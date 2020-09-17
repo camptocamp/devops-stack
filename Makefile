@@ -5,6 +5,8 @@ ARGOCD_OPTS="--plaintext --port-forward --port-forward-namespace argocd"
 
 provision:
 	docker run --rm -it \
+		--group-add $(shell stat -c %g /var/run/docker.sock) \
+		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v /var/run/docker.sock:/var/run/docker.sock \
 		-v $$PWD:/workdir \
 		-v $$HOME/.terraformrc:/root/.terraformrc \
@@ -24,6 +26,8 @@ deploy: provision
 
 destroy:
 	docker run --rm -it \
+		--group-add $(shell stat -c %g /var/run/docker.sock) \
+		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v /var/run/docker.sock:/var/run/docker.sock \
 		-v $$PWD:/workdir \
 		-v $$HOME/.terraformrc:/root/.terraformrc \
