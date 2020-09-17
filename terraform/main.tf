@@ -33,6 +33,22 @@ resource "docker_container" "k3s_server" {
   }
 }
 
+resource "docker_container" "k3s_agent" {
+  image = "rancher/k3s:latest"
+
+  tmpfs = {
+    "/run"     = "rw",
+    "/var/run" = "rw",
+  }
+
+  privileged = true
+
+  env = [
+    "K3S_TOKEN=${random_password.k3s_token.result}",
+    "K3S_URL=https://server:6443"
+  ]
+}
+
 resource "random_password" "k3s_token" {
   length = 16
 }
