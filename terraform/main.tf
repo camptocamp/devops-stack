@@ -1,4 +1,12 @@
 # Mimics https://github.com/rancher/k3s/blob/master/docker-compose.yml
+resource "docker_volume" "k3s_server" {
+  name = "k3s-server"
+}
+
+resource "docker_network" "k3s" {
+  name = "k3s"
+}
+
 resource "docker_container" "k3s_server" {
   image   = "rancher/k3s:latest"
   name    = "server"
@@ -11,6 +19,11 @@ resource "docker_container" "k3s_server" {
 
   privileged = true
 
+  networks_advanced {
+    name    = docker_network.k3s.name
+    aliases = ["server"]
+  }
+
   env = [
     "K3S_TOKEN=${random_password.k3s_token.result}",
     "K3S_KUBECONFIG_OUTPUT=/output/kubeconfig.yaml",
@@ -18,7 +31,7 @@ resource "docker_container" "k3s_server" {
   ]
 
   volumes {
-    volume_name    = "k3s-server"
+    volume_name    = docker_volume.k3s_server.name
     container_path = "/var/lib/rancher/k3s"
   }
 
@@ -43,6 +56,11 @@ resource "docker_container" "k3s_agent" {
   }
 
   privileged = true
+
+  networks_advanced {
+    name    = docker_network.k3s.name
+    aliases = ["agent"]
+  }
 
   env = [
     "K3S_TOKEN=${random_password.k3s_token.result}",
