@@ -35,6 +35,7 @@ resource "docker_container" "k3s_server" {
 
 resource "docker_container" "k3s_agent" {
   image = "rancher/k3s:latest"
+  name  = "agent"
 
   tmpfs = {
     "/run"     = "rw",
