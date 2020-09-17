@@ -1,0 +1,101 @@
+---
+argo-cd:
+  installCRDs: false
+  global:
+    securityContext:
+      runAsUser: 999
+      runAsGroup: 999
+      fsGroup: 999
+  configs:
+    secret:
+      argocdServerAdminPassword: "$2a$10$wzUzrdx.jMb7lHIbW6VutuRpV4OnpPA3ItWBDiP04QVHfGqzAoj6i"  # argocd
+      argocdServerAdminPasswordMtime: '2020-07-23T11:31:23Z'
+  controller:
+    resources:
+      limits:
+        memory: 4Gi
+      requests:
+        cpu: 250m
+        memory: 96Mi
+    metrics:
+      serviceMonitor:
+        enabled: true
+      rules:
+        enabled: true
+        spec:
+          - alert: ArgoAppMissing
+            expr: |
+              absent(argocd_app_info)
+            for: 15m
+            labels:
+              severity: critical
+            annotations:
+              summary: "[ArgoCD] No reported applications"
+              description: >
+                ArgoCD has not reported any applications data for the past 15 minutes which
+                means that it must be down or not functioning properly.  This needs to be
+                resolved for this cloud to continue to maintain state.
+          - alert: ArgoAppNotSynced
+            expr: |
+              argocd_app_sync_status{sync_status!="Synced"} == 1
+            for: 12h
+            labels:
+              severity: warning
+            annotations:
+              summary: "[{{`{{$labels.name}}`}}] Application not synchronized"
+              description: >
+                The application [{{`{{$labels.name}}`}} has not been synchronized for over
+                12 hours which means that the state of this cloud has drifted away from the
+                state inside Git.
+  dex:
+    resources:
+      limits:
+        memory: 64Mi
+      requests:
+        cpu: 10m
+        memory: 32Mi
+  redis:
+    resources:
+      limits:
+        memory: 128Mi
+      requests:
+        cpu: 100m
+        memory: 64Mi
+  server:
+    resources:
+      limits:
+        memory: 128Mi
+      requests:
+        cpu: 50m
+        memory: 32Mi
+    replicas: 2
+    metrics:
+      serviceMonitor:
+        enabled: true
+    extraArgs:
+      - --insecure
+    config:
+      accounts.pipeline: apiKey
+      configManagementPlugins: |
+        - name: kustomized-helm
+          init:
+            command: ["/bin/sh", "-c"]
+            args: ["helm dependency build || true"]
+          generate:
+            command: ["/bin/sh", "-c"]
+            args: ["echo \"$HELM_VALUES\" | helm template . --name-template $ARGOCD_APP_NAME --namespace $ARGOCD_APP_NAMESPACE $HELM_ARGS -f - --include-crds > all.yaml && kustomize build"]
+    rbacConfig:
+      policy.default: role:readonly
+      policy.csv: |
+        g, pipeline, role:readonly
+  repoServer:
+    resources:
+      limits:
+        memory: 1Gi
+      requests:
+        cpu: 10m
+        memory: 32Mi
+    replicas: 2
+    metrics:
+      serviceMonitor:
+        enabled: true

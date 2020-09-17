@@ -2,6 +2,7 @@ DOCKER_HOST="tcp://127.0.0.1:2376/"
 UID_NUMBER=$(shell id -u $$USER)
 GID_NUMBER=$(shell id -g $$USER)
 ARGOCD_OPTS="--plaintext --port-forward --port-forward-namespace argocd"
+KUBECTL_COMMAND=apply
 
 provision:
 	docker run --rm -it \
@@ -19,6 +20,7 @@ deploy: provision
 	docker run --rm -it \
 		-v $$PWD:/workdir \
 		-v /tmp/foo/kubeconfig.yaml:/home/argocd/.kube/config \
+		--group-add $(GID_NUMBER) \
 		--network host \
 		--entrypoint "" \
 		--workdir /workdir \
