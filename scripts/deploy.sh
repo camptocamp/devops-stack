@@ -4,11 +4,9 @@
 if test "$(kubectl -n argocd get pods --selector 'app.kubernetes.io/name=argocd-server' --output=name|wc -l)" -eq 0; then
 	helm dependency update argocd/argocd
 	kubectl create namespace argocd || true
-	helm template --include-crds argocd argocd/argocd \
-		--values values.yaml \
-		--set bootstrap=true \
-		--namespace argocd | kubectl "$KUBECTL_COMMAND" -n argocd -f -
-			kubectl -n argocd wait "$(kubectl -n argocd get pods --selector 'app.kubernetes.io/name=argocd-server' --output=name)" --for=condition=Ready --timeout=-1s
+	helm template --include-crds argocd argocd/argocd --values values.yaml --set bootstrap=true --namespace argocd | kubectl "$KUBECTL_COMMAND" -n argocd -f -
+	sleep 30  # Wait a few seconds so that the pods are declared ()
+	kubectl -n argocd wait "$(kubectl -n argocd get pods --selector 'app.kubernetes.io/name=argocd-server' --output=name)" --for=condition=Ready --timeout=-1s
 fi
 
 account_pipeline_tokens=$(kubectl -n argocd get secrets argocd-secret -o=jsonpath="{.data['accounts\.pipeline\.tokens']}"|base64 -d)
