@@ -22,7 +22,7 @@ deploy: kubeconfig.yaml
 	docker run --rm -it \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v $$PWD:/workdir \
-		-v $$PWD/kubeconfig.yaml:/home/argocd/.kube/config \
+		-v $$PWD/kubeconfig.yaml:/tmp/.kube/config \
 		--network host \
 		--env HOME=/tmp \
 		--env KUBECTL_COMMAND=apply \
