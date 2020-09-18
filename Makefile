@@ -4,7 +4,6 @@ BASE_DOMAIN=127-0-0-1.nip.io
 DOCKER_HOST="tcp://127.0.0.1:2376/"
 UID_NUMBER=$(shell id -u $$USER)
 GID_NUMBER=$(shell id -g $$USER)
-ARGOCD_OPTS="--plaintext --port-forward --port-forward-namespace argocd"
 
 test: deploy
 	docker run --rm -it \
@@ -22,6 +21,7 @@ deploy: kubeconfig.yaml
 		--group-add $(GID_NUMBER) \
 		--network host \
 		--env KUBECTL_COMMAND=apply \
+		--env ARGOCD_OPTS="--plaintext --port-forward --port-forward-namespace argocd" \
 		--entrypoint "" \
 		--workdir /workdir \
 		argoproj/argocd:v1.7.5 /workdir/scripts/deploy.sh
