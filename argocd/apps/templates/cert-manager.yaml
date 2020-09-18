@@ -1,0 +1,26 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
+  name: cert-manager
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: argocd/cert-manager
+    repoURL: {{ .Values.spec.source.repoURL }}
+    targetRevision: {{ .Values.spec.source.targetRevision }}
+  destination:
+    namespace: cert-manager
+    server: {{ .Values.spec.destination.server }}
+  ignoreDifferences:
+    - group: admissionregistration.k8s.io
+      kind: ValidatingWebhookConfiguration
+      name: cert-manager-webhook
+      jsonPointers:
+        - /webhooks/0/namespaceSelector/matchExpressions/2
+  syncPolicy:
+    automated:
+      selfHeal: true
