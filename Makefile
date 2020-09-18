@@ -11,6 +11,7 @@ test: deploy
 	docker run --rm -it \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v $$PWD:/workdir \
+		--network host \
 		--env CLUSTER_NAME=$(CLUSTER_NAME) \
 		--env BASE_DOMAIN=$(BASE_DOMAIN) \
 		--env HOME=/tmp \
