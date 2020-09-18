@@ -1,14 +1,9 @@
+CLUSTER_NAME=$(shell git name-rev --name-only HEAD)
 BASE_DOMAIN=127-0-0-1.nip.io
 
 DOCKER_HOST="tcp://127.0.0.1:2376/"
 UID_NUMBER=$(shell id -u $$USER)
 GID_NUMBER=$(shell id -g $$USER)
-
-ifeq ($(shell git name-rev --name-only HEAD), "master")
-	CLUSTER_NAME="default"
-else
-	CLUSTER_NAME=$(shell git name-rev --name-only HEAD)
-endif
 
 test: deploy
 	docker run --rm -it \
