@@ -7,8 +7,12 @@ resource "docker_network" "k3s" {
   name = "k3s"
 }
 
+resource "docker_image" "k3s" {
+  name = "rancher/k3s:v1.19.1-k3s1"
+}
+
 resource "docker_container" "k3s_server" {
-  image   = "rancher/k3s:latest"
+  image   = docker_image.k3s.latest
   name    = "server"
   command = ["server"]
 
@@ -47,7 +51,7 @@ resource "docker_container" "k3s_server" {
 }
 
 resource "docker_container" "k3s_agent" {
-  image = "rancher/k3s:latest"
+  image = docker_image.k3s.latest
   name  = "agent"
 
   tmpfs = {
