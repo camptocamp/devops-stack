@@ -6,12 +6,18 @@ This is a demo that is also reference implementation for all our Kubernetes rela
 TL;DR
 -----
 
+### Create a cluster
+
 Just run `make`.
 
 It will:
 - spawn a K3s cluster on your workstation using Docker
 - deploy ArgoCD in the cluster
 - deploy the App of Apps that manages ArgoCD and itself.
+
+### Destroy a cluster
+
+Just run `make clean`.
 
 Provisioning
 ------------
