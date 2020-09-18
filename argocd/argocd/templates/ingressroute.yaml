@@ -1,0 +1,19 @@
+{{- if not .Values.bootstrap }}
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: argocd-server-ingress
+  namespace: argocd
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`argocd.apps.127-0-0-1.nip.io`, `argocd.apps.master.127-0-0-1.nip.io`)
+      kind: Rule
+      services:
+        - name: argocd-server
+          port: 80
+  tls:
+    secretName: argocd-cert
+{{- end }}
