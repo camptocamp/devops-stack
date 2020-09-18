@@ -1,0 +1,18 @@
+{{- if not .Values.bootstrap }}
+---
+apiVersion: cert-manager.io/v1alpha3
+kind: Certificate
+metadata:
+  name: argocd
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "10"
+spec:
+  secretName: argocd-cert
+  dnsNames:
+    - argocd.apps.127-0-0-1.nip.io
+    - argocd.apps.master.127-0-0-1.nip.io
+  issuerRef:
+    name: selfsigned-issuer
+    kind: ClusterIssuer
+{{- end }}
