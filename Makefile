@@ -36,6 +36,8 @@ kubeconfig.yaml:
 		-v $$HOME/.terraform.d:/tmp/.terraform.d \
 		--env HOME=/tmp \
 		--env TF_VAR_k3s_kubeconfig_dir=$$PWD \
+		--env CI_PROJECT_URL=https://github.com/$(shell git config --get remote.origin.url | sed -Ene's#git@github.com:([^/]*)/(.*).git#\1/\2#p').git \
+		--env CLUSTER_NAME=$(CLUSTER_NAME) \
 		--entrypoint "" \
 		--workdir /workdir \
 		hashicorp/terraform:0.13.3 /workdir/scripts/provision.sh
