@@ -46,3 +46,30 @@ This two tools use two different paradygm to apply configuration:
 By experience, we know that it is hard to have hundreds of Terraform workspaces that always converge, hence with think that pull mode better fits GitOps philosophy.
 
 To ensure continuous reconciliation, we enable Automated Sync Policy on our Applications. This forces us to be rigurous.
+
+What can you do with this demo?
+-------------------------------
+
+For now not that much, but more stuffs are coming.
+
+### Access Kubernetes API
+
+K3s' installation create a `kubeconfig.yaml` file that contains the Kubernetes context that allows you to access the cluster.
+
+```shell
+$ export KUBECONFIG=kubeconfig.yaml
+$ kubectl get nodes
+$ kubectl get namespaces
+$ kubectl get pods --all-namespaces
+```
+
+### Access ArgoCD web UI
+
+For now you have to use port-forward to access any services deployed in the cluster.
+
+```shell
+$ kubectl port-forward svc/argocd-server -n argocd 8080:80
+```
+
+Then point your web browser to http://localhost:8080.
+The default account is admin/argocd.
