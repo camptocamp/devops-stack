@@ -1,4 +1,4 @@
-#!/bin/sh -x
+#!/bin/sh -xe
 
 cd terraform || exit
 terraform init -upgrade
