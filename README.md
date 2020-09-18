@@ -17,6 +17,8 @@ This is very convenient for developing or testing purpose.
 
 As we already use Terraform to deploy our other Kubernetes clusters, such as EKS, AKS, OpenShift on different cloud, it looks natural to also use Terraform to deploy a K3s cluster locally.
 
+This allows us to use the same `scripts/provision.sh` script, whatever the platform on which we deploy our clusters.
+
 Deployment
 ----------
 
