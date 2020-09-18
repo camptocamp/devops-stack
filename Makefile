@@ -1,4 +1,4 @@
-CLUSTER_NAME=blue
+CLUSTER_NAME=master
 BASE_DOMAIN=127-0-0-1.nip.io
 
 DOCKER_HOST="tcp://127.0.0.1:2376/"
