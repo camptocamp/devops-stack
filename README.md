@@ -3,6 +3,16 @@ Camptocamp's Kubernetes Demo
 
 This is a demo that is also reference implementation for all our Kubernetes related projects.
 
+TL;DR
+-----
+
+Just run `make`.
+
+It will:
+- spawn a K3s cluster on your workstation using Docker
+- deploy ArgoCD in the cluster
+- deploy the App of Apps that manages ArgoCD and itself.
+
 Provisioning
 ------------
 
