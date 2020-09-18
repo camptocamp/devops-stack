@@ -5,7 +5,6 @@ DOCKER_HOST="tcp://127.0.0.1:2376/"
 UID_NUMBER=$(shell id -u $$USER)
 GID_NUMBER=$(shell id -g $$USER)
 ARGOCD_OPTS="--plaintext --port-forward --port-forward-namespace argocd"
-KUBECTL_COMMAND=apply
 
 test: deploy
 	docker run --rm -it \
@@ -22,6 +21,7 @@ deploy: kubeconfig.yaml
 		-v $$PWD/kubeconfig.yaml:/home/argocd/.kube/config \
 		--group-add $(GID_NUMBER) \
 		--network host \
+		--env KUBECTL_COMMAND=apply \
 		--entrypoint "" \
 		--workdir /workdir \
 		argoproj/argocd:v1.7.5 /workdir/scripts/deploy.sh
