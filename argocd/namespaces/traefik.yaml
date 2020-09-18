@@ -5,12 +5,3 @@ metadata:
   name: traefik
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
----
-kind: ResourceQuota
-apiVersion: v1
-metadata:
-  name: traefik
-  namespace: traefik
-spec:
-  hard:
-    limits.memory: 256Mi
