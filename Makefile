@@ -9,19 +9,22 @@ CI_PROJECT_URL="https://github.com/$(shell git config --get remote.origin.url | 
 
 test: deploy
 	docker run --rm -it \
+		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v $$PWD:/workdir \
 		--env CLUSTER_NAME=$(CLUSTER_NAME) \
 		--env BASE_DOMAIN=$(BASE_DOMAIN) \
+		--env HOME=/tmp \
 		--entrypoint "" \
 		--workdir /workdir \
 		curlimages/curl /workdir/scripts/test.sh
 
 deploy: kubeconfig.yaml
 	docker run --rm -it \
+		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v $$PWD:/workdir \
 		-v $$PWD/kubeconfig.yaml:/home/argocd/.kube/config \
-		--group-add $(GID_NUMBER) \
 		--network host \
+		--env HOME=/tmp \
 		--env KUBECTL_COMMAND=apply \
 		--env ARGOCD_OPTS="--plaintext --port-forward --port-forward-namespace argocd" \
 		--entrypoint "" \
