@@ -26,7 +26,7 @@ deploy: provision
 		--workdir /workdir \
 		argoproj/argocd:v1.7.5 /workdir/scripts/deploy.sh
 
-destroy:
+clean:
 	docker run --rm -it \
 		--group-add $(shell stat -c %g /var/run/docker.sock) \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
