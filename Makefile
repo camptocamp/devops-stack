@@ -1,11 +1,26 @@
-CLUSTER_NAME=$(shell git name-rev --name-only HEAD)
-BASE_DOMAIN=127-0-0-1.nip.io
+CLUSTER_NAME := $(shell git name-rev --name-only HEAD)
+BASE_DOMAIN := 127-0-0-1.nip.io
 
-DOCKER_HOST="tcp://127.0.0.1:2376/"
-UID_NUMBER=$(shell id -u $$USER)
-GID_NUMBER=$(shell id -g $$USER)
-DOCKER_GID_NUMBER=$(shell stat -c %g /var/run/docker.sock)
-CI_PROJECT_URL="https://github.com/$(shell git config --get remote.origin.url | sed -Ene's#git@github.com:([^/]*)/(.*).git#\1/\2#p').git"
+DOCKER_HOST := "tcp://127.0.0.1:2376/"
+UID_NUMBER := $(shell id -u $$USER)
+GID_NUMBER := $(shell id -g $$USER)
+DOCKER_GID_NUMBER := $(shell stat -c %g /var/run/docker.sock)
+
+ifneq ($(CI_PROJECT_URL),)
+REPO_URL = $(CI_PROJECT_URL)
+else
+ifneq ($(GITHUB_SERVER_URL),)
+REPO_URL = "$(GITHUB_SERVER_URL)/$(GITHUB_REPOSITORY).git"
+else
+ifeq ($(findstring "https",$(shell git config --get remote.origin.url)),)
+REPO_URL = "https://github.com/$(shell git config --get remote.origin.url | sed -Ene's#git@github.com:([^/]*)/(.*).git#\1/\2#p').git"
+else
+REPO_URL = $(shell git config --get remote.origin.url)
+endif
+endif
+endif
+
+.PHONY: test deploy clean
 
 test: deploy
 	docker run --rm \
@@ -33,6 +48,7 @@ deploy: kubeconfig.yaml
 		argoproj/argocd:v1.6.2 /workdir/scripts/deploy.sh
 
 kubeconfig.yaml: terraform/*
+	echo $(REPO_URL)
 	touch $$HOME/.terraformrc
 	docker run --rm \
 		--group-add $(DOCKER_GID_NUMBER) \
@@ -43,7 +59,7 @@ kubeconfig.yaml: terraform/*
 		-v $$HOME/.terraform.d:/tmp/.terraform.d \
 		--env HOME=/tmp \
 		--env TF_VAR_k3s_kubeconfig_dir=$$PWD \
-		--env CI_PROJECT_URL=$(CI_PROJECT_URL) \
+		--env REPO_URL=$(REPO_URL) \
 		--env CLUSTER_NAME=$(CLUSTER_NAME) \
 		--entrypoint "" \
 		--workdir /workdir \

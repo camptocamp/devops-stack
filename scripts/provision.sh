@@ -13,6 +13,6 @@ cat << EOF > ../values.yaml
 ---
 spec:
   source:
-    repoURL: $CI_PROJECT_URL
+    repoURL: $REPO_URL
     targetRevision: $CLUSTER_NAME
 EOF
