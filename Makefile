@@ -20,7 +20,7 @@ provision:
 deploy: provision
 	docker run --rm -it \
 		-v $$PWD:/workdir \
-		-v /tmp/foo/kubeconfig.yaml:/home/argocd/.kube/config \
+		-v $$PWD/kubeconfig.yaml:/home/argocd/.kube/config \
 		--group-add $(GID_NUMBER) \
 		--network host \
 		--entrypoint "" \
