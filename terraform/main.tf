@@ -1,10 +1,10 @@
 # Mimics https://github.com/rancher/k3s/blob/master/docker-compose.yml
 resource "docker_volume" "k3s_server" {
-  name = "k3s-server"
+  name = "k3s-server-${terraform.workspace}"
 }
 
 resource "docker_network" "k3s" {
-  name = "k3s"
+  name = "k3s-${terraform.workspace}"
 }
 
 resource "docker_image" "k3s" {
