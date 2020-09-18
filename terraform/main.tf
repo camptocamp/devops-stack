@@ -8,7 +8,7 @@ resource "docker_network" "k3s" {
 }
 
 resource "docker_image" "k3s" {
-  name = "rancher/k3s:v1.19.1-k3s1"
+  name = "rancher/k3s:${var.k3s_version}"
 }
 
 resource "docker_container" "k3s_server" {
