@@ -24,7 +24,7 @@ We use [ArgoCD](https://argoproj.github.io/argo-cd/) as continuous delivery tool
 This allows us to declare all the applications we want to deploy in the cluster.
 The `scrips/deploy.sh` script deploys ArgoCD if it detects that it is not present, then deploys the ArgoCD [App of Apps](https://argoproj.github.io/argo-cd/operator-manual/declarative-setup/#app-of-apps) with [Automated Sync Policy](https://argoproj.github.io/argo-cd/user-guide/auto_sync/).
 
-### Why Automated Sync Policy?
+### Why Automated Sync Policy?
 
 At Camptocamp we have a huge experience in both [Puppet](https://puppet.com/) and [Terraform](https://www.terraform.io/).
 This two tools use two different paradygm to apply configuration:
