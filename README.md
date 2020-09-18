@@ -71,13 +71,7 @@ $ kubectl get pods --all-namespaces
 
 ### Access ArgoCD web UI
 
-For now you have to use port-forward to access any services deployed in the cluster.
-
-```shell
-$ kubectl port-forward svc/argocd-server -n argocd 8080:80
-```
-
-Then point your web browser to http://localhost:8080.
+ArgoCD Web UI is accessible via https://argocd.apps.master.127-0-0-1.nip.io.
 The default account is admin/argocd.
 
 ### Access Traefik dashboard
