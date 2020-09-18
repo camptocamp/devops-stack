@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -x
 
 # Install ArgoCD if not present
 if test "$(kubectl -n argocd get pods --selector 'app.kubernetes.io/name=argocd-server' --output=name|wc -l)" -eq 0; then

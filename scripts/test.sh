@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -x
 
 CURL_CA_BUNDLE=/tmp/cert.pem
 
