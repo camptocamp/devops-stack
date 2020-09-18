@@ -11,7 +11,7 @@ spec:
   secretName: argocd-cert
   dnsNames:
     - argocd.apps.127-0-0-1.nip.io
-    - argocd.apps.master.127-0-0-1.nip.io
+    - argocd.apps.{{ $.Values.clusterName }}.127-0-0-1.nip.io
   issuerRef:
     name: selfsigned-issuer
     kind: ClusterIssuer
