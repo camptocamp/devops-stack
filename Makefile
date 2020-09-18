@@ -8,7 +8,7 @@ DOCKER_GID_NUMBER=$(shell stat -c %g /var/run/docker.sock)
 CI_PROJECT_URL="https://github.com/$(shell git config --get remote.origin.url | sed -Ene's#git@github.com:([^/]*)/(.*).git#\1/\2#p').git"
 
 test: deploy
-	docker run --rm -it \
+	docker run --rm \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v $$PWD:/workdir \
 		--network host \
@@ -20,7 +20,7 @@ test: deploy
 		curlimages/curl /workdir/scripts/test.sh
 
 deploy: kubeconfig.yaml
-	docker run --rm -it \
+	docker run --rm \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v $$PWD:/workdir \
 		-v $$PWD/kubeconfig.yaml:/tmp/.kube/config \
@@ -34,7 +34,7 @@ deploy: kubeconfig.yaml
 
 kubeconfig.yaml: terraform/*
 	touch $$HOME/.terraformrc
-	docker run --rm -it \
+	docker run --rm \
 		--group-add $(DOCKER_GID_NUMBER) \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v /var/run/docker.sock:/var/run/docker.sock \
@@ -51,7 +51,7 @@ kubeconfig.yaml: terraform/*
 
 clean:
 	touch $$HOME/.terraformrc
-	docker run --rm -it \
+	docker run --rm \
 		--group-add $(DOCKER_GID_NUMBER) \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v /var/run/docker.sock:/var/run/docker.sock \
