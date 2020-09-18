@@ -1,8 +1,8 @@
 #!/bin/sh
 
-cd terraform
+cd terraform || exit
 terraform init -upgrade
-terraform workspace select $CLUSTER_NAME || terraform workspace new $CLUSTER_NAME
+terraform workspace select "$CLUSTER_NAME" || terraform workspace new "$CLUSTER_NAME"
 terraform init -upgrade
 terraform apply --auto-approve
 terraform plan --detailed-exitcode
@@ -11,8 +11,8 @@ terraform plan --detailed-exitcode
 terraform show --json > terraform.tfstate.json
 cat << EOF > ../values.yaml
 ---
-  spec:
-    source:
-      repoURL: $CI_PROJECT_URL
-      targetRevision: $CLUSTER_NAME
+spec:
+  source:
+    repoURL: $CI_PROJECT_URL
+    targetRevision: $CLUSTER_NAME
 EOF
