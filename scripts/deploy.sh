@@ -36,3 +36,27 @@ signature=$(echo -n $header.$payload | openssl dgst -sha256 -hmac $secret -binar
 export ARGOCD_AUTH_TOKEN=$header.$payload.$signature
 
 argocd app list
+
+# Deploy or update app of apps
+helm template apps argocd/apps \
+	--values values.yaml \
+  -s templates/apps.yaml | kubectl $KUBECTL_COMMAND -n argocd -f - || true
+
+# TODO: Don't use Gitlab CI specific variable in scripts
+if test -n "$CI_MERGE_REQUEST_ID"; then
+  # TODO: use argocd cli to loop over applications
+  cd argocd
+  for app in */;
+  do
+    app=${app%*/}
+    (
+      cd $app
+      test -f Chart.yaml && helm dependency update
+      argocd app diff $app --local . || true
+    )
+  done
+else
+  argocd app list
+  echo "Waiting for app of apps to be in sync"
+  argocd app wait apps --health --timeout 300
+fi
