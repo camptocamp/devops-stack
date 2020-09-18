@@ -4,6 +4,8 @@ BASE_DOMAIN=127-0-0-1.nip.io
 DOCKER_HOST="tcp://127.0.0.1:2376/"
 UID_NUMBER=$(shell id -u $$USER)
 GID_NUMBER=$(shell id -g $$USER)
+DOCKER_GID_NUMBER=$(shell stat -c %g /var/run/docker.sock)
+CI_PROJECT_URL="https://github.com/$(shell git config --get remote.origin.url | sed -Ene's#git@github.com:([^/]*)/(.*).git#\1/\2#p').git"
 
 test: deploy
 	docker run --rm -it \
@@ -29,7 +31,7 @@ deploy: kubeconfig.yaml
 kubeconfig.yaml: terraform/*
 	touch v $$HOME/.terraformrc
 	docker run --rm -it \
-		--group-add $(shell stat -c %g /var/run/docker.sock) \
+		--group-add $(DOCKER_GID_NUMBER) \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v /var/run/docker.sock:/var/run/docker.sock \
 		-v $$PWD:/workdir \
@@ -37,7 +39,7 @@ kubeconfig.yaml: terraform/*
 		-v $$HOME/.terraform.d:/tmp/.terraform.d \
 		--env HOME=/tmp \
 		--env TF_VAR_k3s_kubeconfig_dir=$$PWD \
-		--env CI_PROJECT_URL=https://github.com/$(shell git config --get remote.origin.url | sed -Ene's#git@github.com:([^/]*)/(.*).git#\1/\2#p').git \
+		--env CI_PROJECT_URL=$(CI_PROJECT_URL) \
 		--env CLUSTER_NAME=$(CLUSTER_NAME) \
 		--entrypoint "" \
 		--workdir /workdir \
@@ -46,7 +48,7 @@ kubeconfig.yaml: terraform/*
 clean:
 	touch v $$HOME/.terraformrc
 	docker run --rm -it \
-		--group-add $(shell stat -c %g /var/run/docker.sock) \
+		--group-add $(DOCKER_GID_NUMBER) \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v /var/run/docker.sock:/var/run/docker.sock \
 		-v $$PWD:/workdir \
