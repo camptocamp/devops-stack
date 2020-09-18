@@ -14,7 +14,7 @@ resource "docker_image" "k3s" {
 resource "docker_container" "k3s_server" {
   image   = docker_image.k3s.latest
   name    = "server"
-  command = ["server"]
+  command = ["server", "--disable", "traefik"]
 
   tmpfs = {
     "/run"     = "rw",
