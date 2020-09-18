@@ -56,3 +56,5 @@ clean:
 		--entrypoint "" \
 		--workdir /workdir \
 		hashicorp/terraform:0.13.3 /workdir/scripts/destroy.sh
+	rm kubeconfig.yaml
+	rm values.yaml
