@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+---
+kind: ResourceQuota
+apiVersion: v1
+metadata:
+  name: argocd
+  namespace: argocd
+spec:
+  hard:
+    limits.memory: 16Gi
