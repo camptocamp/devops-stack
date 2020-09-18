@@ -32,8 +32,9 @@ kubeconfig.yaml:
 		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v /var/run/docker.sock:/var/run/docker.sock \
 		-v $$PWD:/workdir \
-		-v $$HOME/.terraformrc:/root/.terraformrc \
-		-v $$HOME/.terraform.d:/root/.terraform.d \
+		-v $$HOME/.terraformrc:/tmp/.terraformrc \
+		-v $$HOME/.terraform.d:/tmp/.terraform.d \
+		--env HOME=/tmp \
 		--env TF_VAR_k3s_kubeconfig_dir=$$PWD \
 		--entrypoint "" \
 		--workdir /workdir \
@@ -45,8 +46,9 @@ clean:
 		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v /var/run/docker.sock:/var/run/docker.sock \
 		-v $$PWD:/workdir \
-		-v $$HOME/.terraformrc:/root/.terraformrc \
-		-v $$HOME/.terraform.d:/root/.terraform.d \
+		-v $$HOME/.terraformrc:/tmp/.terraformrc \
+		-v $$HOME/.terraform.d:/tmp/.terraform.d \
+		--env HOME=/tmp \
 		--env TF_VAR_k3s_kubeconfig_dir=$$PWD \
 		--entrypoint "" \
 		--workdir /workdir \
