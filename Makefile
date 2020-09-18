@@ -27,6 +27,7 @@ deploy: kubeconfig.yaml
 		argoproj/argocd:v1.6.2 /workdir/scripts/deploy.sh
 
 kubeconfig.yaml: terraform/*
+	touch v $$HOME/.terraformrc
 	docker run --rm -it \
 		--group-add $(shell stat -c %g /var/run/docker.sock) \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
@@ -43,6 +44,7 @@ kubeconfig.yaml: terraform/*
 		hashicorp/terraform:0.13.3 /workdir/scripts/provision.sh
 
 clean:
+	touch v $$HOME/.terraformrc
 	docker run --rm -it \
 		--group-add $(shell stat -c %g /var/run/docker.sock) \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
