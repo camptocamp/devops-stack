@@ -79,3 +79,13 @@ $ kubectl port-forward svc/argocd-server -n argocd 8080:80
 
 Then point your web browser to http://localhost:8080.
 The default account is admin/argocd.
+
+### Access Traefik dashboard
+
+For security reasons, Traefik dashboard is not exposed, hence you have to use port-forwarding to access it:
+
+```shell
+$ kubectl -n traefik port-forward $(kubectl -n traefik get pods --selector "app.kubernetes.io/name=traefik" --output=name) 9000:9000
+```
+
+Then point your web browser to http://localhost:9000/dashboard/
