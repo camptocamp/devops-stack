@@ -24,7 +24,7 @@ deploy: kubeconfig.yaml
 		--env ARGOCD_OPTS="--plaintext --port-forward --port-forward-namespace argocd" \
 		--entrypoint "" \
 		--workdir /workdir \
-		argoproj/argocd:v1.7.5 /workdir/scripts/deploy.sh
+		argoproj/argocd:v1.6.2 /workdir/scripts/deploy.sh
 
 kubeconfig.yaml:
 	docker run --rm -it \
