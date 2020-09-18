@@ -52,6 +52,7 @@ clean:
 		-v $$HOME/.terraform.d:/tmp/.terraform.d \
 		--env HOME=/tmp \
 		--env TF_VAR_k3s_kubeconfig_dir=$$PWD \
+		--env CLUSTER_NAME=$(CLUSTER_NAME) \
 		--entrypoint "" \
 		--workdir /workdir \
 		hashicorp/terraform:0.13.3 /workdir/scripts/destroy.sh
