@@ -68,7 +68,6 @@ argo-cd:
       requests:
         cpu: 50m
         memory: 32Mi
-    replicas: 2
     metrics:
       serviceMonitor:
         enabled: true
@@ -95,7 +94,6 @@ argo-cd:
       requests:
         cpu: 10m
         memory: 32Mi
-    replicas: 2
     metrics:
       serviceMonitor:
         enabled: true
