@@ -2,3 +2,4 @@ terraform/.terraform
 terraform/terraform.tfstate*
 Chart.lock
 charts/
+kubeconfig.yaml

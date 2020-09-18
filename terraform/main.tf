@@ -40,7 +40,7 @@ resource "docker_container" "k3s_server" {
   }
 
   volumes {
-    host_path      = "/tmp/foo"
+    host_path      = var.k3s_kubeconfig_dir
     container_path = "/output"
   }
 

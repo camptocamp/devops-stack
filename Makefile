@@ -12,6 +12,7 @@ provision:
 		-v $$PWD:/workdir \
 		-v $$HOME/.terraformrc:/root/.terraformrc \
 		-v $$HOME/.terraform.d:/root/.terraform.d \
+		--env TF_VAR_k3s_kubeconfig_dir=$$PWD \
 		--entrypoint "" \
 		--workdir /workdir \
 		hashicorp/terraform:0.13.3 /workdir/scripts/provision.sh
@@ -34,6 +35,7 @@ clean:
 		-v $$PWD:/workdir \
 		-v $$HOME/.terraformrc:/root/.terraformrc \
 		-v $$HOME/.terraform.d:/root/.terraform.d \
+		--env TF_VAR_k3s_kubeconfig_dir=$$PWD \
 		--entrypoint "" \
 		--workdir /workdir \
 		hashicorp/terraform:0.13.3 /workdir/scripts/destroy.sh
