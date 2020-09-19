@@ -1,25 +1,31 @@
-CLUSTER_NAME := $(shell git name-rev --name-only HEAD)
 BASE_DOMAIN := 127-0-0-1.nip.io
 
 DOCKER_HOST := "tcp://127.0.0.1:2376/"
 UID_NUMBER := $(shell id -u $$USER)
 GID_NUMBER := $(shell id -g $$USER)
 DOCKER_GID_NUMBER := $(shell stat -c %g /var/run/docker.sock)
-ARTIFACTS_DIR := "terraform/terraform.tfstate.d/$(CLUSTER_NAME)"
 
 ifneq ($(CI_PROJECT_URL),)
 REPO_URL = $(CI_PROJECT_URL)
+REMOTE_BRANCH = $(CI_COMMIT_REF_NAME)
 else
 ifneq ($(GITHUB_SERVER_URL),)
 REPO_URL = "$(GITHUB_SERVER_URL)/$(GITHUB_REPOSITORY).git"
+REMOTE_BRANCH = $(shell echo $(GITHUB_REF) | rev | cut -f1 -d/ | rev)
 else
-ifeq ($(findstring "https",$(shell git config --get remote.origin.url)),)
-REPO_URL = "https://github.com/$(shell git config --get remote.origin.url | sed -Ene's#git@github.com:([^/]*)/(.*).git#\1/\2#p').git"
+REMOTE := $(shell git status -sb|sed -Ene's@## ([^\.]*)\.\.\.([^/]*)/(.*)@\2@p')
+REMOTE_BRANCH := $(shell git status -sb|sed -Ene's@## ([^\.]*)\.\.\.([^/]*)/(.*)@\3@p')
+REMOTE_URL := $(shell git remote get-url $(REMOTE))
+ifeq ($(findstring "https",$(REMOTE_URL)),)
+REPO_URL = "https://github.com/$(shell echo $(REMOTE_URL) | sed -Ene's#git@github.com:([^/]*)/(.*).git#\1/\2#p').git"
 else
-REPO_URL = $(shell git config --get remote.origin.url)
+REPO_URL = $(REMOTE_URL)
 endif
 endif
 endif
+
+CLUSTER_NAME := $(REMOTE_BRANCH)
+ARTIFACTS_DIR := "terraform/terraform.tfstate.d/$(CLUSTER_NAME)"
 
 .PHONY: test deploy clean debug
 
@@ -93,4 +99,7 @@ debug:
 	@echo GID_NUMBER=$(GID_NUMBER)
 	@echo DOCKER_GID_NUMBER=$(DOCKER_GID_NUMBER)
 	@echo ARTIFACTS_DIR="terraform/terraform.tfstate.d/$(CLUSTER_NAME)"
+	@echo REMOTE=$(REMOTE)
+	@echo REMOTE_BRANCH=$(REMOTE_BRANCH)
+	@echo REMOTE_URL=$(REMOTE_URL)
 	@echo REPO_URL=$(REPO_URL)
