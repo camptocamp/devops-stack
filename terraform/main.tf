@@ -13,7 +13,7 @@ resource "docker_image" "k3s" {
 
 resource "docker_container" "k3s_server" {
   image = docker_image.k3s.latest
-  name  = "server"
+  name  = "k3s-server-${terraform.workspace}"
 
   command = [
     "server",
@@ -67,7 +67,7 @@ resource "docker_container" "k3s_server" {
 
 resource "docker_container" "k3s_agent" {
   image = docker_image.k3s.latest
-  name  = "agent"
+  name  = "k3s-agent-${terraform.workspace}"
 
   tmpfs = {
     "/run"     = "rw",
