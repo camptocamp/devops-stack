@@ -85,3 +85,18 @@ $ kubectl -n traefik port-forward $(kubectl -n traefik get pods --selector "app.
 ```
 
 Then point your web browser to http://localhost:9000/dashboard/
+
+### Access Grafana dashboard
+
+Granafa is accessible via https://grafana.apps.master.127-0-0-1.nip.io.
+As there is currently no proper secret management in this demo, we let the default Grafana credentials: `admin/prom-operator`.
+
+### Access Prometheus dashboard
+
+Prometheus is accessible via https://prometheus.apps.master.127-0-0-1.nip.io.
+As there is currently no proper secret management in this demo, the Prometheus URL is not protected.
+
+### Access Alertmanager dashboard
+
+Alertmanager is accessible via https://alertmanager.apps.master.127-0-0-1.nip.io.
+As there is currently no proper secret management in this demo, the Alertmanager URL is not protected.
