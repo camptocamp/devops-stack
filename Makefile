@@ -5,6 +5,7 @@ DOCKER_HOST := "tcp://127.0.0.1:2376/"
 UID_NUMBER := $(shell id -u $$USER)
 GID_NUMBER := $(shell id -g $$USER)
 DOCKER_GID_NUMBER := $(shell stat -c %g /var/run/docker.sock)
+ARTIFACTS_DIR := "terraform/terraform.tfstate.d/$(CLUSTER_NAME)"
 
 ifneq ($(CI_PROJECT_URL),)
 REPO_URL = $(CI_PROJECT_URL)
@@ -34,20 +35,21 @@ test: deploy
 		--workdir /workdir \
 		curlimages/curl /workdir/scripts/test.sh
 
-deploy: kubeconfig.yaml
+deploy: $(ARTIFACTS_DIR)/kubeconfig.yaml
 	docker run --rm \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v $$PWD:/workdir \
-		-v $$PWD/kubeconfig.yaml:/tmp/.kube/config \
+		-v $$PWD/$(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
 		--network host \
 		--env HOME=/tmp \
 		--env KUBECTL_COMMAND=apply \
 		--env ARGOCD_OPTS="--plaintext --port-forward --port-forward-namespace argocd" \
+		--env ARTIFACTS_DIR=$(ARTIFACTS_DIR) \
 		--entrypoint "" \
 		--workdir /workdir \
 		argoproj/argocd:v1.6.2 /workdir/scripts/deploy.sh
 
-kubeconfig.yaml: terraform/*
+$(ARTIFACTS_DIR)/kubeconfig.yaml: terraform/*
 	echo $(REPO_URL)
 	touch $$HOME/.terraformrc
 	docker run --rm \
@@ -58,9 +60,10 @@ kubeconfig.yaml: terraform/*
 		-v $$HOME/.terraformrc:/tmp/.terraformrc \
 		-v $$HOME/.terraform.d:/tmp/.terraform.d \
 		--env HOME=/tmp \
-		--env TF_VAR_k3s_kubeconfig_dir=$$PWD \
+		--env TF_VAR_k3s_kubeconfig_dir=$$PWD/$(ARTIFACTS_DIR) \
 		--env REPO_URL=$(REPO_URL) \
 		--env CLUSTER_NAME=$(CLUSTER_NAME) \
+		--env ARTIFACTS_DIR=$(ARTIFACTS_DIR) \
 		--entrypoint "" \
 		--workdir /workdir \
 		hashicorp/terraform:0.13.3 /workdir/scripts/provision.sh
@@ -80,5 +83,4 @@ clean:
 		--entrypoint "" \
 		--workdir /workdir \
 		hashicorp/terraform:0.13.3 /workdir/scripts/destroy.sh
-	rm kubeconfig.yaml
-	rm values.yaml
+	rm -rf $$PWD/$(ARTIFACTS_DIR)

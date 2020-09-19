@@ -8,8 +8,8 @@ terraform apply --auto-approve
 terraform plan --detailed-exitcode
 
 # Create values.yaml for ArgoCD app of apps
-terraform show --json > terraform.tfstate.json
-cat << EOF > ../values.yaml
+terraform show --json > "../$ARTIFACTS_DIR/terraform.tfstate.json"
+cat << EOF > "../$ARTIFACTS_DIR/values.yaml"
 ---
 spec:
   source:

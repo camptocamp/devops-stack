@@ -1,6 +1,4 @@
 terraform/.terraform
-terraform/terraform.tfstate*
+terraform/terraform.tfstate.d/
 Chart.lock
 charts/
-kubeconfig.yaml
-/values.yaml

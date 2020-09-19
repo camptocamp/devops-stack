@@ -35,6 +35,8 @@ As we already use Terraform to deploy our other Kubernetes clusters, such as EKS
 
 This allows us to use the same `scripts/provision.sh` script, whatever the platform on which we deploy our clusters.
 
+Also, we can use [Terraform workspaces](https://www.terraform.io/docs/state/workspaces.html) to create one cluster per git branch, which is quite convenient for testing.
+
 Deployment
 ----------
 
@@ -63,7 +65,7 @@ For now not that much, but more stuffs are coming.
 K3s' installation create a `kubeconfig.yaml` file that contains the Kubernetes context that allows you to access the cluster.
 
 ```shell
-$ export KUBECONFIG=kubeconfig.yaml
+$ export KUBECONFIG=terraform/terraform.tfstate.d/master/kubeconfig.yaml
 $ kubectl get nodes
 $ kubectl get namespaces
 $ kubectl get pods --all-namespaces

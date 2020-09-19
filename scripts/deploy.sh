@@ -4,7 +4,7 @@
 if test "$(kubectl -n argocd get pods --selector 'app.kubernetes.io/name=argocd-server' --output=name|wc -l)" -eq 0; then
 	helm dependency update argocd/argocd
 	kubectl create namespace argocd || true
-	helm template --include-crds argocd argocd/argocd --values values.yaml --set bootstrap=true --namespace argocd | kubectl "$KUBECTL_COMMAND" -n argocd -f -
+	helm template --include-crds argocd argocd/argocd --values "$ARTIFACTS_DIR/values.yaml" --set bootstrap=true --namespace argocd | kubectl "$KUBECTL_COMMAND" -n argocd -f -
 	sleep 30  # Wait a few seconds so that the pods are declared ()
 	kubectl -n argocd wait "$(kubectl -n argocd get pods --selector 'app.kubernetes.io/name=argocd-server' --output=name)" --for=condition=Ready --timeout=-1s
 fi
@@ -38,7 +38,7 @@ argocd app list
 
 # Deploy or update app of apps
 helm template apps argocd/apps \
-	--values values.yaml \
+	--values "$ARTIFACTS_DIR/values.yaml" \
 	-s templates/apps.yaml | kubectl "$KUBECTL_COMMAND" -n argocd -f - || true
 
 # TODO: Don't use Gitlab CI specific variable in scripts
