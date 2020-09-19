@@ -21,7 +21,7 @@ endif
 endif
 endif
 
-.PHONY: test deploy clean
+.PHONY: test deploy clean debug
 
 test: deploy
 	docker run --rm \
@@ -84,3 +84,13 @@ clean:
 		--workdir /workdir \
 		hashicorp/terraform:0.13.3 /workdir/scripts/destroy.sh
 	rm -rf $$PWD/$(ARTIFACTS_DIR)
+
+debug:
+	@echo CLUSTER_NAME=$(CLUSTER_NAME)
+	@echo BASE_DOMAIN=$(BASE_DOMAIN)
+	@echo DOCKER_HOST=$(DOCKER_HOST)
+	@echo UID_NUMBER=$(UID_NUMBER)
+	@echo GID_NUMBER=$(GID_NUMBER)
+	@echo DOCKER_GID_NUMBER=$(DOCKER_GID_NUMBER)
+	@echo ARTIFACTS_DIR="terraform/terraform.tfstate.d/$(CLUSTER_NAME)"
+	@echo REPO_URL=$(REPO_URL)
