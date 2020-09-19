@@ -1,0 +1,48 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: alertmanager
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`alertmanager.apps.127-0-0-1.nip.io`, `alertmanager.apps.{{ .Values.clusterName }}.127-0-0-1.nip.io`)
+      kind: Rule
+      services:
+        - name: cluster-monitoring-kube-pr-alertmanager
+          port: 9093
+  tls:
+    secretName: alertmanager-cert
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: prometheus-k8s
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`prometheus.apps.127-0-0-1.nip.io`, `prometheus.apps.{{ .Values.clusterName }}.127-0-0-1.nip.io`)
+      kind: Rule
+      services:
+        - name: cluster-monitoring-kube-pr-prometheus
+          port: 9090
+  tls:
+    secretName: prometheus-k8s-cert
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: grafana
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`grafana.apps.127-0-0-1.nip.io`, `grafana.apps.{{ .Values.clusterName }}.127-0-0-1.nip.io`)
+      kind: Rule
+      services:
+        - name: cluster-monitoring-grafana
+          port: 80
+  tls:
+    secretName: grafana-cert

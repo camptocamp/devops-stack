@@ -1,0 +1,42 @@
+---
+apiVersion: cert-manager.io/v1alpha3
+kind: Certificate
+metadata:
+  name: alertmanager
+  namespace: cluster-monitoring
+spec:
+  secretName: alertmanager-cert
+  dnsNames:
+    - alertmanager.apps.127-0-0-1.nip.io
+    - alertmanager.apps.{{ .Values.clusterName }}.127-0-0-1.nip.io
+  issuerRef:
+    name: selfsigned-issuer
+    kind: ClusterIssuer
+---
+apiVersion: cert-manager.io/v1alpha3
+kind: Certificate
+metadata:
+  name: grafana
+  namespace: cluster-monitoring
+spec:
+  secretName: grafana-cert
+  dnsNames:
+    - grafana.apps.127-0-0-1.nip.io
+    - grafana.apps.{{ .Values.clusterName }}.127-0-0-1.nip.io
+  issuerRef:
+    name: selfsigned-issuer
+    kind: ClusterIssuer
+---
+apiVersion: cert-manager.io/v1alpha3
+kind: Certificate
+metadata:
+  name: prometheus-k8s
+  namespace: cluster-monitoring
+spec:
+  secretName: prometheus-k8s-cert
+  dnsNames:
+    - prometheus-k8s.apps.127-0-0-1.nip.io
+    - prometheus-k8s.apps.{{ .Values.clusterName }}.127-0-0-1.nip.io
+  issuerRef:
+    name: selfsigned-issuer
+    kind: ClusterIssuer

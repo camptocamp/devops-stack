@@ -1,0 +1,46 @@
+---
+kube-prometheus-stack:
+  defaultRules:
+    create: false
+  alertmanager:
+    enabled: false
+  grafana:
+    enabled: false
+  kubeApiServer:
+    enabled: false
+  kubelet:
+    enabled: false
+  kubeControllerManager:
+    enabled: false
+  coreDns:
+    enabled: false
+  kubeDns:
+    enabled: false
+  kubeEtcd:
+    enabled: false
+  kubeScheduler:
+    enabled: false
+  kubeProxy:
+    enabled: false
+  kubeStateMetrics:
+    enabled: false
+  nodeExporter:
+    enabled: false
+  prometheus:
+    enabled: false
+
+  prometheusOperator:
+    manageCrds: false
+    tlsProxy:
+      enabled: false  # disable for now as I could not make it work
+    admissionWebhooks:
+      enabled: false  # disable for now as I could not make it work
+
+kubeStateMetrics:
+  enabled: false
+
+nodeExporter:
+  enabled: false
+
+grafana:
+  enabled: false
