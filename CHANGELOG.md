@@ -1,8 +1,8 @@
 # Changelog
 
-## 0.2.0 (Unreleased)
+## [0.2.0](https://github.com/camptocamp/k8s-demo/tree/0.2.0) (2020-09-20)
 
-[Full Changelog](https://github.com/camptocamp/k8s-demo/compare/0.1.0...master)
+[Full Changelog](https://github.com/camptocamp/k8s-demo/compare/0.1.0...0.2.0)
 
 **Implemented enhancements:**
 
@@ -12,7 +12,8 @@
 - Enable Prometheus metrics for Traefik [\#38](https://github.com/camptocamp/k8s-demo/pull/38) ([mcanevet](https://github.com/mcanevet))
 - Deploy prometheus-operator and kube-prometheus-stack [\#40](https://github.com/camptocamp/k8s-demo/pull/40) ([mcanevet](https://github.com/mcanevet))
 - Add monitoring for ArgoCD and cert-manager [\#44](https://github.com/camptocamp/k8s-demo/pull/44) ([mcanevet](https://github.com/mcanevet))
-- Upgrade ArgoCD to 1.7.6 [\#45](https://github.com/camptocamp/k8s-demo/pull/45) ([mcanevet](https://github.com/mcanevet))
+- [grafana] Search for dashboard and datasource in all namespaces [\#49](https://github.com/camptocamp/k8s-demo/pull/49) ([mcanevet](https://github.com/mcanevet))
+- Deploy Loki [\#50](https://github.com/camptocamp/k8s-demo/pull/50) ([mcanevet](https://github.com/mcanevet))
 
 ## [0.1.0](https://github.com/camptocamp/k8s-demo/tree/0.1.0) (2020-09-19)
 
