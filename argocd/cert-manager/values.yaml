@@ -3,3 +3,6 @@ cert-manager:
   installCRDs: true
   securityContext:
     fsGroup: 999
+  prometheus:
+    servicemonitor:
+      enabled: true
