@@ -1,0 +1,8 @@
+---
+loki-stack:
+  loki:
+    serviceMonitor:
+      enabled: true
+  promtail:
+    serviceMonitor:
+      enabled: true
