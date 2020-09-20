@@ -1,5 +1,14 @@
 ---
 kube-prometheus-stack:
+  kubeControllerManager:
+    enabled: false
+  kubeEtcd:
+    enabled: false
+  kubeScheduler:
+    enabled: false
+  kubeProxy:
+    enabled: false
+
   prometheusOperator:
     enabled: false
     tlsProxy:
