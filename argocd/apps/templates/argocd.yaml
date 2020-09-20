@@ -13,6 +13,17 @@ spec:
     helm:
       values: |
         clusterName: {{ .Values.spec.source.targetRevision }}
+        # Enable metrics here because CRDs are not available at bootstrap
+        argo-cd:
+          controller:
+            metrics:
+              enabled: true
+          server:
+            metrics:
+              enabled: true
+          repoServer:
+            metrics:
+              enabled: true
   destination:
     namespace: argocd
     server: {{ .Values.spec.destination.server }}
