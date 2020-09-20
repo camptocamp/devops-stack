@@ -1,8 +1,4 @@
 ---
 traefik:
-  resources:
-    limits:
-      memory: 48Mi
-    requests:
-      cpu: 10m
-      memory: 32Mi
+  additionalArguments:
+    - --metrics.prometheus=true
