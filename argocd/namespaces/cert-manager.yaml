@@ -5,12 +5,3 @@ metadata:
   name: cert-manager
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
----
-kind: ResourceQuota
-apiVersion: v1
-metadata:
-  name: cert-manager
-  namespace: cert-manager
-spec:
-  hard:
-    limits.memory: 256Mi

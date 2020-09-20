@@ -3,23 +3,3 @@ cert-manager:
   installCRDs: true
   securityContext:
     fsGroup: 999
-  resources:
-    limits:
-      memory: 32Mi
-    requests:
-      cpu: 10m
-      memory: 16Mi
-  webhook:
-    resources:
-      limits:
-        memory: 24Mi
-      requests:
-        cpu: 10m
-        memory: 16Mi
-  cainjector:
-    resources:
-      limits:
-        memory: 48Mi
-      requests:
-        cpu: 10m
-        memory: 32Mi
