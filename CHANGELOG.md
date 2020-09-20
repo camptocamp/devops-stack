@@ -11,7 +11,8 @@
 - Don't set ResourceQuota on demo [\#36](https://github.com/camptocamp/k8s-demo/pull/36) ([mcanevet](https://github.com/mcanevet))
 - Enable Prometheus metrics for Traefik [\#38](https://github.com/camptocamp/k8s-demo/pull/38) ([mcanevet](https://github.com/mcanevet))
 - Deploy prometheus-operator and kube-prometheus-stack [\#40](https://github.com/camptocamp/k8s-demo/pull/40) ([mcanevet](https://github.com/mcanevet))
-
+- Add monitoring for ArgoCD and cert-manager [\#44](https://github.com/camptocamp/k8s-demo/pull/44) ([mcanevet](https://github.com/mcanevet))
+- Upgrade ArgoCD to 1.7.6 [\#45](https://github.com/camptocamp/k8s-demo/pull/45) ([mcanevet](https://github.com/mcanevet))
 
 ## [0.1.0](https://github.com/camptocamp/k8s-demo/tree/0.1.0) (2020-09-19)
 
