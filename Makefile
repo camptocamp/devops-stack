@@ -1,3 +1,5 @@
+ARGOCD_CLI_VERSION := 1.7.6
+
 BASE_DOMAIN := 127-0-0-1.nip.io
 
 DOCKER_HOST := "tcp://127.0.0.1:2376/"
@@ -53,7 +55,7 @@ deploy: $(ARTIFACTS_DIR)/kubeconfig.yaml
 		--env ARTIFACTS_DIR=$(ARTIFACTS_DIR) \
 		--entrypoint "" \
 		--workdir /workdir \
-		argoproj/argocd:v1.6.2 /workdir/scripts/deploy.sh
+		argoproj/argocd:v$(ARGOCD_CLI_VERSION) /workdir/scripts/deploy.sh
 
 $(ARTIFACTS_DIR)/kubeconfig.yaml: terraform/*
 	echo $(REPO_URL)
