@@ -39,5 +39,10 @@ kube-prometheus-stack:
             scheme: http
 
   grafana:
+    sidecar:
+      dashboards:
+        searchNamespace: ALL
+      datasources:
+        searchNamespace: ALL
     plugins:
       - grafana-piechart-panel
