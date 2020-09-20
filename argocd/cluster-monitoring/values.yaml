@@ -1,0 +1,34 @@
+---
+kube-prometheus-stack:
+  prometheusOperator:
+    enabled: false
+    tlsProxy:
+      enabled: false  # disable for now as I could not make it work
+    admissionWebhooks:
+      enabled: false  # disable for now as I could not make it work
+
+  prometheus:
+    prometheusSpec:
+      ruleSelectorNilUsesHelmValues: false
+      serviceMonitorSelectorNilUsesHelmValues: false
+      podMonitorSelectorNilUsesHelmValues: false
+      thanos:
+        image: quay.io/thanos/thanos:v0.15.0
+        version: v0.15.0
+    additionalPodMonitors:
+      - name: traefik
+        jobLabel: traefik
+        selector:
+          matchLabels:
+            app.kubernetes.io/instance: traefik
+            app.kubernetes.io/name: traefik
+        namespaceSelector:
+          any: true
+        podMetricsEndpoints:
+          - port: traefik
+            path: /metrics
+            scheme: http
+
+  grafana:
+    plugins:
+      - grafana-piechart-panel
