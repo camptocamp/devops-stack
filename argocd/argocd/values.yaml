@@ -11,12 +11,6 @@ argo-cd:
       argocdServerAdminPassword: "$2a$10$wzUzrdx.jMb7lHIbW6VutuRpV4OnpPA3ItWBDiP04QVHfGqzAoj6i"  # argocd
       argocdServerAdminPasswordMtime: '2020-07-23T11:31:23Z'
   controller:
-    resources:
-      limits:
-        memory: 4Gi
-      requests:
-        cpu: 250m
-        memory: 96Mi
     metrics:
       serviceMonitor:
         enabled: true
@@ -47,27 +41,7 @@ argo-cd:
                 The application [{{`{{$labels.name}}`}} has not been synchronized for over
                 12 hours which means that the state of this cloud has drifted away from the
                 state inside Git.
-  dex:
-    resources:
-      limits:
-        memory: 64Mi
-      requests:
-        cpu: 10m
-        memory: 32Mi
-  redis:
-    resources:
-      limits:
-        memory: 128Mi
-      requests:
-        cpu: 100m
-        memory: 64Mi
   server:
-    resources:
-      limits:
-        memory: 128Mi
-      requests:
-        cpu: 50m
-        memory: 32Mi
     metrics:
       serviceMonitor:
         enabled: true
@@ -88,12 +62,6 @@ argo-cd:
       policy.csv: |
         g, pipeline, role:readonly
   repoServer:
-    resources:
-      limits:
-        memory: 1Gi
-      requests:
-        cpu: 10m
-        memory: 32Mi
     metrics:
       serviceMonitor:
         enabled: true
