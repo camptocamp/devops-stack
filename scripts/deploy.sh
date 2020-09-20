@@ -57,5 +57,10 @@ done
 else
 	argocd app list
 	echo "Waiting for app of apps to be in sync"
-	argocd app wait apps --health --timeout 300
+	# FIXME: Because we are using port-forward to communicate with ArgoCD, we
+	# have to log in again when ArgoCD is redeployed (which is the case during
+	# bootstrap). This has to be improved eventually.
+	while ! argocd app wait apps --health --timeout 30; do
+		argocd app list
+	done
 fi
