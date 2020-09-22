@@ -1,0 +1,134 @@
+= Camptocamp’s Kubernetes Demo
+Mickaël Canévet <mickael.canevet@camptocamp.com>; Raphaël Pinson <raphael.pinson@camptocamp.com>; Stéphane Brunner <stephane.brunner@camptocamp.com>
+v0.2.0, 2020-09-24: second version of the Camptocamp's kubernetes demo 
+
+This is a demo that is also reference implementation for all our
+Kubernetes related projects.
+
+== TL;DR
+
+=== Create a cluster
+
+Just run `make`.
+
+It will:
+
+- spawn a K3s cluster on your workstation using Docker
+- deploy ArgoCD in the cluster
+- deploy the App of Apps that manages ArgoCD and itself.
+
+=== Destroy a cluster
+
+Just run `make clean`.
+
+== Provisioning
+
+This demo will start a https://www.rancher.com[Rancher]’s
+https://github.com/rancher/k3s[K3s] cluster locally using
+https://www.hashicorp.com/[HashiCorp]’s
+https://www.terraform.io/[Terraform].
+
+=== Why K3s?
+
+K3s allows to create a lightweight Kubernetes cluster on any
+workstation. This is very convenient for developing or testing purpose.
+
+=== Why Terraform?
+
+As we already use Terraform to deploy our other Kubernetes clusters,
+such as EKS, AKS, OpenShift on different cloud, it looks natural to also
+use Terraform to deploy a K3s cluster locally.
+
+This allows us to use the same `scripts/provision.sh` script, whatever
+the platform on which we deploy our clusters.
+
+Also, we can use
+https://www.terraform.io/docs/state/workspaces.html[Terraform
+workspaces] to create one cluster per git branch, which is quite
+convenient for testing.
+
+== Deployment
+
+We use https://argoproj.github.io/argo-cd/[ArgoCD] as continuous
+delivery tool for Kubernetes. This allows us to declare all the
+applications we want to deploy in the cluster. The `scrips/deploy.sh`
+script deploys ArgoCD if it detects that it is not present, then deploys
+the ArgoCD
+https://argoproj.github.io/argo-cd/operator-manual/declarative-setup/#app-of-apps[App
+of Apps] with
+https://argoproj.github.io/argo-cd/user-guide/auto_sync/[Automated Sync
+Policy].
+
+=== Why Automated Sync Policy?
+
+At Camptocamp we have a huge experience in both
+https://puppet.com/[Puppet] and https://www.terraform.io/[Terraform].
+This two tools use two different paradygm to apply configuration:
+
+- Pull for Puppet: an agent runs every 30 minutes on the server to deploy new
+configuration and ensure that every drift is fixed within half an hour
+at top, 
+- Push for Terraform: as long as nobody really applies a
+Terraform manifest, nothing is deploy ; hence you code may not reflect
+what exists.
+
+By experience, we know that it is hard to have hundreds of Terraform
+workspaces that always converge, hence with think that pull mode better
+fits GitOps philosophy.
+
+To ensure continuous reconciliation, we enable Automated Sync Policy on
+our Applications. This forces us to be rigurous.
+
+== What can you do with this demo?
+
+For now not that much, but more stuffs are coming.
+
+=== Access Kubernetes API
+
+K3s’ installation create a `kubeconfig.yaml` file that contains the
+Kubernetes context that allows you to access the cluster.
+
+[source,shell]
+----
+$ export CLUSTER_NAME=master
+$ export KUBECONFIG=terraform/terraform.tfstate.d/$CLUSTER_NAME/kubeconfig.yaml
+$ export BASE_DOMAIN=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' k3s-server-$CLUSTER_NAME|tr '.' '-'`.nip.io
+$ kubectl get nodes
+$ kubectl get namespaces
+$ kubectl get pods --all-namespaces
+----
+
+=== Access ArgoCD web UI
+
+ArgoCD Web UI is accessible via https://argocd.apps.$BASE_DOMAIN. The
+default account is admin/argocd.
+
+=== Access Traefik dashboard
+
+For security reasons, Traefik dashboard is not exposed, hence you have
+to use port-forwarding to access it:
+
+[source,shell]
+----
+$ kubectl -n traefik port-forward $(kubectl -n traefik get pods --selector "app.kubernetes.io/name=traefik" --output=name) 9000:9000
+----
+
+Then point your web browser to http://localhost:9000/dashboard/
+
+=== Access Grafana dashboard
+
+Granafa is accessible via https://grafana.apps.$BASE_DOMAIN. As there is
+currently no proper secret management in this demo, we let the default
+Grafana credentials: `admin/prom-operator`.
+
+=== Access Prometheus dashboard
+
+Prometheus is accessible via https://prometheus.apps.$BASE_DOMAIN. As
+there is currently no proper secret management in this demo, the
+Prometheus URL is not protected.
+
+=== Access Alertmanager dashboard
+
+Alertmanager is accessible via https://alertmanager.apps.$BASE_DOMAIN.
+As there is currently no proper secret management in this demo, the
+Alertmanager URL is not protected.

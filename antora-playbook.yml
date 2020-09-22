@@ -1,0 +1,21 @@
+site:
+  title: Camptocamp’s Kubernetes Demo
+  # the 404 page and sitemap files only get generated when the url property is set
+  url: https://camptocamp.github.io/k8s-demo/
+  start_page: k8s-demo::index.adoc
+content:
+  sources:
+  - url: https://github.com/camptocamp/k8s-demo.git
+    branches: convert_to_asciidoc
+    #branches: [v2.0, v1.0]
+    edit_url: false
+    start_path: docs
+ui:
+  bundle:
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/master/raw/build/ui-bundle.zip?job=bundle-stable
+    snapshot: true
+  supplemental_files:
+  - path: ui.yml
+    contents: |
+      static_files: [ .nojekyll ]
+  - path: .nojekyll

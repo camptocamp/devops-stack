@@ -1,0 +1,13 @@
+= Camptocamp's Kubernetes Demo
+
+== Overview
+
+This is a demo that is also reference implementation for all our
+Kubernetes related projects.
+
+== Documentation
+
+The documentation is written using Asciidoc and Antora and located in the docs/ folder.
+The https://documentation.divio.com/structure/[Divio documentation structure] is used to organize its content.
+
+The documentation is published here: https://camptocamp.github.io/k8s-demo/
