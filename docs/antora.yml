@@ -1,0 +1,5 @@
+name: k8s-demo
+title: Kubernetes Demo
+version: 0.2.0
+nav:
+- modules/ROOT/nav.adoc

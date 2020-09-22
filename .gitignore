@@ -2,3 +2,4 @@ terraform/.terraform
 terraform/terraform.tfstate.d/
 Chart.lock
 charts/
+build/
