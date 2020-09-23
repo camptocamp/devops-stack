@@ -53,7 +53,7 @@ if test -n "$CI_MERGE_REQUEST_ID"; then
 		test -f Chart.yaml && helm dependency update
 		argocd app diff "$app" --local . || true
 	)
-done
+  done
 else
 	argocd app list
 	echo "Waiting for app of apps to be in sync"
