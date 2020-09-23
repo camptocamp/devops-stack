@@ -8,6 +8,7 @@ import (
 	"net/url"
 	"os"
 	"os/user"
+	"path"
 	"regexp"
 	"strings"
 
@@ -18,6 +19,8 @@ import (
 )
 
 type Environment struct {
+	Home string `env:"HOME"`
+
 	BaseDomain string `env:"BASE_DOMAIN,default=127-0-0-1.nip.io"`
 	DockerHost string `env:"DOCKER_HOST,default=tcp://127.0.0.1:2376/"`
 
@@ -53,6 +56,37 @@ func Provision() error {
 // Cleans the deployment
 func Clean() error {
 	mg.Deps(Env)
+
+	_, err := os.Create(path.Join(environment.Home, ".terraformrc"))
+	if err != nil {
+		return err
+	}
+
+	/*
+		docker run --rm \
+			--group-add $(DOCKER_GID_NUMBER) \
+			--user $(UID_NUMBER):$(GID_NUMBER) \
+			-v /var/run/docker.sock:/var/run/docker.sock \
+			-v $$PWD:/workdir \
+			-v $$HOME/.terraformrc:/tmp/.terraformrc \
+			-v $$HOME/.terraform.d:/tmp/.terraform.d \
+			--env HOME=/tmp \
+			--env TF_VAR_k3s_kubeconfig_dir=$$PWD \
+			--env CLUSTER_NAME=$(CLUSTER_NAME) \
+			--entrypoint "" \
+			--workdir /workdir \
+			hashicorp/terraform:0.13.3 /workdir/scripts/destroy.sh
+		rm -rf $$PWD/$(ARTIFACTS_DIR)
+	*/
+	dir, err := os.Getwd()
+	if err != nil {
+		return err
+	}
+	err = os.RemoveAll(path.Join(dir, environment.ArtifactsDir))
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
 
