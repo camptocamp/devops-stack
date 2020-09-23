@@ -7,8 +7,8 @@ metadata:
 spec:
   secretName: alertmanager-cert
   dnsNames:
-    - alertmanager.apps.127-0-0-1.nip.io
-    - alertmanager.apps.{{ .Values.clusterName }}.127-0-0-1.nip.io
+    - alertmanager.apps.{{ $.Values.baseDomain }}
+    - alertmanager.apps.{{ .Values.clusterName }}.{{ $.Values.baseDomain }}
   issuerRef:
     name: selfsigned-issuer
     kind: ClusterIssuer
@@ -21,8 +21,8 @@ metadata:
 spec:
   secretName: grafana-cert
   dnsNames:
-    - grafana.apps.127-0-0-1.nip.io
-    - grafana.apps.{{ .Values.clusterName }}.127-0-0-1.nip.io
+    - grafana.apps.{{ $.Values.baseDomain }}
+    - grafana.apps.{{ .Values.clusterName }}.{{ $.Values.baseDomain }}
   issuerRef:
     name: selfsigned-issuer
     kind: ClusterIssuer
@@ -35,8 +35,8 @@ metadata:
 spec:
   secretName: prometheus-k8s-cert
   dnsNames:
-    - prometheus-k8s.apps.127-0-0-1.nip.io
-    - prometheus-k8s.apps.{{ .Values.clusterName }}.127-0-0-1.nip.io
+    - prometheus-k8s.apps.{{ $.Values.baseDomain }}
+    - prometheus-k8s.apps.{{ .Values.clusterName }}.{{ $.Values.baseDomain }}
   issuerRef:
     name: selfsigned-issuer
     kind: ClusterIssuer

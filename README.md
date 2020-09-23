@@ -73,7 +73,7 @@ $ kubectl get pods --all-namespaces
 
 ### Access ArgoCD web UI
 
-ArgoCD Web UI is accessible via https://argocd.apps.master.127-0-0-1.nip.io.
+ArgoCD Web UI is accessible via https://argocd.apps.$BASE_DOMAIN.
 The default account is admin/argocd.
 
 ### Access Traefik dashboard
@@ -88,15 +88,15 @@ Then point your web browser to http://localhost:9000/dashboard/
 
 ### Access Grafana dashboard
 
-Granafa is accessible via https://grafana.apps.master.127-0-0-1.nip.io.
+Granafa is accessible via https://grafana.apps.master.$BASE_DOMAIN.
 As there is currently no proper secret management in this demo, we let the default Grafana credentials: `admin/prom-operator`.
 
 ### Access Prometheus dashboard
 
-Prometheus is accessible via https://prometheus.apps.master.127-0-0-1.nip.io.
+Prometheus is accessible via https://prometheus.apps.master.$BASE_DOMAIN.
 As there is currently no proper secret management in this demo, the Prometheus URL is not protected.
 
 ### Access Alertmanager dashboard
 
-Alertmanager is accessible via https://alertmanager.apps.master.127-0-0-1.nip.io.
+Alertmanager is accessible via https://alertmanager.apps.master.$BASE_DOMAIN.
 As there is currently no proper secret management in this demo, the Alertmanager URL is not protected.

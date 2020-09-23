@@ -12,6 +12,7 @@ spec:
     targetRevision: {{ .Values.spec.source.targetRevision }}
     helm:
       values: |
+        baseDomain: {{ .Values.baseDomain }}
         clusterName: {{ .Values.spec.source.targetRevision }}
         # Enable metrics here because CRDs are not available at bootstrap
         argo-cd:

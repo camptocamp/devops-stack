@@ -12,6 +12,7 @@ spec:
     targetRevision: {{ .Values.spec.source.targetRevision }}
     helm:
       values: |
+        baseDomain: {{ .Values.baseDomain }}
         clusterName: {{ .Values.spec.source.targetRevision }}
   destination:
     namespace: cluster-monitoring

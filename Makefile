@@ -1,5 +1,3 @@
-BASE_DOMAIN := 127-0-0-1.nip.io
-
 DOCKER_HOST := "tcp://127.0.0.1:2376/"
 UID_NUMBER := $(shell id -u $$USER)
 GID_NUMBER := $(shell id -g $$USER)
@@ -33,7 +31,7 @@ test: deploy
 	docker run --rm \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v $$PWD:/workdir \
-		--network host \
+		--network k3s-$(CLUSTER_NAME) \
 		--env CLUSTER_NAME=$(CLUSTER_NAME) \
 		--env BASE_DOMAIN=$(BASE_DOMAIN) \
 		--env HOME=/tmp \
@@ -41,12 +39,13 @@ test: deploy
 		--workdir /workdir \
 		curlimages/curl /workdir/scripts/test.sh
 
-deploy: $(ARTIFACTS_DIR)/kubeconfig.yaml
+deploy: $(ARTIFACTS_DIR)/kubeconfig.yaml get-base-domain
+	sed -i -e "s/127.0.0.1/$(API_IP_ADDRESS)/" $$PWD/$(ARTIFACTS_DIR)/kubeconfig.yaml
 	docker run --rm \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v $$PWD:/workdir \
 		-v $$PWD/$(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
-		--network host \
+		--network k3s-$(CLUSTER_NAME) \
 		--env HOME=/tmp \
 		--env KUBECTL_COMMAND=apply \
 		--env ARGOCD_OPTS="--plaintext --port-forward --port-forward-namespace argocd" \
@@ -54,6 +53,13 @@ deploy: $(ARTIFACTS_DIR)/kubeconfig.yaml
 		--entrypoint "" \
 		--workdir /workdir \
 		argoproj/argocd:v1.6.2 /workdir/scripts/deploy.sh
+
+get-base-domain:
+	$(eval API_IP_ADDRESS = $(shell docker run --rm \
+		--user $(UID_NUMBER):$(GID_NUMBER) \
+		-v $$PWD:/workdir \
+		stedolan/jq -r '.values.root_module.resources[]|select(.type=="docker_container" and .name=="k3s_server").values.ip_address' /workdir/terraform/terraform.tfstate.d/$(CLUSTER_NAME)/terraform.tfstate.json))
+	$(eval BASE_DOMAIN = $(shell echo $(API_IP_ADDRESS)|tr '.' '-').nip.io)
 
 $(ARTIFACTS_DIR)/kubeconfig.yaml: terraform/*
 	echo $(REPO_URL)
@@ -91,7 +97,7 @@ clean:
 		hashicorp/terraform:0.13.3 /workdir/scripts/destroy.sh
 	rm -rf $$PWD/$(ARTIFACTS_DIR)
 
-debug:
+debug: get-base-domain
 	@echo CLUSTER_NAME=$(CLUSTER_NAME)
 	@echo BASE_DOMAIN=$(BASE_DOMAIN)
 	@echo DOCKER_HOST=$(DOCKER_HOST)

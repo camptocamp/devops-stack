@@ -48,21 +48,6 @@ resource "docker_container" "k3s_server" {
     host_path      = var.k3s_kubeconfig_dir
     container_path = "/output"
   }
-
-  ports {
-    internal = 80
-    external = 80
-  }
-
-  ports {
-    internal = 443
-    external = 443
-  }
-
-  ports {
-    internal = 6443
-    external = 6443
-  }
 }
 
 resource "docker_container" "k3s_agent" {
