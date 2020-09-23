@@ -66,6 +66,7 @@ K3s' installation create a `kubeconfig.yaml` file that contains the Kubernetes c
 
 ```shell
 $ export KUBECONFIG=terraform/terraform.tfstate.d/master/kubeconfig.yaml
+$ export BASE_DOMAIN=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' k3s-agent-master|tr '.' '-'`.nip.io
 $ kubectl get nodes
 $ kubectl get namespaces
 $ kubectl get pods --all-namespaces
