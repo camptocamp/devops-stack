@@ -23,6 +23,7 @@ type Environment struct {
 	RepoUrl      string
 	Remote       string
 	RemoteBranch string
+	RemoteUrl    string
 }
 
 var environment Environment
@@ -53,6 +54,7 @@ func Debug() error {
 	fmt.Println("REPO_URL =", environment.RepoUrl)
 	fmt.Println("REMOTE =", environment.Remote)
 	fmt.Println("REMOTE_BRANCH =", environment.RemoteBranch)
+	fmt.Println("REMOTE_URL =", environment.RemoteUrl)
 
 	return nil
 }
@@ -70,27 +72,33 @@ func Env() error {
 		environment.RepoUrl = fmt.Sprintf("%s/%s.git", githubServerUrl, es["GITHUB_REPOSITORY"])
 		//environment.RemoteBranch = es["CI_COMMIT_REF_NAME"]
 	} else {
-		br, err := getCurrentBranch()
+		dir, err := os.Getwd()
+		if err != nil {
+			return err
+		}
+		repo, err := git.PlainOpen(dir)
+		if err != nil {
+			return err
+		}
+		br, err := getCurrentBranch(repo)
 		if err != nil {
 			return err
 		}
 		environment.Remote = br.Remote
 		environment.RemoteBranch = br.Name
+
+		r, err := repo.Remote(br.Remote)
+		if err != nil {
+			return err
+		}
+
+		environment.RemoteUrl = r.Config().URLs[0]
 	}
 
 	return err
 }
 
-func getCurrentBranch() (*gitconfig.Branch, error) {
-	dir, err := os.Getwd()
-	if err != nil {
-		return nil, err
-	}
-	repo, err := git.PlainOpen(dir)
-	if err != nil {
-		return nil, err
-	}
-
+func getCurrentBranch(repo *git.Repository) (*gitconfig.Branch, error) {
 	h, err := repo.Head()
 	if err != nil {
 		return nil, err
