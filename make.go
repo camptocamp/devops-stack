@@ -11,9 +11,11 @@ import (
 	"path"
 	"regexp"
 	"strings"
+	"syscall"
 
 	env "github.com/Netflix/go-env"
 	"github.com/magefile/mage/mg"
+	"github.com/magefile/mage/sh"
 	"gopkg.in/src-d/go-git.v4"
 	gitconfig "gopkg.in/src-d/go-git.v4/config"
 )
@@ -31,6 +33,8 @@ type Environment struct {
 
 	ClusterName  string
 	ArtifactsDir string
+
+	DockerGid uint32
 }
 
 var environment Environment
@@ -57,31 +61,33 @@ func Provision() error {
 func Clean() error {
 	mg.Deps(Env)
 
-	_, err := os.Create(path.Join(environment.Home, ".terraformrc"))
+	terraformrc, err := os.Create(path.Join(environment.Home, ".terraformrc"))
 	if err != nil {
 		return err
 	}
 
-	/*
-		docker run --rm \
-			--group-add $(DOCKER_GID_NUMBER) \
-			--user $(UID_NUMBER):$(GID_NUMBER) \
-			-v /var/run/docker.sock:/var/run/docker.sock \
-			-v $$PWD:/workdir \
-			-v $$HOME/.terraformrc:/tmp/.terraformrc \
-			-v $$HOME/.terraform.d:/tmp/.terraform.d \
-			--env HOME=/tmp \
-			--env TF_VAR_k3s_kubeconfig_dir=$$PWD \
-			--env CLUSTER_NAME=$(CLUSTER_NAME) \
-			--entrypoint "" \
-			--workdir /workdir \
-			hashicorp/terraform:0.13.3 /workdir/scripts/destroy.sh
-		rm -rf $$PWD/$(ARTIFACTS_DIR)
-	*/
+	usr, _ := user.Current()
+
 	dir, err := os.Getwd()
 	if err != nil {
 		return err
 	}
+
+	sh.Run("docker", "run", "--rm",
+		"--group-add", string(environment.DockerGid),
+		"--user", fmt.Sprintf("%v:%v", usr.Uid, usr.Gid),
+		"-v", "/var/run/docker.sock:/var/run/docker.sock",
+		"-v", fmt.Sprintf("%s:/workdir", dir),
+		"-v", fmt.Sprintf("%s:/tmp/.terraformrc", terraformrc),
+		"-v", fmt.Sprintf("%s:/tmp/.terraform.d", path.Join(environment.Home, ".terraform.d")),
+		"--env", "HOME=/tmp",
+		"--env", fmt.Sprintf("TF_VAR_k3s_kubeconfig_dir=%s", dir),
+		"--env", fmt.Sprintf("CLUSTER_NAME=%s", environment.ClusterName),
+		"--entrypoint", "",
+		"--workdir", "/workdir",
+		"hashicorp/terraform:0.13.3", "/workdir/scripts/destroy.sh",
+	)
+
 	err = os.RemoveAll(path.Join(dir, environment.ArtifactsDir))
 	if err != nil {
 		return err
@@ -96,10 +102,6 @@ func Debug() error {
 
 	fmt.Println("BASE_DOMAIN =", environment.BaseDomain)
 	fmt.Println("DOCKER_HOST =", environment.DockerHost)
-
-	usr, _ := user.Current()
-	fmt.Println("UID =", usr.Uid)
-	fmt.Println("GID =", usr.Gid)
 
 	fmt.Println("REPO_URL =", environment.RepoUrl)
 	fmt.Println("REMOTE =", environment.Remote)
@@ -117,6 +119,16 @@ func Env() error {
 	es, err := env.UnmarshalFromEnviron(&environment)
 	if err != nil {
 		return err
+	}
+
+	fi, err := os.Stat("/var/run/docker.sock")
+	if err != nil {
+		return err
+	}
+	if stat, ok := fi.Sys().(*syscall.Stat_t); ok {
+		environment.DockerGid = stat.Gid
+	} else {
+		return fmt.Errorf("Failed to get DOCKER_GID")
 	}
 
 	if ciProjectUrl, ok := es["CI_PROJECT_URL"]; ok {
