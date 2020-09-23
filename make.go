@@ -8,6 +8,7 @@ import (
 	"net/url"
 	"os"
 	"os/user"
+	"regexp"
 	"strings"
 
 	env "github.com/Netflix/go-env"
@@ -100,8 +101,9 @@ func Env() error {
 			environment.RepoUrl = environment.RemoteUrl
 		} else {
 			// Not a URL
-			// REPO_URL = "https://github.com/$(shell echo $(REMOTE_URL) | sed -Ene's#git@github.com:([^/]*)/(.*).git#\1/\2#p').git"
-			// TODO: environment.RepoUrl =
+			re := regexp.MustCompile(`[^@]+@([^:]+):([^/]+)/(.*)\.git`)
+			m := re.FindStringSubmatch(environment.RemoteUrl)
+			environment.RepoUrl = fmt.Sprintf("https://%s/%s/%s.git", m[1], m[2], m[3])
 		}
 	}
 
