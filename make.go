@@ -73,6 +73,7 @@ func Clean() error {
 		return err
 	}
 
+	// TODO: use Docker go sdk
 	sh.Run("docker", "run", "--rm",
 		"--group-add", string(environment.DockerGid),
 		"--user", fmt.Sprintf("%v:%v", usr.Uid, usr.Gid),
