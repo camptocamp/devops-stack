@@ -65,8 +65,9 @@ For now not that much, but more stuffs are coming.
 K3s' installation create a `kubeconfig.yaml` file that contains the Kubernetes context that allows you to access the cluster.
 
 ```shell
-$ export KUBECONFIG=terraform/terraform.tfstate.d/master/kubeconfig.yaml
-$ export BASE_DOMAIN=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' k3s-agent-master|tr '.' '-'`.nip.io
+$ export CLUSTER_NAME=master
+$ export KUBECONFIG=terraform/terraform.tfstate.d/$CLUSTER_NAME/kubeconfig.yaml
+$ export BASE_DOMAIN=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' k3s-agent-$CLUSTER_NAME|tr '.' '-'`.nip.io
 $ kubectl get nodes
 $ kubectl get namespaces
 $ kubectl get pods --all-namespaces
@@ -89,15 +90,15 @@ Then point your web browser to http://localhost:9000/dashboard/
 
 ### Access Grafana dashboard
 
-Granafa is accessible via https://grafana.apps.master.$BASE_DOMAIN.
+Granafa is accessible via https://grafana.apps.$CLUSTER_NAME.$BASE_DOMAIN.
 As there is currently no proper secret management in this demo, we let the default Grafana credentials: `admin/prom-operator`.
 
 ### Access Prometheus dashboard
 
-Prometheus is accessible via https://prometheus.apps.master.$BASE_DOMAIN.
+Prometheus is accessible via https://prometheus.apps.$CLUSTER_NAME.$BASE_DOMAIN.
 As there is currently no proper secret management in this demo, the Prometheus URL is not protected.
 
 ### Access Alertmanager dashboard
 
-Alertmanager is accessible via https://alertmanager.apps.master.$BASE_DOMAIN.
+Alertmanager is accessible via https://alertmanager.apps.$CLUSTER_NAME.$BASE_DOMAIN.
 As there is currently no proper secret management in this demo, the Alertmanager URL is not protected.
