@@ -138,6 +138,5 @@ func getCurrentBranch(repo *git.Repository) (*gitconfig.Branch, error) {
 	}
 
 	b := strings.TrimPrefix(h.Name().String(), "refs/heads/")
-	fmt.Println("looking for branch", b)
 	return repo.Branch(b)
 }
