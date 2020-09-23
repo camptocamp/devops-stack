@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`alertmanager.apps.127-0-0-1.nip.io`, `alertmanager.apps.{{ .Values.clusterName }}.127-0-0-1.nip.io`)
+    - match: Host(`alertmanager.apps.{{ $.Values.baseDomain }}`, `alertmanager.apps.{{ .Values.clusterName }}.{{ $.Values.baseDomain }}`)
       kind: Rule
       services:
         - name: cluster-monitoring-kube-pr-alertmanager
@@ -23,7 +23,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`prometheus.apps.127-0-0-1.nip.io`, `prometheus.apps.{{ .Values.clusterName }}.127-0-0-1.nip.io`)
+    - match: Host(`prometheus.apps.{{ $.Values.baseDomain }}`, `prometheus.apps.{{ .Values.clusterName }}.{{ $.Values.baseDomain }}`)
       kind: Rule
       services:
         - name: cluster-monitoring-kube-pr-prometheus
@@ -39,7 +39,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`grafana.apps.127-0-0-1.nip.io`, `grafana.apps.{{ .Values.clusterName }}.127-0-0-1.nip.io`)
+    - match: Host(`grafana.apps.{{ $.Values.baseDomain }}`, `grafana.apps.{{ .Values.clusterName }}.{{ $.Values.baseDomain }}`)
       kind: Rule
       services:
         - name: cluster-monitoring-grafana
