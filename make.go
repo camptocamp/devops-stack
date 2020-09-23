@@ -1,6 +1,6 @@
 //+build mage
 
-// Mostly this is used for building the website and some dev tasks.
+// Deploy a K3S environment with ArgoCD and sample apps
 package main
 
 import (
