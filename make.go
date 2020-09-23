@@ -13,7 +13,6 @@ import (
 
 	env "github.com/Netflix/go-env"
 	"github.com/magefile/mage/mg"
-	"github.com/magefile/mage/sh"
 	"gopkg.in/src-d/go-git.v4"
 	gitconfig "gopkg.in/src-d/go-git.v4/config"
 )
@@ -33,19 +32,25 @@ type Environment struct {
 
 var environment Environment
 
-// Builds the website.  If needed, it will compact the js as well.
-func Build() error {
-	mg.Deps(Env)
-	//fmt.Printf(environment.BaseDomain)
-
-	out, err := sh.Output("echo", "truc")
-	if err != nil {
-		return err
-	}
-	fmt.Printf(out)
+// Tests the resulting URLs
+func Test() error {
+	mg.Deps(Deploy)
 	return nil
 }
 
+// Deploys ArgoCD and apps
+func Deploy() error {
+	mg.Deps(Provision)
+	return nil
+}
+
+// Provivisions K3S
+func Provision() error {
+	mg.Deps(Env)
+	return nil
+}
+
+// Prints the environment variables
 func Debug() error {
 	mg.Deps(Env)
 
@@ -67,6 +72,7 @@ func Debug() error {
 	return nil
 }
 
+// Retrieves and computes the environment variables
 func Env() error {
 	es, err := env.UnmarshalFromEnviron(&environment)
 	if err != nil {
