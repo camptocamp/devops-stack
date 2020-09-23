@@ -50,6 +50,12 @@ func Provision() error {
 	return nil
 }
 
+// Cleans the deployment
+func Clean() error {
+	mg.Deps(Env)
+	return nil
+}
+
 // Prints the environment variables
 func Debug() error {
 	mg.Deps(Env)
