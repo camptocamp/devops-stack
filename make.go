@@ -26,6 +26,9 @@ type Environment struct {
 	Remote       string
 	RemoteBranch string
 	RemoteUrl    string
+
+	ClusterName  string
+	ArtifactsDir string
 }
 
 var environment Environment
@@ -57,6 +60,9 @@ func Debug() error {
 	fmt.Println("REMOTE =", environment.Remote)
 	fmt.Println("REMOTE_BRANCH =", environment.RemoteBranch)
 	fmt.Println("REMOTE_URL =", environment.RemoteUrl)
+
+	fmt.Println("CLUSTER_NAME =", environment.ClusterName)
+	fmt.Println("ARTIFACTS_DIR =", environment.ArtifactsDir)
 
 	return nil
 }
@@ -106,6 +112,9 @@ func Env() error {
 			environment.RepoUrl = fmt.Sprintf("https://%s/%s/%s.git", m[1], m[2], m[3])
 		}
 	}
+
+	environment.ClusterName = environment.RemoteBranch
+	environment.ArtifactsDir = fmt.Sprintf("terraform/terraform.tfstate.d/%s", environment.ClusterName)
 
 	return err
 }
