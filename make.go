@@ -5,6 +5,7 @@ package main
 
 import (
 	"fmt"
+	"net/url"
 	"os"
 	"os/user"
 	"strings"
@@ -70,7 +71,8 @@ func Env() error {
 		environment.RemoteBranch = es["CI_COMMIT_REF_NAME"]
 	} else if githubServerUrl, ok := es["GITHUB_SERVER_URL"]; ok {
 		environment.RepoUrl = fmt.Sprintf("%s/%s.git", githubServerUrl, es["GITHUB_REPOSITORY"])
-		//environment.RemoteBranch = es["CI_COMMIT_REF_NAME"]
+		brSplit := strings.Split(es["GITHUB_REF"], "/")
+		environment.RemoteBranch = brSplit[len(brSplit)-1]
 	} else {
 		dir, err := os.Getwd()
 		if err != nil {
@@ -93,6 +95,14 @@ func Env() error {
 		}
 
 		environment.RemoteUrl = r.Config().URLs[0]
+
+		if _, err := url.Parse(environment.RemoteUrl); err == nil {
+			environment.RepoUrl = environment.RemoteUrl
+		} else {
+			// Not a URL
+			// REPO_URL = "https://github.com/$(shell echo $(REMOTE_URL) | sed -Ene's#git@github.com:([^/]*)/(.*).git#\1/\2#p').git"
+			// TODO: environment.RepoUrl =
+		}
 	}
 
 	return err
