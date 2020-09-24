@@ -51,7 +51,7 @@ func Deploy() error {
 	return nil
 }
 
-// Provivisions K3S
+// Provisions K3S
 func Provision() error {
 	mg.Deps(Env)
 	return nil
