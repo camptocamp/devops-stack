@@ -40,7 +40,6 @@ test: deploy
 		curlimages/curl /workdir/scripts/test.sh
 
 deploy: $(ARTIFACTS_DIR)/kubeconfig.yaml get-base-domain
-	sed -i -e "s/127.0.0.1/$(API_IP_ADDRESS)/" $$PWD/$(ARTIFACTS_DIR)/kubeconfig.yaml
 	docker run --rm \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v $$PWD:/workdir \
@@ -54,6 +53,11 @@ deploy: $(ARTIFACTS_DIR)/kubeconfig.yaml get-base-domain
 		--workdir /workdir \
 		argoproj/argocd:v1.6.2 /workdir/scripts/deploy.sh
 
+# Get kubernetes context
+$(ARTIFACTS_DIR)/kubeconfig.yaml: $(ARTIFACTS_DIR)/terraform.tfstate get-base-domain
+	docker cp k3s-server-$(CLUSTER_NAME):/etc/rancher/k3s/k3s.yaml $(ARTIFACTS_DIR)/kubeconfig.yaml
+	sed -i -e "s/127.0.0.1/$(API_IP_ADDRESS)/" $$PWD/$(ARTIFACTS_DIR)/kubeconfig.yaml
+
 get-base-domain:
 	$(eval API_IP_ADDRESS = $(shell docker run --rm \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
@@ -61,7 +65,7 @@ get-base-domain:
 		stedolan/jq -r '.values.root_module.resources[]|select(.type=="docker_container" and .name=="k3s_server").values.ip_address' /workdir/terraform/terraform.tfstate.d/$(CLUSTER_NAME)/terraform.tfstate.json))
 	$(eval BASE_DOMAIN = $(shell echo $(API_IP_ADDRESS)|tr '.' '-').nip.io)
 
-$(ARTIFACTS_DIR)/kubeconfig.yaml: terraform/*
+$(ARTIFACTS_DIR)/terraform.tfstate: terraform/*
 	echo $(REPO_URL)
 	touch $$HOME/.terraformrc
 	docker run --rm \
@@ -72,7 +76,6 @@ $(ARTIFACTS_DIR)/kubeconfig.yaml: terraform/*
 		-v $$HOME/.terraformrc:/tmp/.terraformrc \
 		-v $$HOME/.terraform.d:/tmp/.terraform.d \
 		--env HOME=/tmp \
-		--env TF_VAR_k3s_kubeconfig_dir=$$PWD/$(ARTIFACTS_DIR) \
 		--env REPO_URL=$(REPO_URL) \
 		--env CLUSTER_NAME=$(CLUSTER_NAME) \
 		--env ARTIFACTS_DIR=$(ARTIFACTS_DIR) \
@@ -90,7 +93,6 @@ clean:
 		-v $$HOME/.terraformrc:/tmp/.terraformrc \
 		-v $$HOME/.terraform.d:/tmp/.terraform.d \
 		--env HOME=/tmp \
-		--env TF_VAR_k3s_kubeconfig_dir=$$PWD \
 		--env CLUSTER_NAME=$(CLUSTER_NAME) \
 		--entrypoint "" \
 		--workdir /workdir \

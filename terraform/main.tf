@@ -35,18 +35,11 @@ resource "docker_container" "k3s_server" {
 
   env = [
     "K3S_TOKEN=${random_password.k3s_token.result}",
-    "K3S_KUBECONFIG_OUTPUT=/output/kubeconfig.yaml",
-    "K3S_KUBECONFIG_MODE=666",
   ]
 
   volumes {
     volume_name    = docker_volume.k3s_server.name
     container_path = "/var/lib/rancher/k3s"
-  }
-
-  volumes {
-    host_path      = var.k3s_kubeconfig_dir
-    container_path = "/output"
   }
 }
 
