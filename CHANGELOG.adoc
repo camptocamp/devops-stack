@@ -1,0 +1,41 @@
+= Changelog
+
+== 0.3.0 (Unreleased)
+
+*Implemented enhancements:*
+
+* Upgrade K3s to v1.19.2 https://github.com/camptocamp/k8s-demo/pull/54[#54] (https://github.com/mcanevet[mcanevet])
+* Support deploying multiple cluster in parallel https://github.com/camptocamp/k8s-demo/pull/61[#61] (https://github.com/mcanevet[mcanevet])
+* Convert to asciidoc, integrate with Antora https://github.com/camptocamp/k8s-demo/pull/63[#63] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
+* Use docker cp to get Kubernetes context https://github.com/camptocamp/k8s-demo/pull/64[#64] (https://github.com/mcanevet[mcanevet])
+* Don’t create 2 vhost per service https://github.com/camptocamp/k8s-demo/pull/66[#66] (https://github.com/mcanevet[mcanevet])
+
+*Fixed bugs:*
+
+* https://github.com/camptocamp/k8s-demo/commit/1a1d0a02343b80e7aa81e8a746c8037c25531839[Fix Issue with some versions of Make] (https://github.com/sbrunner[sbrunner])
+* Don’t delete Docker image on cleanup https://github.com/camptocamp/k8s-demo/pull/65[#65] (https://github.com/mcanevet[mcanevet])
+
+== https://github.com/camptocamp/k8s-demo/tree/0.2.0[0.2.0] (2020-09-20)
+
+https://github.com/camptocamp/k8s-demo/compare/0.1.0...0.2.0[Full Changelog]
+
+*Implemented enhancements:*
+
+* Add debug target to Makefile https://github.com/camptocamp/k8s-demo/pull/30[#30] (https://github.com/mcanevet[mcanevet])
+* Fetch repo URL and cluster name from remote https://github.com/camptocamp/k8s-demo/pull/35[#35] (https://github.com/mcanevet[mcanevet])
+* Don’t set ResourceQuota on demo https://github.com/camptocamp/k8s-demo/pull/36[#36] (https://github.com/mcanevet[mcanevet])
+* Enable Prometheus metrics for Traefik https://github.com/camptocamp/k8s-demo/pull/38[#38] (https://github.com/mcanevet[mcanevet])
+* Deploy prometheus-operator and kube-prometheus-stack https://github.com/camptocamp/k8s-demo/pull/40[#40] (https://github.com/mcanevet[mcanevet])
+* Add monitoring for ArgoCD and cert-manager https://github.com/camptocamp/k8s-demo/pull/44[#44] (https://github.com/mcanevet[mcanevet])
+* [grafana] Search for dashboard and datasource in all namespaces https://github.com/camptocamp/k8s-demo/pull/49[#49] (https://github.com/mcanevet[mcanevet])
+* Deploy Loki https://github.com/camptocamp/k8s-demo/pull/50[#50] (https://github.com/mcanevet[mcanevet])
+
+== https://github.com/camptocamp/k8s-demo/tree/0.1.0[0.1.0] (2020-09-19)
+
+*Implemented enhancements:*
+
+* Deploy K3s using Terraform (https://github.com/mcanevet[mcanevet])
+* Deploy ArgoCD using `helm template ... | kubectl apply -f-` (https://github.com/mcanevet[mcanevet])
+* Deploy cert-manager using ArgoCD (https://github.com/mcanevet[mcanevet])
+* Deploy Traefik using ArgoCD (https://github.com/mcanevet[mcanevet])
+* Create initial github actions pipeline to prevent regressions (https://github.com/mcanevet[mcanevet])
