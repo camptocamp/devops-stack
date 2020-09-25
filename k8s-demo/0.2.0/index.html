@@ -268,7 +268,7 @@ to use port-forwarding to access it:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ kubectl -n traefik port-forward $(kubectl -n traefik get pods --selector "app.kubernetes.io/name=traefik" --output=name) 9000:9000</code></pre>
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ kubectl -n traefik port-forward $(kubectl -n traefik get pods --selector "app.kubernetes.io/name=traefik" --output=name | head -n1) 9000:9000</code></pre>
 </div>
 </div>
 <div class="paragraph">
