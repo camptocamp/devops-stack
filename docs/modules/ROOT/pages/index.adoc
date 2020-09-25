@@ -1,6 +1,6 @@
 = Camptocamp’s Kubernetes Demo
 Mickaël Canévet <mickael.canevet@camptocamp.com>; Raphaël Pinson <raphael.pinson@camptocamp.com>; Stéphane Brunner <stephane.brunner@camptocamp.com>
-v0.2.0, 2020-09-24: second version of the Camptocamp's kubernetes demo 
+v0.2.0, 2020-09-24: second version of the Camptocamp's kubernetes demo
 
 This is a demo that is also reference implementation for all our
 Kubernetes related projects.
@@ -67,7 +67,7 @@ This two tools use two different paradygm to apply configuration:
 
 - Pull for Puppet: an agent runs every 30 minutes on the server to deploy new
 configuration and ensure that every drift is fixed within half an hour
-at top, 
+at top,
 - Push for Terraform: as long as nobody really applies a
 Terraform manifest, nothing is deploy ; hence you code may not reflect
 what exists.
@@ -110,7 +110,7 @@ to use port-forwarding to access it:
 
 [source,shell]
 ----
-$ kubectl -n traefik port-forward $(kubectl -n traefik get pods --selector "app.kubernetes.io/name=traefik" --output=name) 9000:9000
+$ kubectl -n traefik port-forward $(kubectl -n traefik get pods --selector "app.kubernetes.io/name=traefik" --output=name | head -n1) 9000:9000
 ----
 
 Then point your web browser to http://localhost:9000/dashboard/
