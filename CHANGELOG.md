@@ -8,7 +8,7 @@
 - Use docker cp to get Kubernetes context [\#64](https://github.com/camptocamp/k8s-demo/pull/64) ([mcanevet](https://github.com/mcanevet))
 - Don't delete Docker image on cleanup [\#65](https://github.com/camptocamp/k8s-demo/pull/65) ([mcanevet](https://github.com/mcanevet))
 - Don't create 2 vhost per service [\#66](https://github.com/camptocamp/k8s-demo/pull/66) ([mcanevet](https://github.com/mcanevet))
-- Fix Issue with some versions of Make (https://github.com/camptocamp/k8s-demo/commit/1a1d0a02343b80e7aa81e8a746c8037c25531839) ([sbrunner](https://github.com/sbrunner))
+- [Fix Issue with some versions of Make](https://github.com/camptocamp/k8s-demo/commit/1a1d0a02343b80e7aa81e8a746c8037c25531839) ([sbrunner](https://github.com/sbrunner))
 
 ## [0.2.0](https://github.com/camptocamp/k8s-demo/tree/0.2.0) (2020-09-20)
 
