@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.0 (Unreleased)
+
+- Upgrade K3s to v1.19.2 [\#54](https://github.com/camptocamp/k8s-demo/pull/54) ([mcanevet](https://github.com/mcanevet))
+- Support deploying multiple cluster in parallel [\#61](https://github.com/camptocamp/k8s-demo/pull/61) ([mcanevet](https://github.com/mcanevet))
+- Convert to asciidoc, integrate with Antora [\#63](https://github.com/camptocamp/k8s-demo/pull/63) ([acampergue-camptocamp](https://github.com/acampergue-camptocamp))
+- Use docker cp to get Kubernetes context [\#64](https://github.com/camptocamp/k8s-demo/pull/64) ([mcanevet](https://github.com/mcanevet))
+- Don't delete Docker image on cleanup [\#65](https://github.com/camptocamp/k8s-demo/pull/65) ([mcanevet](https://github.com/mcanevet))
+- Don't create 2 vhost per service [\#66](https://github.com/camptocamp/k8s-demo/pull/66) ([mcanevet](https://github.com/mcanevet))
+
 ## [0.2.0](https://github.com/camptocamp/k8s-demo/tree/0.2.0) (2020-09-20)
 
 [Full Changelog](https://github.com/camptocamp/k8s-demo/compare/0.1.0...0.2.0)
