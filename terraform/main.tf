@@ -45,8 +45,10 @@ resource "docker_container" "k3s_server" {
 }
 
 resource "docker_container" "k3s_agent" {
+  count = var.node_count
+
   image = docker_image.k3s.latest
-  name  = "k3s-agent-${terraform.workspace}"
+  name  = "k3s-agent-${terraform.workspace}-${count.index}"
 
   tmpfs = {
     "/run"     = "rw",
@@ -56,8 +58,7 @@ resource "docker_container" "k3s_agent" {
   privileged = true
 
   networks_advanced {
-    name    = docker_network.k3s.name
-    aliases = ["agent"]
+    name = docker_network.k3s.name
   }
 
   env = [

@@ -3,3 +3,9 @@ variable "k3s_version" {
   type        = string
   default     = "v1.19.2-k3s1"
 }
+
+variable "node_count" {
+  description = "Number of nodes to deploy"
+  type        = number
+  default     = 2
+}
