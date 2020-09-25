@@ -49,6 +49,12 @@ argo-cd:
       - --insecure
     config:
       accounts.pipeline: apiKey
+      resource.customizations: |
+        networking.k8s.io/Ingress:
+          health.lua: |
+            hs = {}
+            hs.status = "Healthy"
+            return hs
       configManagementPlugins: |
         - name: kustomized-helm
           init:
