@@ -50,7 +50,7 @@ deploy: $(ARTIFACTS_DIR)/kubeconfig.yaml get-base-domain
 		--env ARTIFACTS_DIR=$(ARTIFACTS_DIR) \
 		--entrypoint "" \
 		--workdir /workdir \
-		argoproj/argocd:v1.6.2 /workdir/scripts/deploy.sh
+		argoproj/argocd:v1.7.6 /workdir/scripts/deploy.sh
 
 # Get kubernetes context
 $(ARTIFACTS_DIR)/kubeconfig.yaml: $(ARTIFACTS_DIR)/terraform.tfstate get-base-domain
