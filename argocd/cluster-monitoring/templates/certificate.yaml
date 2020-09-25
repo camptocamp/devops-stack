@@ -8,7 +8,6 @@ spec:
   secretName: alertmanager-cert
   dnsNames:
     - alertmanager.apps.{{ $.Values.baseDomain }}
-    - alertmanager.apps.{{ .Values.clusterName }}.{{ $.Values.baseDomain }}
   issuerRef:
     name: selfsigned-issuer
     kind: ClusterIssuer
@@ -22,7 +21,6 @@ spec:
   secretName: grafana-cert
   dnsNames:
     - grafana.apps.{{ $.Values.baseDomain }}
-    - grafana.apps.{{ .Values.clusterName }}.{{ $.Values.baseDomain }}
   issuerRef:
     name: selfsigned-issuer
     kind: ClusterIssuer
@@ -36,7 +34,6 @@ spec:
   secretName: prometheus-k8s-cert
   dnsNames:
     - prometheus-k8s.apps.{{ $.Values.baseDomain }}
-    - prometheus-k8s.apps.{{ .Values.clusterName }}.{{ $.Values.baseDomain }}
   issuerRef:
     name: selfsigned-issuer
     kind: ClusterIssuer
