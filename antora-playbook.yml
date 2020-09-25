@@ -5,9 +5,7 @@ site:
   start_page: k8s-demo::index.adoc
 content:
   sources:
-  - url: https://github.com/camptocamp/k8s-demo.git
-    branches: convert_to_asciidoc
-    #branches: [v2.0, v1.0]
+  - url: ./
     edit_url: false
     start_path: docs
 ui:
