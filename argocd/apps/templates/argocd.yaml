@@ -19,6 +19,18 @@ spec:
             metrics:
               enabled: true
           server:
+            ingress:
+              enabled: true
+              annotations:
+                cert-manager.io/cluster-issuer: selfsigned-issuer
+                traefik.ingress.kubernetes.io/router.entrypoints: websecure
+                traefik.ingress.kubernetes.io/router.tls: "true"
+              hosts:
+                - argocd.apps.{{ .Values.baseDomain }}
+              tls:
+                - secretName: argocd-secret
+                  hosts:
+                    - argocd.apps.{{ .Values.baseDomain }}
             metrics:
               enabled: true
           repoServer:
