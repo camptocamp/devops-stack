@@ -13,7 +13,6 @@ spec:
     helm:
       values: |
         baseDomain: {{ .Values.baseDomain }}
-        clusterName: {{ .Values.spec.source.targetRevision }}
   destination:
     namespace: cluster-monitoring
     server: {{ .Values.spec.destination.server }}

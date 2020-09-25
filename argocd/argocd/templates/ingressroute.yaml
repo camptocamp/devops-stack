@@ -9,7 +9,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`argocd.apps.{{ $.Values.baseDomain }}`, `argocd.apps.{{ $.Values.clusterName }}.{{ $.Values.baseDomain }}`)
+    - match: Host(`argocd.apps.{{ $.Values.baseDomain }}`)
       kind: Rule
       services:
         - name: argocd-server

@@ -32,7 +32,6 @@ test: deploy
 		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v $$PWD:/workdir \
 		--network k3s-$(CLUSTER_NAME) \
-		--env CLUSTER_NAME=$(CLUSTER_NAME) \
 		--env BASE_DOMAIN=$(BASE_DOMAIN) \
 		--env HOME=/tmp \
 		--entrypoint "" \
