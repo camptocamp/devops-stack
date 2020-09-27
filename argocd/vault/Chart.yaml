@@ -1,0 +1,8 @@
+---
+apiVersion: "v2"
+name: "vault"
+version: "0"
+dependencies:
+  - name: "vault"
+    version: "0.7.0"
+    repository: "https://helm.releases.hashicorp.com"

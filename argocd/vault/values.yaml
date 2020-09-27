@@ -1,0 +1,11 @@
+---
+vault:
+  global:
+    psp:
+      enable: true
+  injector:
+    metrics:
+      enabled: true
+  server:
+    dev:
+      enabled: true
