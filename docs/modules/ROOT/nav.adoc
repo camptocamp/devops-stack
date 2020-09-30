@@ -1,1 +1,2 @@
 * xref:index.adoc[Camptocamp’s Kubernetes Demo]
+* xref:CHANGELOG.adoc[Changelog]
