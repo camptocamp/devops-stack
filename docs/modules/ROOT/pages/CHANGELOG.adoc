@@ -12,7 +12,7 @@
 * Use local directory for project's reference instead of github link https://github.com/camptocamp/k8s-demo/pull/67[#67] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
 * Convert CHANGELOG from md to adoc https://github.com/camptocamp/k8s-demo/pull/68[#68] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
 * Use Ingress instead of IngressRoute https://github.com/camptocamp/k8s-demo/pull/70[#70] (https://github.com/mcanevet[mcanevet])
-* Integrate changelog page in antora doc https://github.com/camptocamp/k8s-demo/pull/77 (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
+* Integrate changelog page in antora doc https://github.com/camptocamp/k8s-demo/pull/77[#77] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
 
 *Fixed bugs:*
 
