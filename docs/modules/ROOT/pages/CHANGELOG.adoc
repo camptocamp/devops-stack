@@ -13,6 +13,7 @@
 * Convert CHANGELOG from md to adoc https://github.com/camptocamp/k8s-demo/pull/68[#68] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
 * Use Ingress instead of IngressRoute https://github.com/camptocamp/k8s-demo/pull/70[#70] (https://github.com/mcanevet[mcanevet])
 * Integrate changelog page in antora doc https://github.com/camptocamp/k8s-demo/pull/77[#77] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
+* Change of structure to match https://documentation.divio.com/ recommendations https://github.com/camptocamp/k8s-demo/pull/79[#79] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
 
 *Fixed bugs:*
 
