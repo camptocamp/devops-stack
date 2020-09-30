@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>https://camptocamp.github.io/k8s-demo/k8s-demo/0.2.0/CHANGELOG.html</loc>
+<lastmod>2020-09-30T17:10:30.224Z</lastmod>
+</url>
+<url>
 <loc>https://camptocamp.github.io/k8s-demo/k8s-demo/0.2.0/index.html</loc>
-<lastmod>2020-09-28T19:25:29.433Z</lastmod>
+<lastmod>2020-09-30T17:10:30.224Z</lastmod>
 </url>
 </urlset>
