@@ -38,24 +38,6 @@ test: deploy
 		--workdir /workdir \
 		curlimages/curl /workdir/scripts/test.sh
 
-configure-vault: get-base-domain
-	touch $$HOME/.terraformrc
-	docker run --rm \
-		--group-add $(DOCKER_GID_NUMBER) \
-		--user $(UID_NUMBER):$(GID_NUMBER) \
-		-v /var/run/docker.sock:/var/run/docker.sock \
-		-v $$PWD:/workdir \
-		-v $$HOME/.terraformrc:/tmp/.terraformrc \
-		-v $$HOME/.terraform.d:/tmp/.terraform.d \
-		--network k3s-$(CLUSTER_NAME) \
-		--env HOME=/tmp \
-		--env VAULT_ADDR="https://vault.apps.$(BASE_DOMAIN)" \
-		--env CLUSTER_NAME=$(CLUSTER_NAME) \
-		--env ARTIFACTS_DIR=$(ARTIFACTS_DIR) \
-		--entrypoint "" \
-		--workdir /workdir \
-		hashicorp/terraform:0.13.3 /workdir/scripts/configure-vault.sh
-
 deploy: $(ARTIFACTS_DIR)/kubeconfig.yaml get-base-domain
 	docker run --rm \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
@@ -68,7 +50,24 @@ deploy: $(ARTIFACTS_DIR)/kubeconfig.yaml get-base-domain
 		--env ARTIFACTS_DIR=$(ARTIFACTS_DIR) \
 		--entrypoint "" \
 		--workdir /workdir \
-		argoproj/argocd:v1.7.6 /workdir/scripts/deploy.sh
+		argoproj/argocd:v1.7.6 /workdir/scripts/deploy.sh & \
+	docker run --rm \
+		--group-add $(DOCKER_GID_NUMBER) \
+		--user $(UID_NUMBER):$(GID_NUMBER) \
+		-v /var/run/docker.sock:/var/run/docker.sock \
+		-v $$PWD:/workdir \
+		-v $$PWD/$(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
+		-v $$HOME/.terraformrc:/tmp/.terraformrc \
+		-v $$HOME/.terraform.d:/tmp/.terraform.d \
+		--network k3s-$(CLUSTER_NAME) \
+		--env HOME=/tmp \
+		--env VAULT_ADDR="https://vault.apps.$(BASE_DOMAIN)" \
+		--env CLUSTER_NAME=$(CLUSTER_NAME) \
+		--env ARTIFACTS_DIR=$(ARTIFACTS_DIR) \
+		--entrypoint "" \
+		--workdir /workdir \
+		hashicorp/terraform:0.13.3 /workdir/scripts/configure-vault.sh & \
+	wait
 
 # Get kubernetes context
 $(ARTIFACTS_DIR)/kubeconfig.yaml: $(ARTIFACTS_DIR)/terraform.tfstate get-base-domain
