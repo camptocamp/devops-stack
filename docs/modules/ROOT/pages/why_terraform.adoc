@@ -1,0 +1,13 @@
+== Why Terraform?
+
+As we already use Terraform to deploy our other Kubernetes clusters,
+such as EKS, AKS, OpenShift on different cloud, it looks natural to also
+use Terraform to deploy a K3s cluster locally.
+
+This allows us to use the same `scripts/provision.sh` script, whatever
+the platform on which we deploy our clusters.
+
+Also, we can use
+https://www.terraform.io/docs/state/workspaces.html[Terraform
+workspaces] to create one cluster per git branch, which is quite
+convenient for testing.

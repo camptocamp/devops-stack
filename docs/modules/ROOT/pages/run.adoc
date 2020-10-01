@@ -1,0 +1,23 @@
+== Run the demo
+
+=== Create a cluster
+
+Just run :
+[source,shell]
+----
+$ make
+----
+
+It will:
+
+- spawn a K3s cluster on your workstation using Docker
+- deploy ArgoCD in the cluster
+- deploy the App of Apps that manages ArgoCD and itself.
+
+=== Destroy a cluster
+
+Just run :
+[source,shell]
+----
+$ make clean
+----

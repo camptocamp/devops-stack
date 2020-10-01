@@ -1,0 +1,4 @@
+== Why K3s?
+
+K3s allows to create a lightweight Kubernetes cluster on any
+workstation. This is very convenient for developing or testing purpose.

@@ -1,0 +1,3 @@
+=== Access Alertmanager dashboard
+
+Alertmanager is accessible via https://alertmanager.apps.$BASE_DOMAIN. As there is currently no proper secret management in this demo, the Alertmanager URL is not protected.
