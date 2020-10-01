@@ -1,6 +1,9 @@
 = Kubernetes Demo
 Mickaël Canévet <mickael.canevet@camptocamp.com>; Raphaël Pinson <raphael.pinson@camptocamp.com>; Stéphane Brunner <stephane.brunner@camptocamp.com>
-v0.2.0, 2020-09-24: second version of the Camptocamp's kubernetes demo
+:description: This is a demo that is also reference implementation for all our Kubernetes related projects. 
+:keywords: terraform, docker, kubernetes, k3s, argocd, grafana, traefik, prometheus
+:sectanchors: 
+:url-repo: https://github.com/camptocamp/k8s-demo.git
 
 This is a demo that is also reference implementation for all our
 Kubernetes related projects.
