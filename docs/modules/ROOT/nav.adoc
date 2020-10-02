@@ -13,5 +13,5 @@
 * Explanation
 ** xref:why_k3s.adoc[Why k3s?]
 ** xref:why_terraform.adoc[Why Terraform?]
-** xref:why_automated_sync.adoc[Why K3s?]
+** xref:why_automated_sync.adoc[Why Automated Sync Policy?]
 * xref:CHANGELOG.adoc[Changelog]
