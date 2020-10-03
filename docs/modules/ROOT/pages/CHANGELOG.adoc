@@ -4,13 +4,21 @@
 
 *Implemented enhancements:*
 
-* Upgrade K3s to v1.19.2 https://github.com/camptocamp/k8s-demo/pull/54[#54] (https://github.com/mcanevet[mcanevet])
 * Support deploying multiple cluster in parallel https://github.com/camptocamp/k8s-demo/pull/61[#61] (https://github.com/mcanevet[mcanevet])
 * Use docker cp to get Kubernetes context https://github.com/camptocamp/k8s-demo/pull/64[#64] (https://github.com/mcanevet[mcanevet])
 * Don’t create 2 vhost per service https://github.com/camptocamp/k8s-demo/pull/66[#66] (https://github.com/mcanevet[mcanevet])
 * Use Ingress instead of IngressRoute https://github.com/camptocamp/k8s-demo/pull/70[#70] (https://github.com/mcanevet[mcanevet])
+* Allow to scale agents https://github.com/camptocamp/k8s-demo/pull/73[#73] (https://github.com/mcanevet[mcanevet])
+* Deploy Vault https://github.com/camptocamp/k8s-demo/pull/74[#74] (https://github.com/mcanevet[mcanevet])
+* Configure kubernetes auth backend for vault https://github.com/camptocamp/k8s-demo/pull/76[#76] (https://github.com/mcanevet[mcanevet])
 * Automate Vault configuration https://github.com/camptocamp/k8s-demo/pull/81[#81] (https://github.com/mcanevet[mcanevet])
 * Improve Vault configuration https://github.com/camptocamp/k8s-demo/pull/83[#83] (https://github.com/mcanevet[mcanevet])
+
+*Upgraded components:*
+
+* Upgrade K3s to v1.19.2 https://github.com/camptocamp/k8s-demo/pull/54[#54] (https://github.com/mcanevet[mcanevet])
+* Upgrade ArgoCD to 1.7.6 https://github.com/camptocamp/k8s-demo/pull/71[#71] (https://github.com/mcanevet[mcanevet])
+* Upgrade cert-manager to 1.0.2 https://github.com/camptocamp/k8s-demo/pull/72[#72] (https://github.com/mcanevet[mcanevet])
 
 *Fixed bugs:*
 
