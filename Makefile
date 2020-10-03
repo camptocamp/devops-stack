@@ -12,7 +12,7 @@ REPO_URL = "$(GITHUB_SERVER_URL)/$(GITHUB_REPOSITORY).git"
 REMOTE_BRANCH = $(shell echo $(GITHUB_REF) | rev | cut -f1 -d/ | rev)
 else
 REMOTE := $(shell git status -sb|sed -Ene's@.. ([^\.]*)\.\.\.([^/]*)/(.*)@\2@p')
-REMOTE_BRANCH := $(shell git status -sb|sed -Ene's@.. ([^\.]*)\.\.\.([^/]*)/(.*)@\3@p')
+REMOTE_BRANCH := $(shell git status -sb|sed -Ene's@.. ([^\.]*)\.\.\.([^/]*)/(.*)@\3@p'|cut -f1 -d' ')
 REMOTE_URL := $(shell git remote get-url $(REMOTE))
 ifeq ($(findstring "https",$(REMOTE_URL)),)
 REPO_URL = "https://github.com/$(shell echo $(REMOTE_URL) | sed -Ene's|git@github.com:([^/]*)/(.*).git|\1/\2|p').git"
