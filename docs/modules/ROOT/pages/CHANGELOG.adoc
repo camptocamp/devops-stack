@@ -6,21 +6,27 @@
 
 * Upgrade K3s to v1.19.2 https://github.com/camptocamp/k8s-demo/pull/54[#54] (https://github.com/mcanevet[mcanevet])
 * Support deploying multiple cluster in parallel https://github.com/camptocamp/k8s-demo/pull/61[#61] (https://github.com/mcanevet[mcanevet])
-* Convert to asciidoc, integrate with Antora https://github.com/camptocamp/k8s-demo/pull/63[#63] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
 * Use docker cp to get Kubernetes context https://github.com/camptocamp/k8s-demo/pull/64[#64] (https://github.com/mcanevet[mcanevet])
 * Don’t create 2 vhost per service https://github.com/camptocamp/k8s-demo/pull/66[#66] (https://github.com/mcanevet[mcanevet])
-* Use local directory for project's reference instead of github link https://github.com/camptocamp/k8s-demo/pull/67[#67] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
-* Convert CHANGELOG from md to adoc https://github.com/camptocamp/k8s-demo/pull/68[#68] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
 * Use Ingress instead of IngressRoute https://github.com/camptocamp/k8s-demo/pull/70[#70] (https://github.com/mcanevet[mcanevet])
-* Integrate changelog page in antora doc https://github.com/camptocamp/k8s-demo/pull/77[#77] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
-* Change of structure to match https://documentation.divio.com/ recommendations https://github.com/camptocamp/k8s-demo/pull/79[#79] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
-* Use camptocamp's version of Antora-ui, add Metadata, Antora always build current branch https://github.com/camptocamp/k8s-demo/pull/80[#80] (https://github.com/acampergue-camptocamp[acampergue-camptocamp]) 
+* Automate Vault configuration https://github.com/camptocamp/k8s-demo/pull/81[#81] (https://github.com/mcanevet[mcanevet])
+* Improve Vault configuration https://github.com/camptocamp/k8s-demo/pull/83[#83] (https://github.com/mcanevet[mcanevet])
 
 *Fixed bugs:*
 
 * https://github.com/camptocamp/k8s-demo/commit/1a1d0a02343b80e7aa81e8a746c8037c25531839[Fix Issue with some versions of Make] (https://github.com/sbrunner[sbrunner])
 * Don’t delete Docker image on cleanup https://github.com/camptocamp/k8s-demo/pull/65[#65] (https://github.com/mcanevet[mcanevet])
 * Ignore Ingress status https://github.com/camptocamp/k8s-demo/pull/69[#69] (https://github.com/mcanevet[mcanevet])
+* Improve remote branch detection https://github.com/camptocamp/k8s-demo/pull/84[#84] (https://github.com/mcanevet[mcanevet])
+
+*Documentation:*
+
+* Convert to asciidoc, integrate with Antora https://github.com/camptocamp/k8s-demo/pull/63[#63] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
+* Use local directory for project's reference instead of github link https://github.com/camptocamp/k8s-demo/pull/67[#67] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
+* Convert CHANGELOG from md to adoc https://github.com/camptocamp/k8s-demo/pull/68[#68] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
+* Integrate changelog page in antora doc https://github.com/camptocamp/k8s-demo/pull/77[#77] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
+* Change of structure to match https://documentation.divio.com/ recommendations https://github.com/camptocamp/k8s-demo/pull/79[#79] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
+* Use camptocamp's version of Antora-ui, add Metadata, Antora always build current branch https://github.com/camptocamp/k8s-demo/pull/80[#80] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
 
 == https://github.com/camptocamp/k8s-demo/tree/0.2.0[0.2.0] (2020-09-20)
 
