@@ -61,6 +61,6 @@ else
 	# have to log in again when ArgoCD is redeployed (which is the case during
 	# bootstrap). This has to be improved eventually.
 	while ! argocd app wait apps --health --timeout 30; do
-		argocd app list
+		kubectl get pods --all-namespaces
 	done
 fi
