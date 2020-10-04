@@ -1,0 +1,5 @@
+== Develop
+
+If you want to add new applications to this demo, you just have to fork this GitHub repository, then clone your fork on your workstation.
+
+When you'll launch `make` to run the demo, the ArgoCD app of apps will be automatically configure to point to your fork.
