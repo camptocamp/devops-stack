@@ -1,0 +1,5 @@
+=== Access Vault UI
+
+Vault UI is accessible via https://vault.apps.$BASE_DOMAIN.
+
+In this demo, Vault is deploy in dev mode, which means that the root token is `root`.

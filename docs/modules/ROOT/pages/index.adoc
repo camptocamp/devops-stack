@@ -1,8 +1,8 @@
 = Kubernetes Demo
 Mickaël Canévet <mickael.canevet@camptocamp.com>; Raphaël Pinson <raphael.pinson@camptocamp.com>; Stéphane Brunner <stephane.brunner@camptocamp.com>
-:description: This is a demo that is also reference implementation for all our Kubernetes related projects. 
+:description: This is a demo that is also reference implementation for all our Kubernetes related projects.
 :keywords: terraform, docker, kubernetes, k3s, argocd, grafana, traefik, prometheus
-:sectanchors: 
+:sectanchors:
 :url-repo: https://github.com/camptocamp/k8s-demo.git
 
 This is a demo that is also reference implementation for all our
@@ -21,6 +21,8 @@ include::./access_kubernetes_api.adoc[]
 include::./access_argocd_webui.adoc[]
 
 include::./access_traefik_dashboard.adoc[]
+
+include::./access_vault_ui.adoc[]
 
 include::./access_grafana_dashboard.adoc[]
 
