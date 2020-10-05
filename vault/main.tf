@@ -33,12 +33,18 @@ resource "vault_kubernetes_auth_backend_config" "in_cluster" {
   kubernetes_ca_cert = base64decode(lookup(local.cluster, "certificate-authority-data"))
 }
 
+resource "random_password" "superdupersecret" {
+  length           = 128
+  special          = true
+  override_special = "_%@"
+}
+
 resource "vault_generic_secret" "demo_app" {
   path = "secret/demo-app"
 
   data_json = <<EOT
 {
-  "foo":   "bar",
+  "foo":   "${random_password.superdupersecret.result}",
   "pizza": "cheese"
 }
 EOT
