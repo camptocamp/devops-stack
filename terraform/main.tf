@@ -22,11 +22,6 @@ resource "docker_container" "k3s_server" {
     "--disable", "local-storage",
   ]
 
-  tmpfs = {
-    "/run"     = "rw",
-    "/var/run" = "rw",
-  }
-
   privileged = true
 
   networks_advanced {
@@ -38,9 +33,20 @@ resource "docker_container" "k3s_server" {
     "K3S_TOKEN=${random_password.k3s_token.result}",
   ]
 
-  volumes {
-    volume_name    = docker_volume.k3s_server.name
-    container_path = "/var/lib/rancher/k3s"
+  mounts {
+    target = "/run"
+    type   = "tmpfs"
+  }
+
+  mounts {
+    target = "/var/run"
+    type   = "tmpfs"
+  }
+
+  mounts {
+    target = "/var/lib/rancher/k3s"
+    source = docker_volume.k3s_server.name
+    type   = "volume"
   }
 }
 
@@ -49,11 +55,6 @@ resource "docker_container" "k3s_agent" {
 
   image = docker_image.k3s.latest
   name  = "k3s-agent-${terraform.workspace}-${count.index}"
-
-  tmpfs = {
-    "/run"     = "rw",
-    "/var/run" = "rw",
-  }
 
   privileged = true
 
@@ -65,6 +66,16 @@ resource "docker_container" "k3s_agent" {
     "K3S_TOKEN=${random_password.k3s_token.result}",
     "K3S_URL=https://server:6443"
   ]
+
+  mounts {
+    target = "/run"
+    type   = "tmpfs"
+  }
+
+  mounts {
+    target = "/var/run"
+    type   = "tmpfs"
+  }
 }
 
 resource "random_password" "k3s_token" {
