@@ -12,6 +12,10 @@ resource "docker_image" "k3s" {
   keep_locally = true
 }
 
+resource "docker_volume" "k3s_server_kubelet" {
+  name = "k3s-server-kubelet-${terraform.workspace}"
+}
+
 resource "docker_container" "k3s_server" {
   image = docker_image.k3s.latest
   name  = "k3s-server-${terraform.workspace}"
@@ -48,6 +52,22 @@ resource "docker_container" "k3s_server" {
     source = docker_volume.k3s_server.name
     type   = "volume"
   }
+
+  mounts {
+    target = "/var/lib/kubelet"
+    source = docker_volume.k3s_server_kubelet.mountpoint
+    type   = "bind"
+
+    bind_options {
+      propagation = "rshared"
+    }
+  }
+}
+
+resource "docker_volume" "k3s_agent_kubelet" {
+  count = var.node_count
+
+  name = "k3s-agent-kubelet-${terraform.workspace}-${count.index}"
 }
 
 resource "docker_container" "k3s_agent" {
@@ -75,6 +95,16 @@ resource "docker_container" "k3s_agent" {
   mounts {
     target = "/var/run"
     type   = "tmpfs"
+  }
+
+  mounts {
+    target = "/var/lib/kubelet"
+    source = docker_volume.k3s_agent_kubelet[0].mountpoint
+    type   = "bind"
+
+    bind_options {
+      propagation = "rshared"
+    }
   }
 }
 
