@@ -168,6 +168,14 @@ metadata: map[created_time:2020-10-05T15:04:47.061885873Z deletion_time: destroy
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_inject_a_secret_from_vault_using_secrets_store_csi_driver"><a class="anchor" href="#_inject_a_secret_from_vault_using_secrets_store_csi_driver"></a>Inject a secret from Vault using secrets store CSI driver</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ kubectl -n demo-app exec -ti $(kubectl -n demo-app get pods --selector 'app.kubernetes.io/name=demo-app' --output=name|head -n1) -- cat /mnt/secrets-store/demo-app</code></pre>
+</div>
+</div>
+</div>
 </div>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
