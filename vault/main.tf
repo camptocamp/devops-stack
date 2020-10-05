@@ -32,3 +32,33 @@ resource "vault_kubernetes_auth_backend_config" "in_cluster" {
   kubernetes_host    = lookup(local.cluster, "server")
   kubernetes_ca_cert = base64decode(lookup(local.cluster, "certificate-authority-data"))
 }
+
+resource "vault_generic_secret" "demo_app" {
+  path = "secret/demo-app"
+
+  data_json = <<EOT
+{
+  "foo":   "bar",
+  "pizza": "cheese"
+}
+EOT
+}
+
+resource "vault_policy" "demo_app" {
+  name = "demo-app"
+
+  policy = <<EOT
+path "secret/data/demo-app" {
+  capabilities = ["read"]
+}
+EOT
+}
+
+resource "vault_kubernetes_auth_backend_role" "demo_app" {
+  backend                          = vault_auth_backend.kubernetes.path
+  role_name                        = "demo-app"
+  bound_service_account_names      = ["demo-app"]
+  bound_service_account_namespaces = ["demo-app"]
+  token_ttl                        = 3600
+  token_policies                   = [vault_policy.demo_app.name]
+}
