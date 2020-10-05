@@ -1,6 +1,9 @@
 = Changelog
 
-== 0.3.0 (Unreleased)
+== https://github.com/camptocamp/k8s-demo/tree/0.3.0[0.3.0] (2020-10-05)
+
+https://github.com/camptocamp/k8s-demo/compare/0.2.0...0.3.0[Full Changelog]
+
 
 *New applications:*
 
@@ -27,6 +30,8 @@
 * Show list of pods instead of list of apps in wait loop https://github.com/camptocamp/k8s-demo/pull/85[#85] (https://github.com/mcanevet[mcanevet])
 * Use mounts instead of tmpfs and volumes https://github.com/camptocamp/k8s-demo/pull/90[#90] (https://github.com/mcanevet[mcanevet])
 * Mount /var/lib/kubelet with propagation https://github.com/camptocamp/k8s-demo/pull/91[#91] (https://github.com/mcanevet[mcanevet])
+* Inject secret in demo-app using vault-injector https://github.com/camptocamp/k8s-demo/pull/98[#98] (https://github.com/mcanevet[mcanevet])
+* Inject secret in demo-app using secrets store csi driver https://github.com/camptocamp/k8s-demo/pull/99[#99] (https://github.com/mcanevet[mcanevet])
 
 *Fixed bugs:*
 
