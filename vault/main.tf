@@ -49,6 +49,14 @@ resource "vault_policy" "demo_app" {
 
   policy = <<EOT
 path "secret/data/demo-app" {
+  capabilities = ["read", "list"]
+}
+
+path "sys/renew/*" {
+  capabilities = ["update"]
+}
+
+path "sys/mounts" {
   capabilities = ["read"]
 }
 EOT
@@ -57,8 +65,8 @@ EOT
 resource "vault_kubernetes_auth_backend_role" "demo_app" {
   backend                          = vault_auth_backend.kubernetes.path
   role_name                        = "demo-app"
-  bound_service_account_names      = ["demo-app"]
-  bound_service_account_namespaces = ["demo-app"]
+  bound_service_account_names      = ["demo-app", "secrets-store-csi-driver"]
+  bound_service_account_namespaces = ["demo-app", "secrets-store-csi-driver"]
   token_ttl                        = 3600
-  token_policies                   = [vault_policy.demo_app.name]
+  token_policies                   = ["default", vault_policy.demo_app.name]
 }
