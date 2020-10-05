@@ -1,8 +1,8 @@
 = Changelog
 
-== https://github.com/camptocamp/k8s-demo/tree/0.3.0[0.3.0] (2020-10-05)
+== https://github.com/camptocamp/k8s-demo/tree/v0.3.0[0.3.0] (2020-10-05)
 
-https://github.com/camptocamp/k8s-demo/compare/0.2.0...0.3.0[Full Changelog]
+https://github.com/camptocamp/k8s-demo/compare/v0.2.0...v0.3.0[Full Changelog]
 
 
 *New applications:*
@@ -51,9 +51,9 @@ https://github.com/camptocamp/k8s-demo/compare/0.2.0...0.3.0[Full Changelog]
 * Start documenting Vault https://documentation.divio.com/ recommendations https://github.com/camptocamp/k8s-demo/pull/87[#87] (https://github.com/mcanevet[mcanevet])
 * Document how to develop https://documentation.divio.com/ recommendations https://github.com/camptocamp/k8s-demo/pull/88[#88] (https://github.com/mcanevet[mcanevet])
 
-== https://github.com/camptocamp/k8s-demo/tree/0.2.0[0.2.0] (2020-09-20)
+== https://github.com/camptocamp/k8s-demo/tree/v0.2.0[0.2.0] (2020-09-20)
 
-https://github.com/camptocamp/k8s-demo/compare/0.1.0...0.2.0[Full Changelog]
+https://github.com/camptocamp/k8s-demo/compare/v0.1.0...v0.2.0[Full Changelog]
 
 *Implemented enhancements:*
 
@@ -66,7 +66,7 @@ https://github.com/camptocamp/k8s-demo/compare/0.1.0...0.2.0[Full Changelog]
 * [grafana] Search for dashboard and datasource in all namespaces https://github.com/camptocamp/k8s-demo/pull/49[#49] (https://github.com/mcanevet[mcanevet])
 * Deploy Loki https://github.com/camptocamp/k8s-demo/pull/50[#50] (https://github.com/mcanevet[mcanevet])
 
-== https://github.com/camptocamp/k8s-demo/tree/0.1.0[0.1.0] (2020-09-19)
+== https://github.com/camptocamp/k8s-demo/tree/v0.1.0[0.1.0] (2020-09-19)
 
 *Implemented enhancements:*
 
