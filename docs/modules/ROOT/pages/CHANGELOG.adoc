@@ -2,6 +2,18 @@
 
 == 0.3.0 (Unreleased)
 
+*New applications:*
+
+* Deploy Vault https://github.com/camptocamp/k8s-demo/pull/74[#74] (https://github.com/mcanevet[mcanevet])
+* Deploy secret store csi driver https://github.com/camptocamp/k8s-demo/pull/92[#92] (https://github.com/mcanevet[mcanevet])
+* Deploy demo-app https://github.com/camptocamp/k8s-demo/pull/93[#93] (https://github.com/mcanevet[mcanevet])
+
+*Upgraded applications:*
+
+* Upgrade K3s to v1.19.2 https://github.com/camptocamp/k8s-demo/pull/54[#54] (https://github.com/mcanevet[mcanevet])
+* Upgrade ArgoCD to 1.7.6 https://github.com/camptocamp/k8s-demo/pull/71[#71] (https://github.com/mcanevet[mcanevet])
+* Upgrade cert-manager to 1.0.2 https://github.com/camptocamp/k8s-demo/pull/72[#72] (https://github.com/mcanevet[mcanevet])
+
 *Implemented enhancements:*
 
 * Support deploying multiple cluster in parallel https://github.com/camptocamp/k8s-demo/pull/61[#61] (https://github.com/mcanevet[mcanevet])
@@ -9,16 +21,12 @@
 * Don’t create 2 vhost per service https://github.com/camptocamp/k8s-demo/pull/66[#66] (https://github.com/mcanevet[mcanevet])
 * Use Ingress instead of IngressRoute https://github.com/camptocamp/k8s-demo/pull/70[#70] (https://github.com/mcanevet[mcanevet])
 * Allow to scale agents https://github.com/camptocamp/k8s-demo/pull/73[#73] (https://github.com/mcanevet[mcanevet])
-* Deploy Vault https://github.com/camptocamp/k8s-demo/pull/74[#74] (https://github.com/mcanevet[mcanevet])
 * Configure kubernetes auth backend for vault https://github.com/camptocamp/k8s-demo/pull/76[#76] (https://github.com/mcanevet[mcanevet])
 * Automate Vault configuration https://github.com/camptocamp/k8s-demo/pull/81[#81] (https://github.com/mcanevet[mcanevet])
 * Improve Vault configuration https://github.com/camptocamp/k8s-demo/pull/83[#83] (https://github.com/mcanevet[mcanevet])
-
-*Upgraded components:*
-
-* Upgrade K3s to v1.19.2 https://github.com/camptocamp/k8s-demo/pull/54[#54] (https://github.com/mcanevet[mcanevet])
-* Upgrade ArgoCD to 1.7.6 https://github.com/camptocamp/k8s-demo/pull/71[#71] (https://github.com/mcanevet[mcanevet])
-* Upgrade cert-manager to 1.0.2 https://github.com/camptocamp/k8s-demo/pull/72[#72] (https://github.com/mcanevet[mcanevet])
+* Show list of pods instead of list of apps in wait loop https://github.com/camptocamp/k8s-demo/pull/85[#85] (https://github.com/mcanevet[mcanevet])
+* Use mounts instead of tmpfs and volumes https://github.com/camptocamp/k8s-demo/pull/90[#90] (https://github.com/mcanevet[mcanevet])
+* Mount /var/lib/kubelet with propagation https://github.com/camptocamp/k8s-demo/pull/91[#91] (https://github.com/mcanevet[mcanevet])
 
 *Fixed bugs:*
 
@@ -35,6 +43,8 @@
 * Integrate changelog page in antora doc https://github.com/camptocamp/k8s-demo/pull/77[#77] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
 * Change of structure to match https://documentation.divio.com/ recommendations https://github.com/camptocamp/k8s-demo/pull/79[#79] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
 * Use camptocamp's version of Antora-ui, add Metadata, Antora always build current branch https://github.com/camptocamp/k8s-demo/pull/80[#80] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
+* Start documenting Vault https://documentation.divio.com/ recommendations https://github.com/camptocamp/k8s-demo/pull/87[#87] (https://github.com/mcanevet[mcanevet])
+* Document how to develop https://documentation.divio.com/ recommendations https://github.com/camptocamp/k8s-demo/pull/88[#88] (https://github.com/mcanevet[mcanevet])
 
 == https://github.com/camptocamp/k8s-demo/tree/0.2.0[0.2.0] (2020-09-20)
 
