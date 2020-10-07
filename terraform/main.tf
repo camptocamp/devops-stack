@@ -7,6 +7,31 @@ resource "docker_network" "k3s" {
   name = "k3s-${terraform.workspace}"
 }
 
+resource "docker_image" "registry" {
+  name         = "registry:2"
+  keep_locally = true
+}
+
+resource "docker_container" "registry_proxy_docker_io" {
+  image = docker_image.registry.latest
+  name  = "registry-proxy-docker-io-${terraform.workspace}"
+
+  networks_advanced {
+    name    = docker_network.k3s.name
+    aliases = ["registry-proxy-docker-io"]
+  }
+
+  env = [
+    "REGISTRY_PROXY_REMOTEURL=https://registry-1.docker.io",
+  ]
+
+  mounts {
+    target = "/var/lib/registry"
+    source = "registry-proxy-docker-io"
+    type   = "volume"
+  }
+}
+
 resource "docker_image" "k3s" {
   name         = "rancher/k3s:${var.k3s_version}"
   keep_locally = true
@@ -48,6 +73,12 @@ resource "docker_container" "k3s_server" {
   }
 
   mounts {
+    target = "/etc/rancher/k3s/registries.yaml"
+    source = "${abspath(path.module)}/registries.yaml"
+    type   = "bind"
+  }
+
+  mounts {
     target = "/var/lib/rancher/k3s"
     source = docker_volume.k3s_server.name
     type   = "volume"
@@ -84,7 +115,7 @@ resource "docker_container" "k3s_agent" {
 
   env = [
     "K3S_TOKEN=${random_password.k3s_token.result}",
-    "K3S_URL=https://server:6443"
+    "K3S_URL=https://server:6443",
   ]
 
   mounts {
@@ -95,6 +126,12 @@ resource "docker_container" "k3s_agent" {
   mounts {
     target = "/var/run"
     type   = "tmpfs"
+  }
+
+  mounts {
+    target = "/etc/rancher/k3s/registries.yaml"
+    source = "${abspath(path.module)}/registries.yaml"
+    type   = "bind"
   }
 
   mounts {

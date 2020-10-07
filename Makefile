@@ -88,7 +88,7 @@ $(ARTIFACTS_DIR)/terraform.tfstate: terraform/*
 		--group-add $(DOCKER_GID_NUMBER) \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v /var/run/docker.sock:/var/run/docker.sock \
-		-v $$PWD:/workdir \
+		-v $$PWD:$$PWD \
 		-v $$HOME/.terraformrc:/tmp/.terraformrc \
 		-v $$HOME/.terraform.d:/tmp/.terraform.d \
 		--env HOME=/tmp \
@@ -96,8 +96,8 @@ $(ARTIFACTS_DIR)/terraform.tfstate: terraform/*
 		--env CLUSTER_NAME=$(CLUSTER_NAME) \
 		--env ARTIFACTS_DIR=$(ARTIFACTS_DIR) \
 		--entrypoint "" \
-		--workdir /workdir \
-		hashicorp/terraform:0.13.3 /workdir/scripts/provision.sh
+		--workdir $$PWD \
+		hashicorp/terraform:0.13.3 $$PWD/scripts/provision.sh
 
 clean:
 	touch $$HOME/.terraformrc
