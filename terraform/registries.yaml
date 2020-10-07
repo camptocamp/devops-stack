@@ -1,0 +1,5 @@
+---
+mirrors:
+  docker.io:
+    endpoint:
+      - "http://registry-proxy-docker-io:5000"
