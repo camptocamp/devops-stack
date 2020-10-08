@@ -1,5 +1,12 @@
 = Changelog
 
+== 0.4.0 (Unreleased)
+
+*Implemented enhancements:*
+
+* Add randomly generated exemple https://github.com/camptocamp/k8s-demo/pull/100[#100] (https://github.com/JGodin-C2C[JGodin-C2C])
+* Use a local registry as a pull through cache https://github.com/camptocamp/k8s-demo/pull/102[#102] (https://github.com/mcanevet[mcanevet])
+
 == https://github.com/camptocamp/k8s-demo/tree/v0.3.0[0.3.0] (2020-10-05)
 
 https://github.com/camptocamp/k8s-demo/compare/v0.2.0...v0.3.0[Full Changelog]
