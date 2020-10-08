@@ -6,6 +6,11 @@
 
 * Add randomly generated exemple https://github.com/camptocamp/k8s-demo/pull/100[#100] (https://github.com/JGodin-C2C[JGodin-C2C])
 * Use a local registry as a pull through cache https://github.com/camptocamp/k8s-demo/pull/102[#102] (https://github.com/mcanevet[mcanevet])
+* Add cache for quay.io, gcr.io and us.gcr.io registries https://github.com/camptocamp/k8s-demo/pull/103[#103] (https://github.com/mcanevet[mcanevet])
+
+*Upgraded applications:*
+
+* Upgrade Terraform to 0.13.4 https://github.com/camptocamp/k8s-demo/pull/104[#104] (https://github.com/mcanevet[mcanevet])
 
 == https://github.com/camptocamp/k8s-demo/tree/v0.3.0[0.3.0] (2020-10-05)
 
