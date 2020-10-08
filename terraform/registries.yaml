@@ -2,4 +2,13 @@
 mirrors:
   docker.io:
     endpoint:
-      - "http://registry-proxy-docker-io:5000"
+      - "http://registry-dockerio:5000"
+  quay.io:
+    endpoint:
+      - "http://registry-quayio:5000"
+  gcr.io:
+    endpoint:
+      - "http://registry-gcrio:5000"
+  us.gcr.io:
+    endpoint:
+      - "http://registry-usgcrio:5000"

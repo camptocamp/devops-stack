@@ -12,13 +12,13 @@ resource "docker_image" "registry" {
   keep_locally = true
 }
 
-resource "docker_container" "registry_proxy_docker_io" {
+resource "docker_container" "registry_dockerio" {
   image = docker_image.registry.latest
-  name  = "registry-proxy-docker-io-${terraform.workspace}"
+  name  = "registry-dockerio-${terraform.workspace}"
 
   networks_advanced {
     name    = docker_network.k3s.name
-    aliases = ["registry-proxy-docker-io"]
+    aliases = ["registry-dockerio"]
   }
 
   env = [
@@ -27,7 +27,68 @@ resource "docker_container" "registry_proxy_docker_io" {
 
   mounts {
     target = "/var/lib/registry"
-    source = "registry-proxy-docker-io"
+    source = "registry"
+    type   = "volume"
+  }
+}
+
+resource "docker_container" "registry_quayio" {
+  image = docker_image.registry.latest
+  name  = "registry-quayio-${terraform.workspace}"
+
+  networks_advanced {
+    name    = docker_network.k3s.name
+    aliases = ["registry-quayio"]
+  }
+
+  env = [
+    "REGISTRY_PROXY_REMOTEURL=https://quay.io/repository",
+    "REGISTRY_COMPATIBILITY_SCHEMA1_ENABLED=true"
+  ]
+
+  mounts {
+    target = "/var/lib/registry"
+    source = "registry"
+    type   = "volume"
+  }
+}
+
+resource "docker_container" "registry_gcrio" {
+  image = docker_image.registry.latest
+  name  = "registry-gcrio-${terraform.workspace}"
+
+  networks_advanced {
+    name    = docker_network.k3s.name
+    aliases = ["registry-gcrio"]
+  }
+
+  env = [
+    "REGISTRY_PROXY_REMOTEURL=https://gcr.io",
+  ]
+
+  mounts {
+    target = "/var/lib/registry"
+    source = "registry"
+    type   = "volume"
+  }
+}
+
+resource "docker_container" "registry_usgcrio" {
+  image = docker_image.registry.latest
+  name  = "registry-usgcrio-${terraform.workspace}"
+
+  networks_advanced {
+    name    = docker_network.k3s.name
+    aliases = ["registry-usgcrio"]
+  }
+
+  env = [
+    "REGISTRY_PROXY_REMOTEURL=https://us.gcr.io",
+  ]
+
+  mounts {
+    target = "/var/lib/registry"
+    source = "registry"
     type   = "volume"
   }
 }
