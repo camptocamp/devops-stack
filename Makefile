@@ -1,3 +1,5 @@
+TERRAFORM_VERSION := 0.13.4
+
 DOCKER_HOST := "tcp://127.0.0.1:2376/"
 UID_NUMBER := $(shell id -u $$USER)
 GID_NUMBER := $(shell id -g $$USER)
@@ -66,7 +68,7 @@ deploy: $(ARTIFACTS_DIR)/kubeconfig.yaml get-base-domain
 		--env ARTIFACTS_DIR=$(ARTIFACTS_DIR) \
 		--entrypoint "" \
 		--workdir /workdir \
-		hashicorp/terraform:0.13.3 /workdir/scripts/configure-vault.sh & \
+		hashicorp/terraform:$(TERRAFORM_VERSION) /workdir/scripts/configure-vault.sh & \
 	wait
 
 # Get kubernetes context
@@ -97,7 +99,7 @@ $(ARTIFACTS_DIR)/terraform.tfstate: terraform/*
 		--env ARTIFACTS_DIR=$(ARTIFACTS_DIR) \
 		--entrypoint "" \
 		--workdir $$PWD \
-		hashicorp/terraform:0.13.3 $$PWD/scripts/provision.sh
+		hashicorp/terraform:$(TERRAFORM_VERSION) $$PWD/scripts/provision.sh
 
 clean:
 	touch $$HOME/.terraformrc
@@ -112,7 +114,7 @@ clean:
 		--env CLUSTER_NAME=$(CLUSTER_NAME) \
 		--entrypoint "" \
 		--workdir /workdir \
-		hashicorp/terraform:0.13.3 /workdir/scripts/destroy.sh
+		hashicorp/terraform:$(TERRAFORM_VERSION) /workdir/scripts/destroy.sh
 	rm -rf $$PWD/$(ARTIFACTS_DIR)
 
 debug: get-base-domain
