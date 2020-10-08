@@ -44,7 +44,7 @@ resource "vault_generic_secret" "demo_app" {
 
   data_json = <<EOT
 {
-  "foo":   random_password.superdupersecret.result,
+  "foo":   "${random_password.superdupersecret.result}",
   "pizza": "cheese"
 }
 EOT
