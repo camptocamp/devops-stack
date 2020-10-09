@@ -1,3 +1,3 @@
 === Access Prometheus dashboard
 
-Prometheus is accessible via https://prometheus.apps.$BASE_DOMAIN. As there is currently no proper secret management in this demo, the Prometheus URL is not protected.
+Prometheus is accessible via https://prometheus.apps.$BASE_DOMAIN. As there is currently no proper secret management in this stack, the Prometheus URL is not protected.

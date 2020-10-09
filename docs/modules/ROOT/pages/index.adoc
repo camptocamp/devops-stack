@@ -1,12 +1,12 @@
-= Kubernetes Demo
+= Camptocamp's DevOps stack
 Mickaël Canévet <mickael.canevet@camptocamp.com>; Raphaël Pinson <raphael.pinson@camptocamp.com>; Stéphane Brunner <stephane.brunner@camptocamp.com>
-:description: This is a demo that is also reference implementation for all our Kubernetes related projects.
+:description: This repository contains the reference implementation of Camptocamp's Infrastructure Solutions & Services department.
 :keywords: terraform, docker, kubernetes, k3s, argocd, grafana, traefik, prometheus
 :sectanchors:
-:url-repo: https://github.com/camptocamp/k8s-demo.git
+:url-repo: https://github.com/camptocamp/camptocamp-devops-stack.git
 
-This is a demo that is also reference implementation for all our
-Kubernetes related projects.
+This repository contains the reference implementation of Camptocamp's
+Infrastructure Solutions & Services department.
 
 include::./provisioning.adoc[]
 

@@ -2,13 +2,13 @@
 
 Vault UI is accessible via https://vault.apps.$BASE_DOMAIN.
 
-In this demo, Vault is deploy in dev mode, which means that the root token is `root`.
+In this stack, Vault is deploy in dev mode, which means that the root token is `root`.
 
 ==== Create a secret in Vault and allow access to a ServiceAccount using Terraform
 
 ==== Inject a secret from Vault using agent injector
 
-This demo installs https://www.vaultproject.io/docs/platform/k8s/injector[Vault injector] that allows secrets injection to a pod.
+This stack installs https://www.vaultproject.io/docs/platform/k8s/injector[Vault injector] that allows secrets injection to a pod.
 
 ```shell
 $ kubectl -n demo-app exec -ti $(kubectl -n demo-app get pods --selector 'app.kubernetes.io/name=demo-app' --output=name|head -n1) -- cat /vault/secrets/demo-app

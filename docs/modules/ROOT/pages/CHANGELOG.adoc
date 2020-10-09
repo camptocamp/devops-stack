@@ -4,81 +4,81 @@
 
 *Implemented enhancements:*
 
-* Add randomly generated exemple https://github.com/camptocamp/k8s-demo/pull/100[#100] (https://github.com/JGodin-C2C[JGodin-C2C])
-* Use a local registry as a pull through cache https://github.com/camptocamp/k8s-demo/pull/102[#102] (https://github.com/mcanevet[mcanevet])
-* Add cache for quay.io, gcr.io and us.gcr.io registries https://github.com/camptocamp/k8s-demo/pull/103[#103] (https://github.com/mcanevet[mcanevet])
+* Add randomly generated exemple https://github.com/camptocamp/camptocamp-devops-stack/pull/100[#100] (https://github.com/JGodin-C2C[JGodin-C2C])
+* Use a local registry as a pull through cache https://github.com/camptocamp/camptocamp-devops-stack/pull/102[#102] (https://github.com/mcanevet[mcanevet])
+* Add cache for quay.io, gcr.io and us.gcr.io registries https://github.com/camptocamp/camptocamp-devops-stack/pull/103[#103] (https://github.com/mcanevet[mcanevet])
 
 *Upgraded applications:*
 
-* Upgrade Terraform to 0.13.4 https://github.com/camptocamp/k8s-demo/pull/104[#104] (https://github.com/mcanevet[mcanevet])
+* Upgrade Terraform to 0.13.4 https://github.com/camptocamp/camptocamp-devops-stack/pull/104[#104] (https://github.com/mcanevet[mcanevet])
 
-== https://github.com/camptocamp/k8s-demo/tree/v0.3.0[0.3.0] (2020-10-05)
+== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.3.0[0.3.0] (2020-10-05)
 
-https://github.com/camptocamp/k8s-demo/compare/v0.2.0...v0.3.0[Full Changelog]
+https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.2.0...v0.3.0[Full Changelog]
 
 
 *New applications:*
 
-* Deploy Vault https://github.com/camptocamp/k8s-demo/pull/74[#74] (https://github.com/mcanevet[mcanevet])
-* Deploy secret store csi driver https://github.com/camptocamp/k8s-demo/pull/92[#92] (https://github.com/mcanevet[mcanevet])
-* Deploy demo-app https://github.com/camptocamp/k8s-demo/pull/93[#93] (https://github.com/mcanevet[mcanevet])
+* Deploy Vault https://github.com/camptocamp/camptocamp-devops-stack/pull/74[#74] (https://github.com/mcanevet[mcanevet])
+* Deploy secret store csi driver https://github.com/camptocamp/camptocamp-devops-stack/pull/92[#92] (https://github.com/mcanevet[mcanevet])
+* Deploy demo-app https://github.com/camptocamp/camptocamp-devops-stack/pull/93[#93] (https://github.com/mcanevet[mcanevet])
 
 *Upgraded applications:*
 
-* Upgrade K3s to v1.19.2 https://github.com/camptocamp/k8s-demo/pull/54[#54] (https://github.com/mcanevet[mcanevet])
-* Upgrade ArgoCD to 1.7.6 https://github.com/camptocamp/k8s-demo/pull/71[#71] (https://github.com/mcanevet[mcanevet])
-* Upgrade cert-manager to 1.0.2 https://github.com/camptocamp/k8s-demo/pull/72[#72] (https://github.com/mcanevet[mcanevet])
+* Upgrade K3s to v1.19.2 https://github.com/camptocamp/camptocamp-devops-stack/pull/54[#54] (https://github.com/mcanevet[mcanevet])
+* Upgrade ArgoCD to 1.7.6 https://github.com/camptocamp/camptocamp-devops-stack/pull/71[#71] (https://github.com/mcanevet[mcanevet])
+* Upgrade cert-manager to 1.0.2 https://github.com/camptocamp/camptocamp-devops-stack/pull/72[#72] (https://github.com/mcanevet[mcanevet])
 
 *Implemented enhancements:*
 
-* Support deploying multiple cluster in parallel https://github.com/camptocamp/k8s-demo/pull/61[#61] (https://github.com/mcanevet[mcanevet])
-* Use docker cp to get Kubernetes context https://github.com/camptocamp/k8s-demo/pull/64[#64] (https://github.com/mcanevet[mcanevet])
-* Don’t create 2 vhost per service https://github.com/camptocamp/k8s-demo/pull/66[#66] (https://github.com/mcanevet[mcanevet])
-* Use Ingress instead of IngressRoute https://github.com/camptocamp/k8s-demo/pull/70[#70] (https://github.com/mcanevet[mcanevet])
-* Allow to scale agents https://github.com/camptocamp/k8s-demo/pull/73[#73] (https://github.com/mcanevet[mcanevet])
-* Configure kubernetes auth backend for vault https://github.com/camptocamp/k8s-demo/pull/76[#76] (https://github.com/mcanevet[mcanevet])
-* Automate Vault configuration https://github.com/camptocamp/k8s-demo/pull/81[#81] (https://github.com/mcanevet[mcanevet])
-* Improve Vault configuration https://github.com/camptocamp/k8s-demo/pull/83[#83] (https://github.com/mcanevet[mcanevet])
-* Show list of pods instead of list of apps in wait loop https://github.com/camptocamp/k8s-demo/pull/85[#85] (https://github.com/mcanevet[mcanevet])
-* Use mounts instead of tmpfs and volumes https://github.com/camptocamp/k8s-demo/pull/90[#90] (https://github.com/mcanevet[mcanevet])
-* Mount /var/lib/kubelet with propagation https://github.com/camptocamp/k8s-demo/pull/91[#91] (https://github.com/mcanevet[mcanevet])
-* Inject secret in demo-app using vault-injector https://github.com/camptocamp/k8s-demo/pull/98[#98] (https://github.com/mcanevet[mcanevet])
-* Inject secret in demo-app using secrets store csi driver https://github.com/camptocamp/k8s-demo/pull/99[#99] (https://github.com/mcanevet[mcanevet])
+* Support deploying multiple cluster in parallel https://github.com/camptocamp/camptocamp-devops-stack/pull/61[#61] (https://github.com/mcanevet[mcanevet])
+* Use docker cp to get Kubernetes context https://github.com/camptocamp/camptocamp-devops-stack/pull/64[#64] (https://github.com/mcanevet[mcanevet])
+* Don’t create 2 vhost per service https://github.com/camptocamp/camptocamp-devops-stack/pull/66[#66] (https://github.com/mcanevet[mcanevet])
+* Use Ingress instead of IngressRoute https://github.com/camptocamp/camptocamp-devops-stack/pull/70[#70] (https://github.com/mcanevet[mcanevet])
+* Allow to scale agents https://github.com/camptocamp/camptocamp-devops-stack/pull/73[#73] (https://github.com/mcanevet[mcanevet])
+* Configure kubernetes auth backend for vault https://github.com/camptocamp/camptocamp-devops-stack/pull/76[#76] (https://github.com/mcanevet[mcanevet])
+* Automate Vault configuration https://github.com/camptocamp/camptocamp-devops-stack/pull/81[#81] (https://github.com/mcanevet[mcanevet])
+* Improve Vault configuration https://github.com/camptocamp/camptocamp-devops-stack/pull/83[#83] (https://github.com/mcanevet[mcanevet])
+* Show list of pods instead of list of apps in wait loop https://github.com/camptocamp/camptocamp-devops-stack/pull/85[#85] (https://github.com/mcanevet[mcanevet])
+* Use mounts instead of tmpfs and volumes https://github.com/camptocamp/camptocamp-devops-stack/pull/90[#90] (https://github.com/mcanevet[mcanevet])
+* Mount /var/lib/kubelet with propagation https://github.com/camptocamp/camptocamp-devops-stack/pull/91[#91] (https://github.com/mcanevet[mcanevet])
+* Inject secret in demo-app using vault-injector https://github.com/camptocamp/camptocamp-devops-stack/pull/98[#98] (https://github.com/mcanevet[mcanevet])
+* Inject secret in demo-app using secrets store csi driver https://github.com/camptocamp/camptocamp-devops-stack/pull/99[#99] (https://github.com/mcanevet[mcanevet])
 
 *Fixed bugs:*
 
-* https://github.com/camptocamp/k8s-demo/commit/1a1d0a02343b80e7aa81e8a746c8037c25531839[Fix Issue with some versions of Make] (https://github.com/sbrunner[sbrunner])
-* Don’t delete Docker image on cleanup https://github.com/camptocamp/k8s-demo/pull/65[#65] (https://github.com/mcanevet[mcanevet])
-* Ignore Ingress status https://github.com/camptocamp/k8s-demo/pull/69[#69] (https://github.com/mcanevet[mcanevet])
-* Improve remote branch detection https://github.com/camptocamp/k8s-demo/pull/84[#84] (https://github.com/mcanevet[mcanevet])
+* https://github.com/camptocamp/camptocamp-devops-stack/commit/1a1d0a02343b80e7aa81e8a746c8037c25531839[Fix Issue with some versions of Make] (https://github.com/sbrunner[sbrunner])
+* Don’t delete Docker image on cleanup https://github.com/camptocamp/camptocamp-devops-stack/pull/65[#65] (https://github.com/mcanevet[mcanevet])
+* Ignore Ingress status https://github.com/camptocamp/camptocamp-devops-stack/pull/69[#69] (https://github.com/mcanevet[mcanevet])
+* Improve remote branch detection https://github.com/camptocamp/camptocamp-devops-stack/pull/84[#84] (https://github.com/mcanevet[mcanevet])
 
 *Documentation:*
 
-* Convert to asciidoc, integrate with Antora https://github.com/camptocamp/k8s-demo/pull/63[#63] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
-* Use local directory for project's reference instead of github link https://github.com/camptocamp/k8s-demo/pull/67[#67] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
-* Convert CHANGELOG from md to adoc https://github.com/camptocamp/k8s-demo/pull/68[#68] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
-* Integrate changelog page in antora doc https://github.com/camptocamp/k8s-demo/pull/77[#77] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
-* Change of structure to match https://documentation.divio.com/ recommendations https://github.com/camptocamp/k8s-demo/pull/79[#79] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
-* Use camptocamp's version of Antora-ui, add Metadata, Antora always build current branch https://github.com/camptocamp/k8s-demo/pull/80[#80] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
-* Start documenting Vault https://documentation.divio.com/ recommendations https://github.com/camptocamp/k8s-demo/pull/87[#87] (https://github.com/mcanevet[mcanevet])
-* Document how to develop https://documentation.divio.com/ recommendations https://github.com/camptocamp/k8s-demo/pull/88[#88] (https://github.com/mcanevet[mcanevet])
+* Convert to asciidoc, integrate with Antora https://github.com/camptocamp/camptocamp-devops-stack/pull/63[#63] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
+* Use local directory for project's reference instead of github link https://github.com/camptocamp/camptocamp-devops-stack/pull/67[#67] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
+* Convert CHANGELOG from md to adoc https://github.com/camptocamp/camptocamp-devops-stack/pull/68[#68] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
+* Integrate changelog page in antora doc https://github.com/camptocamp/camptocamp-devops-stack/pull/77[#77] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
+* Change of structure to match https://documentation.divio.com/ recommendations https://github.com/camptocamp/camptocamp-devops-stack/pull/79[#79] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
+* Use camptocamp's version of Antora-ui, add Metadata, Antora always build current branch https://github.com/camptocamp/camptocamp-devops-stack/pull/80[#80] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
+* Start documenting Vault https://documentation.divio.com/ recommendations https://github.com/camptocamp/camptocamp-devops-stack/pull/87[#87] (https://github.com/mcanevet[mcanevet])
+* Document how to develop https://documentation.divio.com/ recommendations https://github.com/camptocamp/camptocamp-devops-stack/pull/88[#88] (https://github.com/mcanevet[mcanevet])
 
-== https://github.com/camptocamp/k8s-demo/tree/v0.2.0[0.2.0] (2020-09-20)
+== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.2.0[0.2.0] (2020-09-20)
 
-https://github.com/camptocamp/k8s-demo/compare/v0.1.0...v0.2.0[Full Changelog]
+https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.1.0...v0.2.0[Full Changelog]
 
 *Implemented enhancements:*
 
-* Add debug target to Makefile https://github.com/camptocamp/k8s-demo/pull/30[#30] (https://github.com/mcanevet[mcanevet])
-* Fetch repo URL and cluster name from remote https://github.com/camptocamp/k8s-demo/pull/35[#35] (https://github.com/mcanevet[mcanevet])
-* Don’t set ResourceQuota on demo https://github.com/camptocamp/k8s-demo/pull/36[#36] (https://github.com/mcanevet[mcanevet])
-* Enable Prometheus metrics for Traefik https://github.com/camptocamp/k8s-demo/pull/38[#38] (https://github.com/mcanevet[mcanevet])
-* Deploy prometheus-operator and kube-prometheus-stack https://github.com/camptocamp/k8s-demo/pull/40[#40] (https://github.com/mcanevet[mcanevet])
-* Add monitoring for ArgoCD and cert-manager https://github.com/camptocamp/k8s-demo/pull/44[#44] (https://github.com/mcanevet[mcanevet])
-* [grafana] Search for dashboard and datasource in all namespaces https://github.com/camptocamp/k8s-demo/pull/49[#49] (https://github.com/mcanevet[mcanevet])
-* Deploy Loki https://github.com/camptocamp/k8s-demo/pull/50[#50] (https://github.com/mcanevet[mcanevet])
+* Add debug target to Makefile https://github.com/camptocamp/camptocamp-devops-stack/pull/30[#30] (https://github.com/mcanevet[mcanevet])
+* Fetch repo URL and cluster name from remote https://github.com/camptocamp/camptocamp-devops-stack/pull/35[#35] (https://github.com/mcanevet[mcanevet])
+* Don’t set ResourceQuota on demo https://github.com/camptocamp/camptocamp-devops-stack/pull/36[#36] (https://github.com/mcanevet[mcanevet])
+* Enable Prometheus metrics for Traefik https://github.com/camptocamp/camptocamp-devops-stack/pull/38[#38] (https://github.com/mcanevet[mcanevet])
+* Deploy prometheus-operator and kube-prometheus-stack https://github.com/camptocamp/camptocamp-devops-stack/pull/40[#40] (https://github.com/mcanevet[mcanevet])
+* Add monitoring for ArgoCD and cert-manager https://github.com/camptocamp/camptocamp-devops-stack/pull/44[#44] (https://github.com/mcanevet[mcanevet])
+* [grafana] Search for dashboard and datasource in all namespaces https://github.com/camptocamp/camptocamp-devops-stack/pull/49[#49] (https://github.com/mcanevet[mcanevet])
+* Deploy Loki https://github.com/camptocamp/camptocamp-devops-stack/pull/50[#50] (https://github.com/mcanevet[mcanevet])
 
-== https://github.com/camptocamp/k8s-demo/tree/v0.1.0[0.1.0] (2020-09-19)
+== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.1.0[0.1.0] (2020-09-19)
 
 *Implemented enhancements:*
 

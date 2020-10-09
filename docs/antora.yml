@@ -1,5 +1,5 @@
-name: k8s-demo
-title: Camptocamp’s Kubernetes Demo
+name: camptocamp-devops-stack
+title: Camptocamp’s DevOps stack
 version: 0.3.0
 nav:
 - modules/ROOT/nav.adoc

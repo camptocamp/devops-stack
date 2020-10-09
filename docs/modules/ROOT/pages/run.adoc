@@ -1,4 +1,4 @@
-== Run the demo
+== Run the stack
 
 === Create a cluster
 

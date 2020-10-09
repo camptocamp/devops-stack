@@ -1,13 +1,12 @@
-= Camptocamp's Kubernetes Demo
+= Camptocamp's DevOps Stack
 
 == Overview
 
-This is a demo that is also reference implementation for all our
-Kubernetes related projects.
+This repository contains the reference implementation of https://www.camptocamp.com[Camptocamp]'s https://www.camptocamp.com/infrastructure_solutions_and_services[Infrastructure Solutions & Services] department.
 
 == Documentation
 
 The documentation is written using Asciidoc and Antora and located in the docs/ folder.
 The https://documentation.divio.com/structure/[Divio documentation structure] is used to organize its content.
 
-The documentation is published here: https://camptocamp.github.io/k8s-demo/
+The documentation is published here: https://camptocamp.github.io/camptocamp-devops-stack/

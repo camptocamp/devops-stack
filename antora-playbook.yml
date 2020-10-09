@@ -1,8 +1,8 @@
 site:
-  title: Camptocamp’s Kubernetes Demo
+  title: Camptocamp’s DevOps Stack
   # the 404 page and sitemap files only get generated when the url property is set
-  url: https://camptocamp.github.io/k8s-demo/
-  start_page: k8s-demo::index.adoc
+  url: https://camptocamp.github.io/camptocamp-devops-stack/
+  start_page: camptocamp-devops-stack::index.adoc
 content:
   sources:
   - url: ./
