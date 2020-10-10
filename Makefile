@@ -119,6 +119,18 @@ clean: get-base-domain
 		--entrypoint "" \
 		--workdir /workdir \
 		hashicorp/terraform:$(TERRAFORM_VERSION) /workdir/scripts/destroy-vault.sh
+	docker run --rm \
+		--user $(UID_NUMBER):$(GID_NUMBER) \
+		-v $$PWD:/workdir \
+		-v $$PWD/$(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
+		--network k3s-$(CLUSTER_NAME) \
+		--env HOME=/tmp \
+		--env KUBECTL_COMMAND=apply \
+		--env ARGOCD_OPTS="--plaintext --port-forward --port-forward-namespace argocd" \
+		--env ARTIFACTS_DIR=$(ARTIFACTS_DIR) \
+		--entrypoint "" \
+		--workdir /workdir \
+		argoproj/argocd:v$(ARGOCD_VERSION) /workdir/scripts/pre-clean.sh
 	touch $$HOME/.terraformrc
 	docker run --rm \
 		--group-add $(DOCKER_GID_NUMBER) \
