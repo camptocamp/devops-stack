@@ -1,16 +1,27 @@
 = Changelog
 
-== 0.4.0 (Unreleased)
+== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.4.0[0.4.0] (2020-10-10)
+
+https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.3.0...v0.4.0[Full Changelog]
 
 *Implemented enhancements:*
 
 * Add randomly generated exemple https://github.com/camptocamp/camptocamp-devops-stack/pull/100[#100] (https://github.com/JGodin-C2C[JGodin-C2C])
 * Use a local registry as a pull through cache https://github.com/camptocamp/camptocamp-devops-stack/pull/102[#102] (https://github.com/mcanevet[mcanevet])
 * Add cache for quay.io, gcr.io and us.gcr.io registries https://github.com/camptocamp/camptocamp-devops-stack/pull/103[#103] (https://github.com/mcanevet[mcanevet])
+* Update test workflow conditions https://github.com/camptocamp/camptocamp-devops-stack/pull/112[#112] (https://github.com/mcanevet[mcanevet])
+* Destroy Terraform workspace for Vault on clean https://github.com/camptocamp/camptocamp-devops-stack/pull/117[#117] (https://github.com/mcanevet[mcanevet])
 
 *Upgraded applications:*
 
 * Upgrade Terraform to 0.13.4 https://github.com/camptocamp/camptocamp-devops-stack/pull/104[#104] (https://github.com/mcanevet[mcanevet])
+* Upgrade prometheus-operator to 10.0.1 https://github.com/camptocamp/camptocamp-devops-stack/pull/113[#113] (https://github.com/mcanevet[mcanevet])
+* Upgrade secrets-store-csi-driver to 0.0.16 https://github.com/camptocamp/camptocamp-devops-stack/pull/115[#115] (https://github.com/mcanevet[mcanevet])
+
+*Fixed bugs:*
+
+* Wait for argocd-repo-server before deploying the app of apps https://github.com/camptocamp/camptocamp-devops-stack/pull/116[#116] (https://github.com/mcanevet[mcanevet])
+* Remove all pods before cleanup to release volumes mounted with rshared propagation https://github.com/camptocamp/camptocamp-devops-stack/pull/119[#119] (https://github.com/mcanevet[mcanevet])
 
 == https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.3.0[0.3.0] (2020-10-05)
 
