@@ -1,3 +1,4 @@
+ARGOCD_VERSION := 1.7.6
 TERRAFORM_VERSION := 0.13.4
 
 DOCKER_HOST := "tcp://127.0.0.1:2376/"
@@ -52,7 +53,7 @@ deploy: $(ARTIFACTS_DIR)/kubeconfig.yaml get-base-domain
 		--env ARTIFACTS_DIR=$(ARTIFACTS_DIR) \
 		--entrypoint "" \
 		--workdir /workdir \
-		argoproj/argocd:v1.7.6 /workdir/scripts/deploy.sh & \
+		argoproj/argocd:v$(ARGOCD_VERSION) /workdir/scripts/deploy.sh & \
 	docker run --rm \
 		--group-add $(DOCKER_GID_NUMBER) \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
@@ -101,7 +102,23 @@ $(ARTIFACTS_DIR)/terraform.tfstate: terraform/*
 		--workdir $$PWD \
 		hashicorp/terraform:$(TERRAFORM_VERSION) $$PWD/scripts/provision.sh
 
-clean:
+clean: get-base-domain
+	docker run --rm \
+		--group-add $(DOCKER_GID_NUMBER) \
+		--user $(UID_NUMBER):$(GID_NUMBER) \
+		-v /var/run/docker.sock:/var/run/docker.sock \
+		-v $$PWD:/workdir \
+		-v $$PWD/$(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
+		-v $$HOME/.terraformrc:/tmp/.terraformrc \
+		-v $$HOME/.terraform.d:/tmp/.terraform.d \
+		--network k3s-$(CLUSTER_NAME) \
+		--env HOME=/tmp \
+		--env VAULT_ADDR="https://vault.apps.$(BASE_DOMAIN)" \
+		--env CLUSTER_NAME=$(CLUSTER_NAME) \
+		--env ARTIFACTS_DIR=$(ARTIFACTS_DIR) \
+		--entrypoint "" \
+		--workdir /workdir \
+		hashicorp/terraform:$(TERRAFORM_VERSION) /workdir/scripts/destroy-vault.sh
 	touch $$HOME/.terraformrc
 	docker run --rm \
 		--group-add $(DOCKER_GID_NUMBER) \
