@@ -142,8 +142,11 @@
 <article class="doc">
 <h1 class="page">Changelog</h1>
 <div class="sect1">
-<h2 id="_0_4_0_unreleased"><a class="anchor" href="#_0_4_0_unreleased"></a>0.4.0 (Unreleased)</h2>
+<h2 id="_0_4_0_2020_10_10"><a class="anchor" href="#_0_4_0_2020_10_10"></a><a href="https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.4.0">0.4.0</a> (2020-10-10)</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.3.0&#8230;&#8203;v0.4.0">Full Changelog</a></p>
+</div>
 <div class="paragraph">
 <p><strong>Implemented enhancements:</strong></p>
 </div>
@@ -158,6 +161,12 @@
 <li>
 <p>Add cache for quay.io, gcr.io and us.gcr.io registries <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/103">#103</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
 </li>
+<li>
+<p>Update test workflow conditions <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/112">#112</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Destroy Terraform workspace for Vault on clean <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/117">#117</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
 </ul>
 </div>
 <div class="paragraph">
@@ -167,6 +176,25 @@
 <ul>
 <li>
 <p>Upgrade Terraform to 0.13.4 <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/104">#104</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Upgrade prometheus-operator to 10.0.1 <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/113">#113</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Upgrade secrets-store-csi-driver to 0.0.16 <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/115">#115</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Fixed bugs:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Wait for argocd-repo-server before deploying the app of apps <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/116">#116</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Remove all pods before cleanup to release volumes mounted with rshared propagation <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/119">#119</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
 </li>
 </ul>
 </div>
