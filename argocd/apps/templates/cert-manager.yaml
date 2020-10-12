@@ -1,3 +1,4 @@
+{{- if index $.Values "apps" "cert-manager" "enabled" }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -24,3 +25,4 @@ spec:
   syncPolicy:
     automated:
       selfHeal: true
+{{- end }}

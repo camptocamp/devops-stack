@@ -5,3 +5,27 @@ spec:
   source:
     repoURL: ...
     targetRevision: HEAD
+
+apps:
+  apps:
+    enabled: true
+  argocd:
+    enabled: true
+  cert-manager:
+    enabled: true
+  cluster-monitoring:
+    enabled: true
+  demo-app:
+    enabled: true
+  loki:
+    enabled: true
+  namespaces:
+    enabled: true
+  prometheus-operator:
+    enabled: true
+  secrets-store-csi-driver:
+    enabled: true
+  traefik:
+    enabled: true
+  vault:
+    enabled: true

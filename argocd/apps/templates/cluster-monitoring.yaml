@@ -1,3 +1,4 @@
+{{- if index $.Values "apps" "cluster-monitoring" "enabled" }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -60,3 +61,4 @@ spec:
   syncPolicy:
     automated:
       selfHeal: true
+{{- end }}
