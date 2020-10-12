@@ -1,5 +1,11 @@
 = Changelog
 
+== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.5.0[0.5.0] (unreleased)
+
+*Documentation:*
+
+* Document how to write documentation in this project https://github.com/camptocamp/camptocamp-devops-stack/pull/122[#122] (https://github.com/acampergue-camptocamp[acampergue-camptocamp]), closes https://github.com/camptocamp/camptocamp-devops-stack/issues/107[issue #107].
+
 == https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.4.0[0.4.0] (2020-10-10)
 
 https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.3.0...v0.4.0[Full Changelog]
