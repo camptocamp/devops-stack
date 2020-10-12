@@ -3,3 +3,5 @@ terraform.tfstate.d/
 Chart.lock
 charts/
 build/
+node_modules
+package-lock.json

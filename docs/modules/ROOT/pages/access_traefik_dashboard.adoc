@@ -1,4 +1,4 @@
-=== Access Traefik dashboard
+== Access Traefik dashboard
 
 For security reasons, Traefik dashboard is not exposed, hence you have
 to use port-forwarding to access it:

@@ -1,4 +1,4 @@
-=== Access Kubernetes API
+== Access Kubernetes API
 
 K3s’ installation create a `kubeconfig.yaml` file that contains the
 Kubernetes context that allows you to access the cluster.

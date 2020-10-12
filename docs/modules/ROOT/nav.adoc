@@ -1,19 +1,25 @@
 * xref:index.adoc[Introduction]
-* How-to guides
+* Tutorials
 ** xref:run.adoc[Run the stack]
+* How-to guides
 ** xref:develop.adoc[Develop the stack]
-** xref:access_kubernetes_api.adoc[Access Kubernetes API]
-** xref:access_argocd_webui.adoc[Access ArgoCD web UI]
-** xref:access_traefik_dashboard.adoc[Access Traefik dashboard]
-** xref:access_vault_ui.adoc[Access Vault UI]
-** xref:access_grafana_dashboard.adoc[Access Grafana dashboard]
-** xref:access_prometheus_dashboard.adoc[Access Prometheus dashboard]
-** xref:access_alertmanager_dashboard.adoc[Access Alertmanager dashboard]
+** xref:how_to_write_doc.adoc[Write documentation]
+*** xref:antora-ui-c2c:ROOT:index.adoc[Customize UI]
+** xref:access_services_in_cluster.adoc[Access Services in the cluster]
+*** xref:access_kubernetes_api.adoc[Access Kubernetes API]
+*** xref:access_argocd_webui.adoc[Access ArgoCD web UI]
+*** xref:access_traefik_dashboard.adoc[Access Traefik dashboard]
+*** xref:access_vault_ui.adoc[Access Vault UI]
+*** xref:access_grafana_dashboard.adoc[Access Grafana dashboard]
+*** xref:access_prometheus_dashboard.adoc[Access Prometheus dashboard]
+*** xref:access_alertmanager_dashboard.adoc[Access Alertmanager dashboard]
 * Reference Guides
 ** xref:provisioning.adoc[Provisioning]
 ** xref:deployment.adoc[Deployment]
-* Explanation
+** xref:ref_documentation.adoc[Documentation]
+* Explanations
 ** xref:why_k3s.adoc[Why k3s?]
 ** xref:why_terraform.adoc[Why Terraform?]
 ** xref:why_automated_sync.adoc[Why Automated Sync Policy?]
+** xref:why_antora.adoc[Why Antora for the documentation?]
 * xref:CHANGELOG.adoc[Changelog]
