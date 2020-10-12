@@ -1,3 +1,4 @@
+{{- if index $.Values "apps" "namespaces" "enabled" }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -18,3 +19,4 @@ spec:
   syncPolicy:
     automated:
       selfHeal: true
+{{- end }}
