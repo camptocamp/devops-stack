@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>UI Development Prerequisites :: Camptocamp’s DevOps Stack</title>
+    <link rel="canonical" href="https://camptocamp.github.io/camptocamp-devops-stack/antora-ui-c2c/prerequisites.html">
+    <meta name="generator" content="Antora 2.3.3">
+    <link rel="stylesheet" href="../_/css/site.css">
+    <link rel="icon" href="../_/img/c2c_favicon.png" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://camptocamp.github.io/camptocamp-devops-stack">Camptocamp’s DevOps Stack</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="antora-ui-c2c" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Antora UI for c2c</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="prerequisites.html">UI Development Prerequisites</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="set-up-project.html">Set up a UI Project</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="build-preview-ui.html">Build and Preview the UI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="development-workflow.html">UI Development Workflow</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="templates.html">Work with the Handlebars Templates</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="stylesheets.html">Work with the CSS Stylesheets</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="add-fonts.html">Add Fonts</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="style-guide.html">UI Element Styles</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="inline-text-styles.html">Inline Text</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="admonition-styles.html">Admonitions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="list-styles.html">Lists</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sidebar-styles.html">Sidebars</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ui-macro-styles.html">UI Macros</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Antora UI for c2c</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Antora UI for c2c</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <span class="title">Camptocamp’s DevOps stack</span>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../camptocamp-devops-stack/0.3.0/index.html">0.3.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../camptocamp-devops-stack/0.3.0/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Antora UI for c2c</a></li>
+    <li><a href="prerequisites.html">UI Development Prerequisites</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">UI Development Prerequisites</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>An Antora UI project is based on tools built atop Node.js, namely:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://nodejs.org">Node.js</a> (commands: <code>node</code> and <code>npm</code>)</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/creationix/nvm">nvm</a> (optional, but strongly recommended)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="http://gulpjs.com">Gulp CLI</a> (command: <code>gulp</code>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You also need <a href="https://git-scm.com">git</a> (command: <code>git</code>) to pull down the project and push updates to it.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="git"><a class="anchor" href="#git"></a>git</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>First, make sure you have git installed.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ git --version</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If not, <a href="https://git-scm.com/downloads">download and install</a> the git package for your system.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="node-js"><a class="anchor" href="#node-js"></a>Node.js</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You need Node.js installed on your machine to use Antora, including the default UI.
+Antora follows the Node.js release schedule, so we advise that you choose an active long term support (LTS) release of Node.js.
+We recommend using the latest active Node.js LTS version.
+While you can use other versions of Node.js, Antora is only tested against LTS releases.</p>
+</div>
+<div class="paragraph">
+<p>To check whether you have Node.js installed, and which version, open a terminal and type:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ node --version</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see a version string, such as:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>v10.15.3</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the command fails with an error, it means you don&#8217;t have Node.js installed.
+The best way to install Node.js is to use nvm (Node Version Manager).
+Refer to <a href="#antora:install:linux-requirements.adoc#install-nvm" class="page unresolved">Install nvm and Node.js (Linux)</a>, <a href="#antora:install:macos-requirements.adoc#install-nvm" class="page unresolved">Install nvm and Node.js (macOS)</a>, or <a href="#antora:install:windows-requirements.adoc#install-nvm" class="page unresolved">Install nvm and Node.js (Windows)</a> for instructions.</p>
+</div>
+<div class="paragraph">
+<p>Once you have Node.js installed, you can proceed with installing the Gulp CLI.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="gulp-cli"><a class="anchor" href="#gulp-cli"></a>Gulp CLI</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Next, you&#8217;ll need the Gulp CLI (aka wrapper).
+This package provides the <code>gulp</code> command which executes the version of Gulp declared by the project.
+You should install the Gulp CLI globally (which resolves to a location in your user directory if you&#8217;re using nvm) using the following command:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ npm install -g gulp-cli</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now that you have Node.js and Gulp installed, you&#8217;re ready to set up the project.</p>
+</div>
+</div>
+</div>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

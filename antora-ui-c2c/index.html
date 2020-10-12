@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Antora Default UI :: Camptocamp’s DevOps Stack</title>
+    <link rel="canonical" href="https://camptocamp.github.io/camptocamp-devops-stack/antora-ui-c2c/index.html">
+    <meta name="generator" content="Antora 2.3.3">
+    <link rel="stylesheet" href="../_/css/site.css">
+    <link rel="icon" href="../_/img/c2c_favicon.png" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://camptocamp.github.io/camptocamp-devops-stack">Camptocamp’s DevOps Stack</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="antora-ui-c2c" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Antora UI for c2c</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="prerequisites.html">UI Development Prerequisites</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="set-up-project.html">Set up a UI Project</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="build-preview-ui.html">Build and Preview the UI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="development-workflow.html">UI Development Workflow</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="templates.html">Work with the Handlebars Templates</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="stylesheets.html">Work with the CSS Stylesheets</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="add-fonts.html">Add Fonts</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="style-guide.html">UI Element Styles</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="inline-text-styles.html">Inline Text</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="admonition-styles.html">Admonitions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="list-styles.html">Lists</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sidebar-styles.html">Sidebars</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ui-macro-styles.html">UI Macros</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Antora UI for c2c</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Antora UI for c2c</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <span class="title">Camptocamp’s DevOps stack</span>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../camptocamp-devops-stack/0.3.0/index.html">0.3.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../camptocamp-devops-stack/0.3.0/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Antora UI for c2c</a></li>
+    <li><a href="index.html">Antora Default UI</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Antora Default UI</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>This project produces the <a href="https://antora.gitlab.io/antora-ui-default">default UI bundle</a> for documentation sites generated with <a href="https://antora.org">Antora</a>.
+It contains the UI assets (page templates, CSS, JavaScript, images, etc.) and a Gulp build script.
+The build can be used to preview the UI locally (featuring live updates), or to package it for consumption by the Antora site generator.</p>
+</div>
+<div class="paragraph">
+<p>This documentation explains how to use this project to set up, customize and manage a UI for a documentation site generated with Antora.
+After reading it, you&#8217;ll be able to:</p>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-check-square-o"></i> Understand how an Antora UI project is structured.</p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> Set up your environment to work on the UI project.</p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> Launch a preview server to visually inspect the UI.</p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> Adopt a development workflow to share and accept changes to the UI.</p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> Package a UI for your documentation site that Antora can use.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="file-type-and-technology-overview"><a class="anchor" href="#file-type-and-technology-overview"></a>File type and technology overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Antora UI consists of the following file types that are used to structure and style the documentation site pages generated by Antora.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Handlebars &#8220;page&#8221; templates (layouts, partials, and helpers)</p>
+</li>
+<li>
+<p>CSS (enhanced using PostCSS)</p>
+</li>
+<li>
+<p>JavaScript (UI scripts)</p>
+</li>
+<li>
+<p>Images / Graphics (specific to the UI)</p>
+</li>
+<li>
+<p>Fonts</p>
+</li>
+<li>
+<p>Sample content for previewing the UI (HTML and UI model)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To understand how the UI works, let&#8217;s begin by surveying the primary technologies used by the UI.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Handlebars (file extension: <code>.hbs</code>)</dt>
+<dd>
+<p><a href="http://handlebarsjs.com">Handlebars</a> is a &#8220;logic-less&#8221; templating engine used to create HTML from template files.
+Templates contain placeholders (i.e., mustache expressions like <code>{{{page.title}}}</code>) into which content is injected from a model.
+They also accommodate simple logic expressions for repeating content or including it conditionally (e.g., <code>{{#each navigation}}</code>) as well as partials (e.g., <code>{{&gt; header}}</code>).</p>
+</dd>
+<dt class="hdlist1">Gulp (script file: <em class="path">gulpfile.js/index.js</em>)</dt>
+<dd>
+<p><a href="http://gulpjs.com">Gulp</a> is a build tool for JavaScript projects.
+It configures a collection of tasks that can be used to perform automated tasks such as compiling files, running a preview server, or publishing a release.</p>
+</dd>
+<dt class="hdlist1">npm (command: <code>npm</code>)</dt>
+<dd>
+<p>npm manages software packages (i.e., software dependencies) that it downloads from <a href="https://npmjs.com" class="bare">npmjs.com</a>.
+Software this project uses includes libraries that handle compilation as well as shared assets such as font files that are distributed as npm packages.
+npm is part of Node.js.</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">package.json</dt>
+<dd>
+<p>This file keeps track of the dependencies (described using fuzzy versions) that npm (or Yarn) should fetch.</p>
+</dd>
+<dt class="hdlist1">package-lock.json</dt>
+<dd>
+<p>This file contains a report of which dependencies npm resolved.
+This information ensures that dependency resolution is reproducible.</p>
+</dd>
+<dt class="hdlist1">node_modules/</dt>
+<dd>
+<p>A local cache of resolved dependencies that npm (or Yarn) fetches.</p>
+</dd>
+</dl>
+</div>
+</dd>
+<dt class="hdlist1">PostCSS</dt>
+<dd>
+<p>This project does not use a CSS preprocessor such as Sass or LESS.
+Instead, it relies on normal CSS which is enhanced by a series of postprocessors.
+The most common postprocessor backports newer CSS features to older browsers by adding properties with vendor prefixes.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="ui-project-versus-ui-bundle"><a class="anchor" href="#ui-project-versus-ui-bundle"></a>UI project versus UI bundle</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <strong class="term">UI project</strong>, the master branch of a git repository, contains the recipe and raw materials for creating an Antora UI bundle.
+It includes a build, source files, project files, and dependency information.
+This is your development workspace.</p>
+</div>
+<div class="paragraph">
+<p>The <strong class="term">UI bundle</strong>, a distributable archive, provides pre-compiled (interpreted, consolidated, and/or minimized) files that are ready to be used by Antora.</p>
+</div>
+<div class="sect2">
+<h3 id="ui-project-repository-structure-master-branch"><a class="anchor" href="#ui-project-repository-structure-master-branch"></a>UI project repository structure (master branch)</h3>
+<div class="paragraph">
+<p>You should think of the UI project&#8217;s master branch as your UI workspace.
+It contains the recipe and raw materials for creating a UI, including a build, source files, project files, and dependency information.</p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s how the files are structured in the UI project:</p>
+</div>
+<div class="literalblock output">
+<div class="content">
+<pre>README.adoc
+gulpfile.js/
+  index.js
+  lib/
+  tasks/
+package.json
+package-lock.json
+src/
+  css/
+    base.css
+    breadcrumbs.css
+    ...
+  helpers/
+    and.js
+    eq.js
+    ...
+  img/
+    back.svg
+    caret.svg
+    ...
+  layouts/
+    default.hbs
+    404.hbs
+  partials/
+    article.hbs
+    breadcrumbs.hbs
+    ...
+  js/
+    01-navigation.js
+    02-fragment-jumper.js
+    ...
+    vendor/
+      highlight.js
+preview-src/
+  index.html
+  ui-model.yml</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A Gulp build is used to compile and assemble the UI project files into a UI bundle.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ui-bundle-structure-releases"><a class="anchor" href="#ui-bundle-structure-releases"></a>UI bundle structure (releases)</h3>
+<div class="paragraph">
+<p>The UI bundle&#8212;&#8203;a distributable archive&#8212;&#8203;provides files which are ready to be used by Antora.</p>
+</div>
+<div class="paragraph">
+<p>When the UI project files are built by Gulp, they are assembled under the <em class="path">public</em> directory.
+Since the <em class="path">public</em> directory is generated, it&#8217;s safe to remove.</p>
+</div>
+<div class="paragraph">
+<p>The contents of the UI bundle resembles the UI project&#8217;s master branch contents, except the bundle doesn&#8217;t contain any files other than the ones that make up the UI.
+This is the content that is used by Antora.</p>
+</div>
+<div class="literalblock output">
+<div class="content">
+<pre>css/
+  site.css
+font/
+  ...
+helpers/
+  and.js
+  eq.js
+  ...
+img/
+  back.svg
+  caret.svg
+  ...
+layouts/
+  default.hbs
+  404.hbs
+partials/
+  article.hbs
+  breadcrumbs.hbs
+  ...
+js/
+  site.js
+  vendor/
+    highlight.js</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Some of these files have been compiled or aggregated, such as the stylesheets and JavaScript.
+The benefit of building the UI files is that the files can be optimized for static inclusion in the site without that optimization getting in the way of UI development.
+For example, the UI build can optimize SVGs or add vendor prefixes to the CSS.
+Since these optimizations are only applied to the pre-compiled files, they don&#8217;t interfere with the web developer&#8217;s workflow.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="ui-compilation-and-generator-consumption-overview"><a class="anchor" href="#ui-compilation-and-generator-consumption-overview"></a>UI compilation and generator consumption overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The purpose of an Antora UI project is to get the UI files into a state that Antora can use and to make it reusable.</p>
+</div>
+<div class="paragraph">
+<p>The UI is served statically in a production site, but the UI&#8217;s assets live in a source form in a UI project to accommodate development and simplify maintenance.
+When handed off to the Antora pipeline, the UI is in an interim, pre-compiled state.
+Specifically, the master branch of the git repository contains the files in source form while releases are used to distribute the files in pre-compiled form.</p>
+</div>
+<div class="paragraph">
+<p>The responsibility of compiling the UI is shared between a UI project and Antora.
+The UI project uses a local build to pre-compile (i.e., interpret, consolidate, and/or minimize) the files.
+The pre-compiled files are agnostic to Antora&#8217;s content model, relieving the generator from having to deal with this part.
+It also allows the UI to be reused.</p>
+</div>
+<div class="paragraph">
+<p>The UI project build then packages the UI into a bundle, which the UI Loader in Antora consumes.
+Antora grabs the bundle, extracts it into a UI catalog, and takes compilation to completion by weaving the Antora&#8217;s content model into the Handlebars templates to make the pages and auxiliary data files.
+Antora then copies the remaining UI assets to the site output.</p>
+</div>
+<div class="paragraph">
+<p>Now that you have an overview of the files that make up the UI and how it gets assembled, let&#8217;s go over how to set up the project, build the UI, and preview it.</p>
+</div>
+</div>
+</div>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

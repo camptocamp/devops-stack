@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>List Styles :: Camptocamp’s DevOps Stack</title>
+    <link rel="canonical" href="https://camptocamp.github.io/camptocamp-devops-stack/antora-ui-c2c/list-styles.html">
+    <meta name="generator" content="Antora 2.3.3">
+    <link rel="stylesheet" href="../_/css/site.css">
+    <link rel="icon" href="../_/img/c2c_favicon.png" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://camptocamp.github.io/camptocamp-devops-stack">Camptocamp’s DevOps Stack</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="antora-ui-c2c" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Antora UI for c2c</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="prerequisites.html">UI Development Prerequisites</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="set-up-project.html">Set up a UI Project</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="build-preview-ui.html">Build and Preview the UI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="development-workflow.html">UI Development Workflow</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="templates.html">Work with the Handlebars Templates</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="stylesheets.html">Work with the CSS Stylesheets</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="add-fonts.html">Add Fonts</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="style-guide.html">UI Element Styles</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="inline-text-styles.html">Inline Text</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="admonition-styles.html">Admonitions</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="list-styles.html">Lists</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sidebar-styles.html">Sidebars</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ui-macro-styles.html">UI Macros</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Antora UI for c2c</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Antora UI for c2c</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <span class="title">Camptocamp’s DevOps stack</span>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../camptocamp-devops-stack/0.3.0/index.html">0.3.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../camptocamp-devops-stack/0.3.0/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Antora UI for c2c</a></li>
+    <li><a href="style-guide.html">UI Element Styles</a></li>
+    <li><a href="list-styles.html">Lists</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">List Styles</h1>
+<div class="sect1">
+<h2 id="_ordered_list_numeration"><a class="anchor" href="#_ordered_list_numeration"></a>Ordered list numeration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The browser automatically numbers <a href="#antora:asciidoc:ordered-and-unordered-lists.adoc" class="page unresolved">ordered lists</a> and selects a numeration style by list depth in the following order: decimal, lower-alpha, lower-roman, upper-alpha, upper-roman.</p>
+</div>
+<div class="paragraph">
+<p>AsciiDoc allows the author to override the numeration style for an ordered list.
+Here&#8217;s an example of that output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;div class="olist loweralpha"&gt;
+&lt;ol class="loweralpha" type="a"&gt;
+&lt;li&gt;&lt;p&gt;a&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;b&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;c&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In order to support this customization, you must assign the list-style-type property to the following classes on the <code>&lt;ol&gt;</code> element in your stylesheet.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">&lt;ol&gt; class</th>
+<th class="tableblock halign-left valign-top">list-style-type property value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">arabic</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">decimal</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">decimal</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">decimal-leading-zero</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">loweralpha</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lower-alpha</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lowergreek</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lower-greek</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lowerroman</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lower-roman</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">upperalpha</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">upper-alpha</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">upperroman</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">upper-roman</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_checklist"><a class="anchor" href="#_checklist"></a>Checklist</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <a href="#antora:asciidoc:checklists.adoc" class="page unresolved">checklist</a> is an unordered list with items that are prefixed with a checkbox marker (checked or unchecked).
+Here&#8217;s an AsciiDoc source example that produces a checklist:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">* [ ] todo
+* [x] done!</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If font-based icons are enabled (<code>icons=font</code>), the checkbox gets inserted as the first element of the paragraph element that contains the list item text.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;div class="ulist checklist"&gt;
+&lt;ul class="checklist"&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;i class="fa fa-square-o"&gt; todo&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;i class="fa fa-check-square-o"&gt; done!&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The recommended approach is to hide the list markers (<code>list-style: none</code>), then add a checkbox glyph on the icon element using either a background image or a <code>before</code> pseudo element.</p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s how it might appear:</p>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> todo</p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> done!</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

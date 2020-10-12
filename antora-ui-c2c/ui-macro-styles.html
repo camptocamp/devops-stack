@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>UI Macro Styles :: Camptocamp’s DevOps Stack</title>
+    <link rel="canonical" href="https://camptocamp.github.io/camptocamp-devops-stack/antora-ui-c2c/ui-macro-styles.html">
+    <meta name="generator" content="Antora 2.3.3">
+    <link rel="stylesheet" href="../_/css/site.css">
+    <link rel="icon" href="../_/img/c2c_favicon.png" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://camptocamp.github.io/camptocamp-devops-stack">Camptocamp’s DevOps Stack</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="antora-ui-c2c" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Antora UI for c2c</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="prerequisites.html">UI Development Prerequisites</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="set-up-project.html">Set up a UI Project</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="build-preview-ui.html">Build and Preview the UI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="development-workflow.html">UI Development Workflow</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="templates.html">Work with the Handlebars Templates</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="stylesheets.html">Work with the CSS Stylesheets</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="add-fonts.html">Add Fonts</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="style-guide.html">UI Element Styles</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="inline-text-styles.html">Inline Text</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="admonition-styles.html">Admonitions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="list-styles.html">Lists</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sidebar-styles.html">Sidebars</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="ui-macro-styles.html">UI Macros</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Antora UI for c2c</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Antora UI for c2c</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <span class="title">Camptocamp’s DevOps stack</span>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../camptocamp-devops-stack/0.3.0/index.html">0.3.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../camptocamp-devops-stack/0.3.0/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Antora UI for c2c</a></li>
+    <li><a href="style-guide.html">UI Element Styles</a></li>
+    <li><a href="ui-macro-styles.html">UI Macros</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">UI Macro Styles</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Asciidoctor supports <a href="#antora:asciidoc:ui-macros.adoc" class="page unresolved">three UI element representations</a> out of the box, which are made from corresponding inline UI macros.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>button (btn macro)</p>
+</li>
+<li>
+<p>keybinding (kbd macro)</p>
+</li>
+<li>
+<p>menu (menu macro)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The UI elements are output using semantic HTML elements, so they inherit some default styling from the browser.
+However, to look proper, they require some additional styling.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_button"><a class="anchor" href="#_button"></a>Button</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <a href="#antora:asciidoc:ui-macros.adoc#button" class="page unresolved">button</a> is meant to represent an on-screen button (<code>btn:[Save]</code>).
+However, it should not appear like an actual button as that could confuse the reader into thinking it&#8217;s interactive.
+Therefore, a button is rendered as a bold text by default:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;b class="button"&gt;Save&lt;/b&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Traditionally, a button reference is styled by surrounding the text with square brackets, as shown here:</p>
+</div>
+<div class="paragraph">
+<p>btn:[Save]</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_keybinding"><a class="anchor" href="#_keybinding"></a>Keybinding</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <a href="#antora:asciidoc:ui-macros.adoc#keybinding" class="page unresolved">keybinding</a> can be a single key (<code>kbd:[F11]</code>) or a sequence of keys (<code>+kbd:[Ctrl+F]</code>).
+Here&#8217;s the HTML that&#8217;s generated for these two forms.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;kbd&gt;F11&lt;/kbd&gt;
+&lt;span class="keyseq"&gt;&lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;F&lt;/kbd&gt;&lt;/span&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s how these might appear:</p>
+</div>
+<div class="paragraph">
+<p>kbd:[F11]<br>
+kbd:[Ctrl+F]</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_menu"><a class="anchor" href="#_menu"></a>Menu</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <a href="#antora:asciidoc:ui-macros.adoc#menu" class="page unresolved">menu</a> can be a top-level menu reference (<code>menu:File[]</code>) or a nested selection (<code>menu:File[Save]</code>).
+Here&#8217;s the HTML that&#8217;s generated for these two forms.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;b class="menuref"&gt;File&lt;/b&gt;
+&lt;span class="menuseq"&gt;&lt;b class="menu"&gt;File&lt;/b&gt;&amp;#160;&lt;b class="caret"&gt;&amp;#8250;&lt;/b&gt; &lt;b class="menuitem"&gt;Save&lt;/b&gt;&lt;/span&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This might be rendered as:</p>
+</div>
+<div class="paragraph">
+<p>menu:File[]</p>
+</div>
+<div class="paragraph">
+<p>menu:File[Save]</p>
+</div>
+<div class="paragraph">
+<p>The default styling applied to a menu reference is usually sufficient.</p>
+</div>
+</div>
+</div>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

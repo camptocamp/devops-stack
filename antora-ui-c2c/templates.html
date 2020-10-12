@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Work with the Handlebars Templates :: Camptocamp’s DevOps Stack</title>
+    <link rel="canonical" href="https://camptocamp.github.io/camptocamp-devops-stack/antora-ui-c2c/templates.html">
+    <meta name="generator" content="Antora 2.3.3">
+    <link rel="stylesheet" href="../_/css/site.css">
+    <link rel="icon" href="../_/img/c2c_favicon.png" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://camptocamp.github.io/camptocamp-devops-stack">Camptocamp’s DevOps Stack</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="antora-ui-c2c" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Antora UI for c2c</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="prerequisites.html">UI Development Prerequisites</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="set-up-project.html">Set up a UI Project</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="build-preview-ui.html">Build and Preview the UI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="development-workflow.html">UI Development Workflow</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="templates.html">Work with the Handlebars Templates</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="stylesheets.html">Work with the CSS Stylesheets</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="add-fonts.html">Add Fonts</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="style-guide.html">UI Element Styles</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="inline-text-styles.html">Inline Text</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="admonition-styles.html">Admonitions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="list-styles.html">Lists</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sidebar-styles.html">Sidebars</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ui-macro-styles.html">UI Macros</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Antora UI for c2c</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Antora UI for c2c</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <span class="title">Camptocamp’s DevOps stack</span>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../camptocamp-devops-stack/0.3.0/index.html">0.3.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../camptocamp-devops-stack/0.3.0/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Antora UI for c2c</a></li>
+    <li><a href="templates.html">Work with the Handlebars Templates</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Work with the Handlebars Templates</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Antora combines the Handlebars templates with the converted AsciiDoc content and other UI model data to make the pages in the site.
+These &#8220;logic-less&#8221; templates are mostly HTML with some special mustache tags sprinkled in where content should be inserted.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="what-do-the-templates-do"><a class="anchor" href="#what-do-the-templates-do"></a>What do the templates do?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The layout templates, which are stored in <em class="path">src/layouts/</em>, provide the main page structure.
+The partial templates, in <em class="path">src/partials/</em>, fill in different regions of a page, such as the navigation and footer.</p>
+</div>
+<div class="paragraph">
+<p>The templates read from a model that&#8217;s populated by Antora.
+The model can be accessed by enclosing path expressions in mustaches, which are <code>{{</code> and <code>}}</code> or <code>{{{</code> and <code>}}}</code> (e.g., <code>{{{page.title}}}</code>).
+The double mustaches escape the value for HTML, whereas triple mustaches insert the value as is.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+If the mustaches are preceded by a backslash (e.g, <code>\{{</code>), the expression will be disabled.
+This often comes up when constructing URLs.
+To avoid this problem, you should use forward slashes in URLs instead of backslashes.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>When <code>{{</code> is immediately followed by <code>&gt;</code>, that invokes a partial (from the partials directory) and inserts the result (e.g., <code>{{&gt; head}}</code>.
+In other words, that&#8217;s not a model reference like the other mustache expressions.</p>
+</div>
+<div class="sect2">
+<h3 id="template-variables"><a class="anchor" href="#template-variables"></a>Template variables</h3>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+This model is not final.
+Variable names and purposes may change.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s an overview of the available UI model:</p>
+</div>
+<table id="template-variables-table" class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Variables available to the Handlebars templates (top-level variables in bold)</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><a id="site"></a>site</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Information about the site.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>site.url</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The base URL of the site, if specified in the playbook.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>site.path</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The pathname (i.e., subpath) of the site.url under which the site is hosted (e.g., /docs).
+This value is empty if site.url is not defined, has no path segment, or matches /.
+Can be removed from the site.url value using a helper (e.g., <code>deleteSuffix site.url site.path</code>)
+(since Antora 2.1)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>site.title</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The title of the site.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>site.components</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A map of all the components in the site, keyed by component name.
+Properties of each component include name, title, url, latest, and versions.
+Properties of each version include name (since 2.3), version, displayVersion, prerelease (if set), title, url, asciidoc (since 2.3), and navigation.
+The navigation property on each version provides access to the navigation menu for that component version.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>site.ui</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Information about the site UI.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>site.ui.defaultLayout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The default page layout used for this site.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>site.ui.url</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The absolute base URL of the UI.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><a id="page"></a>page</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Information about the current page.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page.title</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The page title in HTML format (often used as the primary heading).
+This value may include inline HTML elements and XML character references.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page.contents</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The main article content in HTML format.
+Sourced from AsciiDoc and converted to HTML by the Asciidoctor processor.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page.attributes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any AsciiDoc document attribute prefixed with <code>page-</code>.
+The <code>page-</code> prefix is dropped from the name used in this model.
+For example, the value of the document attribute named <code>page-support-phone</code> can be accessed via the UI model using <code>page.attributes.support-phone</code>.
+Page attributes can be defined per page in the AsciiDoc document header (e.g., <code>:page-support-phone: +1 212-555-1234</code>) or globally in the playbook under the key <code>asciidoc.attributes</code>.
+The <code>page-</code> prefix is used to isolate page-related attributes from the numerous other document attributes in AsciiDoc.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page.description</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The text of the description attribute in the AsciiDoc header, if specified.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page.keywords</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A comma-separated list of keywords defined in the AsciiDoc header, if specified.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page.component</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Information about the component for the current page.
+Properties include name, title, url, latest, and versions.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page.componentVersion</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Information about the component version for the current page.
+Properties include name (since 2.3), version, displayVersion, prerelease (if set), title, url, and asciidoc (since 2.3).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page.module</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the module for the current page.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page.version</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the version for the current page.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page.displayVersion</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the display version for the current page.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page.versions</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All versions of the current page, including the current page.
+Each entry has the properties url, string, and missing.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page.breadcrumbs</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An array of breadcrumb items that represent the current selection in the navigation tree.
+Includes text-only and external items.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page.navigation</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The hierarchical navigation menu for the component version of the current page.
+Each navigation item contains the property <code>content</code> as well as the optional properties <code>url</code> and (child) <code>items</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page.url</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The URL for the current page.
+This value is a root-relative path.
+It&#8217;s often used as the base URL to generate relative URLs from this page.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page.canonicalUrl</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The canonical URL for the current page.
+The canonicalUrl is only set if site.url is set.
+If there are multiple versions of the component, the canonical URL is the qualified URL of the most recent version of the page (excluding any prerelease versions).
+If there&#8217;s only a single version of the component, the canonical URL is the qualified URL of the current page.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page.editUrl</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The URL to edit the current page (i.e., activates the web-based editor on the git host).
+This value is derived automatically for the hosts github.com, gitlab.com, pagure.io, and bitbucket.org, even if the repository is private.
+If the host is not recognized, or you want to customize the value, you can use the <code>edit_url</code> key on the content source in the playbook.</p>
+<p class="tableblock">The default UI shows an "Edit this Page" link that points to this URL unless the repository is private (i.e., <code>page.origin.private</code> is true) or <code>page.fileUri</code> is set.
+You can force this link to be shown by setting the environment variable <code>FORCE_SHOW_EDIT_PAGE_LINK</code> (e.g., <code>FORCE_SHOW_EDIT_PAGE_LINK=true</code>) or by customizing the logic in the UI template.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page.fileUri</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The local file:// URI to edit the current page if the page originates from the local filesystem (i.e., the worktree).</p>
+<p class="tableblock">If this property is set, the default UI shows an "Edit this Page" link that points to this URI (instead of the <code>page.editUrl</code> value) unless the <code>CI</code> environment variable is set (e.g., <code>CI=true</code>).
+When the <code>CI</code> environment variable is set, the default UI ignores this property (since linking to a local file:// URI in a published site doesn&#8217;t make any sense).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page.origin.private</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This value will be true if the repository requires authentication or the repository URL embeds credentials.
+In the default UI, if this value is <code>true</code>, the "Edit this Page" link is disabled.
+A quick way to force this property to be <code>true</code> (even if the repository is public) is to begin the content source URL in the playbook with empty credentials, as in <code>https://@</code>.
+Then, the "Edit the Page" link will not appear.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page.home</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates whether the current page is the home page of the site.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page.layout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The page layout for the current page.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page.next</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The next reachable page in the navigation tree (skips past text-only and external items).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page.previous</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The previous reachable page in the navigation tree (skips past text-only and external items).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page.parent</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The parent page in the navigation tree (skips past text-only and external items).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>env</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The map of environment variables (sourced from <code>process.env</code>).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>siteRootPath</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The relative path to the root of the published site.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>uiRootPath</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The relative path to the root directory of the UI.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>antoraVersion</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The version of Antora used to build the site (specifically the version of the @antora/page-composer package).</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>This model is likely to grow over time.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="modify-a-template"><a class="anchor" href="#modify-a-template"></a>Modify a template</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let&#8217;s consider the case when you want to add a new meta tag inside the HTML head.</p>
+</div>
+<div class="paragraph">
+<p>First, make sure you have set up the project and created a development branch.
+Next, open the file <em class="path">templates/partials/head.hbs</em> and add your tag.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;meta class="swiftype" name="title" data-type="string" content="{{page.title}}"&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Each template file has access to the template model, which exposes information about the current page through variable names.
+The variables currently available are listed in <a href="#template-variables-table">Variables available to the Handlebars templates (top-level variables in bold)</a>.</p>
+</div>
+<div class="paragraph">
+<p>Save the file, commit it to git, push the branch, and allow the approval workflow to play out.</p>
+</div>
+</div>
+</div>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

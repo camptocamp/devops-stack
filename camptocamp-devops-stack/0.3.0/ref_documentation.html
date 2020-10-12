@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Why K3s? :: Camptocamp’s DevOps Stack</title>
-    <link rel="canonical" href="https://camptocamp.github.io/camptocamp-devops-stack/camptocamp-devops-stack/0.3.0/why_k3s.html">
+    <title>Untitled :: Camptocamp’s DevOps Stack</title>
+    <link rel="canonical" href="https://camptocamp.github.io/camptocamp-devops-stack/camptocamp-devops-stack/0.3.0/ref_documentation.html">
     <meta name="generator" content="Antora 2.3.3">
     <link rel="stylesheet" href="../../_/css/site.css">
     <link rel="icon" href="../../_/img/c2c_favicon.png" type="image/x-icon">
@@ -104,7 +104,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="deployment.html">Deployment</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="ref_documentation.html">Documentation</a>
   </li>
 </ul>
@@ -113,7 +113,7 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Explanations</span>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="why_k3s.html">Why k3s?</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -169,17 +169,67 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Camptocamp’s DevOps stack</a></li>
-    <li>Explanations</li>
-    <li><a href="why_k3s.html">Why k3s?</a></li>
+    <li>Reference Guides</li>
+    <li><a href="ref_documentation.html">Documentation</a></li>
   </ul>
 </nav>
 </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Why K3s?</h1>
+<div class="sect1">
+<h2 id="_documentation"><a class="anchor" href="#_documentation"></a>Documentation</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_structure"><a class="anchor" href="#_structure"></a>Structure</h3>
 <div class="paragraph">
-<p>K3s allows to create a lightweight Kubernetes cluster on any
-workstation. This is very convenient for developing or testing purpose.</p>
+<p>We follow the <a href="https://documentation.divio.com/structure/">Divio documentation structure</a> to organize the documentation of this project, which is written in <a href="https://asciidoc.org/">Asciidoc</a> and built using <a href="https://antora.org/">Antora</a></p>
+</div>
+<div class="paragraph">
+<p>In short, we break up the documentation in 4 parts, each of which being useful at a different time in the understanding or usage of the project:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>tutorials</strong> focusing on the learning</p>
+</li>
+<li>
+<p><strong>how-to guides</strong> focusing on solving specific problems</p>
+</li>
+<li>
+<p><strong>reference guides</strong> focusing on giving information</p>
+</li>
+<li>
+<p><strong>explanation</strong> focusing on offering a better understanding</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>There are overlaps between those 4 elements, but respecting this separation prevents us from building a confused (and confusing) documentation.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/divio-doc.png" alt="overview of the documentation system">
+</div>
+</div>
+<div class="paragraph">
+<p>To get a better overview of the Divio documentation structure, you can watch this interesting presentation by Daniele Procida</p>
+</div>
+<div class="videoblock">
+<div class="content">
+<iframe src="https://www.youtube.com/embed/t4vKPhjcMZg?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_appearance"><a class="anchor" href="#_appearance"></a>Appearance</h3>
+<div class="paragraph">
+<p>The UI for documentation sites created using <a href="https://antora.org/">Antora</a> is externalized in a separated project named <a href="https://github.com/camptocamp/antora-ui/">antora-ui</a>, forked from <a href="https://gitlab.com/antora/antora-ui-default">antora-ui-default</a>. This project produces an UI bundle containing all UI assets (CSS, Javascript, images, etc) using a gulp build script.</p>
+</div>
+<div class="paragraph">
+<p>This UI bundle is linked to in the <code>antora-playbook.yml</code> of the documentation project and is dynamically pulled and loaded to render the resulting website during the buid phase.</p>
+</div>
+</div>
+</div>
 </div>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

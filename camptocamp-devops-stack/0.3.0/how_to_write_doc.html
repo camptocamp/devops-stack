@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Why K3s? :: Camptocamp’s DevOps Stack</title>
-    <link rel="canonical" href="https://camptocamp.github.io/camptocamp-devops-stack/camptocamp-devops-stack/0.3.0/why_k3s.html">
+    <title>How to participate to this documentation :: Camptocamp’s DevOps Stack</title>
+    <link rel="canonical" href="https://camptocamp.github.io/camptocamp-devops-stack/camptocamp-devops-stack/0.3.0/how_to_write_doc.html">
     <meta name="generator" content="Antora 2.3.3">
     <link rel="stylesheet" href="../../_/css/site.css">
     <link rel="icon" href="../../_/img/c2c_favicon.png" type="image/x-icon">
@@ -56,7 +56,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="develop.html">Develop the stack</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="how_to_write_doc.html">Write documentation</a>
 <ul class="nav-list">
@@ -113,7 +113,7 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Explanations</span>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="why_k3s.html">Why k3s?</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -169,17 +169,82 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Camptocamp’s DevOps stack</a></li>
-    <li>Explanations</li>
-    <li><a href="why_k3s.html">Why k3s?</a></li>
+    <li>How-to guides</li>
+    <li><a href="how_to_write_doc.html">Write documentation</a></li>
   </ul>
 </nav>
 </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Why K3s?</h1>
+<h1 class="page">How to participate to this documentation</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>K3s allows to create a lightweight Kubernetes cluster on any
-workstation. This is very convenient for developing or testing purpose.</p>
+<p>The documentation of this project is located into the <code>docs/</code> folder and has to follow the <a href="ref_documentation.html#_structure" class="page">Divio documentation structure</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_a_new_documentation_page"><a class="anchor" href="#_create_a_new_documentation_page"></a>Create a new Documentation page</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_write_a_new_page"><a class="anchor" href="#_write_a_new_page"></a>Write a new page</h3>
+<div class="paragraph">
+<p>To write a new page of documentation, create a new file inside the <code>docs\modules\ROOT\pages</code> subfolder, with the <code>.adoc</code> extension.
+You should then write your content using <a href="https://asciidoc.org/">Asciidoc language</a>.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Use this <a href="https://powerman.name/doc/asciidoc">Asciidoc Cheatsheet</a>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_convert_an_existing_markdown_document"><a class="anchor" href="#_convert_an_existing_markdown_document"></a>Convert an existing Markdown document</h3>
+<div class="paragraph">
+<p>Alternatively, if you have an existing Markdown document, you can convert it using the <a href="https://pandoc.org/">pandoc tool</a>.</p>
+</div>
+<div class="listingblock">
+<div class="title">Pandoc call to convert Markdown into Asciidoc, preserving format.</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ pandoc -f markdown -t asciidoc --wrap=preserve --shift-heading-level-by=-1 --standalone --output=FILENAME.adoc FILENAME.md</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_include_the_new_page"><a class="anchor" href="#_include_the_new_page"></a>Include the new page</h3>
+<div class="paragraph">
+<p>To include your page in the resulting website, edit the <code>docs/modules/ROOT/nav.adoc</code> file to add an index entry under the right section.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code>* Section
+** xref:my_documentation_under_Section.adoc[My documentation's title]</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_customize_the_appearance"><a class="anchor" href="#_customize_the_appearance"></a>Customize the appearance</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The UI of the documentation is built in an external project named <a href="https://github.com/camptocamp/antora-ui/blob/master/README.adoc#antora-ui-for-camptocamp">Antora-ui for Camptocamp</a>.</p>
+</div>
+<div class="paragraph">
+<p>First make sure to follow the <a href="https://github.com/camptocamp/antora-ui/blob/master/README.adoc#development-quickstart">development quickstart</a>, then <a href="https://github.com/camptocamp/antora-ui/blob/master/README.adoc#clone-and-initialize-the-ui-project">clone and initialize the UI Project</a>.</p>
+</div>
+<div class="paragraph">
+<p>For detailled information on the way to customize the UI, please refer to the <a href="../../antora-ui-c2c/index.html" class="page">corresponding documentation here</a>.</p>
+</div>
+</div>
 </div>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

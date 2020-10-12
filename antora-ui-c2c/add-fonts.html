@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Add Fonts :: Camptocamp’s DevOps Stack</title>
+    <link rel="canonical" href="https://camptocamp.github.io/camptocamp-devops-stack/antora-ui-c2c/add-fonts.html">
+    <meta name="generator" content="Antora 2.3.3">
+    <link rel="stylesheet" href="../_/css/site.css">
+    <link rel="icon" href="../_/img/c2c_favicon.png" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://camptocamp.github.io/camptocamp-devops-stack">Camptocamp’s DevOps Stack</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="antora-ui-c2c" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Antora UI for c2c</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="prerequisites.html">UI Development Prerequisites</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="set-up-project.html">Set up a UI Project</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="build-preview-ui.html">Build and Preview the UI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="development-workflow.html">UI Development Workflow</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="templates.html">Work with the Handlebars Templates</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="stylesheets.html">Work with the CSS Stylesheets</a>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="add-fonts.html">Add Fonts</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="style-guide.html">UI Element Styles</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="inline-text-styles.html">Inline Text</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="admonition-styles.html">Admonitions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="list-styles.html">Lists</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sidebar-styles.html">Sidebars</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ui-macro-styles.html">UI Macros</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Antora UI for c2c</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Antora UI for c2c</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <span class="title">Camptocamp’s DevOps stack</span>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../camptocamp-devops-stack/0.3.0/index.html">0.3.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../camptocamp-devops-stack/0.3.0/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Antora UI for c2c</a></li>
+    <li><a href="stylesheets.html">Work with the CSS Stylesheets</a></li>
+    <li><a href="add-fonts.html">Add Fonts</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Add Fonts</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>This page explains how to add new fonts to your UI.
+These instructions assume you&#8217;ve forked the default UI and are able to customize it.</p>
+</div>
+<div class="paragraph">
+<p>There are three steps involved:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Add the font to your UI project</p>
+</li>
+<li>
+<p>Add a font-face declaration to your stylesheet</p>
+</li>
+<li>
+<p>Use the new font in your stylesheet</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>How you reference the font file in the font-face declaration depends on how you decide to manage it.
+You can manage the font with npm or download it manually and add it directly to your UI project.
+The following sections describe each approach in turn.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_npm_managed"><a class="anchor" href="#_npm_managed"></a>npm managed</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can use npm (or Yarn) to manage the font.
+This approach saves you from having to store the font file directly in your UI project.
+Here are the steps involved.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Use npm (or Yarn) to install the font files from a package (e.g., <a href="https://www.npmjs.com/package/typeface-open-sans">typeface-open-sans</a>)</p>
+<div class="literalblock">
+<div class="content">
+<pre>$ npm install --save typeface-open-sans</pre>
+</div>
+</div>
+</li>
+<li>
+<p>In <em class="path">src/css</em>, add a corresponding CSS file (e.g., <em class="path">typeface-open-sans.css</em>)</p>
+</li>
+<li>
+<p>In that file, declare the font face:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-css hljs" data-lang="css">@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  src:
+    local("Open Sans"),
+    local("Open Sans-Regular"),
+    url(~typeface-open-sans/files/open-sans-latin-400.woff) format("woff")
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The Gulp build recognizes the <code>~</code> URL prefix and copies the font from the npm package to the build folder (and hence bundle).</p>
+</div>
+<div class="paragraph">
+<p>You must define one @font-face for each font weight and style combination (e.g., <code>font-weight: 500</code> + <code>font-style: italic</code>) from the font that you want to use in your stylesheet.</p>
+</div>
+</li>
+<li>
+<p>Import the typeface CSS file you just created into the main stylesheet, <em class="path">src/css/site.css</em> (adjacent to the other typeface imports):</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-css hljs" data-lang="css">@import "typeface-open-sans.css";</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Repeat the previous steps for each font style and weight you want to use from that package.</p>
+</li>
+<li>
+<p>Change the CSS to use your newly imported font:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-css hljs" data-lang="css">html {
+  font-family: "Open Sans", sans;
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you&#8217;re building on the default UI, you may instead want to define or update the font family using a variable defined in <em class="path">src/css/vars.css</em>.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Test the new font by previewing your UI:</p>
+<div class="literalblock">
+<div class="content">
+<pre>$ gulp preview</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>If you see the new font, you&#8217;ve now successfully added it to your UI.
+If you aren&#8217;t sure, look for the <a href="https://developer.mozilla.org/en-US/docs/Tools/Page_Inspector/How_to/Edit_fonts">All fonts on page</a> section in your browser&#8217;s developer tools to see whether the font was loaded.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_manual"><a class="anchor" href="#_manual"></a>Manual</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A simpler approach to adding fonts is to store them directly in your project.
+Here are the steps involved.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Download the font files and add them to the <em class="path">src/font</em> folder.
+Create this folder if it does not exist.</p>
+</li>
+<li>
+<p>In <em class="path">src/css</em>, add a corresponding CSS file (e.g., <em class="path">typeface-open-sans.css</em>)</p>
+</li>
+<li>
+<p>In that file, declare the font face:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-css hljs" data-lang="css">@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  src:
+    local("Open Sans"),
+    local("Open Sans-Regular"),
+    url(../font/open-sans-latin-400.woff) format("woff")
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that the path is a relative path starting from the <em class="path">src/css</em> folder to the <em class="path">src/font</em> folder.</p>
+</div>
+<div class="paragraph">
+<p>You must define one @font-face for each font weight and style combination (e.g., <code>font-weight: 500</code> + <code>font-style: italic</code>) from the font that you want to use in your stylesheet.</p>
+</div>
+</li>
+<li>
+<p>Import the typeface CSS file you just created into the main stylesheet, <em class="path">src/css/site.css</em> (adjacent to the other typeface imports):</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-css hljs" data-lang="css">@import "typeface-open-sans.css";</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Repeat the previous steps for each font style and weight you want to use.</p>
+</li>
+<li>
+<p>Change the CSS to use your newly imported font:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-css hljs" data-lang="css">html {
+  font-family: "Open Sans", sans;
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you&#8217;re building on the default UI, you may instead want to define or update the font family using a variable defined in <em class="path">src/css/vars.css</em>.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Test the new font by previewing your UI:</p>
+<div class="literalblock">
+<div class="content">
+<pre>$ gulp preview</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>If you see the new font, you&#8217;ve now successfully added it to your UI.
+If you aren&#8217;t sure, look for the <a href="https://developer.mozilla.org/en-US/docs/Tools/Page_Inspector/How_to/Edit_fonts">All fonts on page</a> section in your browser&#8217;s developer tools to see whether the font was loaded.</p>
+</div>
+</div>
+</div>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
