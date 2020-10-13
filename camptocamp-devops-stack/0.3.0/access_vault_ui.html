@@ -42,55 +42,34 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Tutorials</span>
+    <span class="nav-text">How-to guides</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="run.html">Run the stack</a>
   </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
-    <span class="nav-text">How-to guides</span>
-<ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="develop.html">Develop the stack</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="how_to_write_doc.html">Write documentation</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../antora-ui-c2c/index.html">Customize UI</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="access_services_in_cluster.html">Access Services in the cluster</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="access_kubernetes_api.html">Access Kubernetes API</a>
   </li>
-  <li class="nav-item" data-depth="3">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="access_argocd_webui.html">Access ArgoCD web UI</a>
   </li>
-  <li class="nav-item" data-depth="3">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="access_traefik_dashboard.html">Access Traefik dashboard</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="3">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="access_vault_ui.html">Access Vault UI</a>
   </li>
-  <li class="nav-item" data-depth="3">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="access_grafana_dashboard.html">Access Grafana dashboard</a>
   </li>
-  <li class="nav-item" data-depth="3">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="access_prometheus_dashboard.html">Access Prometheus dashboard</a>
   </li>
-  <li class="nav-item" data-depth="3">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="access_alertmanager_dashboard.html">Access Alertmanager dashboard</a>
-  </li>
-</ul>
   </li>
 </ul>
   </li>
@@ -104,14 +83,11 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="deployment.html">Deployment</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="ref_documentation.html">Documentation</a>
-  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Explanations</span>
+    <span class="nav-text">Explanation</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="why_k3s.html">Why k3s?</a>
@@ -121,9 +97,6 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="why_automated_sync.html">Why Automated Sync Policy?</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="why_antora.html">Why Antora for the documentation?</a>
   </li>
 </ul>
   </li>
@@ -141,14 +114,6 @@
     <span class="version">0.3.0</span>
   </div>
   <ul class="components">
-    <li class="component">
-      <span class="title">Antora UI for c2c</span>
-      <ul class="versions">
-        <li class="version is-latest">
-          <a href="../../antora-ui-c2c/index.html">master</a>
-        </li>
-      </ul>
-    </li>
     <li class="component is-current">
       <span class="title">Camptocamp’s DevOps stack</span>
       <ul class="versions">
@@ -170,28 +135,26 @@
   <ul>
     <li><a href="index.html">Camptocamp’s DevOps stack</a></li>
     <li>How-to guides</li>
-    <li><a href="access_services_in_cluster.html">Access Services in the cluster</a></li>
     <li><a href="access_vault_ui.html">Access Vault UI</a></li>
   </ul>
 </nav>
 </div>
   <div class="content">
 <article class="doc">
-<div class="sect1">
-<h2 id="_access_vault_ui"><a class="anchor" href="#_access_vault_ui"></a>Access Vault UI</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_access_vault_ui"><a class="anchor" href="#_access_vault_ui"></a>Access Vault UI</h3>
 <div class="paragraph">
 <p>Vault UI is accessible via <a href="https://vault.apps.$BASE_DOMAIN" class="bare">https://vault.apps.$BASE_DOMAIN</a>.</p>
 </div>
 <div class="paragraph">
 <p>In this stack, Vault is deploy in dev mode, which means that the root token is <code>root</code>.</p>
 </div>
-<div class="sect2">
-<h3 id="_create_a_secret_in_vault_and_allow_access_to_a_serviceaccount_using_terraform"><a class="anchor" href="#_create_a_secret_in_vault_and_allow_access_to_a_serviceaccount_using_terraform"></a>Create a secret in Vault and allow access to a ServiceAccount using Terraform</h3>
+<div class="sect3">
+<h4 id="_create_a_secret_in_vault_and_allow_access_to_a_serviceaccount_using_terraform"><a class="anchor" href="#_create_a_secret_in_vault_and_allow_access_to_a_serviceaccount_using_terraform"></a>Create a secret in Vault and allow access to a ServiceAccount using Terraform</h4>
 
 </div>
-<div class="sect2">
-<h3 id="_inject_a_secret_from_vault_using_agent_injector"><a class="anchor" href="#_inject_a_secret_from_vault_using_agent_injector"></a>Inject a secret from Vault using agent injector</h3>
+<div class="sect3">
+<h4 id="_inject_a_secret_from_vault_using_agent_injector"><a class="anchor" href="#_inject_a_secret_from_vault_using_agent_injector"></a>Inject a secret from Vault using agent injector</h4>
 <div class="paragraph">
 <p>This stack installs <a href="https://www.vaultproject.io/docs/platform/k8s/injector">Vault injector</a> that allows secrets injection to a pod.</p>
 </div>
@@ -205,12 +168,11 @@ metadata: map[created_time:2020-10-05T15:04:47.061885873Z deletion_time: destroy
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_inject_a_secret_from_vault_using_secrets_store_csi_driver"><a class="anchor" href="#_inject_a_secret_from_vault_using_secrets_store_csi_driver"></a>Inject a secret from Vault using secrets store CSI driver</h3>
+<div class="sect3">
+<h4 id="_inject_a_secret_from_vault_using_secrets_store_csi_driver"><a class="anchor" href="#_inject_a_secret_from_vault_using_secrets_store_csi_driver"></a>Inject a secret from Vault using secrets store CSI driver</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ kubectl -n demo-app exec -ti $(kubectl -n demo-app get pods --selector 'app.kubernetes.io/name=demo-app' --output=name|head -n1) -- cat /mnt/secrets-store/demo-app</code></pre>
-</div>
 </div>
 </div>
 </div>
