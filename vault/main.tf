@@ -1,5 +1,5 @@
 locals {
-  context = yamldecode(file(format("../terraform/terraform.tfstate.d/%s/kubeconfig.yaml", terraform.workspace)))
+  context = yamldecode(file(pathexpand("~/.kube/config")))
   cluster = lookup(lookup(local.context, "clusters")[0], "cluster")
   user    = lookup(lookup(local.context, "users")[0], "user")
 }
