@@ -1,6 +1,12 @@
 ARGOCD_VERSION := 1.7.6
 TERRAFORM_VERSION := 0.13.4
 
+CONTAINER_PLATFORM ?= k3s
+FLAVOUR ?= _
+PROVIDER ?= docker
+
+DISTRIBUTION := $(CONTAINER_PLATFORM)/$(FLAVOUR)/$(PROVIDER)
+
 DOCKER_HOST := "tcp://127.0.0.1:2376/"
 UID_NUMBER := $(shell id -u $$USER)
 GID_NUMBER := $(shell id -g $$USER)
@@ -26,7 +32,7 @@ endif
 endif
 
 CLUSTER_NAME := $(REMOTE_BRANCH)
-ARTIFACTS_DIR := "$$PWD/terraform/terraform.tfstate.d/$(CLUSTER_NAME)"
+ARTIFACTS_DIR := "$$PWD/distributions/$(DISTRIBUTION)/terraform/terraform.tfstate.d/$(CLUSTER_NAME)"
 
 .PHONY: test deploy clean debug
 
@@ -81,10 +87,10 @@ get-base-domain:
 	$(eval API_IP_ADDRESS = $(shell docker run --rm \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v $$PWD:$$PWD \
-		stedolan/jq -r '.values.root_module.resources[]|select(.type=="docker_container" and .name=="k3s_server").values.ip_address' $$PWD/terraform/terraform.tfstate.d/$(CLUSTER_NAME)/terraform.tfstate.json))
+		stedolan/jq -r '.values.root_module.resources[]|select(.type=="docker_container" and .name=="k3s_server").values.ip_address' $(ARTIFACTS_DIR)/terraform.tfstate.json))
 	$(eval BASE_DOMAIN = $(shell echo $(API_IP_ADDRESS)|tr '.' '-').nip.io)
 
-$(ARTIFACTS_DIR)/terraform.tfstate: terraform/*
+$(ARTIFACTS_DIR)/terraform.tfstate: distributions/$(DISTRIBUTION)/terraform/*
 	echo $(REPO_URL)
 	touch $$HOME/.terraformrc
 	docker run --rm \
@@ -95,6 +101,7 @@ $(ARTIFACTS_DIR)/terraform.tfstate: terraform/*
 		-v $$HOME/.terraformrc:/tmp/.terraformrc \
 		-v $$HOME/.terraform.d:/tmp/.terraform.d \
 		--env HOME=/tmp \
+		--env DISTRIBUTION=$(DISTRIBUTION) \
 		--env REPO_URL=$(REPO_URL) \
 		--env CLUSTER_NAME=$(CLUSTER_NAME) \
 		--env ARTIFACTS_DIR=$(ARTIFACTS_DIR) \
@@ -114,32 +121,7 @@ clean: get-base-domain
 		--network host \
 		--env HOME=/tmp \
 		--env VAULT_ADDR="https://vault.apps.$(BASE_DOMAIN)" \
-		--env CLUSTER_NAME=$(CLUSTER_NAME) \
-		--env ARTIFACTS_DIR=$(ARTIFACTS_DIR) \
-		--entrypoint "" \
-		--workdir $$PWD \
-		hashicorp/terraform:$(TERRAFORM_VERSION) $$PWD/scripts/destroy-vault.sh
-	docker run --rm \
-		--user $(UID_NUMBER):$(GID_NUMBER) \
-		-v $$PWD:$$PWD \
-		-v $(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
-		--network host \
-		--env HOME=/tmp \
-		--env KUBECTL_COMMAND=apply \
-		--env ARGOCD_OPTS="--plaintext --port-forward --port-forward-namespace argocd" \
-		--env ARTIFACTS_DIR=$(ARTIFACTS_DIR) \
-		--entrypoint "" \
-		--workdir $$PWD \
-		argoproj/argocd:v$(ARGOCD_VERSION) $$PWD/scripts/pre-clean.sh
-	touch $$HOME/.terraformrc
-	docker run --rm \
-		--group-add $(DOCKER_GID_NUMBER) \
-		--user $(UID_NUMBER):$(GID_NUMBER) \
-		-v /var/run/docker.sock:/var/run/docker.sock \
-		-v $$PWD:$$PWD \
-		-v $$HOME/.terraformrc:/tmp/.terraformrc \
-		-v $$HOME/.terraform.d:/tmp/.terraform.d \
-		--env HOME=/tmp \
+		--env DISTRIBUTION=$(DISTRIBUTION) \
 		--env CLUSTER_NAME=$(CLUSTER_NAME) \
 		--entrypoint "" \
 		--workdir $$PWD \
@@ -147,13 +129,14 @@ clean: get-base-domain
 	rm -rf $(ARTIFACTS_DIR)
 
 debug: get-base-domain
+	@echo DISTRIBUTION=$(DISTRIBUTION)
 	@echo CLUSTER_NAME=$(CLUSTER_NAME)
 	@echo BASE_DOMAIN=$(BASE_DOMAIN)
 	@echo DOCKER_HOST=$(DOCKER_HOST)
 	@echo UID_NUMBER=$(UID_NUMBER)
 	@echo GID_NUMBER=$(GID_NUMBER)
 	@echo DOCKER_GID_NUMBER=$(DOCKER_GID_NUMBER)
-	@echo ARTIFACTS_DIR="terraform/terraform.tfstate.d/$(CLUSTER_NAME)"
+	@echo ARTIFACTS_DIR=$(ARTIFACTS_DIR)
 	@echo REMOTE=$(REMOTE)
 	@echo REMOTE_BRANCH=$(REMOTE_BRANCH)
 	@echo REMOTE_URL=$(REMOTE_URL)
