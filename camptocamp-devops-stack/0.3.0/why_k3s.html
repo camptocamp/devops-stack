@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Camptocamp’s DevOps Stack</title>
+    <title>Why K3s? :: Camptocamp’s DevOps Stack</title>
     <link rel="canonical" href="https://camptocamp.github.io/camptocamp-devops-stack/camptocamp-devops-stack/0.3.0/why_k3s.html">
     <meta name="generator" content="Antora 2.3.3">
     <link rel="stylesheet" href="../../_/css/site.css">
@@ -42,34 +42,55 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">How-to guides</span>
+    <span class="nav-text">Tutorials</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="run.html">Run the stack</a>
   </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">How-to guides</span>
+<ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="develop.html">Develop the stack</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="how_to_write_doc.html">Write documentation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../antora-ui-c2c/index.html">Customize UI</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="access_services_in_cluster.html">Access Services in the cluster</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="access_kubernetes_api.html">Access Kubernetes API</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="access_argocd_webui.html">Access ArgoCD web UI</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="access_traefik_dashboard.html">Access Traefik dashboard</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="access_vault_ui.html">Access Vault UI</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="access_grafana_dashboard.html">Access Grafana dashboard</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="access_prometheus_dashboard.html">Access Prometheus dashboard</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="access_alertmanager_dashboard.html">Access Alertmanager dashboard</a>
+  </li>
+</ul>
   </li>
 </ul>
   </li>
@@ -83,11 +104,14 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="deployment.html">Deployment</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ref_documentation.html">Documentation</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Explanation</span>
+    <span class="nav-text">Explanations</span>
 <ul class="nav-list">
   <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="why_k3s.html">Why k3s?</a>
@@ -97,6 +121,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="why_automated_sync.html">Why Automated Sync Policy?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="why_antora.html">Why Antora for the documentation?</a>
   </li>
 </ul>
   </li>
@@ -114,6 +141,14 @@
     <span class="version">0.3.0</span>
   </div>
   <ul class="components">
+    <li class="component">
+      <span class="title">Antora UI for c2c</span>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../antora-ui-c2c/index.html">master</a>
+        </li>
+      </ul>
+    </li>
     <li class="component is-current">
       <span class="title">Camptocamp’s DevOps stack</span>
       <ul class="versions">
@@ -134,21 +169,17 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Camptocamp’s DevOps stack</a></li>
-    <li>Explanation</li>
+    <li>Explanations</li>
     <li><a href="why_k3s.html">Why k3s?</a></li>
   </ul>
 </nav>
 </div>
   <div class="content">
 <article class="doc">
-<div class="sect1">
-<h2 id="_why_k3s"><a class="anchor" href="#_why_k3s"></a>Why K3s?</h2>
-<div class="sectionbody">
+<h1 class="page">Why K3s?</h1>
 <div class="paragraph">
 <p>K3s allows to create a lightweight Kubernetes cluster on any
 workstation. This is very convenient for developing or testing purpose.</p>
-</div>
-</div>
 </div>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
