@@ -4,7 +4,7 @@
 
 *Documentation:*
 
-* Document how to write documentation in this project https://github.com/camptocamp/camptocamp-devops-stack/pull/122[#122] (https://github.com/acampergue-camptocamp[acampergue-camptocamp]), closes https://github.com/camptocamp/camptocamp-devops-stack/issues/107[issue #107].
+* Document how to write documentation in this project https://github.com/camptocamp/camptocamp-devops-stack/pull/122[#122] and https://github.com/camptocamp/camptocamp-devops-stack/pull/132[#132] (https://github.com/acampergue-camptocamp[acampergue-camptocamp]), closes https://github.com/camptocamp/camptocamp-devops-stack/issues/107[issue #107].
 
 *Fixed bugs:*
 

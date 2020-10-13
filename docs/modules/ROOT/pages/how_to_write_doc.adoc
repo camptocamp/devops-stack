@@ -9,7 +9,7 @@ The documentation of this project is located into the `docs/` folder and has to 
 To write a new page of documentation, create a new file inside the `docs\modules\ROOT\pages` subfolder, with the `.adoc` extension.
 You should then write your content using https://asciidoc.org/[Asciidoc language].
 
-TIP: Use this https://powerman.name/doc/asciidoc[Asciidoc Cheatsheet]
+TIP: Use the https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/[AsciiDoc Syntax Quick Reference] and the https://powerman.name/doc/asciidoc[Asciidoc Cheatsheet]
 
 === Convert an existing Markdown document
 
