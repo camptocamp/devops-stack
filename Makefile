@@ -26,7 +26,7 @@ endif
 endif
 
 CLUSTER_NAME := $(REMOTE_BRANCH)
-ARTIFACTS_DIR := "terraform/terraform.tfstate.d/$(CLUSTER_NAME)"
+ARTIFACTS_DIR := "$$PWD/terraform/terraform.tfstate.d/$(CLUSTER_NAME)"
 
 .PHONY: test deploy clean debug
 
@@ -45,7 +45,7 @@ deploy: $(ARTIFACTS_DIR)/kubeconfig.yaml get-base-domain
 	docker run --rm \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v $$PWD:$$PWD \
-		-v $$PWD/$(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
+		-v $(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
 		--network k3s-$(CLUSTER_NAME) \
 		--env HOME=/tmp \
 		--env KUBECTL_COMMAND=apply \
@@ -59,7 +59,7 @@ deploy: $(ARTIFACTS_DIR)/kubeconfig.yaml get-base-domain
 		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v /var/run/docker.sock:/var/run/docker.sock \
 		-v $$PWD:$$PWD \
-		-v $$PWD/$(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
+		-v $(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
 		-v $$HOME/.terraformrc:/tmp/.terraformrc \
 		-v $$HOME/.terraform.d:/tmp/.terraform.d \
 		--network k3s-$(CLUSTER_NAME) \
@@ -75,7 +75,7 @@ deploy: $(ARTIFACTS_DIR)/kubeconfig.yaml get-base-domain
 # Get kubernetes context
 $(ARTIFACTS_DIR)/kubeconfig.yaml: $(ARTIFACTS_DIR)/terraform.tfstate get-base-domain
 	docker cp k3s-server-$(CLUSTER_NAME):/etc/rancher/k3s/k3s.yaml $(ARTIFACTS_DIR)/kubeconfig.yaml
-	sed -i -e "s/127.0.0.1/$(API_IP_ADDRESS)/" $$PWD/$(ARTIFACTS_DIR)/kubeconfig.yaml
+	sed -i -e "s/127.0.0.1/$(API_IP_ADDRESS)/" $(ARTIFACTS_DIR)/kubeconfig.yaml
 
 get-base-domain:
 	$(eval API_IP_ADDRESS = $(shell docker run --rm \
@@ -108,7 +108,7 @@ clean: get-base-domain
 		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v /var/run/docker.sock:/var/run/docker.sock \
 		-v $$PWD:$$PWD \
-		-v $$PWD/$(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
+		-v $(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
 		-v $$HOME/.terraformrc:/tmp/.terraformrc \
 		-v $$HOME/.terraform.d:/tmp/.terraform.d \
 		--network k3s-$(CLUSTER_NAME) \
@@ -122,7 +122,7 @@ clean: get-base-domain
 	docker run --rm \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v $$PWD:$$PWD \
-		-v $$PWD/$(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
+		-v $(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
 		--network k3s-$(CLUSTER_NAME) \
 		--env HOME=/tmp \
 		--env KUBECTL_COMMAND=apply \
@@ -144,7 +144,7 @@ clean: get-base-domain
 		--entrypoint "" \
 		--workdir $$PWD \
 		hashicorp/terraform:$(TERRAFORM_VERSION) $$PWD/scripts/destroy.sh
-	rm -rf $$PWD/$(ARTIFACTS_DIR)
+	rm -rf $(ARTIFACTS_DIR)
 
 debug: get-base-domain
 	@echo CLUSTER_NAME=$(CLUSTER_NAME)
