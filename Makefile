@@ -33,18 +33,18 @@ ARTIFACTS_DIR := "terraform/terraform.tfstate.d/$(CLUSTER_NAME)"
 test: deploy
 	docker run --rm \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
-		-v $$PWD:/workdir \
+		-v $$PWD:$$PWD \
 		--network k3s-$(CLUSTER_NAME) \
 		--env BASE_DOMAIN=$(BASE_DOMAIN) \
 		--env HOME=/tmp \
 		--entrypoint "" \
-		--workdir /workdir \
-		curlimages/curl /workdir/scripts/test.sh
+		--workdir $$PWD \
+		curlimages/curl $$PWD/scripts/test.sh
 
 deploy: $(ARTIFACTS_DIR)/kubeconfig.yaml get-base-domain
 	docker run --rm \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
-		-v $$PWD:/workdir \
+		-v $$PWD:$$PWD \
 		-v $$PWD/$(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
 		--network k3s-$(CLUSTER_NAME) \
 		--env HOME=/tmp \
@@ -52,13 +52,13 @@ deploy: $(ARTIFACTS_DIR)/kubeconfig.yaml get-base-domain
 		--env ARGOCD_OPTS="--plaintext --port-forward --port-forward-namespace argocd" \
 		--env ARTIFACTS_DIR=$(ARTIFACTS_DIR) \
 		--entrypoint "" \
-		--workdir /workdir \
-		argoproj/argocd:v$(ARGOCD_VERSION) /workdir/scripts/deploy.sh & \
+		--workdir $$PWD \
+		argoproj/argocd:v$(ARGOCD_VERSION) $$PWD/scripts/deploy.sh & \
 	docker run --rm \
 		--group-add $(DOCKER_GID_NUMBER) \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v /var/run/docker.sock:/var/run/docker.sock \
-		-v $$PWD:/workdir \
+		-v $$PWD:$$PWD \
 		-v $$PWD/$(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
 		-v $$HOME/.terraformrc:/tmp/.terraformrc \
 		-v $$HOME/.terraform.d:/tmp/.terraform.d \
@@ -68,8 +68,8 @@ deploy: $(ARTIFACTS_DIR)/kubeconfig.yaml get-base-domain
 		--env CLUSTER_NAME=$(CLUSTER_NAME) \
 		--env ARTIFACTS_DIR=$(ARTIFACTS_DIR) \
 		--entrypoint "" \
-		--workdir /workdir \
-		hashicorp/terraform:$(TERRAFORM_VERSION) /workdir/scripts/configure-vault.sh & \
+		--workdir $$PWD \
+		hashicorp/terraform:$(TERRAFORM_VERSION) $$PWD/scripts/configure-vault.sh & \
 	wait
 
 # Get kubernetes context
@@ -80,8 +80,8 @@ $(ARTIFACTS_DIR)/kubeconfig.yaml: $(ARTIFACTS_DIR)/terraform.tfstate get-base-do
 get-base-domain:
 	$(eval API_IP_ADDRESS = $(shell docker run --rm \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
-		-v $$PWD:/workdir \
-		stedolan/jq -r '.values.root_module.resources[]|select(.type=="docker_container" and .name=="k3s_server").values.ip_address' /workdir/terraform/terraform.tfstate.d/$(CLUSTER_NAME)/terraform.tfstate.json))
+		-v $$PWD:$$PWD \
+		stedolan/jq -r '.values.root_module.resources[]|select(.type=="docker_container" and .name=="k3s_server").values.ip_address' $$PWD/terraform/terraform.tfstate.d/$(CLUSTER_NAME)/terraform.tfstate.json))
 	$(eval BASE_DOMAIN = $(shell echo $(API_IP_ADDRESS)|tr '.' '-').nip.io)
 
 $(ARTIFACTS_DIR)/terraform.tfstate: terraform/*
@@ -107,7 +107,7 @@ clean: get-base-domain
 		--group-add $(DOCKER_GID_NUMBER) \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v /var/run/docker.sock:/var/run/docker.sock \
-		-v $$PWD:/workdir \
+		-v $$PWD:$$PWD \
 		-v $$PWD/$(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
 		-v $$HOME/.terraformrc:/tmp/.terraformrc \
 		-v $$HOME/.terraform.d:/tmp/.terraform.d \
@@ -117,11 +117,11 @@ clean: get-base-domain
 		--env CLUSTER_NAME=$(CLUSTER_NAME) \
 		--env ARTIFACTS_DIR=$(ARTIFACTS_DIR) \
 		--entrypoint "" \
-		--workdir /workdir \
-		hashicorp/terraform:$(TERRAFORM_VERSION) /workdir/scripts/destroy-vault.sh
+		--workdir $$PWD \
+		hashicorp/terraform:$(TERRAFORM_VERSION) $$PWD/scripts/destroy-vault.sh
 	docker run --rm \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
-		-v $$PWD:/workdir \
+		-v $$PWD:$$PWD \
 		-v $$PWD/$(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
 		--network k3s-$(CLUSTER_NAME) \
 		--env HOME=/tmp \
@@ -129,21 +129,21 @@ clean: get-base-domain
 		--env ARGOCD_OPTS="--plaintext --port-forward --port-forward-namespace argocd" \
 		--env ARTIFACTS_DIR=$(ARTIFACTS_DIR) \
 		--entrypoint "" \
-		--workdir /workdir \
-		argoproj/argocd:v$(ARGOCD_VERSION) /workdir/scripts/pre-clean.sh
+		--workdir $$PWD \
+		argoproj/argocd:v$(ARGOCD_VERSION) $$PWD/scripts/pre-clean.sh
 	touch $$HOME/.terraformrc
 	docker run --rm \
 		--group-add $(DOCKER_GID_NUMBER) \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v /var/run/docker.sock:/var/run/docker.sock \
-		-v $$PWD:/workdir \
+		-v $$PWD:$$PWD \
 		-v $$HOME/.terraformrc:/tmp/.terraformrc \
 		-v $$HOME/.terraform.d:/tmp/.terraform.d \
 		--env HOME=/tmp \
 		--env CLUSTER_NAME=$(CLUSTER_NAME) \
 		--entrypoint "" \
-		--workdir /workdir \
-		hashicorp/terraform:$(TERRAFORM_VERSION) /workdir/scripts/destroy.sh
+		--workdir $$PWD \
+		hashicorp/terraform:$(TERRAFORM_VERSION) $$PWD/scripts/destroy.sh
 	rm -rf $$PWD/$(ARTIFACTS_DIR)
 
 debug: get-base-domain
