@@ -60,6 +60,7 @@ deploy: $(ARTIFACTS_DIR)/kubeconfig.yaml get-base-domain
 		-v /var/run/docker.sock:/var/run/docker.sock \
 		-v $$PWD:/workdir \
 		-v $$PWD/$(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
+		-v $$HOME/.terraformrc:/tmp/.terraformrc \
 		-v $$HOME/.terraform.d:/tmp/.terraform.d \
 		--network k3s-$(CLUSTER_NAME) \
 		--env HOME=/tmp \
@@ -85,11 +86,13 @@ get-base-domain:
 
 $(ARTIFACTS_DIR)/terraform.tfstate: terraform/*
 	echo $(REPO_URL)
+	touch $$HOME/.terraformrc
 	docker run --rm \
 		--group-add $(DOCKER_GID_NUMBER) \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v /var/run/docker.sock:/var/run/docker.sock \
 		-v $$PWD:$$PWD \
+		-v $$HOME/.terraformrc:/tmp/.terraformrc \
 		-v $$HOME/.terraform.d:/tmp/.terraform.d \
 		--env HOME=/tmp \
 		--env REPO_URL=$(REPO_URL) \
@@ -106,6 +109,7 @@ clean: get-base-domain
 		-v /var/run/docker.sock:/var/run/docker.sock \
 		-v $$PWD:/workdir \
 		-v $$PWD/$(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
+		-v $$HOME/.terraformrc:/tmp/.terraformrc \
 		-v $$HOME/.terraform.d:/tmp/.terraform.d \
 		--network k3s-$(CLUSTER_NAME) \
 		--env HOME=/tmp \
@@ -127,11 +131,13 @@ clean: get-base-domain
 		--entrypoint "" \
 		--workdir /workdir \
 		argoproj/argocd:v$(ARGOCD_VERSION) /workdir/scripts/pre-clean.sh
+	touch $$HOME/.terraformrc
 	docker run --rm \
 		--group-add $(DOCKER_GID_NUMBER) \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v /var/run/docker.sock:/var/run/docker.sock \
 		-v $$PWD:/workdir \
+		-v $$HOME/.terraformrc:/tmp/.terraformrc \
 		-v $$HOME/.terraform.d:/tmp/.terraform.d \
 		--env HOME=/tmp \
 		--env CLUSTER_NAME=$(CLUSTER_NAME) \
