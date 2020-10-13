@@ -12,6 +12,8 @@ UID_NUMBER := $(shell id -u $$USER)
 GID_NUMBER := $(shell id -g $$USER)
 DOCKER_GID_NUMBER := $(shell stat -c %g /var/run/docker.sock)
 
+DOCKER_COMMON_ARGS := --user $(UID_NUMBER):$(GID_NUMBER) --group-add $(DOCKER_GID_NUMBER) --network host --env HOME=/tmp --entrypoint "" --workdir $$PWD --volume $$PWD:$$PWD
+
 ifneq ($(CI_PROJECT_URL),)
 REPO_URL = $(CI_PROJECT_URL)
 REMOTE_BRANCH = $(CI_COMMIT_REF_NAME)
@@ -38,43 +40,27 @@ ARTIFACTS_DIR := "$$PWD/distributions/$(DISTRIBUTION)/terraform/terraform.tfstat
 
 test: deploy
 	docker run --rm \
-		--user $(UID_NUMBER):$(GID_NUMBER) \
-		-v $$PWD:$$PWD \
-		--network host \
+		$(DOCKER_COMMON_ARGS) \
 		--env BASE_DOMAIN=$(BASE_DOMAIN) \
-		--env HOME=/tmp \
-		--entrypoint "" \
-		--workdir $$PWD \
 		curlimages/curl $$PWD/scripts/test.sh
 
 deploy: $(ARTIFACTS_DIR)/kubeconfig.yaml get-base-domain
 	docker run --rm \
-		--user $(UID_NUMBER):$(GID_NUMBER) \
-		-v $$PWD:$$PWD \
+		$(DOCKER_COMMON_ARGS) \
 		-v $(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
-		--network host \
-		--env HOME=/tmp \
 		--env KUBECTL_COMMAND=apply \
 		--env ARGOCD_OPTS="--plaintext --port-forward --port-forward-namespace argocd" \
 		--env ARTIFACTS_DIR=$(ARTIFACTS_DIR) \
-		--entrypoint "" \
-		--workdir $$PWD \
 		argoproj/argocd:v$(ARGOCD_VERSION) $$PWD/scripts/deploy.sh & \
 	docker run --rm \
-		--group-add $(DOCKER_GID_NUMBER) \
-		--user $(UID_NUMBER):$(GID_NUMBER) \
+		$(DOCKER_COMMON_ARGS) \
 		-v /var/run/docker.sock:/var/run/docker.sock \
-		-v $$PWD:$$PWD \
 		-v $(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
 		-v $$HOME/.terraformrc:/tmp/.terraformrc \
 		-v $$HOME/.terraform.d:/tmp/.terraform.d \
-		--network host \
-		--env HOME=/tmp \
 		--env VAULT_ADDR="https://vault.apps.$(BASE_DOMAIN)" \
 		--env CLUSTER_NAME=$(CLUSTER_NAME) \
 		--env ARTIFACTS_DIR=$(ARTIFACTS_DIR) \
-		--entrypoint "" \
-		--workdir $$PWD \
 		hashicorp/terraform:$(TERRAFORM_VERSION) $$PWD/scripts/configure-vault.sh & \
 	wait
 
@@ -84,9 +70,8 @@ $(ARTIFACTS_DIR)/kubeconfig.yaml: $(ARTIFACTS_DIR)/terraform.tfstate get-base-do
 	sed -i -e "s/127.0.0.1/$(API_IP_ADDRESS)/" $(ARTIFACTS_DIR)/kubeconfig.yaml
 
 get-base-domain:
-	$(eval API_IP_ADDRESS = $(shell docker run --rm \
-		--user $(UID_NUMBER):$(GID_NUMBER) \
-		-v $$PWD:$$PWD \
+	$(eval API_IP_ADDRESS = $(shell docker run --rm $(DOCKER_COMMON_ARGS) \
+		--entrypoint /usr/local/bin/jq \
 		stedolan/jq -r '.values.root_module.resources[]|select(.type=="docker_container" and .name=="k3s_server").values.ip_address' $(ARTIFACTS_DIR)/terraform.tfstate.json))
 	$(eval BASE_DOMAIN = $(shell echo $(API_IP_ADDRESS)|tr '.' '-').nip.io)
 
@@ -94,37 +79,26 @@ $(ARTIFACTS_DIR)/terraform.tfstate: distributions/$(DISTRIBUTION)/terraform/*
 	echo $(REPO_URL)
 	touch $$HOME/.terraformrc
 	docker run --rm \
-		--group-add $(DOCKER_GID_NUMBER) \
-		--user $(UID_NUMBER):$(GID_NUMBER) \
+		$(DOCKER_COMMON_ARGS) \
 		-v /var/run/docker.sock:/var/run/docker.sock \
-		-v $$PWD:$$PWD \
 		-v $$HOME/.terraformrc:/tmp/.terraformrc \
 		-v $$HOME/.terraform.d:/tmp/.terraform.d \
-		--env HOME=/tmp \
 		--env DISTRIBUTION=$(DISTRIBUTION) \
 		--env REPO_URL=$(REPO_URL) \
 		--env CLUSTER_NAME=$(CLUSTER_NAME) \
 		--env ARTIFACTS_DIR=$(ARTIFACTS_DIR) \
-		--entrypoint "" \
-		--workdir $$PWD \
 		hashicorp/terraform:$(TERRAFORM_VERSION) $$PWD/scripts/provision.sh
 
 clean: get-base-domain
 	docker run --rm \
-		--group-add $(DOCKER_GID_NUMBER) \
-		--user $(UID_NUMBER):$(GID_NUMBER) \
+		$(DOCKER_COMMON_ARGS) \
 		-v /var/run/docker.sock:/var/run/docker.sock \
-		-v $$PWD:$$PWD \
 		-v $(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
 		-v $$HOME/.terraformrc:/tmp/.terraformrc \
 		-v $$HOME/.terraform.d:/tmp/.terraform.d \
-		--network host \
-		--env HOME=/tmp \
 		--env VAULT_ADDR="https://vault.apps.$(BASE_DOMAIN)" \
 		--env DISTRIBUTION=$(DISTRIBUTION) \
 		--env CLUSTER_NAME=$(CLUSTER_NAME) \
-		--entrypoint "" \
-		--workdir $$PWD \
 		hashicorp/terraform:$(TERRAFORM_VERSION) $$PWD/scripts/destroy.sh
 	rm -rf $(ARTIFACTS_DIR)
 
