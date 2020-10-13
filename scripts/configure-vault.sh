@@ -15,6 +15,7 @@ done
 
 ~/kubectl -n vault wait "$(~/kubectl -n vault get pods --selector 'app.kubernetes.io/name=vault' --output=name)" --for=condition=Ready --timeout=-1s
 
+echo 'plugin_cache_dir = "$HOME/.terraform.d/plugin-cache"' > ~/.terraformrc
 cd vault || exit
 terraform init -upgrade
 terraform workspace select "$CLUSTER_NAME" || terraform workspace new "$CLUSTER_NAME"
