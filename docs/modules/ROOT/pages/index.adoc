@@ -8,26 +8,4 @@ Mickaël Canévet <mickael.canevet@camptocamp.com>; Raphaël Pinson <raphael.pin
 This repository contains the reference implementation of Camptocamp's
 Infrastructure Solutions & Services department.
 
-include::./provisioning.adoc[]
-
-include::./deployment.adoc[]
-
 include::./run.adoc[]
-
-include::./develop.adoc[]
-
-== Access elements deployed in the cluster
-
-include::./access_kubernetes_api.adoc[]
-
-include::./access_argocd_webui.adoc[]
-
-include::./access_traefik_dashboard.adoc[]
-
-include::./access_vault_ui.adoc[]
-
-include::./access_grafana_dashboard.adoc[]
-
-include::./access_prometheus_dashboard.adoc[]
-
-include::./access_alertmanager_dashboard.adoc[]

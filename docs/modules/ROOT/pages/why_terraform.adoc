@@ -1,4 +1,4 @@
-== Why Terraform?
+= Why Terraform?
 
 As we already use Terraform to deploy our other Kubernetes clusters,
 such as EKS, AKS, OpenShift on different cloud, it looks natural to also

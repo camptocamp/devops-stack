@@ -1,4 +1,4 @@
-== Why Automated Sync Policy?
+= Why Automated Sync Policy?
 
 At Camptocamp we have a huge experience in both
 https://puppet.com/[Puppet] and https://www.terraform.io/[Terraform].

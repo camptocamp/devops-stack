@@ -1,0 +1,18 @@
+= Why Antora for the documentation ?
+
+== Documentation as code
+
+https://antora.org/[Antora] allows us to manage our documentation *as code*, which allow us to build our website the same way as we would build a software, store the code in a version control system and build/publish our documentation website using the same CI/CD principles as used for our softwares or our infrastructures.
+
+== Asciidoc
+
+https://asciidoc.org/[Asciidoc] is a lightweight markup language, similar to https://daringfireball.net/projects/markdown/[Markdown] but offers more possibilites and https://asciidoctor.org/docs/asciidoc-vs-markdown/#graduating-to-asciidoc[more flexibility]. 
+It is higly configurable and allows to write documentation, articles, web pages, etc.
+
+== Integration with Github
+
+The website for our documentation can be automatically built and published on https://pages.github.com/[Github Pages] using https://github.com/features/actions[Github Actions].
+
+== Highly customizable appearance
+
+The appearance of the website is externalized in an  https://github.com/camptocamp/antora-ui/[independant project] and packaged as UI bundle. It can be highly adapted to ones needs and be can reused over multiple documentation projects.
