@@ -34,7 +34,7 @@ test: deploy
 	docker run --rm \
 		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v $$PWD:$$PWD \
-		--network k3s-$(CLUSTER_NAME) \
+		--network host \
 		--env BASE_DOMAIN=$(BASE_DOMAIN) \
 		--env HOME=/tmp \
 		--entrypoint "" \
@@ -46,7 +46,7 @@ deploy: $(ARTIFACTS_DIR)/kubeconfig.yaml get-base-domain
 		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v $$PWD:$$PWD \
 		-v $(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
-		--network k3s-$(CLUSTER_NAME) \
+		--network host \
 		--env HOME=/tmp \
 		--env KUBECTL_COMMAND=apply \
 		--env ARGOCD_OPTS="--plaintext --port-forward --port-forward-namespace argocd" \
@@ -62,7 +62,7 @@ deploy: $(ARTIFACTS_DIR)/kubeconfig.yaml get-base-domain
 		-v $(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
 		-v $$HOME/.terraformrc:/tmp/.terraformrc \
 		-v $$HOME/.terraform.d:/tmp/.terraform.d \
-		--network k3s-$(CLUSTER_NAME) \
+		--network host \
 		--env HOME=/tmp \
 		--env VAULT_ADDR="https://vault.apps.$(BASE_DOMAIN)" \
 		--env CLUSTER_NAME=$(CLUSTER_NAME) \
@@ -111,7 +111,7 @@ clean: get-base-domain
 		-v $(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
 		-v $$HOME/.terraformrc:/tmp/.terraformrc \
 		-v $$HOME/.terraform.d:/tmp/.terraform.d \
-		--network k3s-$(CLUSTER_NAME) \
+		--network host \
 		--env HOME=/tmp \
 		--env VAULT_ADDR="https://vault.apps.$(BASE_DOMAIN)" \
 		--env CLUSTER_NAME=$(CLUSTER_NAME) \
@@ -123,7 +123,7 @@ clean: get-base-domain
 		--user $(UID_NUMBER):$(GID_NUMBER) \
 		-v $$PWD:$$PWD \
 		-v $(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
-		--network k3s-$(CLUSTER_NAME) \
+		--network host \
 		--env HOME=/tmp \
 		--env KUBECTL_COMMAND=apply \
 		--env ARGOCD_OPTS="--plaintext --port-forward --port-forward-namespace argocd" \
