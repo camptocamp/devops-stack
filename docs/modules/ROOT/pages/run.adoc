@@ -1,3 +1,14 @@
+:project-name: camptocamp-devops-stack
+:url-repo: https://github.com/camptocamp/{project-name}.git
+
+== Clone the project 
+
+[source,shell,subs="attributes"]
+----
+$ git clone {url-repo}
+$ cd {project-name}
+----
+
 == Run the stack
 
 === Create a cluster
