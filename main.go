@@ -23,10 +23,12 @@ func main() {
 	switch action {
 	case "test":
 		err = test(c)
-	case "deploy":
-		err = deploy(c)
 	case "provision":
 		err = provision(c)
+	case "get-kubeconfig":
+		err = getKubeconfig(c)
+	case "deploy":
+		err = deploy(c)
 	case "clean":
 		err = clean(c)
 	case "debug":
@@ -49,6 +51,18 @@ func deploy(c *config.Config) error {
 	return nil
 }
 
+// Get kubeconfig
+func getKubeconfig(c *config.Config) error {
+	log.Info("Get Kubeconfig")
+
+	dist, err := distribution.New(c.Distribution)
+	if err != nil {
+		return fmt.Errorf("Failed to initialize distribution: %v", err)
+	}
+
+	return dist.GetKubeconfig()
+}
+
 // Provisions K3S
 func provision(c *config.Config) error {
 	log.Info("Provision")
@@ -58,7 +72,8 @@ func provision(c *config.Config) error {
 		return fmt.Errorf("Failed to initialize distribution: %v", err)
 	}
 
-	if err := dist.PreScript(); err != nil {
+	log.Info("provision: pre-script")
+	if err := dist.ProvisionPreHook(); err != nil {
 		return fmt.Errorf("Failed to execute pre-script: %v", err)
 	}
 
@@ -104,7 +119,8 @@ func provision(c *config.Config) error {
 		return fmt.Errorf("provision: failed to verify Terraform plan: %v", err)
 	}
 
-	if err := dist.PostScript(); err != nil {
+	log.Info("provision: post-script")
+	if err := dist.ProvisionPostHook(); err != nil {
 		return fmt.Errorf("Failed to execute post-script: %v", err)
 	}
 

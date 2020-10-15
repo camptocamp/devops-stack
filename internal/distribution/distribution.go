@@ -10,8 +10,10 @@ type Distribution interface {
 	DistPath() string
 	ArtifactsPath() string
 	BaseDomain() string
-	PreScript() error
-	PostScript() error
+	ProvisionPreHook() error
+	ProvisionPostHook() error
+	GetKubeconfig() error
+	Values(repoUrl string, targetRevision string) string
 }
 
 func New(c config.DistributionConfig) (d Distribution, err error) {

@@ -17,3 +17,11 @@ func (d *GenericDistribution) DistPath() string {
 func (d *GenericDistribution) ArtifactsPath() string {
 	return path.Join("distributions", d.DistPath(), "terraform", "terraform.tfstate.d", d.Config.ClusterName)
 }
+
+func (d *GenericDistribution) ProvisionPreHook() error {
+	return nil
+}
+
+func (d *GenericDistribution) ProvisionPostHook() error {
+	return nil
+}

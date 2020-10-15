@@ -34,7 +34,7 @@ func (d *K3sDistribution) BaseDomain() string {
 	return fmt.Sprintf(domain, ".nip.io")
 }
 
-func (d *K3sDistribution) PreScript() error {
+func (d *K3sDistribution) GetKubeconfig() error {
 	switch d.Config.Provider {
 	case "docker":
 		return d.dockerCopyKubeconfig()
@@ -90,6 +90,10 @@ func (d *K3sDistribution) dockerCopyKubeconfig() error {
 	return nil
 }
 
-func (d *K3sDistribution) PostScript() error {
+func (d *K3sDistribution) ProvisionPostHook() error {
 	return nil
+}
+
+func (d *K3sDistribution) Values(repoUrl string, targetRevision string) string {
+	return ""
 }
