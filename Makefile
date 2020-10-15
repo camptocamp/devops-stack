@@ -65,8 +65,8 @@ deploy: $(ARTIFACTS_DIR)/kubeconfig.yaml get-base-domain
 	wait
 
 # Get kubernetes context
-$(ARTIFACTS_DIR)/kubeconfig.yaml: $(ARTIFACTS_DIR)/terraform.tfstate get-base-domain
-	CLUSTER_NAME=$(CLUSTER_NAME) ARTIFACTS_DIR=$(ARTIFACTS_DIR) API_IP_ADDRESS=$(API_IP_ADDRESS) distributions/$(DISTRIBUTION)/scripts/get-kubeconfig.sh
+$(ARTIFACTS_DIR)/kubeconfig.yaml: $(ARTIFACTS_DIR)/terraform.tfstate
+	CLUSTER_NAME=$(CLUSTER_NAME) ARTIFACTS_DIR=$(ARTIFACTS_DIR) distributions/$(DISTRIBUTION)/scripts/get-kubeconfig.sh
 
 get-base-domain:
 	$(eval BASE_DOMAIN = $(shell ARTIFACTS_DIR=$(ARTIFACTS_DIR) distributions/$(DISTRIBUTION)/scripts/get-base-domain.sh))
