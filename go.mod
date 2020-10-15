@@ -1,9 +1,8 @@
-module k8s-demo/m
+module github.com/camptocamp/camptocamp-devops-stack
 
-go 1.14
+go 1.15
 
 require (
-	github.com/Netflix/go-env v0.0.0-20200908232752-3e802f601e28
-	github.com/magefile/mage v1.10.0
-	gopkg.in/src-d/go-git.v4 v4.13.1
+	github.com/jessevdk/go-flags v1.4.0
+	gopkg.in/yaml.v2 v2.3.0
 )
