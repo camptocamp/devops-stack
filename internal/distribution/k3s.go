@@ -3,11 +3,13 @@ package distribution
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
 	"os/exec"
 	"path"
 	"strings"
 
 	"github.com/camptocamp/camptocamp-devops-stack/internal/config"
+	"github.com/hashicorp/terraform/states/statefile"
 )
 
 type K3sDistribution struct {
@@ -28,6 +30,21 @@ func (d *K3sDistribution) PreScript() error {
 		return fmt.Errorf("Unknown provider %s for k3s distribution", d.Config.Provider)
 	}
 	return nil
+}
+
+func (d *K3sDistribution) apiIPAddress() (string, error) {
+	file := path.Join(d.ArtifactsPath(), "terraform.tfstate.json")
+	state, err := os.Open(file)
+	if err != nil {
+		return "", fmt.Errorf("failed to read Terraform state file: %v", err)
+	}
+	// FIXME: parse state file to get apiIPAddress
+	_, err := statefile.Read(state)
+	if err != nil {
+		return "", fmt.Errorf("failed to parse Terraform state: %v", err)
+	}
+
+	return "", nil
 }
 
 func (d *K3sDistribution) dockerCopyKubeconfig() error {
