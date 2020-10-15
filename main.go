@@ -8,6 +8,7 @@ import (
 	"path"
 
 	"github.com/camptocamp/camptocamp-devops-stack/internal/config"
+	"github.com/camptocamp/camptocamp-devops-stack/internal/distribution"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -53,11 +54,14 @@ func provision(c *config.Config) error {
 	log.Info("Provision")
 
 	// TODO validate distribution
-	distribution := c.Distribution
+	dist, err := distribution.New(c.Distribution)
+	if err != nil {
+		return fmt.Errorf("Failed to initialize distribution: %v", err)
+	}
 
 	// TODO prescript by distribution
 
-	distPath := path.Join(distribution.ContainerPlatform, distribution.Flavor, distribution.Provider)
+	distPath := dist.DistPath()
 	tfPath := path.Join("distributions", distPath, "terraform")
 
 	log.Info("provision: init")
