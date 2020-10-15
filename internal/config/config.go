@@ -10,30 +10,24 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
+// Config is the main conf
 type Config struct {
-	Home string `env:"HOME"`
+	ConfigFilePath string `short:"c" long:"config-file" default:"config.yaml" description:"configuration file"`
 
-	ConfigFilePath string `default:"config.yaml"`
+	BaseDomain string `short:"b" long:"base-domain" env:"BASE_DOMAIN" yaml:"base_domain" default:"127-0-0-1.nip.io" description:"base domain"`
 
-	BaseDomain string `short:"b" long:"base-domain" env:"BASE_DOMAIN" yaml:"base_domain" default"127-0-0-1.nip.io"`
+	ClusterName string `short:"C" long:"cluster-name" description:"cluster name"`
 
-	RepoUrl      string
-	Remote       string
-	RemoteBranch string
-	RemoteUrl    string
+	Distribution DistributionConfig `group:"Kubernetes Distribution" yaml:"distribution" description:"Kubernetes distribution"`
 
-	ClusterName  string
-	ArtifactsDir string
-
-	Distribution *Distribution
-
-	Version bool
+	Version bool `short:"V" long:"version" description:"Show version"`
 }
 
-type Distribution struct {
-	ContainerPlatform string `long:"container-platform" default:"k3s"`
-	Flavor            string `long:"flavor" default:"_"`
-	Provider          string `long:"provider" default:"docker"`
+// DistributionConfig sets up the k8s distro
+type DistributionConfig struct {
+	ContainerPlatform string `long:"container-platform" default:"k3s" description:"container platform"`
+	Flavor            string `long:"flavor" default:"_" description:"distribution flavor"`
+	Provider          string `long:"provider" default:"docker" description:"distribution provider"`
 }
 
 // LoadConfigFromYaml loads the config from config file
