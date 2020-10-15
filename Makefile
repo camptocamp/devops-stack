@@ -66,8 +66,7 @@ deploy: $(ARTIFACTS_DIR)/kubeconfig.yaml get-base-domain
 
 # Get kubernetes context
 $(ARTIFACTS_DIR)/kubeconfig.yaml: $(ARTIFACTS_DIR)/terraform.tfstate get-base-domain
-	docker cp k3s-server-$(CLUSTER_NAME):/etc/rancher/k3s/k3s.yaml $(ARTIFACTS_DIR)/kubeconfig.yaml
-	sed -i -e "s/127.0.0.1/$(API_IP_ADDRESS)/" $(ARTIFACTS_DIR)/kubeconfig.yaml
+	CLUSTER_NAME=$(CLUSTER_NAME) ARTIFACTS_DIR=$(ARTIFACTS_DIR) API_IP_ADDRESS=$(API_IP_ADDRESS) distributions/$(DISTRIBUTION)/scripts/get-kubeconfig.sh
 
 get-base-domain:
 	$(eval API_IP_ADDRESS = $(shell docker run --rm $(DOCKER_COMMON_ARGS) \
