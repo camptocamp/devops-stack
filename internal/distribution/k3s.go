@@ -39,7 +39,7 @@ func (d *K3sDistribution) apiIPAddress() (string, error) {
 		return "", fmt.Errorf("failed to read Terraform state file: %v", err)
 	}
 	// FIXME: parse state file to get apiIPAddress
-	_, err := statefile.Read(state)
+	_, err = statefile.Read(state)
 	if err != nil {
 		return "", fmt.Errorf("failed to parse Terraform state: %v", err)
 	}
@@ -58,7 +58,11 @@ func (d *K3sDistribution) dockerCopyKubeconfig() error {
 	if err != nil {
 		return fmt.Errorf("failed to read kubeconfig: %v", err)
 	}
-	newConf := strings.Replace(string(conf), "127.0.0.1", apiIPAddress)
+	ipAddress, err := d.apiIPAddress()
+	if err != nil {
+		return fmt.Errorf("failed to get API IP address: %v", err)
+	}
+	newConf := strings.Replace(string(conf), "127.0.0.1", ipAddress, -1)
 
 	if err := ioutil.WriteFile(dst, []byte(newConf), 0); err != nil {
 		return fmt.Errorf("failed to modify kubeconfig: %v", err)
