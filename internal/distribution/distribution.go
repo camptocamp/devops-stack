@@ -8,6 +8,8 @@ import (
 
 type Distribution interface {
 	DistPath() string
+	PreScript() error
+	PostScript() error
 }
 
 func New(c config.DistributionConfig) (d Distribution, err error) {

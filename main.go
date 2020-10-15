@@ -53,13 +53,14 @@ func deploy(c *config.Config) error {
 func provision(c *config.Config) error {
 	log.Info("Provision")
 
-	// TODO validate distribution
 	dist, err := distribution.New(c.Distribution)
 	if err != nil {
 		return fmt.Errorf("Failed to initialize distribution: %v", err)
 	}
 
-	// TODO prescript by distribution
+	if err := dist.PreScript(); err != nil {
+		return fmt.Errorf("Failed to execute pre-script: %v", err)
+	}
 
 	distPath := dist.DistPath()
 	tfPath := path.Join("distributions", distPath, "terraform")
@@ -103,7 +104,9 @@ func provision(c *config.Config) error {
 		return fmt.Errorf("provision: failed to verify Terraform plan: %v", err)
 	}
 
-	// TODO: postscript by distribution
+	if err := dist.PostScript(); err != nil {
+		return fmt.Errorf("Failed to execute post-script: %v", err)
+	}
 
 	return nil
 }

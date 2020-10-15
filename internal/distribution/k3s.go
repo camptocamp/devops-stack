@@ -11,3 +11,11 @@ func NewK3sDistribution(c config.DistributionConfig) *K3sDistribution {
 		&GenericDistribution{c},
 	}
 }
+
+func (d *K3sDistribution) PreScript() error {
+	return nil
+}
+
+func (d *K3sDistribution) PostScript() error {
+	return nil
+}
