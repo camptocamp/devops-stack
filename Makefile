@@ -69,10 +69,7 @@ $(ARTIFACTS_DIR)/kubeconfig.yaml: $(ARTIFACTS_DIR)/terraform.tfstate get-base-do
 	CLUSTER_NAME=$(CLUSTER_NAME) ARTIFACTS_DIR=$(ARTIFACTS_DIR) API_IP_ADDRESS=$(API_IP_ADDRESS) distributions/$(DISTRIBUTION)/scripts/get-kubeconfig.sh
 
 get-base-domain:
-	$(eval API_IP_ADDRESS = $(shell docker run --rm $(DOCKER_COMMON_ARGS) \
-		--entrypoint /usr/local/bin/jq \
-		stedolan/jq -r '.values.root_module.resources[]|select(.type=="docker_container" and .name=="k3s_server").values.ip_address' $(ARTIFACTS_DIR)/terraform.tfstate.json))
-	$(eval BASE_DOMAIN = $(shell echo $(API_IP_ADDRESS)|tr '.' '-').nip.io)
+	$(eval BASE_DOMAIN = $(shell ARTIFACTS_DIR=$(ARTIFACTS_DIR) distributions/$(DISTRIBUTION)/scripts/get-base-domain.sh))
 
 $(ARTIFACTS_DIR)/terraform.tfstate: distributions/$(DISTRIBUTION)/terraform/*
 	echo $(REPO_URL)
