@@ -9,6 +9,7 @@ import (
 type Distribution interface {
 	DistPath() string
 	ArtifactsPath() string
+	BaseDomain() string
 	PreScript() error
 	PostScript() error
 }

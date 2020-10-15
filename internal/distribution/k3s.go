@@ -24,6 +24,16 @@ func NewK3sDistribution(c config.DistributionConfig) *K3sDistribution {
 	}
 }
 
+func (d *K3sDistribution) BaseDomain() string {
+	ipAddress, err := d.apiIPAddress()
+	// TODO: error?
+	if err != nil {
+		return ""
+	}
+	domain := strings.Replace(ipAddress, ".", "-", -1)
+	return fmt.Sprintf(domain, ".nip.io")
+}
+
 func (d *K3sDistribution) PreScript() error {
 	switch d.Config.Provider {
 	case "docker":
