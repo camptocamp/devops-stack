@@ -57,9 +57,6 @@ func LoadConfig(version string) *Config {
 	if c.ConfigFilePath != "" {
 		if _, err := os.Stat(c.ConfigFilePath); err == nil {
 			c.LoadConfigFromYaml()
-		} else {
-			fmt.Printf("File %s doesn't exists!\n", c.ConfigFilePath)
-			os.Exit(1)
 		}
 	}
 

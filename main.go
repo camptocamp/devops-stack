@@ -8,6 +8,7 @@ import (
 	"path"
 
 	"github.com/camptocamp/camptocamp-devops-stack/internal/config"
+	log "github.com/sirupsen/logrus"
 )
 
 var version = "undefined"
@@ -15,7 +16,7 @@ var version = "undefined"
 func main() {
 	c := config.LoadConfig(version)
 
-	action := os.Args[0]
+	action := os.Args[1]
 	var err error
 
 	switch action {
@@ -49,39 +50,51 @@ func deploy(c *config.Config) error {
 
 // Provisions K3S
 func provision(c *config.Config) error {
+	log.Info("Provision")
+
 	// TODO validate distribution
 	distribution := c.Distribution
 
 	// TODO prescript by distribution
 
 	distPath := path.Join(distribution.ContainerPlatform, distribution.Flavor, distribution.Provider)
-	cmd := exec.Command("terraform")
-	cmd.Dir = path.Join("distributions", distPath, "terraform")
+	tfPath := path.Join("distributions", distPath, "terraform")
 
-	cmd.Args = []string{"init", "--upgrade"}
+	log.Info("provision: init")
+	cmd := exec.Command("terraform", "init", "--upgrade")
+	cmd.Dir = tfPath
 	if err := cmd.Run(); err != nil {
 		return fmt.Errorf("provision: failed to initialize Terraform (1): %v", err)
 	}
 
-	cmd.Args = []string{"workspace", "select", c.ClusterName}
+	log.Info("provision: workspace")
+	cmd = exec.Command("terraform", "workspace", "select", c.ClusterName)
+	cmd.Dir = tfPath
 	if err := cmd.Run(); err != nil {
-		cmd.Args = []string{"workspace", "new", c.ClusterName}
+		cmd = exec.Command("terraform", "workspace", "new", c.ClusterName)
+		cmd.Dir = tfPath
 		if err := cmd.Run(); err != nil {
 			return fmt.Errorf("provision: failed to create Terraform worspace: %v", err)
 		}
 	}
 
-	cmd.Args = []string{"init", "--upgrade"}
+	log.Info("provision: init")
+	cmd = exec.Command("terraform", "init", "--upgrade")
+	cmd.Dir = tfPath
 	if err := cmd.Run(); err != nil {
 		return fmt.Errorf("provision: failed to initialize Terraform (2): %v", err)
 	}
 
-	cmd.Args = []string{"apply", "--auto-approve"}
+	log.Info("provision: apply")
+	cmd = exec.Command("terraform", "apply", "--auto-approve")
+	cmd.Dir = tfPath
 	if err := cmd.Run(); err != nil {
 		return fmt.Errorf("provision: failed to apply Terraform: %v", err)
 	}
 
-	cmd.Args = []string{"plan", "--detailed-exitcode"}
+	log.Info("provision: plan")
+	cmd = exec.Command("terraform", "plan", "--detailed-exitcode")
+	cmd.Dir = tfPath
 	if err := cmd.Run(); err != nil {
 		return fmt.Errorf("provision: failed to verify Terraform plan: %v", err)
 	}
