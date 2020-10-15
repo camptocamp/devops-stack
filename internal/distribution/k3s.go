@@ -1,6 +1,7 @@
 package distribution
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -9,6 +10,7 @@ import (
 	"strings"
 
 	"github.com/camptocamp/camptocamp-devops-stack/internal/config"
+	"github.com/hashicorp/terraform/addrs"
 	"github.com/hashicorp/terraform/states/statefile"
 )
 
@@ -33,18 +35,25 @@ func (d *K3sDistribution) PreScript() error {
 }
 
 func (d *K3sDistribution) apiIPAddress() (string, error) {
-	file := path.Join(d.ArtifactsPath(), "terraform.tfstate.json")
+	file := path.Join(d.ArtifactsPath(), "terraform.tfstate")
 	state, err := os.Open(file)
 	if err != nil {
 		return "", fmt.Errorf("failed to read Terraform state file: %v", err)
 	}
-	// FIXME: parse state file to get apiIPAddress
-	_, err = statefile.Read(state)
+	sf, err := statefile.Read(state)
 	if err != nil {
 		return "", fmt.Errorf("failed to parse Terraform state: %v", err)
 	}
+	attrsJSON := sf.State.Modules["root"].Resources["docker_container.k3s_server"].Instances[addrs.IntKey(0)].Current.AttrsJSON
+	attrs := make(map[string]string)
+	if err = json.Unmarshal(attrsJSON, &attrs); err != nil {
+		return "", fmt.Errorf("failed to unmashal attributes: %v", err)
+	}
 
-	return "", nil
+	if ipAddress, ok := attrs["ip_address"]; ok {
+		return ipAddress, nil
+	}
+	return "", fmt.Errorf("failed to get API IP address from Terraform state")
 }
 
 func (d *K3sDistribution) dockerCopyKubeconfig() error {
