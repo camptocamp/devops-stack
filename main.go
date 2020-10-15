@@ -73,10 +73,10 @@ func provision(c *config.Config) error {
 	}
 
 	log.Info("provision: workspace")
-	cmd = exec.Command("terraform", "workspace", "select", c.ClusterName)
+	cmd = exec.Command("terraform", "workspace", "select", c.Distribution.ClusterName)
 	cmd.Dir = tfPath
 	if err := cmd.Run(); err != nil {
-		cmd = exec.Command("terraform", "workspace", "new", c.ClusterName)
+		cmd = exec.Command("terraform", "workspace", "new", c.Distribution.ClusterName)
 		cmd.Dir = tfPath
 		if err := cmd.Run(); err != nil {
 			return fmt.Errorf("provision: failed to create Terraform worspace: %v", err)

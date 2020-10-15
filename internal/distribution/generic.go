@@ -13,3 +13,7 @@ type GenericDistribution struct {
 func (d *GenericDistribution) DistPath() string {
 	return path.Join(d.Config.ContainerPlatform, d.Config.Flavor, d.Config.Provider)
 }
+
+func (d *GenericDistribution) ArtifactsPath() string {
+	return path.Join("distributions", d.DistPath(), "terraform", "terraform.tfstate.d", d.Config.ClusterName)
+}

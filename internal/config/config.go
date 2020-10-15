@@ -12,19 +12,15 @@ import (
 
 // Config is the main conf
 type Config struct {
-	ConfigFilePath string `short:"c" long:"config-file" default:"config.yaml" description:"configuration file"`
-
-	BaseDomain string `short:"b" long:"base-domain" env:"BASE_DOMAIN" yaml:"base_domain" default:"127-0-0-1.nip.io" description:"base domain"`
-
-	ClusterName string `short:"C" long:"cluster-name" description:"cluster name"`
-
-	Distribution DistributionConfig `group:"Kubernetes Distribution" yaml:"distribution" description:"Kubernetes distribution"`
-
-	Version bool `short:"V" long:"version" description:"Show version"`
+	ConfigFilePath string             `short:"c" long:"config-file" default:"config.yaml" description:"configuration file"`
+	BaseDomain     string             `short:"b" long:"base-domain" env:"BASE_DOMAIN" yaml:"base_domain" default:"127-0-0-1.nip.io" description:"base domain"`
+	Distribution   DistributionConfig `group:"Kubernetes Distribution" yaml:"distribution" description:"Kubernetes distribution"`
+	Version        bool               `short:"V" long:"version" description:"Show version"`
 }
 
 // DistributionConfig sets up the k8s distro
 type DistributionConfig struct {
+	ClusterName       string `short:"C" long:"cluster-name" description:"cluster name"`
 	ContainerPlatform string `long:"container-platform" default:"k3s" description:"container platform"`
 	Flavor            string `long:"flavor" default:"_" description:"distribution flavor"`
 	Provider          string `long:"provider" default:"docker" description:"distribution provider"`
