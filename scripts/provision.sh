@@ -1,5 +1,7 @@
 #!/bin/sh -xe
 
+echo 'plugin_cache_dir = "$HOME/.terraform.d/plugin-cache"' > "$HOME/.terraformrc"
+
 if test -x distributions/"$DISTRIBUTION"/scripts/provision-before-script.sh; then
 	distributions/"$DISTRIBUTION"/scripts/provision-before-script.sh
 fi
