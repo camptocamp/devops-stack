@@ -56,7 +56,6 @@ deploy: $(ARTIFACTS_DIR)/kubeconfig.yaml get-base-domain
 		$(DOCKER_COMMON_ARGS) \
 		-v /var/run/docker.sock:/var/run/docker.sock \
 		-v $(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
-		-v $$HOME/.terraform.d:/tmp/.terraform.d \
 		--env VAULT_ADDR="https://vault.apps.$(BASE_DOMAIN)" \
 		--env CLUSTER_NAME=$(CLUSTER_NAME) \
 		--env ARTIFACTS_DIR=$(ARTIFACTS_DIR) \
@@ -75,7 +74,6 @@ $(ARTIFACTS_DIR)/terraform.tfstate: distributions/$(DISTRIBUTION)/terraform/*
 	docker run --rm \
 		$(DOCKER_COMMON_ARGS) \
 		-v /var/run/docker.sock:/var/run/docker.sock \
-		-v $$HOME/.terraform.d:/tmp/.terraform.d \
 		--env DISTRIBUTION=$(DISTRIBUTION) \
 		--env REPO_URL=$(REPO_URL) \
 		--env CLUSTER_NAME=$(CLUSTER_NAME) \
@@ -87,7 +85,6 @@ clean: get-base-domain
 		$(DOCKER_COMMON_ARGS) \
 		-v /var/run/docker.sock:/var/run/docker.sock \
 		-v $(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
-		-v $$HOME/.terraform.d:/tmp/.terraform.d \
 		--env VAULT_ADDR="https://vault.apps.$(BASE_DOMAIN)" \
 		--env DISTRIBUTION=$(DISTRIBUTION) \
 		--env CLUSTER_NAME=$(CLUSTER_NAME) \

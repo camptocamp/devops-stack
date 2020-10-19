@@ -1,7 +1,5 @@
 #!/bin/sh -xe
 
-echo 'plugin_cache_dir = "$HOME/.terraform.d/plugin-cache"' > "$HOME/.terraformrc"
-
 wget https://storage.googleapis.com/kubernetes-release/release/v1.19.0/bin/linux/amd64/kubectl -O ~/kubectl
 chmod +x ~/kubectl
 
