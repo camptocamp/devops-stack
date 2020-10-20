@@ -177,8 +177,54 @@
 <article class="doc">
 <h1 class="page">Changelog</h1>
 <div class="sect1">
-<h2 id="_0_5_0_unreleased"><a class="anchor" href="#_0_5_0_unreleased"></a><a href="https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.5.0">0.5.0</a> (unreleased)</h2>
+<h2 id="_0_5_0_2020_10_20"><a class="anchor" href="#_0_5_0_2020_10_20"></a><a href="https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.5.0">0.5.0</a> (2020-10-20)</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.4.0&#8230;&#8203;v0.5.0">Full Changelog</a></p>
+</div>
+<div class="paragraph">
+<p><strong>Implemented enhancements:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Allow to disable every application <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/123">#123</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Pin docker provider version <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/125">#125</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Fetch kubeconfig from regular path <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/127">#127</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Always use current working dir in docker containers <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/130">#130</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Use absolute path for ARTIFACTS_DIR <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/131">#131</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Add abstraction to support for multiple distributions <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/134">#134</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Factorize Docker common args in a variable <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/136">#136</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Make get-kubeconfig distribution specific <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/141">#141</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Make get-base-domain distribution specific <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/142">#142</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Use terraform.tfstate instead of terraform.tfstate.json <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/143">#143</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Remove dependency between get-kubeconfig.sh and get-base-domain.sh <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/145">#145</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Don&#8217;t use user&#8217;s terraform plugin-cache dir <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/126">#126</a>, <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/129">#129</a>, <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/146">#146</a> and <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/147">#147</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+</ul>
+</div>
 <div class="paragraph">
 <p><strong>Documentation:</strong></p>
 </div>
@@ -186,6 +232,9 @@
 <ul>
 <li>
 <p>Document how to write documentation in this project <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/122">#122</a> and <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/132">#132</a> (<a href="https://github.com/acampergue-camptocamp">acampergue-camptocamp</a>), closes <a href="https://github.com/camptocamp/camptocamp-devops-stack/issues/107">issue #107</a>.</p>
+</li>
+<li>
+<p>Add a link to the Github repo <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/138">#138</a> (<a href="https://github.com/acampergue-camptocamp">acampergue-camptocamp</a>)</p>
 </li>
 </ul>
 </div>
@@ -196,6 +245,9 @@
 <ul>
 <li>
 <p>Don&#8217;t build and deploy the documentation on PR to master, since useless and might cause issues <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/128">#128</a> (<a href="https://github.com/acampergue-camptocamp">acampergue-camptocamp</a>), closes <a href="https://github.com/camptocamp/camptocamp-devops-stack/issues/124">issue #124</a></p>
+</li>
+<li>
+<p>Always use network mode host <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/133">#133</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
 </li>
 </ul>
 </div>
