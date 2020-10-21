@@ -1,10 +1,10 @@
 # Mimics https://github.com/rancher/k3s/blob/master/docker-compose.yml
 resource "docker_volume" "k3s_server" {
-  name = "k3s-server-${terraform.workspace}"
+  name = "k3s-server-${var.cluster_name}"
 }
 
 resource "docker_network" "k3s" {
-  name = "k3s-${terraform.workspace}"
+  name = "k3s-${var.cluster_name}"
 }
 
 resource "docker_image" "registry" {
@@ -14,7 +14,7 @@ resource "docker_image" "registry" {
 
 resource "docker_container" "registry_dockerio" {
   image = docker_image.registry.latest
-  name  = "registry-dockerio-${terraform.workspace}"
+  name  = "registry-dockerio-${var.cluster_name}"
 
   networks_advanced {
     name    = docker_network.k3s.name
@@ -34,7 +34,7 @@ resource "docker_container" "registry_dockerio" {
 
 resource "docker_container" "registry_quayio" {
   image = docker_image.registry.latest
-  name  = "registry-quayio-${terraform.workspace}"
+  name  = "registry-quayio-${var.cluster_name}"
 
   networks_advanced {
     name    = docker_network.k3s.name
@@ -55,7 +55,7 @@ resource "docker_container" "registry_quayio" {
 
 resource "docker_container" "registry_gcrio" {
   image = docker_image.registry.latest
-  name  = "registry-gcrio-${terraform.workspace}"
+  name  = "registry-gcrio-${var.cluster_name}"
 
   networks_advanced {
     name    = docker_network.k3s.name
@@ -75,7 +75,7 @@ resource "docker_container" "registry_gcrio" {
 
 resource "docker_container" "registry_usgcrio" {
   image = docker_image.registry.latest
-  name  = "registry-usgcrio-${terraform.workspace}"
+  name  = "registry-usgcrio-${var.cluster_name}"
 
   networks_advanced {
     name    = docker_network.k3s.name
@@ -99,12 +99,12 @@ resource "docker_image" "k3s" {
 }
 
 resource "docker_volume" "k3s_server_kubelet" {
-  name = "k3s-server-kubelet-${terraform.workspace}"
+  name = "k3s-server-kubelet-${var.cluster_name}"
 }
 
 resource "docker_container" "k3s_server" {
   image = docker_image.k3s.latest
-  name  = "k3s-server-${terraform.workspace}"
+  name  = "k3s-server-${var.cluster_name}"
 
   command = [
     "server",
@@ -159,14 +159,14 @@ resource "docker_container" "k3s_server" {
 resource "docker_volume" "k3s_agent_kubelet" {
   count = var.node_count
 
-  name = "k3s-agent-kubelet-${terraform.workspace}-${count.index}"
+  name = "k3s-agent-kubelet-${var.cluster_name}-${count.index}"
 }
 
 resource "docker_container" "k3s_agent" {
   count = var.node_count
 
   image = docker_image.k3s.latest
-  name  = "k3s-agent-${terraform.workspace}-${count.index}"
+  name  = "k3s-agent-${var.cluster_name}-${count.index}"
 
   privileged = true
 
