@@ -1,3 +1,8 @@
+variable "cluster_name" {
+  description = "The name of the Kubernetes cluster to create."
+  type        = string
+}
+
 variable "k3s_version" {
   description = "The K3s version to use"
   type        = string

@@ -77,6 +77,7 @@ $(ARTIFACTS_DIR)/terraform.tfstate: distributions/$(DISTRIBUTION)/terraform/*
 		--env DISTRIBUTION=$(DISTRIBUTION) \
 		--env REPO_URL=$(REPO_URL) \
 		--env CLUSTER_NAME=$(CLUSTER_NAME) \
+		--env TF_VAR_cluster_name=$(CLUSTER_NAME) \
 		--env ARTIFACTS_DIR=$(ARTIFACTS_DIR) \
 		hashicorp/terraform:$(TERRAFORM_VERSION) $$PWD/scripts/provision.sh
 
@@ -88,6 +89,7 @@ clean: get-base-domain
 		--env VAULT_ADDR="https://vault.apps.$(BASE_DOMAIN)" \
 		--env DISTRIBUTION=$(DISTRIBUTION) \
 		--env CLUSTER_NAME=$(CLUSTER_NAME) \
+		--env TF_VAR_cluster_name=$(CLUSTER_NAME) \
 		hashicorp/terraform:$(TERRAFORM_VERSION) $$PWD/scripts/destroy.sh
 	rm -rf $(ARTIFACTS_DIR)
 
