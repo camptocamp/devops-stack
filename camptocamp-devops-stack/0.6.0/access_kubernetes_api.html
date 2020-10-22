@@ -187,7 +187,7 @@ Kubernetes context that allows you to access the cluster.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ export CLUSTER_NAME=master
-$ export KUBECONFIG=terraform/terraform.tfstate.d/$CLUSTER_NAME/kubeconfig.yaml
+$ export KUBECONFIG=distributions/k3s/_/docker/terraform/terraform.tfstate.d/$CLUSTER_NAME/kubeconfig.yaml
 $ export BASE_DOMAIN=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' k3s-server-$CLUSTER_NAME|tr '.' '-'`.nip.io
 $ kubectl get nodes
 $ kubectl get namespaces
