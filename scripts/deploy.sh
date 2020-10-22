@@ -1,5 +1,12 @@
 #!/bin/sh -xe
 
+# Install operator lifecycle manager
+if test "$(kubectl get ns olm --output=name|wc -l)" -eq 0; then
+  kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/0.16.1/crds.yaml
+  kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/0.16.1/olm.yaml
+fi
+
+
 # Install ArgoCD if not present
 if test "$(kubectl -n argocd get pods --selector 'app.kubernetes.io/name=argocd-server' --output=name|wc -l)" -eq 0; then
 	helm dependency update "$ARGOCD_DIR/argocd"
