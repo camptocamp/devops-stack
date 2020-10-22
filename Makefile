@@ -34,32 +34,36 @@ endif
 endif
 
 CLUSTER_NAME := $(REMOTE_BRANCH)
-ARTIFACTS_DIR := "$$PWD/distributions/$(DISTRIBUTION)/terraform/terraform.tfstate.d/$(CLUSTER_NAME)"
 
-.PHONY: test deploy clean debug
+DISTRIBUTION_DIR := $$PWD/distributions/$(DISTRIBUTION)
+TERRAFORM_DIR := distributions/$(DISTRIBUTION)/terraform
+ARTIFACTS_DIR := $(TERRAFORM_DIR)/terraform.tfstate.d/$(CLUSTER_NAME)
+SCRIPTS_DIR := $$PWD/scripts
 
-test: deploy
+.PHONY: test deploy clean debug get-base-domain
+
+test: deploy get-base-domain
 	docker run --rm \
 		$(DOCKER_COMMON_ARGS) \
 		--env BASE_DOMAIN=$(BASE_DOMAIN) \
-		curlimages/curl $$PWD/scripts/test.sh
+		curlimages/curl $(SCRIPTS_DIR)/test.sh
 
 deploy: $(ARTIFACTS_DIR)/kubeconfig.yaml get-base-domain
 	docker run --rm \
 		$(DOCKER_COMMON_ARGS) \
-		-v $(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
+		--mount type=bind,src=$$PWD/$(ARTIFACTS_DIR)/kubeconfig.yaml,dst=/tmp/.kube/config \
 		--env KUBECTL_COMMAND=apply \
 		--env ARGOCD_OPTS="--plaintext --port-forward --port-forward-namespace argocd" \
 		--env ARTIFACTS_DIR=$(ARTIFACTS_DIR) \
-		argoproj/argocd:v$(ARGOCD_VERSION) $$PWD/scripts/deploy.sh & \
+		argoproj/argocd:v$(ARGOCD_VERSION) $(SCRIPTS_DIR)/deploy.sh & \
 	docker run --rm \
 		$(DOCKER_COMMON_ARGS) \
-		-v /var/run/docker.sock:/var/run/docker.sock \
-		-v $(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
+		--mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
+		--mount type=bind,src=$$PWD/$(ARTIFACTS_DIR)/kubeconfig.yaml,dst=/tmp/.kube/config \
 		--env VAULT_ADDR="https://vault.apps.$(BASE_DOMAIN)" \
 		--env CLUSTER_NAME=$(CLUSTER_NAME) \
 		--env ARTIFACTS_DIR=$(ARTIFACTS_DIR) \
-		hashicorp/terraform:$(TERRAFORM_VERSION) $$PWD/scripts/configure-vault.sh & \
+		hashicorp/terraform:$(TERRAFORM_VERSION) $(SCRIPTS_DIR)/configure-vault.sh & \
 	wait
 
 # Get kubernetes context
@@ -73,24 +77,24 @@ $(ARTIFACTS_DIR)/terraform.tfstate: distributions/$(DISTRIBUTION)/terraform/*
 	echo $(REPO_URL)
 	docker run --rm \
 		$(DOCKER_COMMON_ARGS) \
-		-v /var/run/docker.sock:/var/run/docker.sock \
+		--mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
 		--env DISTRIBUTION=$(DISTRIBUTION) \
 		--env REPO_URL=$(REPO_URL) \
 		--env CLUSTER_NAME=$(CLUSTER_NAME) \
 		--env TF_VAR_cluster_name=$(CLUSTER_NAME) \
 		--env ARTIFACTS_DIR=$(ARTIFACTS_DIR) \
-		hashicorp/terraform:$(TERRAFORM_VERSION) $$PWD/scripts/provision.sh
+		hashicorp/terraform:$(TERRAFORM_VERSION) $(SCRIPTS_DIR)/provision.sh
 
 clean: get-base-domain
 	docker run --rm \
 		$(DOCKER_COMMON_ARGS) \
-		-v /var/run/docker.sock:/var/run/docker.sock \
-		-v $(ARTIFACTS_DIR)/kubeconfig.yaml:/tmp/.kube/config \
+		--mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
+		--mount type=bind,src=$$PWD/$(ARTIFACTS_DIR)/kubeconfig.yaml,dst=/tmp/.kube/config \
 		--env VAULT_ADDR="https://vault.apps.$(BASE_DOMAIN)" \
 		--env DISTRIBUTION=$(DISTRIBUTION) \
 		--env CLUSTER_NAME=$(CLUSTER_NAME) \
 		--env TF_VAR_cluster_name=$(CLUSTER_NAME) \
-		hashicorp/terraform:$(TERRAFORM_VERSION) $$PWD/scripts/destroy.sh
+		hashicorp/terraform:$(TERRAFORM_VERSION) $(SCRIPTS_DIR)/destroy.sh
 	rm -rf $(ARTIFACTS_DIR)
 
 debug: get-base-domain
@@ -101,6 +105,9 @@ debug: get-base-domain
 	@echo UID_NUMBER=$(UID_NUMBER)
 	@echo GID_NUMBER=$(GID_NUMBER)
 	@echo DOCKER_GID_NUMBER=$(DOCKER_GID_NUMBER)
+	@echo DISTRIBUTION_DIR=$(DISTRIBUTION_DIR)
+	@echo TERRAFORM_DIR=$(TERRAFORM_DIR)
+	@echo SCRIPTS_DIR=$(SCRIPTS_DIR)
 	@echo ARTIFACTS_DIR=$(ARTIFACTS_DIR)
 	@echo REMOTE=$(REMOTE)
 	@echo REMOTE_BRANCH=$(REMOTE_BRANCH)
