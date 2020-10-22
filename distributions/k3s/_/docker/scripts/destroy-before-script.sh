@@ -1,6 +1,6 @@
 #!/bin/sh -xe
 
-cd vault || exit
+cd "$VAULT_DIR" || exit
 terraform init -upgrade
 terraform workspace select "$CLUSTER_NAME" || terraform workspace new "$CLUSTER_NAME"
 terraform init -upgrade

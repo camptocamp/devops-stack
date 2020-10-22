@@ -15,9 +15,10 @@ done
 
 ~/kubectl -n vault wait "$(~/kubectl -n vault get pods --selector 'app.kubernetes.io/name=vault' --output=name)" --for=condition=Ready --timeout=-1s
 
-cd vault || exit
+cd "$VAULT_DIR" || exit
 terraform init -upgrade
 terraform workspace select "$CLUSTER_NAME" || terraform workspace new "$CLUSTER_NAME"
 terraform init -upgrade
 terraform apply --auto-approve
 terraform plan --detailed-exitcode
+cd -
