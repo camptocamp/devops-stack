@@ -2,9 +2,9 @@
 
 # Install ArgoCD if not present
 if test "$(kubectl -n argocd get pods --selector 'app.kubernetes.io/name=argocd-server' --output=name|wc -l)" -eq 0; then
-	helm dependency update argocd/argocd
+	helm dependency update "$ARGOCD_DIR/argocd"
 	kubectl create namespace argocd || true
-	helm template --include-crds argocd argocd/argocd --values "$ARTIFACTS_DIR/values.yaml" --set bootstrap=true --namespace argocd | kubectl "$KUBECTL_COMMAND" -n argocd -f -
+	helm template --include-crds argocd "$ARGOCD_DIR/argocd" --values "$ARTIFACTS_DIR/values.yaml" --set bootstrap=true --namespace argocd | kubectl "$KUBECTL_COMMAND" -n argocd -f -
 	while test "$(kubectl -n argocd get pods --selector 'app.kubernetes.io/name=argocd-server' --output=name | wc -l)" -eq 0; do
 		echo Waiting for pods in argocd namespace
 		sleep 3

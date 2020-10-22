@@ -1,10 +1,10 @@
 #!/bin/sh -xe
 
-if test -x distributions/"$DISTRIBUTION"/scripts/destroy-before-script.sh ; then
-	distributions/"$DISTRIBUTION"/scripts/destroy-before-script.sh
+if test -x "$DISTRIBUTION_DIR/scripts/destroy-before-script.sh" ; then
+	"$DISTRIBUTION_DIR/scripts/destroy-before-script.sh"
 fi
 
-cd distributions/"$DISTRIBUTION"/terraform || exit
+cd "$TERRAFORM_DIR" || exit
 terraform init -upgrade
 terraform workspace select "$CLUSTER_NAME" || terraform workspace new "$CLUSTER_NAME"
 terraform init -upgrade
@@ -15,6 +15,6 @@ if [ "$CLUSTER_NAME" != "default" ]; then
 fi
 cd -
 
-if test -x distributions/"$DISTRIBUTION"/scripts/destroy-after-script.sh ; then
-	distributions/"$DISTRIBUTION"/scripts/destroy-after-script.sh
+if test -x "$DISTRIBUTION_DIR/scripts/destroy-after-script.sh" ; then
+	"$DISTRIBUTION_DIR/scripts/destroy-after-script.sh"
 fi
