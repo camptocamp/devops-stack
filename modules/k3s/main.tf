@@ -34,10 +34,34 @@ module "cluster" {
 
 resource "helm_release" "argocd" {
   name              = "argocd"
+  repository        = "https://argoproj.github.io/argo-helm"
+  chart             = "argo-cd"
+  version           = "2.7.4"
   namespace         = "argocd"
-  chart             = "${path.module}/../../argocd/argocd/"
   dependency_update = true
   create_namespace  = true
+
+  values = [
+    <<EOT
+---
+installCRDs: false
+configs:
+  secret:
+    argocdServerAdminPassword: "$2a$10$wzUzrdx.jMb7lHIbW6VutuRpV4OnpPA3ItWBDiP04QVHfGqzAoj6i"  # argocd
+    argocdServerAdminPasswordMtime: '2020-07-23T11:31:23Z'
+server:
+  extraArgs:
+    - --insecure
+  config:
+    accounts.pipeline: apiKey
+    resource.customizations: |
+      networking.k8s.io/Ingress:
+        health.lua: |
+          hs = {}
+          hs.status = "Healthy"
+          return hs
+  EOT
+  ]
 
   depends_on = [
     module.cluster,
