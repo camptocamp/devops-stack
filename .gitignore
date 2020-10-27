@@ -5,3 +5,9 @@ charts/
 build/
 node_modules
 package-lock.json
+examples/k3s/.ash_history
+examples/k3s/.terraform.d/
+examples/k3s/bin/
+examples/k3s/terraform/dev.log
+examples/k3s/terraform/kubeconfig.yaml
+examples/k3s/terraform/terraform.tfstate*
