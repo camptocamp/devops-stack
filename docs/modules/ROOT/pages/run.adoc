@@ -1,12 +1,12 @@
 :project-name: camptocamp-devops-stack
 :url-repo: https://github.com/camptocamp/{project-name}.git
 
-== Clone the project 
+== Run an example
 
 [source,shell,subs="attributes"]
 ----
 $ git clone {url-repo}
-$ cd {project-name}
+$ cd {project-name}/examples/k3s-docker-demo-app
 ----
 
 == Run the stack
@@ -24,6 +24,7 @@ It will:
 - spawn a K3s cluster on your workstation using Docker
 - deploy ArgoCD in the cluster
 - deploy the App of Apps that manages ArgoCD and itself.
+- deploy a demo Application
 
 === Destroy a cluster
 
