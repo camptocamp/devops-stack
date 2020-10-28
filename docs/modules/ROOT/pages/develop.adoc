@@ -1,5 +1,3 @@
 == Develop
 
-If you want to add new applications to this stack, you just have to fork this GitHub repository, then clone your fork on your workstation.
-
-When you'll launch `make` to run the stack, the ArgoCD app of apps will be automatically configure to point to your fork.
+If you want to improve this stack, you just have to fork it and make your root module point to your fork instead of upstream.
