@@ -31,9 +31,9 @@ provider "kubernetes-alpha" {
 }
 
 provider "vault" {
-  address      = format("https://vault.apps.%s", local.base_domain)
-  token        = "root"
-  ca_cert_file = local_file.vault_cert.filename
+  address         = format("https://vault.apps.%s", local.base_domain)
+  token           = "root"
+  skip_tls_verify = true
 }
 
 module "cluster" {
@@ -145,29 +145,6 @@ resource "null_resource" "wait_for_vault" {
       KUBECONFIG = module.cluster.kubeconfig_filename
     }
   }
-}
-
-data "kubernetes_ingress" "vault" {
-  metadata {
-    name      = "vault"
-    namespace = "vault"
-  }
-
-  depends_on = [
-    kubernetes_manifest.app_of_apps,
-  ]
-}
-
-data "kubernetes_secret" "vault" {
-  metadata {
-    name      = data.kubernetes_ingress.vault.spec.0.tls.0.secret_name
-    namespace = "vault"
-  }
-}
-
-resource "local_file" "vault_cert" {
-  content  = lookup(data.kubernetes_secret.vault.data, "ca.crt")
-  filename = "${path.module}/vault.crt"
 }
 
 resource "vault_auth_backend" "kubernetes" {
