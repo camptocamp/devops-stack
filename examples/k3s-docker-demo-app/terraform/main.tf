@@ -49,7 +49,7 @@ resource "kubernetes_manifest" "project_apps" {
     "spec" = {
       "project" = "default"
       "source" = {
-        "path"           = "examples/k3s/argocd/project-apps"
+        "path"           = "examples/k3s-docker-demo-app/argocd/project-apps"
         "repoURL"        = local.repo_url
         "targetRevision" = local.target_revision
         "helm" = {
