@@ -8,7 +8,12 @@ cd terraform || exit
 terraform init -upgrade
 terraform workspace select "$CLUSTER_NAME" || terraform workspace new "$CLUSTER_NAME"
 terraform init -upgrade
-terraform apply --auto-approve -target module.cluster.module.cluster -target module.cluster.helm_release.argocd
+terraform apply --auto-approve \
+	-target module.cluster.module.cluster \
+	-target module.cluster.helm_release.argocd \
+	-target module.cluster.module.iam_assumable_role_cert_manager \
+	-target module.cluster.aws_cognito_user_pool_client.client \
+	-target module.cluster.random_password.oauth2_cookie_secret
 terraform apply --auto-approve -target module.cluster.kubernetes_manifest.app_of_apps
 terraform apply --auto-approve -target module.cluster.null_resource.wait_for_vault
 terraform apply --auto-approve
