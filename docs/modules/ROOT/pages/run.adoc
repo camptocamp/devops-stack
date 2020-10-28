@@ -11,7 +11,7 @@ $ cd {project-name}/examples/k3s-docker-demo-app
 
 == Run the stack
 
-=== Create a cluster
+=== Launch a demo cluster
 
 Just run :
 [source,shell]
