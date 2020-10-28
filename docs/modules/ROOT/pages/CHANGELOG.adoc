@@ -1,5 +1,13 @@
 = Changelog
 
+== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.6.0[0.6.0] (2020-10-28)
+
+https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.5.0...v0.6.0[Full Changelog]
+
+*Implemented enhancements:*
+
+* Allow to instantiate the DevOps Stack (https://github.com/mcanevet[mcanevet])
+
 == https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.5.0[0.5.0] (2020-10-20)
 
 https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.4.0...v0.5.0[Full Changelog]
