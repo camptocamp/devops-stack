@@ -7,3 +7,33 @@ metadata:
     argocd.argoproj.io/sync-wave: "5"
 spec:
   selfSigned: {}
+{{- if index $.Values "cert-manager" "clusterIssuers" "letsencrypt" "enabled" }}
+---
+apiVersion: cert-manager.io/v1alpha3
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
+spec:
+  acme:
+    email: letsencrypt@camptocamp.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-prod
+    {{ index .Values "cert-manager" "clusterIssuers" "acme" | toYaml | nindent 4 }}
+---
+apiVersion: cert-manager.io/v1alpha3
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-staging
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
+spec:
+  acme:
+    email: letsencrypt@camptocamp.com
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-staging
+    {{ index .Values "cert-manager" "clusterIssuers" "acme" | toYaml | nindent 4 }}
+{{- end }}

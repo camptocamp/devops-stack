@@ -1,0 +1,51 @@
+variable "cluster_name" {
+  description = "The name of the cluster to create."
+  type        = string
+}
+
+variable "cluster_endpoint_public_access_cidrs" {
+  description = "List of CIDR blocks which can access the Amazon EKS public API server endpoint."
+  type        = list(string)
+  default     = ["0.0.0.0/0"]
+}
+
+variable "vpc_id" {
+  description = "VPC where the cluster and workers will be deployed."
+  type        = string
+}
+
+variable "map_roles" {
+  description = "Additional IAM roles to add to the aws-auth configmap. See examples/basic/variables.tf for example format."
+  type = list(object({
+    rolearn  = string
+    username = string
+    groups   = list(string)
+  }))
+  default = []
+}
+
+variable "worker_groups" {
+  description = "A list of maps defining worker group configurations to be defined using AWS Launch Configurations. See workers_group_defaults for valid keys."
+  type        = any
+  default     = []
+}
+
+variable "base_domain" {
+  description = "The base domain used for Ingresses."
+  type        = string
+}
+
+variable "repo_url" {
+  description = "The source repo URL of ArgoCD's app of apps."
+  type        = string
+}
+
+variable "target_revision" {
+  description = "The source target revision of ArgoCD's app of apps."
+  type        = string
+}
+
+variable "cognito_user_pool_id" {
+  description = "ID of the Cognito user pool to use."
+  type        = string
+}
