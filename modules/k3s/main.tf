@@ -16,11 +16,24 @@ provider "helm" {
   }
 }
 
+provider "kubernetes" {
+  host                   = local.kubernetes_host
+  client_certificate     = local.client_certificate
+  client_key             = local.client_key
+  cluster_ca_certificate = local.kubernetes_ca_cert
+}
+
 provider "kubernetes-alpha" {
   host                   = local.kubernetes_host
   client_certificate     = local.client_certificate
   client_key             = local.client_key
   cluster_ca_certificate = local.kubernetes_ca_cert
+}
+
+provider "vault" {
+  address      = format("https://vault.apps.%s", local.base_domain)
+  token        = "root"
+  ca_cert_file = local_file.vault_cert.filename
 }
 
 module "cluster" {
@@ -118,4 +131,55 @@ apps:
   depends_on = [
     helm_release.argocd,
   ]
+}
+
+resource "null_resource" "wait_for_vault" {
+  depends_on = [
+    kubernetes_manifest.app_of_apps,
+  ]
+
+  provisioner "local-exec" {
+    command = "for i in `seq 1 60`; do kubectl get ns vault && break || sleep 5; done; for i in `seq 1 60`; do test \"`kubectl -n vault get pods --selector 'app.kubernetes.io/name=vault' --output=name | wc -l`\" -ne 0 && exit 0 || sleep 5; done; echo TIMEOUT && exit 1"
+
+    environment = {
+      KUBECONFIG = module.cluster.kubeconfig_filename
+    }
+  }
+}
+
+data "kubernetes_ingress" "vault" {
+  metadata {
+    name      = "vault"
+    namespace = "vault"
+  }
+
+  depends_on = [
+    kubernetes_manifest.app_of_apps,
+  ]
+}
+
+data "kubernetes_secret" "vault" {
+  metadata {
+    name      = data.kubernetes_ingress.vault.spec.0.tls.0.secret_name
+    namespace = "vault"
+  }
+}
+
+resource "local_file" "vault_cert" {
+  content  = lookup(data.kubernetes_secret.vault.data, "ca.crt")
+  filename = "${path.module}/vault.crt"
+}
+
+resource "vault_auth_backend" "kubernetes" {
+  type = "kubernetes"
+
+  depends_on = [
+    null_resource.wait_for_vault,
+  ]
+}
+
+resource "vault_kubernetes_auth_backend_config" "in_cluster" {
+  backend            = vault_auth_backend.kubernetes.path
+  kubernetes_host    = local.kubernetes_host
+  kubernetes_ca_cert = local.kubernetes_ca_cert
 }
