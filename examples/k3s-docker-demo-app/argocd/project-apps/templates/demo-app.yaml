@@ -7,7 +7,7 @@ metadata:
 spec:
   project: default
   source:
-    path: examples/k3s/argocd/demo-app
+    path: examples/k3s-docker-demo-app/argocd/demo-app
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
     helm:
