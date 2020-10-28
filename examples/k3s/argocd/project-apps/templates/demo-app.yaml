@@ -1,4 +1,3 @@
-{{- if index $.Values "apps" "demo-app" "enabled" }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -8,7 +7,7 @@ metadata:
 spec:
   project: default
   source:
-    path: argocd/demo-app
+    path: examples/k3s/argocd/demo-app
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
     helm:
@@ -37,4 +36,3 @@ spec:
   syncPolicy:
     automated:
       selfHeal: true
-{{- end }}

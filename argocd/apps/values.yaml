@@ -15,8 +15,6 @@ apps:
     enabled: true
   cluster-monitoring:
     enabled: true
-  demo-app:
-    enabled: true
   loki:
     enabled: true
   namespaces:

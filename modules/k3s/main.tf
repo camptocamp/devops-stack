@@ -1,33 +1,33 @@
 locals {
-  base_domain        = format("%s.nip.io", replace(module.cluster.ingress_ip_address, ".", "-"))
-  context            = yamldecode(module.cluster.kubeconfig)
-  kubernetes_host    = local.context.clusters.0.cluster.server
-  kubernetes_ca_cert = base64decode(local.context.clusters.0.cluster.certificate-authority-data)
-  client_certificate = base64decode(local.context.users.0.user.client-certificate-data)
-  client_key         = base64decode(local.context.users.0.user.client-key-data)
+  base_domain                       = format("%s.nip.io", replace(module.cluster.ingress_ip_address, ".", "-"))
+  context                           = yamldecode(module.cluster.kubeconfig)
+  kubernetes_host                   = local.context.clusters.0.cluster.server
+  kubernetes_client_certificate     = base64decode(local.context.users.0.user.client-certificate-data)
+  kubernetes_client_key             = base64decode(local.context.users.0.user.client-key-data)
+  kubernetes_cluster_ca_certificate = base64decode(local.context.clusters.0.cluster.certificate-authority-data)
 }
 
 provider "helm" {
   kubernetes {
     host                   = local.kubernetes_host
-    client_certificate     = local.client_certificate
-    client_key             = local.client_key
-    cluster_ca_certificate = local.kubernetes_ca_cert
+    client_certificate     = local.kubernetes_client_certificate
+    client_key             = local.kubernetes_client_key
+    cluster_ca_certificate = local.kubernetes_cluster_ca_certificate
   }
 }
 
 provider "kubernetes" {
   host                   = local.kubernetes_host
-  client_certificate     = local.client_certificate
-  client_key             = local.client_key
-  cluster_ca_certificate = local.kubernetes_ca_cert
+  client_certificate     = local.kubernetes_client_certificate
+  client_key             = local.kubernetes_client_key
+  cluster_ca_certificate = local.kubernetes_cluster_ca_certificate
 }
 
 provider "kubernetes-alpha" {
   host                   = local.kubernetes_host
-  client_certificate     = local.client_certificate
-  client_key             = local.client_key
-  cluster_ca_certificate = local.kubernetes_ca_cert
+  client_certificate     = local.kubernetes_client_certificate
+  client_key             = local.kubernetes_client_key
+  cluster_ca_certificate = local.kubernetes_cluster_ca_certificate
 }
 
 provider "vault" {
@@ -109,10 +109,6 @@ spec:
     targetRevision: ${var.target_revision}
 
 baseDomain: ${local.base_domain}
-
-apps:
-  demo-app:
-    enabled: false
           EOT
         }
       }
@@ -158,5 +154,5 @@ resource "vault_auth_backend" "kubernetes" {
 resource "vault_kubernetes_auth_backend_config" "in_cluster" {
   backend            = vault_auth_backend.kubernetes.path
   kubernetes_host    = local.kubernetes_host
-  kubernetes_ca_cert = local.kubernetes_ca_cert
+  kubernetes_ca_cert = local.kubernetes_cluster_ca_certificate
 }
