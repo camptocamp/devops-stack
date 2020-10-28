@@ -11,7 +11,7 @@ locals {
 }
 
 module "cluster" {
-  source = "git::https://github.com/camptocamp/camptocamp-devops-stack.git//modules/k3s?ref=HEAD"
+  source = "git::https://github.com/camptocamp/camptocamp-devops-stack.git//modules/k3s-docker?ref=HEAD"
 
   cluster_name = terraform.workspace
   node_count   = 1
