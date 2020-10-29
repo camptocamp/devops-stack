@@ -41,51 +41,7 @@ resource "helm_release" "argocd" {
     module.cluster,
   ]
 }
-resource "random_password" "minioaccesskey" {
-  length           = 128
-  special          = true
-  override_special = "_%@"
-}
-resource "random_password" "miniosecretkey" {
-  length           = 128
-  special          = true
-  override_special = "_%@"
-}
 
-resource "vault_generic_secret" "minio" {
-  path = "secret/minio"
-
-  data_json = <<EOT
-{
-  "accessKey":   "${random_password.minioaccesskey.result}",
-  "secretkey":   "${random_password.miniosecretkey.result}",
-}
-EOT
-}
-resource "vault_policy" "minio" {
-  name = "minio"
-
-  policy = <<EOT
-path "secret/data/minio" {
-  capabilities = ["read", "list"]
-}
-path "sys/renew/*" {
-  capabilities = ["update"]
-}
-path "sys/mounts" {
-  capabilities = ["read"]
-}
-EOT
-}
-
-resource "vault_kubernetes_auth_backend_role" "minio" {
-  backend                          = local.kubernetes_vault_auth_backend_path
-  role_name                        = "minio"
-  bound_service_account_names      = ["minio", "secrets-store-csi-driver"]
-  bound_service_account_namespaces = ["minio", "secrets-store-csi-driver"]
-  token_ttl                        = 3600
-  token_policies                   = ["default", vault_policy.demo_app.name]
-}
 
 
 resource "helm_release" "app_of_apps" {
