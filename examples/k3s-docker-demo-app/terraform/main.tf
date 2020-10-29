@@ -74,6 +74,7 @@ resource "vault_generic_secret" "minio" {
 }
 EOT
 }
+
 resource "vault_policy" "minio" {
   name = "minio"
 
