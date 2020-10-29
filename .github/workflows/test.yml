@@ -12,6 +12,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: cd examples/k3s-docker-demo-app && make debug
       - run: cd examples/k3s-docker-demo-app && make
       - run: cd examples/k3s-docker-demo-app && make clean
