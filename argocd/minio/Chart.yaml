@@ -1,0 +1,7 @@
+apiVersion: "v2"
+name: "minio"
+version: "0"
+dependencies:
+  - name: "minio"
+    version: "8.0.0"
+    repository: "https://helm.min.io/"

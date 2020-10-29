@@ -31,7 +31,8 @@ apps:
     enabled: true
   vault:
     enabled: false
-
+  minio:
+    enabeld: false
 argo-cd: {}
 cert-manager: {}
 efs-provisioner: {}

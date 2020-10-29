@@ -1,0 +1,12 @@
+minio:
+  accessKey: ZQQhDzrKcSB2eYntvQEcfE5m8xgBwdMd
+  secretKey: FqYB6mV5YtwzVs9JNTNjsSEmmHY7XsXZ
+  metrics:
+    serviceMonitor:
+      enabled: true
+  buckets:
+    - name: thanos
+      policy: none
+      purge: false
+  persistence:
+    enabled: false
