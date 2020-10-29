@@ -1,4 +1,3 @@
-
 {{- if index $.Values "apps" "minio" "enabled" }}
 ---
 apiVersion: argoproj.io/v1alpha1
