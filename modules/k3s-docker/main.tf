@@ -9,10 +9,10 @@ locals {
 
 provider "helm" {
   kubernetes {
-    host                   = local.kubernetes_host
-    client_certificate     = local.kubernetes_client_certificate
-    client_key             = local.kubernetes_client_key
-    cluster_ca_certificate = local.kubernetes_cluster_ca_certificate
+    insecure           = true
+    host               = local.kubernetes_host
+    client_certificate = local.kubernetes_client_certificate
+    client_key         = local.kubernetes_client_key
   }
 }
 
