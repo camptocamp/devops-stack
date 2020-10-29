@@ -41,7 +41,7 @@ resource "helm_release" "argocd" {
     module.cluster,
   ]
 }
-resource "random_password" "minioaccessKey" {
+resource "random_password" "minioaccesskey" {
   length           = 128
   special          = true
   override_special = "_%@"
@@ -78,7 +78,7 @@ path "sys/mounts" {
 EOT
 }
 
-resource "vault_kubernetes_auth_backend_role" "demo_app" {
+resource "vault_kubernetes_auth_backend_role" "minio" {
   backend                          = local.kubernetes_vault_auth_backend_path
   role_name                        = "minio"
   bound_service_account_names      = ["minio", "secrets-store-csi-driver"]
