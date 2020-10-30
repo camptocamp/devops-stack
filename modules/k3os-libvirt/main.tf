@@ -38,11 +38,14 @@ provider "vault" {
 
 module "cluster" {
   source  = "camptocamp/k3os/libvirt"
-  version = "0.1.2"
+  version = "0.2.0"
 
   cluster_name = var.cluster_name
   k3os_version = var.k3os_version
   node_count   = var.node_count
+
+  server_memory = 2048
+  agent_memory  = 2048
 }
 
 resource "helm_release" "argocd" {
