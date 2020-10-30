@@ -5,6 +5,6 @@ charts/
 build/
 node_modules
 package-lock.json
-examples/k3s-docker-demo-app/terraform/dev.log
-examples/k3s-docker-demo-app/terraform/kubeconfig.yaml
-examples/k3s-docker-demo-app/terraform/terraform.tfstate*
+examples/*/terraform/dev.log
+examples/*/terraform/kubeconfig.yaml
+examples/*/terraform/terraform.tfstate*
