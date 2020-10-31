@@ -7,7 +7,7 @@ SCRIPT_PATH := $(shell echo $(REPO_URL) | sed "s@https://github.com/\(.*\)\.git@
 .PHONY: provision clean
 
 provision: terraform/*.tf
-	curl $(SCRIPT_PATH)/scripts/provision.sh | sh
+	curl $(SCRIPT_PATH)/scripts/provision.sh | CLUSTER_NAME=$(CLUSTER_NAME) sh
 
 clean:
-	curl $(SCRIPT_PATH)/scripts/destroy.sh | sh
+	curl $(SCRIPT_PATH)/scripts/destroy.sh | CLUSTER_NAME=$(CLUSTER_NAME) sh
