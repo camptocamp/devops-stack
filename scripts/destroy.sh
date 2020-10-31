@@ -8,6 +8,12 @@ cd terraform || exit
 terraform init -upgrade
 terraform workspace select "$CLUSTER_NAME" || terraform workspace new "$CLUSTER_NAME"
 terraform init -upgrade
+for resource in $(terraform state list|grep kubernetes_manifest); do
+	terraform state rm "$resource"
+done
+for resource in $(terraform state list|grep helm_release); do
+	terraform state rm "$resource"
+done
 terraform destroy --auto-approve
 if [ "$CLUSTER_NAME" != "default" ]; then
 	terraform workspace select default
