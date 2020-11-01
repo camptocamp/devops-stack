@@ -75,6 +75,12 @@ baseDomain: ${local.base_domain}
       }
     }
   }
+
+  lifecycle {
+    ignore_changes = [
+      object,
+    ]
+  }
 }
 
 resource "random_password" "superdupersecret" {
