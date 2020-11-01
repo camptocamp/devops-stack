@@ -1,0 +1,22 @@
+---
+name: test
+on:
+  push:
+    branches:
+      - master
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: examples/k3s-docker-demo-app
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy cluster
+        run: ../../scripts/provision.sh
+        env:
+          CLUSTER_NAME: default
+      - name: Destroy cluster
+        run: ../../scripts/destroy.sh
+        env:
+          CLUSTER_NAME: default

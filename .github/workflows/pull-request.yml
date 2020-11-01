@@ -1,0 +1,49 @@
+---
+name: pull_request
+on:
+  pull_request:
+    branches:
+      - master
+jobs:
+  from_scratch:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: examples/k3s-docker-demo-app
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy cluster
+        run: ../../scripts/provision.sh
+        env:
+          CLUSTER_NAME: default
+      - name: Destroy cluster
+        run: ../../scripts/destroy.sh
+        env:
+          CLUSTER_NAME: default
+  update:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: examples/k3s-docker-demo-app
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.base_ref }}
+      - name: Deploy a cluster with base_ref code
+        run: |
+          ../../scripts/provision.sh
+        env:
+          CLUSTER_NAME: default
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.ref }}
+          clean: false
+      - name: Dry-run on ref
+        run: |
+          ../../scripts/plan.sh
+        env:
+          CLUSTER_NAME: default
+      - name: Destroy cluster
+        run: ../../scripts/destroy.sh
+        env:
+          CLUSTER_NAME: default
