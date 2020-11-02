@@ -58,6 +58,7 @@ resource "random_password" "minioaccesskey" {
   special          = true
   override_special = "_%@"
 }
+
 resource "random_password" "miniosecretkey" {
   length           = 128
   special          = true
