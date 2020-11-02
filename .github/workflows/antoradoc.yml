@@ -31,9 +31,9 @@ jobs:
     name: "Deploy GitHub Pages"
     steps:
      - name: Setup Node.js for use with actions
-       uses: actions/setup-node@v1.1.0
+       uses: actions/setup-node@v1.4.4
        with:
-         version: 12.x
+         node-version: 12.x
      - name: Checkout
        uses: actions/checkout@v2
      - name: Download generated site
