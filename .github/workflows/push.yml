@@ -1,5 +1,5 @@
 ---
-name: test
+name: push
 on:
   push:
     branches:
