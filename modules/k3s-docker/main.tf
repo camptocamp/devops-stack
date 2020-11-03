@@ -105,7 +105,7 @@ resource "vault_generic_secret" "minio" {
   data_json = <<EOT
 {
   "accessKey":   "${random_password.minioaccesskey.result}",
-  "secretkey":   "${random_password.miniosecretkey.result}",
+  "secretkey":   "${random_password.miniosecretkey.result}"
 }
 EOT
 }
