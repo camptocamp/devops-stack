@@ -6,7 +6,7 @@ variable "cluster_name" {
 variable "k3s_version" {
   description = "The K3s version to use"
   type        = string
-  default     = "v1.19.2-k3s1"
+  default     = "v1.18.10-k3s1"
 }
 
 variable "node_count" {

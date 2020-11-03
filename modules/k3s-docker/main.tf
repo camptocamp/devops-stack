@@ -1,32 +1,33 @@
+
 locals {
   base_domain                       = format("%s.nip.io", replace(module.cluster.ingress_ip_address, ".", "-"))
   context                           = yamldecode(module.cluster.kubeconfig)
   kubernetes_host                   = local.context.clusters.0.cluster.server
-  kubernetes_client_certificate     = base64decode(local.context.users.0.user.client-certificate-data)
-  kubernetes_client_key             = base64decode(local.context.users.0.user.client-key-data)
+  kubernetes_username               = local.context.users.0.user.username
+  kubernetes_password               = local.context.users.0.user.password
   kubernetes_cluster_ca_certificate = base64decode(local.context.clusters.0.cluster.certificate-authority-data)
 }
 
 provider "helm" {
   kubernetes {
-    insecure           = true
-    host               = local.kubernetes_host
-    client_certificate = local.kubernetes_client_certificate
-    client_key         = local.kubernetes_client_key
+    insecure = true
+    host     = local.kubernetes_host
+    username = local.kubernetes_username
+    password = local.kubernetes_password
   }
 }
 
 provider "kubernetes" {
   host                   = local.kubernetes_host
-  client_certificate     = local.kubernetes_client_certificate
-  client_key             = local.kubernetes_client_key
+  username               = local.kubernetes_username
+  password               = local.kubernetes_password
   cluster_ca_certificate = local.kubernetes_cluster_ca_certificate
 }
 
 provider "kubernetes-alpha" {
   host                   = local.kubernetes_host
-  client_certificate     = local.kubernetes_client_certificate
-  client_key             = local.kubernetes_client_key
+  username               = local.kubernetes_username
+  password               = local.kubernetes_password
   cluster_ca_certificate = local.kubernetes_cluster_ca_certificate
 }
 

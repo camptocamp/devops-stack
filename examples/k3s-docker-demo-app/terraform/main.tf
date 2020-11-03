@@ -4,8 +4,8 @@ locals {
 
   base_domain                        = module.cluster.base_domain
   kubernetes_host                    = module.cluster.kubernetes_host
-  kubernetes_client_certificate      = module.cluster.kubernetes_client_certificate
-  kubernetes_client_key              = module.cluster.kubernetes_client_key
+  kubernetes_username                = module.cluster.kubernetes_username
+  kubernetes_password                = module.cluster.kubernetes_password
   kubernetes_cluster_ca_certificate  = module.cluster.kubernetes_cluster_ca_certificate
   kubernetes_vault_auth_backend_path = module.cluster.kubernetes_vault_auth_backend_path
 }
@@ -22,8 +22,8 @@ module "cluster" {
 
 provider "kubernetes-alpha" {
   host                   = local.kubernetes_host
-  client_certificate     = local.kubernetes_client_certificate
-  client_key             = local.kubernetes_client_key
+  username               = local.kubernetes_username
+  password               = local.kubernetes_password
   cluster_ca_certificate = local.kubernetes_cluster_ca_certificate
 }
 
