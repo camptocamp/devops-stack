@@ -27,3 +27,11 @@ apps:
     enabled: true
   vault:
     enabled: true
+
+argo-cd: {}
+cert-manager: {}
+kube-prometheus-stack: {}
+loki: {}
+secrets-store-csi-driver: {}
+traefik: {}
+vault: {}

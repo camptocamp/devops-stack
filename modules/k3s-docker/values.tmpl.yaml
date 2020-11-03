@@ -1,0 +1,85 @@
+---
+spec:
+  source:
+    repoURL: ${repo_url}
+    targetRevision: ${target_revision}
+
+argo-cd:
+  controller:
+    metrics:
+      enabled: true
+  server:
+    ingress:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: selfsigned-issuer
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+      hosts:
+        - argocd.apps.${base_domain}
+      tls:
+        - secretName: argocd-secret
+          hosts:
+            - argocd.apps.${base_domain}
+    metrics:
+      enabled: true
+  repoServer:
+    metrics:
+      enabled: true
+
+kube-prometheus-stack:
+  alertmanager:
+    ingress:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: selfsigned-issuer
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+      hosts:
+        - alertmanager.apps.${base_domain}
+      tls:
+        - secretName: alertmanager-secret
+          hosts:
+            - alertmanager.apps.${base_domain}
+  grafana:
+    ingress:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: selfsigned-issuer
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+      hosts:
+        - grafana.apps.${base_domain}
+      tls:
+        - secretName: grafana-secret
+          hosts:
+            - grafana.apps.${base_domain}
+  prometheus:
+    ingress:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: selfsigned-issuer
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+      hosts:
+        - prometheus.apps.${base_domain}
+      tls:
+        - secretName: prometheus-secret
+          hosts:
+            - prometheus.apps.${base_domain}
+
+vault:
+  server:
+    ingress:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: selfsigned-issuer
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+      hosts:
+        - host: vault.apps.${base_domain}
+          path: []
+      tls:
+        - secretName: vault-secret
+          hosts:
+            - vault.apps.${base_domain}

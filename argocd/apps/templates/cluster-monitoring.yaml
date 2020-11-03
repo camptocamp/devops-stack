@@ -13,48 +13,8 @@ spec:
     targetRevision: {{ .Values.spec.source.targetRevision }}
     helm:
       values: |
-        baseDomain: {{ .Values.baseDomain }}
         kube-prometheus-stack:
-          alertmanager:
-            ingress:
-              enabled: true
-              annotations:
-                cert-manager.io/cluster-issuer: selfsigned-issuer
-                traefik.ingress.kubernetes.io/router.entrypoints: websecure
-                traefik.ingress.kubernetes.io/router.tls: "true"
-              hosts:
-                - alertmanager.apps.{{ .Values.baseDomain }}
-              tls:
-                - secretName: alertmanager-secret
-                  hosts:
-                    - alertmanager.apps.{{ .Values.baseDomain }}
-          grafana:
-            ingress:
-              enabled: true
-              annotations:
-                cert-manager.io/cluster-issuer: selfsigned-issuer
-                traefik.ingress.kubernetes.io/router.entrypoints: websecure
-                traefik.ingress.kubernetes.io/router.tls: "true"
-              hosts:
-                - grafana.apps.{{ .Values.baseDomain }}
-              tls:
-                - secretName: grafana-secret
-                  hosts:
-                    - grafana.apps.{{ .Values.baseDomain }}
-          prometheus:
-            ingress:
-              enabled: true
-              annotations:
-                cert-manager.io/cluster-issuer: selfsigned-issuer
-                traefik.ingress.kubernetes.io/router.entrypoints: websecure
-                traefik.ingress.kubernetes.io/router.tls: "true"
-              hosts:
-                - prometheus.apps.{{ .Values.baseDomain }}
-              tls:
-                - secretName: prometheus-secret
-                  hosts:
-                    - prometheus.apps.{{ .Values.baseDomain }}
-
+          {{- index .Values "kube-prometheus-stack" | toYaml | nindent 10 }}
   destination:
     namespace: cluster-monitoring
     server: {{ .Values.spec.destination.server }}

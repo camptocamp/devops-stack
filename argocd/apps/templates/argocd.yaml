@@ -13,30 +13,8 @@ spec:
     targetRevision: {{ .Values.spec.source.targetRevision }}
     helm:
       values: |
-        baseDomain: {{ .Values.baseDomain }}
-        # Enable metrics here because CRDs are not available at bootstrap
         argo-cd:
-          controller:
-            metrics:
-              enabled: true
-          server:
-            ingress:
-              enabled: true
-              annotations:
-                cert-manager.io/cluster-issuer: selfsigned-issuer
-                traefik.ingress.kubernetes.io/router.entrypoints: websecure
-                traefik.ingress.kubernetes.io/router.tls: "true"
-              hosts:
-                - argocd.apps.{{ .Values.baseDomain }}
-              tls:
-                - secretName: argocd-secret
-                  hosts:
-                    - argocd.apps.{{ .Values.baseDomain }}
-            metrics:
-              enabled: true
-          repoServer:
-            metrics:
-              enabled: true
+          {{- index .Values "argo-cd" | toYaml | nindent 10 }}
   destination:
     namespace: argocd
     server: {{ .Values.spec.destination.server }}

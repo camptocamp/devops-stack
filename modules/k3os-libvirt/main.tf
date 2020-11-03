@@ -104,15 +104,14 @@ resource "kubernetes_manifest" "app_of_apps" {
         "repoURL"        = var.repo_url
         "targetRevision" = var.target_revision
         "helm" = {
-          "values" = <<EOT
----
-spec:
-  source:
-    repoURL: ${var.repo_url}
-    targetRevision: ${var.target_revision}
-
-baseDomain: ${local.base_domain}
-          EOT
+          "values" = templatefile("${path.module}/values.tmpl.yaml",
+            {
+              cluster_name    = var.cluster_name,
+              base_domain     = local.base_domain,
+              repo_url        = var.repo_url,
+              target_revision = var.target_revision,
+            }
+          )
         }
       }
       "destination" = {

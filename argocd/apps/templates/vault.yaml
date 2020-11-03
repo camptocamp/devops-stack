@@ -16,20 +16,7 @@ spec:
     helm:
       values: |
         vault:
-          server:
-            ingress:
-              enabled: true
-              annotations:
-                cert-manager.io/cluster-issuer: selfsigned-issuer
-                traefik.ingress.kubernetes.io/router.entrypoints: websecure
-                traefik.ingress.kubernetes.io/router.tls: "true"
-              hosts:
-                - host: vault.apps.{{ .Values.baseDomain }}
-                  path: []
-              tls:
-                - secretName: vault-secret
-                  hosts:
-                    - vault.apps.{{ .Values.baseDomain }}
+          {{- index .Values "vault" | toYaml | nindent 10 }}
   destination:
     namespace: vault
     server: {{ .Values.spec.destination.server }}
