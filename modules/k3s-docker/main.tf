@@ -130,5 +130,5 @@ resource "vault_kubernetes_auth_backend_role" "minio" {
   bound_service_account_names      = ["minio", "secrets-store-csi-driver"]
   bound_service_account_namespaces = ["minio", "secrets-store-csi-driver"]
   token_ttl                        = 3600
-  token_policies                   = ["default"]
+  token_policies                   = ["default",vault_policy.minio.name]
 }
