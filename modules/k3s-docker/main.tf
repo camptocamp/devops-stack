@@ -108,10 +108,6 @@ resource "vault_generic_secret" "minio" {
   "secretkey":   "${random_password.miniosecretkey.result}",
 }
 EOT
-  depends_on = [
-    null_resource.wait_for_vault,
-  ]
-
 }
 
 resource "vault_policy" "minio" {
@@ -129,9 +125,6 @@ path "sys/mounts" {
 }
 EOT
 
-  depends_on = [
-    null_resource.wait_for_vault,
-  ]
 }
 
 resource "vault_kubernetes_auth_backend_role" "minio" {
@@ -141,8 +134,4 @@ resource "vault_kubernetes_auth_backend_role" "minio" {
   bound_service_account_namespaces = ["minio", "secrets-store-csi-driver"]
   token_ttl                        = 3600
   token_policies                   = ["default", vault_policy.demo_app.name]
-
-  depends_on = [
-    null_resource.wait_for_vault,
-  ]
 }
