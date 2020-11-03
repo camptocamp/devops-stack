@@ -6,12 +6,12 @@ output "kubernetes_host" {
   value = local.kubernetes_host
 }
 
-output "kubernetes_client_certificate" {
-  value = local.kubernetes_client_certificate
+output "kubernetes_username" {
+  value = local.kubernetes_username
 }
 
-output "kubernetes_client_key" {
-  value = local.kubernetes_client_key
+output "kubernetes_password" {
+  value = local.kubernetes_password
 }
 
 output "kubernetes_cluster_ca_certificate" {
