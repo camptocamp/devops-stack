@@ -13,6 +13,10 @@ spec:
     path: argocd/traefik
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
+    helm:
+      values: |
+        traefik:
+          {{- index .Values "traefik" | toYaml | nindent 10 }}
   destination:
     namespace: traefik
     server: {{ .Values.spec.destination.server }}

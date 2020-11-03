@@ -13,6 +13,10 @@ spec:
     path: argocd/cert-manager
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
+    helm:
+      values: |
+        cert-manager:
+          {{- index .Values "cert-manager" | toYaml | nindent 10 }}
   destination:
     namespace: cert-manager
     server: {{ .Values.spec.destination.server }}

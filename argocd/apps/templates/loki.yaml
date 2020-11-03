@@ -11,6 +11,10 @@ spec:
     path: argocd/loki
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
+    helm:
+      values: |
+        loki:
+          {{- index .Values "loki" | toYaml | nindent 10 }}
   destination:
     namespace: cluster-monitoring
     server: {{ .Values.spec.destination.server }}
