@@ -88,15 +88,13 @@ resource "random_password" "cookie_secret" {
 }
 
 resource "random_password" "minioaccesskey" {
-  length           = 128
+  length           = 32
   special          = true
-  override_special = "_%@"
 }
 
 resource "random_password" "miniosecretkey" {
-  length           = 128
+  length           = 32
   special          = true
-  override_special = "_%@"
 }
 
 resource "vault_generic_secret" "minio" {
