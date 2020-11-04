@@ -52,3 +52,13 @@ resource "aws_route53_record" "wildcard" {
     module.nlb.this_lb_dns_name,
   ]
 }
+
+resource "aws_route53_record" "wildcard-short" {
+  zone_id = data.aws_route53_zone.this.id
+  name    = "*.apps"
+  type    = "CNAME"
+  ttl     = "300"
+  records = [
+    module.nlb.this_lb_dns_name,
+  ]
+}
