@@ -18,7 +18,7 @@ argo-cd:
       url: https://argocd.apps.${cluster_name}.${base_domain}
       oidc.config: |
         name: Cognito
-        issuer: https://cognito-idp.eu-central-1.amazonaws.com/${cognito_user_pool_id}
+        issuer: https://cognito-idp.${aws_default_region}.amazonaws.com/${cognito_user_pool_id}
         clientID: ${cognito_user_pool_client_id}
         clientSecret: ${cognito_user_pool_client_secret}
         requestedScopes: ["openid", "profile", "email"]
@@ -61,7 +61,7 @@ kube-prometheus-stack:
             - --http-address=0.0.0.0:9095
             - --upstream=http://localhost:9093
             - --provider=oidc
-            - --oidc-issuer-url=https://cognito-idp.eu-central-1.amazonaws.com/${cognito_user_pool_id}
+            - --oidc-issuer-url=https://cognito-idp.${aws_default_region}.amazonaws.com/${cognito_user_pool_id}
             - --client-id=${cognito_user_pool_client_id}
             - --client-secret=${cognito_user_pool_client_secret}
             - --cookie-secure=false
@@ -97,7 +97,7 @@ kube-prometheus-stack:
             - --http-address=0.0.0.0:9091
             - --upstream=http://localhost:9090
             - --provider=oidc
-            - --oidc-issuer-url=https://cognito-idp.eu-central-1.amazonaws.com/${cognito_user_pool_id}
+            - --oidc-issuer-url=https://cognito-idp.${aws_default_region}.amazonaws.com/${cognito_user_pool_id}
             - --client-id=${cognito_user_pool_client_id}
             - --client-secret=${cognito_user_pool_client_secret}
             - --cookie-secure=false
