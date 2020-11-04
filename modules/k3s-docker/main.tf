@@ -10,10 +10,11 @@ locals {
 
 provider "helm" {
   kubernetes {
-    insecure = true
-    host     = local.kubernetes_host
-    username = local.kubernetes_username
-    password = local.kubernetes_password
+    insecure         = true
+    host             = local.kubernetes_host
+    username         = local.kubernetes_username
+    password         = local.kubernetes_password
+    load_config_file = false
   }
 }
 
