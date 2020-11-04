@@ -9,29 +9,28 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: examples/k3s-docker-demo-app
+        working-directory: tests/k3s-docker-demo-app
     steps:
       - uses: actions/checkout@v2
       - name: Deploy cluster
-        run: ../../scripts/provision.sh
+        run: TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git TF_VAR_target_revision=${{ github.base_ref }} ../../scripts/provision.sh
         env:
           CLUSTER_NAME: default
       - name: Destroy cluster
-        run: ../../scripts/destroy.sh
+        run: TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git TF_VAR_target_revision=${{ github.base_ref }} ../../scripts/destroy.sh
         env:
           CLUSTER_NAME: default
   update:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: examples/k3s-docker-demo-app
+        working-directory: tests/k3s-docker-demo-app
     steps:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.base_ref }}
       - name: Deploy a cluster with base_ref code
-        run: |
-          ../../scripts/provision.sh
+        run: TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git TF_VAR_target_revision=${{ github.base_ref }} ../../scripts/provision.sh
         env:
           CLUSTER_NAME: default
       - uses: actions/checkout@v2
@@ -39,11 +38,10 @@ jobs:
           ref: ${{ github.ref }}
           clean: false
       - name: Dry-run on ref
-        run: |
-          ../../scripts/plan.sh
+        run: TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git TF_VAR_target_revision=${{ github.base_ref }} ../../scripts/plan.sh
         env:
           CLUSTER_NAME: default
       - name: Destroy cluster
-        run: ../../scripts/destroy.sh
+        run: TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git TF_VAR_target_revision=${{ github.base_ref }} ../../scripts/destroy.sh
         env:
           CLUSTER_NAME: default

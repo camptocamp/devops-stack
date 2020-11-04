@@ -8,3 +8,6 @@ package-lock.json
 examples/*/terraform/dev.log
 examples/*/terraform/kubeconfig.yaml
 examples/*/terraform/terraform.tfstate*
+tests/*/terraform/dev.log
+tests/*/terraform/kubeconfig.yaml
+tests/*/terraform/terraform.tfstate*
