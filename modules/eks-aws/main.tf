@@ -159,6 +159,7 @@ resource "kubernetes_manifest" "app_of_apps" {
         "repoURL"        = var.repo_url
         "targetRevision" = var.target_revision
         "helm" = {
+          "parameters" = var.app_of_apps_parameters
           "values" = templatefile("${path.module}/values.tmpl.yaml",
             {
               cluster_name                    = var.cluster_name,

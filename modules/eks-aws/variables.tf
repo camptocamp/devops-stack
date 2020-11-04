@@ -49,3 +49,13 @@ variable "cognito_user_pool_id" {
   description = "ID of the Cognito user pool to use."
   type        = string
 }
+
+variable "app_of_apps_parameters" {
+  description = "App of apps parameters overrides."
+  type = list(object({
+    name        = string
+    value       = string
+    forceString = bool
+  }))
+  default = []
+}

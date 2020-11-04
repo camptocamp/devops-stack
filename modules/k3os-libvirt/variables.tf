@@ -25,3 +25,13 @@ variable "target_revision" {
   description = "The source target revision of ArgoCD's app of apps."
   type        = string
 }
+
+variable "app_of_apps_parameters" {
+  description = "App of apps parameters overrides."
+  type = list(object({
+    name        = string
+    value       = string
+    forceString = bool
+  }))
+  default = []
+}
