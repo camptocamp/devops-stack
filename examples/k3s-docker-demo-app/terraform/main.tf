@@ -20,11 +20,14 @@ module "cluster" {
   target_revision = local.target_revision
 }
 
-provider "kubernetes-alpha" {
-  host                   = local.kubernetes_host
-  username               = local.kubernetes_username
-  password               = local.kubernetes_password
-  cluster_ca_certificate = local.kubernetes_cluster_ca_certificate
+provider "helm" {
+  kubernetes {
+    insecure         = true
+    host             = local.kubernetes_host
+    username         = local.kubernetes_username
+    password         = local.kubernetes_password
+    load_config_file = false
+  }
 }
 
 provider "vault" {
@@ -33,27 +36,15 @@ provider "vault" {
   skip_tls_verify = true
 }
 
-resource "kubernetes_manifest" "project_apps" {
-  provider = kubernetes-alpha
+resource "helm_release" "project_apps" {
+  name              = "project-apps"
+  chart             = "${path.module}/../argocd/project-apps"
+  namespace         = "argocd"
+  dependency_update = true
+  create_namespace  = true
 
-  manifest = {
-    "apiVersion" = "argoproj.io/v1alpha1"
-    "kind"       = "Application"
-    "metadata" = {
-      "name"      = "project-apps"
-      "namespace" = "argocd"
-      "annotations" = {
-        "argocd.argoproj.io/sync-wave" = "15"
-      }
-    }
-    "spec" = {
-      "project" = "default"
-      "source" = {
-        "path"           = "examples/k3s-docker-demo-app/argocd/project-apps"
-        "repoURL"        = local.repo_url
-        "targetRevision" = local.target_revision
-        "helm" = {
-          "values" = <<EOT
+  values = [
+    <<EOT
 ---
 spec:
   source:
@@ -62,25 +53,11 @@ spec:
 
 baseDomain: ${local.base_domain}
           EOT
-        }
-      }
-      "destination" = {
-        "namespace" = "default"
-        "server"    = "https://kubernetes.default.svc"
-      }
-      "syncPolicy" = {
-        "automated" = {
-          "selfHeal" = true
-        }
-      }
-    }
-  }
+  ]
 
-  lifecycle {
-    ignore_changes = [
-      object,
-    ]
-  }
+  depends_on = [
+    module.cluster,
+  ]
 }
 
 resource "random_password" "superdupersecret" {

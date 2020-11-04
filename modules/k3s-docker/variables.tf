@@ -25,12 +25,8 @@ variable "target_revision" {
   type        = string
 }
 
-variable "app_of_apps_parameters" {
-  description = "App of apps parameters overrides."
-  type = list(object({
-    name        = string
-    value       = string
-    forceString = bool
-  }))
-  default = []
+variable "app_of_apps_values_overrides" {
+  description = "App of apps values overrides."
+  type        = string
+  default     = ""
 }

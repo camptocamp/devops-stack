@@ -44,6 +44,7 @@ provider "helm" {
     host                   = local.kubernetes_host
     cluster_ca_certificate = local.kubernetes_cluster_ca_certificate
     token                  = local.kubernetes_token
+    load_config_file       = false
   }
 }
 
@@ -52,12 +53,6 @@ provider "kubernetes" {
   cluster_ca_certificate = local.kubernetes_cluster_ca_certificate
   token                  = local.kubernetes_token
   load_config_file       = false
-}
-
-provider "kubernetes-alpha" {
-  host                   = local.kubernetes_host
-  cluster_ca_certificate = local.kubernetes_cluster_ca_certificate
-  token                  = local.kubernetes_token
 }
 
 locals {
@@ -139,54 +134,30 @@ resource "random_password" "oauth2_cookie_secret" {
   special = false
 }
 
-resource "kubernetes_manifest" "app_of_apps" {
-  provider = kubernetes-alpha
+resource "helm_release" "app_of_apps" {
+  name              = "app-of-apps"
+  chart             = "${path.module}/../../argocd/app-of-apps"
+  namespace         = "argocd"
+  dependency_update = true
+  create_namespace  = true
 
-  manifest = {
-    "apiVersion" = "argoproj.io/v1alpha1"
-    "kind"       = "Application"
-    "metadata" = {
-      "name"      = "apps"
-      "namespace" = "argocd"
-      "annotations" = {
-        "argocd.argoproj.io/sync-wave" = "5"
+  values = [
+    templatefile("${path.module}/values.tmpl.yaml",
+      {
+        cluster_name                    = var.cluster_name,
+        base_domain                     = var.base_domain,
+        repo_url                        = var.repo_url,
+        target_revision                 = var.target_revision,
+        aws_default_region              = data.aws_region.current.name,
+        cert_manager_assumable_role_arn = module.iam_assumable_role_cert_manager.this_iam_role_arn,
+        cognito_user_pool_id            = var.cognito_user_pool_id
+        cognito_user_pool_client_id     = aws_cognito_user_pool_client.client.id
+        cognito_user_pool_client_secret = aws_cognito_user_pool_client.client.client_secret
+        cookie_secret                   = random_password.oauth2_cookie_secret.result
       }
-    }
-    "spec" = {
-      "project" = "default"
-      "source" = {
-        "path"           = "argocd/apps"
-        "repoURL"        = var.repo_url
-        "targetRevision" = var.target_revision
-        "helm" = {
-          "parameters" = var.app_of_apps_parameters
-          "values" = templatefile("${path.module}/values.tmpl.yaml",
-            {
-              cluster_name                    = var.cluster_name,
-              base_domain                     = var.base_domain,
-              repo_url                        = var.repo_url,
-              target_revision                 = var.target_revision,
-              aws_default_region              = data.aws_region.current.name,
-              cert_manager_assumable_role_arn = module.iam_assumable_role_cert_manager.this_iam_role_arn,
-              cognito_user_pool_id            = var.cognito_user_pool_id
-              cognito_user_pool_client_id     = aws_cognito_user_pool_client.client.id
-              cognito_user_pool_client_secret = aws_cognito_user_pool_client.client.client_secret
-              cookie_secret                   = random_password.oauth2_cookie_secret.result
-            }
-          )
-        }
-      }
-      "destination" = {
-        "namespace" = "default"
-        "server"    = "https://kubernetes.default.svc"
-      }
-      "syncPolicy" = {
-        "automated" = {
-          "selfHeal" = true
-        }
-      }
-    }
-  }
+    ),
+    var.app_of_apps_values_overrides,
+  ]
 
   depends_on = [
     helm_release.argocd,

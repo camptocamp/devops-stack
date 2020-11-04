@@ -1,0 +1,4 @@
+---
+apiVersion: "v2"
+name: "app-of-apps"
+version: "0"

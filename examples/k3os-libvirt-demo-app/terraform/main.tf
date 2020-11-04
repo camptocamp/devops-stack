@@ -1,6 +1,6 @@
 locals {
   repo_url        = "https://github.com/camptocamp/camptocamp-devops-stack.git"
-  target_revision = "master"
+  target_revision = "HEAD"
 
   base_domain                        = module.cluster.base_domain
   kubernetes_host                    = module.cluster.kubernetes_host
@@ -11,7 +11,7 @@ locals {
 }
 
 module "cluster" {
-  source = "git::https://github.com/camptocamp/camptocamp-devops-stack.git//modules/k3os-libvirt?ref=master"
+  source = "git::https://github.com/camptocamp/camptocamp-devops-stack.git//modules/k3os-libvirt?ref=HEAD"
 
   cluster_name = terraform.workspace
   node_count   = 1
@@ -20,11 +20,14 @@ module "cluster" {
   target_revision = local.target_revision
 }
 
-provider "kubernetes-alpha" {
-  host                   = local.kubernetes_host
-  username               = local.kubernetes_username
-  password               = local.kubernetes_password
-  cluster_ca_certificate = local.kubernetes_cluster_ca_certificate
+provider "helm" {
+  kubernetes {
+    insecure         = true
+    host             = local.kubernetes_host
+    username         = local.kubernetes_username
+    password         = local.kubernetes_password
+    load_config_file = false
+  }
 }
 
 provider "vault" {
@@ -33,47 +36,28 @@ provider "vault" {
   skip_tls_verify = true
 }
 
-resource "kubernetes_manifest" "project_apps" {
-  provider = kubernetes-alpha
+resource "helm_release" "project_apps" {
+  name              = "project-apps"
+  chart             = "${path.module}/../argocd/project-apps"
+  namespace         = "argocd"
+  dependency_update = true
+  create_namespace  = true
 
-  manifest = {
-    "apiVersion" = "argoproj.io/v1alpha1"
-    "kind"       = "Application"
-    "metadata" = {
-      "name"      = "project-apps"
-      "namespace" = "argocd"
-      "annotations" = {
-        "argocd.argoproj.io/sync-wave" = "15"
-      }
-    }
-    "spec" = {
-      "project" = "default"
-      "source" = {
-        "path"           = "examples/k3s-docker-demo-app/argocd/project-apps"
-        "repoURL"        = local.repo_url
-        "targetRevision" = local.target_revision
-        "helm" = {
-          "values" = <<EOT
+  values = [
+    <<EOT
 ---
 spec:
   source:
     repoURL: ${local.repo_url}
     targetRevision: ${local.target_revision}
+
 baseDomain: ${local.base_domain}
           EOT
-        }
-      }
-      "destination" = {
-        "namespace" = "default"
-        "server"    = "https://kubernetes.default.svc"
-      }
-      "syncPolicy" = {
-        "automated" = {
-          "selfHeal" = true
-        }
-      }
-    }
-  }
+  ]
+
+  depends_on = [
+    module.cluster,
+  ]
 }
 
 resource "random_password" "superdupersecret" {

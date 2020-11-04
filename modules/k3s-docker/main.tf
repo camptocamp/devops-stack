@@ -1,4 +1,3 @@
-
 locals {
   base_domain                       = format("%s.nip.io", replace(module.cluster.ingress_ip_address, ".", "-"))
   context                           = yamldecode(module.cluster.kubeconfig)
@@ -16,20 +15,6 @@ provider "helm" {
     password         = local.kubernetes_password
     load_config_file = false
   }
-}
-
-provider "kubernetes" {
-  host                   = local.kubernetes_host
-  username               = local.kubernetes_username
-  password               = local.kubernetes_password
-  cluster_ca_certificate = local.kubernetes_cluster_ca_certificate
-}
-
-provider "kubernetes-alpha" {
-  host                   = local.kubernetes_host
-  username               = local.kubernetes_username
-  password               = local.kubernetes_password
-  cluster_ca_certificate = local.kubernetes_cluster_ca_certificate
 }
 
 provider "vault" {
@@ -83,48 +68,24 @@ server:
   ]
 }
 
-resource "kubernetes_manifest" "app_of_apps" {
-  provider = kubernetes-alpha
+resource "helm_release" "app_of_apps" {
+  name              = "app-of-apps"
+  chart             = "${path.module}/../../argocd/app-of-apps"
+  namespace         = "argocd"
+  dependency_update = true
+  create_namespace  = true
 
-  manifest = {
-    "apiVersion" = "argoproj.io/v1alpha1"
-    "kind"       = "Application"
-    "metadata" = {
-      "name"      = "apps"
-      "namespace" = "argocd"
-      "annotations" = {
-        "argocd.argoproj.io/sync-wave" = "5"
+  values = [
+    templatefile("${path.module}/values.tmpl.yaml",
+      {
+        cluster_name    = var.cluster_name,
+        base_domain     = local.base_domain,
+        repo_url        = var.repo_url,
+        target_revision = var.target_revision,
       }
-    }
-    "spec" = {
-      "project" = "default"
-      "source" = {
-        "path"           = "argocd/apps"
-        "repoURL"        = var.repo_url
-        "targetRevision" = var.target_revision
-        "helm" = {
-          "parameters" = var.app_of_apps_parameters
-          "values" = templatefile("${path.module}/values.tmpl.yaml",
-            {
-              cluster_name    = var.cluster_name,
-              base_domain     = local.base_domain,
-              repo_url        = var.repo_url,
-              target_revision = var.target_revision,
-            }
-          )
-        }
-      }
-      "destination" = {
-        "namespace" = "default"
-        "server"    = "https://kubernetes.default.svc"
-      }
-      "syncPolicy" = {
-        "automated" = {
-          "selfHeal" = true
-        }
-      }
-    }
-  }
+    ),
+    var.app_of_apps_values_overrides,
+  ]
 
   depends_on = [
     helm_release.argocd,
@@ -133,7 +94,7 @@ resource "kubernetes_manifest" "app_of_apps" {
 
 resource "null_resource" "wait_for_vault" {
   depends_on = [
-    kubernetes_manifest.app_of_apps,
+    helm_release.app_of_apps,
   ]
 
   provisioner "local-exec" {
