@@ -20,14 +20,6 @@ terraform {
       source  = "hashicorp/null"
       version = "3.0.0"
     }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "1.13.2"
-    }
-    kubernetes-alpha = {
-      source  = "hashicorp/kubernetes-alpha"
-      version = "0.2.1"
-    }
     vault = {
       source  = "hashicorp/vault"
       version = "2.15.0"
