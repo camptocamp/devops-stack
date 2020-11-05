@@ -1,5 +1,13 @@
 = Changelog
 
+== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.8.0[0.8.0] (unreleased)
+
+https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.7.0...v0.8.0[Full Changelog]
+
+*Implemented enhancements:*
+
+* Add pipeline for Gitlab CI https://github.com/camptocamp/camptocamp-devops-stack/pull/203[#203] (https://github.com/mcanevet[mcanevet])
+
 == https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.7.0[0.7.0] (2020-11-05)
 
 https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.6.0...v0.7.0[Full Changelog]
