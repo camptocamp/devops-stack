@@ -55,3 +55,15 @@ variable "app_of_apps_values_overrides" {
   type        = string
   default     = ""
 }
+
+variable "kubeconfig_aws_authenticator_command" {
+  description = "Override the kubeconfig authenticator command"
+  type        = string
+  default     = "aws-iam-authenticator"
+}
+
+variable "kubeconfig_aws_authenticator_command_args" {
+  description = "Override the kubeconfig authenticator arguments"
+  type        = list(string)
+  default     = []
+}
