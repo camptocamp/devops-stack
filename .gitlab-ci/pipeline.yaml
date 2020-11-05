@@ -1,0 +1,57 @@
+---
+variables:
+  TERRAFORM_VERSION: "0.13.5"
+
+###
+# Pipeline for Merge Requests
+#
+
+mr:terraform:plan:
+  image:
+    name: hashicorp/terraform:$TERRAFORM_VERSION
+    entrypoint: [""]
+  variables:
+    CLUSTER_NAME: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
+  script:
+    - wget -O- https://raw.githubusercontent.com/camptocamp/camptocamp-devops-stack/v0.7.0/scripts/plan.sh | sh
+  allow_failure: true
+  rules:
+    - if: '$CI_MERGE_REQUEST_ID'
+
+###
+# Pipeline for Protected Branches
+#
+
+pb:terraform:apply:
+  image:
+    name: hashicorp/terraform:$TERRAFORM_VERSION
+    entrypoint: [""]
+  variables:
+    CLUSTER_NAME: $CI_COMMIT_REF_NAME
+  script:
+    - wget -O- https://raw.githubusercontent.com/camptocamp/camptocamp-devops-stack/v0.7.0/scripts/provision.sh | sh
+  environment:
+    name: cluster/$CI_COMMIT_REF_NAME
+    on_stop: pb:terraform:destroy
+  rules:
+    - if: '$CI_COMMIT_REF_PROTECTED == "true"'
+
+###
+# On-stop action for Gitlab CI environment
+#
+
+pb:terraform:destroy:
+  image:
+    name: hashicorp/terraform:$TERRAFORM_VERSION
+    entrypoint: [""]
+  variables:
+    CLUSTER_NAME: $CI_COMMIT_REF_NAME
+  script:
+    - wget -O- https://raw.githubusercontent.com/camptocamp/camptocamp-devops-stack/v0.7.0/scripts/destroy.sh | sh
+  environment:
+    name: cluster/$CI_COMMIT_REF_NAME
+    action: stop
+  allow_failure: true
+  rules:
+    - if: '$CI_COMMIT_REF_PROTECTED == "true"'
+      when: manual
