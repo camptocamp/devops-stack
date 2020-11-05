@@ -29,3 +29,7 @@ output "kubernetes_cluster_ca_certificate" {
 output "kubernetes_token" {
   value = local.kubernetes_token
 }
+
+output "kubeconfig" {
+  value = module.cluster.kubeconfig
+}
