@@ -9,4 +9,6 @@ image::github.svg[link="{url-repo}",150,250]
 
 {url-repo}[This repository] contains the reference implementation of Camptocamp's Infrastructure Solutions & Services department.
 
+image::architecture.svg[Architecture of the Camptocamp DevOps Stack]
+
 include::./run.adoc[]
