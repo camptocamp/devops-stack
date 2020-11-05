@@ -1,0 +1,2 @@
+include:
+  - https://raw.githubusercontent.com/camptocamp/camptocamp-devops-stack/master/.gitlab-ci/pipeline.yaml
