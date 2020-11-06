@@ -7,6 +7,9 @@ metadata:
     argocd.argoproj.io/sync-wave: "5"
 spec:
   selfSigned: {}
+{{- if index $.Values "cert-manager" }}
+{{- if index $.Values "cert-manager" "clusterIssuers" }}
+{{- if index $.Values "cert-manager" "clusterIssuers" "letsencrypt" }}
 {{- if index $.Values "cert-manager" "clusterIssuers" "letsencrypt" "enabled" }}
 ---
 apiVersion: cert-manager.io/v1alpha3
@@ -36,4 +39,7 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-staging
     {{ index .Values "cert-manager" "clusterIssuers" "acme" | toYaml | nindent 4 }}
+{{- end }}
+{{- end }}
+{{- end }}
 {{- end }}
