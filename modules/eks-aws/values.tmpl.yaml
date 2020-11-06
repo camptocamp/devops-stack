@@ -13,6 +13,21 @@ apps:
     enabled: false
 
 argo-cd:
+  controller:
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+  dex:
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+  repoServer:
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
   server:
     config:
       url: https://argocd.apps.${cluster_name}.${base_domain}
@@ -37,6 +52,10 @@ argo-cd:
           hosts:
             - argocd.apps.${base_domain}
             - argocd.apps.${cluster_name}.${base_domain}
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
 
 cert-manager:
   serviceAccount:
