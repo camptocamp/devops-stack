@@ -90,8 +90,14 @@ kube-prometheus-stack:
 
   prometheus:
     service:
+      port: 9091
       targetPort: 9091
+      additionalPorts:
+        - name: web
+          port: 9090
+          targetPort: 9090
     prometheusSpec:
+      portName: proxy
       containers:
         - args:
             - --http-address=0.0.0.0:9091
