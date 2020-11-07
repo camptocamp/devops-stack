@@ -22,11 +22,11 @@ apps:
   prometheus-operator:
     enabled: true
   secrets-store-csi-driver:
-    enabled: true
+    enabled: false
   traefik:
     enabled: true
   vault:
-    enabled: true
+    enabled: false
 
 argo-cd: {}
 cert-manager: {}

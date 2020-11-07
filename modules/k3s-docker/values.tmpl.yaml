@@ -67,19 +67,3 @@ kube-prometheus-stack:
         - secretName: prometheus-secret
           hosts:
             - prometheus.apps.${base_domain}
-
-vault:
-  server:
-    ingress:
-      enabled: true
-      annotations:
-        cert-manager.io/cluster-issuer: selfsigned-issuer
-        traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.tls: "true"
-      hosts:
-        - host: vault.apps.${base_domain}
-          path: []
-      tls:
-        - secretName: vault-secret
-          hosts:
-            - vault.apps.${base_domain}
