@@ -18,10 +18,6 @@ output "kubernetes_cluster_ca_certificate" {
   value = local.kubernetes_cluster_ca_certificate
 }
 
-output "kubernetes_vault_auth_backend_path" {
-  value = vault_auth_backend.kubernetes.path
-}
-
 output "kubeconfig" {
   value = module.cluster.kubeconfig
 }

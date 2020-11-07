@@ -17,12 +17,6 @@ provider "helm" {
   }
 }
 
-provider "vault" {
-  address         = format("https://vault.apps.%s", local.base_domain)
-  token           = "root"
-  skip_tls_verify = true
-}
-
 module "cluster" {
   source  = "camptocamp/k3s/docker"
   version = "0.1.0"
@@ -90,32 +84,4 @@ resource "helm_release" "app_of_apps" {
   depends_on = [
     helm_release.argocd,
   ]
-}
-
-resource "null_resource" "wait_for_vault" {
-  depends_on = [
-    helm_release.app_of_apps,
-  ]
-
-  provisioner "local-exec" {
-    command = "for i in `seq 1 60`; do kubectl get ns vault && break || sleep 5; done; for i in `seq 1 60`; do test \"`kubectl -n vault get pods --selector 'app.kubernetes.io/name=vault' --output=name | wc -l`\" -ne 0 && exit 0 || sleep 5; done; echo TIMEOUT && exit 1"
-
-    environment = {
-      KUBECONFIG = module.cluster.kubeconfig_filename
-    }
-  }
-}
-
-resource "vault_auth_backend" "kubernetes" {
-  type = "kubernetes"
-
-  depends_on = [
-    null_resource.wait_for_vault,
-  ]
-}
-
-resource "vault_kubernetes_auth_backend_config" "in_cluster" {
-  backend            = vault_auth_backend.kubernetes.path
-  kubernetes_host    = local.kubernetes_host
-  kubernetes_ca_cert = local.kubernetes_cluster_ca_certificate
 }

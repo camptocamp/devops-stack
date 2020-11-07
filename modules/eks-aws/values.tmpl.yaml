@@ -6,12 +6,6 @@ spec:
 
 baseDomain: ${base_domain}
 
-apps:
-  secrets-store-csi-driver:
-    enabled: false
-  vault:
-    enabled: false
-
 argo-cd:
   server:
     config:
