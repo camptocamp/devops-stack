@@ -41,6 +41,17 @@ jobs:
         run: TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git TF_VAR_target_revision=${{ github.base_ref }} ../../scripts/plan.sh
         env:
           CLUSTER_NAME: default
+      - name: App-diff on ref
+        run: |
+          mkdir "$HOME/bin"
+          echo PATH="$PATH"
+          export PATH="$HOME/bin:$PATH"
+          echo PATH="$PATH"
+          curl -sSL -o "$HOME/bin/argocd" https://github.com/argoproj/argo-cd/releases/download/v1.7.6/argocd-linux-amd64
+          chmod +x "$HOME/bin/argocd"
+          KUBECONFIG=terraform/kubeconfig.yaml ../../scripts/app-diff.sh
+        env:
+          CLUSTER_NAME: default
       - name: Destroy cluster
         run: TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git TF_VAR_target_revision=${{ github.base_ref }} ../../scripts/destroy.sh
         env:
