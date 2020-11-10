@@ -65,3 +65,23 @@ resource "helm_release" "app_of_apps" {
     helm_release.argocd,
   ]
 }
+
+data "external" "argocd_auth_token" {
+  program = ["sh", "-c", "wget -O- https://raw.githubusercontent.com/mcanevet/camptocamp-devops-stack/wait-for-apps/scripts/get-argocd-auth-token.sh | sh"]
+}
+
+resource "null_resource" "wait_for_apps" {
+  depends_on = [
+    helm_release.app_of_apps,
+  ]
+
+  provisioner "local-exec" {
+    command = "while ! argocd app wait apps --health --timeout 30; do argocd app list -owide; done"
+
+    environment = {
+      ARGOCD_OPTS       = "--plaintext --port-forward --port-forward-namespace argocd"
+      ARGOCD_AUTH_TOKEN = lookup(data.external.argocd_auth_token.result, "token")
+      KUBECONFIG        = "${path.module}/kubeconfig.yaml"
+    }
+  }
+}
