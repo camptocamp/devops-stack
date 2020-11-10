@@ -11,6 +11,7 @@ module "cluster" {
 
   cluster_name = terraform.workspace
   node_count   = 1
+  network_name = var.network_name
 
   repo_url        = var.repo_url
   target_revision = var.target_revision
