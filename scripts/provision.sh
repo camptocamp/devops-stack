@@ -1,6 +1,7 @@
 #!/bin/sh -xe
 
 export TF_WORKSPACE="$CLUSTER_NAME"
+export PATH="$HOME/bin:$PATH"
 
 cd terraform || exit
 terraform init -upgrade

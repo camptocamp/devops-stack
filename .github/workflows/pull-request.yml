@@ -7,13 +7,20 @@ on:
 jobs:
   from_scratch:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: tests/k3s-docker-demo-app
+    container:
+      image: hashicorp/terraform:0.13.5
     steps:
       - uses: actions/checkout@v2
+      - name: Install jq
+        run: scripts/install-jq.sh
+      - name: Install helm
+        run: scripts/install-helm.sh
       - name: Deploy cluster
-        run: TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git TF_VAR_target_revision=${{ github.base_ref }} ../../scripts/provision.sh
+        run: |
+          mkdir -p /home/runner
+          ln -s /__w /home/runner/work
+          cd /home/runner/work/camptocamp-devops-stack/camptocamp-devops-stack/tests/k3s-docker-demo-app
+          TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git TF_VAR_target_revision=${{ github.base_ref }} ../../scripts/provision.sh
         env:
           CLUSTER_NAME: default
       - name: Destroy cluster
@@ -22,6 +29,8 @@ jobs:
           CLUSTER_NAME: default
   update:
     runs-on: ubuntu-latest
+    container:
+      image: hashicorp/terraform:0.13.5
     defaults:
       run:
         working-directory: tests/k3s-docker-demo-app
