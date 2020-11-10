@@ -7,30 +7,64 @@ on:
 jobs:
   from_scratch:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: tests/k3s-docker-demo-app
+    container:
+      image: hashicorp/terraform:0.13.5
     steps:
       - uses: actions/checkout@v2
+      - name: Install docker
+        run: scripts/install-docker.sh
+      - name: Install jq
+        run: scripts/install-jq.sh
+      - name: Install helm
+        run: scripts/install-helm.sh
       - name: Deploy cluster
-        run: TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git TF_VAR_target_revision=${{ github.base_ref }} ../../scripts/provision.sh
+        run: |
+          export PATH="$HOME/bin:$PATH"
+          mkdir -p /home/runner
+          ln -s /__w /home/runner/work
+          cd /home/runner/work/camptocamp-devops-stack/camptocamp-devops-stack/tests/k3s-docker-demo-app
+          TF_VAR_network_name=$(docker inspect -f '{{range $k,$v := .NetworkSettings.Networks}}{{$k}}{{end}}' $(docker ps -lq)) \
+          TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git \
+          TF_VAR_target_revision=${{ github.ref }} \
+          ../../scripts/provision.sh
         env:
           CLUSTER_NAME: default
       - name: Destroy cluster
-        run: TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git TF_VAR_target_revision=${{ github.base_ref }} ../../scripts/destroy.sh
+        run: |
+          export PATH="$HOME/bin:$PATH"
+          mkdir -p /home/runner
+          ln -s /__w /home/runner/work
+          cd /home/runner/work/camptocamp-devops-stack/camptocamp-devops-stack/tests/k3s-docker-demo-app
+          TF_VAR_network_name=$(docker inspect -f '{{range $k,$v := .NetworkSettings.Networks}}{{$k}}{{end}}' $(docker ps -lq)) \
+          TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git \
+          TF_VAR_target_revision=${{ github.ref }} \
+          ../../scripts/destroy.sh
         env:
           CLUSTER_NAME: default
   update:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: tests/k3s-docker-demo-app
+    container:
+      image: hashicorp/terraform:0.13.5
     steps:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.base_ref }}
+      - name: Install docker
+        run: scripts/install-docker.sh
+      - name: Install jq
+        run: scripts/install-jq.sh
+      - name: Install helm
+        run: scripts/install-helm.sh
       - name: Deploy a cluster with base_ref code
-        run: TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git TF_VAR_target_revision=${{ github.base_ref }} ../../scripts/provision.sh
+        run: |
+          export PATH="$HOME/bin:$PATH"
+          mkdir -p /home/runner
+          ln -s /__w /home/runner/work
+          cd /home/runner/work/camptocamp-devops-stack/camptocamp-devops-stack/tests/k3s-docker-demo-app
+          TF_VAR_network_name=$(docker inspect -f '{{range $k,$v := .NetworkSettings.Networks}}{{$k}}{{end}}' $(docker ps -lq)) \
+          TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git \
+          TF_VAR_target_revision=${{ github.base_ref }} \
+          ../../scripts/provision.sh
         env:
           CLUSTER_NAME: default
       - uses: actions/checkout@v2
@@ -38,21 +72,34 @@ jobs:
           ref: ${{ github.ref }}
           clean: false
       - name: Dry-run on ref
-        run: TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git TF_VAR_target_revision=${{ github.base_ref }} ../../scripts/plan.sh
+        run: |
+          export PATH="$HOME/bin:$PATH"
+          mkdir -p /home/runner
+          ln -s /__w /home/runner/work
+          cd /home/runner/work/camptocamp-devops-stack/camptocamp-devops-stack/tests/k3s-docker-demo-app
+          TF_VAR_network_name=$(docker inspect -f '{{range $k,$v := .NetworkSettings.Networks}}{{$k}}{{end}}' $(docker ps -lq)) \
+          TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git \
+          TF_VAR_target_revision=${{ github.ref }} \
+          ../../scripts/plan.sh
         env:
           CLUSTER_NAME: default
+      - name: Install argocd
+        run: scripts/install-argocd.sh
       - name: App-diff on ref
         run: |
-          mkdir "$HOME/bin"
-          echo PATH="$PATH"
-          export PATH="$HOME/bin:$PATH"
-          echo PATH="$PATH"
-          curl -sSL -o "$HOME/bin/argocd" https://github.com/argoproj/argo-cd/releases/download/v1.7.6/argocd-linux-amd64
-          chmod +x "$HOME/bin/argocd"
+          cd /home/runner/work/camptocamp-devops-stack/camptocamp-devops-stack/tests/k3s-docker-demo-app
           KUBECONFIG=terraform/kubeconfig.yaml ../../scripts/app-diff.sh
         env:
           CLUSTER_NAME: default
       - name: Destroy cluster
-        run: TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git TF_VAR_target_revision=${{ github.base_ref }} ../../scripts/destroy.sh
+        run: |
+          export PATH="$HOME/bin:$PATH"
+          mkdir -p /home/runner
+          ln -s /__w /home/runner/work
+          cd /home/runner/work/camptocamp-devops-stack/camptocamp-devops-stack/tests/k3s-docker-demo-app
+          TF_VAR_network_name=$(docker inspect -f '{{range $k,$v := .NetworkSettings.Networks}}{{$k}}{{end}}' $(docker ps -lq)) \
+          TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git \
+          TF_VAR_target_revision=${{ github.ref }} \
+          ../../scripts/destroy.sh
         env:
           CLUSTER_NAME: default
