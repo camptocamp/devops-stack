@@ -1,6 +1,6 @@
 ---
 argo-cd:
-  installCRDs: false
+  installCRDs: true
   global:
     securityContext:
       runAsUser: 999
