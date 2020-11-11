@@ -107,7 +107,7 @@ resource "helm_release" "argocd" {
   name              = "argocd"
   chart             = "${path.module}/../../argocd/argocd"
   namespace         = "argocd"
-  dependency_update = true
+  #dependency_update = true
   create_namespace  = true
 
   values = [
@@ -128,7 +128,7 @@ resource "helm_release" "app_of_apps" {
   name              = "app-of-apps"
   chart             = "${path.module}/../../argocd/app-of-apps"
   namespace         = "argocd"
-  dependency_update = true
+  #dependency_update = true
   create_namespace  = true
 
   values = [
