@@ -15,12 +15,6 @@ variable "node_count" {
   default     = 2
 }
 
-variable "network_name" {
-  description = "Docker network to use. Creates a new one if null."
-  type        = string
-  default     = null
-}
-
 variable "repo_url" {
   description = "The source repo URL of ArgoCD's app of apps."
   type        = string

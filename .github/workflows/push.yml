@@ -7,37 +7,20 @@ on:
 jobs:
   push:
     runs-on: ubuntu-latest
-    container:
-      image: hashicorp/terraform:0.13.5
+    defaults:
+      run:
+        working-directory: tests/k3s-docker-demo-app
     steps:
       - uses: actions/checkout@v2
-      - name: Install docker
-        run: scripts/install-docker.sh
-      - name: Install jq
-        run: scripts/install-jq.sh
-      - name: Install helm
-        run: scripts/install-helm.sh
       - name: Deploy cluster
-        run: |
-          export PATH="$HOME/bin:$PATH"
-          mkdir -p /home/runner
-          ln -s /__w /home/runner/work
-          cd /home/runner/work/camptocamp-devops-stack/camptocamp-devops-stack/tests/k3s-docker-demo-app
-          TF_VAR_network_name=$(docker inspect -f '{{range $k,$v := .NetworkSettings.Networks}}{{$k}}{{end}}' $(docker ps -lq)) \
-          TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git \
-          TF_VAR_target_revision=${{ github.ref }} \
-          ../../scripts/provision.sh
+        run: ../../scripts/provision.sh
         env:
           CLUSTER_NAME: default
+          TF_VAR_repo_url: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git
+          TF_VAR_target_revision: ${{ github.base_ref }}
       - name: Destroy cluster
-        run: |
-          export PATH="$HOME/bin:$PATH"
-          mkdir -p /home/runner
-          ln -s /__w /home/runner/work
-          cd /home/runner/work/camptocamp-devops-stack/camptocamp-devops-stack/tests/k3s-docker-demo-app
-          TF_VAR_network_name=$(docker inspect -f '{{range $k,$v := .NetworkSettings.Networks}}{{$k}}{{end}}' $(docker ps -lq)) \
-          TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git \
-          TF_VAR_target_revision=${{ github.ref }} \
-          ../../scripts/destroy.sh
+        run: ../../scripts/destroy.sh
         env:
           CLUSTER_NAME: default
+          TF_VAR_repo_url: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git
+          TF_VAR_target_revision: ${{ github.base_ref }}
