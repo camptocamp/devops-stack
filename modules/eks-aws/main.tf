@@ -144,6 +144,9 @@ resource "helm_release" "app_of_apps" {
         cognito_user_pool_client_id     = aws_cognito_user_pool_client.client.id
         cognito_user_pool_client_secret = aws_cognito_user_pool_client.client.client_secret
         cookie_secret                   = random_password.oauth2_cookie_secret.result
+        enable_efs                      = var.enable_efs
+        efs_filesystem_id               = var.enable_efs ? module.efs.0.file_system_id : ""
+        efs_dns_name                    = var.enable_efs ? module.efs.0.full_dns_name : ""
       }
     ),
     var.app_of_apps_values_overrides,

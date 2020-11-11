@@ -1,0 +1,8 @@
+---
+apiVersion: "v2"
+name: "efs-provisioner"
+version: "0"
+dependencies:
+  - name: "stable/efs-provisioner"
+    version: "master"
+    repository: "https://github.com/helm/charts"
