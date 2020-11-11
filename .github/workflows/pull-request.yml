@@ -13,11 +13,25 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Deploy cluster
-        run: TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git TF_VAR_target_revision=${{ github.base_ref }} ../../scripts/provision.sh
+        run: |
+          mkdir "$HOME/bin"
+          export PATH="$HOME/bin:$PATH"
+          curl -sSL -o "$HOME/bin/argocd" https://github.com/argoproj/argo-cd/releases/download/v1.7.6/argocd-linux-amd64
+          chmod +x "$HOME/bin/argocd"
+          TF_VAR_repo_url=$GITHUB_SERVER_URL/${{ github.actor }}/camptocamp-devops-stack.git \
+          TF_VAR_target_revision=${{ github.head_ref }} \
+          ../../scripts/provision.sh
+          . ../../scripts/get-argocd-auth-token.sh
+          while ! argocd app wait apps --health --timeout 30; do argocd app list -owide; done
         env:
           CLUSTER_NAME: default
+          ARGOCD_OPTS: "--plaintext --port-forward --port-forward-namespace argocd"
+          KUBECONFIG: terraform/kubeconfig.yaml
       - name: Destroy cluster
-        run: TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git TF_VAR_target_revision=${{ github.base_ref }} ../../scripts/destroy.sh
+        run: |
+          TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git \
+          TF_VAR_target_revision=${{ github.ref }} \
+          ../../scripts/destroy.sh
         env:
           CLUSTER_NAME: default
   update:
@@ -30,29 +44,42 @@ jobs:
         with:
           ref: ${{ github.base_ref }}
       - name: Deploy a cluster with base_ref code
-        run: TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git TF_VAR_target_revision=${{ github.base_ref }} ../../scripts/provision.sh
+        run: |
+          mkdir "$HOME/bin"
+          export PATH="$HOME/bin:$PATH"
+          curl -sSL -o "$HOME/bin/argocd" https://github.com/argoproj/argo-cd/releases/download/v1.7.6/argocd-linux-amd64
+          chmod +x "$HOME/bin/argocd"
+          TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git \
+          TF_VAR_target_revision=${{ github.base_ref }} \
+          ../../scripts/provision.sh
+          . ../../scripts/get-argocd-auth-token.sh
+          while ! argocd app wait apps --health --timeout 30; do argocd app list -owide; done
         env:
           CLUSTER_NAME: default
+          ARGOCD_OPTS: "--plaintext --port-forward --port-forward-namespace argocd"
+          KUBECONFIG: terraform/kubeconfig.yaml
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.ref }}
           clean: false
       - name: Dry-run on ref
-        run: TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git TF_VAR_target_revision=${{ github.base_ref }} ../../scripts/plan.sh
+        run: |
+          TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git \
+          TF_VAR_target_revision=${{ github.base_ref }} \
+          ../../scripts/plan.sh
         env:
           CLUSTER_NAME: default
       - name: App-diff on ref
         run: |
-          mkdir "$HOME/bin"
-          echo PATH="$PATH"
-          export PATH="$HOME/bin:$PATH"
-          echo PATH="$PATH"
-          curl -sSL -o "$HOME/bin/argocd" https://github.com/argoproj/argo-cd/releases/download/v1.7.6/argocd-linux-amd64
-          chmod +x "$HOME/bin/argocd"
-          KUBECONFIG=terraform/kubeconfig.yaml ../../scripts/app-diff.sh
+          ../../scripts/app-diff.sh
         env:
           CLUSTER_NAME: default
+          ARGOCD_OPTS: "--plaintext --port-forward --port-forward-namespace argocd"
+          KUBECONFIG: terraform/kubeconfig.yaml
       - name: Destroy cluster
-        run: TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git TF_VAR_target_revision=${{ github.base_ref }} ../../scripts/destroy.sh
+        run: |
+          TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git \
+          TF_VAR_target_revision=${{ github.base_ref }} \
+          ../../scripts/destroy.sh
         env:
           CLUSTER_NAME: default
