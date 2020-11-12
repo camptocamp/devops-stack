@@ -13,7 +13,8 @@ spec:
     targetRevision: {{ .Values.spec.source.targetRevision }}
     helm:
       values: |
-        {{- index .Values "efs-provisioner" | toYaml | nindent 8 }}
+        efs-provisioner:
+          {{- index .Values "efs-provisioner" | toYaml | nindent 10 }}
   destination:
     namespace: efs-provisioner
     server: {{ .Values.spec.destination.server }}
