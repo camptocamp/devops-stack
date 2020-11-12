@@ -1,14 +1,16 @@
-{{- if index $.Values "apps" "cluster-monitoring" "enabled" }}
+{{- if index $.Values "apps" "kube-prometheus-stack" "enabled" }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cluster-monitoring
+  annotations:
+    argocd.argoproj.io/sync-wave: "-4"
+  name: kube-prometheus-stack
   namespace: argocd
 spec:
   project: default
   source:
-    path: argocd/cluster-monitoring
+    path: argocd/kube-prometheus-stack
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
     helm:
@@ -16,7 +18,7 @@ spec:
         kube-prometheus-stack:
           {{- index .Values "kube-prometheus-stack" | toYaml | nindent 10 }}
   destination:
-    namespace: cluster-monitoring
+    namespace: kube-prometheus-stack
     server: {{ .Values.spec.destination.server }}
   syncPolicy:
     automated:

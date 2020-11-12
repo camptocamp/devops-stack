@@ -2,15 +2,20 @@
 kube-prometheus-stack:
   kubeControllerManager:
     enabled: false
+
   kubeEtcd:
     enabled: false
+
   kubeScheduler:
     enabled: false
+
   kubeProxy:
     enabled: false
 
   prometheusOperator:
-    enabled: false
+    manageCrds: false
+    tls:
+      enabled: false  # disable for now as I could not make it work
     tlsProxy:
       enabled: false  # disable for now as I could not make it work
     admissionWebhooks:
