@@ -13,15 +13,13 @@ apps:
     enabled: true
   cert-manager:
     enabled: true
-  cluster-monitoring:
-    enabled: true
   efs-provisioner:
     enabled: false
   loki:
     enabled: true
   namespaces:
     enabled: true
-  prometheus-operator:
+  kube-prometheus-stack:
     enabled: true
   secrets-store-csi-driver:
     enabled: false

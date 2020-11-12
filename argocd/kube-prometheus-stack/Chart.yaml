@@ -1,4 +1,7 @@
 ---
+apiVersion: "v2"
+name: "kube-prometheus-stack"
+version: "0"
 dependencies:
   - name: "kube-prometheus-stack"
     version: "11.1.1"

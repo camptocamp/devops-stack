@@ -16,7 +16,7 @@ spec:
         loki:
           {{- index .Values "loki" | toYaml | nindent 10 }}
   destination:
-    namespace: cluster-monitoring
+    namespace: kube-prometheus-stack
     server: {{ .Values.spec.destination.server }}
   syncPolicy:
     automated:

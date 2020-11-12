@@ -1,8 +1,0 @@
----
-apiVersion: "v2"
-name: "prometheus-operator"
-version: "0"
-dependencies:
-  - name: "kube-prometheus-stack"
-    version: "11.1.1"
-    repository: "https://prometheus-community.github.io/helm-charts"
