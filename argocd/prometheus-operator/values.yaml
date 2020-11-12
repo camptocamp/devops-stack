@@ -32,7 +32,9 @@ kube-prometheus-stack:
   prometheusOperator:
     manageCrds: false
     serviceMonitor:
-      selfMonitor: false
+      selfMonitor: false  # disable for now chicken and egg issue
+    tls:
+      enabled: false  # disable for now as I could not make it work
     tlsProxy:
       enabled: false  # disable for now as I could not make it work
     admissionWebhooks:
