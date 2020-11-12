@@ -8,6 +8,9 @@ argo-cd:
   controller:
     metrics:
       enabled: true
+  dex:
+    metrics:
+      enabled: true
   server:
     ingress:
       enabled: true
