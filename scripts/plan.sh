@@ -4,5 +4,5 @@ export TF_WORKSPACE="$CLUSTER_NAME"
 
 cd terraform || exit
 terraform init -upgrade
-terraform plan --detailed-exitcode
+terraform plan
 cd - || exit
