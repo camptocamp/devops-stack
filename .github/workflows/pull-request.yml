@@ -30,7 +30,7 @@ jobs:
       - name: Destroy cluster
         run: |
           TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git \
-          TF_VAR_target_revision=${{ github.ref }} \
+          TF_VAR_target_revision=${{ github.head_ref }} \
           ../../scripts/destroy.sh
         env:
           CLUSTER_NAME: default
@@ -71,6 +71,8 @@ jobs:
           CLUSTER_NAME: default
       - name: App-diff on ref
         run: |
+          export PATH="$HOME/bin:$PATH"
+          . ../../scripts/get-argocd-auth-token.sh
           ../../scripts/app-diff.sh
         env:
           CLUSTER_NAME: default

@@ -1,11 +1,5 @@
 #!/bin/sh -xe
 
-. get-argocd-auth-token.sh
-
-export ARGOCD_OPTS="--plaintext --port-forward --port-forward-namespace argocd"
-
-echo ARGOCD_AUTH_TOKEN="$ARGOCD_AUTH_TOKEN"
-
 argocd app list -owide
 
 for app_dir in ../../argocd/*;
