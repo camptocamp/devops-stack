@@ -6,6 +6,10 @@ spec:
 
 baseDomain: ${base_domain}
 
+apps:
+  efs-provisioner:
+    enabled: ${enable_efs}
+
 argo-cd:
   server:
     config:
@@ -44,6 +48,12 @@ cert-manager:
         - dns01:
             route53:
               region: ${aws_default_region}
+
+efs-provisioner:
+  efsProvisioner:
+    efsFileSystemId: ${efs_filesystem_id}
+    awsRegion: ${aws_default_region}
+    dnsName: ${efs_dns_name}
 
 kube-prometheus-stack:
   alertmanager:

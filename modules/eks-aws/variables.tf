@@ -67,3 +67,9 @@ variable "kubeconfig_aws_authenticator_command_args" {
   type        = list(string)
   default     = []
 }
+
+variable "enable_efs" {
+  description = "Whether to provision an EFS filesystem, along with a provisioner"
+  type        = bool
+  default     = false
+}
