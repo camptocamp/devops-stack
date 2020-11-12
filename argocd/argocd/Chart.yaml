@@ -4,5 +4,5 @@ name: "argocd"
 version: "0"
 dependencies:
   - name: "argo-cd"
-    version: "2.7.4"
+    version: "2.9.5"
     repository: "https://argoproj.github.io/argo-helm"
