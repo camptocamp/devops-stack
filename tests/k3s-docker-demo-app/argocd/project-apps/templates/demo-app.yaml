@@ -36,3 +36,10 @@ spec:
   syncPolicy:
     automated:
       selfHeal: true
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: demo-app
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
