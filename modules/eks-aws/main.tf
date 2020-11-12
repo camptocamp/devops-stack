@@ -82,7 +82,7 @@ module "cluster" {
 
   worker_groups = length(var.worker_groups) > 1 ? flatten([local.ingress_worker_group, slice(var.worker_groups, 1, length(var.worker_groups)), ]) : [local.ingress_worker_group]
 
-  kubeconfig_aws_authenticator_command = var.kubeconfig_aws_authenticator_command
+  kubeconfig_aws_authenticator_command      = var.kubeconfig_aws_authenticator_command
   kubeconfig_aws_authenticator_command_args = var.kubeconfig_aws_authenticator_command_args
 }
 
