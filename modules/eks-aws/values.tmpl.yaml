@@ -6,6 +6,10 @@ spec:
 
 baseDomain: ${base_domain}
 
+apps:
+  efs-provisioner:
+    enabled: ${enable_efs}
+
 argo-cd:
   server:
     config:
@@ -46,7 +50,6 @@ cert-manager:
               region: ${aws_default_region}
 
 efs-provisioner:
-  enabled: ${enable_efs}
   efsProvisioner:
     efsFileSystemId: ${efs_filesystem_id}
     awsRegion: ${aws_default_region}
