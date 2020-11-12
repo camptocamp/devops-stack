@@ -118,7 +118,7 @@ kube-prometheus-stack:
           name: prometheus-proxy
           ports:
             - containerPort: 9091
-              name: web
+              name: proxy
     ingress:
       enabled: true
       annotations:
@@ -135,6 +135,14 @@ kube-prometheus-stack:
             - prometheus.apps.${cluster_name}.${base_domain}
 
   grafana:
+    # Required to use oauth2_proxy on Prometheus
+    sidecar.datasources.defaultDatasourceEnabled: false
+    additionalDataSources: |
+      - name: Prometheus
+        type: prometheus
+        url: http://cluster-monitoring-kube-pr-prometheus:9090/
+        access: proxy
+        isDefault: true
     ingress:
       enabled: true
       annotations:
