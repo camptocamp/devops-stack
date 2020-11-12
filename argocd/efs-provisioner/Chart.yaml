@@ -4,5 +4,5 @@ name: "efs-provisioner"
 version: "0"
 dependencies:
   - name: "efs-provisioner"
-    version: "0.13.1"
+    version: "0.13.0"
     repository: "https://charts.helm.sh/stable"
