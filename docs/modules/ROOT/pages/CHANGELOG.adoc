@@ -7,6 +7,28 @@ https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.7.0...v0.8.0[Fu
 *Implemented enhancements:*
 
 * Add pipeline for Gitlab CI https://github.com/camptocamp/camptocamp-devops-stack/pull/203[#203] (https://github.com/mcanevet[mcanevet])
+* Add Gitlab CI pipeline in examples https://github.com/camptocamp/camptocamp-devops-stack/pull/204[#204] (https://github.com/mcanevet[mcanevet])
+* Allow to manipulate kubeconfig https://github.com/camptocamp/camptocamp-devops-stack/pull/205[#205] (https://github.com/raphink[raphink])
+* Add example for EKS https://github.com/camptocamp/camptocamp-devops-stack/pull/206[#206] (https://github.com/mcanevet[mcanevet])
+* Use TF_WORKSPACE environment variable https://github.com/camptocamp/camptocamp-devops-stack/pull/207[#207] (https://github.com/mcanevet[mcanevet])
+* Add kubeconfig output to every modules https://github.com/camptocamp/camptocamp-devops-stack/pull/208[#208] (https://github.com/mcanevet[mcanevet])
+* Add ArgoCD app diff in the pipeline https://github.com/camptocamp/camptocamp-devops-stack/pull/215[#215] https://github.com/camptocamp/camptocamp-devops-stack/pull/216[#216] (https://github.com/mcanevet[mcanevet])
+
+*Upgraded applications:*
+
+* Upgrade Loki to 2.0.2 https://github.com/camptocamp/camptocamp-devops-stack/pull/224[#224] (https://github.com/mcanevet[mcanevet])
+
+*New applications:*
+
+* Add efs-provisioner to eks-aws module https://github.com/camptocamp/camptocamp-devops-stack/pull/222[#222] (https://github.com/raphink[raphink])
+
+*Fixed bugs:*
+
+* Fix cert-manager deployment https://github.com/camptocamp/camptocamp-devops-stack/pull/209[#209] (https://github.com/mcanevet[mcanevet])
+* Rename prometheus port and add web port again https://github.com/camptocamp/camptocamp-devops-stack/pull/210[#210] (https://github.com/raphink[raphink])
+* Disable Vault and secrets store CSI driver for now https://github.com/camptocamp/camptocamp-devops-stack/pull/212[#212] (https://github.com/mcanevet[mcanevet])
+* Fix race condition when updating kubeconfig https://github.com/camptocamp/camptocamp-devops-stack/pull/225[#225] (https://github.com/mcanevet[mcanevet])
+* Don't run plan with detailed-exit-code https://github.com/camptocamp/camptocamp-devops-stack/pull/226[#226] (https://github.com/mcanevet[mcanevet])
 
 == https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.7.0[0.7.0] (2020-11-05)
 
