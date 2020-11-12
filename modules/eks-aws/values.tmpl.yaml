@@ -11,6 +11,12 @@ apps:
     enabled: ${enable_efs}
 
 argo-cd:
+  controller:
+    metrics:
+      enabled: true
+  dex:
+    metrics:
+      enabled: true
   server:
     config:
       url: https://argocd.apps.${cluster_name}.${base_domain}
@@ -35,6 +41,11 @@ argo-cd:
           hosts:
             - argocd.apps.${base_domain}
             - argocd.apps.${cluster_name}.${base_domain}
+    metrics:
+      enabled: true
+  repoServer:
+    metrics:
+      enabled: true
 
 cert-manager:
   serviceAccount:
