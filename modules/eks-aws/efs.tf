@@ -1,6 +1,6 @@
 module "efs" {
   count = var.enable_efs ? 1 : 0
-  source = "./efs"
+  source = "camptocamp/efs/aws"
 
   name                     = var.cluster_name
   subnet_id                = tolist(data.aws_subnet_ids.private.ids)[0]
