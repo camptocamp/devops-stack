@@ -19,7 +19,7 @@ jobs:
           curl -sSL -o "$HOME/bin/argocd" https://github.com/argoproj/argo-cd/releases/download/v1.7.6/argocd-linux-amd64
           chmod +x "$HOME/bin/argocd"
           TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git \
-          TF_VAR_target_revision=${{ github.base_ref }} \
+          TF_VAR_target_revision=${GITHUB_REF##*/} \
           ../../scripts/provision.sh
           . ../../scripts/get-argocd-auth-token.sh
           while ! argocd app wait apps --health --timeout 30; do argocd app list -owide; done
