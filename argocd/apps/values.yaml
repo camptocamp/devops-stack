@@ -15,12 +15,14 @@ apps:
     enabled: true
   efs-provisioner:
     enabled: false
+  kube-prometheus-stack:
+    enabled: true
   loki:
     enabled: true
   namespaces:
     enabled: true
-  kube-prometheus-stack:
-    enabled: true
+  olm:
+    enabled: false
   secrets-store-csi-driver:
     enabled: false
   traefik:

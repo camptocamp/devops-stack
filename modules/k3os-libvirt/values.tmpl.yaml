@@ -4,6 +4,10 @@ spec:
     repoURL: ${repo_url}
     targetRevision: ${target_revision}
 
+apps:
+  olm:
+    enabled: true
+
 argo-cd:
   controller:
     metrics:

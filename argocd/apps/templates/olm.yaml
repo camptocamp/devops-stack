@@ -1,0 +1,22 @@
+{{- if index $.Values "apps" "olm" "enabled" }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-5"
+  name: olm
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: deploy/upstream/manifests/0.17.0
+    repoURL: https://github.com/operator-framework/operator-lifecycle-manager.git
+    targetRevision: master
+  destination:
+    namespace: olm
+    server: {{ .Values.spec.destination.server }}
+  syncPolicy:
+    automated:
+      selfHeal: true
+{{- end }}
