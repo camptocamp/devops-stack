@@ -4,5 +4,5 @@ name: "traefik"
 version: "0"
 dependencies:
   - name: "traefik"
-    version: "9.1.0"
-    repository: "https://containous.github.io/traefik-helm-chart"
+    version: "9.10.1"
+    repository: "https://helm.traefik.io/traefik"
