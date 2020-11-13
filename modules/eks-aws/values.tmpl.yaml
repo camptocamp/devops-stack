@@ -37,7 +37,7 @@ argo-cd:
         - argocd.apps.${base_domain}
         - argocd.apps.${cluster_name}.${base_domain}
       tls:
-        - secretName: argocd-secret
+        - secretName: argocd-tls
           hosts:
             - argocd.apps.${base_domain}
             - argocd.apps.${cluster_name}.${base_domain}
@@ -98,7 +98,7 @@ kube-prometheus-stack:
         - alertmanager.apps.${base_domain}
         - alertmanager.apps.${cluster_name}.${base_domain}
       tls:
-        - secretName: alertmanager-secret
+        - secretName: alertmanager-tls
           hosts:
             - alertmanager.apps.${base_domain}
             - alertmanager.apps.${cluster_name}.${base_domain}
@@ -140,7 +140,7 @@ kube-prometheus-stack:
         - prometheus.apps.${base_domain}
         - prometheus.apps.${cluster_name}.${base_domain}
       tls:
-        - secretName: prometheus-secret
+        - secretName: prometheus-tls
           hosts:
             - prometheus.apps.${base_domain}
             - prometheus.apps.${cluster_name}.${base_domain}
@@ -185,7 +185,7 @@ kube-prometheus-stack:
         - grafana.apps.${base_domain}
         - grafana.apps.${cluster_name}.${base_domain}
       tls:
-        - secretName: grafana-secret
+        - secretName: grafana-tls
           hosts:
             - grafana.apps.${base_domain}
             - grafana.apps.${cluster_name}.${base_domain}
