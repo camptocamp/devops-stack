@@ -71,10 +71,9 @@ jobs:
           CLUSTER_NAME: default
       - name: App-diff on ref
         run: |
-          wget https://get.helm.sh/helm-v2.17.0-linux-amd64.tar.gz -O - | tar xz linux-amd64/helm -O > "$HOME/bin/helm2"
-          chmod +x "$HOME/bin/helm2"
           export PATH="$HOME/bin:$PATH"
           . ../../scripts/get-argocd-auth-token.sh
+          chmod 0600 "$KUBECONFIG"
           ../../scripts/app-diff.sh
         env:
           CLUSTER_NAME: default
