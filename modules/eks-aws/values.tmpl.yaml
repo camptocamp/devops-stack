@@ -129,7 +129,7 @@ kube-prometheus-stack:
           name: prometheus-proxy
           ports:
             - containerPort: 9091
-              name: web
+              name: proxy
     ingress:
       enabled: true
       annotations:
@@ -146,6 +146,35 @@ kube-prometheus-stack:
             - prometheus.apps.${cluster_name}.${base_domain}
 
   grafana:
+    grafana.ini:
+      auth.generic_oauth:
+        name: Cognito
+        enabled: true
+        allow_sign_up: true
+        client_id: ${cognito_user_pool_client_id}
+        client_secret: ${cognito_user_pool_client_secret}
+        scopes: "openid profile email"
+        auth_url: https://${cognito_user_pool_domain}.auth.${aws_default_region}.amazoncognito.com/oauth2/authorize
+        token_url: https://${cognito_user_pool_domain}.auth.${aws_default_region}.amazoncognito.com/oauth2/token
+        api_url: https://${cognito_user_pool_domain}.auth.${aws_default_region}.amazoncognito.com/oauth2/userInfo
+      server:
+        domain: grafana.apps.${cluster_name}.${base_domain}
+        root_url: "https://%(domain)s"
+    sidecar:
+      datasources:
+        defaultDatasourceEnabled: false
+    additionalDataSources:
+      - name: Prometheus
+        type: prometheus
+        # TODO: fix this 9091 with oauthPassThru
+        #url: http://cluster-monitoring-kube-pr-prometheus:9091/
+        url: http://cluster-monitoring-kube-pr-prometheus:9090/
+        access: proxy
+        isDefault: true
+        jsonData:
+          tlsAuth: false
+          tlsAuthWithCACert: false
+          oauthPassThru: true
     ingress:
       enabled: true
       annotations:
