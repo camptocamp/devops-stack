@@ -9,7 +9,7 @@ else
 REPO_URL = $(REMOTE_URL)
 endif
 
-.PHONY: provision clean
+.PHONY: provision dry-run app-diff clean debug
 
 provision: terraform/*.tf
 	CLUSTER_NAME=$(CLUSTER_NAME) TF_VAR_repo_url=$(REPO_URL) TF_VAR_target_revision=$(TARGET_REVISION) ../../scripts/provision.sh
