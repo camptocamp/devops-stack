@@ -19,7 +19,7 @@ provider "helm" {
 
 module "cluster" {
   source  = "camptocamp/k3s/docker"
-  version = "0.3.1"
+  version = "0.3.2"
 
   cluster_name = var.cluster_name
   k3s_version  = var.k3s_version
