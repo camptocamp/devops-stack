@@ -78,3 +78,15 @@ variable "enable_efs" {
   type        = bool
   default     = false
 }
+
+variable "create_public_nlb" {
+  description = "Whether to create an internet-facing NLB attached to the public subnets"
+  type        = bool
+  default     = true
+}
+
+variable "create_private_nlb" {
+  description = "Whether to create an internal NLB attached the private subnets"
+  type        = bool
+  default     = false
+}
