@@ -5,6 +5,8 @@ spec:
     targetRevision: ${target_revision}
 
 apps:
+  keycloak:
+    enabled: true
   olm:
     enabled: true
 
