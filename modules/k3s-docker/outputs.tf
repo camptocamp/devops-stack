@@ -21,3 +21,7 @@ output "kubernetes_cluster_ca_certificate" {
 output "kubeconfig" {
   value = module.cluster.kubeconfig
 }
+
+output "admin_password" {
+  value = random_password.admin_password.result
+}

@@ -18,15 +18,12 @@ provider "helm" {
 }
 
 module "cluster" {
-  source  = "camptocamp/k3os/libvirt"
-  version = "0.2.1"
+  source  = "camptocamp/k3s/docker"
+  version = "0.3.2"
 
   cluster_name = var.cluster_name
-  k3os_version = var.k3os_version
+  k3s_version  = var.k3s_version
   node_count   = var.node_count
-
-  server_memory = 2048
-  agent_memory  = 2048
 }
 
 resource "helm_release" "argocd" {
@@ -59,6 +56,10 @@ resource "helm_release" "app_of_apps" {
         base_domain     = local.base_domain,
         repo_url        = var.repo_url,
         target_revision = var.target_revision,
+        clientid        = "applications"
+        clientsecret    = random_password.clientsecret.result
+        admin_password  = random_password.admin_password.result
+        cookie_secret   = random_password.cookie_secret.result
       }
     ),
     var.app_of_apps_values_overrides,
@@ -67,4 +68,19 @@ resource "helm_release" "app_of_apps" {
   depends_on = [
     helm_release.argocd,
   ]
+}
+
+resource "random_password" "clientsecret" {
+  length  = 16
+  special = false
+}
+
+resource "random_password" "admin_password" {
+  length  = 16
+  special = false
+}
+
+resource "random_password" "cookie_secret" {
+  length  = 16
+  special = false
 }

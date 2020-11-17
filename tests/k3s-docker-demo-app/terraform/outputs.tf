@@ -17,3 +17,7 @@ output "prometheus_url" {
 output "alertmanager_url" {
   value = format("https://alertmanager.apps.%s", module.cluster.base_domain)
 }
+
+output "admin_password" {
+  value = module.cluster.admin_password
+}

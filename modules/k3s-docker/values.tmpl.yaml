@@ -36,6 +36,36 @@ argo-cd:
     metrics:
       enabled: true
 
+keycloak:
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: selfsigned-issuer
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      traefik.ingress.kubernetes.io/router.tls: "true"
+    hosts:
+      - host: keycloak.apps.${base_domain}
+        paths:
+          - /
+    tls:
+      - secretName: keycloak-tls
+        hosts:
+          - keycloak.apps.${base_domain}
+  service:
+    annotations:
+      traefik.ingress.kubernetes.io/service.serversscheme: https
+  keycloakClient:
+    client:
+      clientId: ${clientid}
+      secret: ${clientsecret}
+      redirectUris:
+        - https://argocd.apps.${base_domain}/auth/callback
+        - https://grafana.apps.${base_domain}/login/generic_oauth
+        - https://prometheus.apps.${base_domain}/oauth2/callback
+        - https://alertmanager.apps.${base_domain}/oauth2/callback
+  keycloakUser:
+    password: "${admin_password}"
+
 kube-prometheus-stack:
   alertmanager:
     ingress:
