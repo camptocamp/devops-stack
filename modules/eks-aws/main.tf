@@ -26,7 +26,7 @@ data "aws_subnet_ids" "public" {
 }
 
 data "aws_nat_gateway" "this" {
-  for_each  = data.aws_subnet_ids.public.ids
+  for_each  = data.aws_subnet_ids.private.ids
   subnet_id = each.value
   state     = "available"
 }
