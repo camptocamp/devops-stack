@@ -1,5 +1,40 @@
 = Changelog
 
+== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.9.0[0.9.0] (2020-11-17)
+
+https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.8.0...v0.9.0[Full Changelog]
+
+*Implemented enhancements:*
+
+* Add OAuth to Grafana for EKS https://github.com/camptocamp/camptocamp-devops-stack/pull/230[#230] (https://github.com/raphink[raphink])
+* Merge prometheus-operator and cluster-monitoring Applications into kube-prometheus-stack https://github.com/camptocamp/camptocamp-devops-stack/pull/237[#237] (https://github.com/mcanevet[mcanevet])
+* Remove namespaces Application https://github.com/camptocamp/camptocamp-devops-stack/pull/238[#238] (https://github.com/mcanevet[mcanevet])
+* Make pipeline less verbose https://github.com/camptocamp/camptocamp-devops-stack/pull/240[#240] (https://github.com/mcanevet[mcanevet])
+* Update k3s/k3os modules to support local storage https://github.com/camptocamp/camptocamp-devops-stack/pull/245[#245] (https://github.com/mcanevet[mcanevet])
+
+*Upgraded applications:*
+
+* Upgrade kube-prometheus-stack https://github.com/camptocamp/camptocamp-devops-stack/pull/229[#229] (https://github.com/mcanevet[mcanevet])
+* Upgrade argocd chart to 2.9.5 https://github.com/camptocamp/camptocamp-devops-stack/pull/233[#233] (https://github.com/mcanevet[mcanevet])
+* Upgrade cert-manager to 1.0.4 https://github.com/camptocamp/camptocamp-devops-stack/pull/239[#239] (https://github.com/mcanevet[mcanevet])
+* Upgrade Traefik chart to 9.10.1 https://github.com/camptocamp/camptocamp-devops-stack/pull/241[#241] (https://github.com/mcanevet[mcanevet])
+* Upgrade k3s to v1.18.12-k3s1 https://github.com/camptocamp/camptocamp-devops-stack/pull/246[#246] (https://github.com/mcanevet[mcanevet])
+
+*New applications:*
+
+* Deploy OLM https://github.com/camptocamp/camptocamp-devops-stack/pull/243[#243] (https://github.com/mcanevet[mcanevet])
+* Deploy Keycloak Operator https://github.com/camptocamp/camptocamp-devops-stack/pull/247[#247] (https://github.com/mcanevet[mcanevet])
+* Deploy Keycloak https://github.com/camptocamp/camptocamp-devops-stack/pull/250[#250] (https://github.com/mcanevet[mcanevet])
+
+*Fixed bugs:*
+
+* Enable ArgoCD metrics everywhere https://github.com/camptocamp/camptocamp-devops-stack/pull/231[#231] (https://github.com/mcanevet[mcanevet])
+* Manage app of apps with itself https://github.com/camptocamp/camptocamp-devops-stack/pull/232[#232] (https://github.com/mcanevet[mcanevet])
+* Fix bootstrap https://github.com/camptocamp/camptocamp-devops-stack/pull/235[#235] (https://github.com/mcanevet[mcanevet])
+* Fix bootstrap https://github.com/camptocamp/camptocamp-devops-stack/pull/236[#236] (https://github.com/mcanevet[mcanevet])
+* Use a dedicated secret for ingress tls certs https://github.com/camptocamp/camptocamp-devops-stack/pull/242[#242] (https://github.com/raphink[raphink])
+* Update prometheus datasource to use kube-prometheus-stack svc https://github.com/camptocamp/camptocamp-devops-stack/pull/244[#244] (https://github.com/raphink[raphink])
+
 == https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.8.0[0.8.0] (2020-11-12)
 
 https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.7.0...v0.8.0[Full Changelog]
