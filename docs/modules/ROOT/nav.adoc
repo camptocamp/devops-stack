@@ -2,6 +2,7 @@
 * Tutorials
 ** xref:run.adoc[Run the stack]
 * How-to guides
+** xref:release.adoc[Release a new version of the Camptocamp DevOps Stack]
 ** xref:develop.adoc[Develop the stack]
 ** xref:how_to_write_doc.adoc[Write documentation]
 *** xref:antora-ui-c2c:ROOT:index.adoc[Customize UI]
