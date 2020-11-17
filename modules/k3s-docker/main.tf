@@ -56,6 +56,10 @@ resource "helm_release" "app_of_apps" {
         base_domain     = local.base_domain,
         repo_url        = var.repo_url,
         target_revision = var.target_revision,
+        clientid        = "applications"
+        clientsecret    = random_password.clientsecret.result
+        admin_password  = random_password.admin_password.result
+        cookie_secret   = random_password.cookie_secret.result
       }
     ),
     var.app_of_apps_values_overrides,
@@ -64,4 +68,19 @@ resource "helm_release" "app_of_apps" {
   depends_on = [
     helm_release.argocd,
   ]
+}
+
+resource "random_password" "clientsecret" {
+  length  = 16
+  special = false
+}
+
+resource "random_password" "admin_password" {
+  length  = 16
+  special = false
+}
+
+resource "random_password" "cookie_secret" {
+  length  = 16
+  special = false
 }

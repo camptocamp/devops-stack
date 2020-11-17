@@ -1,0 +1,16 @@
+---
+apiVersion: keycloak.org/v1alpha1
+kind: KeycloakRealm
+metadata:
+  name: kubernetes
+  labels:
+    app: sso
+spec:
+  realm:
+    id: kubernetes
+    realm: kubernetes
+    enabled: true
+    displayName: Kubernetes Realm
+  instanceSelector:
+    matchLabels:
+      app: sso

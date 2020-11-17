@@ -1,0 +1,18 @@
+---
+apiVersion: keycloak.org/v1alpha1
+kind: KeycloakClient
+metadata:
+  name: applications
+  labels:
+    app: sso
+spec:
+  realmSelector:
+    matchLabels:
+      app: sso
+  client:
+    clientId: {{ .Values.keycloakClient.client.clientId }}
+    secret: {{ .Values.keycloakClient.client.secret }}
+    clientAuthenticatorType: client-secret
+    standardFlowEnabled: true
+    redirectUris:
+      {{- toYaml .Values.keycloakClient.client.redirectUris | nindent 6}}
