@@ -1,4 +1,6 @@
-#!/bin/sh -xe
+#!/bin/sh -e
+
+export KUBECTL_EXTERNAL_DIFF="diff -u"
 
 for app_dir in ../../argocd/*;
 do
