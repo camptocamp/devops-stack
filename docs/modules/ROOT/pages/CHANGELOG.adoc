@@ -4,6 +4,10 @@
 
 https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.9.0...v0.10.0[Full Changelog]
 
+*Breaking changes:*
+
+* [eks-aws] Due to the fact that a Cognito User Pool can have only one Cognito User Pool Domain attached, we had to remove the creation of the User Pool Domain from the DevOps Stack because it is incompatible with a clue/green or a prod/qa/int/dev/lab/whatever pattern. Hence, there is a new `cognito_user_pool_domain` mandatory parameter, and the previous user pool domain will be removed.
+
 *Implemented enhancements:*
 
 * Use diff as differ https://github.com/camptocamp/camptocamp-devops-stack/pull/258[#258] (https://github.com/mcanevet[mcanevet])
@@ -20,6 +24,7 @@ https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.9.0...v0.10.0[F
 *Fixed bugs:*
 
 * Fix devops-stack version in gitlab pipeline and example https://github.com/camptocamp/camptocamp-devops-stack/pull/255[#255] (https://github.com/mcanevet[mcanevet])
+* Replace cognito_user_pool_domain resource with module argument https://github.com/camptocamp/camptocamp-devops-stack/pull/263[#263] (https://github.com/ckaenzig[ckaenzig])
 
 == https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.9.0[0.9.0] (2020-11-17)
 
