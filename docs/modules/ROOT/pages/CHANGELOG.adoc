@@ -1,6 +1,6 @@
 = Changelog
 
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.10.0[0.10.0] (unreleased)
+== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.10.0[0.10.0] (2020-11-18)
 
 https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.9.0...v0.10.0[Full Changelog]
 

@@ -13,7 +13,7 @@ mr:terraform:plan:
   variables:
     CLUSTER_NAME: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
   script:
-    - wget -O- https://raw.githubusercontent.com/camptocamp/camptocamp-devops-stack/v0.9.0/scripts/plan.sh | sh
+    - wget -O- https://raw.githubusercontent.com/camptocamp/camptocamp-devops-stack/v0.10.0/scripts/plan.sh | sh
   allow_failure: true
   rules:
     - if: '$CI_MERGE_REQUEST_ID'
@@ -29,7 +29,7 @@ pb:terraform:apply:
   variables:
     CLUSTER_NAME: $CI_COMMIT_REF_NAME
   script:
-    - wget -O- https://raw.githubusercontent.com/camptocamp/camptocamp-devops-stack/v0.9.0/scripts/provision.sh | sh
+    - wget -O- https://raw.githubusercontent.com/camptocamp/camptocamp-devops-stack/v0.10.0/scripts/provision.sh | sh
   environment:
     name: cluster/$CI_COMMIT_REF_NAME
     on_stop: pb:terraform:destroy
@@ -47,7 +47,7 @@ pb:terraform:destroy:
   variables:
     CLUSTER_NAME: $CI_COMMIT_REF_NAME
   script:
-    - wget -O- https://raw.githubusercontent.com/camptocamp/camptocamp-devops-stack/v0.9.0/scripts/destroy.sh | sh
+    - wget -O- https://raw.githubusercontent.com/camptocamp/camptocamp-devops-stack/v0.10.0/scripts/destroy.sh | sh
   environment:
     name: cluster/$CI_COMMIT_REF_NAME
     action: stop
