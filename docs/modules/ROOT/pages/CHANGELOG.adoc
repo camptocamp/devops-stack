@@ -25,6 +25,7 @@ https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.9.0...v0.10.0[F
 
 * Fix devops-stack version in gitlab pipeline and example https://github.com/camptocamp/camptocamp-devops-stack/pull/255[#255] (https://github.com/mcanevet[mcanevet])
 * Replace cognito_user_pool_domain resource with module argument https://github.com/camptocamp/camptocamp-devops-stack/pull/263[#263] (https://github.com/ckaenzig[ckaenzig])
+* Fix eks-aws example https://github.com/camptocamp/camptocamp-devops-stack/pull/264[#264] (https://github.com/mcanevet[mcanevet])
 
 == https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.9.0[0.9.0] (2020-11-17)
 
