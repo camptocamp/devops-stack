@@ -50,6 +50,11 @@ variable "cognito_user_pool_id" {
   type        = string
 }
 
+variable "cognito_user_pool_domain" {
+  description = "Domain prefix of the Cognito user pool to use (custom domain currently not supported!)."
+  type        = string
+}
+
 variable "app_of_apps_values_overrides" {
   description = "App of apps values overrides."
   type        = string

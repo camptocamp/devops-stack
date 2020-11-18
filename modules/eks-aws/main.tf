@@ -141,9 +141,9 @@ resource "helm_release" "app_of_apps" {
         aws_default_region              = data.aws_region.current.name,
         cert_manager_assumable_role_arn = module.iam_assumable_role_cert_manager.this_iam_role_arn,
         cognito_user_pool_id            = var.cognito_user_pool_id
+        cognito_user_pool_domain        = var.cognito_user_pool_domain
         cognito_user_pool_client_id     = aws_cognito_user_pool_client.client.id
         cognito_user_pool_client_secret = aws_cognito_user_pool_client.client.client_secret
-        cognito_user_pool_domain        = aws_cognito_user_pool_domain.this.domain
         cookie_secret                   = random_password.oauth2_cookie_secret.result
         enable_efs                      = var.enable_efs
         efs_filesystem_id               = var.enable_efs ? module.efs.0.this_efs_mount_target_file_system_id : ""
@@ -156,9 +156,4 @@ resource "helm_release" "app_of_apps" {
   depends_on = [
     helm_release.argocd,
   ]
-}
-
-resource "aws_cognito_user_pool_domain" "this" {
-  domain       = var.cluster_name
-  user_pool_id = var.cognito_user_pool_id
 }
