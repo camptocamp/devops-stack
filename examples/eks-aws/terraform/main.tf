@@ -54,7 +54,8 @@ module "cluster" {
   repo_url        = local.repo_url
   target_revision = local.target_revision
 
-  cognito_user_pool_id = aws_cognito_user_pool.pool.id
+  cognito_user_pool_id     = aws_cognito_user_pool.pool.id
+  cognito_user_pool_domain = aws_cognito_user_pool_domain.pool_domain.domain
 }
 
 resource "aws_cognito_user_pool" "pool" {
