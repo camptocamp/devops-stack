@@ -79,6 +79,18 @@ jobs:
           CLUSTER_NAME: default
           ARGOCD_OPTS: "--plaintext --port-forward --port-forward-namespace argocd"
           KUBECONFIG: terraform/kubeconfig.yaml
+      - name: Update cluster
+        run: |
+          export PATH="$HOME/bin:$PATH"
+          TF_VAR_repo_url=$GITHUB_SERVER_URL/${{ github.actor }}/camptocamp-devops-stack.git \
+          TF_VAR_target_revision=${{ github.head_ref }} \
+          ../../scripts/provision.sh
+          . ../../scripts/get-argocd-auth-token.sh
+          while ! argocd app wait apps --health --timeout 30; do argocd app list -owide; done
+        env:
+          CLUSTER_NAME: default
+          ARGOCD_OPTS: "--plaintext --port-forward --port-forward-namespace argocd"
+          KUBECONFIG: terraform/kubeconfig.yaml
       - name: Destroy cluster
         run: |
           TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git \

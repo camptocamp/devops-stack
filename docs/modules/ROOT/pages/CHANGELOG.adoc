@@ -1,5 +1,13 @@
 = Changelog
 
+== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.10.0[0.10.0] (unreleased)
+
+https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.9.0...v0.10.0[Full Changelog]
+
+*Implemented enhancements:*
+
+* Apply modifications on pull requests in pipeline https://github.com/camptocamp/camptocamp-devops-stack/pull/262[#262] (https://github.com/mcanevet[mcanevet])
+
 == https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.9.0[0.9.0] (2020-11-17)
 
 https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.8.0...v0.9.0[Full Changelog]
