@@ -41,7 +41,7 @@ argo-cd: {}
 cert-manager: {}
 efs-provisioner: {}
 kube-prometheus-stack: {}
-loki: {}
+loki-stack: {}
 secrets-store-csi-driver: {}
 traefik: {}
 vault: {}

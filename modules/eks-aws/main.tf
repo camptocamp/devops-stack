@@ -149,6 +149,8 @@ resource "helm_release" "app_of_apps" {
         target_revision                 = var.target_revision,
         aws_default_region              = data.aws_region.current.name,
         cert_manager_assumable_role_arn = module.iam_assumable_role_cert_manager.this_iam_role_arn,
+        loki_assumable_role_arn         = module.iam_assumable_role_loki.this_iam_role_arn,
+        loki_bucket_name                = aws_s3_bucket.loki.id,
         cognito_user_pool_id            = var.cognito_user_pool_id
         cognito_user_pool_domain        = var.cognito_user_pool_domain
         cognito_user_pool_client_id     = aws_cognito_user_pool_client.client.id
