@@ -13,8 +13,8 @@ spec:
     targetRevision: {{ .Values.spec.source.targetRevision }}
     helm:
       values: |
-        loki:
-          {{- index .Values "loki" | toYaml | nindent 10 }}
+        loki-stack:
+          {{- index .Values "loki-stack" | toYaml | nindent 10 }}
   destination:
     namespace: kube-prometheus-stack
     server: {{ .Values.spec.destination.server }}
