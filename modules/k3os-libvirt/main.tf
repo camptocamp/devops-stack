@@ -18,12 +18,15 @@ provider "helm" {
 }
 
 module "cluster" {
-  source  = "camptocamp/k3s/docker"
-  version = "0.3.2"
+  source  = "camptocamp/k3os/libvirt"
+  version = "0.2.1"
 
   cluster_name = var.cluster_name
-  k3s_version  = var.k3s_version
+  k3os_version = var.k3os_version
   node_count   = var.node_count
+
+  server_memory = 2048
+  agent_memory  = 2048
 }
 
 resource "helm_release" "argocd" {
