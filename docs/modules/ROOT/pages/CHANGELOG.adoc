@@ -1,5 +1,14 @@
 = Changelog
 
+== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.11.0[0.11.0] (2020-11-19)
+
+https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.10.1...v0.11.0[Full Changelog]
+
+*Implemented enhancements:*
+
+* [eks-aws] Add support for creating a private NLB https://github.com/camptocamp/camptocamp-devops-stack/pull/268[#268] (https://github.com/ckaenzig[ckaenzig])
+* [pipeline] Variabilize version in gitlab-ci pipeline https://github.com/camptocamp/camptocamp-devops-stack/pull/269[#269] (https://github.com/mcanevet[mcanevet])
+
 == https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.10.1[0.10.1] (2020-11-18)
 
 https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.10.0...v0.10.1[Full Changelog]
