@@ -1,5 +1,5 @@
 = Camptocamp's DevOps stack
-Mickaël Canévet <mickael.canevet@camptocamp.com>; Raphaël Pinson <raphael.pinson@camptocamp.com>; Stéphane Brunner <stephane.brunner@camptocamp.com>
+
 :description: This repository contains the reference implementation of Camptocamp's Infrastructure Solutions & Services department.
 :keywords: terraform, docker, kubernetes, k3s, argocd, grafana, traefik, prometheus
 :sectanchors:
