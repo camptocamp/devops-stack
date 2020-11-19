@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Access services deployed in the cluster :: Camptocamp’s DevOps Stack</title>
+    <link rel="canonical" href="https://camptocamp.github.io/camptocamp-devops-stack/camptocamp-devops-stack/0.11.0/access_services_in_cluster.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <link rel="icon" href="../../_/img/c2c_favicon.png" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://camptocamp.github.io/camptocamp-devops-stack">Camptocamp’s DevOps Stack</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="camptocamp-devops-stack" data-version="0.11.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Camptocamp’s DevOps stack</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Tutorials</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="run.html">Run the stack</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">How-to guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="release.html">Release a new version of the Camptocamp DevOps Stack</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="develop.html">Develop the stack</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="how_to_write_doc.html">Write documentation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../antora-ui-c2c/index.html">Customize UI</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="access_services_in_cluster.html">Access Services in the cluster</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="access_kubernetes_api.html">Access Kubernetes API</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="access_argocd_webui.html">Access ArgoCD web UI</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="access_traefik_dashboard.html">Access Traefik dashboard</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="access_vault_ui.html">Access Vault UI</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="access_grafana_dashboard.html">Access Grafana dashboard</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="access_prometheus_dashboard.html">Access Prometheus dashboard</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="access_alertmanager_dashboard.html">Access Alertmanager dashboard</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Reference Guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="provisioning.html">Provisioning</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="deployment.html">Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ref_documentation.html">Documentation</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Explanations</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="why_k3s.html">Why k3s?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="why_terraform.html">Why Terraform?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="why_automated_sync.html">Why Automated Sync Policy?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="why_antora.html">Why Antora for the documentation?</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="CHANGELOG.html">Changelog</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Camptocamp’s DevOps stack</span>
+    <span class="version">0.11.0</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <span class="title">Antora UI for c2c</span>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../antora-ui-c2c/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <span class="title">Camptocamp’s DevOps stack</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">0.11.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Camptocamp’s DevOps stack</a></li>
+    <li>How-to guides</li>
+    <li><a href="access_services_in_cluster.html">Access Services in the cluster</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Access services deployed in the cluster</h1>
+<div class="sect1">
+<h2 id="_access_kubernetes_api"><a class="anchor" href="#_access_kubernetes_api"></a>Access Kubernetes API</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>K3s’ installation create a <code>kubeconfig.yaml</code> file that contains the
+Kubernetes context that allows you to access the cluster.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ export CLUSTER_NAME=master
+$ export KUBECONFIG=distributions/k3s/_/docker/terraform/terraform.tfstate.d/$CLUSTER_NAME/kubeconfig.yaml
+$ export BASE_DOMAIN=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' k3s-server-$CLUSTER_NAME|tr '.' '-'`.nip.io
+$ kubectl get nodes
+$ kubectl get namespaces
+$ kubectl get pods --all-namespaces</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_access_argocd_web_ui"><a class="anchor" href="#_access_argocd_web_ui"></a>Access ArgoCD web UI</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>ArgoCD Web UI is accessible via <a href="https://argocd.apps.$BASE_DOMAIN" class="bare">https://argocd.apps.$BASE_DOMAIN</a>. The default account is admin/argocd.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_access_traefik_dashboard"><a class="anchor" href="#_access_traefik_dashboard"></a>Access Traefik dashboard</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For security reasons, Traefik dashboard is not exposed, hence you have
+to use port-forwarding to access it:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ kubectl -n traefik port-forward $(kubectl -n traefik get pods --selector "app.kubernetes.io/name=traefik" --output=name | head -n1) 9000:9000</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then point your web browser to <a href="http://localhost:9000/dashboard/" class="bare">http://localhost:9000/dashboard/</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_access_vault_ui"><a class="anchor" href="#_access_vault_ui"></a>Access Vault UI</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Vault UI is accessible via <a href="https://vault.apps.$BASE_DOMAIN" class="bare">https://vault.apps.$BASE_DOMAIN</a>.</p>
+</div>
+<div class="paragraph">
+<p>In this stack, Vault is deploy in dev mode, which means that the root token is <code>root</code>.</p>
+</div>
+<div class="sect2">
+<h3 id="_create_a_secret_in_vault_and_allow_access_to_a_serviceaccount_using_terraform"><a class="anchor" href="#_create_a_secret_in_vault_and_allow_access_to_a_serviceaccount_using_terraform"></a>Create a secret in Vault and allow access to a ServiceAccount using Terraform</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_inject_a_secret_from_vault_using_agent_injector"><a class="anchor" href="#_inject_a_secret_from_vault_using_agent_injector"></a>Inject a secret from Vault using agent injector</h3>
+<div class="paragraph">
+<p>This stack installs <a href="https://www.vaultproject.io/docs/platform/k8s/injector">Vault injector</a> that allows secrets injection to a pod.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ kubectl -n demo-app exec -ti $(kubectl -n demo-app get pods --selector 'app.kubernetes.io/name=demo-app' --output=name|head -n1) -- cat /vault/secrets/demo-app
+Defaulting container name to demo-app.
+Use 'kubectl describe pod/demo-app-6f7cf8ddbf-vq7vg -n demo-app' to see all of the containers in this pod.
+data: map[foo:bar pizza:cheese]
+metadata: map[created_time:2020-10-05T15:04:47.061885873Z deletion_time: destroyed:false version:1]</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_inject_a_secret_from_vault_using_secrets_store_csi_driver"><a class="anchor" href="#_inject_a_secret_from_vault_using_secrets_store_csi_driver"></a>Inject a secret from Vault using secrets store CSI driver</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ kubectl -n demo-app exec -ti $(kubectl -n demo-app get pods --selector 'app.kubernetes.io/name=demo-app' --output=name|head -n1) -- cat /mnt/secrets-store/demo-app</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_access_grafana_dashboard"><a class="anchor" href="#_access_grafana_dashboard"></a>Access Grafana dashboard</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Granafa is accessible via <a href="https://grafana.apps.$BASE_DOMAIN" class="bare">https://grafana.apps.$BASE_DOMAIN</a>. As there is currently no proper secret management in this stack, we let the default Grafana credentials: <code>admin/prom-operator</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_access_prometheus_dashboard"><a class="anchor" href="#_access_prometheus_dashboard"></a>Access Prometheus dashboard</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Prometheus is accessible via <a href="https://prometheus.apps.$BASE_DOMAIN" class="bare">https://prometheus.apps.$BASE_DOMAIN</a>. As there is currently no proper secret management in this stack, the Prometheus URL is not protected.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_access_alertmanager_dashboard"><a class="anchor" href="#_access_alertmanager_dashboard"></a>Access Alertmanager dashboard</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Alertmanager is accessible via <a href="https://alertmanager.apps.$BASE_DOMAIN" class="bare">https://alertmanager.apps.$BASE_DOMAIN</a>. As there is currently no proper secret management in this stack, the Alertmanager URL is not protected.</p>
+</div>
+</div>
+</div>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

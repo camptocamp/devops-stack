@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>How to participate to this documentation :: Camptocamp’s DevOps Stack</title>
+    <link rel="canonical" href="https://camptocamp.github.io/camptocamp-devops-stack/camptocamp-devops-stack/0.11.0/how_to_write_doc.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <link rel="icon" href="../../_/img/c2c_favicon.png" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://camptocamp.github.io/camptocamp-devops-stack">Camptocamp’s DevOps Stack</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="camptocamp-devops-stack" data-version="0.11.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Camptocamp’s DevOps stack</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Tutorials</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="run.html">Run the stack</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">How-to guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="release.html">Release a new version of the Camptocamp DevOps Stack</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="develop.html">Develop the stack</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="how_to_write_doc.html">Write documentation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../antora-ui-c2c/index.html">Customize UI</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="access_services_in_cluster.html">Access Services in the cluster</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="access_kubernetes_api.html">Access Kubernetes API</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="access_argocd_webui.html">Access ArgoCD web UI</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="access_traefik_dashboard.html">Access Traefik dashboard</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="access_vault_ui.html">Access Vault UI</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="access_grafana_dashboard.html">Access Grafana dashboard</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="access_prometheus_dashboard.html">Access Prometheus dashboard</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="access_alertmanager_dashboard.html">Access Alertmanager dashboard</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Reference Guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="provisioning.html">Provisioning</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="deployment.html">Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ref_documentation.html">Documentation</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Explanations</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="why_k3s.html">Why k3s?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="why_terraform.html">Why Terraform?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="why_automated_sync.html">Why Automated Sync Policy?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="why_antora.html">Why Antora for the documentation?</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="CHANGELOG.html">Changelog</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Camptocamp’s DevOps stack</span>
+    <span class="version">0.11.0</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <span class="title">Antora UI for c2c</span>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../antora-ui-c2c/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <span class="title">Camptocamp’s DevOps stack</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">0.11.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Camptocamp’s DevOps stack</a></li>
+    <li>How-to guides</li>
+    <li><a href="how_to_write_doc.html">Write documentation</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">How to participate to this documentation</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The documentation of this project is located into the <code>docs/</code> folder and has to follow the <a href="ref_documentation.html#_structure" class="page">Divio documentation structure</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_a_new_documentation_page"><a class="anchor" href="#_create_a_new_documentation_page"></a>Create a new Documentation page</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_write_a_new_page"><a class="anchor" href="#_write_a_new_page"></a>Write a new page</h3>
+<div class="paragraph">
+<p>To write a new page of documentation, create a new file inside the <code>docs\modules\ROOT\pages</code> subfolder, with the <code>.adoc</code> extension.
+You should then write your content using <a href="https://asciidoc.org/">Asciidoc language</a>.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Use the <a href="https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/">AsciiDoc Syntax Quick Reference</a> and the <a href="https://powerman.name/doc/asciidoc">Asciidoc Cheatsheet</a>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_convert_an_existing_markdown_document"><a class="anchor" href="#_convert_an_existing_markdown_document"></a>Convert an existing Markdown document</h3>
+<div class="paragraph">
+<p>Alternatively, if you have an existing Markdown document, you can convert it using the <a href="https://pandoc.org/">pandoc tool</a>.</p>
+</div>
+<div class="listingblock">
+<div class="title">Pandoc call to convert Markdown into Asciidoc, preserving format.</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ pandoc -f markdown -t asciidoc --wrap=preserve --shift-heading-level-by=-1 --standalone --output=FILENAME.adoc FILENAME.md</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_include_the_new_page"><a class="anchor" href="#_include_the_new_page"></a>Include the new page</h3>
+<div class="paragraph">
+<p>To include your page in the resulting website, edit the <code>docs/modules/ROOT/nav.adoc</code> file to add an index entry under the right section.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code>* Section
+** xref:my_documentation_under_Section.adoc[My documentation's title]</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_customize_the_appearance"><a class="anchor" href="#_customize_the_appearance"></a>Customize the appearance</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The UI of the documentation is built in an external project named <a href="https://github.com/camptocamp/antora-ui/blob/master/README.adoc#antora-ui-for-camptocamp">Antora-ui for Camptocamp</a>.</p>
+</div>
+<div class="paragraph">
+<p>First make sure to follow the <a href="https://github.com/camptocamp/antora-ui/blob/master/README.adoc#development-quickstart">development quickstart</a>, then <a href="https://github.com/camptocamp/antora-ui/blob/master/README.adoc#clone-and-initialize-the-ui-project">clone and initialize the UI Project</a>.</p>
+</div>
+<div class="paragraph">
+<p>For detailled information on the way to customize the UI, please refer to the <a href="../../antora-ui-c2c/index.html" class="page">corresponding documentation here</a>.</p>
+</div>
+</div>
+</div>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
