@@ -56,7 +56,7 @@ provider "kubernetes" {
 }
 
 locals {
-  ingress_worker_group  = merge(var.worker_groups.0, { target_group_arns = concat(module.nlb.target_group_arns, module.nlb_private.target_group_arns) })
+  ingress_worker_group = merge(var.worker_groups.0, { target_group_arns = concat(module.nlb.target_group_arns, module.nlb_private.target_group_arns) })
 }
 
 module "cluster" {
