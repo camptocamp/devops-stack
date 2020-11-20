@@ -31,3 +31,9 @@ variable "app_of_apps_values_overrides" {
   type        = string
   default     = ""
 }
+
+variable "enable_minio" {
+  description = "Whether to enable minio object storage system"
+  type        = bool
+  default     = false
+}
