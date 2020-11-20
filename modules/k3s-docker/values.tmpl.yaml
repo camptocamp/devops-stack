@@ -9,6 +9,29 @@ apps:
     enabled: true
   olm:
     enabled: true
+  minio:
+    enabled: ${enable_minio}
+minio:
+  persistence:
+    enabled: false
+  accessKey: ${minio_access_key}
+  secretKey: ${minio_secret_key}
+  replicas: 1
+  resources:
+    requests:
+      memory: 64Mi
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: selfsigned-issuer
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      traefik.ingress.kubernetes.io/router.tls: "true"
+    hosts:
+      - minio.apps.${base_domain}
+    tls:
+      - secretName: minio-tls
+        hosts:
+          - minio.apps.${base_domain}
 
 argo-cd:
   controller:

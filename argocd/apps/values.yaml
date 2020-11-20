@@ -31,6 +31,8 @@ apps:
     enabled: true
   vault:
     enabled: false
+  minio:
+    enabled: false
 
 argo-cd: {}
 cert-manager: {}
@@ -40,3 +42,4 @@ loki: {}
 secrets-store-csi-driver: {}
 traefik: {}
 vault: {}
+minio: {}
