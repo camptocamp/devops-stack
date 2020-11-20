@@ -11,7 +11,7 @@ In this stack, Vault is deploy in dev mode, which means that the root token is `
 This stack installs https://www.vaultproject.io/docs/platform/k8s/injector[Vault injector] that allows secrets injection to a pod.
 
 ```shell
-$ kubectl -n demo-app exec -ti $(kubectl -n demo-app get pods --selector 'app.kubernetes.io/name=demo-app' --output=name|head -n1) -- cat /vault/secrets/demo-app
+kubectl -n demo-app exec -ti $(kubectl -n demo-app get pods --selector 'app.kubernetes.io/name=demo-app' --output=name|head -n1) -- cat /vault/secrets/demo-app
 Defaulting container name to demo-app.
 Use 'kubectl describe pod/demo-app-6f7cf8ddbf-vq7vg -n demo-app' to see all of the containers in this pod.
 data: map[foo:bar pizza:cheese]
@@ -21,5 +21,5 @@ metadata: map[created_time:2020-10-05T15:04:47.061885873Z deletion_time: destroy
 === Inject a secret from Vault using secrets store CSI driver
 
 ```shell
-$ kubectl -n demo-app exec -ti $(kubectl -n demo-app get pods --selector 'app.kubernetes.io/name=demo-app' --output=name|head -n1) -- cat /mnt/secrets-store/demo-app
+kubectl -n demo-app exec -ti $(kubectl -n demo-app get pods --selector 'app.kubernetes.io/name=demo-app' --output=name|head -n1) -- cat /mnt/secrets-store/demo-app
 ```

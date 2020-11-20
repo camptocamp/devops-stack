@@ -18,7 +18,7 @@ Alternatively, if you have an existing Markdown document, you can convert it usi
 [source,shell]
 .Pandoc call to convert Markdown into Asciidoc, preserving format.
 ----
-$ pandoc -f markdown -t asciidoc --wrap=preserve --shift-heading-level-by=-1 --standalone --output=FILENAME.adoc FILENAME.md
+pandoc -f markdown -t asciidoc --wrap=preserve --shift-heading-level-by=-1 --standalone --output=FILENAME.adoc FILENAME.md
 ----
 
 === Include the new page

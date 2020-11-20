@@ -5,7 +5,7 @@ to use port-forwarding to access it:
 
 [source,shell]
 ----
-$ kubectl -n traefik port-forward $(kubectl -n traefik get pods --selector "app.kubernetes.io/name=traefik" --output=name | head -n1) 9000:9000
+kubectl -n traefik port-forward $(kubectl -n traefik get pods --selector "app.kubernetes.io/name=traefik" --output=name | head -n1) 9000:9000
 ----
 
 Then point your web browser to http://localhost:9000/dashboard/
