@@ -5,8 +5,8 @@
 
 [source,shell,subs="attributes"]
 ----
-$ git clone {url-repo}
-$ cd {project-name}/examples/k3s-docker-demo-app
+git clone {url-repo}
+cd {project-name}/examples/k3s-docker-demo-app
 ----
 
 == Run the stack
@@ -16,7 +16,7 @@ $ cd {project-name}/examples/k3s-docker-demo-app
 Just run :
 [source,shell]
 ----
-$ make
+make
 ----
 
 It will:
@@ -31,5 +31,5 @@ It will:
 Just run :
 [source,shell]
 ----
-$ make clean
+make clean
 ----
