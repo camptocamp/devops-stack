@@ -11,11 +11,26 @@ jobs:
       matrix:
         flavor:
           - k3s-docker
+          - k3os-libvirt
     defaults:
       run:
         working-directory: tests/${{ matrix.flavor }}
     steps:
       - uses: actions/checkout@v2
+      - name: Install libvirt
+        if: ${{ matrix.flavor == 'k3os-libvirt' }}
+        run: |
+          sudo apt-get install -y -qq libvirt0 libvirt-daemon libvirt-daemon-system libvirt-clients qemu-kvm qemu-system-x86
+          # Can't find a way to add current user to libvirt group...
+          sudo chgrp $(id -g) /var/run/libvirt/libvirt-admin-sock
+          sudo chgrp $(id -g) /var/run/libvirt/libvirt-sock
+          sudo chgrp $(id -g) /var/run/libvirt/libvirt-sock-ro
+      - name: Install terraform-libvirt-provider
+        if: ${{ matrix.flavor == 'k3os-libvirt' }}
+        run: |
+          mkdir -p "$HOME/.local/share/terraform/plugins/registry.terraform.io/dmacvicar/libvirt/0.6.2/linux_amd64"
+          curl -sSL https://github.com/dmacvicar/terraform-provider-libvirt/releases/download/v0.6.2/terraform-provider-libvirt-0.6.2+git.1585292411.8cbe9ad0.Ubuntu_18.04.amd64.tar.gz | tar xz terraform-provider-libvirt -O > "$HOME/.local/share/terraform/plugins/registry.terraform.io/dmacvicar/libvirt/0.6.2/linux_amd64/terraform-provider-libvirt"
+          chmod +x "$HOME/.local/share/terraform/plugins/registry.terraform.io/dmacvicar/libvirt/0.6.2/linux_amd64/terraform-provider-libvirt"
       - name: Deploy cluster
         run: |
           mkdir "$HOME/bin"
@@ -28,6 +43,8 @@ jobs:
           ../../scripts/wait-for-app-of-apps.sh
         env:
           CLUSTER_NAME: default
+          # KVM is not available in github actions
+          TERRAFORM_LIBVIRT_TEST_DOMAIN_TYPE: "qemu"
       - name: Destroy cluster
         run: |
           TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git \
@@ -35,3 +52,5 @@ jobs:
           ../../scripts/destroy.sh
         env:
           CLUSTER_NAME: default
+          # KVM is not available in github actions
+          TERRAFORM_LIBVIRT_TEST_DOMAIN_TYPE: "qemu"

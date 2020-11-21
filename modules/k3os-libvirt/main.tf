@@ -33,7 +33,7 @@ module "cluster" {
   k3os_version = var.k3os_version
   node_count   = var.node_count
 
-  server_memory = 2048
+  server_memory = 3072
   agent_memory  = 2048
 }
 

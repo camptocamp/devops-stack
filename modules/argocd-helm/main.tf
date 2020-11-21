@@ -27,6 +27,7 @@ resource "helm_release" "argocd" {
   namespace         = "argocd"
   dependency_update = true
   create_namespace  = true
+  timeout           = 10800
 
   values = [
     file("${path.module}/../../argocd/argocd/values.yaml"),
