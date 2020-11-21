@@ -7,9 +7,13 @@ on:
 jobs:
   push:
     runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        flavor:
+          - k3s-docker
     defaults:
       run:
-        working-directory: tests/k3s-docker
+        working-directory: tests/${{ matrix.flavor }}
     steps:
       - uses: actions/checkout@v2
       - name: Deploy cluster
