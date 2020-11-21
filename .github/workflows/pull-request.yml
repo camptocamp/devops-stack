@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: tests/k3s-docker-demo-app
+        working-directory: tests/k3s-docker
     steps:
       - uses: actions/checkout@v2
       - name: Deploy cluster
@@ -38,7 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: tests/k3s-docker-demo-app
+        working-directory: tests/k3s-docker
     steps:
       - uses: actions/checkout@v2
         with:
