@@ -6,7 +6,7 @@ on:
       - master
 jobs:
   from_scratch:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     defaults:
       run:
         working-directory: tests/k3s-docker
@@ -35,7 +35,7 @@ jobs:
         env:
           CLUSTER_NAME: default
   update:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     defaults:
       run:
         working-directory: tests/k3s-docker
