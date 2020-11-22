@@ -1,3 +1,8 @@
+output "argocd_auth_token" {
+  description = "The token to set in ARGOCD_AUTH_TOKEN environment variable."
+  value       = module.argocd.argocd_auth_token
+}
+
 output "cluster_id" {
   description = "The name/id of the EKS cluster. Will block on cluster creation until the cluster is really ready"
   value       = module.cluster.cluster_id
