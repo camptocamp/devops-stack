@@ -9,11 +9,7 @@ export ARGOCD_OPTS
 KUBECONFIG_CONTENT=$(jq -r '.KUBECONFIG_CONTENT.value' terraform/outputs.json)
 export KUBECONFIG_CONTENT
 
-export KUBECTL_EXTERNAL_DIFF="diff -u"
-
-for app_dir in ../../argocd/*;
+while ! KUBECONFIG=<(echo "$KUBECONFIG_CONTENT") argocd app wait apps --health --timeout 30
 do
-	app=${app_dir#../../argocd/}
-	test -f "$app_dir/Chart.yaml" && helm dependency update "$app_dir"
-	KUBECONFIG=<(echo "$KUBECONFIG_CONTENT") argocd app diff "$app" --local "$app_dir" || true
+	KUBECONFIG=<(echo "$KUBECONFIG_CONTENT") argocd app list -owide
 done

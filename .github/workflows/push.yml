@@ -25,12 +25,9 @@ jobs:
           TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git \
           TF_VAR_target_revision=${GITHUB_REF##*/} \
           ../../scripts/provision.sh
-          . ../../scripts/get-argocd-auth-token.sh
-          while ! argocd app wait apps --health --timeout 30; do argocd app list -owide; done
+          ../../scripts/wait-for-app-of-apps.sh
         env:
           CLUSTER_NAME: default
-          ARGOCD_OPTS: "--plaintext --port-forward --port-forward-namespace argocd"
-          KUBECONFIG: terraform/kubeconfig.yaml
       - name: Destroy cluster
         run: |
           TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git \

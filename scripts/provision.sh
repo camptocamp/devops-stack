@@ -11,4 +11,5 @@ helm dependency update "$(jq -r '.Modules[]|select(.Key == "cluster").Dir + "/..
 
 terraform apply --auto-approve
 terraform plan --detailed-exitcode
+terraform output -json > outputs.json
 cd - || exit
