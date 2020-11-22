@@ -103,16 +103,8 @@ resource "aws_security_group_rule" "workers_ingress_healthcheck_http" {
   cidr_blocks       = [data.aws_vpc.this.cidr_block]
 }
 
-resource "helm_release" "argocd" {
-  name              = "argocd"
-  chart             = "${path.module}/../../argocd/argocd"
-  namespace         = "argocd"
-  dependency_update = true
-  create_namespace  = true
-
-  values = [
-    file("${path.module}/../../argocd/argocd/values.yaml")
-  ]
+module "argocd" {
+  source = "../argocd-helm"
 
   depends_on = [
     module.cluster,

@@ -26,16 +26,8 @@ module "cluster" {
   node_count   = var.node_count
 }
 
-resource "helm_release" "argocd" {
-  name              = "argocd"
-  chart             = "${path.module}/../../argocd/argocd"
-  namespace         = "argocd"
-  dependency_update = true
-  create_namespace  = true
-
-  values = [
-    file("${path.module}/../../argocd/argocd/values.yaml")
-  ]
+module "argocd" {
+  source = "../argocd-helm"
 
   depends_on = [
     module.cluster,
@@ -69,7 +61,7 @@ resource "helm_release" "app_of_apps" {
   ]
 
   depends_on = [
-    helm_release.argocd,
+    module.argocd,
   ]
 }
 
