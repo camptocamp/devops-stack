@@ -17,6 +17,14 @@ provider "helm" {
   }
 }
 
+provider "kubernetes" {
+  host                   = local.kubernetes_host
+  username               = local.kubernetes_username
+  password               = local.kubernetes_password
+  cluster_ca_certificate = local.kubernetes_cluster_ca_certificate
+  load_config_file       = false
+}
+
 module "cluster" {
   source  = "camptocamp/k3s/docker"
   version = "0.3.2"

@@ -1,17 +1,25 @@
 locals {
-  iat = 1605854613 # An arbitrary Unix timestamp before than now
+  jwt_token_payload = {
+    jti = random_uuid.jti.result
+    iat = time_static.iat.unix
+    iss = "argocd"
+    nbf = time_static.iat.unix
+    sub = "pipeline"
+  }
 
   argocd_accounts_pipeline_tokens = jsonencode(
     [
       {
-        id  = random_uuid.accounts_pipeline_token_id.result
-        iat = local.iat
+        id  = random_uuid.jti.result
+        iat = time_static.iat.unix
       }
     ]
   )
 }
 
-resource "random_uuid" "accounts_pipeline_token_id" {}
+resource "time_static" "iat" {}
+
+resource "random_uuid" "jti" {}
 
 resource "helm_release" "argocd" {
   name              = "argocd"
@@ -30,4 +38,21 @@ resource "helm_release" "argocd" {
             accounts.pipeline.tokens: '${local.argocd_accounts_pipeline_tokens}'
     EOT
   ]
+}
+
+data "kubernetes_secret" "argocd_secret" {
+  metadata {
+    name      = "argocd-secret"
+    namespace = helm_release.argocd.namespace
+  }
+
+  depends_on = [
+    helm_release.argocd,
+  ]
+}
+
+resource "jwt_hashed_token" "argocd" {
+  algorithm   = "HS256"
+  secret      = lookup(data.kubernetes_secret.argocd_secret.data, "server.secretkey")
+  claims_json = jsonencode(local.jwt_token_payload)
 }
