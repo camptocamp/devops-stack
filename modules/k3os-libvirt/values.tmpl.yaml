@@ -33,6 +33,10 @@ minio:
         hosts:
           - minio.apps.${base_domain}
 argo-cd:
+  configs:
+    secret:
+      extra:
+        accounts.pipeline.tokens: '${argocd_accounts_pipeline_tokens}'
   controller:
     metrics:
       enabled: true

@@ -126,9 +126,10 @@ resource "helm_release" "app_of_apps" {
   values = [
     templatefile("${path.module}/values.tmpl.yaml",
       {
-        cluster_name                    = var.cluster_name,
-        base_domain                     = var.base_domain,
-        repo_url                        = var.repo_url,
+        cluster_name                    = var.cluster_name
+        base_domain                     = var.base_domain
+        repo_url                        = var.repo_url
+        argocd_accounts_pipeline_tokens = module.argocd.argocd_accounts_pipeline_tokens
         target_revision                 = var.target_revision,
         aws_default_region              = data.aws_region.current.name,
         cert_manager_assumable_role_arn = module.iam_assumable_role_cert_manager.this_iam_role_arn,

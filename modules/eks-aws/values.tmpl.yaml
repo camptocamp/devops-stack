@@ -11,6 +11,10 @@ apps:
     enabled: ${enable_efs}
 
 argo-cd:
+  configs:
+    secret:
+      extra:
+        accounts.pipeline.tokens: '${argocd_accounts_pipeline_tokens}'
   controller:
     metrics:
       enabled: true
