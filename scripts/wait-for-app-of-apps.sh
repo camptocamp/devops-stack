@@ -1,12 +1,12 @@
 #!/bin/bash -e
 
-ARGOCD_AUTH_TOKEN=$(jq -r '.ARGOCD_AUTH_TOKEN.value' terraform/outputs.json)
+ARGOCD_AUTH_TOKEN=$(python3 -c "import sys, json; print(json.load(sys.stdin)['ARGOCD_AUTH_TOKEN']['value'])" < terraform/outputs.json)
 export ARGOCD_AUTH_TOKEN
 
 ARGOCD_OPTS="--plaintext --port-forward --port-forward-namespace argocd"
 export ARGOCD_OPTS
 
-KUBECONFIG_CONTENT=$(jq -r '.KUBECONFIG_CONTENT.value' terraform/outputs.json)
+KUBECONFIG_CONTENT=$(python3 -c "import sys, json; print(json.load(sys.stdin)['KUBECONFIG_CONTENT']['value'])" < terraform/outputs.json)
 export KUBECONFIG_CONTENT
 
 while ! KUBECONFIG=<(echo "$KUBECONFIG_CONTENT") argocd app wait apps --health --timeout 30
