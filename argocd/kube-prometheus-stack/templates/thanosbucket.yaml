@@ -1,0 +1,16 @@
+{{- if index $.Values "thanos" "archives" "enabled" }}
+apiVersion: v1
+kind: Secret
+type: Opaque
+metadata:
+  name: thanos-objectstore-config
+stringData:
+  thanos.yaml: |-
+        type: S3
+        config:
+          endpoint: "minio.minio.svc:9000"
+          bucket: "thanos"
+          insecure: true
+          access_key: {{ $.Values.thanos.archives.accessKey }}
+          secret_key: {{ $.Values.thanos.archives.secretKey }}
+{{- end }}

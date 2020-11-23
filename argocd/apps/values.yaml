@@ -43,3 +43,6 @@ secrets-store-csi-driver: {}
 traefik: {}
 vault: {}
 minio: {}
+thanos:
+  archives:
+    enabled: false

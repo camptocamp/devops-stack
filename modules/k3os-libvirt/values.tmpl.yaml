@@ -20,6 +20,10 @@ minio:
   resources:
     requests:
       memory: 64Mi
+  buckets:
+    - name: thanos
+      policy: none
+      purge: false
   ingress:
     enabled: true
     annotations:
