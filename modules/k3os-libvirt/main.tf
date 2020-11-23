@@ -73,7 +73,7 @@ resource "helm_release" "app_of_apps" {
   ]
 
   depends_on = [
-    helm_release.argocd,
+    module.argocd,
   ]
 }
 
