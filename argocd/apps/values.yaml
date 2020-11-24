@@ -5,6 +5,9 @@ spec:
   source:
     repoURL: ...
     targetRevision: HEAD
+  syncPolicy:
+    automated:
+      selfHeal: true
 
 apps:
   apps:

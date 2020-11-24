@@ -18,8 +18,9 @@ spec:
   destination:
     namespace: minio
     server: {{ .Values.spec.destination.server }}
+  {{- if .Values.spec.syncPolicy }}
   syncPolicy:
-    automated:
-      selfHeal: true
+    {{ toYaml .Values.spec.syncPolicy | nindent 4 }}
+  {{- end }}
 {{- end }}
 
