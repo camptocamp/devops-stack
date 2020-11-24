@@ -1,13 +1,19 @@
 ---
 variables:
+  ARGOCD_VERSION: "1.7.6"
   TERRAFORM_VERSION: "0.13.5"
   CAMPTOCAMP_DEVOPS_STACK_VERSION: "0.13.0"
+
+stages:
+  - terraform
+  - argocd
 
 ###
 # Pipeline for Merge Requests
 #
 
 mr:terraform:plan:
+  stage: terraform
   image:
     name: hashicorp/terraform:$TERRAFORM_VERSION
     entrypoint: [""]
@@ -15,6 +21,23 @@ mr:terraform:plan:
     CLUSTER_NAME: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
   script:
     - wget -O- "https://raw.githubusercontent.com/camptocamp/camptocamp-devops-stack/v$CAMPTOCAMP_DEVOPS_STACK_VERSION/scripts/plan.sh" | sh
+  artifacts:
+    paths:
+      - terraform/outputs.json
+    expire_in: 1 hour
+    when: always
+  rules:
+    - if: '$CI_MERGE_REQUEST_ID'
+
+mr:argocd:diff:
+  stage: argocd
+  image:
+    name: argoproj/argocd:v${ARGOCD_VERSION}
+  script:
+    - python3 -c "import urllib.request; print(urllib.request.urlopen('https://raw.githubusercontent.com/camptocamp/camptocamp-devops-stack/v$CAMPTOCAMP_DEVOPS_STACK_VERSION/scripts/app-diff.sh').read().decode())" | bash
+  needs:
+    - job: mr:terraform:plan
+      artifacts: true
   allow_failure: true
   rules:
     - if: '$CI_MERGE_REQUEST_ID'
@@ -24,6 +47,7 @@ mr:terraform:plan:
 #
 
 pb:terraform:apply:
+  stage: terraform
   image:
     name: hashicorp/terraform:$TERRAFORM_VERSION
     entrypoint: [""]
@@ -49,6 +73,7 @@ pb:terraform:apply:
 #
 
 pb:terraform:destroy:
+  stage: terraform
   image:
     name: hashicorp/terraform:$TERRAFORM_VERSION
     entrypoint: [""]
