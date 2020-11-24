@@ -5,7 +5,7 @@ output "argocd_auth_token" {
 }
 
 output "kubeconfig" {
-  value = module.cluster.kubeconfig
+  value = local.kubeconfig
 }
 
 output "repo_url" {
