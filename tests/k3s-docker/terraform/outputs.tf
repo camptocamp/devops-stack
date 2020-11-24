@@ -2,14 +2,27 @@ output "base_domain" {
   value = module.cluster.base_domain
 }
 
-output "ARGOCD_AUTH_TOKEN" {
+output "argocd_auth_token" {
   sensitive = true
   value     = module.cluster.argocd_auth_token
 }
 
-output "KUBECONFIG_CONTENT" {
+output "kubeconfig" {
   sensitive = true
   value     = module.cluster.kubeconfig
+}
+
+output "repo_url" {
+  value = module.cluster.repo_url
+}
+
+output "target_revision" {
+  value = module.cluster.target_revision
+}
+
+output "app_of_apps_values" {
+  sensitive = true
+  value     = module.cluster.app_of_apps_values
 }
 
 output "argocd_url" {
