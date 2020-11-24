@@ -1,5 +1,20 @@
 = Changelog
 
+== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.13.0[0.13.0] (2020-11-24)
+
+https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.12.0...v0.13.0[Full Changelog]
+
+*Implemented enhancements:*
+
+* Allow to override Applications' syncPolicy https://github.com/camptocamp/camptocamp-devops-stack/pull/292[#292] (https://github.com/mcanevet[mcanevet]
+* Add common outputs to modules https://github.com/camptocamp/camptocamp-devops-stack/pull/293[#293] (https://github.com/mcanevet[mcanevet]
+
+*Fixed bugs:*
+
+* Sync app-of-apps and apps values.yaml https://github.com/camptocamp/camptocamp-devops-stack/pull/291[#291] (https://github.com/mcanevet[mcanevet]
+* Use planned outputs instead of outputs for dry-run https://github.com/camptocamp/camptocamp-devops-stack/pull/294[#294] (https://github.com/mcanevet[mcanevet]
+* Fix target branch for dry-run in tests https://github.com/camptocamp/camptocamp-devops-stack/pull/295[#295] (https://github.com/mcanevet[mcanevet]
+
 == https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.12.0[0.12.0] (2020-11-24)
 
 https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.11.0...v0.12.0[Full Changelog]
