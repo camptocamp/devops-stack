@@ -8,6 +8,7 @@ https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.12.0...v0.13.0[
 
 * Allow to override Applications' syncPolicy https://github.com/camptocamp/camptocamp-devops-stack/pull/292[#292] (https://github.com/mcanevet[mcanevet]
 * Add common outputs to modules https://github.com/camptocamp/camptocamp-devops-stack/pull/293[#293] (https://github.com/mcanevet[mcanevet]
+* Apply Applications object to have a more accurate diff on PR/MR https://github.com/camptocamp/camptocamp-devops-stack/pull/297[#297] (https://github.com/mcanevet[mcanevet]
 
 *Fixed bugs:*
 
