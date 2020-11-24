@@ -5,3 +5,41 @@ spec:
   source:
     repoURL: ...
     targetRevision: HEAD
+
+apps:
+  apps:
+    enabled: true
+  argocd:
+    enabled: true
+  cert-manager:
+    enabled: true
+  efs-provisioner:
+    enabled: false
+  keycloak:
+    enabled: false
+  kube-prometheus-stack:
+    enabled: true
+  loki:
+    enabled: true
+  namespaces:
+    enabled: true
+  olm:
+    enabled: false
+  secrets-store-csi-driver:
+    enabled: false
+  traefik:
+    enabled: true
+  vault:
+    enabled: false
+  minio:
+    enabled: false
+
+argo-cd: {}
+cert-manager: {}
+efs-provisioner: {}
+kube-prometheus-stack: {}
+loki: {}
+secrets-store-csi-driver: {}
+traefik: {}
+vault: {}
+minio: {}
