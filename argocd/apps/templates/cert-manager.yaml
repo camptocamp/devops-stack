@@ -26,7 +26,8 @@ spec:
       name: cert-manager-webhook
       jsonPointers:
         - /webhooks/0/namespaceSelector/matchExpressions/2
+  {{- if .Values.spec.syncPolicy }}
   syncPolicy:
-    automated:
-      selfHeal: true
+    {{ toYaml .Values.spec.syncPolicy | nindent 4 }}
+  {{- end }}
 {{- end }}
