@@ -118,7 +118,7 @@ resource "random_password" "oauth2_cookie_secret" {
 
 resource "helm_release" "app_of_apps" {
   name              = "app-of-apps"
-  chart             = "${path.module}/../../argocd/app-of-apps"
+  chart             = "${path.module}/../../argocd/apps"
   namespace         = "argocd"
   dependency_update = true
   create_namespace  = true

@@ -3,6 +3,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
+  labels:
+    argocd.argoproj.io/instance: apps
   name: minio
   namespace: argocd
 spec:

@@ -5,6 +5,8 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "-3"
+  labels:
+    argocd.argoproj.io/instance: apps
   name: traefik
   namespace: argocd
 spec:

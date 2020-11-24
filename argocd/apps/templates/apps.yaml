@@ -3,7 +3,12 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
+    meta.helm.sh/release-name: app-of-apps
+    meta.helm.sh/release-namespace: argocd
     argocd.argoproj.io/sync-wave: "5"
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    argocd.argoproj.io/instance: apps
   name: apps
   namespace: argocd
 spec:
