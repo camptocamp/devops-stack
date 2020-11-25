@@ -1,6 +1,7 @@
 ---
 loki-stack:
   loki:
+    serviceName: loki-stack.loki-stack
     serviceMonitor:
       enabled: true
   promtail:

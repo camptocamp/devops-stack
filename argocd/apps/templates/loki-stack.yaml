@@ -1,14 +1,14 @@
-{{- if index $.Values "apps" "loki" "enabled" }}
+{{- if index $.Values "apps" "loki-stack" "enabled" }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: loki
+  name: loki-stack
   namespace: argocd
 spec:
   project: default
   source:
-    path: argocd/loki
+    path: argocd/loki-stack
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
     helm:
@@ -16,7 +16,7 @@ spec:
         loki-stack:
           {{- index .Values "loki-stack" | toYaml | nindent 10 }}
   destination:
-    namespace: kube-prometheus-stack
+    namespace: loki-stack
     server: {{ .Values.spec.destination.server }}
   {{- if .Values.spec.syncPolicy }}
   syncPolicy:

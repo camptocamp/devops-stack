@@ -22,7 +22,7 @@ apps:
     enabled: false
   kube-prometheus-stack:
     enabled: true
-  loki:
+  loki-stack:
     enabled: true
   namespaces:
     enabled: true
