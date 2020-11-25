@@ -61,6 +61,12 @@ variable "app_of_apps_values_overrides" {
   default     = ""
 }
 
+variable "extra_apps" {
+  description = "Extra applications to deploy."
+  type        = list
+  default     = []
+}
+
 variable "kubeconfig_aws_authenticator_command" {
   description = "Override the kubeconfig authenticator command"
   type        = string

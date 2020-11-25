@@ -31,6 +31,12 @@ variable "app_of_apps_values_overrides" {
   default     = ""
 }
 
+variable "extra_apps" {
+  description = "Extra applications to deploy."
+  type        = list
+  default     = []
+}
+
 variable "enable_minio" {
   description = "Whether to enable minio object storage system"
   type        = bool

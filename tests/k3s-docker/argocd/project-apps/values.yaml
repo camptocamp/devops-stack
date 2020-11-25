@@ -1,7 +1,0 @@
----
-spec:
-  destination:
-    server: https://kubernetes.default.svc
-  source:
-    repoURL: ...
-    targetRevision: HEAD
