@@ -1,6 +1,6 @@
 ---
 apiVersion: "v2"
-name: "loki"
+name: "loki-stack"
 version: "0"
 dependencies:
   - name: "loki-stack"
