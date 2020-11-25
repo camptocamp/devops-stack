@@ -15,7 +15,6 @@ argo-cd:
         clientID: ${cognito_user_pool_client_id}
         clientSecret: ${cognito_user_pool_client_secret}
         requestedScopes: ["openid", "profile", "email"]
-        requestedIDTokenClaims: {"groups": {"essential": true}}
     ingress:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
@@ -27,6 +26,12 @@ argo-cd:
           hosts:
             - argocd.apps.${base_domain}
             - argocd.apps.${cluster_name}.${base_domain}
+    rbacConfig:
+      policy.default: role:readonly
+      policy.csv: |
+        g, pipeline, role:readonly
+        g, argocd-admin, role:admin
+      scopes: '[cognito:groups]'
 
 cert-manager:
   serviceAccount:
