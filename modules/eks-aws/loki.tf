@@ -13,7 +13,7 @@ module "iam_assumable_role_loki" {
   role_name                     = format("loki-%s", var.cluster_name)
   provider_url                  = replace(module.cluster.cluster_oidc_issuer_url, "https://", "")
   role_policy_arns              = [aws_iam_policy.loki.arn]
-  oidc_fully_qualified_subjects = ["system:serviceaccount:kube-prometheus-stack:loki"]
+  oidc_fully_qualified_subjects = ["system:serviceaccount:loki-stack:loki-stack"]
 }
 
 resource "aws_iam_policy" "loki" {
