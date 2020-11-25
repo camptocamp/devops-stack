@@ -1,4 +1,6 @@
-#!/bin/bash -e
+#!/bin/bash
+
+set -e
 
 python3 -c "import sys, json; print(json.load(sys.stdin)['kubeconfig']['value'])" < terraform/outputs.json > kubeconfig.yaml
 chmod 0600 kubeconfig.yaml

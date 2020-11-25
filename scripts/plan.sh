@@ -1,4 +1,6 @@
-#!/bin/sh -xe
+#!/bin/sh
+
+set -e
 
 export PATH="$HOME/bin:$PATH"
 export TF_WORKSPACE="$CLUSTER_NAME"
