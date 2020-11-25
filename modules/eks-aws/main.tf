@@ -140,14 +140,18 @@ resource "helm_release" "app_of_apps" {
   create_namespace  = true
 
   values = [
+    templatefile("${path.module}/../../argocd/app-of-apps/values.tmpl.yaml",
+      {
+        repo_url                        = var.repo_url
+        target_revision                 = var.target_revision
+        argocd_accounts_pipeline_tokens = module.argocd.argocd_accounts_pipeline_tokens
+      }
+    ),
     templatefile("${path.module}/values.tmpl.yaml",
       {
         cluster_name                    = var.cluster_name
         base_domain                     = var.base_domain
-        repo_url                        = var.repo_url
-        argocd_accounts_pipeline_tokens = module.argocd.argocd_accounts_pipeline_tokens
-        target_revision                 = var.target_revision,
-        aws_default_region              = data.aws_region.current.name,
+        aws_default_region              = data.aws_region.current.name
         cert_manager_assumable_role_arn = module.iam_assumable_role_cert_manager.this_iam_role_arn,
         loki_assumable_role_arn         = module.iam_assumable_role_loki.this_iam_role_arn,
         loki_bucket_name                = aws_s3_bucket.loki.id,

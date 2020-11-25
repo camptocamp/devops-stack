@@ -15,6 +15,7 @@ TARGET_REVISION=$(python3 -c "import sys, json; print(json.load(sys.stdin)['targ
 # FIXME: find a more robust way to do this
 APP_OF_APPS_VALUES_0=$(python3 -c "import sys, json; print(json.load(sys.stdin)['app_of_apps_values']['value'][0])" < terraform/outputs.json)
 APP_OF_APPS_VALUES_1=$(python3 -c "import sys, json; print(json.load(sys.stdin)['app_of_apps_values']['value'][1])" < terraform/outputs.json)
+APP_OF_APPS_VALUES_2=$(python3 -c "import sys, json; print(json.load(sys.stdin)['app_of_apps_values']['value'][2])" < terraform/outputs.json)
 
 export KUBECTL_EXTERNAL_DIFF="diff -u"
 export ARGOCD_OPTS="--plaintext --port-forward --port-forward-namespace argocd"
@@ -28,7 +29,11 @@ helm version
 
 echo Update app of apps without syncPolicy
 date
-helm -n argocd upgrade app-of-apps camptocamp-devops-stack/argocd/app-of-apps -f <(echo "$APP_OF_APPS_VALUES_0") -f <(echo "$APP_OF_APPS_VALUES_1") --set spec.syncPolicy= --wait
+helm -n argocd upgrade app-of-apps camptocamp-devops-stack/argocd/app-of-apps \
+	-f <(echo "$APP_OF_APPS_VALUES_0") \
+	-f <(echo "$APP_OF_APPS_VALUES_1") \
+	-f <(echo "$APP_OF_APPS_VALUES_2") \
+	--set spec.syncPolicy= --wait
 
 echo Waiting for app of apps to sync
 echo Sleep 3 seconds

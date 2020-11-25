@@ -1,9 +1,4 @@
 ---
-spec:
-  source:
-    repoURL: ${repo_url}
-    targetRevision: ${target_revision}
-
 apps:
   keycloak:
     enabled: true
@@ -11,56 +6,18 @@ apps:
     enabled: true
   minio:
     enabled: ${enable_minio}
-minio:
-  persistence:
-    enabled: false
-  accessKey: ${minio_access_key}
-  secretKey: ${minio_secret_key}
-  replicas: 1
-  resources:
-    requests:
-      memory: 64Mi
-  ingress:
-    enabled: true
-    annotations:
-      cert-manager.io/cluster-issuer: selfsigned-issuer
-      traefik.ingress.kubernetes.io/router.entrypoints: websecure
-      traefik.ingress.kubernetes.io/router.tls: "true"
-    hosts:
-      - minio.apps.${base_domain}
-    tls:
-      - secretName: minio-tls
-        hosts:
-          - minio.apps.${base_domain}
+
 argo-cd:
-  configs:
-    secret:
-      extra:
-        accounts.pipeline.tokens: '${argocd_accounts_pipeline_tokens}'
-  controller:
-    metrics:
-      enabled: true
-  dex:
-    metrics:
-      enabled: true
   server:
     ingress:
-      enabled: true
       annotations:
         cert-manager.io/cluster-issuer: selfsigned-issuer
-        traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.tls: "true"
       hosts:
         - argocd.apps.${base_domain}
       tls:
         - secretName: argocd-tls
           hosts:
             - argocd.apps.${base_domain}
-    metrics:
-      enabled: true
-  repoServer:
-    metrics:
-      enabled: true
 
 keycloak:
   ingress:
@@ -95,11 +52,8 @@ keycloak:
 kube-prometheus-stack:
   alertmanager:
     ingress:
-      enabled: true
       annotations:
         cert-manager.io/cluster-issuer: selfsigned-issuer
-        traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.tls: "true"
       hosts:
         - alertmanager.apps.${base_domain}
       tls:
@@ -108,11 +62,8 @@ kube-prometheus-stack:
             - alertmanager.apps.${base_domain}
   grafana:
     ingress:
-      enabled: true
       annotations:
         cert-manager.io/cluster-issuer: selfsigned-issuer
-        traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.tls: "true"
       hosts:
         - grafana.apps.${base_domain}
       tls:
@@ -121,14 +72,33 @@ kube-prometheus-stack:
             - grafana.apps.${base_domain}
   prometheus:
     ingress:
-      enabled: true
       annotations:
         cert-manager.io/cluster-issuer: selfsigned-issuer
-        traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.tls: "true"
       hosts:
         - prometheus.apps.${base_domain}
       tls:
         - secretName: prometheus-tls
           hosts:
             - prometheus.apps.${base_domain}
+
+minio:
+  persistence:
+    enabled: false
+  accessKey: ${minio_access_key}
+  secretKey: ${minio_secret_key}
+  replicas: 1
+  resources:
+    requests:
+      memory: 64Mi
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: selfsigned-issuer
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      traefik.ingress.kubernetes.io/router.tls: "true"
+    hosts:
+      - minio.apps.${base_domain}
+    tls:
+      - secretName: minio-tls
+        hosts:
+          - minio.apps.${base_domain}

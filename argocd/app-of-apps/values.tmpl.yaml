@@ -1,0 +1,97 @@
+---
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: ${repo_url}
+    targetRevision: ${target_revision}
+  syncPolicy:
+    automated:
+      selfHeal: true
+
+apps:
+  apps:
+    enabled: true
+  argocd:
+    enabled: true
+  cert-manager:
+    enabled: true
+  efs-provisioner:
+    enabled: false
+  keycloak:
+    enabled: false
+  kube-prometheus-stack:
+    enabled: true
+  loki-stack:
+    enabled: true
+  namespaces:
+    enabled: true
+  olm:
+    enabled: false
+  secrets-store-csi-driver:
+    enabled: false
+  traefik:
+    enabled: true
+  vault:
+    enabled: false
+  minio:
+    enabled: false
+
+argo-cd:
+  configs:
+    secret:
+      extra:
+        accounts.pipeline.tokens: '${argocd_accounts_pipeline_tokens}'
+  controller:
+    metrics:
+      enabled: true
+  dex:
+    metrics:
+      enabled: true
+  repoServer:
+    metrics:
+      enabled: true
+  server:
+    ingress:
+      enabled: true
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+    metrics:
+      enabled: true
+
+cert-manager: {}
+
+efs-provisioner: {}
+
+kube-prometheus-stack:
+  alertmanager:
+    ingress:
+      enabled: true
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+
+  grafana:
+    ingress:
+      enabled: true
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+
+  prometheus:
+    ingress:
+      enabled: true
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+
+loki-stack: {}
+
+minio: {}
+
+secrets-store-csi-driver: {}
+
+traefik: {}
+
+vault: {}
