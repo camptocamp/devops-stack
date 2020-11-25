@@ -1,9 +1,4 @@
 ---
-spec:
-  source:
-    repoURL: ${repo_url}
-    targetRevision: ${target_revision}
-
 baseDomain: ${base_domain}
 
 apps:
@@ -11,16 +6,6 @@ apps:
     enabled: ${enable_efs}
 
 argo-cd:
-  configs:
-    secret:
-      extra:
-        accounts.pipeline.tokens: '${argocd_accounts_pipeline_tokens}'
-  controller:
-    metrics:
-      enabled: true
-  dex:
-    metrics:
-      enabled: true
   server:
     config:
       url: https://argocd.apps.${cluster_name}.${base_domain}
@@ -32,11 +17,8 @@ argo-cd:
         requestedScopes: ["openid", "profile", "email"]
         requestedIDTokenClaims: {"groups": {"essential": true}}
     ingress:
-      enabled: true
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
-        traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.tls: "true"
       hosts:
         - argocd.apps.${base_domain}
         - argocd.apps.${cluster_name}.${base_domain}
@@ -45,11 +27,6 @@ argo-cd:
           hosts:
             - argocd.apps.${base_domain}
             - argocd.apps.${cluster_name}.${base_domain}
-    metrics:
-      enabled: true
-  repoServer:
-    metrics:
-      enabled: true
 
 cert-manager:
   serviceAccount:
@@ -93,11 +70,8 @@ kube-prometheus-stack:
             - containerPort: 9095
               name: web
     ingress:
-      enabled: true
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
-        traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.tls: "true"
       hosts:
         - alertmanager.apps.${base_domain}
         - alertmanager.apps.${cluster_name}.${base_domain}
