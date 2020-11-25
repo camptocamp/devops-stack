@@ -16,15 +16,6 @@ locals {
   ]
 }
 
-provider "helm" {
-  kubernetes {
-    host                   = local.kubernetes_host
-    cluster_ca_certificate = local.kubernetes_cluster_ca_certificate
-    token                  = local.kubernetes_token
-    load_config_file       = false
-  }
-}
-
 data "aws_vpc" "this" {
   cidr_block = "10.11.0.0/16"
 }

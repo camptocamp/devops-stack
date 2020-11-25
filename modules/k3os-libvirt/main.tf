@@ -58,6 +58,7 @@ resource "helm_release" "app_of_apps" {
         repo_url                        = var.repo_url
         target_revision                 = var.target_revision
         argocd_accounts_pipeline_tokens = module.argocd.argocd_accounts_pipeline_tokens
+        extra_apps                      = var.extra_apps
       }
     ),
     templatefile("${path.module}/values.tmpl.yaml",

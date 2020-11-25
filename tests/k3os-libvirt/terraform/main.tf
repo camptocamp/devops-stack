@@ -14,28 +14,22 @@ module "cluster" {
 
   repo_url        = var.repo_url
   target_revision = var.target_revision
-}
 
-provider "helm" {
-  kubernetes {
-    insecure         = true
-    host             = local.kubernetes_host
-    username         = local.kubernetes_username
-    password         = local.kubernetes_password
-    load_config_file = false
-  }
-}
+  extra_apps = [
+    {
+      metadata = {
+        name = "demo-app"
+      }
+      spec = {
+        project = "default"
 
-resource "helm_release" "project_apps" {
-  name              = "project-apps"
-  chart             = "${path.module}/../argocd/project-apps"
-  namespace         = "argocd"
-  dependency_update = true
-  create_namespace  = true
+        source = {
+          path           = "tests/k3os-docker/argocd/demo-app"
+          repoURL        = var.repo_url
+          targetRevision = var.target_revision
 
-  values = [
-    <<EOT
----
+          helm = {
+            values = <<EOT
 spec:
   source:
     repoURL: ${var.repo_url}
@@ -43,9 +37,20 @@ spec:
 
 baseDomain: ${local.base_domain}
           EOT
-  ]
+          }
+        }
 
-  depends_on = [
-    module.cluster,
+        destination = {
+          namespace = "demo-app"
+          server    = "https://kubernetes.default.svc"
+        }
+
+        syncPolicy = {
+          automated = {
+            selfHeal = true
+          }
+        }
+      }
+    }
   ]
 }

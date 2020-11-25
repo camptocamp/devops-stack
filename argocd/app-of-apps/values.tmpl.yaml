@@ -37,6 +37,8 @@ apps:
   minio:
     enabled: false
 
+${yamlencode({"extraApps": extra_apps})}
+
 argo-cd:
   configs:
     secret:
