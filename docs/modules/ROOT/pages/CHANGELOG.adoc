@@ -1,5 +1,17 @@
 = Changelog
 
+== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.14.0[0.14.0] (2020-11-25)
+
+https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.13.0...v0.14.0[Full Changelog]
+
+*Implemented enhancements:*
+
+* Use token in EKS' kubeconfig https://github.com/camptocamp/camptocamp-devops-stack/pull/298[#298] (https://github.com/mcanevet[mcanevet]
+* Rename loki Application to loki-stack and deploys it in its own namespace https://github.com/camptocamp/camptocamp-devops-stack/pull/300[#300] (https://github.com/mcanevet[mcanevet]
+* Explicitly use "set" directive in shell scripts https://github.com/camptocamp/camptocamp-devops-stack/pull/302[#302] (https://github.com/mcanevet[mcanevet]
+* Move common app of apps values in a template https://github.com/camptocamp/camptocamp-devops-stack/pull/303[#303] (https://github.com/mcanevet[mcanevet]
+* Allow to deploy additional applications https://github.com/camptocamp/camptocamp-devops-stack/pull/304[#304] (https://github.com/mcanevet[mcanevet]
+
 == https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.13.0[0.13.0] (2020-11-24)
 
 https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.12.0...v0.13.0[Full Changelog]
