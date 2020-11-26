@@ -149,25 +149,6 @@ resource "helm_release" "app_of_apps" {
         cluster_name                    = var.cluster_name
         base_domain                     = var.base_domain
         cluster_issuer                  = "letsencrypt-prod"
-        client_id                       = aws_cognito_user_pool_client.client.id
-        client_secret                   = aws_cognito_user_pool_client.client.client_secret
-        admin_password                  = ""
-        minio_access_key                = ""
-        minio_secret_key                = ""
-        enable_efs                      = var.enable_efs
-        enable_keycloak                 = false
-        enable_olm                      = false
-        enable_minio                    = false
-      }
-    ),
-    templatefile("${path.module}/values.tmpl.yaml",
-      {
-        cluster_name                    = var.cluster_name
-        base_domain                     = var.base_domain
-        aws_default_region              = data.aws_region.current.name
-        cert_manager_assumable_role_arn = module.iam_assumable_role_cert_manager.this_iam_role_arn,
-        loki_assumable_role_arn         = module.iam_assumable_role_loki.this_iam_role_arn,
-        loki_bucket_name                = aws_s3_bucket.loki.id,
         oidc_issuer_url                 = format("https://cognito-idp.%s.amazonaws.com/%s", data.aws_region.current.name, var.cognito_user_pool_id)
         oauth2_oauth_url                = format("https://%s.auth.%s.amazoncognito.com/oauth2/authorize", var.cognito_user_pool_domain, data.aws_region.current.name)
         oauth2_token_url                = format("https://%s.auth.%s.amazoncognito.com/oauth2/token", var.cognito_user_pool_domain, data.aws_region.current.name)
@@ -175,6 +156,24 @@ resource "helm_release" "app_of_apps" {
         client_id                       = aws_cognito_user_pool_client.client.id
         client_secret                   = aws_cognito_user_pool_client.client.client_secret
         cookie_secret                   = random_password.oauth2_cookie_secret.result
+        admin_password                  = ""
+        minio_access_key                = ""
+        minio_secret_key                = ""
+        enable_efs                      = var.enable_efs
+        enable_keycloak                 = false
+        enable_olm                      = false
+        enable_minio                    = false
+
+        oauth2_proxy_extra_args          = []
+        grafana_generic_oauth_extra_args = {}
+      }
+    ),
+    templatefile("${path.module}/values.tmpl.yaml",
+      {
+        aws_default_region              = data.aws_region.current.name
+        cert_manager_assumable_role_arn = module.iam_assumable_role_cert_manager.this_iam_role_arn,
+        loki_assumable_role_arn         = module.iam_assumable_role_loki.this_iam_role_arn,
+        loki_bucket_name                = aws_s3_bucket.loki.id,
         efs_filesystem_id               = var.enable_efs ? module.efs.0.this_efs_mount_target_file_system_id : ""
         efs_dns_name                    = var.enable_efs ? module.efs.0.this_efs_mount_target_full_dns_name : ""
       }
