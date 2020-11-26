@@ -1,3 +1,3 @@
 ---
 include:
-  - https://raw.githubusercontent.com/camptocamp/camptocamp-devops-stack/v0.14.1/.gitlab-ci/pipeline.yaml
+  - https://raw.githubusercontent.com/camptocamp/camptocamp-devops-stack/v0.14.2/.gitlab-ci/pipeline.yaml
