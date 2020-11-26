@@ -1,6 +1,6 @@
 locals {
   repo_url        = "https://github.com/camptocamp/camptocamp-devops-stack.git"
-  target_revision = "v0.14.2"
+  target_revision = "v0.15.0"
 
   base_domain                       = module.cluster.base_domain
   kubernetes_host                   = module.cluster.kubernetes_host
@@ -10,7 +10,7 @@ locals {
 }
 
 module "cluster" {
-  source = "git::https://github.com/camptocamp/camptocamp-devops-stack.git//modules/k3s-docker?ref=v0.14.2"
+  source = "git::https://github.com/camptocamp/camptocamp-devops-stack.git//modules/k3s-docker?ref=v0.15.0"
 
   cluster_name = terraform.workspace
   node_count   = 1

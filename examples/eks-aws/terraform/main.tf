@@ -1,7 +1,7 @@
 locals {
   base_domain     = "example.com"
   repo_url        = "https://github.com/camptocamp/camptocamp-devops-stack.git"
-  target_revision = "v0.14.2"
+  target_revision = "v0.15.0"
 
   kubernetes_host                   = module.cluster.kubernetes_host
   kubernetes_cluster_ca_certificate = module.cluster.kubernetes_cluster_ca_certificate
@@ -25,7 +25,7 @@ data "aws_iam_role" "eks_admin" {
 }
 
 module "cluster" {
-  source = "git::https://github.com/camptocamp/camptocamp-devops-stack.git//modules/eks-aws?ref=v0.14.2"
+  source = "git::https://github.com/camptocamp/camptocamp-devops-stack.git//modules/eks-aws?ref=v0.15.0"
 
   cluster_name                         = terraform.workspace
   cluster_endpoint_public_access_cidrs = local.cluster_endpoint_public_access_cidrs
