@@ -24,6 +24,8 @@ apps:
     enabled: true
   loki-stack:
     enabled: true
+  metrics-server:
+    enabled: true
   namespaces:
     enabled: true
   olm:
@@ -89,6 +91,8 @@ kube-prometheus-stack:
         traefik.ingress.kubernetes.io/router.tls: "true"
 
 loki-stack: {}
+
+metrics-server: {}
 
 minio: {}
 
