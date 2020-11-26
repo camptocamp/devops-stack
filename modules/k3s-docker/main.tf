@@ -58,7 +58,7 @@ resource "helm_release" "app_of_apps" {
         extra_apps                      = var.extra_apps
         cluster_name                    = var.cluster_name
         base_domain                     = local.base_domain
-        cluster_issuer                  = "selfsigned-issuer"
+        cluster_issuer                  = "ca-issuer"
         oidc_issuer_url                 = format("https://keycloak.apps.%s/auth/realms/kubernetes", local.base_domain)
         oauth2_oauth_url                = format("https://keycloak.apps.%s/auth/realms/kubernetes/protocol/openid-connect/auth", local.base_domain)
         oauth2_token_url                = format("https://keycloak.apps.%s/auth/realms/kubernetes/protocol/openid-connect/token", local.base_domain)
@@ -86,6 +86,8 @@ resource "helm_release" "app_of_apps" {
     ),
     templatefile("${path.module}/values.tmpl.yaml",
       {
+        root_cert = base64encode(tls_self_signed_cert.root.cert_pem)
+        root_key  = base64encode(tls_private_key.root.private_key_pem)
       }
     ),
     var.app_of_apps_values_overrides,
@@ -121,4 +123,26 @@ resource "random_password" "minio_secretkey" {
   count   = var.enable_minio ? 1 : 0
   length  = 16
   special = false
+}
+
+resource "tls_private_key" "root" {
+  algorithm = "ECDSA"
+}
+
+resource "tls_self_signed_cert" "root" {
+  key_algorithm   = "ECDSA"
+  private_key_pem = tls_private_key.root.private_key_pem
+
+  subject {
+    common_name  = "devops-stack.camptocamp.com"
+    organization = "Camptocamp, SA"
+  }
+
+  validity_period_hours = 8760
+
+  allowed_uses = [
+    "cert_signing",
+  ]
+
+  is_ca_certificate = true
 }

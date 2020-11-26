@@ -8,6 +8,18 @@ metadata:
 spec:
   selfSigned: {}
 {{- if index $.Values "cert-manager" }}
+{{- if index $.Values "cert-manager" "tlsCrt" }}
+---
+apiVersion: cert-manager.io/v1alpha3
+kind: ClusterIssuer
+metadata:
+  name: ca-issuer
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
+spec:
+  ca:
+    secretName: ca-key-pair
+{{- end }}
 {{- if index $.Values "cert-manager" "clusterIssuers" }}
 {{- if index $.Values "cert-manager" "clusterIssuers" "letsencrypt" }}
 {{- if index $.Values "cert-manager" "clusterIssuers" "letsencrypt" "enabled" }}
