@@ -54,6 +54,14 @@ argo-cd:
     metrics:
       enabled: true
   server:
+    config:
+      url: https://argocd.apps.${cluster_name}.${base_domain}
+      oidc.config: |
+        name: OIDC
+        issuer: ${oidc_issuer_url}
+        clientID: ${client_id}
+        clientSecret: ${client_secret}
+        requestedScopes: ["openid", "profile", "email"]
     ingress:
       enabled: true
       annotations:
@@ -70,6 +78,12 @@ argo-cd:
             - argocd.apps.${cluster_name}.${base_domain}
     metrics:
       enabled: true
+    rbacConfig:
+      policy.default: role:readonly
+      policy.csv: |
+        g, pipeline, role:readonly
+        g, argocd-admin, role:admin
+      scopes: '[groups, cognito:groups]'
 
 cert-manager: {}
 
@@ -115,6 +129,27 @@ keycloak:
 
 kube-prometheus-stack:
   alertmanager:
+    alertmanagerSpec:
+      containers:
+        - args:
+            - --http-address=0.0.0.0:9095
+            - --upstream=http://localhost:9093
+            - --provider=oidc
+            - --oidc-issuer-url=${oidc_issuer_url}
+            - --client-id=${client_id}
+            - --client-secret=${client_secret}
+            - --cookie-secure=false
+            - --cookie-secret=${cookie_secret}
+            - --email-domain=*
+            - --redirect-url=https://alertmanager.apps.${cluster_name}.${base_domain}/oauth2/callback
+            %{ for arg in oauth2_proxy_extra_args }
+            - ${arg}
+            %{ endfor }
+          image: quay.io/pusher/oauth2_proxy:v6.1.1
+          name: alertmanager-proxy
+          ports:
+            - containerPort: 9095
+              name: web
     ingress:
       enabled: true
       annotations:
@@ -129,8 +164,41 @@ kube-prometheus-stack:
           hosts:
             - alertmanager.apps.${base_domain}
             - alertmanager.apps.${cluster_name}.${base_domain}
+    service:
+      targetPort: 9095
 
   grafana:
+    grafana.ini:
+      auth.generic_oauth:
+        enabled: true
+        allow_sign_up: true
+        client_id: ${client_id}
+        client_secret: ${client_secret}
+        scopes: "openid profile email"
+        auth_url: ${oauth2_oauth_url}
+        token_url: ${oauth2_token_url}
+        api_url: ${oauth2_api_url}
+        %{ for k, v in grafana_generic_oauth_extra_args }
+        ${k}: ${v}
+        %{ endfor }
+      server:
+        domain: grafana.apps.${cluster_name}.${base_domain}
+        root_url: "https://%(domain)s"
+    sidecar:
+      datasources:
+        defaultDatasourceEnabled: false
+    additionalDataSources:
+      - name: Prometheus
+        type: prometheus
+        # TODO: fix this 9091 with oauthPassThru
+        #url: http://kube-prometheus-stack-prometheus:9091/
+        url: http://kube-prometheus-stack-prometheus:9090/
+        access: proxy
+        isDefault: true
+        jsonData:
+          tlsAuth: false
+          tlsAuthWithCACert: false
+          oauthPassThru: true
     ingress:
       enabled: true
       annotations:
@@ -161,6 +229,35 @@ kube-prometheus-stack:
           hosts:
             - prometheus.apps.${base_domain}
             - prometheus.apps.${cluster_name}.${base_domain}
+    prometheusSpec:
+      portName: proxy
+      containers:
+        - args:
+            - --http-address=0.0.0.0:9091
+            - --upstream=http://localhost:9090
+            - --provider=oidc
+            - --oidc-issuer-url=${oidc_issuer_url}
+            - --client-id=${client_id}
+            - --client-secret=${client_secret}
+            - --cookie-secure=false
+            - --cookie-secret=${cookie_secret}
+            - --email-domain=*
+            - --redirect-url=https://prometheus.apps.${cluster_name}.${base_domain}/oauth2/callback
+            %{ for arg in oauth2_proxy_extra_args }
+            - ${arg}
+            %{ endfor }
+          image: quay.io/pusher/oauth2_proxy:v6.1.1
+          name: prometheus-proxy
+          ports:
+            - containerPort: 9091
+              name: proxy
+    service:
+      port: 9091
+      targetPort: 9091
+      additionalPorts:
+        - name: web
+          port: 9090
+          targetPort: 9090
 
 loki-stack: {}
 
