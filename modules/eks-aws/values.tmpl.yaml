@@ -8,6 +8,7 @@ apps:
 argo-cd:
   server:
     config:
+      admin.enabled: "false"
       url: https://argocd.apps.${cluster_name}.${base_domain}
       oidc.config: |
         name: Cognito
