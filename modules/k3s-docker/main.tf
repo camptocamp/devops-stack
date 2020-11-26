@@ -56,19 +56,22 @@ resource "helm_release" "app_of_apps" {
         target_revision                 = var.target_revision
         argocd_accounts_pipeline_tokens = module.argocd.argocd_accounts_pipeline_tokens
         extra_apps                      = var.extra_apps
+        cluster_name                    = var.cluster_name
+        base_domain                     = local.base_domain
+        cluster_issuer                  = "selfsigned-issuer"
+        client_id                       = "applications"
+        client_secret                   = random_password.clientsecret.result
+        admin_password                  = random_password.admin_password.result
+        minio_access_key                = var.enable_minio ? random_password.minio_accesskey.0.result : ""
+        minio_secret_key                = var.enable_minio ? random_password.minio_secretkey.0.result : ""
+        enable_efs                      = false
+        enable_keycloak                 = true
+        enable_olm                      = true
+        enable_minio                    = var.enable_minio
       }
     ),
     templatefile("${path.module}/values.tmpl.yaml",
       {
-        cluster_name     = var.cluster_name
-        base_domain      = local.base_domain
-        clientid         = "applications"
-        clientsecret     = random_password.clientsecret.result
-        admin_password   = random_password.admin_password.result
-        cookie_secret    = random_password.cookie_secret.result
-        enable_minio     = var.enable_minio
-        minio_access_key = var.enable_minio ? random_password.minio_accesskey.0.result : ""
-        minio_secret_key = var.enable_minio ? random_password.minio_secretkey.0.result : ""
       }
     ),
     var.app_of_apps_values_overrides,

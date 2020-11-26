@@ -17,24 +17,24 @@ apps:
   cert-manager:
     enabled: true
   efs-provisioner:
-    enabled: false
+    enabled: ${enable_efs}
   keycloak:
-    enabled: false
+    enabled: ${enable_keycloak}
   kube-prometheus-stack:
     enabled: true
   loki-stack:
     enabled: true
+  minio:
+    enabled: ${enable_minio}
   namespaces:
     enabled: true
   olm:
-    enabled: false
+    enabled: ${enable_olm}
   secrets-store-csi-driver:
     enabled: false
   traefik:
     enabled: true
   vault:
-    enabled: false
-  minio:
     enabled: false
 
 ${yamlencode({"extraApps": extra_apps})}
@@ -57,8 +57,17 @@ argo-cd:
     ingress:
       enabled: true
       annotations:
+        cert-manager.io/cluster-issuer: ${cluster_issuer}
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
+      hosts:
+        - argocd.apps.${base_domain}
+        - argocd.apps.${cluster_name}.${base_domain}
+      tls:
+        - secretName: argocd-tls
+          hosts:
+            - argocd.apps.${base_domain}
+            - argocd.apps.${cluster_name}.${base_domain}
     metrics:
       enabled: true
 
@@ -66,31 +75,118 @@ cert-manager: {}
 
 efs-provisioner: {}
 
+keycloak:
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: ${cluster_issuer}
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      traefik.ingress.kubernetes.io/router.tls: "true"
+    hosts:
+      - host: keycloak.apps.${base_domain}
+        paths:
+          - /
+      - host: keycloak.apps.${cluster_name}.${base_domain}
+        paths:
+          - /
+    tls:
+      - secretName: keycloak-tls
+        hosts:
+          - keycloak.apps.${base_domain}
+          - keycloak.apps.${cluster_name}.${base_domain}
+  service:
+    annotations:
+      traefik.ingress.kubernetes.io/service.serversscheme: https
+  keycloakClient:
+    client:
+      clientId: ${client_id}
+      secret: ${client_secret}
+      redirectUris:
+        - https://argocd.apps.${base_domain}/auth/callback
+        - https://argocd.apps.${cluster_name}.${base_domain}/auth/callback
+        - https://grafana.apps.${base_domain}/login/generic_oauth
+        - https://grafana.apps.${cluster_name}.${base_domain}/login/generic_oauth
+        - https://prometheus.apps.${base_domain}/oauth2/callback
+        - https://prometheus.apps.${cluster_name}.${base_domain}/oauth2/callback
+        - https://alertmanager.apps.${base_domain}/oauth2/callback
+        - https://alertmanager.apps.${cluster_name}.${base_domain}/oauth2/callback
+  keycloakUser:
+    password: "${admin_password}"
+
 kube-prometheus-stack:
   alertmanager:
     ingress:
       enabled: true
       annotations:
+        cert-manager.io/cluster-issuer: ${cluster_issuer}
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
+      hosts:
+        - alertmanager.apps.${base_domain}
+        - alertmanager.apps.${cluster_name}.${base_domain}
+      tls:
+        - secretName: alertmanager-tls
+          hosts:
+            - alertmanager.apps.${base_domain}
+            - alertmanager.apps.${cluster_name}.${base_domain}
 
   grafana:
     ingress:
       enabled: true
       annotations:
+        cert-manager.io/cluster-issuer: ${cluster_issuer}
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
+      hosts:
+        - grafana.apps.${base_domain}
+        - grafana.apps.${cluster_name}.${base_domain}
+      tls:
+        - secretName: grafana-tls
+          hosts:
+            - grafana.apps.${base_domain}
+            - grafana.apps.${cluster_name}.${base_domain}
 
   prometheus:
     ingress:
       enabled: true
       annotations:
+        cert-manager.io/cluster-issuer: ${cluster_issuer}
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
+      hosts:
+        - prometheus.apps.${base_domain}
+        - prometheus.apps.${cluster_name}.${base_domain}
+      tls:
+        - secretName: prometheus-tls
+          hosts:
+            - prometheus.apps.${base_domain}
+            - prometheus.apps.${cluster_name}.${base_domain}
 
 loki-stack: {}
 
-minio: {}
+minio:
+  persistence:
+    enabled: false
+  accessKey: ${minio_access_key}
+  secretKey: ${minio_secret_key}
+  replicas: 1
+  resources:
+    requests:
+      memory: 64Mi
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: ${cluster_issuer}
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      traefik.ingress.kubernetes.io/router.tls: "true"
+    hosts:
+      - minio.apps.${base_domain}
+      - minio.apps.${cluster_name}.${base_domain}
+    tls:
+      - secretName: minio-tls
+        hosts:
+          - minio.apps.${base_domain}
+          - minio.apps.${cluster_name}.${base_domain}
 
 secrets-store-csi-driver: {}
 
