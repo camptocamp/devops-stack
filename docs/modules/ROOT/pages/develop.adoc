@@ -1,3 +1,11 @@
 == Develop
 
-If you want to improve this stack, you just have to fork it and make your root module point to your fork instead of upstream.
+If you want to help improving this stack, you can clone this project, then cd to the `tests` directory and choose your flavor.
+Currently, there are 2 flavors available:
+- k3s-docker: will create a K3S cluster in Docker,
+- k3os-libvirt: will spawn instances using Libvirt and use k3os image to create a cluster.
+
+If you run `make`, it will apply the terraform manifests located in the `terraform` directory. This will deploy a cluster and all core Kubernetes applications using ArgoCD.
+
+If you want to test some modifications in the terraform manifests, you can run `make` without committing your changes.
+But if you want to test some modifications in the Applications deployed by ArgoCD, you have to commit and push your change in a branch in your fork, then run `make` again (the `Makfile` will select the remote branch as repo URL and target reference of all Applications).
