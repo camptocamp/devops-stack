@@ -6,8 +6,6 @@ include::./access_argocd_webui.adoc[]
 
 include::./access_traefik_dashboard.adoc[]
 
-include::./access_vault_ui.adoc[]
-
 include::./access_grafana_dashboard.adoc[]
 
 include::./access_prometheus_dashboard.adoc[]
