@@ -1,0 +1,49 @@
+:project-name: camptocamp-devops-stack
+:url-repo: https://github.com/camptocamp/{project-name}.git
+:version: 0.15.0
+
+== Create a new project
+
+[source,shell,subs="attributes"]
+----
+mkdir myproject
+cd myproject
+git init
+----
+
+=== Create .gitlab-ci.yml file
+
+[source,shell,subs="attributes"]
+----
+cat << EOF > .gitlab-ci.yml
+---
+include:
+  - https://raw.githubusercontent.com/camptocamp/camptocamp-devops-stack/v{version}/.gitlab-ci/pipeline.yaml
+EOF
+----
+
+=== Create Terraform root module
+
+[source,shell,subs="attributes"]
+----
+mkdir terraform
+cat << EOF > terraform/main.tf
+module "cluster" {
+  source = "git::{url-repo}//modules/eks-aws?ref={version}"
+
+  cluster_name = terraform.workspace
+  vpc_id       = data.aws_vpc.this.id
+
+  worker_groups = [
+    {
+      instance_type        = "m5a.large"
+      asg_desired_capacity = 2
+      asg_max_size         = 3
+    }
+  ]
+
+  repo_url        = {url-repo}
+  target_revision = {version}
+}
+EOF
+----
