@@ -24,6 +24,8 @@ EOF
 
 === Create Terraform root module
 
+Declare Camptocamp's DevOps Stack's Terraform's composition module:
+
 [source,shell,subs="attributes"]
 ----
 mkdir terraform
@@ -44,6 +46,36 @@ module "cluster" {
 
   repo_url        = {url-repo}
   target_revision = {version}
+}
+EOF
+----
+
+Gitlab CI's pipeline requires outputs to run `argocd app diff` on merge requests.
+Declare required outputs:
+[source,shell,subs="attributes"]
+----
+cat << EOF > terraform/outputs.tf
+output "argocd_auth_token" {
+  sensitive = true
+  value     = module.cluster.argocd_auth_token
+}
+
+output "kubeconfig" {
+  sensitive = true
+  value     = module.cluster.kubeconfig
+}
+
+output "repo_url" {
+  value = module.cluster.repo_url
+}
+
+output "target_revision" {
+  value = module.cluster.target_revision
+}
+
+output "app_of_apps_values" {
+  sensitive = true
+  value     = module.cluster.app_of_apps_values
 }
 EOF
 ----
