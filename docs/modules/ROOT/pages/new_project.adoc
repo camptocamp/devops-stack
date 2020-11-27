@@ -31,7 +31,7 @@ Declare Camptocamp's DevOps Stack's Terraform's composition module:
 mkdir terraform
 cat << EOF > terraform/main.tf
 module "cluster" {
-  source = "git::{url-repo}//modules/eks-aws?ref={version}"
+  source = "git::{url-repo}//modules/eks-aws?ref=v{version}"
 
   cluster_name = terraform.workspace
   vpc_id       = data.aws_vpc.this.id
@@ -44,8 +44,8 @@ module "cluster" {
     }
   ]
 
-  repo_url        = {url-repo}
-  target_revision = {version}
+  repo_url        = "{url-repo}"
+  target_revision = "v{version}"
 }
 EOF
 ----
