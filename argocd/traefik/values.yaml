@@ -3,3 +3,6 @@ traefik:
   additionalArguments:
     - --metrics.prometheus=true
     - --serversTransport.insecureSkipVerify=true
+  logs:
+    access:
+      enabled: true
