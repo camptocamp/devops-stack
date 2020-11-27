@@ -264,6 +264,12 @@ kube-prometheus-stack:
           ports:
             - containerPort: 9091
               name: proxy
+%{ if enable_metrics_archives }
+      thanos:
+        objectStorageConfig:
+          key: thanos.yaml
+          name: thanos-objectstore-config
+%{ endif }
     service:
       port: 9091
       targetPort: 9091
@@ -298,7 +304,17 @@ minio:
     - name: ${loki_bucket_name}
       policy: none
       purge: false
-%{ endif }
+    - name: "${thanos_archives_bucket_name}"
+      policy: none
+      purge: false
+
+thanos:
+  archives:
+    endpoint: "${thanos_archives_endpoint}"
+    accessKey: "${thanos_archives_access_key}"
+    secretKey: "${thanos_archives_secret_key}"
+    bucket_name: "${thanos_archives_bucket_name}"
+    enabled: ${enable_metrics_archives}
 
 secrets-store-csi-driver: {}
 

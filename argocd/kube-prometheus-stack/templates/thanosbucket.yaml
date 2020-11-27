@@ -1,0 +1,16 @@
+{{- if index $.Values "thanos" "archives" "enabled" }}
+apiVersion: v1
+kind: Secret
+type: Opaque
+metadata:
+  name: thanos-objectstore-config
+stringData:
+  thanos.yaml: |-
+        type: S3
+        config:
+          endpoint: {{ $.Values.thanos.archives.endpoint }}
+          bucket: {{ $.Values.thanos.archives.bucket_name }}
+          insecure: {{ $.Values.thanos.insecure | default true }}
+          access_key: {{ $.Values.thanos.archives.accessKey }}
+          secret_key: {{ $.Values.thanos.archives.secretKey }}
+{{- end }}

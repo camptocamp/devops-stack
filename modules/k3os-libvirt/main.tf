@@ -77,7 +77,11 @@ resource "helm_release" "app_of_apps" {
         enable_keycloak                 = true
         enable_olm                      = true
         enable_minio                    = var.enable_minio
-
+        enable_metrics_archives         = var.enable_metrics_archives
+        thanos_archives_endpoint        = var.enable_minio ? "minio.minio.svc:9000" : ""
+        thanos_archives_access_key      = var.enable_minio ? random_password.minio_accesskey.0.result : ""
+        thanos_archives_secret_key      = var.enable_minio ? random_password.minio_secretkey.0.result : ""
+        thanos_archives_bucket_name     = var.thanos_archives_bucket_name
         oauth2_proxy_extra_args = [
           "--insecure-oidc-skip-issuer-verification=true",
           "--ssl-insecure-skip-verify=true",

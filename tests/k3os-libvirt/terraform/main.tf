@@ -1,11 +1,13 @@
 module "cluster" {
   source = "../../../modules/k3os-libvirt"
 
-  cluster_name = terraform.workspace
-  node_count   = 0
-
-  repo_url        = var.repo_url
-  target_revision = var.target_revision
+  cluster_name            = terraform.workspace
+  node_count              = 0
+  server_memory           = 8192
+  repo_url                = var.repo_url
+  target_revision         = var.target_revision
+  enable_minio            = true
+  enable_metrics_archives = true
 
   extra_apps = [
     {

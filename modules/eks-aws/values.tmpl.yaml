@@ -3,8 +3,12 @@ argo-cd:
   server:
     config:
       admin.enabled: "false"
-
-cert-manager:
+kube-prometheus-stack:
+  prometheus:
+    serviceAccount:
+      annotations:
+        eks.amazonaws.com/role-arn: ${thanos_assumable_role_arn}
+cert-amazonawsager:
   serviceAccount:
     annotations:
       eks.amazonaws.com/role-arn: ${cert_manager_assumable_role_arn}

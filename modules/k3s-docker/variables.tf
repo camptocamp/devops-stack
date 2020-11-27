@@ -42,3 +42,22 @@ variable "enable_minio" {
   type        = bool
   default     = true
 }
+
+variable "enable_metrics_archives" {
+  description = "Whether to enable prometheus to flush WAL to object storage"
+  type        = bool
+  default     = false
+}
+
+variable "thanos_archives_endpoint" {
+  description = "S3 like endpoint for thanos long term storage"
+  type        = string
+  default     = ""
+}
+
+variable "thanos_archives_bucket_name" {
+  description = "Bucket name for thanos"
+  type        = string
+  default     = "thanos"
+}
+

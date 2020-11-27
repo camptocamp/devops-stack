@@ -7,6 +7,8 @@ module "cluster" {
   repo_url        = var.repo_url
   target_revision = var.target_revision
 
+  enable_minio = true
+
   extra_apps = [
     {
       metadata = {
