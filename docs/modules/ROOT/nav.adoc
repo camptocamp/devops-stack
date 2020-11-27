@@ -1,6 +1,5 @@
 * xref:index.adoc[Introduction]
 * Tutorials
-** xref:run.adoc[Run the stack]
 * How-to guides
 ** xref:new_project.adoc[Create a new Project]
 ** xref:release.adoc[Release a new version]
