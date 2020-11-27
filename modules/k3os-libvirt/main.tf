@@ -25,8 +25,8 @@ module "cluster" {
   k3os_version = var.k3os_version
   node_count   = var.node_count
 
-  server_memory = 2048
-  agent_memory  = 2048
+  server_memory = 8192
+  #agent_memory  = 2048
 }
 
 resource "helm_release" "argocd" {
@@ -55,17 +55,18 @@ resource "helm_release" "app_of_apps" {
   values = [
     templatefile("${path.module}/values.tmpl.yaml",
       {
-        cluster_name     = var.cluster_name,
-        base_domain      = local.base_domain,
-        repo_url         = var.repo_url,
-        target_revision  = var.target_revision,
-        clientid         = "applications"
-        clientsecret     = random_password.clientsecret.result
-        admin_password   = random_password.admin_password.result
-        cookie_secret    = random_password.cookie_secret.result
-        enable_minio     = var.enable_minio
-        minio_access_key = var.enable_minio ? random_password.minio_accesskey.0.result : ""
-        minio_secret_key = var.enable_minio ? random_password.minio_secretkey.0.result : ""
+        cluster_name            = var.cluster_name,
+        base_domain             = local.base_domain,
+        repo_url                = var.repo_url,
+        target_revision         = var.target_revision,
+        clientid                = "applications"
+        clientsecret            = random_password.clientsecret.result
+        admin_password          = random_password.admin_password.result
+        cookie_secret           = random_password.cookie_secret.result
+        enable_minio            = var.enable_minio
+        enable_metrics_archives = var.enable_metrics_archives
+        minio_access_key        = var.enable_minio ? random_password.minio_accesskey.0.result : ""
+        minio_secret_key        = var.enable_minio ? random_password.minio_secretkey.0.result : ""
       }
     ),
     var.app_of_apps_values_overrides,

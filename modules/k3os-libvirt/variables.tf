@@ -37,3 +37,8 @@ variable "enable_minio" {
   type        = bool
   default     = false
 }
+variable "enable_metrics_archives" {
+  description = "Whether to enable prometheus to flush WAL to object storage"
+  type        = bool
+  default     = false
+}

@@ -92,6 +92,12 @@ keycloak:
   keycloakUser:
     password: "${admin_password}"
 
+thanos:
+  archives:
+    accessKey: "${minio_access_key}"
+    secretKey: "${minio_secret_key}"
+    enabled: ${enable_metrics_archives}
+
 kube-prometheus-stack:
   alertmanager:
     ingress:
@@ -119,7 +125,14 @@ kube-prometheus-stack:
         - secretName: grafana-tls
           hosts:
             - grafana.apps.${base_domain}
+%{ if enable_metrics_archives }
   prometheus:
+    prometheusSpec:
+      thanos:
+        objectStorageConfig:
+          key: thanos.yaml
+          name: thanos-objectstore-config
+%{ endif }
     ingress:
       enabled: true
       annotations:
