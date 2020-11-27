@@ -43,3 +43,15 @@ variable "enable_minio" {
   type        = bool
   default     = false
 }
+
+variable "server_memory" {
+  description = "Server RAM"
+  type        = number
+  default     = 2048
+}
+
+variable "agent_memory" {
+  description = "Agent RAM"
+  type        = number
+  default     = 2048
+}
