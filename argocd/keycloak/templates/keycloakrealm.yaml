@@ -2,6 +2,8 @@
 apiVersion: keycloak.org/v1alpha1
 kind: KeycloakRealm
 metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
   name: kubernetes
   labels:
     app: sso
