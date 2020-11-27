@@ -11,6 +11,15 @@ cd myproject
 git init
 ----
 
+== Define which version of the Camptocamp DevOps Stack to use
+
+You can define the version to use for:
+- the Gitlab CI pipeline,
+- the Terraform composition module,
+- the Kubernetes core applications to deploy.
+
+In production system, you should always use the same version for this 3 elements, but it may be convient when testing to change the version of only one of these.
+
 === Create .gitlab-ci.yml file
 
 [source,shell,subs="attributes"]
