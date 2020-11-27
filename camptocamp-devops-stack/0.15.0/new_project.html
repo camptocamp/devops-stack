@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Why Automated Sync Policy? :: Camptocamp’s DevOps Stack</title>
-    <link rel="canonical" href="https://camptocamp.github.io/camptocamp-devops-stack/camptocamp-devops-stack/0.15.0/why_automated_sync.html">
+    <title>Untitled :: Camptocamp’s DevOps Stack</title>
+    <link rel="canonical" href="https://camptocamp.github.io/camptocamp-devops-stack/camptocamp-devops-stack/0.15.0/new_project.html">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../_/css/site.css">
     <link rel="icon" href="../../_/img/c2c_favicon.png" type="image/x-icon">
@@ -47,7 +47,7 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">How-to guides</span>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="new_project.html">Create a new Project</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -119,7 +119,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="why_terraform.html">Why Terraform?</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="why_automated_sync.html">Why Automated Sync Policy?</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -169,41 +169,63 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Camptocamp’s DevOps stack</a></li>
-    <li>Explanations</li>
-    <li><a href="why_automated_sync.html">Why Automated Sync Policy?</a></li>
+    <li>How-to guides</li>
+    <li><a href="new_project.html">Create a new Project</a></li>
   </ul>
 </nav>
 </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Why Automated Sync Policy?</h1>
-<div class="paragraph">
-<p>At Camptocamp we have a huge experience in both
-<a href="https://puppet.com/">Puppet</a> and <a href="https://www.terraform.io/">Terraform</a>.
-This two tools use two different paradygm to apply configuration:</p>
+<div class="sect1">
+<h2 id="_create_a_new_project"><a class="anchor" href="#_create_a_new_project"></a>Create a new project</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">mkdir myproject
+cd myproject
+git init</code></pre>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Pull for Puppet: an agent runs every 30 minutes on the server to deploy new
-configuration and ensure that every drift is fixed within half an hour
-at top,</p>
-</li>
-<li>
-<p>Push for Terraform: as long as nobody really applies a
-Terraform manifest, nothing is deploy ; hence you code may not reflect
-what exists.</p>
-</li>
-</ul>
 </div>
-<div class="paragraph">
-<p>By experience, we know that it is hard to have hundreds of Terraform
-workspaces that always converge, hence with think that pull mode better
-fits GitOps philosophy.</p>
+<div class="sect2">
+<h3 id="_create_gitlab_ci_yml_file"><a class="anchor" href="#_create_gitlab_ci_yml_file"></a>Create .gitlab-ci.yml file</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">cat << EOF > .gitlab-ci.yml
+---
+include:
+  - https://raw.githubusercontent.com/camptocamp/camptocamp-devops-stack/v0.15.0/.gitlab-ci/pipeline.yaml
+EOF</code></pre>
 </div>
-<div class="paragraph">
-<p>To ensure continuous reconciliation, we enable Automated Sync Policy on
-our Applications. This forces us to be rigurous.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_create_terraform_root_module"><a class="anchor" href="#_create_terraform_root_module"></a>Create Terraform root module</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">mkdir terraform
+cat << EOF > terraform/main.tf
+module "cluster" {
+  source = "git::https://github.com/camptocamp/camptocamp-devops-stack.git//modules/eks-aws?ref=0.15.0"
+
+  cluster_name = terraform.workspace
+  vpc_id       = data.aws_vpc.this.id
+
+  worker_groups = [
+    {
+      instance_type        = "m5a.large"
+      asg_desired_capacity = 2
+      asg_max_size         = 3
+    }
+  ]
+
+  repo_url        = https://github.com/camptocamp/camptocamp-devops-stack.git
+  target_revision = 0.15.0
+}
+EOF</code></pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
