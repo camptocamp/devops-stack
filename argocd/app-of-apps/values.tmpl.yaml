@@ -24,6 +24,8 @@ apps:
     enabled: true
   loki-stack:
     enabled: true
+  metrics-server:
+    enabled: true
   minio:
     enabled: ${enable_minio}
   namespaces:
@@ -260,6 +262,8 @@ kube-prometheus-stack:
           targetPort: 9090
 
 loki-stack: {}
+
+metrics-server: {}
 
 minio:
   persistence:
