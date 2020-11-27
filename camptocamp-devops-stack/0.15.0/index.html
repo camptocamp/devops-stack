@@ -179,78 +179,17 @@
   <div class="content">
 <article class="doc">
 <h1 class="page">Camptocamp&#8217;s DevOps stack</h1>
-<div id="preamble">
-<div class="sectionbody">
 <div class="imageblock">
 <div class="content">
 <a class="image" href="https://github.com/camptocamp/camptocamp-devops-stack.git"><img src="_images/github.svg" alt="github" width="150" height="250"></a>
 </div>
 </div>
 <div class="paragraph">
-<p><a href="https://github.com/camptocamp/camptocamp-devops-stack.git">This repository</a> contains the reference implementation of Camptocamp&#8217;s Infrastructure Solutions &amp; Services department.</p>
+<p><a href="https://github.com/camptocamp/camptocamp-devops-stack.git">This repository</a> contains the DevOps Stack of Camptocamp&#8217;s Infrastructure Solutions &amp; Services department.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devops-stack-architecture.svg" alt="Architecture of the Camptocamp DevOps Stack">
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_run_an_example"><a class="anchor" href="#_run_an_example"></a>Run an example</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">git clone https://github.com/camptocamp/camptocamp-devops-stack.git
-cd camptocamp-devops-stack/examples/k3s-docker-demo-app</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_run_the_stack"><a class="anchor" href="#_run_the_stack"></a>Run the stack</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_launch_a_demo_cluster"><a class="anchor" href="#_launch_a_demo_cluster"></a>Launch a demo cluster</h3>
-<div class="paragraph">
-<p>Just run :</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">make</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>It will:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>spawn a K3s cluster on your workstation using Docker</p>
-</li>
-<li>
-<p>deploy ArgoCD in the cluster</p>
-</li>
-<li>
-<p>deploy the App of Apps that manages ArgoCD and itself.</p>
-</li>
-<li>
-<p>deploy a demo Application</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_destroy_a_cluster"><a class="anchor" href="#_destroy_a_cluster"></a>Destroy a cluster</h3>
-<div class="paragraph">
-<p>Just run :</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">make clean</code></pre>
-</div>
-</div>
-</div>
 </div>
 </div>
 </article>
