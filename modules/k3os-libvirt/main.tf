@@ -33,8 +33,8 @@ module "cluster" {
   k3os_version = var.k3os_version
   node_count   = var.node_count
 
-  server_memory = 2048
-  agent_memory  = 2048
+  server_memory = var.server_memory
+  agent_memory  = var.agent_memory
 }
 
 module "argocd" {
