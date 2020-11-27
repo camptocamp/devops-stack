@@ -205,7 +205,7 @@ EOF</code></pre>
 <pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">mkdir terraform
 cat << EOF > terraform/main.tf
 module "cluster" {
-  source = "git::https://github.com/camptocamp/camptocamp-devops-stack.git//modules/eks-aws?ref=0.15.0"
+  source = "git::https://github.com/camptocamp/camptocamp-devops-stack.git//modules/eks-aws?ref=v0.15.0"
 
   cluster_name = terraform.workspace
   vpc_id       = data.aws_vpc.this.id
@@ -218,8 +218,8 @@ module "cluster" {
     }
   ]
 
-  repo_url        = https://github.com/camptocamp/camptocamp-devops-stack.git
-  target_revision = 0.15.0
+  repo_url        = "https://github.com/camptocamp/camptocamp-devops-stack.git"
+  target_revision = "v0.15.0"
 }
 EOF</code></pre>
 </div>
