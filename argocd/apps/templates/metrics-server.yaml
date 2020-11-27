@@ -9,8 +9,8 @@ spec:
   project: default
   source:
     repoURL: https://github.com/kubernetes-sigs/metrics-server.git
-    path: manifests/release
-    targetRevision: v0.4.1
+    path: deploy/1.8+
+    targetRevision: v0.3.7
   destination:
     namespace: kube-system
     server: {{ .Values.spec.destination.server }}
