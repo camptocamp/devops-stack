@@ -1,2 +1,5 @@
 ---
-minio: {}
+minio:
+  metrics:
+    serviceMonitor:
+      enabled: true
