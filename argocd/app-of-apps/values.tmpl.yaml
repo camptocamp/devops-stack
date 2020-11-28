@@ -265,6 +265,7 @@ loki-stack: {}
 
 metrics-server: {}
 
+%{ if enable_minio }
 minio:
   persistence:
     enabled: false
@@ -284,6 +285,7 @@ minio:
         hosts:
           - minio.apps.${base_domain}
           - minio.apps.${cluster_name}.${base_domain}
+%{ endif }
 
 secrets-store-csi-driver: {}
 
