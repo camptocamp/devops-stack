@@ -159,6 +159,7 @@ resource "helm_release" "app_of_apps" {
         admin_password                  = ""
         minio_access_key                = ""
         minio_secret_key                = ""
+        loki_bucket_name                = aws_s3_bucket.loki.id,
         enable_efs                      = var.enable_efs
         enable_keycloak                 = false
         enable_olm                      = false

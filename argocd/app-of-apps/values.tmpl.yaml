@@ -283,6 +283,10 @@ minio:
         hosts:
           - minio.apps.${base_domain}
           - minio.apps.${cluster_name}.${base_domain}
+  buckets:
+    - name: ${loki_bucket_name}
+      policy: none
+      purge: false
 %{ endif }
 
 secrets-store-csi-driver: {}
