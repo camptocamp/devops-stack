@@ -72,6 +72,7 @@ resource "helm_release" "app_of_apps" {
         admin_password                  = random_password.admin_password.result
         minio_access_key                = var.enable_minio ? random_password.minio_accesskey.0.result : ""
         minio_secret_key                = var.enable_minio ? random_password.minio_secretkey.0.result : ""
+        loki_bucket_name                = "loki"
         enable_efs                      = false
         enable_keycloak                 = true
         enable_olm                      = true
