@@ -267,8 +267,6 @@ metrics-server: {}
 
 %{ if enable_minio }
 minio:
-  persistence:
-    enabled: false
   accessKey: ${minio_access_key}
   secretKey: ${minio_secret_key}
   ingress:
