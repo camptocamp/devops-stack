@@ -3,3 +3,6 @@ minio:
   metrics:
     serviceMonitor:
       enabled: true
+  resources:
+    requests:
+      memory: 24Mi

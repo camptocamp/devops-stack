@@ -270,10 +270,6 @@ minio:
     enabled: false
   accessKey: ${minio_access_key}
   secretKey: ${minio_secret_key}
-  replicas: 1
-  resources:
-    requests:
-      memory: 64Mi
   ingress:
     enabled: true
     annotations:
