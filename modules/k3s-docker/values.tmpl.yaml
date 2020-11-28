@@ -2,3 +2,11 @@
 cert-manager:
   tlsCrt: ${root_cert}
   tlsKey: ${root_key}
+
+loki-stack:
+  loki:
+    config:
+      storage_config:
+        aws:
+          s3: s3://${minio_access_key}:${minio_secret_key}@minio.minio.svc:9000/${loki_bucket_name}
+          s3forcepathstyle: true

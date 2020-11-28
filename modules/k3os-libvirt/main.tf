@@ -90,8 +90,11 @@ resource "helm_release" "app_of_apps" {
     ),
     templatefile("${path.module}/values.tmpl.yaml",
       {
-        root_cert = base64encode(tls_self_signed_cert.root.cert_pem)
-        root_key  = base64encode(tls_private_key.root.private_key_pem)
+        root_cert        = base64encode(tls_self_signed_cert.root.cert_pem)
+        root_key         = base64encode(tls_private_key.root.private_key_pem)
+        minio_access_key = var.enable_minio ? random_password.minio_accesskey.0.result : ""
+        minio_secret_key = var.enable_minio ? random_password.minio_secretkey.0.result : ""
+        loki_bucket_name = "loki"
       }
     ),
     var.app_of_apps_values_overrides,

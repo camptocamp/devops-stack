@@ -261,7 +261,23 @@ kube-prometheus-stack:
           port: 9090
           targetPort: 9090
 
-loki-stack: {}
+loki-stack:
+  loki:
+    config:
+      schema_config:
+        configs:
+          - from: 2020-10-24
+            store: boltdb-shipper
+            object_store: s3
+            schema: v11
+            index:
+              prefix: index_
+              period: 24h
+      storage_config:
+        boltdb_shipper:
+          active_index_directory: /data/loki/index
+          shared_store: s3
+          cache_location: /data/loki/boltdb-cache
 
 metrics-server: {}
 
