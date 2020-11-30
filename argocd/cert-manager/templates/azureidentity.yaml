@@ -1,0 +1,11 @@
+{{- if index "$.Values" "cert-manager" "azureIdentity" }}
+---
+apiVersion: aadpodidentity.k8s.io/v1
+kind: AzureIdentity
+metadata:
+  name: cert-manager
+spec:
+  type: 0
+  resourceID: {{ index "$.Values" "azureIdentity" "resourceID" }}
+  clientID: {{ index "$.Values" "azureIdentity" "clientID" }}
+{{- end }}

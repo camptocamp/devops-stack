@@ -10,12 +10,16 @@ spec:
       selfHeal: true
 
 apps:
+  aad-pod-identity:
+    enabled: false
   apps:
     enabled: true
   argocd:
     enabled: true
   cert-manager:
     enabled: true
+  csi-secrets-store-provider-azure:
+    enabled: false
   efs-provisioner:
     enabled: ${enable_efs}
   keycloak:
@@ -92,7 +96,7 @@ argo-cd:
       policy.csv: |
         g, pipeline, role:readonly
         g, argocd-admin, role:admin
-      scopes: '[groups, cognito:groups]'
+      scopes: '[groups, cognito:groups, roles]'
 
 cert-manager: {}
 
