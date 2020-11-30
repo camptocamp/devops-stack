@@ -1,0 +1,36 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: aad-pod-identity-mic
+spec:
+  jobLabel: aad-pod-identity-mic
+  namespaceSelector:
+    any: true
+  podMetricsEndpoints:
+    - path: /metrics
+      port: metrics
+      scheme: http
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: mic
+      app.kubernetes.io/instance: aad-pod-identity
+      app.kubernetes.io/name: aad-pod-identity
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: aad-pod-identity-nmi
+spec:
+  jobLabel: aad-pod-identity-nmi
+  namespaceSelector:
+    any: true
+  podMetricsEndpoints:
+    - path: /metrics
+      port: metrics
+      scheme: http
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: nmi
+      app.kubernetes.io/instance: aad-pod-identity
+      app.kubernetes.io/name: aad-pod-identity

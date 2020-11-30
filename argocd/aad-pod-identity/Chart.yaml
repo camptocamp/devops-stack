@@ -1,0 +1,8 @@
+---
+apiVersion: "v2"
+name: "aad-pod-identity"
+version: "0"
+dependencies:
+  - name: "aad-pod-identity"
+    version: "2.0.2"
+    repository: "https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts"
