@@ -27,14 +27,14 @@ jobs:
           ../../scripts/provision.sh
           ../../scripts/wait-for-app-of-apps.sh
         env:
-          CLUSTER_NAME: default
+          CLUSTER_NAME: test
       - name: Destroy cluster
         run: |
           TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git \
           TF_VAR_target_revision=${{ github.head_ref }} \
           ../../scripts/destroy.sh
         env:
-          CLUSTER_NAME: default
+          CLUSTER_NAME: test
   update:
     runs-on: ubuntu-18.04
     strategy:
@@ -59,7 +59,7 @@ jobs:
           ../../scripts/provision.sh
           ../../scripts/wait-for-app-of-apps.sh
         env:
-          CLUSTER_NAME: default
+          CLUSTER_NAME: test
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.ref }}
@@ -70,13 +70,13 @@ jobs:
           TF_VAR_target_revision=${{ github.head_ref }} \
           ../../scripts/plan.sh
         env:
-          CLUSTER_NAME: default
+          CLUSTER_NAME: test
       - name: App-diff on ref
         run: |
           export PATH="$HOME/bin:$PATH"
           ../../scripts/app-diff.sh
         env:
-          CLUSTER_NAME: default
+          CLUSTER_NAME: test
       - name: Update cluster
         run: |
           export PATH="$HOME/bin:$PATH"
@@ -85,11 +85,11 @@ jobs:
           ../../scripts/provision.sh
           ../../scripts/wait-for-app-of-apps.sh
         env:
-          CLUSTER_NAME: default
+          CLUSTER_NAME: test
       - name: Destroy cluster
         run: |
           TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git \
           TF_VAR_target_revision=${{ github.base_ref }} \
           ../../scripts/destroy.sh
         env:
-          CLUSTER_NAME: default
+          CLUSTER_NAME: test

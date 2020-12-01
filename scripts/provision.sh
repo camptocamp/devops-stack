@@ -1,6 +1,7 @@
 #!/bin/sh
 
 set -e
+set -x
 
 export TF_WORKSPACE="$CLUSTER_NAME"
 

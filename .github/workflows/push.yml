@@ -27,11 +27,11 @@ jobs:
           ../../scripts/provision.sh
           ../../scripts/wait-for-app-of-apps.sh
         env:
-          CLUSTER_NAME: default
+          CLUSTER_NAME: test
       - name: Destroy cluster
         run: |
           TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git \
           TF_VAR_target_revision=${{ github.base_ref }} \
           ../../scripts/destroy.sh
         env:
-          CLUSTER_NAME: default
+          CLUSTER_NAME: test
