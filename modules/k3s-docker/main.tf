@@ -53,7 +53,6 @@ module "argocd" {
   oauth2_api_url                  = format("https://keycloak.apps.%s/auth/realms/kubernetes/protocol/openid-connect/userinfo", local.base_domain)
   client_id                       = "applications"
   client_secret                   = random_password.clientsecret.result
-  cookie_secret                   = random_password.oauth2_cookie_secret.result
   admin_password                  = random_password.admin_password.result
   minio_access_key                = var.enable_minio ? random_password.minio_accesskey.0.result : ""
   minio_secret_key                = var.enable_minio ? random_password.minio_secretkey.0.result : ""
@@ -93,11 +92,6 @@ resource "random_password" "clientsecret" {
 }
 
 resource "random_password" "admin_password" {
-  length  = 16
-  special = false
-}
-
-resource "random_password" "oauth2_cookie_secret" {
   length  = 16
   special = false
 }
