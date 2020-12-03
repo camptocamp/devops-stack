@@ -84,7 +84,6 @@ module "argocd" {
   ]
 }
 
-
 resource "random_password" "clientsecret" {
   length  = 16
   special = false
