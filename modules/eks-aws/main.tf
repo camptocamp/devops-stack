@@ -122,11 +122,11 @@ resource "aws_security_group_rule" "workers_ingress_healthcheck_http" {
 module "argocd" {
   source = "../argocd-helm"
 
-  repo_url = var.repo_url
+  repo_url        = var.repo_url
   target_revision = var.target_revision
-  extra_apps = var.extra_apps
-  cluster_name = var.cluster_name
-  base_domain = var.base_domain
+  extra_apps      = var.extra_apps
+  cluster_name    = var.cluster_name
+  base_domain     = var.base_domain
 
   cluster_issuer                  = "letsencrypt-prod"
   oidc_issuer_url                 = format("https://cognito-idp.%s.amazonaws.com/%s", data.aws_region.current.name, var.cognito_user_pool_id)
