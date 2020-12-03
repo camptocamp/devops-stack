@@ -21,9 +21,9 @@ apps:
   csi-secrets-store-provider-azure:
     enabled: false
   efs-provisioner:
-    enabled: ${enable_efs}
+    enabled: ${efs_provisioner.enable}
   keycloak:
-    enabled: ${enable_keycloak}
+    enabled: ${keycloak.enable}
   kube-prometheus-stack:
     enabled: true
   loki-stack:
@@ -31,11 +31,11 @@ apps:
   metrics-server:
     enabled: true
   minio:
-    enabled: ${enable_minio}
+    enabled: ${minio.enable}
   namespaces:
     enabled: true
   olm:
-    enabled: ${enable_olm}
+    enabled: ${olm.enable}
   secrets-store-csi-driver:
     enabled: false
   traefik:
@@ -49,7 +49,7 @@ argo-cd:
   configs:
     secret:
       extra:
-        oidc.default.clientSecret: ${client_secret}
+        oidc.default.clientSecret: ${oidc.client_secret}
         accounts.pipeline.tokens: '${argocd_accounts_pipeline_tokens}'
   controller:
     metrics:
@@ -65,8 +65,8 @@ argo-cd:
       url: https://argocd.apps.${cluster_name}.${base_domain}
       oidc.config: |
         name: OIDC
-        issuer: ${oidc_issuer_url}
-        clientID: ${client_id}
+        issuer: ${oidc.issuer_url}
+        clientID: ${oidc.client_id}
         clientSecret: $oidc.default.clientSecret
         requestedIDTokenClaims:
           groups:
@@ -126,8 +126,8 @@ keycloak:
       traefik.ingress.kubernetes.io/service.serversscheme: https
   keycloakClient:
     client:
-      clientId: ${client_id}
-      secret: ${client_secret}
+      clientId: ${oidc.client_id}
+      secret: ${oidc.client_secret}
       redirectUris:
         - https://argocd.apps.${base_domain}/auth/callback
         - https://argocd.apps.${cluster_name}.${base_domain}/auth/callback
@@ -138,7 +138,7 @@ keycloak:
         - https://alertmanager.apps.${base_domain}/oauth2/callback
         - https://alertmanager.apps.${cluster_name}.${base_domain}/oauth2/callback
   keycloakUser:
-    password: "${admin_password}"
+    password: "${keycloak.admin_password}"
 
 kube-prometheus-stack:
   alertmanager:
@@ -148,14 +148,14 @@ kube-prometheus-stack:
             - --http-address=0.0.0.0:9095
             - --upstream=http://localhost:9093
             - --provider=oidc
-            - --oidc-issuer-url=${oidc_issuer_url}
-            - --client-id=${client_id}
-            - --client-secret=${client_secret}
+            - --oidc-issuer-url=${oidc.issuer_url}
+            - --client-id=${oidc.client_id}
+            - --client-secret=${oidc.client_secret}
             - --cookie-secure=false
             - --cookie-secret=${cookie_secret}
             - --email-domain=*
             - --redirect-url=https://alertmanager.apps.${cluster_name}.${base_domain}/oauth2/callback
-            %{ for arg in oauth2_proxy_extra_args }
+            %{ for arg in oidc.oauth2_proxy_extra_args }
             - ${arg}
             %{ endfor }
           image: quay.io/pusher/oauth2_proxy:v6.1.1
@@ -185,13 +185,13 @@ kube-prometheus-stack:
       auth.generic_oauth:
         enabled: true
         allow_sign_up: true
-        client_id: ${client_id}
-        client_secret: ${client_secret}
+        client_id: ${oidc.client_id}
+        client_secret: ${oidc.client_secret}
         scopes: "openid profile email"
-        auth_url: ${oauth2_oauth_url}
-        token_url: ${oauth2_token_url}
-        api_url: ${oauth2_api_url}
-        %{ for k, v in grafana_generic_oauth_extra_args }
+        auth_url: ${oidc.oauth_url}
+        token_url: ${oidc.token_url}
+        api_url: ${oidc.api_url}
+        %{ for k, v in grafana.generic_oauth_extra_args }
         ${k}: ${v}
         %{ endfor }
       server:
@@ -249,14 +249,14 @@ kube-prometheus-stack:
             - --http-address=0.0.0.0:9091
             - --upstream=http://localhost:9090
             - --provider=oidc
-            - --oidc-issuer-url=${oidc_issuer_url}
-            - --client-id=${client_id}
-            - --client-secret=${client_secret}
+            - --oidc-issuer-url=${oidc.issuer_url}
+            - --client-id=${oidc.client_id}
+            - --client-secret=${oidc.client_secret}
             - --cookie-secure=false
             - --cookie-secret=${cookie_secret}
             - --email-domain=*
             - --redirect-url=https://prometheus.apps.${cluster_name}.${base_domain}/oauth2/callback
-            %{ for arg in oauth2_proxy_extra_args }
+            %{ for arg in oidc.oauth2_proxy_extra_args }
             - ${arg}
             %{ endfor }
           image: quay.io/pusher/oauth2_proxy:v6.1.1
@@ -276,10 +276,10 @@ loki-stack: {}
 
 metrics-server: {}
 
-%{ if enable_minio }
+%{ if minio.enable }
 minio:
-  accessKey: ${minio_access_key}
-  secretKey: ${minio_secret_key}
+  accessKey: ${minio.access_key}
+  secretKey: ${minio.secret_key}
   ingress:
     enabled: true
     annotations:
@@ -295,7 +295,7 @@ minio:
           - minio.apps.${base_domain}
           - minio.apps.${cluster_name}.${base_domain}
   buckets:
-    - name: ${loki_bucket_name}
+    - name: ${loki.bucket_name}
       policy: none
       purge: false
 %{ endif }
