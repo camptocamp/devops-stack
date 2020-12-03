@@ -12,8 +12,7 @@ spec:
     repoURL: {{ .spec.source.repoURL }}
     targetRevision: {{ .spec.source.targetRevision }}
     helm:
-      values:
-        {{- .spec.source.helm.values | toYaml | nindent 8 }}
+      {{- .spec.source.helm | toYaml | nindent 6 }}
   destination:
     namespace: {{ .spec.destination.namespace }}
     server: {{ .spec.destination.server }}
