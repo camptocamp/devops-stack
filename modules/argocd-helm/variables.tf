@@ -32,21 +32,25 @@ variable "cluster_issuer" {
 variable "oidc_issuer_url" {
   description = "OIDC Issuer URL"
   type        = string
+  default     = format("https://keycloak.apps.%s/auth/realms/kubernetes", var.base_domain)
 }
 
 variable "oauth2_oauth_url" {
   description = "OAuth2 OAuth URL"
   type        = string
+  default     = format("https://keycloak.apps.%s/auth/realms/kubernetes/protocol/openid-connect/auth", var.base_domain)
 }
 
 variable "oauth2_token_url" {
   description = "OAuth2 Token URL"
   type        = string
+  default     = format("https://keycloak.apps.%s/auth/realms/kubernetes/protocol/openid-connect/token", var.base_domain)
 }
 
 variable "oauth2_api_url" {
   description = "OAuth2 API URL"
   type        = string
+  default     = format("https://keycloak.apps.%s/auth/realms/kubernetes/protocol/openid-connect/userinfo", var.base_domain)
 }
 
 variable "oauth2_proxy_extra_args" {
@@ -65,14 +69,11 @@ variable "client_secret" {
   type        = string
 }
 
-
-
 variable "grafana_generic_oauth_extra_args" {
   description = "Generic OAuth extra args for Grafana"
   type        = map
   default     = {}
 }
-
 
 variable "loki_bucket_name" {
   description = "Name of the Loki bucket"
@@ -88,7 +89,7 @@ variable "enable_efs" {
 variable "enable_keycloak" {
   description = "Whether to activate Keycloak"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "admin_password" {
@@ -97,13 +98,11 @@ variable "admin_password" {
   default     = ""
 }
 
-
 variable "enable_olm" {
   description = "Whether to activate OLM"
   type        = bool
   default     = false
 }
-
 
 variable "enable_minio" {
   description = "Whether to activate Minio"
@@ -122,7 +121,6 @@ variable "minio_secret_key" {
   type        = string
   default     = ""
 }
-
 
 variable "app_of_apps_values_overrides" {
   description = "Extra value files content for the App of Apps"
