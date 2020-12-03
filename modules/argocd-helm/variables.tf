@@ -32,25 +32,25 @@ variable "cluster_issuer" {
 variable "oidc_issuer_url" {
   description = "OIDC Issuer URL"
   type        = string
-  default     = format("https://keycloak.apps.%s/auth/realms/kubernetes", var.base_domain)
+  default     = ""
 }
 
 variable "oauth2_oauth_url" {
   description = "OAuth2 OAuth URL"
   type        = string
-  default     = format("https://keycloak.apps.%s/auth/realms/kubernetes/protocol/openid-connect/auth", var.base_domain)
+  default     = ""
 }
 
 variable "oauth2_token_url" {
   description = "OAuth2 Token URL"
   type        = string
-  default     = format("https://keycloak.apps.%s/auth/realms/kubernetes/protocol/openid-connect/token", var.base_domain)
+  default     = ""
 }
 
 variable "oauth2_api_url" {
   description = "OAuth2 API URL"
   type        = string
-  default     = format("https://keycloak.apps.%s/auth/realms/kubernetes/protocol/openid-connect/userinfo", var.base_domain)
+  default     = ""
 }
 
 variable "oauth2_proxy_extra_args" {
