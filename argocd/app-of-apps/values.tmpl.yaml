@@ -45,6 +45,7 @@ argo-cd:
   configs:
     secret:
       extra:
+        oidc.default.clientSecret: ${client_secret}
         accounts.pipeline.tokens: '${argocd_accounts_pipeline_tokens}'
   controller:
     metrics:
@@ -62,8 +63,14 @@ argo-cd:
         name: OIDC
         issuer: ${oidc_issuer_url}
         clientID: ${client_id}
-        clientSecret: ${client_secret}
-        requestedScopes: ["openid", "profile", "email"]
+        clientSecret: $oidc.default.clientSecret
+        requestedIDTokenClaims:
+          groups:
+            essential: true
+        requestedScopes:
+          - openid
+          - profile
+          - email
     ingress:
       enabled: true
       annotations:
