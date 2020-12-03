@@ -85,7 +85,7 @@ variable "enable_efs" {
   default     = false
 }
 
-variable "enable_keycloack" {
+variable "enable_keycloak" {
   description = "Whether to activate Keycloak"
   type        = bool
   default     = false
