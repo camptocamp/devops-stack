@@ -122,53 +122,23 @@ resource "aws_security_group_rule" "workers_ingress_healthcheck_http" {
 module "argocd" {
   source = "../argocd-helm"
 
-  depends_on = [
-    module.cluster,
-  ]
-}
+  repo_url = var.repo_url
+  target_revision = var.target_revision
+  extra_apps = var.extra_apps
+  cluster_name = var.cluster_name
+  base_domain = var.base_domain
 
-resource "random_password" "oauth2_cookie_secret" {
-  length  = 16
-  special = false
-}
+  cluster_issuer                  = "letsencrypt-prod"
+  oidc_issuer_url                 = format("https://cognito-idp.%s.amazonaws.com/%s", data.aws_region.current.name, var.cognito_user_pool_id)
+  oauth2_oauth_url                = format("https://%s.auth.%s.amazoncognito.com/oauth2/authorize", var.cognito_user_pool_domain, data.aws_region.current.name)
+  oauth2_token_url                = format("https://%s.auth.%s.amazoncognito.com/oauth2/token", var.cognito_user_pool_domain, data.aws_region.current.name)
+  oauth2_api_url                  = format("https://%s.auth.%s.amazoncognito.com/oauth2/userInfo", var.cognito_user_pool_domain, data.aws_region.current.name)
+  client_id                       = aws_cognito_user_pool_client.client.id
+  client_secret                   = aws_cognito_user_pool_client.client.client_secret
+  loki_bucket_name                = aws_s3_bucket.loki.id,
+  enable_efs                      = var.enable_efs
 
-resource "helm_release" "app_of_apps" {
-  name              = "app-of-apps"
-  chart             = "${path.module}/../../argocd/app-of-apps"
-  namespace         = "argocd"
-  dependency_update = true
-  create_namespace  = true
-
-  values = [
-    templatefile("${path.module}/../../argocd/app-of-apps/values.tmpl.yaml",
-      {
-        repo_url                        = var.repo_url
-        target_revision                 = var.target_revision
-        argocd_accounts_pipeline_tokens = module.argocd.argocd_accounts_pipeline_tokens
-        extra_apps                      = var.extra_apps
-        cluster_name                    = var.cluster_name
-        base_domain                     = var.base_domain
-        cluster_issuer                  = "letsencrypt-prod"
-        oidc_issuer_url                 = format("https://cognito-idp.%s.amazonaws.com/%s", data.aws_region.current.name, var.cognito_user_pool_id)
-        oauth2_oauth_url                = format("https://%s.auth.%s.amazoncognito.com/oauth2/authorize", var.cognito_user_pool_domain, data.aws_region.current.name)
-        oauth2_token_url                = format("https://%s.auth.%s.amazoncognito.com/oauth2/token", var.cognito_user_pool_domain, data.aws_region.current.name)
-        oauth2_api_url                  = format("https://%s.auth.%s.amazoncognito.com/oauth2/userInfo", var.cognito_user_pool_domain, data.aws_region.current.name)
-        client_id                       = aws_cognito_user_pool_client.client.id
-        client_secret                   = aws_cognito_user_pool_client.client.client_secret
-        cookie_secret                   = random_password.oauth2_cookie_secret.result
-        admin_password                  = ""
-        minio_access_key                = ""
-        minio_secret_key                = ""
-        loki_bucket_name                = aws_s3_bucket.loki.id,
-        enable_efs                      = var.enable_efs
-        enable_keycloak                 = false
-        enable_olm                      = false
-        enable_minio                    = false
-
-        oauth2_proxy_extra_args          = []
-        grafana_generic_oauth_extra_args = {}
-      }
-    ),
+  app_of_apps_values_overrides    = [
     templatefile("${path.module}/values.tmpl.yaml",
       {
         aws_default_region              = data.aws_region.current.name
@@ -183,6 +153,6 @@ resource "helm_release" "app_of_apps" {
   ]
 
   depends_on = [
-    module.argocd,
+    module.cluster,
   ]
 }
