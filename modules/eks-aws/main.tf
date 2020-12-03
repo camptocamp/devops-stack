@@ -128,17 +128,17 @@ module "argocd" {
   cluster_name    = var.cluster_name
   base_domain     = var.base_domain
 
-  cluster_issuer                  = "letsencrypt-prod"
-  oidc_issuer_url                 = format("https://cognito-idp.%s.amazonaws.com/%s", data.aws_region.current.name, var.cognito_user_pool_id)
-  oauth2_oauth_url                = format("https://%s.auth.%s.amazoncognito.com/oauth2/authorize", var.cognito_user_pool_domain, data.aws_region.current.name)
-  oauth2_token_url                = format("https://%s.auth.%s.amazoncognito.com/oauth2/token", var.cognito_user_pool_domain, data.aws_region.current.name)
-  oauth2_api_url                  = format("https://%s.auth.%s.amazoncognito.com/oauth2/userInfo", var.cognito_user_pool_domain, data.aws_region.current.name)
-  client_id                       = aws_cognito_user_pool_client.client.id
-  client_secret                   = aws_cognito_user_pool_client.client.client_secret
-  loki_bucket_name                = aws_s3_bucket.loki.id,
-  enable_efs                      = var.enable_efs
+  cluster_issuer   = "letsencrypt-prod"
+  oidc_issuer_url  = format("https://cognito-idp.%s.amazonaws.com/%s", data.aws_region.current.name, var.cognito_user_pool_id)
+  oauth2_oauth_url = format("https://%s.auth.%s.amazoncognito.com/oauth2/authorize", var.cognito_user_pool_domain, data.aws_region.current.name)
+  oauth2_token_url = format("https://%s.auth.%s.amazoncognito.com/oauth2/token", var.cognito_user_pool_domain, data.aws_region.current.name)
+  oauth2_api_url   = format("https://%s.auth.%s.amazoncognito.com/oauth2/userInfo", var.cognito_user_pool_domain, data.aws_region.current.name)
+  client_id        = aws_cognito_user_pool_client.client.id
+  client_secret    = aws_cognito_user_pool_client.client.client_secret
+  loki_bucket_name = aws_s3_bucket.loki.id,
+  enable_efs       = var.enable_efs
 
-  app_of_apps_values_overrides    = [
+  app_of_apps_values_overrides = [
     templatefile("${path.module}/values.tmpl.yaml",
       {
         aws_default_region              = data.aws_region.current.name
