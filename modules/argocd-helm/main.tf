@@ -96,7 +96,7 @@ resource "helm_release" "app_of_apps" {
       }
     )],
     var.app_of_apps_values_overrides,
-  ),
+  )
 
   depends_on = [
     helm_release.argocd
