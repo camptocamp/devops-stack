@@ -69,7 +69,7 @@ variable "client_secret" {
 
 variable "grafana_generic_oauth_extra_args" {
   description = "Generic OAuth extra args for Grafana"
-  type        = object
+  type        = map
   default     = {}
 }
 
