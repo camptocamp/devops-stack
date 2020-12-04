@@ -42,3 +42,9 @@ variable "enable_minio" {
   type        = bool
   default     = true
 }
+
+variable "network_name" {
+  description = "Docker network to use. Creates a new one if null."
+  type        = string
+  default     = "bridge"
+}

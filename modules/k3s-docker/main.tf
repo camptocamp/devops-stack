@@ -26,9 +26,9 @@ provider "kubernetes" {
 }
 
 module "cluster" {
-  source  = "camptocamp/k3s/docker"
-  version = "0.4.0"
+  source = "git::https://github.com/mcanevet/terraform-docker-k3s.git?ref=no-registry"
 
+  network_name = var.network_name
   cluster_name = var.cluster_name
   k3s_version  = var.k3s_version
   node_count   = var.node_count
