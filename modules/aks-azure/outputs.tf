@@ -5,7 +5,7 @@ output "argocd_auth_token" {
 }
 
 output "kubeconfig" {
-  value = module.cluster.kube_config_raw
+  value = data.azurerm_kubernetes_cluster.cluster.kube_admin_config_raw
 }
 
 output "repo_url" {
