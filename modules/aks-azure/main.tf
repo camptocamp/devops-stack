@@ -70,53 +70,33 @@ module "cluster" {
 module "argocd" {
   source = "../argocd-helm"
 
-  depends_on = [
-    module.cluster,
-  ]
-}
+  repo_url                        = var.repo_url
+  target_revision                 = var.target_revision
+  argocd_accounts_pipeline_tokens = module.argocd.argocd_accounts_pipeline_tokens
+  extra_apps                      = var.extra_apps
+  cluster_name                    = var.cluster_name
+  base_domain                     = var.base_domain
+  cluster_issuer                  = "letsencrypt-prod"
+  oidc_issuer_url                 = format("https://login.microsoftonline.com/%s/v2.0", data.azurerm_client_config.current.tenant_id)
+  oauth2_oauth_url                = format("https://login.microsoftonline.com/%s/oauth2/authorize", data.azurerm_client_config.current.tenant_id)
+  oauth2_token_url                = format("https://login.microsoftonline.com/%s/oauth2/token", data.azurerm_client_config.current.tenant_id)
+  oauth2_api_url                  = format("https://graph.microsoft.com/oidc/userinfo")
+  client_id                       = azuread_application.oauth2_apps.application_id
+  client_secret                   = azuread_application_password.oauth2_apps.value
+  cookie_secret                   = random_password.oauth2_cookie_secret.result
+  admin_password                  = ""
+  minio_access_key                = ""
+  minio_secret_key                = ""
+  loki_bucket_name                = "",
+  enable_efs                      = false
+  enable_keycloak                 = false
+  enable_olm                      = false
+  enable_minio                    = false
 
-resource "random_password" "oauth2_cookie_secret" {
-  length  = 16
-  special = false
-}
+  oauth2_proxy_extra_args          = []
+  grafana_generic_oauth_extra_args = {}
 
-resource "helm_release" "app_of_apps" {
-  name              = "app-of-apps"
-  chart             = "${path.module}/../../argocd/app-of-apps"
-  namespace         = "argocd"
-  dependency_update = true
-  create_namespace  = true
-
-  values = [
-    templatefile("${path.module}/../../argocd/app-of-apps/values.tmpl.yaml",
-      {
-        repo_url                        = var.repo_url
-        target_revision                 = var.target_revision
-        argocd_accounts_pipeline_tokens = module.argocd.argocd_accounts_pipeline_tokens
-        extra_apps                      = var.extra_apps
-        cluster_name                    = var.cluster_name
-        base_domain                     = var.base_domain
-        cluster_issuer                  = "letsencrypt-prod"
-        oidc_issuer_url                 = format("https://login.microsoftonline.com/%s/v2.0", data.azurerm_client_config.current.tenant_id)
-        oauth2_oauth_url                = format("https://login.microsoftonline.com/%s/oauth2/authorize", data.azurerm_client_config.current.tenant_id)
-        oauth2_token_url                = format("https://login.microsoftonline.com/%s/oauth2/token", data.azurerm_client_config.current.tenant_id)
-        oauth2_api_url                  = format("https://graph.microsoft.com/oidc/userinfo")
-        client_id                       = azuread_application.oauth2_apps.application_id
-        client_secret                   = azuread_application_password.oauth2_apps.value
-        cookie_secret                   = random_password.oauth2_cookie_secret.result
-        admin_password                  = ""
-        minio_access_key                = ""
-        minio_secret_key                = ""
-        loki_bucket_name                = "",
-        enable_efs                      = false
-        enable_keycloak                 = false
-        enable_olm                      = false
-        enable_minio                    = false
-
-        oauth2_proxy_extra_args          = []
-        grafana_generic_oauth_extra_args = {}
-      }
-    ),
+  app_of_apps_values_overrides = [
     templatefile("${path.module}/values.tmpl.yaml",
       {
         client_secret            = azuread_application_password.oauth2_apps.value
@@ -132,8 +112,13 @@ resource "helm_release" "app_of_apps" {
   ]
 
   depends_on = [
-    module.argocd,
+    module.cluster,
   ]
+}
+
+resource "random_password" "oauth2_cookie_secret" {
+  length  = 16
+  special = false
 }
 
 data "azurerm_subscription" "primary" {
