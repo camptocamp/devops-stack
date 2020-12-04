@@ -11,27 +11,20 @@ jobs:
       matrix:
         flavor:
           - k3s-docker
-    defaults:
-      run:
-        working-directory: tests/${{ matrix.flavor }}
     steps:
       - uses: actions/checkout@v2
       - name: Deploy cluster
-        run: |
-          mkdir "$HOME/bin"
-          export PATH="$HOME/bin:$PATH"
-          curl -sSL -o "$HOME/bin/argocd" https://github.com/argoproj/argo-cd/releases/download/v1.7.6/argocd-linux-amd64
-          chmod +x "$HOME/bin/argocd"
-          TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git \
-          TF_VAR_target_revision=${GITHUB_REF##*/} \
-          ../../scripts/provision.sh
-          ../../scripts/wait-for-app-of-apps.sh
-        env:
-          CLUSTER_NAME: default
+        uses: docker://hashicorp/terraform:0.13.5
+        with:
+          entrypoint: scripts/gh-deploy-cluster.sh
+          args: ${{ matrix.flavor }} $GITHUB_SERVER_URL/$GITHUB_ACTOR/camptocamp-devops-stack.git $GITHUB_HEAD_REF
+      - name: Wait for App of Apps
+        uses: docker://argoproj/argocd:v1.7.6
+        with:
+          entrypoint: scripts/gh-wait-for-app-of-apps.sh
+          args: ${{ matrix.flavor }}
       - name: Destroy cluster
-        run: |
-          TF_VAR_repo_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git \
-          TF_VAR_target_revision=${{ github.base_ref }} \
-          ../../scripts/destroy.sh
-        env:
-          CLUSTER_NAME: default
+        uses: docker://hashicorp/terraform:0.13.5
+        with:
+          entrypoint: scripts/gh-destroy-cluster.sh
+          args: ${{ matrix.flavor }}
