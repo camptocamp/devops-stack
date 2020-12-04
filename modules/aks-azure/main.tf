@@ -6,6 +6,8 @@ locals {
   kubernetes_client_certificate     = base64decode(data.azurerm_kubernetes_cluster.cluster.kube_admin_config.0.client_certificate)
   kubernetes_client_key             = base64decode(data.azurerm_kubernetes_cluster.cluster.kube_admin_config.0.client_key)
   kubernetes_cluster_ca_certificate = base64decode(data.azurerm_kubernetes_cluster.cluster.kube_admin_config.0.cluster_ca_certificate)
+
+  azure_dns_label_name = format("%s-%s", var.cluster_name, replace(var.base_domain, ".", "-"))
 }
 
 provider "helm" {
@@ -123,6 +125,7 @@ resource "helm_release" "app_of_apps" {
         base_domain              = var.base_domain
         cert_manager_resource_id = azurerm_user_assigned_identity.cert_manager.id
         cert_manager_client_id   = azurerm_user_assigned_identity.cert_manager.client_id
+        azure_dns_label_name     = local.azure_dns_label_name
       }
     ),
     var.app_of_apps_values_overrides,
@@ -164,6 +167,14 @@ resource "azurerm_role_assignment" "reader" {
 data "azurerm_dns_zone" "this" {
   name                = var.base_domain
   resource_group_name = var.resource_group_name
+}
+
+resource "azurerm_dns_cname_record" "wildcard" {
+  name                = "*.apps.${var.cluster_name}"
+  zone_name           = data.azurerm_dns_zone.this.name
+  resource_group_name = data.azurerm_dns_zone.this.resource_group_name
+  ttl                 = 300
+  record              = "${local.azure_dns_label_name}.${data.azurerm_resource_group.this.location}.cloudapp.azure.com."
 }
 
 resource "azurerm_role_assignment" "dns_zone_contributor" {
