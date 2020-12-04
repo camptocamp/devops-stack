@@ -1,11 +1,3 @@
-locals {
-  base_domain                       = module.cluster.base_domain
-  kubernetes_host                   = module.cluster.kubernetes_host
-  kubernetes_username               = module.cluster.kubernetes_username
-  kubernetes_password               = module.cluster.kubernetes_password
-  kubernetes_cluster_ca_certificate = module.cluster.kubernetes_cluster_ca_certificate
-}
-
 module "cluster" {
   source = "../../../modules/k3os-libvirt"
 
@@ -35,7 +27,7 @@ spec:
     repoURL: ${var.repo_url}
     targetRevision: ${var.target_revision}
 
-baseDomain: ${local.base_domain}
+baseDomain: ${module.cluster.base_domain}
           EOT
           }
         }
