@@ -176,3 +176,6 @@ traefik:
     requests:
       cpu: 10m
       memory: 32Mi
+  service:
+    annotations:
+      service.beta.kubernetes.io/azure-dns-label-name: ${azure_dns_label_name}
