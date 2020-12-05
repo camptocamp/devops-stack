@@ -2,6 +2,8 @@
 argo-cd:
   installCRDs: false
   global:
+    image:
+      tag: v1.7.10
     securityContext:
       runAsUser: 999
       runAsGroup: 999
