@@ -22,6 +22,8 @@ APP_OF_APPS_VALUES_2=$(python3 -c "import sys, json; print(json.load(sys.stdin)[
 export KUBECTL_EXTERNAL_DIFF="diff -u"
 export ARGOCD_OPTS="--plaintext --port-forward --port-forward-namespace argocd"
 
+cd /tmp || exit
+
 git clone "$REPO_URL"
 cd camptocamp-devops-stack || exit
 git checkout "$TARGET_REVISION"
