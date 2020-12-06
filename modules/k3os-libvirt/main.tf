@@ -40,6 +40,8 @@ module "cluster" {
 module "argocd" {
   source = "../argocd-helm"
 
+  client_secret = random_password.clientsecret.result
+
   depends_on = [
     module.cluster,
   ]
