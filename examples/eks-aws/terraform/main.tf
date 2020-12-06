@@ -1,12 +1,11 @@
 locals {
-  base_domain     = "example.com"
   repo_url        = "https://github.com/camptocamp/camptocamp-devops-stack.git"
   target_revision = "v0.16.0"
 
-  kubernetes_host                   = module.cluster.kubernetes_host
-  kubernetes_cluster_ca_certificate = module.cluster.kubernetes_cluster_ca_certificate
-  kubernetes_token                  = module.cluster.kubernetes_token
-
+  kubernetes_host                      = module.cluster.kubernetes_host
+  kubernetes_cluster_ca_certificate    = module.cluster.kubernetes_cluster_ca_certificate
+  kubernetes_token                     = module.cluster.kubernetes_token
+  cluster_endpoint_public_access_cidrs = ["0.0.0.0/0"]
   map_roles = [
     {
       rolearn  = data.aws_iam_role.eks_admin.arn
@@ -17,11 +16,11 @@ locals {
 }
 
 data "aws_vpc" "this" {
-  cidr_block = "10.11.0.0/16"
+  cidr_block = "10.100.0.0/16"
 }
 
 data "aws_iam_role" "eks_admin" {
-  name = "eks_admin"
+  name = "pbu_eks_admin"
 }
 
 module "cluster" {
@@ -38,8 +37,8 @@ module "cluster" {
       asg_max_size         = 3
     }
   ]
-
-  map_roles = local.map_roles
+  enable_metrics_archives = true
+  map_roles               = local.map_roles
 
   base_domain     = local.base_domain
   repo_url        = local.repo_url

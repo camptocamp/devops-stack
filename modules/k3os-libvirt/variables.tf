@@ -73,4 +73,3 @@ variable "agent_memory" {
   type        = number
   default     = 2048
 }
-

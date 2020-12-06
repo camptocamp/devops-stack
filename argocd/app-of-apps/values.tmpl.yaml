@@ -307,7 +307,7 @@ minio:
     - name: "${thanos_archives_bucket_name}"
       policy: none
       purge: false
-
+%{ endif }
 thanos:
   archives:
     endpoint: "${thanos_archives_endpoint}"

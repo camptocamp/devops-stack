@@ -142,29 +142,33 @@ resource "helm_release" "app_of_apps" {
   values = [
     templatefile("${path.module}/../../argocd/app-of-apps/values.tmpl.yaml",
       {
-        repo_url                        = var.repo_url
-        target_revision                 = var.target_revision
-        argocd_accounts_pipeline_tokens = module.argocd.argocd_accounts_pipeline_tokens
-        extra_apps                      = var.extra_apps
-        cluster_name                    = var.cluster_name
-        base_domain                     = var.base_domain
-        cluster_issuer                  = "letsencrypt-prod"
-        oidc_issuer_url                 = format("https://cognito-idp.%s.amazonaws.com/%s", data.aws_region.current.name, var.cognito_user_pool_id)
-        oauth2_oauth_url                = format("https://%s.auth.%s.amazoncognito.com/oauth2/authorize", var.cognito_user_pool_domain, data.aws_region.current.name)
-        oauth2_token_url                = format("https://%s.auth.%s.amazoncognito.com/oauth2/token", var.cognito_user_pool_domain, data.aws_region.current.name)
-        oauth2_api_url                  = format("https://%s.auth.%s.amazoncognito.com/oauth2/userInfo", var.cognito_user_pool_domain, data.aws_region.current.name)
-        client_id                       = aws_cognito_user_pool_client.client.id
-        client_secret                   = aws_cognito_user_pool_client.client.client_secret
-        cookie_secret                   = random_password.oauth2_cookie_secret.result
-        admin_password                  = ""
-        minio_access_key                = ""
-        minio_secret_key                = ""
-        loki_bucket_name                = aws_s3_bucket.loki.id,
-        enable_efs                      = var.enable_efs
-        enable_keycloak                 = false
-        enable_olm                      = false
-        enable_minio                    = false
-
+        repo_url                         = var.repo_url
+        target_revision                  = var.target_revision
+        argocd_accounts_pipeline_tokens  = module.argocd.argocd_accounts_pipeline_tokens
+        extra_apps                       = var.extra_apps
+        cluster_name                     = var.cluster_name
+        base_domain                      = var.base_domain
+        cluster_issuer                   = "letsencrypt-prod"
+        oidc_issuer_url                  = format("https://cognito-idp.%s.amazonaws.com/%s", data.aws_region.current.name, var.cognito_user_pool_id)
+        oauth2_oauth_url                 = format("https://%s.auth.%s.amazoncognito.com/oauth2/authorize", var.cognito_user_pool_domain, data.aws_region.current.name)
+        oauth2_token_url                 = format("https://%s.auth.%s.amazoncognito.com/oauth2/token", var.cognito_user_pool_domain, data.aws_region.current.name)
+        oauth2_api_url                   = format("https://%s.auth.%s.amazoncognito.com/oauth2/userInfo", var.cognito_user_pool_domain, data.aws_region.current.name)
+        client_id                        = aws_cognito_user_pool_client.client.id
+        client_secret                    = aws_cognito_user_pool_client.client.client_secret
+        cookie_secret                    = random_password.oauth2_cookie_secret.result
+        admin_password                   = ""
+        minio_access_key                 = ""
+        minio_secret_key                 = ""
+        loki_bucket_name                 = aws_s3_bucket.loki.id,
+        enable_efs                       = var.enable_efs
+        enable_keycloak                  = false
+        enable_olm                       = false
+        enable_minio                     = false
+        enable_metrics_archives          = var.enable_metrics_archives
+        thanos_archives_bucket_name      = aws_s3_bucket.thanos.id
+        thanos_archives_endpoint         = aws_s3_bucket.thanos.bucket_regional_domain_name
+        thanos_archives_secret_key       = ""
+        thanos_archives_access_key       = ""
         oauth2_proxy_extra_args          = []
         grafana_generic_oauth_extra_args = {}
       }
@@ -174,6 +178,7 @@ resource "helm_release" "app_of_apps" {
         aws_default_region              = data.aws_region.current.name
         cert_manager_assumable_role_arn = module.iam_assumable_role_cert_manager.this_iam_role_arn,
         loki_assumable_role_arn         = module.iam_assumable_role_loki.this_iam_role_arn,
+        thanos_assumable_role_arn       = module.iam_assumable_role_thanos.this_iam_role_arn,
         loki_bucket_name                = aws_s3_bucket.loki.id,
         efs_filesystem_id               = var.enable_efs ? module.efs.0.this_efs_mount_target_file_system_id : ""
         efs_dns_name                    = var.enable_efs ? module.efs.0.this_efs_mount_target_full_dns_name : ""
