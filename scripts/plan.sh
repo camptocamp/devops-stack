@@ -10,7 +10,7 @@ wget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 -O "$HOM
 chmod +x "$HOME/bin/jq"
 
 cd terraform || exit
-terraform init -upgrade
+terraform init
 terraform plan -out plan
 terraform show -json plan | jq -r '.planned_values.outputs' > outputs.json
 cd - || exit

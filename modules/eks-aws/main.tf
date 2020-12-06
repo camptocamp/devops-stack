@@ -122,6 +122,8 @@ resource "aws_security_group_rule" "workers_ingress_healthcheck_http" {
 module "argocd" {
   source = "../argocd-helm"
 
+  client_secret = aws_cognito_user_pool_client.client.client_secret
+
   depends_on = [
     module.cluster,
   ]

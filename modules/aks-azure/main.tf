@@ -70,6 +70,8 @@ module "cluster" {
 module "argocd" {
   source = "../argocd-helm"
 
+  client_secret = azuread_application_password.oauth2_apps.value
+
   depends_on = [
     module.cluster,
   ]
