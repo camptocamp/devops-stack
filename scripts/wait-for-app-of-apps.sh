@@ -13,5 +13,5 @@ export KUBECONFIG_CONTENT
 
 while ! KUBECONFIG=<(echo "$KUBECONFIG_CONTENT") argocd app wait apps --health --timeout 30
 do
-	KUBECONFIG=<(echo "$KUBECONFIG_CONTENT") argocd app list -owide
+	KUBECONFIG=<(echo "$KUBECONFIG_CONTENT") argocd app list -owide || true
 done
