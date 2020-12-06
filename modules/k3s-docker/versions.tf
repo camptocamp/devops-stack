@@ -5,8 +5,8 @@ terraform {
       version = "3.0.0"
     }
     docker = {
-      source  = "terraform-providers/docker"
-      version = "2.7.2"
+      source  = "kreuzwerker/docker"
+      version = "2.8.0"
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"

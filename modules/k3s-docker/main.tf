@@ -27,7 +27,7 @@ provider "kubernetes" {
 
 module "cluster" {
   source  = "camptocamp/k3s/docker"
-  version = "0.5.0"
+  version = "0.6.0"
 
   network_name = "bridge"
   cluster_name = var.cluster_name
