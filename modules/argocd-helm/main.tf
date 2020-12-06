@@ -46,10 +46,6 @@ data "kubernetes_secret" "argocd_secret" {
     name      = "argocd-secret"
     namespace = helm_release.argocd.namespace
   }
-
-  depends_on = [
-    helm_release.argocd,
-  ]
 }
 
 resource "jwt_hashed_token" "argocd" {
