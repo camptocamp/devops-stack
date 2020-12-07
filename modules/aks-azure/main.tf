@@ -73,7 +73,6 @@ module "argocd" {
 
   repo_url                        = var.repo_url
   target_revision                 = var.target_revision
-  argocd_accounts_pipeline_tokens = module.argocd.argocd_accounts_pipeline_tokens
   extra_apps                      = var.extra_apps
   cluster_name                    = var.cluster_name
   base_domain                     = var.base_domain
