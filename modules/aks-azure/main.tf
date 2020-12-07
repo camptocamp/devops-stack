@@ -46,10 +46,11 @@ data "azurerm_kubernetes_cluster" "cluster" {
 }
 
 module "cluster" {
-  source = "git::https://github.com/Azure/terraform-azurerm-aks.git?ref=4f94226"
+  source = "git::https://github.com/mcanevet/terraform-azurerm-aks.git?ref=network-profile"
 
   resource_group_name = data.azurerm_resource_group.this.name
   prefix              = var.cluster_name
+  network_plugin      = "azure"
   vnet_subnet_id      = var.vnet_subnet_id
   agents_size         = var.agents_size
   os_disk_size_gb     = var.os_disk_size_gb
