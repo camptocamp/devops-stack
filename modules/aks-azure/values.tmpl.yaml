@@ -168,8 +168,6 @@ kube-prometheus-stack:
           memory: 96Mi
 
 traefik:
-  deployment:
-    replicas: 2
   resources:
     limits:
       memory: 48Mi
