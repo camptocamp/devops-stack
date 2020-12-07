@@ -1,4 +1,5 @@
 locals {
+  base_domain     = "example.com"
   repo_url        = "https://github.com/camptocamp/camptocamp-devops-stack.git"
   target_revision = "v0.16.0"
 
@@ -20,7 +21,7 @@ data "aws_vpc" "this" {
 }
 
 data "aws_iam_role" "eks_admin" {
-  name = "pbu_eks_admin"
+  name = "eks_admin"
 }
 
 module "cluster" {
