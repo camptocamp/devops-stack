@@ -17,7 +17,7 @@ output "target_revision" {
 }
 
 output "app_of_apps_values" {
-  value = helm_release.app_of_apps.values
+  value = module.argocd.app_of_apps_values
 }
 
 output "node_resource_group" {

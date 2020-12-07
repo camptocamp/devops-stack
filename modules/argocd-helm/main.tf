@@ -35,7 +35,7 @@ resource "helm_release" "argocd" {
       configs:
         secret:
           extra:
-            oidc.default.clientSecret: ${var.client_secret}
+            oidc.default.clientSecret: ${var.oidc.client_secret}
             accounts.pipeline.tokens: '${local.argocd_accounts_pipeline_tokens}'
     EOT
   ]
@@ -53,3 +53,44 @@ resource "jwt_hashed_token" "argocd" {
   secret      = lookup(data.kubernetes_secret.argocd_secret.data, "server.secretkey")
   claims_json = jsonencode(local.jwt_token_payload)
 }
+
+resource "helm_release" "app_of_apps" {
+  name              = "app-of-apps"
+  chart             = "${path.module}/../../argocd/app-of-apps"
+  namespace         = "argocd"
+  dependency_update = true
+  create_namespace  = true
+
+  values = concat([
+    templatefile("${path.module}/../../argocd/app-of-apps/values.tmpl.yaml",
+      {
+        repo_url                         = var.repo_url
+        target_revision                  = var.target_revision
+        argocd_accounts_pipeline_tokens  = local.argocd_accounts_pipeline_tokens
+        extra_apps                       = var.extra_apps
+        cluster_name                     = var.cluster_name
+        base_domain                      = var.base_domain
+        cluster_issuer                   = var.cluster_issuer
+        oidc                             = var.oidc
+        cookie_secret                    = random_password.oauth2_cookie_secret.result
+        minio                            = var.minio
+        loki                             = var.loki
+        efs_provisioner                  = var.efs_provisioner
+        olm                              = var.olm
+        keycloak                         = var.keycloak
+        grafana                          = var.grafana
+      }
+    )],
+    var.app_of_apps_values_overrides,
+  )
+
+  depends_on = [
+    helm_release.argocd
+  ]
+}
+
+resource "random_password" "oauth2_cookie_secret" {
+  length  = 16
+  special = false
+}
+
