@@ -1,5 +1,37 @@
 = Changelog
 
+== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.17.0[0.17.0] (2020-12-07)
+
+https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.16.0...v0.17.0[Full Changelog]
+
+*Implemented enhancements:*
+
+* Instantiate the app of apps inside the argocd-helm module https://github.com/camptocamp/camptocamp-devops-stack/pull/351[#351] (https://github.com/raphink[raphink])
+* Scale traefik to 2 by default https://github.com/camptocamp/camptocamp-devops-stack/pull/369[#369] (https://github.com/mcanevet[mcanevet])
+* Use Azure CNI network plugin https://github.com/camptocamp/camptocamp-devops-stack/pull/366[#366] (https://github.com/mcanevet[mcanevet])
+* Upgrade camptocamp/k3s/docker to 0.6.0 https://github.com/camptocamp/camptocamp-devops-stack/pull/361[#361] (https://github.com/mcanevet[mcanevet])
+* Run github workflow in container https://github.com/camptocamp/camptocamp-devops-stack/pull/352[#352] (https://github.com/mcanevet[mcanevet])
+* Don't use terraform workspace select with TF_WORKSPACE env var https://github.com/camptocamp/camptocamp-devops-stack/pull/345[#345] (https://github.com/mcanevet[mcanevet])
+* Cleanup tests https://github.com/camptocamp/camptocamp-devops-stack/pull/349[#349] (https://github.com/mcanevet[mcanevet])
+
+*Upgraded applications:*
+
+* Upgrade csi-secrets-store-provider-azure https://github.com/camptocamp/camptocamp-devops-stack/pull/367[#367] (https://github.com/mcanevet[mcanevet])
+* Upgrade aad-pod-identity https://github.com/camptocamp/camptocamp-devops-stack/pull/365[#365] (https://github.com/mcanevet[mcanevet])
+* Upgrade kube-prometheus-stack to v12.5.0 https://github.com/camptocamp/camptocamp-devops-stack/pull/364[#364] (https://github.com/mcanevet[mcanevet])
+* Upgrade camptocamp/k3s/docker to 0.6.0 https://github.com/camptocamp/camptocamp-devops-stack/pull/361[#361] (https://github.com/mcanevet[mcanevet])
+* Upgrade cert-manager to 1.1.0 https://github.com/camptocamp/camptocamp-devops-stack/pull/358[#358] (https://github.com/mcanevet[mcanevet])
+* Upgrade to ArgoCD 1.7.10 https://github.com/camptocamp/camptocamp-devops-stack/pull/353[#353] (https://github.com/mcanevet[mcanevet])
+
+*Fixed bugs:*
+
+* Fix AzureIdentity for cert-manager https://github.com/camptocamp/camptocamp-devops-stack/pull/368[#368] (https://github.com/mcanevet[mcanevet])
+* Fix pipeline https://github.com/camptocamp/camptocamp-devops-stack/pull/357[#357] (https://github.com/mcanevet[mcanevet])
+* Fix some issues with github workflow https://github.com/camptocamp/camptocamp-devops-stack/pull/356[#356] (https://github.com/mcanevet[mcanevet])
+* Fix github workflow https://github.com/camptocamp/camptocamp-devops-stack/pull/355[#355] (https://github.com/mcanevet[mcanevet])
+* Force destroy Loki's bucket https://github.com/camptocamp/camptocamp-devops-stack/pull/374[#374] (https://github.com/mcanevet[mcanevet])
+
+
 == https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.16.0[0.16.0] (2020-12-04)
 
 https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.15.0...v0.16.0[Full Changelog]
