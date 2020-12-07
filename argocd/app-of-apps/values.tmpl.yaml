@@ -314,8 +314,8 @@ thanos:
     accessKey: "${thanos_archives_access_key}"
     secretKey: "${thanos_archives_secret_key}"
     bucket_name: "${thanos_archives_bucket_name}"
+    insecure: ${thanos_archives_insecure}
     enabled: ${enable_metrics_archives}
-
 secrets-store-csi-driver: {}
 
 traefik: {}

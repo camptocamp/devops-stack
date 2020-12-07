@@ -169,6 +169,7 @@ resource "helm_release" "app_of_apps" {
         thanos_archives_endpoint         = aws_s3_bucket.thanos.bucket_regional_domain_name
         thanos_archives_secret_key       = ""
         thanos_archives_access_key       = ""
+        thanos_archives_insecure         = false
         oauth2_proxy_extra_args          = []
         grafana_generic_oauth_extra_args = {}
       }
