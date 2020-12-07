@@ -35,8 +35,26 @@ variable "oidc" {
   default     = {}
 }
 
+variable "argocd" {
+  description = "ArgoCD settings"
+  type        = any
+  default     = {}
+}
+
 variable "grafana" {
   description = "Grafana settings"
+  type        = any
+  default     = {}
+}
+
+variable "prometheus" {
+  description = "Prometheus settings"
+  type        = any
+  default     = {}
+}
+
+variable "alertmanager" {
+  description = "Alertmanager settings"
   type        = any
   default     = {}
 }
