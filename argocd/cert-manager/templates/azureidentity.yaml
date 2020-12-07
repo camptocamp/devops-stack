@@ -6,6 +6,6 @@ metadata:
   name: cert-manager
 spec:
   type: 0
-  resourceID: {{ index "$.Values" "azureIdentity" "resourceID" }}
-  clientID: {{ index "$.Values" "azureIdentity" "clientID" }}
+  resourceID: {{ index "$.Values" "cert-manager" "azureIdentity" "resourceID" }}
+  clientID: {{ index "$.Values" "cert-manager" "azureIdentity" "clientID" }}
 {{- end }}
