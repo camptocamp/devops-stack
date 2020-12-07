@@ -53,7 +53,10 @@ module "argocd" {
     api_url                 = format("https://keycloak.apps.%s/auth/realms/kubernetes/protocol/openid-connect/userinfo", local.base_domain)
     client_id               = "applications"
     client_secret           = random_password.clientsecret.result
-    oauth2_proxy_extra_args = []
+    oauth2_proxy_extra_args = [
+      "--insecure-oidc-skip-issuer-verification=true",
+      "--ssl-insecure-skip-verify=true",
+    ]
   }
   minio                           = {
     enable     = var.enable_minio
@@ -70,11 +73,6 @@ module "argocd" {
   olm                             = {
     enable = true
   }
-
-  oauth2_proxy_extra_args = [
-    "--insecure-oidc-skip-issuer-verification=true",
-    "--ssl-insecure-skip-verify=true",
-  ]
 
   grafana = {
     generic_oauth_extra_args = {
