@@ -35,7 +35,7 @@ resource "helm_release" "argocd" {
       configs:
         secret:
           extra:
-            oidc.default.clientSecret: ${var.client_secret}
+            oidc.default.clientSecret: ${var.oidc.client_secret}
             accounts.pipeline.tokens: '${local.argocd_accounts_pipeline_tokens}'
     EOT
   ]
