@@ -14,7 +14,7 @@ locals {
   )
 
   argocd_defaults = {
-    domain = "argocd.apps.$${cluster_name}.$${base_domain}"
+    domain = "argocd.apps.${var.cluster_name}.${var.base_domain}"
   }
   argocd = merge(
     local.argocd_defaults,
@@ -23,7 +23,7 @@ locals {
 
   grafana_defaults = {
     generic_oauth_extra_args = {}
-    domain                   = "grafana.apps.$${cluster_name}.$${base_domain}"
+    domain                   = "grafana.apps.${var.cluster_name}.${var.base_domain}"
   }
   grafana = merge(
     local.grafana_defaults,
@@ -31,7 +31,7 @@ locals {
   )
 
   prometheus_defaults = {
-    domain = "prometheus.apps.$${cluster_name}.$${base_domain}"
+    domain = "prometheus.apps.${var.cluster_name}.${var.base_domain}"
   }
   prometheus = merge(
     local.prometheus_defaults,
@@ -39,7 +39,7 @@ locals {
   )
 
   alertmanager_defaults = {
-    domain = "alertmanager.apps.$${cluster_name}.$${base_domain}"
+    domain = "alertmanager.apps.${var.cluster_name}.${var.base_domain}"
   }
   alertmanager = merge(
     local.alertmanager_defaults,
@@ -65,7 +65,7 @@ locals {
   keycloak_defaults = {
     enable         = false
     admin_password = ""
-    domain         = "keycloak.apps.$${cluster_name}.$${base_domain}"
+    domain         = "keycloak.apps.${var.cluster_name}.${var.base_domain}"
   }
   keycloak = merge(
     local.keycloak_defaults,
@@ -84,7 +84,7 @@ locals {
     enable     = false
     access_key = ""
     secret_key = ""
-    domain     = "minio.apps.$${cluster_name}.$${base_domain}"
+    domain     = "minio.apps.${var.cluster_name}.${var.base_domain}"
   }
   minio = merge(
     local.minio_defaults,
