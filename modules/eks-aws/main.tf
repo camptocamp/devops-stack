@@ -128,8 +128,8 @@ module "argocd" {
   cluster_name    = var.cluster_name
   base_domain     = var.base_domain
 
-  cluster_issuer   = "letsencrypt-prod"
-  oidc             = {
+  cluster_issuer = "letsencrypt-prod"
+  oidc = {
     issuer_url    = format("https://cognito-idp.%s.amazonaws.com/%s", data.aws_region.current.name, var.cognito_user_pool_id)
     oauth_url     = format("https://%s.auth.%s.amazoncognito.com/oauth2/authorize", var.cognito_user_pool_domain, data.aws_region.current.name)
     token_url     = format("https://%s.auth.%s.amazoncognito.com/oauth2/token", var.cognito_user_pool_domain, data.aws_region.current.name)
@@ -137,10 +137,10 @@ module "argocd" {
     client_id     = aws_cognito_user_pool_client.client.id
     client_secret = aws_cognito_user_pool_client.client.client_secret
   }
-  loki             = {
+  loki = {
     bucket_name = aws_s3_bucket.loki.id,
   }
-  efs_provisioner  = {
+  efs_provisioner = {
     enable = var.enable_efs
   }
 

@@ -62,5 +62,5 @@ locals {
   minio = merge(
     local.minio_defaults,
     var.minio,
-  ) 
+  )
 }
