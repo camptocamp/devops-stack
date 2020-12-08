@@ -1,0 +1,29 @@
+== Authentication
+
+The DevOps Stack uses OIDC layer for SSO authentication.
+Depending on the module you're using, a different OIDC provider is automatically selected:
+
+.Default OIDC Providers
+|===
+|Module |OIDC Provider
+
+|aks-azure |Azure Active Directory
+
+|eks-aws |AWS Cognito
+
+|k3s-docker |Keycloak
+
+|k3os-libvirt |Keycloak
+|===
+
+
+=== Groups
+
+The following OIDC groups are pre-defined:
+
+.Groups
+|===
+|Group name |Permissions
+
+|argocd-admin |Administrator of Argo CD
+|===
