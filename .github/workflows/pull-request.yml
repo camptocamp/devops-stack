@@ -13,6 +13,10 @@ jobs:
           - k3s-docker
     steps:
       - uses: actions/checkout@v2
+      - name: Terraform format check
+        uses: docker://hashicorp/terraform:0.13.5
+        with:
+          args: fmt -check -diff -recursive
       - name: Deploy cluster
         uses: docker://hashicorp/terraform:0.13.5
         with:
