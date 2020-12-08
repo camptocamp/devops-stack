@@ -16,6 +16,7 @@
 * Reference Guides
 ** xref:provisioning.adoc[Provisioning]
 ** xref:deployment.adoc[Deployment]
+** xref:authentication.adoc[Authentication]
 ** xref:ref_documentation.adoc[Documentation]
 * Explanations
 ** xref:why_k3s.adoc[Why k3s?]
