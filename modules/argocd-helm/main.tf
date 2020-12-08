@@ -71,14 +71,14 @@ resource "helm_release" "app_of_apps" {
         cluster_name                     = var.cluster_name
         base_domain                      = var.base_domain
         cluster_issuer                   = var.cluster_issuer
-        oidc                             = var.oidc
+        oidc                             = local.oidc
         cookie_secret                    = random_password.oauth2_cookie_secret.result
-        minio                            = var.minio
-        loki                             = var.loki
-        efs_provisioner                  = var.efs_provisioner
-        olm                              = var.olm
-        keycloak                         = var.keycloak
-        grafana                          = var.grafana
+        minio                            = local.minio
+        loki                             = local.loki
+        efs_provisioner                  = local.efs_provisioner
+        olm                              = local.olm
+        keycloak                         = local.keycloak
+        grafana                          = local.grafana
       }
     )],
     var.app_of_apps_values_overrides,

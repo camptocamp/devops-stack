@@ -31,90 +31,44 @@ variable "cluster_issuer" {
 
 variable "oidc" {
   description = "OIDC Settings"
-  type        = object({
-    issuer_url              = string
-    oauth_url               = string
-    token_url               = string
-    api_url                 = string
-    oauth2_proxy_extra_args = list(string)
-    client_id               = string
-    client_secret           = string
-  })
-  default     = {
-    issuer_url              = ""
-    oauth_url               = ""
-    token_url               = ""
-    api_url                 = ""
-    client_id               = ""
-    client_secret           = ""
-    oauth2_proxy_extra_args = []
-  }
+  type        = any
+  default     = {}
 }
 
 variable "grafana" {
   description = "Grafana settings"
-  type        = object({
-    generic_oauth_extra_args = map(any)
-  })
-  default     = {
-    generic_oauth_extra_args = {}
-  }
+  type        = any
+  default     = {}
 }
 
 variable "loki" {
   description = "Loki settings"
-  type = object({
-    bucket_name = string
-  })
-  default = {
-    bucket_name = ""
-  } 
+  type        = any
+  default     = {}
 }
 
 variable "efs_provisioner" {
   description = "EFS provisioner settings"
-  type        = object({
-    enable = bool
-  })
-  default     = {
-    enable = false
-  } 
+  type        = any
+  default     = {}
 }
 
 variable "keycloak" {
   description = "Keycloak settings"
-  type        = object({
-    enable         = bool
-    admin_password = string
-  })
-  default     = {
-    enable         = false
-    admin_password = ""
-  } 
+  type        = any
+  default     = {}
 }
 
 variable "olm" {
   description = "OLM settings"
-  type        = object({
-    enable = bool
-  })
-  default     = {
-    enable = false
-  }
+  type        = any
+  default     = {}
 }
 
 variable "minio" {
   description = "Minio settings"
-  type        = object({
-    enable     = bool
-    access_key = string
-    secret_key = string
-  })
-  default = {
-    enable     = false
-    access_key = ""
-    secret_key = ""
-  }
+  type        = any
+  default     = {}
 }
 
 variable "app_of_apps_values_overrides" {

@@ -71,20 +71,20 @@ module "cluster" {
 module "argocd" {
   source = "../argocd-helm"
 
-  repo_url                        = var.repo_url
-  target_revision                 = var.target_revision
-  extra_apps                      = var.extra_apps
-  cluster_name                    = var.cluster_name
-  base_domain                     = var.base_domain
-  cluster_issuer                  = "letsencrypt-prod"
-  oidc                            = {
+  repo_url        = var.repo_url
+  target_revision = var.target_revision
+  extra_apps      = var.extra_apps
+  cluster_name    = var.cluster_name
+  base_domain     = var.base_domain
+  cluster_issuer  = "letsencrypt-prod"
+
+  oidc = {
     issuer_url    = format("https://login.microsoftonline.com/%s/v2.0", data.azurerm_client_config.current.tenant_id)
     oauth_url     = format("https://login.microsoftonline.com/%s/oauth2/authorize", data.azurerm_client_config.current.tenant_id)
     token_url     = format("https://login.microsoftonline.com/%s/oauth2/token", data.azurerm_client_config.current.tenant_id)
     api_url       = format("https://graph.microsoft.com/oidc/userinfo")
     client_id     = azuread_application.oauth2_apps.application_id
     client_secret = azuread_application_password.oauth2_apps.value
-    oauth2_proxy_extra_args = []
   }
 
   app_of_apps_values_overrides = [
