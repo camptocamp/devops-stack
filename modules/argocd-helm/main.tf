@@ -77,8 +77,11 @@ resource "helm_release" "app_of_apps" {
         loki                            = local.loki
         efs_provisioner                 = local.efs_provisioner
         olm                             = local.olm
+        argocd                          = local.argocd
         keycloak                        = local.keycloak
         grafana                         = local.grafana
+        prometheus                      = local.prometheus
+        alertmanager                    = local.alertmanager
       }
     )],
     var.app_of_apps_values_overrides,
