@@ -204,7 +204,7 @@ git init</code></pre>
 <pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">cat << EOF > .gitlab-ci.yml
 ---
 include:
-  - https://raw.githubusercontent.com/camptocamp/camptocamp-devops-stack/v0.15.0/.gitlab-ci/pipeline.yaml
+  - https://raw.githubusercontent.com/camptocamp/camptocamp-devops-stack/v0.17.0/.gitlab-ci/pipeline.yaml
 EOF</code></pre>
 </div>
 </div>
@@ -219,7 +219,7 @@ EOF</code></pre>
 <pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">mkdir terraform
 cat << EOF > terraform/main.tf
 module "cluster" {
-  source = "git::https://github.com/camptocamp/camptocamp-devops-stack.git//modules/eks-aws?ref=v0.15.0"
+  source = "git::https://github.com/camptocamp/camptocamp-devops-stack.git//modules/eks-aws?ref=v0.17.0"
 
   cluster_name = terraform.workspace
   vpc_id       = data.aws_vpc.this.id
@@ -233,7 +233,7 @@ module "cluster" {
   ]
 
   repo_url        = "https://github.com/camptocamp/camptocamp-devops-stack.git"
-  target_revision = "v0.15.0"
+  target_revision = "v0.17.0"
 }
 EOF</code></pre>
 </div>
