@@ -1,5 +1,5 @@
 module "efs" {
-  count = var.enable_efs ? 1 : 0
+  count  = var.enable_efs ? 1 : 0
   source = "camptocamp/efs/aws"
 
   name                     = var.cluster_name

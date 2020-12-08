@@ -49,30 +49,30 @@ module "argocd" {
   base_domain     = local.base_domain
   cluster_issuer  = "ca-issuer"
   oidc = {
-    issuer_url              = format("https://keycloak.apps.%s/auth/realms/kubernetes", local.base_domain)
-    oauth_url               = format("https://keycloak.apps.%s/auth/realms/kubernetes/protocol/openid-connect/auth", local.base_domain)
-    token_url               = format("https://keycloak.apps.%s/auth/realms/kubernetes/protocol/openid-connect/token", local.base_domain)
-    api_url                 = format("https://keycloak.apps.%s/auth/realms/kubernetes/protocol/openid-connect/userinfo", local.base_domain)
-    client_id               = "applications"
-    client_secret           = random_password.clientsecret.result
+    issuer_url    = format("https://keycloak.apps.%s/auth/realms/kubernetes", local.base_domain)
+    oauth_url     = format("https://keycloak.apps.%s/auth/realms/kubernetes/protocol/openid-connect/auth", local.base_domain)
+    token_url     = format("https://keycloak.apps.%s/auth/realms/kubernetes/protocol/openid-connect/token", local.base_domain)
+    api_url       = format("https://keycloak.apps.%s/auth/realms/kubernetes/protocol/openid-connect/userinfo", local.base_domain)
+    client_id     = "applications"
+    client_secret = random_password.clientsecret.result
     oauth2_proxy_extra_args = [
       "--insecure-oidc-skip-issuer-verification=true",
       "--ssl-insecure-skip-verify=true",
     ]
   }
-  minio                           = {
+  minio = {
     enable     = var.enable_minio
     access_key = var.enable_minio ? random_password.minio_accesskey.0.result : ""
     secret_key = var.enable_minio ? random_password.minio_secretkey.0.result : ""
   }
-  keycloak                        = {
+  keycloak = {
     enable         = true
     admin_password = random_password.admin_password.result
   }
-  loki                            = {
+  loki = {
     bucket_name = "loki"
   }
-  olm                             = {
+  olm = {
     enable = true
   }
 
@@ -82,7 +82,7 @@ module "argocd" {
     }
   }
 
-  app_of_apps_values_overrides    = [
+  app_of_apps_values_overrides = [
     templatefile("${path.module}/values.tmpl.yaml",
       {
         root_cert = base64encode(tls_self_signed_cert.root.cert_pem)
