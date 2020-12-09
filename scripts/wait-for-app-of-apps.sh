@@ -2,16 +2,21 @@
 
 set -e
 
+KUBECONFIG=$(mktemp /tmp/kubeconfig.XXXXXX)
+export KUBECONFIG
+
+python3 -c "import sys, json; print(json.load(sys.stdin)['kubeconfig']['value'])" < terraform/outputs.json > "$KUBECONFIG"
+chmod 0600 "$KUBECONFIG"
+
 ARGOCD_AUTH_TOKEN=$(python3 -c "import sys, json; print(json.load(sys.stdin)['argocd_auth_token']['value'])" < terraform/outputs.json)
 export ARGOCD_AUTH_TOKEN
 
 ARGOCD_OPTS="--plaintext --port-forward --port-forward-namespace argocd"
 export ARGOCD_OPTS
 
-KUBECONFIG_CONTENT=$(python3 -c "import sys, json; print(json.load(sys.stdin)['kubeconfig']['value'])" < terraform/outputs.json)
-export KUBECONFIG_CONTENT
-
-while ! KUBECONFIG=<(echo "$KUBECONFIG_CONTENT") argocd app wait apps --health --timeout 30
+while ! argocd app wait -l argocd.argoproj.io/instance=apps --sync --health --timeout 30
 do
-	KUBECONFIG=<(echo "$KUBECONFIG_CONTENT") argocd app list -owide || true
+	argocd app list -owide || true
 done
+
+rm "$KUBECONFIG"
