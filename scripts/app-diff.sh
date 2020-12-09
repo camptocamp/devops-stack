@@ -54,3 +54,5 @@ done
 
 helm -n argocd rollback app-of-apps
 date
+
+rm "$KUBECONFIG"
