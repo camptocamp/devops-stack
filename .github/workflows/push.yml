@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Deploy cluster
-        uses: docker://hashicorp/terraform:0.13.5
+        uses: docker://hashicorp/terraform:0.14.2
         with:
           entrypoint: scripts/gh-deploy-cluster.sh
           args: ${{ matrix.flavor }} $GITHUB_SERVER_URL/$GITHUB_ACTOR/camptocamp-devops-stack.git $GITHUB_HEAD_REF
@@ -24,7 +24,7 @@ jobs:
           entrypoint: scripts/gh-wait-for-app-of-apps.sh
           args: ${{ matrix.flavor }}
       - name: Destroy cluster
-        uses: docker://hashicorp/terraform:0.13.5
+        uses: docker://hashicorp/terraform:0.14.2
         with:
           entrypoint: scripts/gh-destroy-cluster.sh
           args: ${{ matrix.flavor }}
