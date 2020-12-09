@@ -19,7 +19,7 @@ jobs:
           entrypoint: scripts/gh-deploy-cluster.sh
           args: ${{ matrix.flavor }} $GITHUB_SERVER_URL/$GITHUB_ACTOR/camptocamp-devops-stack.git $GITHUB_HEAD_REF
       - name: Wait for App of Apps
-        uses: docker://argoproj/argocd:v1.7.10
+        uses: docker://argoproj/argocd:v1.8.1
         with:
           entrypoint: scripts/gh-wait-for-app-of-apps.sh
           args: ${{ matrix.flavor }}
