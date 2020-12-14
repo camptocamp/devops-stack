@@ -11,6 +11,8 @@ export ARGOCD_OPTS
 KUBECONFIG_CONTENT=$(python3 -c "import sys, json; print(json.load(sys.stdin)['kubeconfig']['value'])" < terraform/outputs.json)
 export KUBECONFIG_CONTENT
 
+KUBECONFIG=<(echo "$KUBECONFIG_CONTENT") argocd app list -owide || true
+
 while ! KUBECONFIG=<(echo "$KUBECONFIG_CONTENT") argocd app wait apps --health --timeout 30
 do
 	KUBECONFIG=<(echo "$KUBECONFIG_CONTENT") argocd app list -owide || true
