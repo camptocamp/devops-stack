@@ -46,7 +46,10 @@ data "azurerm_kubernetes_cluster" "cluster" {
 }
 
 module "cluster" {
-  source = "git::https://github.com/mcanevet/terraform-azurerm-aks.git?ref=network-profile"
+  source = "git::https://github.com/Azure/terraform-azurerm-aks.git?ref=a9fa12b"
+
+  kubernetes_version   = "1.18.10"
+  orchestrator_version = "1.18.10"
 
   resource_group_name = data.azurerm_resource_group.this.name
   prefix              = var.cluster_name
