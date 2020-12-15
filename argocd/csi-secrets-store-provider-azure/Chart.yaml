@@ -4,5 +4,5 @@ name: "csi-secrets-store-provider-azure"
 version: "0"
 dependencies:
   - name: "csi-secrets-store-provider-azure"
-    version: "0.0.14"
+    version: "0.0.15"
     repository: "https://raw.githubusercontent.com/Azure/secrets-store-csi-driver-provider-azure/master/charts"
