@@ -6,19 +6,17 @@ terraform {
     }
     jwt = {
       source  = "camptocamp/jwt"
-      version = "0.0.3"
-    }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "1.13.2"
-    }
-    random = {
-      source  = "hashicorp/random"
-      version = "3.0.0"
+      version = ">= 0.0.3"
     }
     time = {
       source  = "hashicorp/time"
       version = "0.6.0"
+    }
+    kubernetes = {
+      source = "hashicorp/kubernetes"
+    }
+    random = {
+      source = "hashicorp/random"
     }
   }
   required_version = ">= 0.13"
