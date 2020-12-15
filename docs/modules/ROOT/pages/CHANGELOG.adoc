@@ -1,5 +1,31 @@
 = Changelog
 
+== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.18.0[0.18.0] (2020-12-15)
+
+https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.17.0...v0.18.0[Full Changelog]
+
+*Implemented enhancements:*
+
+* Instantiate the app of apps inside the argocd-helm module https://github.com/camptocamp/camptocamp-devops-stack/pull/377[#377] (https://github.com/raphink[raphink])
+* Check Terraform syntaxe on Pull Requests https://github.com/camptocamp/camptocamp-devops-stack/pull/379[#379] (https://github.com/mcanevet[mcanevet])
+* Allow to set app domains https://github.com/camptocamp/camptocamp-devops-stack/pull/375[#375] (https://github.com/raphink[raphink])
+* Hardcode AKS version to 1.18.10 https://github.com/camptocamp/camptocamp-devops-stack/pull/392[#392] (https://github.com/mcanevet[mcanevet])
+
+*Upgraded components:*
+
+* Upgrade k3s to v1.18.13 https://github.com/camptocamp/camptocamp-devops-stack/pull/393[#393] (https://github.com/mcanevet[mcanevet])
+* Upgrade ArgoCD to v1.8.1 https://github.com/camptocamp/camptocamp-devops-stack/pull/387[#387] (https://github.com/mcanevet[mcanevet])
+* Upgrade csi-secrets-store-provider-azure chart to 0.0.15 https://github.com/camptocamp/camptocamp-devops-stack/pull/395[#395] (https://github.com/mcanevet[mcanevet])
+
+*Fixed bugs:*
+
+* Increase argocd helm release timeout https://github.com/camptocamp/camptocamp-devops-stack/pull/381[#381] (https://github.com/mcanevet[mcanevet])
+
+*Documentation:*
+
+* Update new_project when releasing https://github.com/camptocamp/camptocamp-devops-stack/pull/382[#382] (https://github.com/raphink[raphink])
+* Add reference > authentication https://github.com/camptocamp/camptocamp-devops-stack/pull/383[#383] (https://github.com/raphink[raphink])
+
 == https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.17.0[0.17.0] (2020-12-07)
 
 https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.16.0...v0.17.0[Full Changelog]
