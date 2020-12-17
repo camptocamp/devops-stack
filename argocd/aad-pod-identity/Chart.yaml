@@ -4,5 +4,5 @@ name: "aad-pod-identity"
 version: "0"
 dependencies:
   - name: "aad-pod-identity"
-    version: "2.1.0"
+    version: "3.0.0"
     repository: "https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts"
