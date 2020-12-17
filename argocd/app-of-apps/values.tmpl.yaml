@@ -7,6 +7,7 @@ spec:
     targetRevision: ${target_revision}
   syncPolicy:
     automated:
+      prune: true
       selfHeal: true
 
 apps:
