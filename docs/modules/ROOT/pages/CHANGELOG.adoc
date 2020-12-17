@@ -1,5 +1,27 @@
 = Changelog
 
+== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.19.0[0.19.0] (2020-12-17)
+
+https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.18.0...v0.19.0[Full Changelog]
+
+*Implemented enhancements:*
+
+* Enable automatic pruning of resources https://github.com/camptocamp/camptocamp-devops-stack/pull/400[#400] (https://github.com/mcanevet[mcanevet])
+
+*Upgraded components:*
+
+* Upgrade dependencies for eks-aws https://github.com/camptocamp/camptocamp-devops-stack/pull/397[#397] (https://github.com/mcanevet[mcanevet])
+* Upgrade AAD Pod Identity to 1.7.1 https://github.com/camptocamp/camptocamp-devops-stack/pull/399[#399] (https://github.com/mcanevet[mcanevet])
+
+*Fixed bugs:*
+
+* Don't set provider version in generic module https://github.com/camptocamp/camptocamp-devops-stack/pull/396[#396] (https://github.com/mcanevet[mcanevet])
+
+*Documentation:*
+
+* Update new_project when releasing https://github.com/camptocamp/camptocamp-devops-stack/pull/382[#382] (https://github.com/raphink[raphink])
+* Add reference > authentication https://github.com/camptocamp/camptocamp-devops-stack/pull/383[#383] (https://github.com/raphink[raphink])
+
 == https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.18.0[0.18.0] (2020-12-15)
 
 https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.17.0...v0.18.0[Full Changelog]
