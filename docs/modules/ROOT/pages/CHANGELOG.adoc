@@ -17,11 +17,6 @@ https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.18.0...v0.19.0[
 
 * Don't set provider version in generic module https://github.com/camptocamp/camptocamp-devops-stack/pull/396[#396] (https://github.com/mcanevet[mcanevet])
 
-*Documentation:*
-
-* Update new_project when releasing https://github.com/camptocamp/camptocamp-devops-stack/pull/382[#382] (https://github.com/raphink[raphink])
-* Add reference > authentication https://github.com/camptocamp/camptocamp-devops-stack/pull/383[#383] (https://github.com/raphink[raphink])
-
 == https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.18.0[0.18.0] (2020-12-15)
 
 https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.17.0...v0.18.0[Full Changelog]
