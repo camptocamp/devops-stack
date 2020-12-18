@@ -9,6 +9,7 @@ if [ -z "$AAD_ROOT_APP" ]; then
     rm $manifest
 
     # check repo
+    # TODO try to match with different protocol : http/ssh/git
     if [ $AAD_REPO_URL != $git_repo ]; then
       [ "$DEBUG" = 'true' ] && echo "Skipping app $app: defined in another repo ($AAD_REPO_URL != $git_repo)"
       continue
@@ -16,7 +17,7 @@ if [ -z "$AAD_ROOT_APP" ]; then
 
     # check branch
     if [ $AAD_TARGET_BRANCH != $git_branch ]; then
-      [ "$DEBUG" = 'true' ] && echo "Skipping app $app: use anothe branch ($AAD_TARGET_BRANCH != $git_branch)"
+      [ "$DEBUG" = 'true' ] && echo "Skipping app $app: use another branch ($AAD_TARGET_BRANCH != $git_branch)"
       continue
     fi
 
