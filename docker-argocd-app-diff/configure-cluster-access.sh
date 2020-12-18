@@ -5,6 +5,6 @@ fi
 
 kubectl cluster-info > /dev/null 2>&1
 if [ $? -ne 0 ]; then
-  echo "Cannot connect k8s cluster"
+  echo "Cannot connect k8s cluster with KUBECONFIG=$KUBECONFIG"
   exit 2
 fi
