@@ -21,11 +21,7 @@ source /usr/local/bin/argocd-fetch-server.sh
 # Set AAD_ROOT_APP
 source /usr/local/bin/find-root-app.sh
 
-# Compute Diff
-mkdir -p app_diff_manifests
-export DEBUG=TRUE
-set -x
-
+# TODO lock argocd by deploying a configmap that contains pipeline ID with kubectl *create*
 # 1. Disable auto sync and use feature branch for argocd
 argocd-switch-to-feature-branch.sh ${AAD_ROOT_APP} ${AAD_FEATURE_BRANCH}
 
@@ -33,7 +29,7 @@ argocd-switch-to-feature-branch.sh ${AAD_ROOT_APP} ${AAD_FEATURE_BRANCH}
 # * Display diff
 # * Deploy any Application
 # * Run App Diff in all Application (new, modified, ...)
-scripts/argocd-app-diff.sh ${ARGOCD_ROOT_APP} app_diff_manifests || true
+scripts/argocd-app-diff.sh ${AAD_ROOT_APP} app_diff_manifests || true
 
 # 3. Revert modification
-scripts/argocd-re-sync.sh ${ARGOCD_ROOT_APP} ${CI_MERGE_REQUEST_TARGET_BRANCH_NAME} > /dev/null
+scripts/argocd-re-sync.sh ${AAD_ROOT_APP} ${AAD_TARGET_BRANCH}

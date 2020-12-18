@@ -47,7 +47,7 @@ sync () {
   fi
   for app in $(kubectl get Application -l "app.kubernetes.io/instance=$1" --all-namespaces -o name | grep application.argoproj.io | cut -f 2 -d /); do
     if [ $app != $1 ]; then
-      sync $app "${2}${1}->"
+      sync $app "${2}${1} -> "
     fi
   done
 }
