@@ -33,7 +33,7 @@ if [ -z "$ARGOCD_SERVER" ]; then
       echo "ArgoCD is available on $ARGOCD_SERVER"
     else
       echo "Cannot connect to  ArgoCD"
-      echo exit 1
+      exit 1
     fi
   fi
 fi
@@ -54,6 +54,6 @@ else
   else
     echo -n "Insecure connection to ArgoCD are not allowed, "
     echo "set AAD_ARGOCD_ALLOW_INSECURE to 'true' to allow insecrure connection"
-    echo exit 1
+    exit 1
   fi
 fi
