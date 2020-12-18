@@ -4,11 +4,11 @@
 [ -n "$DEBUG" ] && set -xe
 
 # Sync target revision first
-argocd app set $1 --helm-set spec.syncPolicy= --helm-set spec.source.targetRevision=$2 --revision $2
-argocd app sync $1 --prune
+argocd app set $1 --helm-set spec.syncPolicy= --helm-set spec.source.targetRevision=$2 --revision $2 > /dev/null 2>&1
+argocd app sync $1 --prune > /dev/null 2>&1
 argocd app wait $1 --operation > /dev/null 2>&1
 
 # Sync syncPolicy
-argocd app unset $1 -p spec.syncPolicy -p spec.source.targetRevision
-argocd app sync $1 --prune
-argocd app wait $1 --sync
+argocd app unset $1 -p spec.syncPolicy -p spec.source.targetRevision > /dev/null 2>&1
+argocd app sync $1 --prune > /dev/null 2>&1
+argocd app wait $1 --sync > /dev/null 2>&1
