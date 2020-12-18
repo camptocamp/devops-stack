@@ -16,3 +16,4 @@ RUN apt-get update && \
 ADD *.sh /usr/local/bin/
 
 ENTRYPOINT ["/usr/loca/bin/entrypoint.sh"]
+CMD ["/usr/local/bin/app-diff.sh"]
