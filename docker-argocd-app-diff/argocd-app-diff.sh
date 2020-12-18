@@ -1,17 +1,31 @@
 #!/bin/bash
 
-[ -z "$1" ] && echo "Usage $0 <argocd app> [<path to save manifests]" && echo "No app specified" && exit 1
-[ $# -gt 2 ] && echo "Usage $0 <argocd app> [<path to save manifests]" && echo "Extra parameters" && exit 1
-[ -n "$2" ] && [ ! -d "$2" ] && echo "'$2' is not a directory" && exit 1
-
-
-if [ -n "$2" ]; then
-  export APPS_DEPLOYED_DIR=$2
-else
-  export APPS_DEPLOYED_DIR=$(mktemp -d)
-fi
+[ -z "$1" ] && echo "Usage $0 <argocd app> [<logical app path>]" && echo "No app specified" && exit 1
 
 export KUBECTL_EXTERNAL_DIFF=$(dirname $(realpath $0))/custom-diff-tool.sh
-$(dirname $(realpath $0))/argocd-app-diff-sub.sh $1
 
-[ -z "$2" ] && rm -fr $APPS_DEPLOYED_DIR
+# Compute diff
+diff=$(mktemp)
+argocd app diff $1 | sed 's/===== \(.*\)\/\(.*\) \(.*\)\/\(.*\) ======/* ApiGroup: \1\n* Kind: \2\n* Namespace: \3\n* Name: \4/g' > $diff
+
+# Don't display title id there is no diff
+if [ ${PIPESTATUS[0]} -ne 0 ]; then
+  echo "## ${2}${1}"
+  cat $diff
+else
+  echo "*No modifications for ${2}${1}*"
+fi
+
+# Run diff on child apps
+apps_in_app=$(argocd app manifests $1 | yq r -c -d '*' - | yq p - a | yq r - 'a.(kind==Application).metadata.name')
+for app in $(echo $apps_in_app); do
+  if [ $app != $1 ]; then # Don't recurse of current app
+
+    # Synchronise app to load app or update sync policy and target revision
+    [ "$DEBUG" = 'true' ] && echo "Syncing $app in $1"
+    argocd app sync $1 --resource argoproj.io:Application:${app} > /dev/null 2>&1
+    argocd app wait ${app} --operation > /dev/null 2>&1
+    # Recursion
+    $0 $app "${2}${1} -> "
+  fi
+done
