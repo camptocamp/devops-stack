@@ -18,7 +18,6 @@ provider "helm" {
     client_certificate     = local.kubernetes_client_certificate
     client_key             = local.kubernetes_client_key
     cluster_ca_certificate = local.kubernetes_cluster_ca_certificate
-    load_config_file       = false
   }
 }
 
