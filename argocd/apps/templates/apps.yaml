@@ -20,4 +20,7 @@ spec:
     server: {{ .Values.spec.destination.server }}
   syncPolicy:
     automated:
+      {{- if .Values.spec.syncPolicy }}
+      prune: true
+      {{- end }}
       selfHeal: true
