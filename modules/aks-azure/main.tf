@@ -45,7 +45,8 @@ data "azurerm_kubernetes_cluster" "cluster" {
 }
 
 module "cluster" {
-  source = "git::https://github.com/Azure/terraform-azurerm-aks.git?ref=a9fa12b"
+  source  = "Azure/aks/azurerm"
+  version = "4.5.0"
 
   kubernetes_version   = "1.18.10"
   orchestrator_version = "1.18.10"
