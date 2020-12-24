@@ -1,12 +1,12 @@
 terraform {
   required_providers {
-    random = {
-      source  = "hashicorp/random"
-      version = "3.0.0"
-    }
     docker = {
       source  = "kreuzwerker/docker"
       version = "2.8.0"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = "3.0.0"
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
