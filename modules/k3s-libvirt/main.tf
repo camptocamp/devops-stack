@@ -25,7 +25,7 @@ provider "kubernetes" {
 }
 
 module "cluster" {
-  source  = "camptocamp/k3os/libvirt"
+  source  = "camptocamp/k3s/libvirt"
   version = "0.3.0"
 
   cluster_name = var.cluster_name
