@@ -1,12 +1,12 @@
 terraform {
   required_providers {
-    random = {
-      source  = "hashicorp/random"
-      version = "3.0.0"
-    }
     libvirt = {
       source  = "dmacvicar/libvirt"
       version = "0.6.2"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = "3.0.0"
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
