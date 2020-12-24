@@ -3,19 +3,6 @@ variable "cluster_name" {
   type        = string
 }
 
-variable "k3os_version" {
-  description = "The K3os version to use"
-  type        = string
-  default     = "v0.11.1"
-}
-
-variable "node_count" {
-  description = "Number of nodes to deploy"
-  type        = number
-  default     = 2
-}
-
-
 variable "repo_url" {
   description = "The source repo URL of ArgoCD's app of apps."
   type        = string
@@ -36,22 +23,4 @@ variable "extra_apps" {
   description = "Extra applications to deploy."
   type        = list
   default     = []
-}
-
-variable "enable_minio" {
-  description = "Whether to enable minio object storage system"
-  type        = bool
-  default     = true
-}
-
-variable "server_memory" {
-  description = "Server RAM"
-  type        = number
-  default     = 2048
-}
-
-variable "agent_memory" {
-  description = "Agent RAM"
-  type        = number
-  default     = 2048
 }
