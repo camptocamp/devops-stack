@@ -1,5 +1,5 @@
 module "cluster" {
-  source = "../../../modules/k3os-libvirt"
+  source = "../../../modules/k3s-libvirt"
 
   cluster_name = terraform.workspace
   node_count   = 0
@@ -16,7 +16,7 @@ module "cluster" {
         project = "default"
 
         source = {
-          path           = "tests/k3os-docker/argocd/demo-app"
+          path           = "tests/k3s-docker/argocd/demo-app"
           repoURL        = var.repo_url
           targetRevision = var.target_revision
 
