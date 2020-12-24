@@ -5,6 +5,7 @@ locals {
   kubernetes_username               = local.context.users.0.user.username
   kubernetes_password               = local.context.users.0.user.password
   kubernetes_cluster_ca_certificate = base64decode(local.context.clusters.0.cluster.certificate-authority-data)
+  kubeconfig                        = module.cluster.kubeconfig
 }
 
 provider "helm" {
@@ -37,7 +38,7 @@ module "cluster" {
 }
 
 module "argocd" {
-  source = "../argocd-helm"
+  source = "../../argocd-helm"
 
   repo_url        = var.repo_url
   target_revision = var.target_revision

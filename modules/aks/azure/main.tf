@@ -8,6 +8,7 @@ locals {
   kubernetes_cluster_ca_certificate = base64decode(data.azurerm_kubernetes_cluster.cluster.kube_admin_config.0.cluster_ca_certificate)
 
   azure_dns_label_name = format("%s-%s", var.cluster_name, replace(var.base_domain, ".", "-"))
+  kubeconfig           = data.azurerm_kubernetes_cluster.cluster.kube_admin_config_raw
 }
 
 provider "helm" {
@@ -72,7 +73,7 @@ module "cluster" {
 }
 
 module "argocd" {
-  source = "../argocd-helm"
+  source = "../../argocd-helm"
 
   repo_url        = var.repo_url
   target_revision = var.target_revision

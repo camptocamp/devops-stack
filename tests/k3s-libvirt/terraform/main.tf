@@ -1,5 +1,5 @@
 module "cluster" {
-  source = "../../../modules/k3s-libvirt"
+  source = "../../../modules/k3s/libvirt"
 
   cluster_name = terraform.workspace
   node_count   = 0

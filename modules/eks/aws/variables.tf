@@ -1,5 +1,5 @@
-variable "cluster_name" {
-  description = "The name of the cluster to create."
+variable "base_domain" {
+  description = "The base domain used for Ingresses."
   type        = string
 }
 
@@ -30,21 +30,6 @@ variable "worker_groups" {
   default     = []
 }
 
-variable "base_domain" {
-  description = "The base domain used for Ingresses."
-  type        = string
-}
-
-variable "repo_url" {
-  description = "The source repo URL of ArgoCD's app of apps."
-  type        = string
-}
-
-variable "target_revision" {
-  description = "The source target revision of ArgoCD's app of apps."
-  type        = string
-}
-
 variable "cognito_user_pool_id" {
   description = "ID of the Cognito user pool to use."
   type        = string
@@ -53,18 +38,6 @@ variable "cognito_user_pool_id" {
 variable "cognito_user_pool_domain" {
   description = "Domain prefix of the Cognito user pool to use (custom domain currently not supported!)."
   type        = string
-}
-
-variable "app_of_apps_values_overrides" {
-  description = "App of apps values overrides."
-  type        = string
-  default     = ""
-}
-
-variable "extra_apps" {
-  description = "Extra applications to deploy."
-  type        = list
-  default     = []
 }
 
 variable "kubeconfig_aws_authenticator_command" {
