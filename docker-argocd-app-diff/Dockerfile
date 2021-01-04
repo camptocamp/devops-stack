@@ -1,4 +1,4 @@
-FROM argoproj/argocd:v1.7.7
+FROM argoproj/argocd:v1.8.1
 
 ENV PACKAGE_TO_INSTALL="curl vim"
 
