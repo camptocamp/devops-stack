@@ -5,7 +5,7 @@
 
 $(dirname $0)/argocd-disable-auto-sync.sh $1
 echo "Switch to $2..."
-argocd app set $1 --helm-set spec.source.targetRevision=$2 # --revision $2
+argocd app set $1 --helm-set spec.source.targetRevision=$2 > /dev/null 2>&1 # --revision $2
 argocd app wait $1 --operation > /dev/null 2>&1
 sleep 1
 $(dirname $0)/argocd-recursive-sync.sh $1 --only-application

@@ -9,24 +9,15 @@ else
   only_app=false
 fi
 
-apps_status=$(mktemp -d)
+[ "$DEBUG" = 'true' ] && set -xe
 
-update_sync_status () {
-  [ "$DEBUG" = 'true' ] && echo -n "Refresh app status..."
-
-  rm -fr $apps_status/*
-  while IFS= read -r line; do
-    name=$(echo $line | cut -f 1 -d ' ')
-    sync_status=$(echo $line | cut -f 2 -d ' ')
-    echo $sync_status > $apps_status/$name
-  done < <(kubectl get Application --all-namespaces -o json | jq -r '.items[] | "\(.metadata.name) \(.status.sync.status)"')
-  [ "$DEBUG" = 'true' ] && echo "OK"
-}
+# Load some function to manage app status cache
+source $(dirname $0)/argocd-app-status.sh
 
 sync () {
 
   [ "$DEBUG" = 'true' ] && echo -n "Syncing $2$1..."
-  sync_status=$(cat $apps_status/$1)
+  sync_status=$(get_app_status $1)
   if [ "$sync_status" != "Synced" ]; then
     if [ "$only_app" = "true" ]; then
       # Search for resource of type 'argoproj.io/Application'
@@ -38,7 +29,7 @@ sync () {
         if [ "$group" = "argoproj.io" ] && [ "$kind" = "Application" ]; then
           resource_opts="$resource_opts --resource $group:$kind:$name"
         fi
-      done < <(argocd app resources apps)
+      done < <(argocd app resources $1 2>/dev/null)
       if [ -n "$resource_opts" ]; then
         [ "$DEBUG" = 'true' ] && echo argocd app sync $1 $resource_opts
         argocd app sync $1 $resource_opts >/dev/null 2>&1
@@ -47,7 +38,7 @@ sync () {
       argocd app sync $1 >/dev/null 2>&1
     fi
     [ "$DEBUG" = 'true' ] && echo "OK"
-    update_sync_status
+    refresh_app_status
   else
     [ "$DEBUG" = 'true' ] && echo "Already Synced"
   fi
@@ -58,7 +49,7 @@ sync () {
     fi
   done
 }
-update_sync_status
+refresh_app_status
 sync $1 ""
 rm -fr $apps_status
 if [ "$2" = "--only-application" ]; then

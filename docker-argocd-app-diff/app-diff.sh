@@ -1,5 +1,7 @@
 #/bin/bash
 
+[ "$DEBUG" = "true" ] && set -xe
+
 # TODO lock argocd by deploying a configmap that contains pipeline ID with kubectl *create*
 # 1. Disable auto sync and use feature branch for argocd
 echo ""
@@ -14,7 +16,7 @@ $(dirname $0)/argocd-switch-to-feature-branch.sh ${AAD_ROOT_APP} ${AAD_FEATURE_B
 echo ""
 echo "Compute Diff"
 echo "------------"
-$(dirname $0)/recursive-diff.sh ${AAD_ROOT_APP} app_diff_manifests || true
+$(dirname $0)/recursive-diff.sh ${AAD_ROOT_APP} || true
 
 # 3. Revert modification
 echo ""
