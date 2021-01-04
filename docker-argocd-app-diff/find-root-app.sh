@@ -1,12 +1,13 @@
+#!/bin/bash
+
 if [ -z "$AAD_ROOT_APP" ]; then
-  for app in $(argocd app list -o name); do
-    [ "$DEBUG" = 'true' ] && echo "App: $app"
-    manifest=$(mktemp)
-    argocd app get $app -o yaml > $manifest
-    parent_app=$(yq r $manifest 'metadata.labels."app.kubernetes.io/instance"')
-    git_repo=$(yq r $manifest 'spec.source.repoURL')
-    git_branch=$(yq r $manifest 'spec.source.targetRevision')
-    rm $manifest
+
+  while IFS= read -r line; do
+    app=$(echo $line | cut -f 1 -d ' ')
+    parent_app=$(echo $line | cut -f 2 -d ' ')
+    git_repo=$(echo $line | cut -f 3 -d ' ')
+    git_branch=$(echo $line | cut -f 4 -d ' ')
+    [ "$DEBUG" = 'true' ] && echo "App: $parent_app -> $app ($git_branch@$git_repo)"
 
     # check repo
     # TODO try to match with different protocol : http/ssh/git
@@ -31,8 +32,8 @@ if [ -z "$AAD_ROOT_APP" ]; then
         exit 1
       fi
     fi
-  done
-  [ -z "$AAD_ROOT_APP" ] && echo "Cannot find root app" && echo exit 1
+  done < <(kubectl get Application --all-namespaces -o json | jq -r '.items[] | "\(.metadata.name) \(.metadata.labels["app.kubernetes.io/instance"]) \(.spec.source.repoURL) \(.spec.source.targetRevision)"')
+  [ -z "$AAD_ROOT_APP" ] && echo "Cannot find root app" && exit 1
 else
   echo "Root app already set: $AAD_ROOT_APP"
 fi
