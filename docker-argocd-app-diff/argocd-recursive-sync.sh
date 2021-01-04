@@ -13,20 +13,13 @@ apps_status=$(mktemp -d)
 
 update_sync_status () {
   [ "$DEBUG" = 'true' ] && echo -n "Refresh app status..."
-  apps_manifests=$(mktemp -d)
-  kubectl get Application --all-namespaces -o yaml > $apps_manifests/apps.yaml
-
-  yq r $apps_manifests/apps.yaml 'items[*].metadata.name' > $apps_manifests/names.yaml
-  yq r $apps_manifests/apps.yaml 'items[*].status.sync.status' > $apps_manifests/status.yaml
 
   rm -fr $apps_status/*
-  while IFS= read -r line
-  do
+  while IFS= read -r line; do
     name=$(echo $line | cut -f 1 -d ' ')
     sync_status=$(echo $line | cut -f 2 -d ' ')
     echo $sync_status > $apps_status/$name
-  done < <(paste -d ' ' $apps_manifests/names.yaml $apps_manifests/status.yaml)
-  rm -fr $apps_manifests
+  done < <(kubectl get Application --all-namespaces -o json | jq -r '.items[] | "\(.metadata.name) \(.status.sync.status)"')
   [ "$DEBUG" = 'true' ] && echo "OK"
 }
 
@@ -36,7 +29,20 @@ sync () {
   sync_status=$(cat $apps_status/$1)
   if [ "$sync_status" != "Synced" ]; then
     if [ "$only_app" = "true" ]; then
-      argocd app sync $1 $(argocd app manifests $1 | yq r -c -d '*' - | yq p - a | yq r - 'a.(kind==Application).metadata.name' | sed -e 's/^/--resource argoproj.io:Application:/' | xargs) >/dev/null 2>&1
+      # Search for resource of type 'argoproj.io/Application'
+      resource_opts=""
+      while IFS= read -r line; do
+        group=$(echo $line | awk '{print $1}')
+        kind=$(echo $line | awk '{print $2}')
+        name=$(echo $line | awk '{print $4}')
+        if [ "$group" = "argoproj.io" ] && [ "$kind" = "Application" ]; then
+          resource_opts="$resource_opts --resource $group:$kind:$name"
+        fi
+      done < <(argocd app resources apps)
+      if [ -n "$resource_opts" ]; then
+        [ "$DEBUG" = 'true' ] && echo argocd app sync $1 $resource_opts
+        argocd app sync $1 $resource_opts >/dev/null 2>&1
+      fi
     else
       argocd app sync $1 >/dev/null 2>&1
     fi
@@ -45,6 +51,7 @@ sync () {
   else
     [ "$DEBUG" = 'true' ] && echo "Already Synced"
   fi
+  # Sync child apps
   for app in $(kubectl get Application -l "app.kubernetes.io/instance=$1" --all-namespaces -o name | grep application.argoproj.io | cut -f 2 -d /); do
     if [ $app != $1 ]; then
       sync $app "${2}${1} -> "
