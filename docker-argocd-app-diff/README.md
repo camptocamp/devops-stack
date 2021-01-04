@@ -19,5 +19,4 @@ Optional:
 * AAD_TARGET_BRANCH: Target branch of the pull/merge request
 * AAD_ARGOCD_ALLOW_INSECURE: if set to 'true' allow insecure connection to
   ArgoCD
-* ARGOCD_SERVER: Force address of ArgoCD, disable auto detection
 * ARGOCD_AUTH_TOKEN: Same for token
