@@ -1,5 +1,5 @@
 if [ -z "$KUBECONFIG" ]; then
-  echo "Missing configuration to access cluster. KUBECONFIG mlust be set."
+  echo "Missing configuration to access cluster. KUBECONFIG must be set."
   exit 1
 fi
 
