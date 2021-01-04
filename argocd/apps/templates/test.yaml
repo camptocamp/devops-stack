@@ -1,0 +1,33 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test
+  namespace: argocd
+spec:
+  project: default
+  {{- if .Values.spec.syncPolicy }}
+  syncPolicy:
+    {{ toYaml .Values.spec.syncPolicy | nindent 4 }}
+  {{- end }}
+  source:
+    path: argocd/default/test
+    repoURL: {{ .Values.spec.source.repoURL }}
+    targetRevision: {{ .Values.spec.source.targetRevision }}
+    helm:
+      values: |
+        spec:
+          destination:
+            server: {{ .Values.spec.destination.server }}
+          source:
+            repoURL: {{ .Values.spec.source.repoURL }}
+            targetRevision: {{ .Values.spec.source.targetRevision }}
+          {{- if .Values.spec.syncPolicy }}
+          syncPolicy:
+            {{ toYaml .Values.spec.syncPolicy | nindent 12 }}
+          {{- end }}
+        baseDomain: {{ .Values.baseDomain }}
+        clusterName: {{ .Values.clusterName }}
+  destination:
+    namespace: default
+    server: {{ .Values.spec.destination.server }}
