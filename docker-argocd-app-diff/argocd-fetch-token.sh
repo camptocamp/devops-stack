@@ -23,3 +23,4 @@ payload=$(echo -n "{\"jti\":\"$jti\",\"iat\":$iat,\"iss\":\"$iss\",\"nbf\":$nbf,
 signature=$(echo -n "$header.$payload" | openssl dgst -sha256 -hmac "$secret" -binary | base64 -w0 | tr '/+' '_-' | tr -d '=')
 
 export ARGOCD_AUTH_TOKEN=$header.$payload.$signature
+[ "$DEBUG" = "true" ] && echo "Successfull fetch of ArgoCD token"
