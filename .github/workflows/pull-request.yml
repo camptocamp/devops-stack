@@ -62,10 +62,7 @@ jobs:
           entrypoint: scripts/gh-plan.sh
           args: ${{ matrix.flavor }} ${{ github.actor }} ${{ github.head_ref }}
       - name: App-diff on ref
-        uses: docker://argoproj/argocd:v1.8.1
-        with:
-          entrypoint: scripts/gh-app-diff.sh
-          args: ${{ matrix.flavor }}
+        uses: docker://camptocamp/argocd-app-diff:latest
       - name: Update cluster
         uses: docker://hashicorp/terraform:0.13.5
         with:
