@@ -15,7 +15,7 @@ refresh_app_status () {
 }
 
 get_app_status () {
-    cat /tmp/app_status/$1
+    cat /tmp/app_status/$1 2> /dev/null
 }
 
 update_app_status () {
