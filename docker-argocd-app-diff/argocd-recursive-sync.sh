@@ -9,8 +9,6 @@ else
   only_app=false
 fi
 
-[ "$DEBUG" = 'true' ] && set -xe
-
 # Load some function to manage app status cache
 source $(dirname $0)/argocd-app-status.sh
 
