@@ -1,5 +1,5 @@
 :project-name: camptocamp-devops-stack
-:url-repo: https://github.com/camptocamp/{project-name}.git
+:url-repo: git@github.com:camptocamp/{project-name}.git
 
 == Run an example
 
