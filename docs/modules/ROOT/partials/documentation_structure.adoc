@@ -1,0 +1,10 @@
+We follow the https://documentation.divio.com/structure/[Divio documentation structure] to organize the documentation of this project, which is written in https://asciidoc.org/[Asciidoc] and built using https://antora.org/[Antora]
+
+In short, we break up the global documentation of the project in 4 parts, each of which being useful at a different time in the understanding or usage of the project:
+
+- *tutorials* focusing on the learning
+- *how-to guides* focusing on solving specific problems
+- *reference guides* focusing on giving information
+- *explanation* focusing on offering a better understanding
+
+Additionnaly each component of the DevOps stack as a sub-documentation in the *DevOps Stack Module* section to better separate their specific documentation (in terms of maintenance and readability).

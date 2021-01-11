@@ -2,15 +2,7 @@
 
 If you want to help improving this stack or simply want to test it on your workstation, you can clone this project, then cd to the `tests` directory and choose your flavor.
 
-Currently, there are 2 flavors available:
+There are different ways to test the DevOps stack, the full documentation on how to make changes and test them is available for each flavor of the DevOps stack:
 
-- k3s-docker: will create a K3S cluster in Docker,
-- k3s-libvirt: will spawn instances using Libvirt and use k3os image to create a cluster.
-
-If you run `make`, it will apply the terraform manifests located in the `terraform` directory. This will deploy a cluster and all core Kubernetes applications using ArgoCD.
-
-If you want to test some modifications in the terraform manifests, you can run `make` without committing your changes.
-
-But if you want to test some modifications in the Applications deployed by ArgoCD, you have to commit and push your change in a branch in your fork, then run `make` again (the `Makefile` will select the remote branch as repo URL and target reference of all Applications).
-
-To destroy everything, simply run `make clean`.
+- xref:ROOT:test_deploy_k3s_docker.adoc[k3s-docker] for testing k3s in docker containers.
+- xref:ROOT:test_deploy_k3s_libvirt.adoc[k3s-libvirt] for testing k3s in virtal machines using libvirt.

@@ -1,0 +1,24 @@
+== Deploying the DevOps Stack to EKS
+
+TODO spcific stuff about deploying to EKS.
+
+=== Recovering the kubeconfig for EKS
+
+. Make sure your AWS credentials file (`~/.aws/credentials` on Linux) contains the access key that has been used to create the cluster:
++
+[source,toml]
+----
+[<ACCOUNT_NAME>]
+aws_access_key_id = <YOUR_ACCESS_KEY_ID>
+aws_secret_access_key = <YOUR_SECRET_ACCESS_KEY>
+region = <YOUR_REGION>
+----
+
+. Update your kubeconfig using the following command:
++
+[source,shell]
+----
+aws --profile <ACCOUNT_NAME> eks --region <YOUR_REGION> update-kubeconfig --name <CLUSTER_NAME>
+----
+
+Then, you should be able to use Kubectl.

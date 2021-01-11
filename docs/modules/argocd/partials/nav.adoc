@@ -1,0 +1,2 @@
+** ArgoCD
+*** xref:argocd:howto_access.adoc[Howto Access ArgoCD]
