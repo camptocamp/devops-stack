@@ -1,9 +1,9 @@
 * xref:index.adoc[Introduction]
 * Tutorials
 * How-to guides
+** xref:develop.adoc[Test and/or improve the DevOps stack]
 ** xref:new_project.adoc[Create a new Project]
 ** xref:release.adoc[Release a new version]
-** xref:develop.adoc[Develop the stack]
 ** xref:how_to_write_doc.adoc[Write documentation]
 *** xref:antora-ui-c2c:ROOT:index.adoc[Customize UI]
 ** xref:access_services_in_cluster.adoc[Access Services in the cluster]
