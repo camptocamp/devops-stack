@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Untitled :: Camptocamp’s DevOps Stack</title>
-    <link rel="canonical" href="https://camptocamp.github.io/camptocamp-devops-stack/camptocamp-devops-stack/0.20.0/release.html">
+    <link rel="canonical" href="https://camptocamp.github.io/camptocamp-devops-stack/camptocamp-devops-stack/0.20.0/deploy_devops_stack_in_eks.html">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../_/css/site.css">
     <link rel="icon" href="../../_/img/c2c_favicon.png" type="image/x-icon">
@@ -48,7 +48,7 @@
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="using_the_devops_stack.html">Using the DevOps Stack</a>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="3">
+  <li class="nav-item is-current-page" data-depth="3">
     <a class="nav-link" href="deploy_devops_stack_in_eks.html">Deploy the DevOps Stack on EKS</a>
   </li>
 </ul>
@@ -74,7 +74,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="new_project.html">Create a new Project</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="release.html">Release a new version</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -217,40 +217,48 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Camptocamp’s DevOps stack</a></li>
-    <li>How-to guides</li>
-    <li><a href="release.html">Release a new version</a></li>
+    <li>Tutorials</li>
+    <li><a href="using_the_devops_stack.html">Using the DevOps Stack</a></li>
+    <li><a href="deploy_devops_stack_in_eks.html">Deploy the DevOps Stack on EKS</a></li>
   </ul>
 </nav>
 </div>
   <div class="content">
 <article class="doc">
 <div class="sect1">
-<h2 id="_release"><a class="anchor" href="#_release"></a>Release</h2>
+<h2 id="_deploying_the_devops_stack_to_eks"><a class="anchor" href="#_deploying_the_devops_stack_to_eks"></a>Deploying the DevOps Stack to EKS</h2>
 <div class="sectionbody">
-<div class="ulist">
-<ul>
+<div class="paragraph">
+<p>TODO spcific stuff about deploying to EKS.</p>
+</div>
+<div class="sect2">
+<h3 id="_recovering_the_kubeconfig_for_eks"><a class="anchor" href="#_recovering_the_kubeconfig_for_eks"></a>Recovering the kubeconfig for EKS</h3>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
-<p>Update <code>docs/modules/ROOT/pages/CHANGELOG.adoc</code></p>
+<p>Make sure your AWS credentials file (<code>~/.aws/credentials</code> on Linux) contains the access key that has been used to create the cluster:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[&lt;ACCOUNT_NAME&gt;]
+aws_access_key_id = &lt;YOUR_ACCESS_KEY_ID&gt;
+aws_secret_access_key = &lt;YOUR_SECRET_ACCESS_KEY&gt;
+region = &lt;YOUR_REGION&gt;</code></pre>
+</div>
+</div>
 </li>
 <li>
-<p>Update the version number (e.g. <code>v0.9.0</code>) in the following files (mandatory): <a href="https://github.com/camptocamp/camptocamp-devops-stack/blob/master/docs/antora.yml#L4">docs/antora.yml</a> <a href="https://github.com/camptocamp/camptocamp-devops-stack/blob/master/.gitlab-ci/pipeline.yaml">.gitlab-ci/pipeline.yaml</a></p>
+<p>Update your kubeconfig using the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">aws --profile &lt;ACCOUNT_NAME&gt; eks --region &lt;YOUR_REGION&gt; update-kubeconfig --name &lt;CLUSTER_NAME&gt;</code></pre>
+</div>
+</div>
 </li>
-<li>
-<p>Optionally update the version number in the following files: <a href="https://github.com/camptocamp/camptocamp-devops-stack/blob/master/examples/eks-aws/.gitlab-ci.yml">examples/eks-aws/.gitlab-ci.yml</a> <a href="https://github.com/camptocamp/camptocamp-devops-stack/blob/master/modules/eks-aws/main.tf">examples/eks-aws/terraform/main.tf</a> <a href="https://github.com/camptocamp/camptocamp-devops-stack/blob/master/modules/k3os-libvirt/main.tf">examples/k3os-libvirt-demo-app/terraform/main.tf</a> <a href="https://github.com/camptocamp/camptocamp-devops-stack/blob/master/modules/k3s-docker/main.tf">examples/k3s-docker-demo-app/terraform/main.tf</a> <a href="https://github.com/camptocamp/camptocamp-devops-stack/blob/master/docs/modules/ROOT/pages/new_project.adoc">docs/modules/ROOT/pages/new_project.adoc</a></p>
-</li>
-<li>
-<p>Create a pull request with the updated version. Once it has been reviewed and approved, merge it to <code>master</code></p>
-</li>
-<li>
-<p>Tag the merged commit (e.g. <code>v0.9.0</code>)</p>
-</li>
-<li>
-<p>Push the tag</p>
-</li>
-<li>
-<p>Create a new <a href="https://github.com/camptocamp/camptocamp-devops-stack/releases">release</a> via the GitHub release page, naming it the same as the version number - e.g. <code>v0.9.0</code>. Ensure to state what&#8217;s new in the release</p>
-</li>
-</ul>
+</ol>
+</div>
+<div class="paragraph">
+<p>Then, you should be able to use Kubectl.</p>
+</div>
 </div>
 </div>
 </div>

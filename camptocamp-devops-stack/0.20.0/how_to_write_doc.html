@@ -41,14 +41,35 @@
     <a class="nav-link" href="index.html">Introduction</a>
   </li>
   <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <span class="nav-text">Tutorials</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="using_the_devops_stack.html">Using the DevOps Stack</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="deploy_devops_stack_in_eks.html">Deploy the DevOps Stack on EKS</a>
+  </li>
+</ul>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
     <span class="nav-text">How-to guides</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="develop.html">Test and/or improve the DevOps stack</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="test_deploy_k3s_docker.html">Test DevOps Stack using k3s on docker</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="test_deploy_k3s_libvirt.html">Test DevOps Stack using k3s on libvirt</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="new_project.html">Create a new Project</a>
@@ -62,30 +83,6 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../../antora-ui-c2c/index.html">Customize UI</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="access_services_in_cluster.html">Access Services in the cluster</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="access_kubernetes_api.html">Access Kubernetes API</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="access_argocd_webui.html">Access ArgoCD web UI</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="access_traefik_dashboard.html">Access Traefik dashboard</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="access_grafana_dashboard.html">Access Grafana dashboard</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="access_prometheus_dashboard.html">Access Prometheus dashboard</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="access_alertmanager_dashboard.html">Access Alertmanager dashboard</a>
   </li>
 </ul>
   </li>
@@ -124,6 +121,57 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="why_antora.html">Why Antora for the documentation?</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">DevOps Stack modules</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">alertmanager</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="alertmanager/howto_access.html">Howto access alertmanager</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">grafana</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="grafana/howto_access.html">Howto access grafana</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">prometheus</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="prometheus/howto_access.html">Howto access prometheus</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">traefik</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="traefik/howto_access.html">Howto access traefik</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">ArgoCD</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="argocd/howto_access.html">Howto Access ArgoCD</a>
+  </li>
+</ul>
   </li>
 </ul>
   </li>
@@ -226,7 +274,7 @@ Use the <a href="https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/">
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code>* Section
-** xref:my_documentation_under_Section.adoc[My documentation's title]</code></pre>
+** xref:module_name:my_documentation_under_Section.adoc[My documentation's title]</code></pre>
 </div>
 </div>
 </div>
@@ -243,6 +291,22 @@ Use the <a href="https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/">
 </div>
 <div class="paragraph">
 <p>For detailled information on the way to customize the UI, please refer to the <a href="../../antora-ui-c2c/index.html" class="page">corresponding documentation here</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_viewing_your_changes_locally"><a class="anchor" href="#_viewing_your_changes_locally"></a>Viewing your changes locally</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can generate the doc using the docker image of antora and put it in a local directory. For example with the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">docker run --rm -it --user 1000:1000 -v $LOCAL_ABSOLUTE_PATH/camptocamp-devops-stack:/tmp/docs docker.io/antora/antora:2.3.4 generate /tmp/docs/antora-playbook.yml  --to-dir /tmp/docs/docs/output</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then to visualize your result you can open your browser to the file <code>$LOCAL_ABSOLUTE_PATH/camptocamp-devops-stack/docs/output/index.html</code> and browse your doc.</p>
 </div>
 </div>
 </div>

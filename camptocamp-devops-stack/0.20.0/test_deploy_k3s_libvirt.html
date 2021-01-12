@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Untitled :: Camptocamp’s DevOps Stack</title>
-    <link rel="canonical" href="https://camptocamp.github.io/camptocamp-devops-stack/camptocamp-devops-stack/0.20.0/release.html">
+    <link rel="canonical" href="https://camptocamp.github.io/camptocamp-devops-stack/camptocamp-devops-stack/0.20.0/test_deploy_k3s_libvirt.html">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../_/css/site.css">
     <link rel="icon" href="../../_/img/c2c_favicon.png" type="image/x-icon">
@@ -66,7 +66,7 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="test_deploy_k3s_docker.html">Test DevOps Stack using k3s on docker</a>
   </li>
-  <li class="nav-item" data-depth="3">
+  <li class="nav-item is-current-page" data-depth="3">
     <a class="nav-link" href="test_deploy_k3s_libvirt.html">Test DevOps Stack using k3s on libvirt</a>
   </li>
 </ul>
@@ -74,7 +74,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="new_project.html">Create a new Project</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="release.html">Release a new version</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -218,39 +218,102 @@
   <ul>
     <li><a href="index.html">Camptocamp’s DevOps stack</a></li>
     <li>How-to guides</li>
-    <li><a href="release.html">Release a new version</a></li>
+    <li><a href="develop.html">Test and/or improve the DevOps stack</a></li>
+    <li><a href="test_deploy_k3s_libvirt.html">Test DevOps Stack using k3s on libvirt</a></li>
   </ul>
 </nav>
 </div>
   <div class="content">
 <article class="doc">
 <div class="sect1">
-<h2 id="_release"><a class="anchor" href="#_release"></a>Release</h2>
+<h2 id="_test_devops_stack_using_k3s_on_libvirt"><a class="anchor" href="#_test_devops_stack_using_k3s_on_libvirt"></a>Test DevOps stack using k3s on libvirt</h2>
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Update <code>docs/modules/ROOT/pages/CHANGELOG.adoc</code></p>
-</li>
-<li>
-<p>Update the version number (e.g. <code>v0.9.0</code>) in the following files (mandatory): <a href="https://github.com/camptocamp/camptocamp-devops-stack/blob/master/docs/antora.yml#L4">docs/antora.yml</a> <a href="https://github.com/camptocamp/camptocamp-devops-stack/blob/master/.gitlab-ci/pipeline.yaml">.gitlab-ci/pipeline.yaml</a></p>
-</li>
-<li>
-<p>Optionally update the version number in the following files: <a href="https://github.com/camptocamp/camptocamp-devops-stack/blob/master/examples/eks-aws/.gitlab-ci.yml">examples/eks-aws/.gitlab-ci.yml</a> <a href="https://github.com/camptocamp/camptocamp-devops-stack/blob/master/modules/eks-aws/main.tf">examples/eks-aws/terraform/main.tf</a> <a href="https://github.com/camptocamp/camptocamp-devops-stack/blob/master/modules/k3os-libvirt/main.tf">examples/k3os-libvirt-demo-app/terraform/main.tf</a> <a href="https://github.com/camptocamp/camptocamp-devops-stack/blob/master/modules/k3s-docker/main.tf">examples/k3s-docker-demo-app/terraform/main.tf</a> <a href="https://github.com/camptocamp/camptocamp-devops-stack/blob/master/docs/modules/ROOT/pages/new_project.adoc">docs/modules/ROOT/pages/new_project.adoc</a></p>
-</li>
-<li>
-<p>Create a pull request with the updated version. Once it has been reviewed and approved, merge it to <code>master</code></p>
-</li>
-<li>
-<p>Tag the merged commit (e.g. <code>v0.9.0</code>)</p>
-</li>
-<li>
-<p>Push the tag</p>
-</li>
-<li>
-<p>Create a new <a href="https://github.com/camptocamp/camptocamp-devops-stack/releases">release</a> via the GitHub release page, naming it the same as the version number - e.g. <code>v0.9.0</code>. Ensure to state what&#8217;s new in the release</p>
-</li>
-</ul>
+<div class="sect2">
+<h3 id="_setting_up_extra_terraform_provider"><a class="anchor" href="#_setting_up_extra_terraform_provider"></a>Setting up extra terraform provider</h3>
+<div class="paragraph">
+<p>Due to an issue in the terraform provider system, you need to download and place the libvirt provider at a very specific spot in your home directory before deploying k3s.
+You can find the libvirt provider version in modules/k3s/libvirt/versions.tf to keep things simple this version will be referred as $LIBVIRT_PROVIDER_VERSION from now on.
+Go to <a href="https://github.com/dmacvicar/terraform-provider-libvirt/releases/tag/v$LIBVIRT_PROVIDER_VERSION" class="bare">https://github.com/dmacvicar/terraform-provider-libvirt/releases/tag/v$LIBVIRT_PROVIDER_VERSION</a> and find the correct link for your OS/CPU_ARCH (an example is "linux_amd64"; now refered as $OS_CPU_ARCH).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">mkdir -p ~/.local/share/terraform/plugins/registry.terraform.io/dmacvicar/libvirt/$LIBVIRT_PROVIDER_VERSION/$OS_CPU_ARCH/
+mv terraform-provider-libvirt ~/.local/share/terraform/plugins/registry.terraform.io/dmacvicar/libvirt/$LIBVIRT_PROVIDER_VERSION/$OS_CPU_ARCH/terraform-provider-libvirt</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_finding_the_flavor"><a class="anchor" href="#_finding_the_flavor"></a>Finding the flavor</h3>
+<div class="paragraph">
+<p>In the <code>tests</code> folder at the root of the repository, you can find all flavors that are ready to use. The name of the folders describe the flavor of the DevOps stack that will be installed. For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ ls tests/
+k3s-docker
+k3s-libvirt</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can see that, here, both flavors are <code>k3s</code> and one installs it using <code>docker</code> while the other uses <code>libvirt</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_deploying_using_makefile"><a class="anchor" href="#_deploying_using_makefile"></a>Deploying using Makefile</h3>
+<div class="paragraph">
+<p>The folder of the flavor you are trying to test contains a Makefile. Typing <code>make</code> in that folder is sufficient to deploy the DevOps stack.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cleaning_up"><a class="anchor" href="#_cleaning_up"></a>Cleaning up</h3>
+<div class="paragraph">
+<p>The Makefile contains a target <code>clean</code> so using <code>make clean</code> will delete everything that was deployed for the test.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_finding_the_urls_of_the_services"><a class="anchor" href="#_finding_the_urls_of_the_services"></a>Finding the URLs of the services</h3>
+<div class="paragraph">
+<p>The Access URLs are found as output of terraform, look in your console for something like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">Outputs:
+
+admin_password = "dEzq88Zx0SY2FSFQ"
+alertmanager_url = "https://alertmanager.apps.10-17-3-127.nip.io"
+app_of_apps_values = &lt;sensitive&gt;
+argocd_auth_token = &lt;sensitive&gt;
+argocd_url = "https://argocd.apps.10-17-3-127.nip.io"
+base_domain = "10-17-3-127.nip.io"
+grafana_url = "https://grafana.apps.10-17-3-127.nip.io"
+kubeconfig = &lt;sensitive&gt;
+prometheus_url = "https://prometheus.apps.10-17-3-127.nip.io"
+repo_url = "https://github.com/.git"
+target_revision = "master"</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_finding_the_kubeconfig"><a class="anchor" href="#_finding_the_kubeconfig"></a>Finding the kubeconfig</h3>
+<div class="paragraph">
+<p>The kubeconfig file is written on disk by terraform the path is <code>terraform/kubeconfig.yaml</code> in the flavor directory.</p>
+</div>
+<div class="paragraph">
+<p>Exporting the <code>KUBECONFIG</code> variable to point to that file will allow you to use the <code>kubectl</code> and other kubernetes tools to manipulate your cluster.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_testing_a_terraform_change"><a class="anchor" href="#_testing_a_terraform_change"></a>Testing a terraform change</h3>
+<div class="paragraph">
+<p>By simply running the Makefile again all changes to the terraform code will be applied.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_making_a_change_to_an_application_deployed_by_argocd"><a class="anchor" href="#_making_a_change_to_an_application_deployed_by_argocd"></a>Making a change to an Application deployed by ArgoCD</h3>
+<div class="paragraph">
+<p>Due to how ArgoCD works, you need to commit and push your change to a fork of the project for it to be visible.
+ArgoCD should be in auto-sync by default, if it is not, you can visit the administration page of ArgoCD which url was given in the terraform ouput and manually sync.</p>
+</div>
 </div>
 </div>
 </div>

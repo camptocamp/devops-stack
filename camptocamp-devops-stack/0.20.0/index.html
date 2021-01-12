@@ -41,14 +41,35 @@
     <a class="nav-link" href="index.html">Introduction</a>
   </li>
   <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <span class="nav-text">Tutorials</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="using_the_devops_stack.html">Using the DevOps Stack</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="deploy_devops_stack_in_eks.html">Deploy the DevOps Stack on EKS</a>
+  </li>
+</ul>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
     <span class="nav-text">How-to guides</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="develop.html">Test and/or improve the DevOps stack</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="test_deploy_k3s_docker.html">Test DevOps Stack using k3s on docker</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="test_deploy_k3s_libvirt.html">Test DevOps Stack using k3s on libvirt</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="new_project.html">Create a new Project</a>
@@ -62,30 +83,6 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../../antora-ui-c2c/index.html">Customize UI</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="access_services_in_cluster.html">Access Services in the cluster</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="access_kubernetes_api.html">Access Kubernetes API</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="access_argocd_webui.html">Access ArgoCD web UI</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="access_traefik_dashboard.html">Access Traefik dashboard</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="access_grafana_dashboard.html">Access Grafana dashboard</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="access_prometheus_dashboard.html">Access Prometheus dashboard</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="access_alertmanager_dashboard.html">Access Alertmanager dashboard</a>
   </li>
 </ul>
   </li>
@@ -124,6 +121,57 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="why_antora.html">Why Antora for the documentation?</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">DevOps Stack modules</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">alertmanager</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="alertmanager/howto_access.html">Howto access alertmanager</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">grafana</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="grafana/howto_access.html">Howto access grafana</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">prometheus</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="prometheus/howto_access.html">Howto access prometheus</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">traefik</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="traefik/howto_access.html">Howto access traefik</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">ArgoCD</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="argocd/howto_access.html">Howto Access ArgoCD</a>
+  </li>
+</ul>
   </li>
 </ul>
   </li>
@@ -176,6 +224,8 @@
   <div class="content">
 <article class="doc">
 <h1 class="page">Camptocamp&#8217;s DevOps stack</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="imageblock">
 <div class="content">
 <a class="image" href="https://github.com/camptocamp/camptocamp-devops-stack.git"><img src="_images/github.svg" alt="github" width="150" height="250"></a>
@@ -187,6 +237,38 @@
 <div class="imageblock">
 <div class="content">
 <img src="_images/devops-stack-architecture.svg" alt="Architecture of the Camptocamp DevOps Stack">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_documentation_structure"><a class="anchor" href="#_documentation_structure"></a>Documentation Structure</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We follow the <a href="https://documentation.divio.com/structure/">Divio documentation structure</a> to organize the documentation of this project, which is written in <a href="https://asciidoc.org/">Asciidoc</a> and built using <a href="https://antora.org/">Antora</a></p>
+</div>
+<div class="paragraph">
+<p>In short, we break up the global documentation of the project in 4 parts, each of which being useful at a different time in the understanding or usage of the project:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>tutorials</strong> focusing on the learning</p>
+</li>
+<li>
+<p><strong>how-to guides</strong> focusing on solving specific problems</p>
+</li>
+<li>
+<p><strong>reference guides</strong> focusing on giving information</p>
+</li>
+<li>
+<p><strong>explanation</strong> focusing on offering a better understanding</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Additionnaly each component of the DevOps stack as a sub-documentation in the <strong>DevOps Stack Module</strong> section to better separate their specific documentation (in terms of maintenance and readability).</p>
+</div>
 </div>
 </div>
 </article>
