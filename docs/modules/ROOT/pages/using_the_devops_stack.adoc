@@ -1,0 +1,3 @@
+== Using the DevOps Stack
+
+TODO example of the lifecycle of the devops stack, instanciation, extension, etc

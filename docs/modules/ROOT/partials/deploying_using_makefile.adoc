@@ -1,0 +1,20 @@
+=== Finding the flavor
+
+In the `tests` folder at the root of the repository, you can find all flavors that are ready to use. The name of the folders describe the flavor of the DevOps stack that will be installed. For example:
+
+[source,shell]
+--------------
+$ ls tests/
+k3s-docker
+k3s-libvirt
+--------------
+
+You can see that, here, both flavors are `k3s` and one installs it using `docker` while the other uses `libvirt`.
+
+=== Deploying using Makefile
+
+The folder of the flavor you are trying to test contains a Makefile. Typing `make` in that folder is sufficient to deploy the DevOps stack.
+
+=== Cleaning up
+
+The Makefile contains a target `clean` so using `make clean` will delete everything that was deployed for the test.

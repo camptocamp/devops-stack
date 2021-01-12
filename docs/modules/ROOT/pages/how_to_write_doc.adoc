@@ -1,6 +1,6 @@
 = How to participate to this documentation
 
-The documentation of this project is located into the `docs/` folder and has to follow the xref:ref_documentation.adoc#_structure[Divio documentation structure].
+The documentation of this project is located into the `docs/` folder and has to follow the xref:ROOT:ref_documentation.adoc#_structure[Divio documentation structure].
 
 == Create a new Documentation page
 
@@ -28,7 +28,7 @@ To include your page in the resulting website, edit the `docs/modules/ROOT/nav.a
 [source]
 ----
 * Section
-** xref:my_documentation_under_Section.adoc[My documentation's title]
+** xref:module_name:my_documentation_under_Section.adoc[My documentation's title]
 ----
 
 == Customize the appearance
@@ -38,3 +38,14 @@ The UI of the documentation is built in an external project named https://github
 First make sure to follow the https://github.com/camptocamp/antora-ui/blob/master/README.adoc#development-quickstart[development quickstart], then https://github.com/camptocamp/antora-ui/blob/master/README.adoc#clone-and-initialize-the-ui-project[clone and initialize the UI Project].
 
 For detailled information on the way to customize the UI, please refer to the xref:antora-ui-c2c:ROOT:index.adoc[corresponding documentation here].
+
+== Viewing your changes locally
+
+You can generate the doc using the docker image of antora and put it in a local directory. For example with the following:
+
+[source,shell]
+--------------
+docker run --rm -it --user 1000:1000 -v $LOCAL_ABSOLUTE_PATH/camptocamp-devops-stack:/tmp/docs docker.io/antora/antora:2.3.4 generate /tmp/docs/antora-playbook.yml  --to-dir /tmp/docs/docs/output
+--------------
+
+Then to visualize your result you can open your browser to the file `$LOCAL_ABSOLUTE_PATH/camptocamp-devops-stack/docs/output/index.html` and browse your doc.

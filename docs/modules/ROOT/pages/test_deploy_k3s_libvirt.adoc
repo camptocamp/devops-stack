@@ -1,0 +1,17 @@
+== Test DevOps stack using k3s on libvirt
+
+=== Setting up extra terraform provider
+
+Due to an issue in the terraform provider system, you need to download and place the libvirt provider at a very specific spot in your home directory before deploying k3s.
+You can find the libvirt provider version in modules/k3s/libvirt/versions.tf to keep things simple this version will be referred as $LIBVIRT_PROVIDER_VERSION from now on.
+Go to https://github.com/dmacvicar/terraform-provider-libvirt/releases/tag/v$LIBVIRT_PROVIDER_VERSION and find the correct link for your OS/CPU_ARCH (an example is "linux_amd64"; now refered as $OS_CPU_ARCH).
+
+[source,shell]
+mkdir -p ~/.local/share/terraform/plugins/registry.terraform.io/dmacvicar/libvirt/$LIBVIRT_PROVIDER_VERSION/$OS_CPU_ARCH/
+mv terraform-provider-libvirt ~/.local/share/terraform/plugins/registry.terraform.io/dmacvicar/libvirt/$LIBVIRT_PROVIDER_VERSION/$OS_CPU_ARCH/terraform-provider-libvirt
+
+include::ROOT:partial$deploying_using_makefile.adoc[]
+
+include::ROOT:partial$accessing_services_deployed_by_makefile.adoc[]
+
+include::ROOT:partial$change_testing_using_makefile.adoc[]

@@ -1,0 +1,7 @@
+== Test DevOps stack using k3s on docker
+
+include::ROOT:partial$deploying_using_makefile.adoc[]
+
+include::ROOT:partial$accessing_services_deployed_by_makefile.adoc[]
+
+include::ROOT:partial$change_testing_using_makefile.adoc[]
