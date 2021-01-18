@@ -3,7 +3,7 @@ CLUSTER_NAME := default
 REMOTE := $(shell git status -sb|sed -Ene's@.. ([^\.]*)\.\.\.([^/]*)/(.*)@\2@p')
 TARGET_REVISION := $(shell git status -sb|sed -Ene's@.. ([^\.]*)\.\.\.([^/]*)/(.*)@\3@p'|cut -f1 -d' ')
 REMOTE_URL := $(shell git remote get-url $(REMOTE))
-ifeq ($(findstring "https",$(REMOTE_URL)),)
+ifeq ($(findstring https,$(REMOTE_URL)),)
 REPO_URL = "https://github.com/$(shell echo $(REMOTE_URL) | sed -Ene's|git@github.com:([^/]*)/(.*).git|\1/\2|p').git"
 else
 REPO_URL = $(REMOTE_URL)
