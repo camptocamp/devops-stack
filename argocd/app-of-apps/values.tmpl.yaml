@@ -82,6 +82,7 @@ argo-cd:
         cert-manager.io/cluster-issuer: ${cluster_issuer}
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
+        ingress.kubernetes.io/ssl-redirect: "true"
       hosts:
         - ${argocd.domain}
         - argocd.apps.${base_domain}
@@ -110,6 +111,7 @@ keycloak:
       cert-manager.io/cluster-issuer: ${cluster_issuer}
       traefik.ingress.kubernetes.io/router.entrypoints: websecure
       traefik.ingress.kubernetes.io/router.tls: "true"
+      ingress.kubernetes.io/ssl-redirect: "true"
     hosts:
       - host: ${keycloak.domain}
         paths:
@@ -170,6 +172,7 @@ kube-prometheus-stack:
         cert-manager.io/cluster-issuer: ${cluster_issuer}
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
+        ingress.kubernetes.io/ssl-redirect: "true"
       hosts:
         - ${alertmanager.domain}
         - alertmanager.apps.${base_domain}
@@ -219,6 +222,7 @@ kube-prometheus-stack:
         cert-manager.io/cluster-issuer: ${cluster_issuer}
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
+        ingress.kubernetes.io/ssl-redirect: "true"
       hosts:
         - ${grafana.domain}
         - grafana.apps.${base_domain}
@@ -235,6 +239,7 @@ kube-prometheus-stack:
         cert-manager.io/cluster-issuer: ${cluster_issuer}
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
+        ingress.kubernetes.io/ssl-redirect: "true"
       hosts:
         - ${prometheus.domain}
         - prometheus.apps.${base_domain}
@@ -287,6 +292,7 @@ minio:
       cert-manager.io/cluster-issuer: ${cluster_issuer}
       traefik.ingress.kubernetes.io/router.entrypoints: websecure
       traefik.ingress.kubernetes.io/router.tls: "true"
+      ingress.kubernetes.io/ssl-redirect: "true"
     hosts:
       - ${minio.domain}
       - minio.apps.${base_domain}
