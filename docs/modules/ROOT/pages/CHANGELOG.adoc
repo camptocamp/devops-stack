@@ -1,5 +1,43 @@
 = Changelog
 
+== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.21.0[0.21.0] (2021-01-27)
+
+https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.20.0...v0.21.0[Full Changelog]
+
+*Breaking Changes:*
+
+* Rename k3os/libvirt to k3s/libvirt https://github.com/camptocamp/camptocamp-devops-stack/pull/404[#404] (https://github.com/mcanevet[mcanevet])
+* Factorize Terraform code per distrib variant https://github.com/camptocamp/camptocamp-devops-stack/pull/405[#405] (https://github.com/mcanevet[mcanevet])
+
+*Implemented enhancements:*
+
+* Factorize more code https://github.com/camptocamp/camptocamp-devops-stack/pull/406[#406] (https://github.com/mcanevet[mcanevet])
+* Adding redirect to ssl target https://github.com/camptocamp/camptocamp-devops-stack/pull/415[#415] (https://github.com/pburgisser[pburgisser])
+* Expose kubernetes version for AKS https://github.com/camptocamp/camptocamp-devops-stack/pull/422[#422] (https://github.com/mcanevet[mcanevet])
+* Expose cluster version for EKS https://github.com/camptocamp/camptocamp-devops-stack/pull/423[#423] (https://github.com/mcanevet[mcanevet])
+
+*Upgraded components:*
+
+* Upgrade camptocamp/k3s/docker module to 0.7.1 https://github.com/camptocamp/camptocamp-devops-stack/pull/416[#416] (https://github.com/mcanevet[mcanevet])
+* Upgrade docker provider to 2.11.0 https://github.com/camptocamp/camptocamp-devops-stack/pull/417[#417] (https://github.com/mcanevet[mcanevet])
+* Rollback ArgoCD to 1.7.11 https://github.com/camptocamp/camptocamp-devops-stack/pull/418[#418] (https://github.com/mcanevet[mcanevet])
+* Upgrade Loki to 2.1.0 https://github.com/camptocamp/camptocamp-devops-stack/pull/419[#419] (https://github.com/mcanevet[mcanevet])
+* Upgrade k3s to v1.18.15-k3s1 https://github.com/camptocamp/camptocamp-devops-stack/pull/420[#420] (https://github.com/mcanevet[mcanevet])
+* Upgrade helm provider to 2.0.2 https://github.com/camptocamp/camptocamp-devops-stack/pull/421[#421] (https://github.com/mcanevet[mcanevet])
+* Set default version for AKS to 1.18.14 https://github.com/camptocamp/camptocamp-devops-stack/pull/424[#424] (https://github.com/mcanevet[mcanevet])
+
+*Fixed bugs:*
+
+* Change git repo URL to ssh https://github.com/camptocamp/camptocamp-devops-stack/pull/408[#408] (https://github.com/saimonn[saimonn])
+* K3s-libvirt : Extending default memory to 8Gb for better stability https://github.com/camptocamp/camptocamp-devops-stack/pull/410[#410] (https://github.com/pburgisser[pburgisser])
+* k3s-libvirt : Show repo when cloning with https https://github.com/camptocamp/camptocamp-devops-stack/pull/412[#412] (https://github.com/chornberger-c2c[chornberger-c2c])
+* k3s-docker : Show repo when cloning with https https://github.com/camptocamp/camptocamp-devops-stack/pull/413[#413] (https://github.com/chornberger-c2c[chornberger-c2c])
+
+*Documentation:*
+
+* Describe access to kube api for eks https://github.com/camptocamp/camptocamp-devops-stack/pull/409[#409] (https://github.com/cryptobioz[cryptobioz])
+* Refactor documentation and add information about how to test the DevOps Stack https://github.com/camptocamp/camptocamp-devops-stack/pull/411[#411] (https://github.com/dabelenda[dabelenda])
+
 == https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.20.0[0.20.0] (2020-12-22)
 
 https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.19.0...v0.20.0[Full Changelog]
