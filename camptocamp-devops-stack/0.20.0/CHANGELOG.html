@@ -225,6 +225,106 @@
 <article class="doc">
 <h1 class="page">Changelog</h1>
 <div class="sect1">
+<h2 id="_0_21_0_2021_01_27"><a class="anchor" href="#_0_21_0_2021_01_27"></a><a href="https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.21.0">0.21.0</a> (2021-01-27)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.20.0&#8230;&#8203;v0.21.0">Full Changelog</a></p>
+</div>
+<div class="paragraph">
+<p><strong>Breaking Changes:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Rename k3os/libvirt to k3s/libvirt <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/404">#404</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Factorize Terraform code per distrib variant <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/405">#405</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Implemented enhancements:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Factorize more code <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/406">#406</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Adding redirect to ssl target <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/415">#415</a> (<a href="https://github.com/pburgisser">pburgisser</a>)</p>
+</li>
+<li>
+<p>Expose kubernetes version for AKS <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/422">#422</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Expose cluster version for EKS <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/423">#423</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Upgraded components:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Upgrade camptocamp/k3s/docker module to 0.7.1 <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/416">#416</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Upgrade docker provider to 2.11.0 <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/417">#417</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Rollback ArgoCD to 1.7.11 <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/418">#418</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Upgrade Loki to 2.1.0 <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/419">#419</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Upgrade k3s to v1.18.15-k3s1 <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/420">#420</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Upgrade helm provider to 2.0.2 <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/421">#421</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Set default version for AKS to 1.18.14 <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/424">#424</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Fixed bugs:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Change git repo URL to ssh <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/408">#408</a> (<a href="https://github.com/saimonn">saimonn</a>)</p>
+</li>
+<li>
+<p>K3s-libvirt : Extending default memory to 8Gb for better stability <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/410">#410</a> (<a href="https://github.com/pburgisser">pburgisser</a>)</p>
+</li>
+<li>
+<p>k3s-libvirt : Show repo when cloning with https <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/412">#412</a> (<a href="https://github.com/chornberger-c2c">chornberger-c2c</a>)</p>
+</li>
+<li>
+<p>k3s-docker : Show repo when cloning with https <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/413">#413</a> (<a href="https://github.com/chornberger-c2c">chornberger-c2c</a>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Documentation:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Describe access to kube api for eks <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/409">#409</a> (<a href="https://github.com/cryptobioz">cryptobioz</a>)</p>
+</li>
+<li>
+<p>Refactor documentation and add information about how to test the DevOps Stack <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/411">#411</a> (<a href="https://github.com/dabelenda">dabelenda</a>)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_0_20_0_2020_12_22"><a class="anchor" href="#_0_20_0_2020_12_22"></a><a href="https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.20.0">0.20.0</a> (2020-12-22)</h2>
 <div class="sectionbody">
 <div class="paragraph">
