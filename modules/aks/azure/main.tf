@@ -49,8 +49,8 @@ module "cluster" {
   source  = "Azure/aks/azurerm"
   version = "4.5.0"
 
-  kubernetes_version   = "1.18.10"
-  orchestrator_version = "1.18.10"
+  kubernetes_version   = var.kubernetes_version
+  orchestrator_version = var.kubernetes_version
 
   resource_group_name = data.azurerm_resource_group.this.name
   prefix              = var.cluster_name
