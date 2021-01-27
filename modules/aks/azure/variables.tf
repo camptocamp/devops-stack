@@ -3,6 +3,12 @@ variable "base_domain" {
   type        = string
 }
 
+variable "kubernetes_version" {
+  description = "Specify which Kubernetes release to use."
+  type        = string
+  default     = "1.18.10"
+}
+
 variable "resource_group_name" {
   description = "The Resource Group where the Managed Kubernetes Cluster should exist."
   type        = string
