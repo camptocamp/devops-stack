@@ -1,3 +1,9 @@
+variable "cluster_version" {
+  description = "Kubernetes version to use for the EKS cluster."
+  type        = string
+  default     = "1.18"
+}
+
 variable "base_domain" {
   description = "The base domain used for Ingresses."
   type        = string
