@@ -1,5 +1,13 @@
 = Changelog
 
+== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.21.1[0.21.1] (2021-01-27)
+
+https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.21.0...v0.21.1[Full Changelog]
+
+*Fixed bugs:*
+
+* AKS : Add missing providers pining https://github.com/camptocamp/camptocamp-devops-stack/pull/425[#425] (https://github.com/mcanevet[mcanevet])
+
 == https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.21.0[0.21.0] (2021-01-27)
 
 https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.20.0...v0.21.0[Full Changelog]

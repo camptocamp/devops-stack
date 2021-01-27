@@ -1,6 +1,6 @@
 locals {
   repo_url        = "https://github.com/camptocamp/camptocamp-devops-stack.git"
-  target_revision = "v0.21.0"
+  target_revision = "v0.21.1"
 
   base_domain                       = module.cluster.base_domain
   kubernetes_host                   = module.cluster.kubernetes_host
@@ -10,7 +10,7 @@ locals {
 }
 
 module "cluster" {
-  source = "git::https://github.com/camptocamp/camptocamp-devops-stack.git//modules/k3s/libvirt?ref=v0.21.0"
+  source = "git::https://github.com/camptocamp/camptocamp-devops-stack.git//modules/k3s/libvirt?ref=v0.21.1"
 
   cluster_name = terraform.workspace
   node_count   = 1
