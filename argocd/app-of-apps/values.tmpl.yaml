@@ -249,6 +249,12 @@ kube-prometheus-stack:
             - ${prometheus.domain}
             - prometheus.apps.${base_domain}
     prometheusSpec:
+%{ if can(metrics_archives.bucket_config) }
+      thanos:
+        objectStorageConfig:
+          key: thanos.yaml
+          name: thanos-objectstorage
+%{ endif }
       portName: proxy
       containers:
         - args:
@@ -277,7 +283,9 @@ kube-prometheus-stack:
         - name: web
           port: 9090
           targetPort: 9090
-
+%{ if can(metrics_archives.bucket_config) }
+  ${ indent(4,yamlencode({"thanosObjectStorageConfig": metrics_archives.bucket_config})) }
+%{ endif }
 loki-stack: {}
 
 metrics-server: {}
@@ -303,6 +311,9 @@ minio:
           - minio.apps.${base_domain}
   buckets:
     - name: ${loki.bucket_name}
+      policy: none
+      purge: false
+    - name: ${metrics_archives.bucket_name}
       policy: none
       purge: false
 %{ endif }

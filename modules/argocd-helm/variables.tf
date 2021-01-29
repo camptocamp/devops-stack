@@ -10,7 +10,7 @@ variable "target_revision" {
 
 variable "extra_apps" {
   description = "Extra applications to deploy."
-  type        = list
+  type        = list(any)
   default     = []
 }
 
@@ -94,3 +94,10 @@ variable "app_of_apps_values_overrides" {
   type        = list(string)
   default     = []
 }
+
+variable "metrics_archives" {
+  description = "Metrics archives settings"
+  type        = any
+  default     = {}
+}
+

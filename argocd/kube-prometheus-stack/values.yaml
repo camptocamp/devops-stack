@@ -1,5 +1,7 @@
 ---
 kube-prometheus-stack:
+  thanosObjectStorageConfig:
+
   kubeControllerManager:
     enabled: false
 

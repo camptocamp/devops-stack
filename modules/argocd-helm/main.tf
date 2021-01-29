@@ -83,6 +83,7 @@ resource "helm_release" "app_of_apps" {
         grafana                         = local.grafana
         prometheus                      = local.prometheus
         alertmanager                    = local.alertmanager
+        metrics_archives                = local.metrics_archives
       }
     )],
     var.app_of_apps_values_overrides,

@@ -90,4 +90,11 @@ locals {
     local.minio_defaults,
     var.minio,
   )
+  metrics_archives_defaults = {
+    bucket_name = "thanos"
+  }
+  metrics_archives = merge(
+    local.metrics_archives_defaults,
+    var.metrics_archives,
+  )
 }
