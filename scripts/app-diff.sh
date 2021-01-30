@@ -20,7 +20,7 @@ APP_OF_APPS_VALUES_1=$(python3 -c "import sys, json; print(json.load(sys.stdin)[
 APP_OF_APPS_VALUES_2=$(python3 -c "import sys, json; print(json.load(sys.stdin)['app_of_apps_values']['value'][2])" < terraform/outputs.json)
 
 export KUBECTL_EXTERNAL_DIFF="diff -u"
-export ARGOCD_OPTS="--plaintext --port-forward --port-forward-namespace argocd"
+export ARGOCD_OPTS="--port-forward --port-forward-namespace argocd"
 
 cd /tmp || exit
 

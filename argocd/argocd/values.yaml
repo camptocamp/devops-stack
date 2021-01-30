@@ -43,8 +43,6 @@ argo-cd:
     metrics:
       serviceMonitor:
         enabled: true
-    extraArgs:
-      - --insecure
     config:
       accounts.pipeline: apiKey
       resource.customizations: |
