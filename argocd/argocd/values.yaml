@@ -1,9 +1,6 @@
 ---
 argo-cd:
   installCRDs: false
-  global:
-    image:
-      tag: v1.7.11
   configs:
     secret:
       argocdServerAdminPassword: "$2a$10$wzUzrdx.jMb7lHIbW6VutuRpV4OnpPA3ItWBDiP04QVHfGqzAoj6i"  # argocd
@@ -29,7 +26,7 @@ argo-cd:
                 resolved for this cloud to continue to maintain state.
           - alert: ArgoAppNotSynced
             expr: |
-              argocd_app_sync_status{sync_status!="Synced"} == 1
+              argocd_app_info{sync_status!="Synced"} == 1
             for: 12h
             labels:
               severity: warning
