@@ -6,6 +6,10 @@ locals {
   kubernetes_password               = local.context.users.0.user.password
   kubernetes_cluster_ca_certificate = base64decode(local.context.clusters.0.cluster.certificate-authority-data)
   kubeconfig                        = module.cluster.kubeconfig
+  minio = {
+    access_key = var.enable_minio ? random_password.minio_accesskey.0.result : ""
+    secret_key = var.enable_minio ? random_password.minio_secretkey.0.result : ""
+  }
 }
 
 provider "helm" {
@@ -48,8 +52,8 @@ module "argocd" {
   }
   minio = {
     enable     = var.enable_minio
-    access_key = var.enable_minio ? random_password.minio_accesskey.0.result : ""
-    secret_key = var.enable_minio ? random_password.minio_secretkey.0.result : ""
+    access_key = local.minio.access_key
+    secret_key = local.minio.secret_key
   }
   keycloak = {
     enable         = true
@@ -58,16 +62,27 @@ module "argocd" {
   loki = {
     bucket_name = "loki"
   }
+  metrics_archives = {
+    bucket_name = "thanos",
+    bucket_config = {
+      "type" = "S3",
+      "config" = {
+        "bucket"     = "thanos",
+        "endpoint"   = "minio.minio.svc:9000",
+        "insecure"   = true,
+        "access_key" = local.minio.access_key,
+        "secret_key" = local.minio.secret_key
+      }
+    }
+  }
   olm = {
     enable = true
   }
-
   grafana = {
     generic_oauth_extra_args = {
       tls_skip_verify_insecure = true
     }
   }
-
   app_of_apps_values_overrides = [
     templatefile("${path.module}/../values.tmpl.yaml",
       {
@@ -77,7 +92,6 @@ module "argocd" {
     ),
     var.app_of_apps_values_overrides,
   ]
-
   depends_on = [
     module.cluster,
   ]
