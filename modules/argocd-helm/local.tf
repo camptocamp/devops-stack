@@ -72,14 +72,6 @@ locals {
     var.keycloak,
   )
 
-  olm_defaults = {
-    enable = false
-  }
-  olm = merge(
-    local.olm_defaults,
-    var.olm,
-  )
-
   minio_defaults = {
     enable     = false
     access_key = ""

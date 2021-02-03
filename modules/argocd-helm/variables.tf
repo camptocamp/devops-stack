@@ -77,12 +77,6 @@ variable "keycloak" {
   default     = {}
 }
 
-variable "olm" {
-  description = "OLM settings"
-  type        = any
-  default     = {}
-}
-
 variable "minio" {
   description = "Minio settings"
   type        = any
