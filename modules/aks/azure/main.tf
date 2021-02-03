@@ -94,13 +94,15 @@ module "argocd" {
   app_of_apps_values_overrides = [
     templatefile("${path.module}/values.tmpl.yaml",
       {
-        client_secret            = azuread_application_password.oauth2_apps.value
-        subscription_id          = split("/", data.azurerm_subscription.primary.id)[2]
-        resource_group_name      = var.resource_group_name
-        base_domain              = var.base_domain
-        cert_manager_resource_id = azurerm_user_assigned_identity.cert_manager.id
-        cert_manager_client_id   = azurerm_user_assigned_identity.cert_manager.client_id
-        azure_dns_label_name     = local.azure_dns_label_name
+        client_secret                                = azuread_application_password.oauth2_apps.value
+        subscription_id                              = split("/", data.azurerm_subscription.primary.id)[2]
+        resource_group_name                          = var.resource_group_name
+        base_domain                                  = var.base_domain
+        cert_manager_resource_id                     = azurerm_user_assigned_identity.cert_manager.id
+        cert_manager_client_id                       = azurerm_user_assigned_identity.cert_manager.client_id
+        azure_dns_label_name                         = local.azure_dns_label_name
+        kube_prometheus_stack_prometheus_resource_id = azurerm_user_assigned_identity.kube_prometheus_stack_prometheus.id
+        kube_prometheus_stack_prometheus_client_id   = azurerm_user_assigned_identity.kube_prometheus_stack_prometheus.client_id
       }
     ),
     var.app_of_apps_values_overrides,
@@ -124,6 +126,12 @@ resource "azurerm_role_assignment" "virtual_machine_contributor" {
   scope                = format("%s/resourcegroups/%s", data.azurerm_subscription.primary.id, module.cluster.node_resource_group)
   role_definition_name = "Virtual Machine Contributor"
   principal_id         = lookup(module.cluster.kubelet_identity[0], "object_id")
+}
+
+resource "azurerm_user_assigned_identity" "kube_prometheus_stack_prometheus" {
+  resource_group_name = module.cluster.node_resource_group
+  location            = data.azurerm_resource_group.this.location
+  name                = "kube-prometheus-stack-prometheus"
 }
 
 resource "azurerm_user_assigned_identity" "cert_manager" {
