@@ -1,3 +1,5 @@
 ---
 # keycloak:
 #   baseDomain: ...
+image:
+  version: 12.0.2

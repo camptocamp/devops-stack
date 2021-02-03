@@ -41,6 +41,10 @@ output "alertmanager_url" {
   value = format("https://alertmanager.apps.%s", module.cluster.base_domain)
 }
 
+output "keycloak_url" {
+  value = format("https://keycloak.apps.%s/auth/realms/kubernetes/account", module.cluster.base_domain)
+}
+
 output "admin_password" {
   value = module.cluster.admin_password
 }
