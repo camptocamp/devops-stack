@@ -1,6 +1,6 @@
 :project-name: camptocamp-devops-stack
 :url-repo: https://github.com/camptocamp/{project-name}.git
-:version: 0.21.1
+:version: 0.22.0
 
 == Create a new project
 

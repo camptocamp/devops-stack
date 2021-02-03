@@ -1,5 +1,24 @@
 = Changelog
 
+== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.22.0[0.22.0] (2021-02-03)
+
+https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.21.1...v0.22.0[Full Changelog]
+
+*Implemented enhancements:*
+
+* Integration of thanos together with minio S3 buckets https://github.com/camptocamp/camptocamp-devops-stack/pull/430[#430] (https://github.com/pburgisser[pburgisser])
+* Add aadpodidentity to Prometheus https://github.com/camptocamp/camptocamp-devops-stack/pull/432[#432] (https://github.com/mcanevet[mcanevet])
+* Allow to create SecretProviderClass for Prometheus https://github.com/camptocamp/camptocamp-devops-stack/pull/433[#433] (https://github.com/mcanevet[mcanevet])
+
+*Upgraded components:*
+
+* Upgrade ArgoCD helm chart https://github.com/camptocamp/camptocamp-devops-stack/pull/429[#429] (https://github.com/mcanevet[mcanevet])
+
+*Fixed Bugs*
+
+* [k3s-docker] don't use insecure connection in helm provider https://github.com/camptocamp/camptocamp-devops-stack/pull/426[#426] (https://github.com/mcanevet[mcanevet])
+* Fix wait for app of apps script https://github.com/camptocamp/camptocamp-devops-stack/pull/428[#428] (https://github.com/mcanevet[mcanevet])
+
 == https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.21.1[0.21.1] (2021-01-27)
 
 https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.21.0...v0.21.1[Full Changelog]
