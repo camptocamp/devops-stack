@@ -1,5 +1,14 @@
 = Changelog
 
+== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.23.0[0.23.0] (2021-02-03)
+
+https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.22.0...v0.23.0[Full Changelog]
+
+*Implemented enhancements:*
+
+* Moving away from olm https://github.com/camptocamp/camptocamp-devops-stack/pull/431[#431] (https://github.com/pburgisser[pburgisser])
+* Add output for prometheus identity https://github.com/camptocamp/camptocamp-devops-stack/pull/435[#435] (https://github.com/mcanevet[mcanevet])
+
 == https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.22.0[0.22.0] (2021-02-03)
 
 https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.21.1...v0.22.0[Full Changelog]
