@@ -77,7 +77,6 @@ resource "helm_release" "app_of_apps" {
         minio                           = local.minio
         loki                            = local.loki
         efs_provisioner                 = local.efs_provisioner
-        olm                             = local.olm
         argocd                          = local.argocd
         keycloak                        = local.keycloak
         grafana                         = local.grafana

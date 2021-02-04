@@ -35,8 +35,6 @@ apps:
     enabled: ${minio.enable}
   namespaces:
     enabled: true
-  olm:
-    enabled: ${olm.enable}
   secrets-store-csi-driver:
     enabled: false
   traefik:

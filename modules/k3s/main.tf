@@ -75,9 +75,6 @@ module "argocd" {
       }
     }
   }
-  olm = {
-    enable = true
-  }
   grafana = {
     generic_oauth_extra_args = {
       tls_skip_verify_insecure = true
