@@ -25,5 +25,8 @@ module "cluster" {
     "us.gcr.io" = [
       "REGISTRY_PROXY_REMOTEURL=https://us.gcr.io",
     ],
+    "registry.access.redhat.com" = [
+      "REGISTRY_PROXY_REMOTEURL=https://registry.access.redhat.com",
+    ]
   }
 }
