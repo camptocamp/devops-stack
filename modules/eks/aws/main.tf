@@ -67,7 +67,6 @@ provider "kubernetes" {
   host                   = local.kubernetes_host
   cluster_ca_certificate = local.kubernetes_cluster_ca_certificate
   token                  = local.kubernetes_token
-  load_config_file       = false
 }
 
 locals {

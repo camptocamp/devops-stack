@@ -26,7 +26,6 @@ provider "kubernetes" {
   username               = local.kubernetes_username
   password               = local.kubernetes_password
   cluster_ca_certificate = local.kubernetes_cluster_ca_certificate
-  load_config_file       = false
 }
 
 module "argocd" {
