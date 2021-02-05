@@ -22,6 +22,9 @@ module "cluster" {
     "gcr.io" = [
       "REGISTRY_PROXY_REMOTEURL=https://gcr.io",
     ],
+    "k8s.gcr.io" = [
+      "REGISTRY_PROXY_REMOTEURL=https://k8s.gcr.io",
+    ],
     "us.gcr.io" = [
       "REGISTRY_PROXY_REMOTEURL=https://us.gcr.io",
     ],
