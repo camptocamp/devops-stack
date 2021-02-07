@@ -1,6 +1,9 @@
 ---
 argo-cd:
   installCRDs: false
+  global:
+    image:
+      tag: v1.7.12
   configs:
     secret:
       argocdServerAdminPassword: "$2a$10$wzUzrdx.jMb7lHIbW6VutuRpV4OnpPA3ItWBDiP04QVHfGqzAoj6i"  # argocd
