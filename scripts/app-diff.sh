@@ -2,22 +2,24 @@
 
 set -e
 
+TF_ROOT="${TF_ROOT:-terraform}"
+
 KUBECONFIG=$(mktemp /tmp/kubeconfig.XXXXXX)
 export KUBECONFIG
 
-python3 -c "import sys, json; print(json.load(sys.stdin)['kubeconfig']['value'])" < terraform/outputs.json > "$KUBECONFIG"
+python3 -c "import sys, json; print(json.load(sys.stdin)['kubeconfig']['value'])" < "$TF_ROOT/outputs.json" > "$KUBECONFIG"
 chmod 0600 "$KUBECONFIG"
 
-ARGOCD_AUTH_TOKEN=$(python3 -c "import sys, json; print(json.load(sys.stdin)['argocd_auth_token']['value'])" < terraform/outputs.json)
+ARGOCD_AUTH_TOKEN=$(python3 -c "import sys, json; print(json.load(sys.stdin)['argocd_auth_token']['value'])" < "$TF_ROOT/outputs.json")
 export ARGOCD_AUTH_TOKEN
 
-REPO_URL=$(python3 -c "import sys, json; print(json.load(sys.stdin)['repo_url']['value'])" < terraform/outputs.json)
-TARGET_REVISION=$(python3 -c "import sys, json; print(json.load(sys.stdin)['target_revision']['value'])" < terraform/outputs.json)
+REPO_URL=$(python3 -c "import sys, json; print(json.load(sys.stdin)['repo_url']['value'])" < "$TF_ROOT/outputs.json")
+TARGET_REVISION=$(python3 -c "import sys, json; print(json.load(sys.stdin)['target_revision']['value'])" < "$TF_ROOT/outputs.json")
 
 # FIXME: find a more robust way to do this
-APP_OF_APPS_VALUES_0=$(python3 -c "import sys, json; print(json.load(sys.stdin)['app_of_apps_values']['value'][0])" < terraform/outputs.json)
-APP_OF_APPS_VALUES_1=$(python3 -c "import sys, json; print(json.load(sys.stdin)['app_of_apps_values']['value'][1])" < terraform/outputs.json)
-APP_OF_APPS_VALUES_2=$(python3 -c "import sys, json; print(json.load(sys.stdin)['app_of_apps_values']['value'][2])" < terraform/outputs.json)
+APP_OF_APPS_VALUES_0=$(python3 -c "import sys, json; print(json.load(sys.stdin)['app_of_apps_values']['value'][0])" < "$TF_ROOT/outputs.json")
+APP_OF_APPS_VALUES_1=$(python3 -c "import sys, json; print(json.load(sys.stdin)['app_of_apps_values']['value'][1])" < "$TF_ROOT/outputs.json")
+APP_OF_APPS_VALUES_2=$(python3 -c "import sys, json; print(json.load(sys.stdin)['app_of_apps_values']['value'][2])" < "$TF_ROOT/outputs.json")
 
 export KUBECTL_EXTERNAL_DIFF="diff -u"
 export ARGOCD_OPTS="--plaintext --port-forward --port-forward-namespace argocd"
