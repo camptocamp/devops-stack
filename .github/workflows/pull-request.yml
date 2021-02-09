@@ -11,6 +11,8 @@ jobs:
       matrix:
         flavor:
           - k3s-docker
+    env:
+      TF_ROOT: tests/${{ matrix.flavor }}/terraform
     steps:
       - uses: actions/checkout@v2
       - name: Terraform format check
@@ -21,23 +23,23 @@ jobs:
         uses: docker://hashicorp/terraform:0.13.6
         with:
           entrypoint: ./.github/scripts/gh-deploy-cluster.sh
-          args: ${{ matrix.flavor }} ${{ github.actor }} ${{ github.head_ref }}
+          args: ${{ github.actor }} ${{ github.head_ref }}
       - name: Wait for App of Apps
         uses: docker://argoproj/argocd:v1.7.12
         with:
-          entrypoint: ./.github/scripts/gh-wait-for-app-of-apps.sh
-          args: ${{ matrix.flavor }}
+          entrypoint: ./scripts/wait-for-app-of-apps.sh
       - name: Destroy cluster
         uses: docker://hashicorp/terraform:0.13.6
         with:
           entrypoint: ./.github/scripts/gh-destroy-cluster.sh
-          args: ${{ matrix.flavor }}
   update:
     runs-on: ubuntu-18.04
     strategy:
       matrix:
         flavor:
           - k3s-docker
+    env:
+      TF_ROOT: tests/${{ matrix.flavor }}/terraform
     steps:
       - uses: actions/checkout@v2
         with:
@@ -46,12 +48,11 @@ jobs:
         uses: docker://hashicorp/terraform:0.13.6
         with:
           entrypoint: ./.github/scripts/gh-deploy-cluster.sh
-          args: ${{ matrix.flavor }} camptocamp ${{ github.base_ref }}
+          args: camptocamp ${{ github.base_ref }}
       - name: Wait for App of Apps
         uses: docker://argoproj/argocd:v1.7.12
         with:
-          entrypoint: ./.github/scripts/gh-wait-for-app-of-apps.sh
-          args: ${{ matrix.flavor }}
+          entrypoint: ./scripts/wait-for-app-of-apps.sh
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.ref }}
@@ -60,24 +61,21 @@ jobs:
         uses: docker://hashicorp/terraform:0.13.6
         with:
           entrypoint: ./.github/scripts/gh-plan.sh
-          args: ${{ matrix.flavor }} ${{ github.actor }} ${{ github.head_ref }}
+          args: ${{ github.actor }} ${{ github.head_ref }}
       - name: App-diff on ref
         uses: docker://argoproj/argocd:v1.7.12
         with:
-          entrypoint: ./.github/scripts/gh-app-diff.sh
-          args: ${{ matrix.flavor }}
+          entrypoint: ./scripts/app-diff.sh
       - name: Update cluster
         uses: docker://hashicorp/terraform:0.13.6
         with:
           entrypoint: ./.github/scripts/gh-deploy-cluster.sh
-          args: ${{ matrix.flavor }} ${{ github.actor }} ${{ github.head_ref }}
+          args: ${{ github.actor }} ${{ github.head_ref }}
       - name: Wait for App of Apps
         uses: docker://argoproj/argocd:v1.7.12
         with:
-          entrypoint: ./.github/scripts/gh-wait-for-app-of-apps.sh
-          args: ${{ matrix.flavor }}
+          entrypoint: ./scripts/wait-for-app-of-apps.sh
       - name: Destroy cluster
         uses: docker://hashicorp/terraform:0.13.6
         with:
           entrypoint: ./.github/scripts/gh-destroy-cluster.sh
-          args: ${{ matrix.flavor }}

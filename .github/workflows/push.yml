@@ -11,20 +11,20 @@ jobs:
       matrix:
         flavor:
           - k3s-docker
+    env:
+      TF_ROOT: tests/${{ matrix.flavor }}/terraform
     steps:
       - uses: actions/checkout@v2
       - name: Deploy cluster
         uses: docker://hashicorp/terraform:0.13.6
         with:
           entrypoint: ./.github/scripts/gh-deploy-cluster.sh
-          args: ${{ matrix.flavor }} $GITHUB_SERVER_URL/$GITHUB_ACTOR/camptocamp-devops-stack.git $GITHUB_HEAD_REF
+          args: $GITHUB_SERVER_URL/$GITHUB_ACTOR/camptocamp-devops-stack.git $GITHUB_HEAD_REF
       - name: Wait for App of Apps
         uses: docker://argoproj/argocd:v1.7.12
         with:
-          entrypoint: ./.github/scripts/gh-wait-for-app-of-apps.sh
-          args: ${{ matrix.flavor }}
+          entrypoint: ./scripts/wait-for-app-of-apps.sh
       - name: Destroy cluster
         uses: docker://hashicorp/terraform:0.13.6
         with:
           entrypoint: ./.github/scripts/gh-destroy-cluster.sh
-          args: ${{ matrix.flavor }}
