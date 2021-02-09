@@ -16,15 +16,15 @@ jobs:
       - name: Deploy cluster
         uses: docker://hashicorp/terraform:0.13.6
         with:
-          entrypoint: scripts/gh-deploy-cluster.sh
+          entrypoint: ./.github/scripts/gh-deploy-cluster.sh
           args: ${{ matrix.flavor }} $GITHUB_SERVER_URL/$GITHUB_ACTOR/camptocamp-devops-stack.git $GITHUB_HEAD_REF
       - name: Wait for App of Apps
         uses: docker://argoproj/argocd:v1.7.12
         with:
-          entrypoint: scripts/gh-wait-for-app-of-apps.sh
+          entrypoint: ./.github/scripts/gh-wait-for-app-of-apps.sh
           args: ${{ matrix.flavor }}
       - name: Destroy cluster
         uses: docker://hashicorp/terraform:0.13.6
         with:
-          entrypoint: scripts/gh-destroy-cluster.sh
+          entrypoint: ./.github/scripts/gh-destroy-cluster.sh
           args: ${{ matrix.flavor }}
