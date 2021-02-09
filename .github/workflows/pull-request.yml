@@ -12,6 +12,7 @@ jobs:
         flavor:
           - k3s-docker
     env:
+      CLUSTER_NAME: default
       TF_ROOT: tests/${{ matrix.flavor }}/terraform
     steps:
       - uses: actions/checkout@v2
@@ -21,9 +22,11 @@ jobs:
           args: fmt -check -diff -recursive
       - name: Deploy cluster
         uses: docker://hashicorp/terraform:0.13.6
+        env:
+          TF_VAR_repo_url: ${{ github.server_url }}/${{ github.actor }}/camptocamp-devops-stack.git
+          TF_VAR_target_revision: ${{ github.head_ref }}
         with:
           entrypoint: ./.github/scripts/gh-deploy-cluster.sh
-          args: ${{ github.actor }} ${{ github.head_ref }}
       - name: Wait for App of Apps
         uses: docker://argoproj/argocd:v1.7.12
         with:
@@ -39,6 +42,7 @@ jobs:
         flavor:
           - k3s-docker
     env:
+      CLUSTER_NAME: default
       TF_ROOT: tests/${{ matrix.flavor }}/terraform
     steps:
       - uses: actions/checkout@v2
@@ -46,9 +50,11 @@ jobs:
           ref: ${{ github.base_ref }}
       - name: Deploy cluster with base_ref code
         uses: docker://hashicorp/terraform:0.13.6
+        env:
+          TF_VAR_repo_url: ${{ github.server_url }}/camptocamp/camptocamp-devops-stack.git
+          TF_VAR_target_revision: ${{ github.base_ref }}
         with:
           entrypoint: ./.github/scripts/gh-deploy-cluster.sh
-          args: camptocamp ${{ github.base_ref }}
       - name: Wait for App of Apps
         uses: docker://argoproj/argocd:v1.7.12
         with:
@@ -59,18 +65,22 @@ jobs:
           clean: false
       - name: Dry-run on ref
         uses: docker://hashicorp/terraform:0.13.6
+        env:
+          TF_VAR_repo_url: ${{ github.server_url }}/${{ github.actor }}/camptocamp-devops-stack.git
+          TF_VAR_target_revision: ${{ github.head_ref }}
         with:
           entrypoint: ./.github/scripts/gh-plan.sh
-          args: ${{ github.actor }} ${{ github.head_ref }}
       - name: App-diff on ref
         uses: docker://argoproj/argocd:v1.7.12
         with:
           entrypoint: ./scripts/app-diff.sh
       - name: Update cluster
         uses: docker://hashicorp/terraform:0.13.6
+        env:
+          TF_VAR_repo_url: ${{ github.server_url }}/${{ github.actor }}/camptocamp-devops-stack.git
+          TF_VAR_target_revision: ${{ github.head_ref }}
         with:
           entrypoint: ./.github/scripts/gh-deploy-cluster.sh
-          args: ${{ github.actor }} ${{ github.head_ref }}
       - name: Wait for App of Apps
         uses: docker://argoproj/argocd:v1.7.12
         with:
