@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <sitemap>
-<loc>https://camptocamp.github.io/camptocamp-devops-stack/sitemap-antora-ui-c2c.xml</loc>
+<loc>https://devops-stack.io/camptocamp-devops-stack/sitemap-antora-ui-c2c.xml</loc>
 </sitemap>
 <sitemap>
-<loc>https://camptocamp.github.io/camptocamp-devops-stack/sitemap-camptocamp-devops-stack.xml</loc>
+<loc>https://devops-stack.io/camptocamp-devops-stack/sitemap-camptocamp-devops-stack.xml</loc>
 </sitemap>
 </sitemapindex>
