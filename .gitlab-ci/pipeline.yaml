@@ -53,13 +53,6 @@ pb:terraform:apply:
     entrypoint: [""]
   variables:
     CLUSTER_NAME: $CI_COMMIT_REF_NAME
-  before_script:
-    - mkdir -p "$HOME/bin"
-    - wget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 -O "$HOME/bin/jq"
-    - chmod +x "$HOME/bin/jq"
-    - wget https://get.helm.sh/helm-v3.4.0-linux-amd64.tar.gz -O -| tar xz linux-amd64/helm -O > "$HOME/bin/helm"
-    - chmod +x "$HOME/bin/helm"
-    - export PATH="$HOME/bin:$PATH"
   script:
     - wget -O- "https://raw.githubusercontent.com/camptocamp/camptocamp-devops-stack/v$CAMPTOCAMP_DEVOPS_STACK_VERSION/scripts/provision.sh" | sh
   environment:

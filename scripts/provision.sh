@@ -2,6 +2,22 @@
 
 set -e
 
+if ! command -v jq; then
+	JQ_DIR=$(mktemp -d /tmp/jq.XXXXXX)
+	export PATH="$JQ_DIR:$PATH"
+
+	wget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 -O "$JQ_DIR/jq"
+	chmod +x "$JQ_DIR/jq"
+fi
+
+if ! command -v helm; then
+	HELM_DIR=$(mktemp -d /tmp/helm.XXXXXX)
+	export PATH="$HELM_DIR:$PATH"
+
+	wget https://get.helm.sh/helm-v3.4.0-linux-amd64.tar.gz -O - | tar xz linux-amd64/helm -O > "$HELM_DIR/helm"
+	chmod +x "$HELM_DIR/helm"
+fi
+
 export TF_WORKSPACE="$CLUSTER_NAME"
 
 cd terraform || exit
