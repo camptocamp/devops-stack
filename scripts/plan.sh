@@ -2,12 +2,15 @@
 
 set -e
 
-export PATH="$HOME/bin:$PATH"
-export TF_WORKSPACE="$CLUSTER_NAME"
+if ! command -v jq; then
+	JQ_DIR=$(mktemp -d /tmp/jq.XXXXXX)
+	export PATH="$JQ_DIR:$PATH"
 
-mkdir -p "$HOME/bin"
-wget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 -O "$HOME/bin/jq"
-chmod +x "$HOME/bin/jq"
+	wget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 -O "$JQ_DIR/jq"
+	chmod +x "$JQ_DIR/jq"
+fi
+
+export TF_WORKSPACE="$CLUSTER_NAME"
 
 TF_ROOT="${TF_ROOT:-terraform}"
 
