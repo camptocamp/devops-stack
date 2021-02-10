@@ -1,0 +1,25 @@
+---
+name: push
+on:
+  push:
+    branches:
+      - blue
+      - green
+jobs:
+  push:
+    runs-on: ubuntu-18.04
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: us-east-1
+      CAMPTOCAMP_DEVOPS_STACK_VERSION: 0.24.0
+      TF_ROOT: terraform
+    steps:
+      - uses: actions/checkout@v2
+      - name: Extract branch name
+        shell: bash
+        run: echo "CLUSTER_NAME=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+      - name: Deploy cluster
+        uses: docker://hashicorp/terraform:0.13.6
+        with:
+          entrypoint: ./.github/scripts/provision.sh
