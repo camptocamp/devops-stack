@@ -1,5 +1,32 @@
 = Changelog
 
+== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.24.0[0.24.0] (2021-02-10)
+
+https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.23.0...v0.24.0[Full Changelog]
+
+*Implemented enhancements:*
+
+* Removing olm https://github.com/camptocamp/camptocamp-devops-stack/pull/436[#436] (https://github.com/pburgisser[pburgisser])
+* [k3s/docker] Add registry mirror for registry.access.redhat.com https://github.com/camptocamp/camptocamp-devops-stack/pull/439[#439] (https://github.com/mcanevet[mcanevet])
+* [k3s/docker] Add registry mirror for k8s.gcr.io https://github.com/camptocamp/camptocamp-devops-stack/pull/440[#440] (https://github.com/mcanevet[mcanevet])
+* Install keycloak operator from github https://github.com/camptocamp/camptocamp-devops-stack/pull/443[#443] (https://github.com/mcanevet[mcanevet])
+* Move github actions scripts to .github/scripts https://github.com/camptocamp/camptocamp-devops-stack/pull/448[#448] (https://github.com/mcanevet[mcanevet])
+* Remove debug https://github.com/camptocamp/camptocamp-devops-stack/pull/449[#449] (https://github.com/mcanevet[mcanevet])
+* Move jq and helm installation in provision.sh https://github.com/camptocamp/camptocamp-devops-stack/pull/450[#450] (https://github.com/mcanevet[mcanevet])
+* Allow to override TF_ROOT https://github.com/camptocamp/camptocamp-devops-stack/pull/451[#451] (https://github.com/mcanevet[mcanevet])
+* Simplify CI by using TF_ROOT https://github.com/camptocamp/camptocamp-devops-stack/pull/452[#452] (https://github.com/mcanevet[mcanevet])
+* Refactor CI scripts https://github.com/camptocamp/camptocamp-devops-stack/pull/453[#453] (https://github.com/mcanevet[mcanevet])
+* Install jq only if needed in script/plan.sh https://github.com/camptocamp/camptocamp-devops-stack/pull/454[#454] (https://github.com/mcanevet[mcanevet])
+
+*Upgraded components:*
+
+* Upgrade Kubernetes provider to v2.0.2 https://github.com/camptocamp/camptocamp-devops-stack/pull/437[#437] (https://github.com/mcanevet[mcanevet])
+* Upgrade oauth2-proxy to 7.0.0 https://github.com/camptocamp/camptocamp-devops-stack/pull/441[#441] (https://github.com/mcanevet[mcanevet])
+* Upgrade kube-prometheus-stack to v13.5.0 https://github.com/camptocamp/camptocamp-devops-stack/pull/438[#438] (https://github.com/mcanevet[mcanevet])
+* Deploy new version of ArgOCD's Grafana dashboard https://github.com/camptocamp/camptocamp-devops-stack/pull/444[#444] (https://github.com/mcanevet[mcanevet])
+* Upgrade Terraform to 0.13.6 https://github.com/camptocamp/camptocamp-devops-stack/pull/445[#445] (https://github.com/mcanevet[mcanevet])
+* Upgrade ArgoCD to 1.7.12 https://github.com/camptocamp/camptocamp-devops-stack/pull/446[#446] (https://github.com/mcanevet[mcanevet])
+
 == https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.23.0[0.23.0] (2021-02-03)
 
 https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.22.0...v0.23.0[Full Changelog]
