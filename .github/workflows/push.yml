@@ -14,10 +14,12 @@ jobs:
     env:
       CLUSTER_NAME: default
       TF_ROOT: tests/${{ matrix.flavor }}/terraform
-      TF_VAR_repo_url: ${{ github.server_url }}/${{ github.actor }}/camptocamp-devops-stack.git
-      TF_VAR_target_revision: ${{ github.head_ref }}
+      TF_VAR_repo_url: ${{ github.server_url }}/${{ github.repository }}
     steps:
       - uses: actions/checkout@v2
+      - name: Extract branch name
+        shell: bash
+        run: echo "TF_VAR_target_revision=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
       - name: Deploy cluster
         uses: docker://hashicorp/terraform:0.13.6
         with:
