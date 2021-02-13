@@ -47,7 +47,6 @@ jobs:
         if: github.event_name == 'push'
         env:
           TF_VAR_repo_url: ${{ github.server_url }}/${{ github.repository }}
-          TF_VAR_target_revision: ${{ github.head_ref }}
         run: ./scripts/provision.sh
 
       - name: Wait for App of Apps
