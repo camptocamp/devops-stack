@@ -32,6 +32,22 @@ jobs:
         run: terraform fmt -check -diff -recursive
 
       - name: Deploy Cluster from scratch
+        if: github.event_name == 'pull_request'
+        env:
+          TF_VAR_repo_url: ${{ github.server_url }}/${{ github.actor }}/camptocamp-devops-stack.git
+          TF_VAR_target_revision: ${{ github.head_ref }}
+        run: ./scripts/provision.sh
+
+      - name: Extract branch name
+        if: github.event_name == 'push'
+        shell: bash
+        run: echo "TF_VAR_target_revision=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+
+      - name: Deploy Cluster from scratch
+        if: github.event_name == 'push'
+        env:
+          TF_VAR_repo_url: ${{ github.server_url }}/${{ github.repository }}
+          TF_VAR_target_revision: ${{ github.head_ref }}
         run: ./scripts/provision.sh
 
       - name: Wait for App of Apps
