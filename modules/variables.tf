@@ -21,6 +21,6 @@ variable "app_of_apps_values_overrides" {
 
 variable "extra_apps" {
   description = "Extra applications to deploy."
-  type        = list
+  type        = list(any)
   default     = []
 }
