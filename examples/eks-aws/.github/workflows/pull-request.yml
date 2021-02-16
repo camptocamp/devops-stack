@@ -18,11 +18,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Terraform format check
-        uses: docker://hashicorp/terraform:0.13.6
+        uses: docker://hashicorp/terraform:0.14.6
         with:
           args: fmt -check -diff -recursive
       - name: Terraform plan
-        uses: docker://hashicorp/terraform:0.13.6
+        uses: docker://hashicorp/terraform:0.14.6
         with:
           entrypoint: ./.github/scripts/plan.sh
       - name: ArgoCD app diff
