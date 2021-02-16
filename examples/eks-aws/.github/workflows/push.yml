@@ -20,6 +20,6 @@ jobs:
         shell: bash
         run: echo "CLUSTER_NAME=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
       - name: Deploy cluster
-        uses: docker://hashicorp/terraform:0.13.6
+        uses: docker://hashicorp/terraform:0.14.6
         with:
           entrypoint: ./.github/scripts/provision.sh
