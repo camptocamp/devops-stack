@@ -23,7 +23,7 @@ export TF_WORKSPACE="$CLUSTER_NAME"
 TF_ROOT="${TF_ROOT:-terraform}"
 
 cd "$TF_ROOT" || exit
-terraform init -upgrade
+terraform init
 
 # FIXME: Somehow Terraform's Helm provider does not do it even though
 # I specified `dependency_update = true`
