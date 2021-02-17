@@ -1,0 +1,122 @@
+---
+banner:
+  title: "DevOps Stack"
+  #image: "https://www.camptocamp.com/images/logo-with-text.svg"
+  content: |
+    Your Kubernetes platform is one Git commit away
+  button:
+    enable: true
+    label: "Learn more"
+    link: "docs"
+
+# Features
+feature:
+  enable : true
+  title : "Stack Components"
+  feature_item:
+    # feature item loop
+    - name : "Prometheus"
+      icon : "prometheus.png"
+      content : "The standard in Kubernetes Time Series Database."
+      
+    # feature item loop
+    - name : "Grafana"
+      icon : "grafana.png"
+      content : "Observability Metrics Dashboards."
+      
+    # feature item loop
+    - name : "Cert-Manager"
+      icon : "ti-lock"
+      content : "Lorem ipsum dolor sit amet consectetur adipisicing elit quam nihil"
+      
+    # feature item loop
+    - name : "Loki"
+      icon : "ti-truck"
+      content : "Lorem ipsum dolor sit amet consectetur adipisicing elit quam nihil"
+      
+    # feature item loop
+    - name : "Etc"
+      icon : "ti-headphone-alt"
+      content : "Lorem ipsum dolor sit amet consectetur adipisicing elit quam nihil"
+      
+    # feature item loop
+    - name : "Truc"
+      icon : "ti-cloud-up"
+      content : "Lorem ipsum dolor sit amet consectetur adipisicing elit quam nihil"
+
+
+
+######################### Service #####################
+service:
+  enable : true
+  service_item:
+    # service item loop
+    - title : "Cloud Native DevOps"
+      images:
+      - "images/service-1.png"
+      - "images/service-2.png"
+      - "images/service-3.png"
+      content : "The great set of tools you've gotten to use and love for your Kubernetes infrastructure management."
+      button:
+        enable : true
+        label : "Check it out"
+        link : "#"
+        
+    # service item loop
+    - title : "Defined as Code"
+      images:
+      - "images/service-1.png"
+      content : "The DevOps Stack is based on Open Source Terraform modules so you get a declarative, convergent Kubernetes platform, leveraging the Infrastructure as Code approach."
+      button:
+        enable : true
+        label : "I want to code!"
+        link : "#"
+        
+    # service item loop
+    - title : "Choose your Cloud"
+      images:
+      - "images/service-1.png"
+      content : "Whether you want to deploy AKS on Azure, EKS on Amazon, or K3S for a local playground, the DevOps Stack has you covered with ready-to-go Terraform modules."
+      button:
+        enable : true
+        label : "Show me the Cloud Menu"
+        link : "#"
+        
+    # service item loop
+    - title : "Continuously Deployed"
+      images:
+      - "images/service-2.png"
+      content : "At the core of the DevOps Stack, ArgoCD manages applications and deploys them continually to the Kubernetes cluster. We also include a collection of CI/CD pipeline libraries you can use with GitLab or GitHub Actions to set up a GitOps workflow for your entire Kubernetes infrastructure."
+      button:
+        enable : true
+        label : "Check it out"
+        link : "#"
+        
+    # service item loop
+    - title : "Extensible"
+      images:
+      - "images/service-3.png"
+      content : "Easily pick and choose the applications you wish to activate in the stack. Add your own applications and let ArgoCD do the deployment magic."
+      button:
+        enable : true
+        label : "Check it out"
+        link : "#"
+        
+################### Screenshot ########################
+screenshot:
+  enable : true
+  title : "Experience the best <br> workflow with us"
+  image : "images/screenshot.svg"
+
+  
+
+##################### Call to action #####################
+call_to_action:
+  enable : true
+  title : "Ready to get started?"
+  image : "images/cta.svg"
+  content : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consequat tristique eget amet, tempus eu at consecttur."
+  button:
+    enable : true
+    label : "Contact Us"
+    link : "contact"
