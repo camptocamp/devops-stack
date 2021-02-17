@@ -1,7 +1,7 @@
 ---
 banner:
   title: "DevOps Stack"
-  image: "img/devops-stack_logo.svg"
+  image: "img/devops-stack_simple_logo.svg"
   content: |
     Your Kubernetes platform is one Git commit away
   button:
