@@ -2,7 +2,12 @@ baseURL = "http://devops-stack.io/"
 languageCode = "en-us"
 title = "DevOps Stack"
 theme = "bigspring"
+
+
+[params]
 author = "Camptocamp"
+logo = "img/devops-stack.png"
+logo_width = "200px"
 
 
 ############################# Plugins ##############################
@@ -26,62 +31,62 @@ link = "plugins/slick/slick.min.js"
 ############################## navigation ###############################
 
 # main menu
-[[menu.main]]
-name = "Docs"
-url = "docs"
-weight = 1
-
-[[menu.main]]
-name = "News"
-url = "news"
-weight = 2
-
-[[menu.main]]
-name = "Contact"
-url = "contact"
-weight = 3
-
-[[menu.main]]
-name = "FAQ"
-url = "faq"
-weight = 4
-
-# footer menu left
-[[menu.footer_left]]
-name = "About"
-url = "#"
-
-[[menu.footer_left]]
-name = "Quick Start"
-url = "#"
-
-[[menu.footer_left]]
-name = "Pricing"
-url = "pricing"
-
-
-# footer menu middle
-[[menu.footer_middle]]
-name = "Pricing"
-url = "pricing"
-
-[[menu.footer_middle]]
-name = "Platform"
-url = "#"
-
-[[menu.footer_middle]]
-name = "Features"
-url = "#"
-
-# footer menu right
-[[menu.footer_right]]
-name = "Privacy Policy"
-url = "privacy-policy"
-
-[[menu.footer_right]]
-name = "Terms & Conditions"
-url = "terms-conditions"
-
-[[menu.footer_right]]
-name = "FAQ"
-url = "faq"
+#[[menu.main]]
+#name = "Docs"
+#url = "docs"
+#weight = 1
+#
+#[[menu.main]]
+#name = "News"
+#url = "news"
+#weight = 2
+#
+#[[menu.main]]
+#name = "Contact"
+#url = "contact"
+#weight = 3
+#
+#[[menu.main]]
+#name = "FAQ"
+#url = "faq"
+#weight = 4
+#
+## footer menu left
+#[[menu.footer_left]]
+#name = "About"
+#url = "#"
+#
+#[[menu.footer_left]]
+#name = "Quick Start"
+#url = "#"
+#
+#[[menu.footer_left]]
+#name = "Pricing"
+#url = "pricing"
+#
+#
+## footer menu middle
+#[[menu.footer_middle]]
+#name = "Pricing"
+#url = "pricing"
+#
+#[[menu.footer_middle]]
+#name = "Platform"
+#url = "#"
+#
+#[[menu.footer_middle]]
+#name = "Features"
+#url = "#"
+#
+## footer menu right
+#[[menu.footer_right]]
+#name = "Privacy Policy"
+#url = "privacy-policy"
+#
+#[[menu.footer_right]]
+#name = "Terms & Conditions"
+#url = "terms-conditions"
+#
+#[[menu.footer_right]]
+#name = "FAQ"
+#url = "faq"

@@ -1,7 +1,7 @@
 ---
 banner:
   title: "DevOps Stack"
-  #image: "https://www.camptocamp.com/images/logo-with-text.svg"
+  image: "img/devops-stack.png"
   content: |
     Your Kubernetes platform is one Git commit away
   button:
@@ -25,6 +25,16 @@ feature:
       content : "Observability Metrics Dashboards."
       
     # feature item loop
+    - name : "Loki"
+      icon : "loki.png"
+      content : "Bring all your logs into Grafana."
+      
+    # feature item loop
+    - name : "Argo CD"
+      icon : "argocd.png"
+      content : "Continuous Deployment for Kubernetes Resources."
+      
+    # feature item loop
     - name : "Cert-Manager"
       icon : "cert-manager.png"
       content : "Certificate generation and renewal automation for Kubernetes."
@@ -38,11 +48,6 @@ feature:
     - name : "Traefik"
       icon : "traefik.jpeg"
       content : "Probably the most versatile Ingress controller for Kubernetes."
-      
-    # feature item loop
-    - name : "Vault"
-      icon : "vault.png"
-      content : "Keep your secrets safe, and interface them with all your applications in a granular way."
       
 
 
@@ -86,7 +91,9 @@ service:
     # service item loop
     - title : "Continuously Deployed"
       images:
-      - "images/service-2.png"
+      - "img/logo/argocd_banner.png"
+      - "img/logo/gitlab.png"
+      - "img/logo/github_actions.png"
       content : "At the core of the DevOps Stack, ArgoCD manages applications and deploys them continually to the Kubernetes cluster. We also include a collection of CI/CD pipeline libraries you can use with GitLab or GitHub Actions to set up a GitOps workflow for your entire Kubernetes infrastructure."
       button:
         enable : true
@@ -94,9 +101,9 @@ service:
         link : "#"
         
     # service item loop
-    - title : "Extensible"
+    - title : "You're at the Helm"
       images:
-      - "images/service-3.png"
+      - "img/helm.png"
       content : "Easily pick and choose the applications you wish to activate in the stack. Add your own applications and let ArgoCD do the deployment magic."
       button:
         enable : true
@@ -104,10 +111,10 @@ service:
         link : "#"
         
 ################### Screenshot ########################
-screenshot:
-  enable : true
-  title : "Experience the best <br> workflow with us"
-  image : "images/screenshot.svg"
+#screenshot:
+#  enable : true
+#  title : "Experience the best <br> workflow with us"
+#  image : "images/screenshot.svg"
 
   
 
@@ -115,9 +122,9 @@ screenshot:
 call_to_action:
   enable : true
   title : "Ready to get started?"
-  image : "images/cta.svg"
-  content : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consequat tristique eget amet, tempus eu at consecttur."
+  image : "img/cta.svg"
+  content : "We have multiple examples of using the DevOps Stacks to deploy Kubernetes from the ground up."
   button:
     enable : true
-    label : "Contact Us"
-    link : "contact"
+    label : "Check the docs"
+    link : "docs"
