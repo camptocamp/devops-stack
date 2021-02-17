@@ -9,6 +9,10 @@ author = "Camptocamp"
 logo = "img/devops-stack_by_c2c.svg"
 logo_width = "200px"
 
+org_name = "Camptocamp"
+org_logo = "img/logo/camptocamp.png"
+org_logo_width = "200px"
+org_url = "https://camptocamp.com"
 
 ############################# Plugins ##############################
 
