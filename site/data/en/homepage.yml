@@ -26,23 +26,24 @@ feature:
       
     # feature item loop
     - name : "Cert-Manager"
-      icon : "ti-lock"
-      content : "Lorem ipsum dolor sit amet consectetur adipisicing elit quam nihil"
+      icon : "cert-manager.png"
+      content : "Certificate generation and renewal automation for Kubernetes."
       
     # feature item loop
-    - name : "Loki"
-      icon : "ti-truck"
-      content : "Lorem ipsum dolor sit amet consectetur adipisicing elit quam nihil"
+    - name : "Open ID Connect"
+      icon : "oidc.png"
+      content : "Automatic set up with either the platform's authentication system, or using Keycloak."
+
+    # feature item loop
+    - name : "Traefik"
+      icon : "traefik.jpeg"
+      content : "Probably the most versatile Ingress controller for Kubernetes."
       
     # feature item loop
-    - name : "Etc"
-      icon : "ti-headphone-alt"
-      content : "Lorem ipsum dolor sit amet consectetur adipisicing elit quam nihil"
+    - name : "Vault"
+      icon : "vault.png"
+      content : "Keep your secrets safe, and interface them with all your applications in a granular way."
       
-    # feature item loop
-    - name : "Truc"
-      icon : "ti-cloud-up"
-      content : "Lorem ipsum dolor sit amet consectetur adipisicing elit quam nihil"
 
 
 
@@ -53,9 +54,7 @@ service:
     # service item loop
     - title : "Cloud Native DevOps"
       images:
-      - "images/service-1.png"
-      - "images/service-2.png"
-      - "images/service-3.png"
+      - "/img/devops-loop.png"
       content : "The great set of tools you've gotten to use and love for your Kubernetes infrastructure management."
       button:
         enable : true
@@ -65,7 +64,7 @@ service:
     # service item loop
     - title : "Defined as Code"
       images:
-      - "images/service-1.png"
+      - "img/devops-tf-shot.jpg"
       content : "The DevOps Stack is based on Open Source Terraform modules so you get a declarative, convergent Kubernetes platform, leveraging the Infrastructure as Code approach."
       button:
         enable : true
@@ -75,7 +74,9 @@ service:
     # service item loop
     - title : "Choose your Cloud"
       images:
-      - "images/service-1.png"
+      - "img/aws-eks.png"
+      - "img/azure-aks.png"
+      - "img/rancher-k3s.png"
       content : "Whether you want to deploy AKS on Azure, EKS on Amazon, or K3S for a local playground, the DevOps Stack has you covered with ready-to-go Terraform modules."
       button:
         enable : true
