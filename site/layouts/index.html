@@ -116,8 +116,10 @@
         <h2 class="section-title">{{ .title | markdownify }}</h2>
       </div>
     </div>
+    <div class="row">
+      {{ with .image }} <img src="{{ . | relURL }}" class="img-fluid w-100">{{ end }}
+    </div>
   </div>
-  {{ with .image }} <img src="{{ . | relURL }}" class="img-fluid w-100">{{ end }}
 </section>
 {{ end }}
 {{ end }}
