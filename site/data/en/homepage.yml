@@ -1,9 +1,13 @@
 ---
 banner:
   title: "DevOps Stack"
+  subtitle: "Your Kubernetes Platform is one Git commit away."
+  
   image: "img/devops-stack_simple_logo.svg"
   content: |
-    Your Kubernetes platform is one Git commit away
+    The DevOps Stack provides a standard Kubernetes Platform, bringing together
+    automated Provisioning as Code, Continuous Application Deployment,
+    and readily-made configurations for the best tools in the industry.
   button:
     enable: true
     label: "Learn more"
@@ -17,47 +21,47 @@ feature:
     # feature item loop
     - name : "Kubernetes"
       icon : "kubernetes.png"
-      content : "The most powerful container orchestrator."
+      content : "At the heart of the DevOps Stack, Kubernetes powers all application deployments, and more."
 
     # feature item loop
     - name : "Terraform"
       icon : "terraform.png"
-      content : "Provisioning as Code for all your cloud needs."
+      content : "The base layer of the Stack, provisioning the whole Infrastructure as Code, from IaaS to Argo CD."
 
     # feature item loop
     - name : "Argo CD"
       icon : "argocd.png"
-      content : "Continuous Deployment for Kubernetes Resources."
+      content : "DevOps Stack Applications are deployed in a GitOps fashion, using Continuous Deployment for Kubernetes Resources."
 
     # feature item loop
     - name : "Prometheus"
       icon : "prometheus.png"
-      content : "The standard in Kubernetes Time Series Database."
+      content : "The standard in Kubernetes Time Series Database, set up for the whole Stack out-of-the-box."
       
     # feature item loop
     - name : "Grafana"
       icon : "grafana.png"
-      content : "Observability Metrics Dashboards."
+      content : "Readily-made Observability Dashboards are provided for the Kubernetes cluster and Stack Components."
       
     # feature item loop
     - name : "Loki"
       icon : "loki.png"
-      content : "Bring all your logs into Grafana."
+      content : "Application logs are gathered and made accessible using Loki inside Grafana."
       
     # feature item loop
     - name : "Cert-Manager"
       icon : "cert-manager.png"
-      content : "Certificate generation and renewal automation for Kubernetes."
+      content : "Valid public certificates are automatically provided for all Stack Components, courtesy of Let's Encrypt."
       
     # feature item loop
     - name : "Open ID Connect"
       icon : "oidc.png"
-      content : "Automatic set up with either the platform's authentication system, or using Keycloak."
+      content : "Authentication is set up for all Components in the Stack, using either the platform's authentication system, or Keycloak."
 
     # feature item loop
     - name : "Traefik"
       icon : "traefik.jpeg"
-      content : "Probably the most versatile Ingress controller for Kubernetes."
+      content : "The Traefik Ingress controller is used to route web access to all Components, on your domain of choice."
       
 
 
