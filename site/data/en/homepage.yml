@@ -127,7 +127,7 @@ service:
 ################### Screenshot ########################
 screenshot:
   enable : true
-  title : "From Zero to Hero<br /> in a few lines a code"
+  title : "From Zero to Hero, in a few lines a code"
   image : "img/devops-stack_vscode.png"
 
   
