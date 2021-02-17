@@ -125,10 +125,10 @@ service:
         link : "#"
         
 ################### Screenshot ########################
-#screenshot:
-#  enable : true
-#  title : "Experience the best <br> workflow with us"
-#  image : "images/screenshot.svg"
+screenshot:
+  enable : true
+  title : "From Zero to Hero<br /> in a few lines a code"
+  image : "img/devops-stack_vscode.png"
 
   
 
