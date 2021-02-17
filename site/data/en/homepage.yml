@@ -15,6 +15,21 @@ feature:
   title : "Stack Components"
   feature_item:
     # feature item loop
+    - name : "Kubernetes"
+      icon : "kubernetes.png"
+      content : "The most powerful container orchestrator."
+
+    # feature item loop
+    - name : "Terraform"
+      icon : "terraform.png"
+      content : "Provisioning as Code for all your cloud needs."
+
+    # feature item loop
+    - name : "Argo CD"
+      icon : "argocd.png"
+      content : "Continuous Deployment for Kubernetes Resources."
+
+    # feature item loop
     - name : "Prometheus"
       icon : "prometheus.png"
       content : "The standard in Kubernetes Time Series Database."
@@ -28,11 +43,6 @@ feature:
     - name : "Loki"
       icon : "loki.png"
       content : "Bring all your logs into Grafana."
-      
-    # feature item loop
-    - name : "Argo CD"
-      icon : "argocd.png"
-      content : "Continuous Deployment for Kubernetes Resources."
       
     # feature item loop
     - name : "Cert-Manager"
