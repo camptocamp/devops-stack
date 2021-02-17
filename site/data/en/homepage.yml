@@ -137,7 +137,7 @@ call_to_action:
   enable : true
   title : "Ready to get started?"
   image : "img/cta.svg"
-  content : "We have multiple examples of using the DevOps Stacks to deploy Kubernetes from the ground up."
+  content : "We have multiple examples of using the DevOps Stack to deploy Kubernetes from the ground up."
   button:
     enable : true
     label : "Check the docs"
