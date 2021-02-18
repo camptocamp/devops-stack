@@ -88,26 +88,6 @@ service:
   enable : true
   service_item:
     # service item loop
-    - title : "Cloud Native DevOps"
-      images:
-      - "/img/devops-loop.png"
-      content : "The great set of tools you've gotten to use and love for your Kubernetes infrastructure management."
-      button:
-        enable : true
-        label : "Check it out"
-        link : "#"
-        
-    # service item loop
-    - title : "Defined as Code"
-      images:
-      - "img/devops-tf-shot.jpg"
-      content : "The DevOps Stack is based on Open Source Terraform modules so you get a declarative, convergent Kubernetes platform, leveraging the Infrastructure as Code approach."
-      button:
-        enable : true
-        label : "I want to code!"
-        link : "#"
-        
-    # service item loop
     - title : "Choose your Cloud"
       images:
       - "img/aws-eks.png"
@@ -118,6 +98,16 @@ service:
       button:
         enable : true
         label : "Show me the Cloud Menu"
+        link : "#"
+        
+    # service item loop
+    - title : "Defined as Code"
+      images:
+      - "img/devops-tf-shot.jpg"
+      content : "The DevOps Stack is based on Open Source Terraform modules so you get a declarative, convergent Kubernetes platform, leveraging the Infrastructure as Code approach."
+      button:
+        enable : true
+        label : "I want to code!"
         link : "#"
         
     # service item loop
