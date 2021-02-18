@@ -1,0 +1,51 @@
+{{ if .enable }}
+{{ range $i,$p := .items }}
+{{if modBool $i 2}}
+<section class="section">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6 order-2 order-md-1">
+        <h2 class="section-title">{{ .title | markdownify }}</h2>
+        <p>{{ .content | markdownify }}</p>
+        {{ if .button.enable }}
+        {{ with .button }}
+        <a href="{{ .link | relURL }}" class="btn-link">{{ .label }} <i class="fas fa-arrow-right"></i></a>
+        {{ end }}
+        {{ end }}
+      </div>
+      <div class="col-md-6 order-1 order-md-2 mb-4 mb-md-0">
+        <div {{if gt (len .images) 1}}class="slider" {{end}}>
+          {{ range .images }}
+          <img src="{{ . | relURL }}" class="img-fluid">
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{{ else }}
+<section class="section bg-light">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6 mb-4 mb-md-0">
+        <div {{if gt (len .images) 1}}class="slider" {{end}}>
+          {{ range .images }}
+          <img src="{{ . | relURL }}" class="img-fluid">
+          {{ end }}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <h2 class="section-title">{{ .title | markdownify }}</h2>
+        <p>{{ .content | markdownify }}</p>
+        {{ if .button.enable }}
+        {{ with .button }}
+        <a href="{{ .link | relURL }}" class="btn-link">{{ .label }} <i class="fas fa-arrow-right"></i></a>
+        {{ end }}
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}
+{{ end }}
+{{ end }}

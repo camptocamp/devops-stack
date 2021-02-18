@@ -1,0 +1,22 @@
+{{ if .enable }}
+<section class="section bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 text-center">
+        <h2 class="section-title">{{ .title | markdownify }}</h2>
+      </div>
+      {{ range .items }}
+      <div class="col-lg-4 col-md-5 col-sm-6 mb-4">
+        <a href="{{ .link }}" alt="{{ .name | title }}" target="_blank">
+          <div class="feature-card text-center h-100">
+            <img src="/images/logo/{{.icon}}" class="mb-3" height="80px" />
+            <h4 class="mb-2">{{ .name | title }}</h4>
+            <p>{{ .content | markdownify }}</p>
+          </div>
+        </a>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

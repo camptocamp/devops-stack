@@ -1,0 +1,23 @@
+<section class="banner">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 mx-auto text-center">
+        <h1 class="mb-3">{{ .title | markdownify }}</h1>
+        <h4 class="mb-3">{{ .subtitle | markdownify }}</h4>
+        <p class="mb-4">{{ .content | markdownify }}</p>
+        {{ if .button.enable }}
+        <div><a href="{{ .link | safeURL }}" class="btn btn-primary">{{ .label }}</a></div>
+        {{ end }}
+
+        {{with .image}}<img src="{{ . | relURL }}" class="img-fluid mt-5 mb-5 w-25" width="750px">{{end}}
+      </div>
+    </div>
+    <div class="row justify-content-center mx-4">
+      {{ range .quickstart.item }}
+      <div class="col-lg-3 col-md-5 col-sm-6 mb-3 text-center">
+        <a href="{{ .link | safeURL }}" class="btn btn-primary">Get started with {{ .label }}</a>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
