@@ -20,7 +20,7 @@
     </div>
     <div class="row justify-content-center">
       {{ range .quickstart.item }}
-      <div class="col-md-5 col-sm-4 col-lg-3 mb-3 text-center">
+      <div class="col-lg-3 col-md-5 col-sm-6 mb-3 text-center">
         <a href="{{ .link | safeURL }}" class="btn btn-primary">Get started with {{ .label }}</a>
       </div>
       {{ end }}
@@ -40,7 +40,7 @@
         <h2 class="section-title">{{ .title | markdownify }}</h2>
       </div>
       {{ range .feature_item }}
-      <div class="col-md-4 col-sm-6 mb-4">
+      <div class="col-lg-4 col-md-5 col-sm-6 mb-4">
         <a href="{{ .link }}" alt="{{ .name | title }}" target="_blank">
           <div class="feature-card text-center">
             <img src="/images/logo/{{.icon}}" class="mb-3" height="80px" />
