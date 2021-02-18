@@ -15,26 +15,13 @@
         <div><a href="{{ .link | safeURL }}" class="btn btn-primary">{{ .label }}</a></div>
         {{ end }}
 
-        {{with .image}}<img src="{{ . | relURL }}" class="img-fluid mt-5 w-25" width="750px">{{end}}
+        {{with .image}}<img src="{{ . | relURL }}" class="img-fluid mt-5 mb-5 w-25" width="750px">{{end}}
       </div>
     </div>
-  </div>
-</section>
-{{ end }}
-<!-- /banner -->
-
-<!-- quickstart -->
-{{ with $content.homepage.quickstart }}
-<section class="section bg-light">
-  <div class="container">
     <div class="row justify-content-center">
-      <div class="col-12 text-center">
-        <h2 class="section-title">{{ .title | markdownify }}</h2>
-      </div>
-      {{ range .item }}
+      {{ range .quickstart.item }}
       <div class="col-md-3 col-sm-6 mb-3">
-        <div class="feature-card text-center">
-          <img src="{{.icon}}" class="mb-3 w-100" />
+        <div class="text-center">
           <div><a href="{{ .link | safeURL }}" class="btn btn-primary">Get started with {{ .label }}</a></div>
         </div>
       </div>
@@ -42,7 +29,8 @@
 
       {{ with .enterprise_offer }}
       <div class="row">
-        <div class="col-lg-10 mx-auto text-center">
+        <div class="mt-5 col-lg-10 mx-auto text-center">
+          <img src="{{.icon}}" class="mb-3 w-50" />
           <div><a href="{{ .link | safeURL }}" class="btn btn-primary">{{ .label }}</a></div>
         </div>
       </div>
