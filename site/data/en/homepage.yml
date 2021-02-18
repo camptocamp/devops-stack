@@ -2,17 +2,38 @@
 banner:
   title: "DevOps Stack"
   subtitle: "Your Kubernetes Platform is one Git commit away."
-  
-  #image: "img/devops-stack_simple_logo.svg"
   image: "img/devops-stack-d.png"
+  
   content: |
     The DevOps Stack provides a standard Kubernetes Platform, bringing together
     automated Provisioning as Code, Continuous Application Deployment,
     and readily-made configurations for the best tools in the industry.
+
   button:
-    enable: true
+    enable: false
     label: "Learn more"
     link: "docs"
+
+quickstart:
+  title: "Quick start"
+  item:
+    - label: AKS
+      icon: "img/azure-aks.png"
+      content: "test"
+      link: "aks"
+    - label: EKS
+      icon: "img/aws-eks.png"
+      link: "eks"
+    - label: SKS
+      icon: "img/exoscale_banner.jpg"
+      link: "sks"
+    - label: K3S
+      icon: "img/rancher-k3s.png"
+      link: "k3s"
+
+  enterprise_offer:
+    link: ""
+    label: "Get help"
 
 # Features
 feature:

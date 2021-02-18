@@ -12,9 +12,7 @@
         <h4 class="mb-3">{{ .subtitle | markdownify }}</h4>
         <p class="mb-4">{{ .content | markdownify }}</p>
         {{ if .button.enable }}
-        {{ with .button }}
         <div><a href="{{ .link | safeURL }}" class="btn btn-primary">{{ .label }}</a></div>
-        {{ end }}
         {{ end }}
 
         {{with .image}}<img src="{{ . | relURL }}" class="img-fluid mt-5 w-25" width="750px">{{end}}
@@ -24,6 +22,36 @@
 </section>
 {{ end }}
 <!-- /banner -->
+
+<!-- quickstart -->
+{{ with $content.homepage.quickstart }}
+<section class="section bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 text-center">
+        <h2 class="section-title">{{ .title | markdownify }}</h2>
+      </div>
+      {{ range .item }}
+      <div class="col-md-3 col-sm-6 mb-3">
+        <div class="feature-card text-center">
+          <img src="{{.icon}}" class="mb-3 w-100" />
+          <div><a href="{{ .link | safeURL }}" class="btn btn-primary">Get started with {{ .label }}</a></div>
+        </div>
+      </div>
+      {{ end }}
+
+      {{ with .enterprise_offer }}
+      <div class="row">
+        <div class="col-lg-10 mx-auto text-center">
+          <div><a href="{{ .link | safeURL }}" class="btn btn-primary">{{ .label }}</a></div>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+<!-- /quickstart -->
 
 <!-- feature -->
 {{ if $content.homepage.feature.enable }}
