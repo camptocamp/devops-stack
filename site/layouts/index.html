@@ -44,7 +44,7 @@
       {{ range .feature_item }}
       <div class="col-md-4 col-sm-6 mb-4">
         <div class="feature-card text-center">
-          <img src="/images/logo/{{.icon}}" class="mb-3 w-25" />
+          <img src="/images/logo/{{.icon}}" class="mb-3" height="80px" />
           <h4 class="mb-2">{{ .name | title }}</h4>
           <p>{{ .content | markdownify }}</p>
         </div>
