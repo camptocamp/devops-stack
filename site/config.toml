@@ -14,6 +14,23 @@ org_logo = "img/logo/camptocamp.png"
 org_logo_width = "200px"
 org_url = "https://camptocamp.com"
 
+############################# social site ########################
+[[params.social]]
+title = "github"
+icon = "ti-github" # themify icon : https://themify.me/themify-icons
+link = "https://github.com/camptocamp"
+
+[[params.social]]
+title = "twitter"
+icon = "ti-twitter-alt" # themify icon : https://themify.me/themify-icons
+link = "https://twitter.com/camptocamp"
+
+[[params.social]]
+title = "linkedin"
+icon = "ti-linkedin" # themify icon : https://themify.me/themify-icons
+link = "https://www.linkedin.com/company/camptocamp-sa/"
+
+
 ############################# Plugins ##############################
 
 # CSS Plugins
