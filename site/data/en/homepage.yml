@@ -160,6 +160,6 @@ call_to_action:
     - label: "Technical documentation"
       link : "docs"
     - label: "Request a demo"
-      link : "https://camptocamp.com"
+      link : "demo"
     - label: "Professional services"
-      link : "https://camptocamp.com"
+      link : "https://www.camptocamp.com/infrastructure_solutions_and_services"
