@@ -1,7 +1,9 @@
 variable "repo_url" {
-  type = string
+  type    = string
+  default = "https://github.com/camptocamp/camptocamp-devops-stack.git"
 }
 
 variable "target_revision" {
-  type = string
+  type    = string
+  default = "master"
 }
