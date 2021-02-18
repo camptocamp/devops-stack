@@ -20,10 +20,8 @@
     </div>
     <div class="row justify-content-center">
       {{ range .quickstart.item }}
-      <div class="col-md-3 col-sm-6 mb-3">
-        <div class="text-center">
-          <div><a href="{{ .link | safeURL }}" class="btn btn-primary">Get started with {{ .label }}</a></div>
-        </div>
+      <div class="col-md-5 col-sm-4 col-lg-3 mb-3 text-center">
+        <a href="{{ .link | safeURL }}" class="btn btn-primary">Get started with {{ .label }}</a>
       </div>
       {{ end }}
     </div>
