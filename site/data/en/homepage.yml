@@ -2,7 +2,7 @@
 banner:
   title: "DevOps Stack"
   subtitle: "Your Kubernetes Platform is one Git commit away."
-  image: "img/devops-stack-d.png"
+  image: "images/devops-stack-d.png"
   
   content: |
     The DevOps Stack provides a standard Kubernetes Platform, bringing together
@@ -17,17 +17,17 @@ banner:
   quickstart:
     item:
       - label: AKS
-        icon: "img/banner/azure-aks.png"
+        icon: "images/banner/azure-aks.png"
         content: "test"
         link: "aks"
       - label: EKS
-        icon: "img/banner/aws-eks.png"
+        icon: "images/banner/aws-eks.png"
         link: "eks"
       - label: SKS
-        icon: "img/banner/exoscale.png"
+        icon: "images/banner/exoscale.png"
         link: "sks"
       - label: K3S
-        icon: "img/banner/rancher-k3s.png"
+        icon: "images/banner/rancher-k3s.png"
         link: "k3s"
 
 # Features
@@ -90,10 +90,10 @@ service:
     # service item loop
     - title : "Choose your Cloud"
       images:
-      - "img/banner/aws-eks.png"
-      - "img/banner/azure-aks.png"
-      - "img/banner/rancher-k3s.png"
-      - "img/banner/exoscale.png"
+      - "images/banner/aws-eks.png"
+      - "images/banner/azure-aks.png"
+      - "images/banner/rancher-k3s.png"
+      - "images/banner/exoscale.png"
       content : "Whether you want to deploy AKS on Azure, EKS on Amazon, or K3S for a local playground, the DevOps Stack has you covered with ready-to-go Terraform modules."
       button:
         enable : true
@@ -103,7 +103,7 @@ service:
     # service item loop
     - title : "Defined as Code"
       images:
-      - "img/devops-tf-shot.jpg"
+      - "images/devops-tf-shot.jpg"
       content : "The DevOps Stack is based on Open Source Terraform modules so you get a declarative, convergent Kubernetes platform, leveraging the Infrastructure as Code approach."
       button:
         enable : true
@@ -113,9 +113,9 @@ service:
     # service item loop
     - title : "Continuously Deployed"
       images:
-      - "img/logo/argocd_banner.png"
-      - "img/logo/gitlab.png"
-      - "img/logo/github_actions.png"
+      - "images/logo/argocd_banner.png"
+      - "images/logo/gitlab.png"
+      - "images/logo/github_actions.png"
       content : "At the core of the DevOps Stack, ArgoCD manages applications and deploys them continually to the Kubernetes cluster. We also include a collection of CI/CD pipeline libraries you can use with GitLab or GitHub Actions to set up a GitOps workflow for your entire Kubernetes infrastructure."
       button:
         enable : true
@@ -125,7 +125,7 @@ service:
     # service item loop
     - title : "Operate"
       images:
-      - "img/helm.png"
+      - "images/helm.png"
       content : "With the integration of state-of-art of Observability tools, you can easily keep an eye on both your Kubernetes platform, and the applications running on it."
       button:
         enable : true
@@ -136,7 +136,7 @@ service:
 screenshot:
   enable : true
   title : "From Zero to Hero, in a few lines a code"
-  image : "img/devops-stack_vscode.png"
+  image : "images/devops-stack_vscode.png"
 
   
 
@@ -144,7 +144,7 @@ screenshot:
 call_to_action:
   enable : true
   title : "Ready to get started?"
-  image : "img/cta.svg"
+  image : "images/cta.svg"
   content : "Wherever you are in your Cloud Native journey, you can either dive straight into the technical documentation, or contact us for a demo or a consulting session."
   buttons:
     - label: "Technical documentation"
