@@ -113,9 +113,9 @@ service:
     # service item loop
     - title : "Continuously Deployed"
       images:
-      - "images/logo/argocd_banner.png"
-      - "images/logo/gitlab.png"
-      - "images/logo/github_actions.png"
+      - "images/banner/argo.png"
+      - "images/banner/gitlab.png"
+      - "images/banner/github_actions.png"
       content : "At the core of the DevOps Stack, ArgoCD manages applications and deploys them continually to the Kubernetes cluster. We also include a collection of CI/CD pipeline libraries you can use with GitLab or GitHub Actions to set up a GitOps workflow for your entire Kubernetes infrastructure."
       button:
         enable : true
