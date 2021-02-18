@@ -26,15 +26,6 @@
         </div>
       </div>
       {{ end }}
-
-      {{ with .enterprise_offer }}
-      <div class="row">
-        <div class="mt-5 col-lg-10 mx-auto text-center">
-          <img src="{{.icon}}" class="mb-3 w-50" />
-          <div><a href="{{ .link | safeURL }}" class="btn btn-primary">{{ .label }}</a></div>
-        </div>
-      </div>
-      {{ end }}
     </div>
   </div>
 </section>
@@ -153,12 +144,16 @@
       <div class="col-lg-5 col-md-6">
         <h2 class="section-title">{{ .title | markdownify }}</h2>
         {{with .content }}<p class="mb-4">{{ . | markdownify }}</p>{{ end }}
-        {{ if .button.enable }}
-        {{ with .button }}
-        <a href="{{ .link | relURL }}" class="btn btn-primary">{{ .label }}</a>
-        {{ end }}
-        {{ end }}
       </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+      {{ range .buttons }}
+      <div class="col-md-3 col-sm-6 mb-3">
+        <div class="text-center">
+          <div><a href="{{ .link | safeURL }}" class="btn btn-primary">{{ .label }}</a></div>
+        </div>
+      </div>
+      {{ end }}
     </div>
   </div>
 </section>

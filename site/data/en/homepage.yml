@@ -30,11 +30,6 @@ banner:
         icon: "img/rancher-k3s.png"
         link: "k3s"
 
-  enterprise_offer:
-    icon: "img/logo/camptocamp.png"
-    link: "https://camptocamp.com"
-    label: "Request a demo"
-
 # Features
 feature:
   enable : true
@@ -161,7 +156,10 @@ call_to_action:
   title : "Ready to get started?"
   image : "img/cta.svg"
   content : "We have multiple examples of using the DevOps Stack to deploy Kubernetes from the ground up."
-  button:
-    enable : true
-    label : "Check the docs"
-    link : "docs"
+  buttons:
+    - label: "Technical documentation"
+      link : "docs"
+    - label: "Request a demo"
+      link : "https://camptocamp.com"
+    - label: "Professional services"
+      link : "https://camptocamp.com"
