@@ -56,11 +56,13 @@ link = "plugins/slick/slick.min.js"
 # main menu
 [[menu.main]]
 name = "Docs"
+pre = "<i class='ti-book'></i> "
 url = "docs"
 weight = 1
 
 [[menu.main]]
 name = "GitHub"
+pre = "<i class='ti-github'></i> "
 url = "https://github.com/camptocamp/camptocamp-devops-stack"
 weight = 2
 
