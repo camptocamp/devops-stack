@@ -17,17 +17,17 @@ banner:
   quickstart:
     item:
       - label: AKS
-        icon: "img/azure-aks.png"
+        icon: "img/banner/azure-aks.png"
         content: "test"
         link: "aks"
       - label: EKS
-        icon: "img/aws-eks.png"
+        icon: "img/banner/aws-eks.png"
         link: "eks"
       - label: SKS
-        icon: "img/exoscale.png"
+        icon: "img/banner/exoscale.png"
         link: "sks"
       - label: K3S
-        icon: "img/rancher-k3s.png"
+        icon: "img/banner/rancher-k3s.png"
         link: "k3s"
 
 # Features
@@ -90,10 +90,10 @@ service:
     # service item loop
     - title : "Choose your Cloud"
       images:
-      - "img/aws-eks.png"
-      - "img/azure-aks.png"
-      - "img/rancher-k3s.png"
-      - "img/exoscale.png"
+      - "img/banner/aws-eks.png"
+      - "img/banner/azure-aks.png"
+      - "img/banner/rancher-k3s.png"
+      - "img/banner/exoscale.png"
       content : "Whether you want to deploy AKS on Azure, EKS on Amazon, or K3S for a local playground, the DevOps Stack has you covered with ready-to-go Terraform modules."
       button:
         enable : true
