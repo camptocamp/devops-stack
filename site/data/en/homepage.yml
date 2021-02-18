@@ -120,7 +120,7 @@ services:
     # service item loop
     - title : "Operate"
       images:
-      - "images/helm.png"
+      - "images/helm_540x.png"
       content : "With the integration of state-of-art of Observability tools, you can easily keep an eye on both your Kubernetes platform, and the applications running on it."
       button:
         enable : true
