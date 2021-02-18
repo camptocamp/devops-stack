@@ -17,17 +17,22 @@ org_url = "https://camptocamp.com"
 ############################# social site ########################
 [[params.social]]
 title = "github"
-icon = "ti-github" # themify icon : https://themify.me/themify-icons
+icon = "fab fa-github"
 link = "https://github.com/camptocamp"
 
 [[params.social]]
+title = "dev.to"
+icon = "fab fa-dev"
+link = "https://dev.to/camptocamp-ops"
+
+[[params.social]]
 title = "twitter"
-icon = "ti-twitter-alt" # themify icon : https://themify.me/themify-icons
+icon = "fab fa-twitter"
 link = "https://twitter.com/camptocamp"
 
 [[params.social]]
 title = "linkedin"
-icon = "ti-linkedin" # themify icon : https://themify.me/themify-icons
+icon = "fab fa-linkedin"
 link = "https://www.linkedin.com/company/camptocamp-sa/"
 
 
@@ -37,7 +42,7 @@ link = "https://www.linkedin.com/company/camptocamp-sa/"
 [[params.plugins.css]]
 link = "plugins/bootstrap/bootstrap.min.css"
 [[params.plugins.css]]
-link = "plugins/themify-icons/themify-icons.css"
+link = "plugins/fontawesome/css/all.min.css"
 [[params.plugins.css]]
 link = "plugins/slick/slick.css"
 [[params.plugins.css]]
@@ -56,13 +61,13 @@ link = "plugins/slick/slick.min.js"
 # main menu
 [[menu.main]]
 name = "Docs"
-pre = "<i class='ti-book'></i> "
+pre = "<i class='fas fa-book'></i> "
 url = "docs"
 weight = 1
 
 [[menu.main]]
 name = "GitHub"
-pre = "<i class='ti-github'></i> "
+pre = "<i class='fab fa-github'></i> "
 url = "https://github.com/camptocamp/camptocamp-devops-stack"
 weight = 2
 
