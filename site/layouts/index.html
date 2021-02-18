@@ -148,10 +148,8 @@
     </div>
     <div class="row justify-content-center mt-5">
       {{ range .buttons }}
-      <div class="col-md-3 col-sm-6 mb-3">
-        <div class="text-center">
-          <div><a href="{{ .link | safeURL }}" class="btn btn-primary">{{ .label }}</a></div>
-        </div>
+      <div class="col-lg-3 col-md-5 col-sm-6 mb-3 text-center">
+        <div><a href="{{ .link | safeURL }}" class="btn btn-primary">{{ .label }}</a></div>
       </div>
       {{ end }}
     </div>
