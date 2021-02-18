@@ -42,7 +42,7 @@
       {{ range .feature_item }}
       <div class="col-lg-4 col-md-5 col-sm-6 mb-4">
         <a href="{{ .link }}" alt="{{ .name | title }}" target="_blank">
-          <div class="feature-card text-center">
+          <div class="feature-card text-center h-100">
             <img src="/images/logo/{{.icon}}" class="mb-3" height="80px" />
             <h4 class="mb-2">{{ .name | title }}</h4>
             <p>{{ .content | markdownify }}</p>
