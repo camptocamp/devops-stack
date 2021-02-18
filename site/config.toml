@@ -54,16 +54,16 @@ link = "plugins/slick/slick.min.js"
 ############################## navigation ###############################
 
 # main menu
-#[[menu.main]]
-#name = "Docs"
-#url = "docs"
-#weight = 1
-#
-#[[menu.main]]
-#name = "News"
-#url = "news"
-#weight = 2
-#
+[[menu.main]]
+name = "Docs"
+url = "docs"
+weight = 1
+
+[[menu.main]]
+name = "GitHub"
+url = "https://github.com/camptocamp/camptocamp-devops-stack"
+weight = 2
+
 #[[menu.main]]
 #name = "Contact"
 #url = "contact"
