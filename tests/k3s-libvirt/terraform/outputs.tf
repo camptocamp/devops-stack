@@ -46,5 +46,6 @@ output "keycloak_url" {
 }
 
 output "admin_password" {
-  value = module.cluster.admin_password
+  sensitive = true
+  value     = module.cluster.admin_password
 }
