@@ -24,7 +24,7 @@ banner:
         icon: "img/aws-eks.png"
         link: "eks"
       - label: SKS
-        icon: "img/exoscale_banner.jpg"
+        icon: "img/exoscale.png"
         link: "sks"
       - label: K3S
         icon: "img/rancher-k3s.png"
@@ -113,7 +113,7 @@ service:
       - "img/aws-eks.png"
       - "img/azure-aks.png"
       - "img/rancher-k3s.png"
-      - "img/exoscale_banner.jpg"
+      - "img/exoscale.png"
       content : "Whether you want to deploy AKS on Azure, EKS on Amazon, or K3S for a local playground, the DevOps Stack has you covered with ready-to-go Terraform modules."
       button:
         enable : true
