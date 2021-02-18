@@ -119,17 +119,17 @@ service:
       content : "At the core of the DevOps Stack, ArgoCD manages applications and deploys them continually to the Kubernetes cluster. We also include a collection of CI/CD pipeline libraries you can use with GitLab or GitHub Actions to set up a GitOps workflow for your entire Kubernetes infrastructure."
       button:
         enable : true
-        label : "Check it out"
+        label : "Deploy it"
         link : "#"
         
     # service item loop
-    - title : "You're at the Helm"
+    - title : "Operate"
       images:
       - "img/helm.png"
-      content : "Easily pick and choose the applications you wish to activate in the stack. Add your own applications and let ArgoCD do the deployment magic."
+      content : "With the integration of state-of-art of Observability tools, you can easily keep an eye on both your Kubernetes platform, and the applications running on it."
       button:
         enable : true
-        label : "Check it out"
+        label : "Show me the dashboards"
         link : "#"
         
 ################### Screenshot ########################
