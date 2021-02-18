@@ -63,7 +63,7 @@ feature:
     # feature item loop
     - name : "Loki"
       icon : "loki.png"
-      content : "Application logs are gathered and made accessible using Loki inside Grafana."
+      content : "Logs from the Stack components and additional applications are gathered and made accessible in Grafana using Loki."
       
     # feature item loop
     - name : "Cert-Manager"
