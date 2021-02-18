@@ -145,7 +145,7 @@ call_to_action:
   enable : true
   title : "Ready to get started?"
   image : "img/cta.svg"
-  content : "We have multiple examples of using the DevOps Stack to deploy Kubernetes from the ground up."
+  content : "Wherever you are in your Cloud Native journey, you can either dive straight into the technical documentation, or contact us for a demo or a consulting session."
   buttons:
     - label: "Technical documentation"
       link : "docs"
