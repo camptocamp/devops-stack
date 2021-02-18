@@ -38,46 +38,55 @@ feature:
     # feature item loop
     - name : "Kubernetes"
       icon : "kubernetes.png"
+      link: "https://kubernetes.io"
       content : "At the heart of the DevOps Stack, Kubernetes powers all application deployments, and more."
 
     # feature item loop
     - name : "Terraform"
       icon : "terraform.png"
+      link: "https://terraform.io"
       content : "The base layer of the Stack, provisioning the whole Infrastructure as Code, from IaaS to Argo CD."
 
     # feature item loop
     - name : "Argo CD"
       icon : "argocd.png"
+      link: "https://argoproj.github.io/argo-cd/"
       content : "DevOps Stack Applications are deployed in a GitOps fashion, using Continuous Deployment for Kubernetes Resources."
 
     # feature item loop
     - name : "Prometheus"
       icon : "prometheus.png"
+      link: "https://prometheus.io"
       content : "The standard in Kubernetes Time Series Database, set up for the whole Stack out-of-the-box."
       
     # feature item loop
     - name : "Grafana"
       icon : "grafana.png"
+      link: "https://grafana.com"
       content : "Readily-made Observability Dashboards are provided for the Kubernetes cluster and Stack Components."
       
     # feature item loop
     - name : "Loki"
       icon : "loki.png"
+      link: "https://grafana.com/oss/loki/"
       content : "Logs from the Stack components and additional applications are gathered and made accessible in Grafana using Loki."
       
     # feature item loop
     - name : "Cert-Manager"
       icon : "cert-manager.png"
+      link: "https://cert-manager.io"
       content : "Valid public certificates are automatically provided for all Stack Components, courtesy of Let's Encrypt."
       
     # feature item loop
     - name : "Open ID Connect"
       icon : "oidc.png"
+      link: "https://openid.net/connect/"
       content : "Authentication is set up for all Components in the Stack, using either the platform's authentication system, or Keycloak."
 
     # feature item loop
     - name : "Traefik"
       icon : "traefik.jpeg"
+      link: "https://traefik.io/"
       content : "The Traefik Ingress controller is used to route web access to all Components, on your domain of choice."
       
 
