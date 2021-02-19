@@ -15,6 +15,8 @@ locals {
       }
     ]
   )
+
+  argocd_chart = yamldecode(file("${path.module}/../../argocd/argocd/Chart.yaml")).dependencies.0
 }
 
 resource "time_static" "iat" {}
@@ -22,22 +24,24 @@ resource "time_static" "iat" {}
 resource "random_uuid" "jti" {}
 
 resource "helm_release" "argocd" {
-  name              = "argocd"
-  chart             = "${path.module}/../../argocd/argocd"
+  name       = "argocd"
+  repository = local.argocd_chart.repository
+  chart      = "argo-cd"
+  version    = local.argocd_chart.version
+
   namespace         = "argocd"
   dependency_update = true
   create_namespace  = true
   timeout           = 10800
 
   values = [
-    file("${path.module}/../../argocd/argocd/values.yaml"),
+    yamlencode(yamldecode(file("${path.module}/../../argocd/argocd/values.yaml")).argo-cd),
     <<EOT
-    argo-cd:
-      configs:
-        secret:
-          extra:
-            oidc.default.clientSecret: ${var.oidc.client_secret}
-            accounts.pipeline.tokens: '${local.argocd_accounts_pipeline_tokens}'
+    configs:
+      secret:
+        extra:
+          oidc.default.clientSecret: ${var.oidc.client_secret}
+          accounts.pipeline.tokens: '${local.argocd_accounts_pipeline_tokens}'
     EOT
   ]
 }
@@ -97,4 +101,3 @@ resource "random_password" "oauth2_cookie_secret" {
   length  = 16
   special = false
 }
-
