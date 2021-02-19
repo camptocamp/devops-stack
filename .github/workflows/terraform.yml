@@ -18,6 +18,9 @@ jobs:
       TF_ROOT: ${{ matrix.tf_root }}
       TF_VAR_repo_url: ${{ github.server_url }}/${{ github.actor }}/camptocamp-devops-stack.git
       TF_VAR_target_revision: ${{ github.head_ref }}
+    defaults:
+      run:
+        working-directory: ${{ matrix.tf_root }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -26,28 +29,49 @@ jobs:
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 0.14.6
-          terraform_wrapper: false
 
       - name: Terraform Format
         run: terraform fmt -check -diff -recursive
 
-      - name: Deploy Cluster from scratch
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate
+        run: terraform validate -no-color
+
+      - name: Terraform Apply
         if: github.event_name == 'pull_request'
         env:
           TF_VAR_repo_url: ${{ github.server_url }}/${{ github.actor }}/camptocamp-devops-stack.git
           TF_VAR_target_revision: ${{ github.head_ref }}
-        run: ./scripts/provision.sh
+        run: terraform apply --auto-approve
 
       - name: Extract branch name
         if: github.event_name == 'push'
         shell: bash
         run: echo "TF_VAR_target_revision=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
 
-      - name: Deploy Cluster from scratch
+      - name: Terraform Apply
         if: github.event_name == 'push'
         env:
           TF_VAR_repo_url: ${{ github.server_url }}/${{ github.repository }}
-        run: ./scripts/provision.sh
+        run: terraform apply --auto-approve
+
+      - name: Terraform Plan
+        if: github.event_name == 'pull_request'
+        env:
+          TF_VAR_repo_url: ${{ github.server_url }}/${{ github.actor }}/camptocamp-devops-stack.git
+          TF_VAR_target_revision: ${{ github.head_ref }}
+        run: terraform plan --detailed-exitcode -no-color
+
+      - name: Terraform Plan
+        if: github.event_name == 'push'
+        env:
+          TF_VAR_repo_url: ${{ github.server_url }}/${{ github.repository }}
+        run: terraform plan --detailed-exitcode -no-color
+
+      - name: Generate outputs.tf
+        run: terraform-bin output -json > outputs.json
 
       - name: Wait for App of Apps
         uses: docker://argoproj/argocd:v1.7.12
@@ -55,7 +79,7 @@ jobs:
           entrypoint: ./scripts/wait-for-app-of-apps.sh
 
       - name: Destroy Cluster
-        run: ./scripts/destroy.sh
+        run: terraform destroy --auto-approve
 
   update:
     name: Update
@@ -68,12 +92,14 @@ jobs:
     env:
       CLUSTER_NAME: default
       TF_ROOT: ${{ matrix.tf_root }}
+    defaults:
+      run:
+        working-directory: ${{ matrix.tf_root }}
     steps:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 0.14.6
-          terraform_wrapper: false
 
       - name: Checkout ${{ github.base_ref }}
         uses: actions/checkout@v2
@@ -83,11 +109,26 @@ jobs:
       - name: Terraform Format
         run: terraform fmt -check -diff -recursive
 
-      - name: Deploy Cluster with ${{ github.base_ref }} code
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate
+        run: terraform validate -no-color
+
+      - name: Terraform Apply
         env:
           TF_VAR_repo_url: ${{ github.server_url }}/camptocamp/camptocamp-devops-stack.git
           TF_VAR_target_revision: ${{ github.base_ref }}
-        run: ./scripts/provision.sh
+        run: terraform apply --auto-approve
+
+      - name: Terraform Plan
+        env:
+          TF_VAR_repo_url: ${{ github.server_url }}/camptocamp/camptocamp-devops-stack.git
+          TF_VAR_target_revision: ${{ github.base_ref }}
+        run: terraform plan --detailed-exitcode -no-color
+
+      - name: Generate outputs.tf
+        run: terraform-bin output -json > outputs.json
 
       - name: Wait for App of Apps
         uses: docker://argoproj/argocd:v1.7.12
@@ -100,22 +141,28 @@ jobs:
           ref: ${{ github.ref }}
           clean: false
 
-      - name: Dry-run with ${{ github.ref }} code
+      - name: Terraform Init on ${{ github.ref }}
+        run: terraform init
+
+      - name: Terraform Plan on ${{ github.ref }}
         env:
           TF_VAR_repo_url: ${{ github.server_url }}/${{ github.actor }}/camptocamp-devops-stack.git
           TF_VAR_target_revision: ${{ github.head_ref }}
-        run: ./scripts/plan.sh
+        run: terraform plan -no-color -out plan
+
+      - name: Generate outputs.tf
+        run: terraform-bin show -json plan | jq -r '.planned_values.outputs' > outputs.json
 
       - name: ArgoCD app diff with ${{ github.ref }}
         uses: docker://argoproj/argocd:v1.7.12
         with:
           entrypoint: ./scripts/app-diff.sh
 
-      - name: Update cluster
+      - name: Terraform Apply on ${{ github.ref }}
         env:
           TF_VAR_repo_url: ${{ github.server_url }}/${{ github.actor }}/camptocamp-devops-stack.git
           TF_VAR_target_revision: ${{ github.head_ref }}
-        run: ./scripts/provision.sh
+        run: terraform apply --auto-approve
 
       - name: Wait for App of Apps
         uses: docker://argoproj/argocd:v1.7.12
@@ -123,4 +170,4 @@ jobs:
           entrypoint: ./scripts/wait-for-app-of-apps.sh
 
       - name: Destroy Cluster
-        run: ./scripts/destroy.sh
+        run: terraform destroy --auto-approve
