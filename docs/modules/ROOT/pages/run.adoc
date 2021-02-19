@@ -6,7 +6,7 @@
 [source,shell,subs="attributes"]
 ----
 git clone {url-repo}
-cd {project-name}/examples/k3s-docker-demo-app
+cd {project-name}/tests/k3s-docker/terraform
 ----
 
 == Run the stack
@@ -16,7 +16,8 @@ cd {project-name}/examples/k3s-docker-demo-app
 Just run :
 [source,shell]
 ----
-make
+terraform init
+terraform apply
 ----
 
 It will:
@@ -31,5 +32,5 @@ It will:
 Just run :
 [source,shell]
 ----
-make clean
+terraform destroy
 ----
