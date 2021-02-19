@@ -1,4 +1,4 @@
-baseURL = "http://raphink.devops-stack.io/"
+baseURL = "https://raphink.devops-stack.io/"
 languageCode = "en-us"
 title = "DevOps Stack"
 theme = "bigspring"
