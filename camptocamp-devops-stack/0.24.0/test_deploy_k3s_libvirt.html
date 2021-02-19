@@ -261,13 +261,13 @@ k3s-libvirt</code></pre>
 <div class="sect2">
 <h3 id="_deploying_using_makefile"><a class="anchor" href="#_deploying_using_makefile"></a>Deploying using Makefile</h3>
 <div class="paragraph">
-<p>The folder of the flavor you are trying to test contains a Makefile. Typing <code>make</code> in that folder is sufficient to deploy the DevOps stack.</p>
+<p>The folder of the flavor you are trying to test contains a terraform repository. Typing <code>terraform init &amp;&amp; terraform apply</code> in that folder is sufficient to deploy the DevOps stack.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_cleaning_up"><a class="anchor" href="#_cleaning_up"></a>Cleaning up</h3>
 <div class="paragraph">
-<p>The Makefile contains a target <code>clean</code> so using <code>make clean</code> will delete everything that was deployed for the test.</p>
+<p><code>terraform destroy</code> will delete everything that was deployed for the test.</p>
 </div>
 </div>
 <div class="sect2">
