@@ -2,7 +2,7 @@
 banner:
   title: "DevOps Stack"
   subtitle: "Your Kubernetes Platform is one Git commit away."
-  image: "images/devops-stack-d.png"
+  image: "images/devops-stack-circle2.png"
   
   content: |
     The DevOps Stack provides a standard Kubernetes Platform, bringing together

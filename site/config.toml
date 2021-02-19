@@ -6,7 +6,7 @@ theme = "bigspring"
 
 [params]
 author = "Camptocamp"
-logo = "images/devops-stack-d_by_c2c.png"
+logo = "images/devops-stack-circle_by_c2c.png"
 logo_width = "200px"
 
 org_name = "Camptocamp"

@@ -13,8 +13,8 @@
    version="1.1"
    id="svg8"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
-   sodipodi:docname="devops-stack-d_by_c2c.svg"
-   inkscape:export-filename="/home/raphink/src/github.com/camptocamp/camptocamp-devops-stack/site/static/images/devops-stack-d_by_c2c.png"
+   sodipodi:docname="devops-stack-circle_by_c2c.svg"
+   inkscape:export-filename="/home/raphink/src/github.com/camptocamp/camptocamp-devops-stack/site/static/images/devops-stack-circle_by_c2c.png"
    inkscape:export-xdpi="48"
    inkscape:export-ydpi="48">
   <defs
@@ -60,58 +60,44 @@
      id="layer1"
      transform="translate(-22.3982,-40.630361)">
     <g
-       id="g2604"
-       transform="matrix(0.1026381,0,0,0.1026381,-55.810483,-1.7391559)">
+       id="g1071"
+       transform="matrix(0.11954095,-0.10140003,0.10140003,0.11954095,-75.055979,78.63803)">
       <text
          xml:space="preserve"
-         style="font-style:normal;font-weight:normal;font-size:360.129px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#4b6584;fill-opacity:1;stroke:none;stroke-width:27.0099"
-         x="-1343.0148"
-         y="452.29358"
-         id="text1852"
-         transform="matrix(-0.35550256,-0.61592552,1.2178547,-0.70292663,0,0)"><tspan
+         style="font-style:normal;font-weight:normal;font-size:256.202px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#a3cb38;fill-opacity:1;stroke:none;stroke-width:19.2153"
+         x="906.79321"
+         y="317.59979"
+         id="text1047"
+         transform="scale(0.71115845,1.4061564)"><tspan
            sodipodi:role="line"
-           id="tspan1850"
-           x="-1343.0148"
-           y="452.29358"
-           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-family:Inter;-inkscape-font-specification:'Inter Semi-Bold';fill:#4b6584;fill-opacity:1;stroke-width:27.0099">&gt;</tspan></text>
-      <g
-         id="g1953">
-        <text
-           xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:360.129px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#a5b1c2;fill-opacity:1;stroke:none;stroke-width:27.0099"
-           x="1207.5345"
-           y="499.21417"
-           id="text1860"
-           transform="matrix(0.71115621,-0.00178137,0.00352228,1.406152,0,0)"><tspan
-             sodipodi:role="line"
-             id="tspan1858"
-             x="1207.5345"
-             y="499.21417"
-             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-family:Inter;-inkscape-font-specification:'Inter Semi-Bold';fill:#a5b1c2;fill-opacity:1;stroke-width:27.0099">&gt;</tspan></text>
-        <text
-           xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:360.129px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#4b7bec;fill-opacity:1;stroke:none;stroke-width:27.0099"
-           x="35.646759"
-           y="-641.992"
-           id="text1856"
-           transform="matrix(-0.3549824,0.61622549,-1.2184477,-0.70189807,0,0)"><tspan
-             sodipodi:role="line"
-             id="tspan1854"
-             x="35.646759"
-             y="-641.992"
-             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-family:Inter;-inkscape-font-specification:'Inter Semi-Bold';fill:#4b7bec;fill-opacity:1;stroke-width:27.0099">&gt;</tspan></text>
-        <g
-           aria-label="&gt;"
-           transform="matrix(-0.35550256,-0.61592553,1.2178547,-0.70292664,0,0)"
-           id="text1872"
-           style="font-style:normal;font-weight:normal;font-size:360.129px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#4b6584;fill-opacity:1;stroke:none;stroke-width:27.0099">
-          <path
-             d="m -1186.4814,351.26307 v -5.88279 l 1.4067,2.42985 -124.3059,-53.32876 v -45.39979 l 174.9491,80.82441 v 36.83137"
-             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-family:Inter;-inkscape-font-specification:'Inter Semi-Bold';fill:#4b6584;fill-opacity:1;stroke-width:27.0099"
-             id="path1874"
-             sodipodi:nodetypes="ccccccc" />
-        </g>
-      </g>
+           id="tspan1045"
+           x="906.79321"
+           y="317.59979"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-family:Inter;-inkscape-font-specification:'Inter Semi-Bold';fill:#a3cb38;fill-opacity:1;stroke-width:19.2153">&gt;</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:256.202px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#0652dd;fill-opacity:1;stroke:none;stroke-width:19.2153"
+         x="869.96008"
+         y="317.59979"
+         id="text1051"
+         transform="scale(0.71115845,1.4061564)"><tspan
+           sodipodi:role="line"
+           id="tspan1049"
+           x="869.96008"
+           y="317.59979"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-family:Inter;-inkscape-font-specification:'Inter Semi-Bold';fill:#0652dd;fill-opacity:1;stroke-width:19.2153">&gt;</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:256.202px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#f79f1f;fill-opacity:1;stroke:none;stroke-width:19.2153"
+         x="833.12695"
+         y="317.59979"
+         id="text1055"
+         transform="scale(0.71115845,1.4061564)"><tspan
+           sodipodi:role="line"
+           id="tspan1053"
+           x="833.12695"
+           y="317.59979"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-family:Inter;-inkscape-font-specification:'Inter Semi-Bold';fill:#f79f1f;fill-opacity:1;stroke-width:19.2153">&gt;</tspan></text>
     </g>
     <text
        xml:space="preserve"
