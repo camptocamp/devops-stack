@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Untitled :: Camptocamp’s DevOps Stack</title>
-    <link rel="canonical" href="https://devops-stack.io/camptocamp-devops-stack/camptocamp-devops-stack/0.24.0/develop.html">
+    <link rel="canonical" href="https://devops-stack.io/camptocamp-devops-stack/camptocamp-devops-stack/0.24.0/quickstart_k3s_libvirt.html">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../_/css/site.css">
     <link rel="icon" href="../../_/img/c2c_favicon.png" type="image/x-icon">
@@ -66,12 +66,12 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="quickstart_k3s_docker.html">K3s on Docker</a>
   </li>
-  <li class="nav-item" data-depth="3">
+  <li class="nav-item is-current-page" data-depth="3">
     <a class="nav-link" href="quickstart_k3s_libvirt.html">K3s on Libvirt</a>
   </li>
 </ul>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="develop.html">Improve the DevOps stack</a>
 <ul class="nav-list">
@@ -230,30 +230,86 @@
   <ul>
     <li><a href="index.html">Camptocamp’s DevOps stack</a></li>
     <li>How-to guides</li>
-    <li><a href="develop.html">Improve the DevOps stack</a></li>
+    <li><a href="#ROOT:quickstart.adoc">Quickstarts</a></li>
+    <li><a href="quickstart_k3s_libvirt.html">K3s on Libvirt</a></li>
   </ul>
 </nav>
 </div>
   <div class="content">
 <article class="doc">
 <div class="sect1">
-<h2 id="_test_andor_improve_the_devops_stack"><a class="anchor" href="#_test_andor_improve_the_devops_stack"></a>Test and/or improve the DevOps stack</h2>
+<h2 id="_k3s_on_libvirt_quickstart"><a class="anchor" href="#_k3s_on_libvirt_quickstart"></a>K3s on Libvirt Quickstart</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_setting_up_extra_terraform_provider"><a class="anchor" href="#_setting_up_extra_terraform_provider"></a>Setting up extra terraform provider</h3>
 <div class="paragraph">
-<p>If you want to help improving this stack or simply want to test it on your workstation, you can clone this project, then cd to the <code>tests</code> directory and choose your flavor.</p>
+<p>Due to an issue in the terraform provider system, you need to download and place the libvirt provider at a very specific spot in your home directory before deploying k3s.
+You can find the libvirt provider version in modules/k3s/libvirt/versions.tf to keep things simple this version will be referred as $LIBVIRT_PROVIDER_VERSION from now on.
+Go to <a href="https://github.com/dmacvicar/terraform-provider-libvirt/releases/tag/v$LIBVIRT_PROVIDER_VERSION" class="bare">https://github.com/dmacvicar/terraform-provider-libvirt/releases/tag/v$LIBVIRT_PROVIDER_VERSION</a> and find the correct link for your OS/CPU_ARCH (an example is "linux_amd64"; now refered as $OS_CPU_ARCH).</p>
 </div>
-<div class="paragraph">
-<p>There are different ways to test the DevOps stack, the full documentation on how to make changes and test them is available for each flavor of the DevOps stack:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">mkdir -p ~/.local/share/terraform/plugins/registry.terraform.io/dmacvicar/libvirt/$LIBVIRT_PROVIDER_VERSION/$OS_CPU_ARCH/
+mv terraform-provider-libvirt ~/.local/share/terraform/plugins/registry.terraform.io/dmacvicar/libvirt/$LIBVIRT_PROVIDER_VERSION/$OS_CPU_ARCH/terraform-provider-libvirt</code></pre>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h3>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="test_deploy_k3s_docker.html" class="page">k3s-docker</a> for testing k3s in docker containers.</p>
+<p>Access to a functional Libvirt daemon,</p>
 </li>
 <li>
-<p><a href="test_deploy_k3s_libvirt.html" class="page">k3s-libvirt</a> for testing k3s in virtal machines using libvirt.</p>
+<p>Knowledge of Terraform basis.</p>
 </li>
 </ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_create_terraform_root_module"><a class="anchor" href="#_create_terraform_root_module"></a>Create Terraform root module</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">module "cluster" {
+  source = "git::https://github.com/camptocamp/camptocamp-devops-stack.git//modules/k3s/libvirt?ref=master"
+
+  cluster_name = "my-cluster"
+  node_count   = 2
+
+  repo_url        = "https://github.com/camptocamp/camptocamp-devops-stack.git"
+  target_revision = "master"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_deploy_the_cluster"><a class="anchor" href="#_deploy_the_cluster"></a>Deploy the cluster</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ terraform init
+$ terraform apply</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should have the services URL as outputs.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_get_kubeconfig"><a class="anchor" href="#_get_kubeconfig"></a>Get kubeconfig</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ terraform output -json kubeconfig | jq -r .</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_destroy_the_cluster"><a class="anchor" href="#_destroy_the_cluster"></a>Destroy the cluster</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ terraform destroy</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
