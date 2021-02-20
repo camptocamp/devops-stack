@@ -29,6 +29,12 @@ $ terraform apply
 
 You should have the services URL as outputs.
 
+=== Get kubeconfig
+
+```shell
+$ terraform output -json kubeconfig | jq -r .
+```
+
 === Destroy the cluster
 
 ```shell
