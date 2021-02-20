@@ -282,6 +282,14 @@ $ terraform apply</code></pre>
 </div>
 </div>
 <div class="sect2">
+<h3 id="_get_kubeconfig"><a class="anchor" href="#_get_kubeconfig"></a>Get kubeconfig</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ terraform output -json kubeconfig | jq -r .</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_destroy_the_cluster"><a class="anchor" href="#_destroy_the_cluster"></a>Destroy the cluster</h3>
 <div class="listingblock">
 <div class="content">
