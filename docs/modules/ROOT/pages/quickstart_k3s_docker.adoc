@@ -4,7 +4,7 @@
 
 - Access to a functional Docker Engine,
 - CGroupv2 disabled (K3s does not support for now),
-- Knowledge of Terraform basis,
+- Knowledge of Terraform basis.
 
 === Create Terraform root module
 

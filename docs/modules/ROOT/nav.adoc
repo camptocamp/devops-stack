@@ -5,7 +5,8 @@
 * How-to guides
 ** xref:ROOT:quickstart.adoc[Quickstarts]
 *** xref:ROOT:quickstart_k3s_docker.adoc[K3s on Docker]
-** xref:ROOT:develop.adoc[Test and/or improve the DevOps stack]
+*** xref:ROOT:quickstart_k3s_libvirt.adoc[K3s on Libvirt]
+** xref:ROOT:develop.adoc[Improve the DevOps stack]
 *** xref:ROOT:test_deploy_k3s_docker.adoc[Test DevOps Stack using k3s on docker]
 *** xref:ROOT:test_deploy_k3s_libvirt.adoc[Test DevOps Stack using k3s on libvirt]
 ** xref:ROOT:new_project.adoc[Create a new Project]
