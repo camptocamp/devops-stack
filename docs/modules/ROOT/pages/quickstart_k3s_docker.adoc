@@ -1,0 +1,36 @@
+== K3s on Docker Quickstart
+
+=== Prerequisites
+
+- Access to a functional Docker Engine,
+- CGroupv2 disabled (K3s does not support for now),
+- Knowledge of Terraform basis,
+
+=== Create Terraform root module
+
+```hcl
+module "cluster" {
+  source = "git::https://github.com/camptocamp/camptocamp-devops-stack.git//modules/k3s/docker?ref=master"
+
+  cluster_name = "my-cluster"
+  node_count   = 2
+
+  repo_url        = "https://github.com/camptocamp/camptocamp-devops-stack.git"
+  target_revision = "master"
+}
+```
+
+=== Deploy the cluster
+
+```shell
+$ terraform init
+$ terraform apply
+```
+
+You should have the services URL as outputs.
+
+=== Destroy the cluster
+
+```shell
+$ terraform destroy
+```
