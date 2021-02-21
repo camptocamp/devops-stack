@@ -1,0 +1,60 @@
+---
+name: 'Terraform'
+on:
+  push:
+    branches:
+      - blue
+      - green
+  pull_request:
+jobs:
+  terraform:
+    name: Terraform
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: us-east-1
+      CAMPTOCAMP_DEVOPS_STACK_VERSION: 0.24.0
+      TF_ROOT: terraform
+    defaults:
+      run:
+        working-directory: terraform
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 0.14.6
+
+      - name: Terraform Format
+        run: terraform fmt -check -diff -recursive
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate
+        run: terraform validate -no-color
+
+      - name: Terraform Plan
+        if: github.event_name == 'pull_request'
+        run: terraform plan -no-color -out plan
+
+      - name: Generate outputs.tf
+        if: github.event_name == 'pull_request'
+        run: terraform-bin show -json plan | jq -r '.planned_values.outputs' > outputs.json
+
+      - name: ArgoCD app diff with ${{ github.ref }}
+        if: github.event_name == 'pull_request'
+        uses: docker://argoproj/argocd:v1.7.12
+        with:
+          entrypoint: ./.github/scripts/app-diff.sh
+
+      - name: Terraform Apply
+        if: github.event_name == 'push'
+        run: terraform apply --auto-approve
+
+      - name: Terraform Plan
+        if: github.event_name == 'push'
+        run: terraform plan --detailed-exitcode -no-color
