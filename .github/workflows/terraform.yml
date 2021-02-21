@@ -106,9 +106,6 @@ jobs:
         with:
           ref: ${{ github.base_ref }}
 
-      - name: Terraform Format
-        run: terraform fmt -check -diff -recursive
-
       - name: Terraform Init
         run: terraform init
 
@@ -141,10 +138,20 @@ jobs:
           ref: ${{ github.ref }}
           clean: false
 
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt -check -diff -recursive
+
       - name: Terraform Init on ${{ github.ref }}
+        id: init
         run: terraform init
 
+      - name: Terraform Validate
+        id: Validate
+        run: terraform validate -no-color
+
       - name: Terraform Plan on ${{ github.ref }}
+        id: plan
         env:
           TF_VAR_repo_url: ${{ github.server_url }}/${{ github.actor }}/camptocamp-devops-stack.git
           TF_VAR_target_revision: ${{ github.head_ref }}
@@ -154,6 +161,7 @@ jobs:
         run: terraform-bin show -json plan | jq -r '.planned_values.outputs' > outputs.json
 
       - name: ArgoCD app diff with ${{ github.ref }}
+        id: app-diff
         uses: docker://argoproj/argocd:v1.7.12
         with:
           entrypoint: ./scripts/app-diff.sh
@@ -171,3 +179,31 @@ jobs:
 
       - name: Destroy Cluster
         run: terraform destroy --auto-approve
+
+      - uses: actions/github-script@0.9.0
+        if: github.event_name == 'pull_request'
+        env:
+          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
+            #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
+            #### Terraform Validation 🤖${{ steps.validate.outputs.stdout }}
+            #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
+            #### ArgoCD app diif \`${{ steps.app-diff.outcome }}\`
+
+            <details><summary>Show Plan</summary>
+
+            \`\`\`${process.env.PLAN}\`\`\`
+
+            </details>
+
+            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*`;
+
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            })
