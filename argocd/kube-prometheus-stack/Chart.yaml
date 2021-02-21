@@ -4,5 +4,5 @@ name: "kube-prometheus-stack"
 version: "0"
 dependencies:
   - name: "kube-prometheus-stack"
-    version: "13.5.0"
+    version: "13.10.0"
     repository: "https://prometheus-community.github.io/helm-charts"
