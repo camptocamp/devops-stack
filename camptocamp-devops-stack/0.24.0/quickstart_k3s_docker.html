@@ -271,6 +271,35 @@
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>If you want to use this in pipeline, you have to declare the required outputs</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">output "argocd_auth_token" {
+  sensitive = true
+  value     = module.cluster.argocd_auth_token
+}
+
+output "kubeconfig" {
+  sensitive = true
+  value     = module.cluster.kubeconfig
+}
+
+output "repo_url" {
+  value = module.cluster.repo_url
+}
+
+output "target_revision" {
+  value = module.cluster.target_revision
+}
+
+output "app_of_apps_values" {
+  sensitive = true
+  value     = module.cluster.app_of_apps_values
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_deploy_the_cluster"><a class="anchor" href="#_deploy_the_cluster"></a>Deploy the cluster</h3>
