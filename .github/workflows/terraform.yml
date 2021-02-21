@@ -145,7 +145,7 @@ jobs:
         run: terraform init
 
       - name: Terraform Validate
-        id: Validate
+        id: validate
         run: terraform validate -no-color
 
       - name: Terraform Plan on ${{ github.ref }}
