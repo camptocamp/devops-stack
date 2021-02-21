@@ -3,6 +3,7 @@ variables:
   ARGOCD_VERSION: "1.7.12"
   TERRAFORM_VERSION: "0.14.6"
   CAMPTOCAMP_DEVOPS_STACK_VERSION: "0.24.0"
+  TF_ROOT: terraform
 
 stages:
   - terraform
@@ -18,12 +19,19 @@ mr:terraform:plan:
     name: hashicorp/terraform:$TERRAFORM_VERSION
     entrypoint: [""]
   variables:
-    CLUSTER_NAME: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
+    TF_WORKSPACE: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
+  before_script:
+    - wget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 -O /tmp/jq
+    - chmod +x /tmp/jq
+    - export PATH="/tmp:$PATH"
   script:
-    - wget -O- "https://raw.githubusercontent.com/camptocamp/camptocamp-devops-stack/v$CAMPTOCAMP_DEVOPS_STACK_VERSION/scripts/plan.sh" | sh
+    - cd "$TF_ROOT"
+    - terraform init
+    - terraform plan -out plan
+    - terraform show -json plan | jq -r '.planned_values.outputs' > outputs.json
   artifacts:
     paths:
-      - terraform/outputs.json
+      - "$TF_ROOT/outputs.json"
     expire_in: 1 hour
     when: always
   rules:
@@ -52,9 +60,13 @@ pb:terraform:apply:
     name: hashicorp/terraform:$TERRAFORM_VERSION
     entrypoint: [""]
   variables:
-    CLUSTER_NAME: $CI_COMMIT_REF_NAME
+    TF_WORKSPACE: $CI_COMMIT_REF_NAME
   script:
-    - wget -O- "https://raw.githubusercontent.com/camptocamp/camptocamp-devops-stack/v$CAMPTOCAMP_DEVOPS_STACK_VERSION/scripts/provision.sh" | sh
+    - cd "$TF_ROOT"
+    - terraform init
+    - terraform apply --auto-approve
+    - terraform plan --detailed-exitcode
+    - terraform output -json > outputs.json
   environment:
     name: cluster/$CI_COMMIT_REF_NAME
     on_stop: pb:terraform:destroy
@@ -71,9 +83,12 @@ pb:terraform:destroy:
     name: hashicorp/terraform:$TERRAFORM_VERSION
     entrypoint: [""]
   variables:
-    CLUSTER_NAME: $CI_COMMIT_REF_NAME
+    TF_WORKSPACE: $CI_COMMIT_REF_NAME
   script:
-    - wget -O- "https://raw.githubusercontent.com/camptocamp/camptocamp-devops-stack/v$CAMPTOCAMP_DEVOPS_STACK_VERSION/scripts/destroy.sh" | sh
+    - cd "$TF_ROOT"
+    - terraform init
+    - terraform destroy --auto-approve
+    - if [ "$TF_WORKSPACE" != "default" ]; then WORKSPACE="$TF_WORKSPACE"; unset TF_WORKSPACE; terraform workspace select default; terraform workspace delete "$WORKSPACE"; fi
   environment:
     name: cluster/$CI_COMMIT_REF_NAME
     action: stop
