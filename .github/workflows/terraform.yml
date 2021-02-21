@@ -8,12 +8,13 @@ on:
 jobs:
   from-scratch:
     name: From Scratch
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     strategy:
       matrix:
         tf_root:
-          - tests/k3s-docker/terraform
+          - tests/k3s-libvirt/terraform
     env:
+      LIBVIRT_DEFAULT_URI: qemu+unix:///system?socket=/System/Volumes/Data/Users/runner/.cache/libvirt/libvirt-sock
       TF_ROOT: ${{ matrix.tf_root }}
       TF_VAR_repo_url: ${{ github.server_url }}/${{ github.actor }}/camptocamp-devops-stack.git
       TF_VAR_target_revision: ${{ github.head_ref }}
@@ -31,6 +32,25 @@ jobs:
 
       - name: Terraform Format
         run: terraform fmt -check -diff -recursive
+
+      - name: Install libvirt
+        run: brew install libvirt
+
+      - name: Start libvirt
+        run: |
+          brew services start libvirt
+          # Somehow settinh LIBVIRT_DEFAULT_URI does not work
+          mkdir -p /usr/local/var/run
+          ln -s /System/Volumes/Data/Users/runner/.cache/libvirt /usr/local/var/run/libvirt
+
+      - name: Build terraform-libvirt
+        run: |
+          git clone https://github.com/dmacvicar/terraform-provider-libvirt.git
+          cd terraform-provider-libvirt
+          git checkout v0.6.3
+          make
+          mkdir -p ~/.terraform.d/plugins/registry.terraform.io/dmacvicar/libvirt/0.6.3/darwin_amd64/
+          cp terraform-provider-libvirt ~/.terraform.d/plugins/registry.terraform.io/dmacvicar/libvirt/0.6.3/darwin_amd64/
 
       - name: Terraform Init
         run: terraform init
@@ -83,11 +103,11 @@ jobs:
   update:
     name: Update
     if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     strategy:
       matrix:
         tf_root:
-          - tests/k3s-docker/terraform
+          - tests/k3s-libvirt/terraform
     env:
       TF_ROOT: ${{ matrix.tf_root }}
     defaults:
