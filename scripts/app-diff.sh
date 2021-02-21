@@ -31,10 +31,7 @@ cd camptocamp-devops-stack || exit
 git checkout "$TARGET_REVISION"
 cd - || exit
 
-helm version
-
 echo Update app of apps without syncPolicy
-date
 helm -n argocd upgrade app-of-apps camptocamp-devops-stack/argocd/app-of-apps \
 	-f <(echo "$APP_OF_APPS_VALUES_0") \
 	-f <(echo "$APP_OF_APPS_VALUES_1") \
@@ -55,6 +52,5 @@ do
 done
 
 helm -n argocd rollback app-of-apps
-date
 
 rm "$KUBECONFIG"
