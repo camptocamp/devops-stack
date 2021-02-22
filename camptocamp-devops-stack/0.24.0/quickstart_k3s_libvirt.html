@@ -242,10 +242,25 @@
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_setting_up_extra_terraform_provider"><a class="anchor" href="#_setting_up_extra_terraform_provider"></a>Setting up extra terraform provider</h3>
-<div class="paragraph">
-<p>Due to an issue in the terraform provider system, you need to download and place the libvirt provider at a very specific spot in your home directory before deploying k3s.
-You can find the libvirt provider version in modules/k3s/libvirt/versions.tf to keep things simple this version will be referred as $LIBVIRT_PROVIDER_VERSION from now on.
-Go to <a href="https://github.com/dmacvicar/terraform-provider-libvirt/releases/tag/v$LIBVIRT_PROVIDER_VERSION" class="bare">https://github.com/dmacvicar/terraform-provider-libvirt/releases/tag/v$LIBVIRT_PROVIDER_VERSION</a> and find the correct link for your OS/CPU_ARCH (an example is "linux_amd64"; now refered as $OS_CPU_ARCH).</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Due to an issue in the terraform provider system,
+  you need to download and place the libvirt provider at a very specific
+  location in your home directory before deploying K3s.
+  You can find the libvirt provider version in <code>modules/k3s/libvirt/versions.tf</code>.
+  To keep things simple this version will be referred to as
+  <code>$LIBVIRT_PROVIDER_VERSION</code> in this documentation.
+  Go to <a href="https://github.com/dmacvicar/terraform-provider-libvirt/releases/tag/v$LIBVIRT_PROVIDER_VERSION" class="bare">https://github.com/dmacvicar/terraform-provider-libvirt/releases/tag/v$LIBVIRT_PROVIDER_VERSION</a>
+  and find the correct link for your OS/CPU_ARCH (an example is "linux_amd64";
+  now referred to as $OS_CPU_ARCH).
+</td>
+</tr>
+</table>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -326,5 +341,6 @@ $ terraform apply</code></pre>
 </footer>
 <script src="../../_/js/site.js"></script>
 <script async src="../../_/js/vendor/highlight.js"></script>
+<script async src="../../_/js/vendor/terraform.js"></script>
   </body>
 </html>
