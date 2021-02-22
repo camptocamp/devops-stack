@@ -256,8 +256,8 @@ Due to an issue in the terraform provider system,
   To keep things simple this version will be referred to as
   <code>$LIBVIRT_PROVIDER_VERSION</code> in this documentation.
   Go to <a href="https://github.com/dmacvicar/terraform-provider-libvirt/releases/tag/v$LIBVIRT_PROVIDER_VERSION" class="bare">https://github.com/dmacvicar/terraform-provider-libvirt/releases/tag/v$LIBVIRT_PROVIDER_VERSION</a>
-  and find the correct link for your OS/CPU_ARCH (an example is "linux_amd64";
-  now referred to as $OS_CPU_ARCH).
+  and find the correct link for your OS/CPU_ARCH
+  (an example is <code>linux_amd64</code>, referred to as <code>$OS_CPU_ARCH</code> in the rest of this documentation).
 </td>
 </tr>
 </table>
@@ -274,16 +274,16 @@ mv terraform-provider-libvirt ~/.local/share/terraform/plugins/registry.terrafor
 <div class="ulist">
 <ul>
 <li>
-<p>Access to a functional Libvirt daemon,</p>
+<p>Access to a functional Libvirt daemon</p>
 </li>
 <li>
-<p>Knowledge of Terraform basis.</p>
+<p>Knowledge of [Terraform](<a href="https://terraform.io" class="bare">https://terraform.io</a>) basics</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_create_terraform_root_module"><a class="anchor" href="#_create_terraform_root_module"></a>Create Terraform root module</h3>
+<h3 id="_create_the_terraform_root_module"><a class="anchor" href="#_create_the_terraform_root_module"></a>Create the Terraform root module</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">module "cluster" {
@@ -307,11 +307,11 @@ $ terraform apply</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You should have the services URL as outputs.</p>
+<p>You should see the services URL as Terraform outputs.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_get_kubeconfig"><a class="anchor" href="#_get_kubeconfig"></a>Get kubeconfig</h3>
+<h3 id="_retrieve_kubeconfig"><a class="anchor" href="#_retrieve_kubeconfig"></a>Retrieve kubeconfig</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ terraform output -json kubeconfig | jq -r .</code></pre>
