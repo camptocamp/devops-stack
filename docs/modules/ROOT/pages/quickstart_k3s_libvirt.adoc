@@ -20,7 +20,7 @@ mv terraform-provider-libvirt ~/.local/share/terraform/plugins/registry.terrafor
 === Prerequisites
 
 - Access to a functional Libvirt daemon
-- Knowledge of [Terraform](https://terraform.io) basics
+- Knowledge of https://terraform.io[Terraform] basics
 
 
 === Create the Terraform root module
