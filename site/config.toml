@@ -47,8 +47,6 @@ link = "plugins/bootstrap/bootstrap.min.css"
 link = "plugins/fontawesome/css/all.min.css"
 [[params.plugins.css]]
 link = "plugins/slick/slick.css"
-[[params.plugins.css]]
-link = "css/c2c.css"
 
 # JS Plugins
 [[params.plugins.js]]
