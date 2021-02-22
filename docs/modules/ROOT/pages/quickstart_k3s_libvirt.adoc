@@ -9,8 +9,8 @@ IMPORTANT: Due to an issue in the terraform provider system,
   To keep things simple this version will be referred to as
   `$LIBVIRT_PROVIDER_VERSION` in this documentation.
   Go to https://github.com/dmacvicar/terraform-provider-libvirt/releases/tag/v$LIBVIRT_PROVIDER_VERSION
-  and find the correct link for your OS/CPU_ARCH (an example is "linux_amd64";
-  now referred to as $OS_CPU_ARCH).
+  and find the correct link for your OS/CPU_ARCH
+  (an example is `linux_amd64`, referred to as `$OS_CPU_ARCH` in the rest of this documentation).
 
 ```shell
 mkdir -p ~/.local/share/terraform/plugins/registry.terraform.io/dmacvicar/libvirt/$LIBVIRT_PROVIDER_VERSION/$OS_CPU_ARCH/
@@ -19,10 +19,11 @@ mv terraform-provider-libvirt ~/.local/share/terraform/plugins/registry.terrafor
 
 === Prerequisites
 
-- Access to a functional Libvirt daemon,
-- Knowledge of Terraform basis.
+- Access to a functional Libvirt daemon
+- Knowledge of [Terraform](https://terraform.io) basics
 
-=== Create Terraform root module
+
+=== Create the Terraform root module
 
 ```hcl
 module "cluster" {
@@ -43,9 +44,10 @@ $ terraform init
 $ terraform apply
 ```
 
-You should have the services URL as outputs.
+You should see the services URL as Terraform outputs.
 
-=== Get kubeconfig
+
+=== Retrieve kubeconfig
 
 ```shell
 $ terraform output -json kubeconfig | jq -r .

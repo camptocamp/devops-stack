@@ -6,7 +6,7 @@
 - CGroupv2 disabled (K3s does not support it for now),
 - Knowledge of Terraform basics.
 
-=== Create Terraform root module
+=== Create the Terraform root module
 
 ```hcl
 module "cluster" {
@@ -20,7 +20,7 @@ module "cluster" {
 }
 ```
 
-If you want to use this in pipeline, you have to declare the required outputs
+If you want to use this in a pipeline, declare the required outputs:
 
 ```hcl
 output "argocd_auth_token" {
@@ -54,7 +54,7 @@ $ terraform init
 $ terraform apply
 ```
 
-You should have the services URL as outputs.
+You should see the services URL as Terraform outputs.
 
 === Get kubeconfig
 
