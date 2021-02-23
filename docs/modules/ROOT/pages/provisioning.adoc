@@ -1,3 +1,0 @@
-== Provisioning
-
-This stack will start a https://www.rancher.com[Rancher]’s https://github.com/rancher/k3s[K3s] cluster locally using https://www.hashicorp.com/[HashiCorp]’s https://www.terraform.io/[Terraform].

@@ -1,16 +1,19 @@
-= Camptocamp's DevOps stack
+= Camptocamp's DevOps Stack
 
 :description: This repository contains the DevOps Stack of Camptocamp's Infrastructure Solutions & Services department.
 :keywords: terraform, docker, kubernetes, k3s, eks, argocd, grafana, traefik, prometheus
 :sectanchors:
 :url-repo: https://github.com/camptocamp/camptocamp-devops-stack.git
+:url-c2c: https://www.camptocamp.com/
 
-image::github.svg[link="{url-repo}",150,250]
+> The DevOps Stack provides a standard Kubernetes Platform, bringing together automated Provisioning as Code, Continuous 
+Application Deployment, and readily-made configurations for the best tools in the industry.
 
-{url-repo}[This repository] contains the DevOps Stack of Camptocamp's Infrastructure Solutions & Services department.
+== Project sponsor
 
-image::devops-stack-architecture.svg[Architecture of the Camptocamp DevOps Stack]
+This project is mainly developed and sponsored by {url-c2c}[Camptocamp]. The source code is open, distributed under the Apache 2 license and available on {url-repo}[GitHub].
 
-== Documentation Structure
+== Documentation
 
-include::ROOT:partial$documentation_structure.adoc[]
+This documentation is inspired by the https://documentation.divio.com/structure/[Divio documentation structure]. It is written in https://asciidoc.org/[Asciidoc] and built using https://antora.org/[Antora]. All the details related to the documentation are available on the xref:explanations/documentation.adoc[Docs as Code] page. 
+

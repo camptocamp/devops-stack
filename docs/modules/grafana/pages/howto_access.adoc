@@ -1,3 +1,0 @@
-== Access Grafana dashboard
-
-Granafa is accessible via https://grafana.apps.$BASE_DOMAIN. As there is currently no proper secret management in this stack, we let the default Grafana credentials: `admin/prom-operator`.

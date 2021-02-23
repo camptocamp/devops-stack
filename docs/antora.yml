@@ -1,6 +1,6 @@
 ---
 name: camptocamp-devops-stack
-title: Camptocamp’s DevOps stack
+title: Camptocamp’s DevOps Stack
 version: 0.25.0
 nav:
   - modules/ROOT/nav.adoc
