@@ -1,2 +1,0 @@
-** traefik
-*** xref:traefik:howto_access.adoc[Howto access traefik]

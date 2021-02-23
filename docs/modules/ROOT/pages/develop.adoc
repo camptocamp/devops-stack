@@ -1,8 +1,0 @@
-== Test and/or improve the DevOps stack
-
-If you want to help improving this stack or simply want to test it on your workstation, you can clone this project, then cd to the `tests` directory and choose your flavor.
-
-There are different ways to test the DevOps stack, the full documentation on how to make changes and test them is available for each flavor of the DevOps stack:
-
-- xref:ROOT:test_deploy_k3s_docker.adoc[k3s-docker] for testing k3s in docker containers.
-- xref:ROOT:test_deploy_k3s_libvirt.adoc[k3s-libvirt] for testing k3s in virtal machines using libvirt.

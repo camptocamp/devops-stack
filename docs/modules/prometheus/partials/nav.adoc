@@ -1,2 +1,0 @@
-** prometheus
-*** xref:prometheus:howto_access.adoc[Howto access prometheus]

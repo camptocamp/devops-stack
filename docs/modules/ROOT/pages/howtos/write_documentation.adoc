@@ -1,6 +1,6 @@
-= How to participate to this documentation
+= Contribute to documentation
 
-The documentation of this project is located into the `docs/` folder and has to follow the xref:ROOT:ref_documentation.adoc#_structure[Divio documentation structure].
+The documentation of this project is located into the `docs/` folder.
 
 == Create a new Documentation page
 

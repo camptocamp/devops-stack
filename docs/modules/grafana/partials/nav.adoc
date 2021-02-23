@@ -1,2 +1,0 @@
-** grafana
-*** xref:grafana:howto_access.adoc[Howto access grafana]

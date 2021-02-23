@@ -1,5 +1,0 @@
-== Deployment
-
-We use https://argoproj.github.io/argo-cd/[ArgoCD] as continuous delivery tool for Kubernetes. This allows us to declare all the
-applications we want to deploy in the cluster. The `scrips/deploy.sh` script deploys ArgoCD if it detects that it is not present, then deploys
-the ArgoCD https://argoproj.github.io/argo-cd/operator-manual/declarative-setup/#app-of-apps[Appof Apps] with https://argoproj.github.io/argo-cd/user-guide/auto_sync/[Automated Sync Policy].

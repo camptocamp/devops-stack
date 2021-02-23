@@ -1,2 +1,0 @@
-** alertmanager
-*** xref:alertmanager:howto_access.adoc[Howto access alertmanager]
