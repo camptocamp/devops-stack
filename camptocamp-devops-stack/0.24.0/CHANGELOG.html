@@ -237,6 +237,97 @@
 <article class="doc">
 <h1 class="page">Changelog</h1>
 <div class="sect1">
+<h2 id="_0_25_0_2021_02_23"><a class="anchor" href="#_0_25_0_2021_02_23"></a><a href="https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.25.0">0.25.0</a> (2021-02-23)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.24.0&#8230;&#8203;v0.25.0">Full Changelog</a></p>
+</div>
+<div class="paragraph">
+<p><strong>Upgraded components:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Upgrade Terraform to v0.14.6 <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/388">#388</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Upgrade cert-manager to 1.1.1 <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/466">#466</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Upgrade kube-prometheus-stack to 13.10.0 <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/470">#470</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Fixed Bugs:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Fix Terraform lint issue <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/457">#457</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Mark some outputs as sensitive <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/460">#460</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Don&#8217;t run helm dep update explicitely (workaround) <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/463">#463</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Implemented enhancements:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Set default values for tests <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/461">#461</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Remove Makefile (only brings confusion now) <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/464">#464</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Use Terraform wrapper in github workflowhttps://github.com/camptocamp/camptocamp-devops-stack/pull/468[#468] (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Set kubernetes.io/ingress.allow-http: "false" annotation for all ingresses <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/477">#477</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Documentations:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Improve EKS example <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/455">#455</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Pipelines:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Use hashicorp/setup-terraform action in github workflow <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/456">#456</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Don&#8217;t upgrade dependencies when running terraform <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/458">#458</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Don&#8217;t set CLUSTER_NAME in tests <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/471">#471</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Update example github workflow <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/473">#473</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Don&#8217;t use script in Gitlab CI pipeline <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/474">#474</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_0_24_0_2021_02_10"><a class="anchor" href="#_0_24_0_2021_02_10"></a><a href="https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.24.0">0.24.0</a> (2021-02-10)</h2>
 <div class="sectionbody">
 <div class="paragraph">
