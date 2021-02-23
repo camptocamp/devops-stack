@@ -81,6 +81,7 @@ argo-cd:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
         ingress.kubernetes.io/ssl-redirect: "true"
+        kubernetes.io/ingress.allow-http: "false"
       hosts:
         - ${argocd.domain}
         - argocd.apps.${base_domain}
@@ -110,6 +111,7 @@ keycloak:
       traefik.ingress.kubernetes.io/router.entrypoints: websecure
       traefik.ingress.kubernetes.io/router.tls: "true"
       ingress.kubernetes.io/ssl-redirect: "true"
+      kubernetes.io/ingress.allow-http: "false"
     hosts:
       - host: ${keycloak.domain}
         paths:
@@ -171,6 +173,7 @@ kube-prometheus-stack:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
         ingress.kubernetes.io/ssl-redirect: "true"
+        kubernetes.io/ingress.allow-http: "false"
       hosts:
         - ${alertmanager.domain}
         - alertmanager.apps.${base_domain}
@@ -221,6 +224,7 @@ kube-prometheus-stack:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
         ingress.kubernetes.io/ssl-redirect: "true"
+        kubernetes.io/ingress.allow-http: "false"
       hosts:
         - ${grafana.domain}
         - grafana.apps.${base_domain}
@@ -238,6 +242,7 @@ kube-prometheus-stack:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
         ingress.kubernetes.io/ssl-redirect: "true"
+        kubernetes.io/ingress.allow-http: "false"
       hosts:
         - ${prometheus.domain}
         - prometheus.apps.${base_domain}
@@ -299,6 +304,7 @@ minio:
       traefik.ingress.kubernetes.io/router.entrypoints: websecure
       traefik.ingress.kubernetes.io/router.tls: "true"
       ingress.kubernetes.io/ssl-redirect: "true"
+      kubernetes.io/ingress.allow-http: "false"
     hosts:
       - ${minio.domain}
       - minio.apps.${base_domain}
