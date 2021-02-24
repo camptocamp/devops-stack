@@ -1,0 +1,56 @@
+= Deploying the DevOps Stack to AKS
+:ci-variables: aks
+:terraform-provider: AKS
+:terraform-provider-link: https://registry.terraform.io/providers/hashicorp/azurerm/latest
+
+
+== Prerequisites
+
+- Access to API keys allowing to create required resources in AWS,
+- Access to GitLab or GitHub (only supported CI/CD for now),
+- Knowledge of https://terraform.io[Terraform] basics
+
+== Create your Terraform root module
+
+Camptocamp's DevOps stack is a Terraform composition module
+that has to be instantiated from the Terraform root module.
+
+Here is a minimal working example:
+
+```hcl
+# terraform/main.tf
+
+locals {
+  cluster_name = terraform.workspace
+}
+resource "azurerm_resource_group" "this" {
+  name     = local.cluster_name
+  location = "France Central"
+}
+
+module "network" {
+  source  = "Azure/network/azurerm"
+  version = "3.2.1"
+
+  resource_group_name = azurerm_resource_group.this.name
+  address_space       = "10.1.0.0/16"
+  subnet_prefixes     = ["10.1.0.0/22"]
+  vnet_name           = format("%s-network", local.cluster_name)
+  subnet_names        = ["internal"]
+  tags                = {}
+}
+
+module "cluster" {
+ source = "git::https://github.com/camptocamp/camptocamp-devops-stack.git//modules/aks/azure?ref=v0.26.0"
+
+  vnet_subnet_id      = module.network.vnet_subnets[0]
+  resource_group_name = azurerm_resource_group.this.name
+  base_domain         = "example.com"
+  public_ssh_key      = "ssh-rsa ..."
+  cluster_name        = local.cluster_name
+}
+```
+
+include::partial$pipeline_outputs.adoc[]
+
+include::partial$terraform_backend.adoc[]
