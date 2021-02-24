@@ -1,4 +1,4 @@
-= Continuous Delivery
+= Continuous Delivery & GitOps
 
 Change Management is at the heart of Infrastructure Operations.
 The rise of Continous Integration and Continuous Delivery practices
