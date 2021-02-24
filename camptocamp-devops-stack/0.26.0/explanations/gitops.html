@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Camptocamp&#8217;s DevOps Stack :: Camptocamp’s DevOps Stack</title>
-    <link rel="canonical" href="https://devops-stack.io/camptocamp-devops-stack/camptocamp-devops-stack/0.26.0/index.html">
+    <title>Continuous Delivery :: Camptocamp’s DevOps Stack</title>
+    <link rel="canonical" href="https://devops-stack.io/camptocamp-devops-stack/camptocamp-devops-stack/0.26.0/explanations/gitops.html">
     <meta name="generator" content="Antora 2.3.4">
-    <link rel="stylesheet" href="../../_/css/site.css">
-    <link rel="icon" href="../../_/img/c2c_favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <link rel="icon" href="../../../_/img/c2c_favicon.png" type="image/x-icon">
   </head>
   <body class="article">
 <header class="header">
@@ -33,12 +33,12 @@
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-    <h3 class="title"><a href="index.html">Camptocamp’s DevOps Stack</a></h3>
+    <h3 class="title"><a href="../index.html">Camptocamp’s DevOps Stack</a></h3>
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="1">
-    <a class="nav-link" href="index.html">Home</a>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Home</a>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
@@ -58,16 +58,16 @@
     <a class="nav-link" href="#ROOT:quickstart.adoc">Quickstarts</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="howtos/quickstart_eks.html">EKS</a>
+    <a class="nav-link" href="../howtos/quickstart_eks.html">EKS</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="howtos/quickstart_aks.html">AKS</a>
+    <a class="nav-link" href="../howtos/quickstart_aks.html">AKS</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="howtos/quickstart_k3s_docker.html">K3s on Docker</a>
+    <a class="nav-link" href="../howtos/quickstart_k3s_docker.html">K3s on Docker</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="howtos/quickstart_k3s_libvirt.html">K3s on Libvirt</a>
+    <a class="nav-link" href="../howtos/quickstart_k3s_libvirt.html">K3s on Libvirt</a>
   </li>
 </ul>
   </li>
@@ -76,13 +76,13 @@
     <a class="nav-link" href="#ROOT:howtos/contributions.adoc">Contribution</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="howtos/development.html">Development</a>
+    <a class="nav-link" href="../howtos/development.html">Development</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="howtos/write_documentation.html">Documentation</a>
+    <a class="nav-link" href="../howtos/write_documentation.html">Documentation</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="howtos/release.html">Release a new version</a>
+    <a class="nav-link" href="../howtos/release.html">Release a new version</a>
   </li>
 </ul>
   </li>
@@ -93,10 +93,10 @@
     <span class="nav-text">References</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="references/authentication.html">Authentication</a>
+    <a class="nav-link" href="../references/authentication.html">Authentication</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="references/changelog.html">Changelog</a>
+    <a class="nav-link" href="../references/changelog.html">Changelog</a>
   </li>
 </ul>
   </li>
@@ -105,22 +105,22 @@
     <span class="nav-text">Explanations</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="explanations/purpose.html">DevOps Stack Purpose</a>
+    <a class="nav-link" href="purpose.html">DevOps Stack Purpose</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="#ROOT:explanations/cloud-agnostic.adoc">Cloud Agnostic</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="explanations/infrastructure-as-code.html">Infrastructure As Code</a>
+    <a class="nav-link" href="infrastructure-as-code.html">Infrastructure As Code</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="explanations/gitops.html">Continuous Delivery</a>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="gitops.html">Continuous Delivery</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="#ROOT:explanations/lifecycle_operations.adoc">Lifecycle Operations</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="explanations/documentation.html">Docs as Code</a>
+    <a class="nav-link" href="documentation.html">Docs as Code</a>
   </li>
 </ul>
   </li>
@@ -139,7 +139,7 @@
       <span class="title">Antora UI for c2c</span>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../antora-ui-c2c/index.html">master</a>
+          <a href="../../../antora-ui-c2c/index.html">master</a>
         </li>
       </ul>
     </li>
@@ -147,7 +147,7 @@
       <span class="title">Camptocamp’s DevOps Stack</span>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="index.html">0.26.0</a>
+          <a href="../index.html">0.26.0</a>
         </li>
       </ul>
     </li>
@@ -159,42 +159,65 @@
 <main class="article">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="index.html" class="home-link is-current"></a>
+  <a href="../index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="index.html">Camptocamp’s DevOps Stack</a></li>
-    <li><a href="index.html">Home</a></li>
+    <li><a href="../index.html">Camptocamp’s DevOps Stack</a></li>
+    <li>Explanations</li>
+    <li><a href="gitops.html">Continuous Delivery</a></li>
   </ul>
 </nav>
 </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Camptocamp&#8217;s DevOps Stack</h1>
+<h1 class="page">Continuous Delivery</h1>
 <div id="preamble">
 <div class="sectionbody">
-<div class="quoteblock">
-<blockquote>
 <div class="paragraph">
-<p>The DevOps Stack provides a standard Kubernetes Platform, bringing together automated Provisioning as Code, Continuous
-Application Deployment, and readily-made configurations for the best tools in the industry.</p>
+<p>Change Management is at the heart of Infrastructure Operations.
+The rise of Continous Integration and Continuous Delivery practices
+in the Infrastructure world has been so important that the expression
+DevOps Engineer is often used to describe CI/CD Engineering.</p>
 </div>
-</blockquote>
+<div class="paragraph">
+<p>The DevOps Stack takes advantage of the CI/CD approach to make changes seamless,
+both at the provisioning and deployment levels.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_project_sponsor"><a class="anchor" href="#_project_sponsor"></a>Project sponsor</h2>
+<h2 id="_terraform"><a class="anchor" href="#_terraform"></a>Terraform</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This project is mainly developed and sponsored by <a href="https://www.camptocamp.com/">Camptocamp</a>. The source code is open, distributed under the Apache 2 license and available on <a href="https://github.com/camptocamp/camptocamp-devops-stack.git">GitHub</a>.</p>
+<p>The underlying infrastructure which sets up the Kubernetes Cluster
+underneath the DevOps Stack is managed with Terraform.</p>
+</div>
+<div class="paragraph">
+<p>It is strongly encouraged to use a CI/CD approach to manage
+this Terraform deployment, and the DevOps Stack provides a set of scripts
+to integrate pair-reviewed change process on your CI/CD platform of choice.</p>
+</div>
+<div class="paragraph">
+<p>See the Quickstarts section to see how to get started with your Cloud of choice.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_documentation"><a class="anchor" href="#_documentation"></a>Documentation</h2>
+<h2 id="_argo_cd"><a class="anchor" href="#_argo_cd"></a>Argo CD</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This documentation is inspired by the <a href="https://documentation.divio.com/structure/">Divio documentation structure</a>. It is written in <a href="https://asciidoc.org/">Asciidoc</a> and built using <a href="https://antora.org/">Antora</a>. All the details related to the documentation are available on the <a href="explanations/documentation.html" class="page">Docs as Code</a> page.</p>
+<p>On top of Kubernetes, the DevOps Stack sets up Argo CD to continuously deploy
+all applications to the cluster.</p>
+</div>
+<div class="paragraph">
+<p>Argo CD monitors Kubernetes resources and can keep them synchronized
+with their target state.
+The cluster applications deployed by Argo CD can easily be
+<a href="#ROOT:howtos/tune_cluter_apps.adoc" class="page unresolved">tuned to fit your needs</a>.</p>
+</div>
+<div class="paragraph">
+<p>You can also take advantage of Argo CD to
+<a href="#ROOT:howtos/deploy_own_app.adoc" class="page unresolved">deploy your own applications</a>.</p>
 </div>
 </div>
 </div>
@@ -209,8 +232,8 @@ Application Deployment, and readily-made configurations for the best tools in th
   <p>This page was built using the Antora default UI.</p>
   <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
 </footer>
-<script src="../../_/js/site.js"></script>
-<script async src="../../_/js/vendor/terraform.js"></script>
-<script async src="../../_/js/vendor/highlight.js"></script>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/terraform.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
   </body>
 </html>
