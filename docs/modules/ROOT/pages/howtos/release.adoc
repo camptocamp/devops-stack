@@ -1,8 +1,16 @@
 == Release
 
-* Update `docs/modules/ROOT/pages/CHANGELOG.adoc`
-* Update the version number (e.g. `v0.9.0`) in the following files (mandatory): https://github.com/camptocamp/camptocamp-devops-stack/blob/master/docs/antora.yml#L4[docs/antora.yml] https://github.com/camptocamp/camptocamp-devops-stack/blob/master/.gitlab-ci/pipeline.yaml[.gitlab-ci/pipeline.yaml]
-* Optionally update the version number in the following files: https://github.com/camptocamp/camptocamp-devops-stack/blob/master/examples/eks-aws/.gitlab-ci.yml[examples/eks-aws/.gitlab-ci.yml] https://github.com/camptocamp/camptocamp-devops-stack/blob/master/modules/eks-aws/main.tf[examples/eks-aws/terraform/main.tf] https://github.com/camptocamp/camptocamp-devops-stack/blob/master/modules/k3os-libvirt/main.tf[examples/k3os-libvirt-demo-app/terraform/main.tf] https://github.com/camptocamp/camptocamp-devops-stack/blob/master/modules/k3s-docker/main.tf[examples/k3s-docker-demo-app/terraform/main.tf] https://github.com/camptocamp/camptocamp-devops-stack/blob/master/docs/modules/ROOT/pages/new_project.adoc[docs/modules/ROOT/pages/new_project.adoc]
+* Update `docs/modules/ROOT/pages/references/changelog.adoc`
+* Update the version number (e.g. `v0.9.0`) in the following files (mandatory):
+** https://github.com/camptocamp/camptocamp-devops-stack/blob/master/docs/antora.yml#L4[docs/antora.yml]
+** https://github.com/camptocamp/camptocamp-devops-stack/blob/master/.gitlab-ci/pipeline.yaml[.gitlab-ci/pipeline.yaml]
+** https://github.com/camptocamp/camptocamp-devops-stack/blob/master/modules/variables.tf[modules/variables.tf]
+* Optionally update the version number in the following files:
+** https://github.com/camptocamp/camptocamp-devops-stack/blob/master/examples/eks-aws/.gitlab-ci.yml[examples/eks-aws/.gitlab-ci.yml]
+** https://github.com/camptocamp/camptocamp-devops-stack/blob/master/modules/eks-aws/main.tf[examples/eks-aws/terraform/main.tf]
+** https://github.com/camptocamp/camptocamp-devops-stack/blob/master/modules/k3os-libvirt/main.tf[examples/k3os-libvirt-demo-app/terraform/main.tf]
+** https://github.com/camptocamp/camptocamp-devops-stack/blob/master/modules/k3s-docker/main.tf[examples/k3s-docker-demo-app/terraform/main.tf]
+** https://github.com/camptocamp/camptocamp-devops-stack/blob/master/docs/modules/ROOT/pages/new_project.adoc[docs/modules/ROOT/pages/new_project.adoc]
 * Create a pull request with the updated version. Once it has been reviewed and approved, merge it to `master`
 * Tag the merged commit (e.g. `v0.9.0`)
 * Push the tag
