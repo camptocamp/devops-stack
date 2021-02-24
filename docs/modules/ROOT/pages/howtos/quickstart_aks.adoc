@@ -54,3 +54,5 @@ module "cluster" {
 include::partial$pipeline_outputs.adoc[]
 
 include::partial$terraform_backend.adoc[]
+
+include::partial$deploy_workstation.adoc[]
