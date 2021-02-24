@@ -6,11 +6,13 @@ variable "cluster_name" {
 variable "repo_url" {
   description = "The source repo URL of ArgoCD's app of apps."
   type        = string
+  default     = "https://github.com/camptocamp/camptocamp-devops-stack.git"
 }
 
 variable "target_revision" {
   description = "The source target revision of ArgoCD's app of apps."
   type        = string
+  default     = "v0.26.0"
 }
 
 variable "app_of_apps_values_overrides" {
