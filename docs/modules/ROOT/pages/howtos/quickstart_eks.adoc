@@ -1,24 +1,322 @@
 == Deploying the DevOps Stack to EKS
 
-TODO spcific stuff about deploying to EKS.
+=== Prerequisites
+
+- Access to API keys allowing to create required resources in AWS,
+- Access to GitLab or GitHub (only supported CI/CD for now),
+- Knowledge of https://terraform.io[Terraform] basics
+
+
+=== Create your Terraform root module
+
+Camptocamp's DevOps stack is a Terraform composition module
+has to be instantiated from the Terraform root module.
+
+Here is a minimal working example:
+
+```hcl
+# terraform/main.tf
+
+locals {
+  cluster_name = terraform.workspace
+}
+
+data "aws_availability_zones" "available" {}
+
+module "vpc" {
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "2.66.0"
+
+  name = local.cluster_name
+  cidr = "10.0.0.0/16"
+
+  azs = data.aws_availability_zones.available.names
+
+  private_subnets = [
+    "10.0.1.0/24",
+    "10.0.2.0/24",
+    "10.0.3.0/24",
+  ]
+
+  public_subnets = [
+    "10.0.11.0/24",
+    "10.0.12.0/24",
+    "10.0.13.0/24",
+  ]
+
+  # NAT Gateway Scenarios : One NAT Gateway per availability zone
+  enable_nat_gateway     = true
+  single_nat_gateway     = false
+  one_nat_gateway_per_az = true
+
+  enable_dns_hostnames = true
+  enable_dns_support   = true
+
+  private_subnet_tags = {
+    "kubernetes.io/cluster/default"   = "shared"
+    "kubernetes.io/role/internal-elb" = "1"
+  }
+
+  public_subnet_tags = {
+    "kubernetes.io/role/elb" = "1"
+  }
+}
+
+module "cluster" {
+  source = "git::https://github.com/camptocamp/camptocamp-devops-stack.git//modules/eks/aws?ref=v0.26.0"
+
+  cluster_name = local.cluster_name
+  vpc_id       = module.vpc.vpc_id
+
+  worker_groups = [
+    {
+      instance_type        = "m5a.large"
+      asg_desired_capacity = 2
+      asg_max_size         = 3
+    }
+  ]
+
+  base_domain     = "example.com"
+
+  cognito_user_pool_id     = aws_cognito_user_pool.pool.id
+  cognito_user_pool_domain = aws_cognito_user_pool_domain.pool_domain.domain
+}
+
+resource "aws_cognito_user_pool" "pool" {
+  name = "pool"
+}
+
+resource "aws_cognito_user_pool_domain" "pool_domain" {
+  domain       = "pool-domain"
+  user_pool_id = aws_cognito_user_pool.pool.id
+}
+```
+
+include::partial$pipeline_outputs.adoc[]
+
+include::partial$terraform_backend.adoc[]
+
+
+
+=== Deploying from your workstation
+
+Even if one of the purpose of the DevOps Stack is to do everything in pipelines,
+you could deploy your cluster from your workstation using the Terraform CLI:
+
+
+```shell
+$ cd terraform
+$ terraform init
+$ terraform apply
+```
+
+
+=== Deploying from pipelines
+
+When using pipelines, the DevOps Stack creates one Kubernetes cluster per protected branch.
+Each cluster's state is saved in a separate
+https://www.terraform.io/docs/language/state/workspaces.html[Terraform workspace].
+
+
+NOTE: On GitLab, the DevOps Stack creates one
+https://docs.gitlab.com/ee/ci/environments/[GitLab CI Environment] per cluster.
+This links the cluster’s lifecycle to the GitLab environment.
+In particular, it allows to automatically destroy a cluster when the
+associated branch is deleted or the environment is stopped.
+
+1 protected branch == 1 Kubernetes cluster == 1 Terraform workspace (== 1 GitLab environment)
+
+This behavior allows you to either have one cluster per line (prod, qa, int, dev…)
+or adopt a blue/green infrastructure philosophy.
+Of course, if you want to share some resources between multiple clusters,
+a VPC and RDS cluster or whatever stateful resources,
+you should define them in a separated Terraform project and use datasources
+to lookup them in the cluster Terraform project.
+
+
+==== GitLab CI
+
+===== Push your code in a new project on Gitlab
+
+Create a new project on GitLab and push your Terraform files on it.
+You can use either gitlab.com or your self hosted GitLab instance.
+
+===== Protect your branch
+
+The cluster creation pipeline is triggered only on protected branches,
+so you have to protect every branch that will define a cluster
+(in Settings => Repository => Protected Branches).
+
+===== Add CI / CD variables
+
+There are multiple ways to configure the
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs[Terraform AWS provider].
+You could commit the credentials in your code,
+with a high potential risk of secret leakage,
+or another simple solution is to define the required environment variables as CI/CD variables.
+
+In your project's Setting → CI/CD → Variables, add variables for:
+
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+- `AWS_REGION`
+
+===== Create .gitlab-ci.yml
+
+In order to use Gitlab as Continuous Delivery,
+you have to create a `.gitlab-ci.yml` file in the root level of your project.
+
+```yaml
+---
+include:
+  - https://raw.githubusercontent.com/camptocamp/camptocamp-devops-stack/v0.26.0/.gitlab-ci/pipeline.yaml
+```
+
+===== Trigger pipeline
+
+The pipeline, and hence the cluster creation,
+will be triggered when you push to a protected branch,
+but you can trigger a pipeline manually if needed (in CI/CD ⇒ Pipelines ⇒ Run Pipeline).
+
+==== GitHub Actions
+
+===== Create a new project on GitHub
+
+Create a new project on GitHub and push your Terraform files on it.
+
+===== Add Actions secrets
+
+There are multiple ways to configure the
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs[Terraform AWS provider].
+You could commit the credentials in your code,
+with a high potential risk of leakage,
+or another simple solution is to define the required environment variables as Actions secrets.
+
+In your project settings in Secrets Actions, create secrets for these variables:
+
+- AWS_ACCESS_KEY_ID
+- AWS_SECRET_ACCESS_KEY
+- AWS_REGION
+
+===== Create GitHub Actions workflow for your project
+
+Unfortunately, composite Actions have some limitations right now,
+so we can't provide a single Action to declare in your workflow
+(as we do for GitLab pipeline).
+Hence, you have to create a `.github/workflows/terraform.yml` file with this content:
+
+```yaml
+---
+name: 'Terraform'
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+jobs:
+  terraform:
+    name: Terraform
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+      CAMPTOCAMP_DEVOPS_STACK_VERSION: 0.26.0
+      TF_ROOT: terraform
+    defaults:
+      run:
+        working-directory: ${{ env.TF_ROOT }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 0.14.6
+
+      - name: Terraform Format
+        run: terraform fmt -check -diff -recursive
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate
+        run: terraform validate -no-color
+
+      - name: Terraform Plan
+        if: github.event_name == 'pull_request'
+        run: terraform plan -no-color -out plan
+
+      - name: Generate outputs.tf
+        if: github.event_name == 'pull_request'
+        run: terraform-bin show -json plan | jq -r '.planned_values.outputs' > outputs.json
+
+      - name: ArgoCD app diff with ${{ github.ref }}
+        if: github.event_name == 'pull_request'
+        uses: docker://argoproj/argocd:v1.7.12
+        with:
+          entrypoint: ./.github/scripts/app-diff.sh
+
+      - name: Terraform Apply
+        if: github.event_name == 'push'
+        run: terraform apply --auto-approve
+
+      - name: Terraform Plan
+        if: github.event_name == 'push'
+        run: terraform plan --detailed-exitcode -no-color
+
+      - name: Generate outputs.tf
+        if: github.event_name == 'push'
+        run: terraform-bin output -json > outputs.json
+
+      - name: Wait for App of Apps
+        if: github.event_name == 'push'
+        uses: docker://argoproj/argocd:v1.7.12
+        with:
+          entrypoint: .github/scripts/wait-for-app-of-apps.sh
+```
+
+And these two files in `.github/scripts`:
+
+- `.github/scripts/app-diff.sh`:
++
+```bash
+#!/bin/sh
+
+set -e
+
+python3 -c "import urllib.request; print(urllib.request.urlopen('https://raw.githubusercontent.com/camptocamp/camptocamp-devops-stack/v$CAMPTOCAMP_DEVOPS_STACK_VERSION/scripts/app-diff.sh').read().decode())" | bash
+```
+
+
+- `.github/scripts/wait-for-app-of-apps.sh`:
++
+```bash
+#!/bin/sh
+
+set -e
+
+python3 -c "import urllib.request; print(urllib.request.urlopen('https://raw.githubusercontent.com/camptocamp/camptocamp-devops-stack/v$CAMPTOCAMP_DEVOPS_STACK_VERSION/scripts/wait-for-app-of-apps.sh').read().decode())" | bash
+```
+
+
 
 === Recovering the kubeconfig for EKS
 
 . Make sure your AWS credentials file (`~/.aws/credentials` on Linux) contains the access key that has been used to create the cluster:
 +
-[source,toml]
-----
+```ini
 [<ACCOUNT_NAME>]
 aws_access_key_id = <YOUR_ACCESS_KEY_ID>
 aws_secret_access_key = <YOUR_SECRET_ACCESS_KEY>
 region = <YOUR_REGION>
-----
+```
 
 . Update your kubeconfig using the following command:
 +
-[source,shell]
-----
+```bash
 aws --profile <ACCOUNT_NAME> eks --region <YOUR_REGION> update-kubeconfig --name <CLUSTER_NAME>
-----
+```
 
-Then, you should be able to use Kubectl.
+Then, you should be able to use `kubectl`.
