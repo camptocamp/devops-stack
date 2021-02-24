@@ -1,4 +1,4 @@
-== Authentication
+= Authentication
 
 The DevOps Stack uses OIDC layer for SSO authentication.
 Depending on the module you're using, a different OIDC provider is automatically selected:
@@ -17,7 +17,7 @@ Depending on the module you're using, a different OIDC provider is automatically
 |===
 
 
-=== Groups
+== Groups
 
 The following OIDC groups are pre-defined:
 

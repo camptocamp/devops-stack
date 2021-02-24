@@ -1,10 +1,10 @@
-==== GitHub Actions
+=== GitHub Actions
 
-===== Create a new project on GitHub
+==== Create a new project on GitHub
 
 Create a new project on GitHub and push your Terraform files on it.
 
-===== Add Actions secrets
+==== Add Actions secrets
 
 There are multiple ways to configure the
 {terraform-provider-link}[Terraform {terraform-provider} provider].
@@ -17,7 +17,7 @@ In your project settings in Secrets Actions, create secrets for these variables:
 include::partial$variables-{ci-variables}.adoc[]
 
 
-===== Create GitHub Actions workflow for your project
+==== Create GitHub Actions workflow for your project
 
 Unfortunately, composite Actions have some limitations right now,
 so we can't provide a single Action to declare in your workflow

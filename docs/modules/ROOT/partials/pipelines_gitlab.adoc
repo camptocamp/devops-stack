@@ -1,17 +1,17 @@
-==== GitLab CI
+=== GitLab CI
 
-===== Push your code in a new project on Gitlab
+==== Push your code in a new project on Gitlab
 
 Create a new project on GitLab and push your Terraform files on it.
 You can use either gitlab.com or your self hosted GitLab instance.
 
-===== Protect your branch
+==== Protect your branch
 
 The cluster creation pipeline is triggered only on protected branches,
 so you have to protect every branch that will define a cluster
 (in Settings => Repository => Protected Branches).
 
-===== Add CI / CD variables
+==== Add CI / CD variables
 
 There are multiple ways to configure the
 {terraform-provider-link}[Terraform {terraform-provider} provider].
@@ -26,7 +26,7 @@ include::partial$variables-{ci-variables}.adoc[]
 
 
 
-===== Create `.gitlab-ci.yml`
+==== Create `.gitlab-ci.yml`
 
 In order to use Gitlab as Continuous Delivery,
 you have to create a `.gitlab-ci.yml` file in the root level of your project.
@@ -37,7 +37,7 @@ include:
   - https://raw.githubusercontent.com/camptocamp/camptocamp-devops-stack/v0.26.0/.gitlab-ci/pipeline.yaml
 ```
 
-===== Trigger pipeline
+==== Trigger pipeline
 
 The pipeline, and hence the cluster creation,
 will be triggered when you push to a protected branch,

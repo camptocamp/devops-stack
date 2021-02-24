@@ -1,16 +1,16 @@
-== Deploying the DevOps Stack to EKS
+= Deploying the DevOps Stack to EKS
 :ci-variables: aws
 :terraform-provider: AWS
 :terraform-provider-link: https://registry.terraform.io/providers/hashicorp/aws/latest/docs
 
-=== Prerequisites
+== Prerequisites
 
 - Access to API keys allowing to create required resources in AWS,
 - Access to GitLab or GitHub (only supported CI/CD for now),
 - Knowledge of https://terraform.io[Terraform] basics
 
 
-=== Create your Terraform root module
+== Create your Terraform root module
 
 Camptocamp's DevOps stack is a Terraform composition module
 has to be instantiated from the Terraform root module.
@@ -101,7 +101,7 @@ include::partial$terraform_backend.adoc[]
 
 
 
-=== Deploying from your workstation
+== Deploying from your workstation
 
 Even if one of the purpose of the DevOps Stack is to do everything in pipelines,
 you could deploy your cluster from your workstation using the Terraform CLI:
@@ -114,7 +114,7 @@ $ terraform apply
 ```
 
 
-=== Deploying from pipelines
+== Deploying from pipelines
 
 When using pipelines, the DevOps Stack creates one Kubernetes cluster per protected branch.
 Each cluster's state is saved in a separate
@@ -143,7 +143,7 @@ include::partial$pipelines_gitlab.adoc[ci-variables, terraform-provider, terrafo
 include::partial$pipelines_github.adoc[ci-variables, terraform-provider, terraform-provider-link]
 
 
-=== Recovering the kubeconfig for EKS
+== Recovering the kubeconfig for EKS
 
 . Make sure your AWS credentials file (`~/.aws/credentials` on Linux) contains the access key that has been used to create the cluster:
 +

@@ -1,4 +1,4 @@
-== Release
+= Release
 
 * Update `docs/modules/ROOT/pages/references/changelog.adoc`
 * Update the version number (e.g. `v0.9.0`) in the following files (mandatory):

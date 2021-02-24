@@ -1,6 +1,6 @@
-== K3s on Libvirt Quickstart
+= K3s on Libvirt Quickstart
 
-=== Setting up extra terraform provider
+== Setting up extra terraform provider
 
 IMPORTANT: Due to an issue in the terraform provider system,
   you need to download and place the libvirt provider at a very specific
@@ -17,13 +17,13 @@ mkdir -p ~/.local/share/terraform/plugins/registry.terraform.io/dmacvicar/libvir
 mv terraform-provider-libvirt ~/.local/share/terraform/plugins/registry.terraform.io/dmacvicar/libvirt/$LIBVIRT_PROVIDER_VERSION/$OS_CPU_ARCH/terraform-provider-libvirt
 ```
 
-=== Prerequisites
+== Prerequisites
 
 - Access to a functional Libvirt daemon
 - Knowledge of https://terraform.io[Terraform] basics
 
 
-=== Create the Terraform root module
+== Create the Terraform root module
 
 ```hcl
 module "cluster" {
@@ -37,7 +37,7 @@ module "cluster" {
 include::partial$pipeline_outputs.adoc[]
 
 
-=== Deploy the cluster
+== Deploy the cluster
 
 ```shell
 $ terraform init
@@ -47,13 +47,13 @@ $ terraform apply
 You should see the services URL as Terraform outputs.
 
 
-=== Retrieve kubeconfig
+== Retrieve kubeconfig
 
 ```shell
 $ terraform output -json kubeconfig | jq -r .
 ```
 
-=== Destroy the cluster
+== Destroy the cluster
 
 ```shell
 $ terraform destroy
