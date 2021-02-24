@@ -67,9 +67,27 @@ pb:terraform:apply:
     - terraform apply --auto-approve
     - terraform plan --detailed-exitcode
     - terraform output -json > outputs.json
+  artifacts:
+    paths:
+      - "$TF_ROOT/outputs.json"
+    expire_in: 1 hour
+    when: always
   environment:
     name: cluster/$CI_COMMIT_REF_NAME
     on_stop: pb:terraform:destroy
+  rules:
+    - if: '$CI_COMMIT_REF_PROTECTED == "true"'
+
+pb:argocd:wait-for-app-of-apps:
+  stage: argocd
+  image:
+    name: argoproj/argocd:v${ARGOCD_VERSION}
+  script:
+    - python3 -c "import urllib.request; print(urllib.request.urlopen('https://raw.githubusercontent.com/camptocamp/camptocamp-devops-stack/v$CAMPTOCAMP_DEVOPS_STACK_VERSION/scripts/wait-for-app-of-apps.sh').read().decode())" | bash
+  needs:
+    - job: pb:terraform:apply
+      artifacts: true
+  allow_failure: true
   rules:
     - if: '$CI_COMMIT_REF_PROTECTED == "true"'
 
