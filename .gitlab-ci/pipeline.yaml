@@ -59,10 +59,10 @@ pb:terraform:apply:
   image:
     name: hashicorp/terraform:$TERRAFORM_VERSION
     entrypoint: [""]
-  variables:
-    TF_WORKSPACE: $CI_COMMIT_REF_NAME
   script:
     - cd "$TF_ROOT"
+    - terraform init
+    - terraform workspace select "$CI_COMMIT_REF_NAME" || terraform workspace new "$CI_COMMIT_REF_NAME"
     - terraform init
     - terraform apply --auto-approve
     - terraform plan --detailed-exitcode
