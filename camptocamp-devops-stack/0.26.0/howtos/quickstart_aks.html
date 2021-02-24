@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Authentication :: Camptocamp’s DevOps Stack</title>
-    <link rel="canonical" href="https://devops-stack.io/camptocamp-devops-stack/camptocamp-devops-stack/0.26.0/references/authentication.html">
+    <title>Deploying the DevOps Stack to AKS :: Camptocamp’s DevOps Stack</title>
+    <link rel="canonical" href="https://devops-stack.io/camptocamp-devops-stack/camptocamp-devops-stack/0.26.0/howtos/quickstart_aks.html">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../../_/css/site.css">
     <link rel="icon" href="../../../_/img/c2c_favicon.png" type="image/x-icon">
@@ -58,16 +58,16 @@
     <a class="nav-link" href="#ROOT:quickstart.adoc">Quickstarts</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../howtos/quickstart_eks.html">EKS</a>
+    <a class="nav-link" href="quickstart_eks.html">EKS</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="quickstart_aks.html">AKS</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../howtos/quickstart_aks.html">AKS</a>
+    <a class="nav-link" href="quickstart_k3s_docker.html">K3s on Docker</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../howtos/quickstart_k3s_docker.html">K3s on Docker</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../howtos/quickstart_k3s_libvirt.html">K3s on Libvirt</a>
+    <a class="nav-link" href="quickstart_k3s_libvirt.html">K3s on Libvirt</a>
   </li>
 </ul>
   </li>
@@ -76,13 +76,13 @@
     <a class="nav-link" href="#ROOT:howtos/contributions.adoc">Contribution</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../howtos/development.html">Development</a>
+    <a class="nav-link" href="development.html">Development</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../howtos/write_documentation.html">Documentation</a>
+    <a class="nav-link" href="write_documentation.html">Documentation</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../howtos/release.html">Release a new version</a>
+    <a class="nav-link" href="release.html">Release a new version</a>
   </li>
 </ul>
   </li>
@@ -92,11 +92,11 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">References</span>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="authentication.html">Authentication</a>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../references/authentication.html">Authentication</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="changelog.html">Changelog</a>
+    <a class="nav-link" href="../references/changelog.html">Changelog</a>
   </li>
 </ul>
   </li>
@@ -163,78 +163,135 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Camptocamp’s DevOps Stack</a></li>
-    <li>References</li>
-    <li><a href="authentication.html">Authentication</a></li>
+    <li>Howtos</li>
+    <li><a href="#ROOT:quickstart.adoc">Quickstarts</a></li>
+    <li><a href="quickstart_aks.html">AKS</a></li>
   </ul>
 </nav>
 </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Authentication</h1>
-<div id="preamble">
+<h1 class="page">Deploying the DevOps Stack to AKS</h1>
+<div class="sect1">
+<h2 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>The DevOps Stack uses OIDC layer for SSO authentication.
-Depending on the module you&#8217;re using, a different OIDC provider is automatically selected:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Access to API keys allowing to create required resources in AWS,</p>
+</li>
+<li>
+<p>Access to GitLab or GitHub (only supported CI/CD for now),</p>
+</li>
+<li>
+<p>Knowledge of <a href="https://terraform.io">Terraform</a> basics</p>
+</li>
+</ul>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. Default OIDC Providers</caption>
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Module</th>
-<th class="tableblock halign-left valign-top">OIDC Provider</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">aks-azure</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Azure Active Directory</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">eks-aws</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">AWS Cognito</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">k3s-docker</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Keycloak</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">k3os-libvirt</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Keycloak</p></td>
-</tr>
-</tbody>
-</table>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_groups"><a class="anchor" href="#_groups"></a>Groups</h2>
+<h2 id="_create_your_terraform_root_module"><a class="anchor" href="#_create_your_terraform_root_module"></a>Create your Terraform root module</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The following OIDC groups are pre-defined:</p>
+<p>Camptocamp&#8217;s DevOps stack is a Terraform composition module
+that has to be instantiated from the Terraform root module.</p>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 2. Groups</caption>
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Group name</th>
-<th class="tableblock halign-left valign-top">Permissions</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">argocd-admin</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Administrator of Argo CD</p></td>
-</tr>
-</tbody>
-</table>
+<div class="paragraph">
+<p>Here is a minimal working example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl"># terraform/main.tf
+
+locals {
+  cluster_name = terraform.workspace
+}
+resource "azurerm_resource_group" "this" {
+  name     = local.cluster_name
+  location = "France Central"
+}
+
+module "network" {
+  source  = "Azure/network/azurerm"
+  version = "3.2.1"
+
+  resource_group_name = azurerm_resource_group.this.name
+  address_space       = "10.1.0.0/16"
+  subnet_prefixes     = ["10.1.0.0/22"]
+  vnet_name           = format("%s-network", local.cluster_name)
+  subnet_names        = ["internal"]
+  tags                = {}
+}
+
+module "cluster" {
+ source = "git::https://github.com/camptocamp/camptocamp-devops-stack.git//modules/aks/azure?ref=v0.26.0"
+
+  vnet_subnet_id      = module.network.vnet_subnets[0]
+  resource_group_name = azurerm_resource_group.this.name
+  base_domain         = "example.com"
+  public_ssh_key      = "ssh-rsa ..."
+  cluster_name        = local.cluster_name
+}</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_terraform_outputs"><a class="anchor" href="#_terraform_outputs"></a>Terraform Outputs</h3>
+<div class="paragraph">
+<p>Define outputs:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl"># terraform/outputs.tf
+
+output "argocd_auth_token" {
+  sensitive = true
+  value     = module.cluster.argocd_auth_token
+}
+
+output "kubeconfig" {
+  sensitive = true
+  value     = module.cluster.kubeconfig
+}
+
+output "repo_url" {
+  value = module.cluster.repo_url
+}
+
+output "target_revision" {
+  value = module.cluster.target_revision
+}
+
+output "app_of_apps_values" {
+  sensitive = true
+  value     = module.cluster.app_of_apps_values
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_terraform_backend"><a class="anchor" href="#_terraform_backend"></a>Terraform Backend</h3>
+<div class="paragraph">
+<p>If you wish to
+<a href="https://www.terraform.io/docs/language/state/remote.html">collaborate</a>,
+define a backend to store your state:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl"># terraform/versions.tf
+
+terraform {
+  backend "remote" {
+    organization = "example_corp"
+
+    workspaces {
+      name = "my-app-prod"
+    }
+  }
+}</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 </article>

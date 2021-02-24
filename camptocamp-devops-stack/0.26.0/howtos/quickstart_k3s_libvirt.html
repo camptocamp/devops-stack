@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Camptocamp’s DevOps Stack</title>
+    <title>K3s on Libvirt Quickstart :: Camptocamp’s DevOps Stack</title>
     <link rel="canonical" href="https://devops-stack.io/camptocamp-devops-stack/camptocamp-devops-stack/0.26.0/howtos/quickstart_k3s_libvirt.html">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../../_/css/site.css">
@@ -59,6 +59,9 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="quickstart_eks.html">EKS</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="quickstart_aks.html">AKS</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="quickstart_k3s_docker.html">K3s on Docker</a>
@@ -168,11 +171,10 @@
 </div>
   <div class="content">
 <article class="doc">
+<h1 class="page">K3s on Libvirt Quickstart</h1>
 <div class="sect1">
-<h2 id="_k3s_on_libvirt_quickstart"><a class="anchor" href="#_k3s_on_libvirt_quickstart"></a>K3s on Libvirt Quickstart</h2>
+<h2 id="_setting_up_extra_terraform_provider"><a class="anchor" href="#_setting_up_extra_terraform_provider"></a>Setting up extra terraform provider</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_setting_up_extra_terraform_provider"><a class="anchor" href="#_setting_up_extra_terraform_provider"></a>Setting up extra terraform provider</h3>
 <div class="admonitionblock important">
 <table>
 <tr>
@@ -200,8 +202,10 @@ mv terraform-provider-libvirt ~/.local/share/terraform/plugins/registry.terrafor
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h3>
+</div>
+<div class="sect1">
+<h2 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
@@ -213,8 +217,10 @@ mv terraform-provider-libvirt ~/.local/share/terraform/plugins/registry.terrafor
 </ul>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_create_the_terraform_root_module"><a class="anchor" href="#_create_the_terraform_root_module"></a>Create the Terraform root module</h3>
+</div>
+<div class="sect1">
+<h2 id="_create_the_terraform_root_module"><a class="anchor" href="#_create_the_terraform_root_module"></a>Create the Terraform root module</h2>
+<div class="sectionbody">
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">module "cluster" {
@@ -225,8 +231,8 @@ mv terraform-provider-libvirt ~/.local/share/terraform/plugins/registry.terrafor
 }</code></pre>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_terraform_outputs"><a class="anchor" href="#_terraform_outputs"></a>Terraform Outputs</h4>
+<div class="sect2">
+<h3 id="_terraform_outputs"><a class="anchor" href="#_terraform_outputs"></a>Terraform Outputs</h3>
 <div class="paragraph">
 <p>Define outputs:</p>
 </div>
@@ -260,8 +266,10 @@ output "app_of_apps_values" {
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_deploy_the_cluster"><a class="anchor" href="#_deploy_the_cluster"></a>Deploy the cluster</h3>
+</div>
+<div class="sect1">
+<h2 id="_deploy_the_cluster"><a class="anchor" href="#_deploy_the_cluster"></a>Deploy the cluster</h2>
+<div class="sectionbody">
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ terraform init
@@ -272,20 +280,23 @@ $ terraform apply</code></pre>
 <p>You should see the services URL as Terraform outputs.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_retrieve_kubeconfig"><a class="anchor" href="#_retrieve_kubeconfig"></a>Retrieve kubeconfig</h3>
+</div>
+<div class="sect1">
+<h2 id="_retrieve_kubeconfig"><a class="anchor" href="#_retrieve_kubeconfig"></a>Retrieve kubeconfig</h2>
+<div class="sectionbody">
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ terraform output -json kubeconfig | jq -r .</code></pre>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_destroy_the_cluster"><a class="anchor" href="#_destroy_the_cluster"></a>Destroy the cluster</h3>
+</div>
+<div class="sect1">
+<h2 id="_destroy_the_cluster"><a class="anchor" href="#_destroy_the_cluster"></a>Destroy the cluster</h2>
+<div class="sectionbody">
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ terraform destroy</code></pre>
-</div>
 </div>
 </div>
 </div>

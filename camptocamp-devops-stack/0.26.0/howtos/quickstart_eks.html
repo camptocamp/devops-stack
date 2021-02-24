@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Camptocamp’s DevOps Stack</title>
+    <title>Deploying the DevOps Stack to EKS :: Camptocamp’s DevOps Stack</title>
     <link rel="canonical" href="https://devops-stack.io/camptocamp-devops-stack/camptocamp-devops-stack/0.26.0/howtos/quickstart_eks.html">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../../_/css/site.css">
@@ -59,6 +59,9 @@
 <ul class="nav-list">
   <li class="nav-item is-current-page" data-depth="3">
     <a class="nav-link" href="quickstart_eks.html">EKS</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="quickstart_aks.html">AKS</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="quickstart_k3s_docker.html">K3s on Docker</a>
@@ -168,11 +171,10 @@
 </div>
   <div class="content">
 <article class="doc">
+<h1 class="page">Deploying the DevOps Stack to EKS</h1>
 <div class="sect1">
-<h2 id="_deploying_the_devops_stack_to_eks"><a class="anchor" href="#_deploying_the_devops_stack_to_eks"></a>Deploying the DevOps Stack to EKS</h2>
+<h2 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -187,8 +189,10 @@
 </ul>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_create_your_terraform_root_module"><a class="anchor" href="#_create_your_terraform_root_module"></a>Create your Terraform root module</h3>
+</div>
+<div class="sect1">
+<h2 id="_create_your_terraform_root_module"><a class="anchor" href="#_create_your_terraform_root_module"></a>Create your Terraform root module</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Camptocamp&#8217;s DevOps stack is a Terraform composition module
 has to be instantiated from the Terraform root module.</p>
@@ -275,8 +279,8 @@ resource "aws_cognito_user_pool_domain" "pool_domain" {
 }</code></pre>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_terraform_outputs"><a class="anchor" href="#_terraform_outputs"></a>Terraform Outputs</h4>
+<div class="sect2">
+<h3 id="_terraform_outputs"><a class="anchor" href="#_terraform_outputs"></a>Terraform Outputs</h3>
 <div class="paragraph">
 <p>Define outputs:</p>
 </div>
@@ -309,8 +313,8 @@ output "app_of_apps_values" {
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_terraform_backend"><a class="anchor" href="#_terraform_backend"></a>Terraform Backend</h4>
+<div class="sect2">
+<h3 id="_terraform_backend"><a class="anchor" href="#_terraform_backend"></a>Terraform Backend</h3>
 <div class="paragraph">
 <p>If you wish to
 <a href="https://www.terraform.io/docs/language/state/remote.html">collaborate</a>,
@@ -333,8 +337,10 @@ terraform {
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_deploying_from_your_workstation"><a class="anchor" href="#_deploying_from_your_workstation"></a>Deploying from your workstation</h3>
+</div>
+<div class="sect1">
+<h2 id="_deploying_from_your_workstation"><a class="anchor" href="#_deploying_from_your_workstation"></a>Deploying from your workstation</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Even if one of the purpose of the DevOps Stack is to do everything in pipelines,
 you could deploy your cluster from your workstation using the Terraform CLI:</p>
@@ -347,8 +353,10 @@ $ terraform apply</code></pre>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_deploying_from_pipelines"><a class="anchor" href="#_deploying_from_pipelines"></a>Deploying from pipelines</h3>
+</div>
+<div class="sect1">
+<h2 id="_deploying_from_pipelines"><a class="anchor" href="#_deploying_from_pipelines"></a>Deploying from pipelines</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>When using pipelines, the DevOps Stack creates one Kubernetes cluster per protected branch.
 Each cluster&#8217;s state is saved in a separate
@@ -381,25 +389,25 @@ a VPC and RDS cluster or whatever stateful resources,
 you should define them in a separated Terraform project and use datasources
 to lookup them in the cluster Terraform project.</p>
 </div>
+<div class="sect2">
+<h3 id="_gitlab_ci"><a class="anchor" href="#_gitlab_ci"></a>GitLab CI</h3>
 <div class="sect3">
-<h4 id="_gitlab_ci"><a class="anchor" href="#_gitlab_ci"></a>GitLab CI</h4>
-<div class="sect4">
-<h5 id="_push_your_code_in_a_new_project_on_gitlab"><a class="anchor" href="#_push_your_code_in_a_new_project_on_gitlab"></a>Push your code in a new project on Gitlab</h5>
+<h4 id="_push_your_code_in_a_new_project_on_gitlab"><a class="anchor" href="#_push_your_code_in_a_new_project_on_gitlab"></a>Push your code in a new project on Gitlab</h4>
 <div class="paragraph">
 <p>Create a new project on GitLab and push your Terraform files on it.
 You can use either gitlab.com or your self hosted GitLab instance.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_protect_your_branch"><a class="anchor" href="#_protect_your_branch"></a>Protect your branch</h5>
+<div class="sect3">
+<h4 id="_protect_your_branch"><a class="anchor" href="#_protect_your_branch"></a>Protect your branch</h4>
 <div class="paragraph">
 <p>The cluster creation pipeline is triggered only on protected branches,
 so you have to protect every branch that will define a cluster
 (in Settings &#8658; Repository &#8658; Protected Branches).</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_add_ci_cd_variables"><a class="anchor" href="#_add_ci_cd_variables"></a>Add CI / CD variables</h5>
+<div class="sect3">
+<h4 id="_add_ci_cd_variables"><a class="anchor" href="#_add_ci_cd_variables"></a>Add CI / CD variables</h4>
 <div class="paragraph">
 <p>There are multiple ways to configure the
 <a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs">Terraform AWS provider</a>.
@@ -424,8 +432,8 @@ or another simple solution is to define the required environment variables as CI
 </ul>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_create_gitlab_ci_yml"><a class="anchor" href="#_create_gitlab_ci_yml"></a>Create <code>.gitlab-ci.yml</code></h5>
+<div class="sect3">
+<h4 id="_create_gitlab_ci_yml"><a class="anchor" href="#_create_gitlab_ci_yml"></a>Create <code>.gitlab-ci.yml</code></h4>
 <div class="paragraph">
 <p>In order to use Gitlab as Continuous Delivery,
 you have to create a <code>.gitlab-ci.yml</code> file in the root level of your project.</p>
@@ -438,8 +446,8 @@ include:
 </div>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_trigger_pipeline"><a class="anchor" href="#_trigger_pipeline"></a>Trigger pipeline</h5>
+<div class="sect3">
+<h4 id="_trigger_pipeline"><a class="anchor" href="#_trigger_pipeline"></a>Trigger pipeline</h4>
 <div class="paragraph">
 <p>The pipeline, and hence the cluster creation,
 will be triggered when you push to a protected branch,
@@ -447,16 +455,16 @@ but you can trigger a pipeline manually if needed (in CI/CD ⇒ Pipelines ⇒ Ru
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_github_actions"><a class="anchor" href="#_github_actions"></a>GitHub Actions</h3>
 <div class="sect3">
-<h4 id="_github_actions"><a class="anchor" href="#_github_actions"></a>GitHub Actions</h4>
-<div class="sect4">
-<h5 id="_create_a_new_project_on_github"><a class="anchor" href="#_create_a_new_project_on_github"></a>Create a new project on GitHub</h5>
+<h4 id="_create_a_new_project_on_github"><a class="anchor" href="#_create_a_new_project_on_github"></a>Create a new project on GitHub</h4>
 <div class="paragraph">
 <p>Create a new project on GitHub and push your Terraform files on it.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_add_actions_secrets"><a class="anchor" href="#_add_actions_secrets"></a>Add Actions secrets</h5>
+<div class="sect3">
+<h4 id="_add_actions_secrets"><a class="anchor" href="#_add_actions_secrets"></a>Add Actions secrets</h4>
 <div class="paragraph">
 <p>There are multiple ways to configure the
 <a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs">Terraform AWS provider</a>.
@@ -481,8 +489,8 @@ or another simple solution is to define the required environment variables as Ac
 </ul>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_create_github_actions_workflow_for_your_project"><a class="anchor" href="#_create_github_actions_workflow_for_your_project"></a>Create GitHub Actions workflow for your project</h5>
+<div class="sect3">
+<h4 id="_create_github_actions_workflow_for_your_project"><a class="anchor" href="#_create_github_actions_workflow_for_your_project"></a>Create GitHub Actions workflow for your project</h4>
 <div class="paragraph">
 <p>Unfortunately, composite Actions have some limitations right now,
 so we can&#8217;t provide a single Action to declare in your workflow
@@ -596,8 +604,10 @@ python3 -c "import urllib.request; print(urllib.request.urlopen('https://raw.git
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_recovering_the_kubeconfig_for_eks"><a class="anchor" href="#_recovering_the_kubeconfig_for_eks"></a>Recovering the kubeconfig for EKS</h3>
+</div>
+<div class="sect1">
+<h2 id="_recovering_the_kubeconfig_for_eks"><a class="anchor" href="#_recovering_the_kubeconfig_for_eks"></a>Recovering the kubeconfig for EKS</h2>
+<div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -623,7 +633,6 @@ region = &lt;YOUR_REGION&gt;</code></pre>
 </div>
 <div class="paragraph">
 <p>Then, you should be able to use <code>kubectl</code>.</p>
-</div>
 </div>
 </div>
 </div>
