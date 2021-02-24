@@ -1,0 +1,11 @@
+== Deploying from your workstation
+
+Even if one of the purpose of the DevOps Stack is to do everything in pipelines,
+you could deploy your cluster from your workstation using the Terraform CLI:
+
+
+```shell
+$ cd terraform
+$ terraform init
+$ terraform apply
+```
