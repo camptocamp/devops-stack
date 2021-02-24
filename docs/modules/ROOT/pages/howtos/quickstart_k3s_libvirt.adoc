@@ -31,9 +31,6 @@ module "cluster" {
 
   cluster_name = "my-cluster"
   node_count   = 2
-
-  repo_url        = "https://github.com/camptocamp/camptocamp-devops-stack.git"
-  target_revision = "master"
 }
 ```
 
