@@ -20,24 +20,41 @@ google_analytics = "G-GDBX9466LL"
 
 ############################# social site ########################
 [[params.social]]
-title = "github"
+title = "GitHub"
 icon = "fab fa-github"
 link = "https://github.com/camptocamp"
 
 [[params.social]]
-title = "dev.to"
+title = "GitLab"
+icon = "fab fa-gitlab"
+link = "https://gitlab.com/camptocamp"
+
+[[params.social]]
+title = "Dev"
 icon = "fab fa-dev"
 link = "https://dev.to/camptocamp-ops"
 
 [[params.social]]
-title = "twitter"
+title = "Twitter"
 icon = "fab fa-twitter"
 link = "https://twitter.com/camptocamp"
 
 [[params.social]]
-title = "linkedin"
+title = "LinkedIn"
 icon = "fab fa-linkedin"
 link = "https://www.linkedin.com/company/camptocamp-sa/"
+
+[[params.social]]
+title = "YouTube"
+icon = "fab fa-youtube"
+link = "https://www.youtube.com/user/CamptocampOnline"
+
+[[params.social]]
+title = "StackShare"
+icon = "fas fa-share-alt"
+link = "https://stackshare.io/camptocamp/infrastructure"
+
+
 
 
 ############################# Plugins ##############################
