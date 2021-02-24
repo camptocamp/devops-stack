@@ -1,5 +1,31 @@
 = Changelog
 
+== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.26.0[0.26.0] (2021-02-24)
+
+https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.25.0...v0.26.0[Full Changelog]
+
+*Upgraded components:*
+
+* Upgrade Azure/aks/azurerm module to 4.7.0 https://github.com/camptocamp/camptocamp-devops-stack/pull/480[#480] (https://github.com/mcanevet[mcanevet])
+* Upgrade ArgoCD to 1.8.5 https://github.com/camptocamp/camptocamp-devops-stack/pull/481[#481] (https://github.com/mcanevet[mcanevet])
+* Upgrade hashicorp/azurerm provider to 2.48.0 https://github.com/camptocamp/camptocamp-devops-stack/pull/491[#491] (https://github.com/mcanevet[mcanevet])
+* Upgrade AAD Pod Identity to 1.7.4 https://github.com/camptocamp/camptocamp-devops-stack/pull/492[#492] (https://github.com/mcanevet[mcanevet])
+* Upgrade CSI secrets store provider Azure to 0.0.13 https://github.com/camptocamp/camptocamp-devops-stack/pull/493[#493] (https://github.com/mcanevet[mcanevet])
+
+*Fixed Bugs:*
+
+* Fix chicken and egg problem in Azure https://github.com/camptocamp/camptocamp-devops-stack/pull/486[#486] (https://github.com/mcanevet[mcanevet])
+* Create Terraform workspace if it does not exist https://github.com/camptocamp/camptocamp-devops-stack/pull/489[#489] (https://github.com/mcanevet[mcanevet])
+
+*Implemented enhancements:*
+
+* Wait for app of apps in gitlab CI pipeline https://github.com/camptocamp/camptocamp-devops-stack/pull/490[#490] (https://github.com/mcanevet[mcanevet])
+* Create LICENSE https://github.com/camptocamp/camptocamp-devops-stack/pull/488[#488] (https://github.com/mcanevet[mcanevet])
+
+*Documentations:*
+
+* Doc: Cleaning and restructuring https://github.com/camptocamp/camptocamp-devops-stack/pull/485[#485] (https://github.com/mbornoz[mbornoz])
+
 == https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.25.0[0.25.0] (2021-02-23)
 
 https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.24.0...v0.25.0[Full Changelog]
