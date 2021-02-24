@@ -4,7 +4,11 @@ on:
   push:
     branches:
       - master
+    path-ignore:
+      - 'docs/**'
   pull_request:
+    path-ignore:
+      - 'docs/**'
 jobs:
   from-scratch:
     name: From Scratch
