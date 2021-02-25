@@ -79,15 +79,19 @@ module "argocd" {
       tls_skip_verify_insecure = true
     }
   }
-  app_of_apps_values_overrides = [
-    templatefile("${path.module}/../values.tmpl.yaml",
-      {
-        root_cert = base64encode(tls_self_signed_cert.root.cert_pem)
-        root_key  = base64encode(tls_private_key.root.private_key_pem)
-      }
-    ),
-    var.app_of_apps_values_overrides,
-  ]
+  app_of_apps_values_overrides = yamlencode(
+    merge(
+      yamldecode(
+        templatefile("${path.module}/../values.tmpl.yaml",
+          {
+            root_cert = base64encode(tls_self_signed_cert.root.cert_pem)
+            root_key  = base64encode(tls_private_key.root.private_key_pem)
+          }
+        )
+      ),
+      yamldecode(var.app_of_apps_values_overrides),
+    )
+  )
   depends_on = [
     module.cluster,
   ]
