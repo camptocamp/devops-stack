@@ -45,4 +45,4 @@ This UI bundle is linked to in the `antora-playbook.yml` of the documentation pr
 
 == Contribution
 
-
+There is a dedicated page that explains how to write and xref:howtos/write_documentation.adoc[contribute to documentation].
