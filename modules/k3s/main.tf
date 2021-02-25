@@ -31,13 +31,15 @@ provider "kubernetes" {
 module "argocd" {
   source = "../../argocd-helm"
 
-  kubeconfig      = local.kubeconfig
-  repo_url        = var.repo_url
-  target_revision = var.target_revision
-  extra_apps      = var.extra_apps
-  cluster_name    = var.cluster_name
-  base_domain     = local.base_domain
-  cluster_issuer  = "ca-issuer"
+  kubeconfig              = local.kubeconfig
+  repo_url                = var.repo_url
+  target_revision         = var.target_revision
+  extra_apps              = var.extra_apps
+  cluster_name            = var.cluster_name
+  base_domain             = local.base_domain
+  argocd_server_secretkey = var.argocd_server_secretkey
+
+  cluster_issuer = "ca-issuer"
   oidc = var.oidc != null ? var.oidc : {
     issuer_url    = format("https://keycloak.apps.%s/auth/realms/kubernetes", local.base_domain)
     oauth_url     = format("https://keycloak.apps.%s/auth/realms/kubernetes/protocol/openid-connect/auth", local.base_domain)

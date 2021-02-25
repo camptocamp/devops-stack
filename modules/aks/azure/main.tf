@@ -74,13 +74,14 @@ module "cluster" {
 module "argocd" {
   source = "../../argocd-helm"
 
-  kubeconfig      = local.kubeconfig
-  repo_url        = var.repo_url
-  target_revision = var.target_revision
-  extra_apps      = var.extra_apps
-  cluster_name    = var.cluster_name
-  base_domain     = var.base_domain
-  cluster_issuer  = "letsencrypt-prod"
+  kubeconfig              = local.kubeconfig
+  repo_url                = var.repo_url
+  target_revision         = var.target_revision
+  extra_apps              = var.extra_apps
+  cluster_name            = var.cluster_name
+  base_domain             = var.base_domain
+  cluster_issuer          = "letsencrypt-prod"
+  argocd_server_secretkey = var.argocd_server_secretkey
 
   oidc = var.oidc != null ? var.oidc : {
     issuer_url    = format("https://login.microsoftonline.com/%s/v2.0", data.azurerm_client_config.current.tenant_id)
