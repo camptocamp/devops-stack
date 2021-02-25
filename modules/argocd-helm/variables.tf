@@ -19,6 +19,12 @@ variable "extra_apps" {
   default     = []
 }
 
+variable "argocd_server_secretkey" {
+  description = "ArgoCD Server Secert Key to avoid regenerate token on redeploy."
+  type        = string
+  default     = null
+}
+
 variable "cluster_name" {
   description = "The name of the cluster to create."
   type        = string

@@ -50,6 +50,7 @@ argo-cd:
       extra:
         oidc.default.clientSecret: ${oidc.client_secret}
         accounts.pipeline.tokens: '${argocd_accounts_pipeline_tokens}'
+        server.secretkey: ${argocd_server_secretkey}
   controller:
     metrics:
       enabled: true

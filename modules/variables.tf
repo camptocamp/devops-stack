@@ -40,3 +40,9 @@ variable "oidc" {
   })
   default = null
 }
+
+variable "argocd_server_secretkey" {
+  description = "ArgoCD Server Secert Key to avoid regenerate token on redeploy."
+  type        = string
+  default     = null
+}

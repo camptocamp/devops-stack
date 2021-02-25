@@ -105,12 +105,13 @@ resource "aws_security_group_rule" "workers_ingress_healthcheck_http" {
 module "argocd" {
   source = "../../argocd-helm"
 
-  kubeconfig      = local.kubeconfig
-  repo_url        = var.repo_url
-  target_revision = var.target_revision
-  extra_apps      = var.extra_apps
-  cluster_name    = var.cluster_name
-  base_domain     = var.base_domain
+  kubeconfig              = local.kubeconfig
+  repo_url                = var.repo_url
+  target_revision         = var.target_revision
+  extra_apps              = var.extra_apps
+  cluster_name            = var.cluster_name
+  base_domain             = var.base_domain
+  argocd_server_secretkey = var.argocd_server_secretkey
 
   cluster_issuer = "letsencrypt-prod"
   oidc = var.oidc != null ? var.oidc : {
