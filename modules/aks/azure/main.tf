@@ -82,19 +82,18 @@ module "argocd" {
   base_domain     = var.base_domain
   cluster_issuer  = "letsencrypt-prod"
 
-  oidc = {
+  oidc = var.oidc != null ? var.oidc : {
     issuer_url    = format("https://login.microsoftonline.com/%s/v2.0", data.azurerm_client_config.current.tenant_id)
     oauth_url     = format("https://login.microsoftonline.com/%s/oauth2/authorize", data.azurerm_client_config.current.tenant_id)
     token_url     = format("https://login.microsoftonline.com/%s/oauth2/token", data.azurerm_client_config.current.tenant_id)
     api_url       = format("https://graph.microsoft.com/oidc/userinfo")
-    client_id     = azuread_application.oauth2_apps.application_id
-    client_secret = azuread_application_password.oauth2_apps.value
+    client_id     = azuread_application.oauth2_apps.0.application_id
+    client_secret = azuread_application_password.oauth2_apps.0.value
   }
 
   app_of_apps_values_overrides = [
     templatefile("${path.module}/values.tmpl.yaml",
       {
-        client_secret                                = azuread_application_password.oauth2_apps.value
         subscription_id                              = split("/", data.azurerm_subscription.primary.id)[2]
         resource_group_name                          = var.resource_group_name
         base_domain                                  = var.base_domain
@@ -169,6 +168,8 @@ resource "azurerm_role_assignment" "dns_zone_contributor" {
 data "azurerm_client_config" "current" {}
 
 resource "azuread_application" "oauth2_apps" {
+  count = var.oidc == null ? 1 : 0
+
   name = "oauth2-apps-${terraform.workspace}"
   reply_urls = [
     format("https://argocd.apps.%s.%s/auth/callback", var.cluster_name, var.base_domain),
@@ -203,7 +204,9 @@ resource "azuread_application" "oauth2_apps" {
 }
 
 resource "azuread_application_app_role" "argocd_admin" {
-  application_object_id = azuread_application.oauth2_apps.id
+  count = var.oidc == null ? 1 : 0
+
+  application_object_id = azuread_application.oauth2_apps.0.id
   allowed_member_types  = ["User"]
   description           = "ArgoCD Admins"
   display_name          = "ArgoCD Administrator"
@@ -212,13 +215,17 @@ resource "azuread_application_app_role" "argocd_admin" {
 }
 
 resource "random_password" "oauth2_apps" {
+  count = var.oidc == null ? 1 : 0
+
   length           = 34
   special          = true
   override_special = "-_~."
 }
 
 resource "azuread_application_password" "oauth2_apps" {
-  application_object_id = azuread_application.oauth2_apps.id
+  count = var.oidc == null ? 1 : 0
+
+  application_object_id = azuread_application.oauth2_apps.0.id
   end_date              = "2299-12-30T23:00:00Z"
   value                 = random_password.oauth2_apps.result
 }

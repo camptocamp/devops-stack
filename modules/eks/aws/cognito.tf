@@ -1,4 +1,6 @@
 resource "aws_cognito_user_pool_client" "client" {
+  count = var.oidc == null ? 1 : 0
+
   name = format("client-%s", var.cluster_name)
 
   user_pool_id = var.cognito_user_pool_id
