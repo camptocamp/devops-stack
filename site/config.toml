@@ -50,6 +50,11 @@ icon = "fab fa-youtube"
 link = "https://www.youtube.com/user/CamptocampOnline"
 
 [[params.social]]
+title = "Facebook"
+icon = "fab fa-facebook"
+link = "https://www.facebook.com/camptocampsa"
+
+[[params.social]]
 title = "StackShare"
 icon = "fas fa-share-alt"
 link = "https://stackshare.io/camptocamp/infrastructure"
