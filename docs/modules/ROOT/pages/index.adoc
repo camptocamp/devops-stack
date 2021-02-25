@@ -1,13 +1,15 @@
 = Camptocamp's DevOps Stack
 
-:description: This repository contains the DevOps Stack of Camptocamp's Infrastructure Solutions & Services department.
-:keywords: terraform, docker, kubernetes, k3s, eks, argocd, grafana, traefik, prometheus
+:description: This repository contains the DevOps Stack of Camptocamp's Infrastructure Solutions Department.
+:keywords: terraform, docker, kubernetes, k3s, eks, aks, terraform, argocd, grafana, loki, traefik, prometheus, cert-manager, openid-connect, antora
 :sectanchors:
 :url-repo: https://github.com/camptocamp/camptocamp-devops-stack.git
 :url-c2c: https://www.camptocamp.com/
 
 > The DevOps Stack provides a standard Kubernetes Platform, bringing together automated Provisioning as Code, Continuous 
 Application Deployment, and readily-made configurations for the best tools in the industry.
+
+TIP: The easiest wat to get started with the DevOps Stack is definitely to follow the xref:howtos/quickstart_k3s_docker.adoc[K3s on Docker Quickstart]. This way you will have a fully operational https://k3s.io/[K3s] playground on your local machine.
 
 == Project sponsor
 
