@@ -186,6 +186,7 @@ kube-prometheus-stack:
       targetPort: 9095
 
   grafana:
+    adminPassword: ${grafana.admin_password}
     grafana.ini:
       auth.generic_oauth:
         enabled: true

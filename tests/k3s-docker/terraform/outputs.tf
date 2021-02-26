@@ -49,3 +49,8 @@ output "admin_password" {
   sensitive = true
   value     = module.cluster.admin_password
 }
+
+output "grafana_admin_password" {
+  sensitive = true
+  value = module.cluster.grafana_admin_password
+}

@@ -75,6 +75,7 @@ module "argocd" {
     }
   }
   grafana = {
+    admin_password = random_password.grafana_admin_password.result
     generic_oauth_extra_args = {
       tls_skip_verify_insecure = true
     }
@@ -100,6 +101,11 @@ resource "random_password" "clientsecret" {
 
 resource "random_password" "admin_password" {
   length  = 16
+  special = false
+}
+
+resource "random_password" "grafana_admin_password" {
+  length = 16
   special = false
 }
 
