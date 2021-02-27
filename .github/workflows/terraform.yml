@@ -78,7 +78,7 @@ jobs:
           echo "ARGOCD_AUTH_TOKEN=$(terraform-bin output -json argocd_auth_token | jq -r .)" >> $GITHUB_ENV
 
       - name: Wait for App of Apps
-        uses: docker://argoproj/argocd:v1.7.12
+        uses: docker://argoproj/argocd:v1.8.7
         env:
           KUBECONFIG: ${{ github.workspace }}/kubeconfig
         with:
@@ -135,7 +135,7 @@ jobs:
           echo "ARGOCD_AUTH_TOKEN=$(terraform-bin output -json argocd_auth_token | jq -r .)" >> $GITHUB_ENV
 
       - name: Wait for App of Apps
-        uses: docker://argoproj/argocd:v1.7.12
+        uses: docker://argoproj/argocd:v1.8.7
         env:
           KUBECONFIG: ${{ github.workspace }}/kubeconfig
         with:
@@ -180,7 +180,7 @@ jobs:
 
       - name: ArgoCD app diff with ${{ github.ref }}
         id: app-diff
-        uses: docker://argoproj/argocd:v1.7.12
+        uses: docker://argoproj/argocd:v1.8.7
         env:
           KUBECONFIG: ${{ github.workspace }}/kubeconfig
           APP_OF_APPS_VALUES_0 : ${{ github.workspace }}/values0.yaml
@@ -196,7 +196,7 @@ jobs:
         run: terraform apply --auto-approve
 
       - name: Wait for App of Apps
-        uses: docker://argoproj/argocd:v1.7.12
+        uses: docker://argoproj/argocd:v1.8.7
         env:
           KUBECONFIG: ${{ github.workspace }}/kubeconfig
         with:
