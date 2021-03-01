@@ -184,6 +184,8 @@ kube-prometheus-stack:
             - alertmanager.apps.${base_domain}
     service:
       targetPort: 9095
+    serviceMonitor:
+      selfMonitor: false
 
   grafana:
     grafana.ini:
@@ -279,6 +281,10 @@ kube-prometheus-stack:
           ports:
             - containerPort: 9091
               name: proxy
+      alertingEndpoints:
+        - name: kube-prometheus-stack-alertmanager
+          namespace: kube-prometheus-stack
+          port: 9093
     service:
       port: 9091
       targetPort: 9091
@@ -286,6 +292,31 @@ kube-prometheus-stack:
         - name: web
           port: 9090
           targetPort: 9090
+    serviceMonitor:
+      selfMonitor: false
+    additionalPodMonitors:
+      - name: alertmanager
+        podMetricsEndpoints:
+          - path: /metrics
+            targetPort: 9093
+        namespaceSelector:
+          matchNames:
+          - kube-prometheus-stack
+        selector:
+          matchLabels:
+            alertmanager: kube-prometheus-stack-alertmanager
+            app: alertmanager
+      - name: prometheus
+        podMetricsEndpoints:
+          - path: /metrics
+            targetPort: 9090
+        namespaceSelector:
+          matchNames:
+          - kube-prometheus-stack
+        selector:
+          matchLabels:
+            app: prometheus
+            prometheus: kube-prometheus-stack-prometheus
 %{ if can(metrics_archives.bucket_config) }
   ${ indent(4,yamlencode({"thanosObjectStorageConfig": metrics_archives.bucket_config})) }
 %{ endif }
