@@ -18,7 +18,6 @@ jobs:
         tf_root:
           - tests/k3s-docker/terraform
     env:
-      TF_ROOT: ${{ matrix.tf_root }}
       TF_VAR_repo_url: ${{ github.server_url }}/${{ github.actor }}/camptocamp-devops-stack.git
       TF_VAR_target_revision: ${{ github.head_ref }}
     defaults:
@@ -73,11 +72,15 @@ jobs:
           TF_VAR_repo_url: ${{ github.server_url }}/${{ github.repository }}
         run: terraform plan --detailed-exitcode -no-color
 
-      - name: Generate outputs.tf
-        run: terraform-bin output -json > outputs.json
+      - name: Set env
+        run: |
+          terraform-bin output -json kubeconfig | jq -r . > ${{ github.workspace }}/kubeconfig
+          echo "ARGOCD_AUTH_TOKEN=$(terraform-bin output -json argocd_auth_token | jq -r .)" >> $GITHUB_ENV
 
       - name: Wait for App of Apps
         uses: docker://argoproj/argocd:v1.7.12
+        env:
+          KUBECONFIG: ${{ github.workspace }}/kubeconfig
         with:
           entrypoint: ./scripts/wait-for-app-of-apps.sh
 
@@ -127,6 +130,7 @@ jobs:
         run: terraform plan --detailed-exitcode -no-color
 
       - name: Generate outputs.tf
+        # TODO: change this once PR #508 is merged
         run: terraform-bin output -json > outputs.json
 
       - name: Wait for App of Apps
@@ -159,12 +163,26 @@ jobs:
           TF_VAR_target_revision: ${{ github.head_ref }}
         run: terraform plan -no-color -out plan
 
-      - name: Generate outputs.tf
-        run: terraform-bin show -json plan | jq -r '.planned_values.outputs' > outputs.json
+      - name: Set env
+        run: |
+          terraform-bin output -json kubeconfig | jq -r . > ${{ github.workspace }}/kubeconfig
+          echo "ARGOCD_AUTH_TOKEN=$(terraform-bin output -json argocd_auth_token | jq -r .)" >> $GITHUB_ENV
+          echo "REPO_URL=$(terraform-bin output -json repo_url | jq -r .)" >> $GITHUB_ENV
+          echo "TARGET_REVISION=$(terraform-bin output -json target_revision | jq -r .)" >> $GITHUB_ENV
+          # FIXME: find a more robust way to do this
+          terraform-bin show -json plan > plan.json
+          jq -r '.planned_values.outputs.app_of_apps_values.value[0]' plan.json > ${{ github.workspace }}/values0.yaml
+          jq -r '.planned_values.outputs.app_of_apps_values.value[1]' plan.json > ${{ github.workspace }}/values1.yaml
+          jq -r '.planned_values.outputs.app_of_apps_values.value[2]' plan.json > ${{ github.workspace }}/values2.yaml
 
       - name: ArgoCD app diff with ${{ github.ref }}
         id: app-diff
         uses: docker://argoproj/argocd:v1.7.12
+        env:
+          KUBECONFIG: ${{ github.workspace }}/kubeconfig
+          APP_OF_APPS_VALUES_0 : ${{ github.workspace }}/values0.yaml
+          APP_OF_APPS_VALUES_1 : ${{ github.workspace }}/values1.yaml
+          APP_OF_APPS_VALUES_2 : ${{ github.workspace }}/values2.yaml
         with:
           entrypoint: ./scripts/app-diff.sh
 
@@ -176,6 +194,8 @@ jobs:
 
       - name: Wait for App of Apps
         uses: docker://argoproj/argocd:v1.7.12
+        env:
+          KUBECONFIG: ${{ github.workspace }}/kubeconfig
         with:
           entrypoint: ./scripts/wait-for-app-of-apps.sh
 

@@ -28,10 +28,21 @@ mr:terraform:plan:
     - cd "$TF_ROOT"
     - terraform init
     - terraform plan -out plan
-    - terraform show -json plan | jq -r '.planned_values.outputs' > outputs.json
+    - terraform output -json kubeconfig | jq -r . > "$CI_PROJECT_DIR/kubeconfig"
+    - echo "ARGOCD_AUTH_TOKEN=$(terraform output -json argocd_auth_token | jq -r .)" >> "$CI_PROJECT_DIR/.env"
+    - echo "REPO_URL=$(terraform output -json repo_url | jq -r .)" >> "$CI_PROJECT_DIR/.env"
+    - echo "TARGET_REVISION=$(terraform output -json target_revision | jq -r .)" >> "$CI_PROJECT_DIR/.env"
+    - terraform show -json plan > plan.json
+    - jq -r '.planned_values.outputs.app_of_apps_values.value[0]' plan.json > "$CI_PROJECT_DIR/values0.yaml"
+    - jq -r '.planned_values.outputs.app_of_apps_values.value[1]' plan.json > "$CI_PROJECT_DIR/values1.yaml"
+    - jq -r '.planned_values.outputs.app_of_apps_values.value[2]' plan.json > "$CI_PROJECT_DIR/values2.yaml"
   artifacts:
     paths:
-      - "$TF_ROOT/outputs.json"
+      - kubeconfig
+      - .env
+      - values0.yaml
+      - values1.yaml
+      - values2.yaml
     expire_in: 1 hour
     when: always
   rules:
@@ -41,11 +52,17 @@ mr:argocd:diff:
   stage: argocd
   image:
     name: argoproj/argocd:v${ARGOCD_VERSION}
+  variables:
+    KUBECONFIG: "$CI_PROJECT_DIR/kubeconfig"
+    APP_OF_APPS_VALUES_0: "$CI_PROJECT_DIR/values0.yaml"
+    APP_OF_APPS_VALUES_1: "$CI_PROJECT_DIR/values1.yaml"
+    APP_OF_APPS_VALUES_2: "$CI_PROJECT_DIR/values2.yaml"
   before_script:
     - python3 -c "from urllib.request import urlretrieve; urlretrieve('https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/aws-iam-authenticator', '/tmp/aws-iam-authenticator')"
     - chmod +x /tmp/aws-iam-authenticator
     - export PATH="/tmp:$PATH"
   script:
+    - set -o allexport && . .env && set +o allexport
     - python3 -c "import urllib.request; print(urllib.request.urlopen('https://raw.githubusercontent.com/camptocamp/camptocamp-devops-stack/v$CAMPTOCAMP_DEVOPS_STACK_VERSION/scripts/app-diff.sh').read().decode())" | bash
   needs:
     - job: mr:terraform:plan
@@ -70,10 +87,12 @@ pb:terraform:apply:
     - terraform init
     - terraform apply --auto-approve
     - terraform plan --detailed-exitcode
-    - terraform output -json > outputs.json
+    - terraform output -json kubeconfig | jq -r . > "$CI_PROJECT_DIR/kubeconfig"
+    - echo "ARGOCD_AUTH_TOKEN=$(terraform output -json argocd_auth_token | jq -r .)" >> "$CI_PROJECT_DIR/.env"
   artifacts:
     paths:
-      - "$TF_ROOT/outputs.json"
+      - kubeconfig
+      - .env
     expire_in: 1 hour
     when: always
   environment:
@@ -86,11 +105,14 @@ pb:argocd:wait-for-app-of-apps:
   stage: argocd
   image:
     name: argoproj/argocd:v${ARGOCD_VERSION}
+  variables:
+    KUBECONFIG: "$CI_PROJECT_DIR/kubeconfig"
   before_script:
     - python3 -c "from urllib.request import urlretrieve; urlretrieve('https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/aws-iam-authenticator', '/tmp/aws-iam-authenticator')"
     - chmod +x /tmp/aws-iam-authenticator
     - export PATH="/tmp:$PATH"
   script:
+    - set -o allexport && . .env && set +o allexport
     - python3 -c "import urllib.request; print(urllib.request.urlopen('https://raw.githubusercontent.com/camptocamp/camptocamp-devops-stack/v$CAMPTOCAMP_DEVOPS_STACK_VERSION/scripts/wait-for-app-of-apps.sh').read().decode())" | bash
   needs:
     - job: pb:terraform:apply
