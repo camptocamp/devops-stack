@@ -129,12 +129,15 @@ jobs:
           TF_VAR_target_revision: ${{ github.base_ref }}
         run: terraform plan --detailed-exitcode -no-color
 
-      - name: Generate outputs.tf
-        # TODO: change this once PR #508 is merged
-        run: terraform-bin output -json > outputs.json
+      - name: Set env
+        run: |
+          terraform-bin output -json kubeconfig | jq -r . > ${{ github.workspace }}/kubeconfig
+          echo "ARGOCD_AUTH_TOKEN=$(terraform-bin output -json argocd_auth_token | jq -r .)" >> $GITHUB_ENV
 
       - name: Wait for App of Apps
         uses: docker://argoproj/argocd:v1.7.12
+        env:
+          KUBECONFIG: ${{ github.workspace }}/kubeconfig
         with:
           entrypoint: ./scripts/wait-for-app-of-apps.sh
 
