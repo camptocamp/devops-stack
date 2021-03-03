@@ -3,22 +3,7 @@ locals {
   kubernetes_host                   = data.aws_eks_cluster.cluster.endpoint
   kubernetes_cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
   kubernetes_token                  = data.aws_eks_cluster_auth.cluster.token
-
-  kubeconfig = yamlencode(
-    merge(
-      yamldecode(module.cluster.kubeconfig),
-      {
-        users = [
-          {
-            name = lookup(lookup(lookup(yamldecode(module.cluster.kubeconfig), "contexts")[0], "context"), "user")
-            user = {
-              token = local.kubernetes_token
-            }
-          }
-        ]
-      }
-    )
-  )
+  kubeconfig                        = module.cluster.kubeconfig
 }
 
 data "aws_vpc" "this" {
