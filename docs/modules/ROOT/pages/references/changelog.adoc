@@ -1,5 +1,27 @@
 = Changelog
 
+== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.27.0[0.27.0] (2021-03-03)
+
+https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.26.0...v0.27.0[Full Changelog]
+
+*Implemented enhancements:*
+
+* Set default repoURL and targetRevision to latest DevOps stack version https://github.com/camptocamp/camptocamp-devops-stack/pull/494[#494] (https://github.com/mcanevet[mcanevet])
+* Get rid of outputs.json https://github.com/camptocamp/camptocamp-devops-stack/pull/508[#508] (https://github.com/mcanevet[mcanevet])
+
+*Fixed Bugs:*
+
+* Fix csi-secrets-store-provider-azure override https://github.com/camptocamp/camptocamp-devops-stack/pull/507[#507] (https://github.com/mcanevet[mcanevet])
+* Use aws-iam-authenticator instead of the temporary token https://github.com/camptocamp/camptocamp-devops-stack/pull/509[#509] (https://github.com/mcanevet[mcanevet])
+
+*Pipelines:*
+
+* Run Terraform workflow unless only doc modification https://github.com/camptocamp/camptocamp-devops-stack/pull/499[#499] (https://github.com/mcanevet[mcanevet])
+
+*Documentations:*
+
+* Lot of documentation improvements.
+
 == https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.26.0[0.26.0] (2021-02-24)
 
 https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.25.0...v0.26.0[Full Changelog]
