@@ -1,0 +1,11 @@
+= Data Persistence
+
+At Camptocamp, we prefer to have a clear separation
+between compute workload and storage.
+Hence, we try to have our clusters totally stateless and do data persistence
+out of the cluster (external RDBMS, NoSQL databases or object storage).
+
+That means that we don't use storageClasses that would allow self provisioning
+of Persistent Volumes (PVs).
+Moreover, usage of storageClasses would break the blue/green infrastructure
+paradigm that the DevOps Stack supports.

@@ -20,4 +20,5 @@
 ** xref:ROOT:explanations/infrastructure-as-code.adoc[Infrastructure As Code]
 ** xref:ROOT:explanations/gitops.adoc[Continuous Delivery]
 ** xref:ROOT:explanations/lifecycle_operations.adoc[Lifecycle Operations]
+** xref:ROOT:explanations/data_persistence.adoc[Data Persistence]
 ** xref:ROOT:explanations/documentation.adoc[Docs as Code]
