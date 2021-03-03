@@ -80,6 +80,10 @@ pb:terraform:apply:
   image:
     name: hashicorp/terraform:$TERRAFORM_VERSION
     entrypoint: [""]
+  before_script:
+    - wget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 -O /tmp/jq
+    - chmod +x /tmp/jq
+    - export PATH="/tmp:$PATH"
   script:
     - cd "$TF_ROOT"
     - terraform init
