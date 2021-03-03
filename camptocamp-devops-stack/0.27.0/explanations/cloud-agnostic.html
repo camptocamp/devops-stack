@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Infrastructure as Code :: Camptocamp’s DevOps Stack</title>
-    <link rel="canonical" href="https://devops-stack.io/camptocamp-devops-stack/camptocamp-devops-stack/0.27.0/explanations/infrastructure-as-code.html">
+    <title>Cloud Agnostic :: Camptocamp’s DevOps Stack</title>
+    <link rel="canonical" href="https://devops-stack.io/camptocamp-devops-stack/camptocamp-devops-stack/0.27.0/explanations/cloud-agnostic.html">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../../_/css/site.css">
     <link rel="icon" href="../../../_/img/c2c_favicon.png" type="image/x-icon">
@@ -107,10 +107,10 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="purpose.html">Purpose</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="cloud-agnostic.html">Cloud Agnostic</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="infrastructure-as-code.html">Infrastructure As Code</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -164,37 +164,18 @@
   <ul>
     <li><a href="../index.html">Camptocamp’s DevOps Stack</a></li>
     <li>Explanations</li>
-    <li><a href="infrastructure-as-code.html">Infrastructure As Code</a></li>
+    <li><a href="cloud-agnostic.html">Cloud Agnostic</a></li>
   </ul>
 </nav>
 </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Infrastructure as Code</h1>
+<h1 class="page">Cloud Agnostic</h1>
 <div class="paragraph">
-<p>Deploying Kubernetes clusters from scratch has become an easy task with IaaS interfaces.
-However, the proper management of all components that make up the cluster
-and its ecosystem can quickly become a nightmare if everything was done manually.</p>
+<p>Nobody likes to be locked-in. That’s why the DevOps Stack provides a Cloud abstraction so you can deploy it on top of multiple Cloud platforms, in an agnostic way.</p>
 </div>
 <div class="paragraph">
-<p>The Infrastructure as Code approach has long proved its worth to deploy
-and maintain complex environments on the long run.
-In particular, in the context of Cloud resources, it allows to make sure
-all resources are managed centrally and destroyed in their proper context.
-This is important to control the financial consequences of numerous deployments.</p>
-</div>
-<div class="paragraph">
-<p>The DevOps Stack is strongly founded on the idea that every one of
-its components should be managed as code:
-- The underlying Kubernetes cluster and its components are managed with Terraform
-- The Cluster Applications are deployed using Helm charts orchestrated by Argo CD</p>
-</div>
-<div class="paragraph">
-<p>This allows you to keep track of all changes made at any level of the Stack,
-using <a href="gitops.html" class="page">Continuous Deployment</a> in a GitOps approach.</p>
-</div>
-<div class="paragraph">
-<p><a href="#:ROOT:getting_started.adoc" class="page unresolved">Get Started</a></p>
+<p>Good "agnostic" automation practices offer many benefits.</p>
 </div>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

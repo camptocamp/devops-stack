@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Infrastructure as Code :: Camptocamp’s DevOps Stack</title>
-    <link rel="canonical" href="https://devops-stack.io/camptocamp-devops-stack/camptocamp-devops-stack/0.27.0/explanations/infrastructure-as-code.html">
+    <title>Lifecycle Operations :: Camptocamp’s DevOps Stack</title>
+    <link rel="canonical" href="https://devops-stack.io/camptocamp-devops-stack/camptocamp-devops-stack/0.27.0/explanations/lifecycle_operations.html">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../../_/css/site.css">
     <link rel="icon" href="../../../_/img/c2c_favicon.png" type="image/x-icon">
@@ -110,13 +110,13 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="cloud-agnostic.html">Cloud Agnostic</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="infrastructure-as-code.html">Infrastructure As Code</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="gitops.html">Continuous Delivery</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="lifecycle_operations.html">Lifecycle Operations</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -164,37 +164,74 @@
   <ul>
     <li><a href="../index.html">Camptocamp’s DevOps Stack</a></li>
     <li>Explanations</li>
-    <li><a href="infrastructure-as-code.html">Infrastructure As Code</a></li>
+    <li><a href="lifecycle_operations.html">Lifecycle Operations</a></li>
   </ul>
 </nav>
 </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Infrastructure as Code</h1>
+<h1 class="page">Lifecycle Operations</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>Deploying Kubernetes clusters from scratch has become an easy task with IaaS interfaces.
-However, the proper management of all components that make up the cluster
-and its ecosystem can quickly become a nightmare if everything was done manually.</p>
+<p>It is not easy to describe the different phases of an IT project,
+especially when you also want to talk about operational aspects.
+One way to do this, which seems to be used more and more,
+is to talk about "days".</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_days_are_all_about"><a class="anchor" href="#_what_days_are_all_about"></a>What "days" are all about</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To make it very simple, here are some explanations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Day 0</strong> is related to software development,
+questions about requirements, architecture and design.</p>
+</li>
+<li>
+<p><strong>Day 1</strong> is more about deploying software developed
+in the <strong>Day 0</strong> and starting to build and configure
+the hosting infrastructure.</p>
+</li>
+<li>
+<p><strong>Day 2</strong> is the time to go live and hope that the efforts
+made in <strong>Day 1</strong> are adequate.
+This is a crucial moment, when it is imperative to have metrics,
+monitoring, tools and best practices to do efficient troubleshooting.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>The Infrastructure as Code approach has long proved its worth to deploy
-and maintain complex environments on the long run.
-In particular, in the context of Cloud resources, it allows to make sure
-all resources are managed centrally and destroyed in their proper context.
-This is important to control the financial consequences of numerous deployments.</p>
+<p>For now, the DevOps Stack is very focused on the points relating to days 1 and 2.
+In particular, the aspects related to the provisioning of a Kubernetes platform
+as well as the mandatory services related to its operational management.
+We must also take into account that using the Cloud and Cloud Native development
+practices make it much easier to handle changes related to software life cycle.
+The boundaries and responsibilities between these different phases
+have become more blurred, less strict.</p>
 </div>
-<div class="paragraph">
-<p>The DevOps Stack is strongly founded on the idea that every one of
-its components should be managed as code:
-- The underlying Kubernetes cluster and its components are managed with Terraform
-- The Cluster Applications are deployed using Helm charts orchestrated by Argo CD</p>
 </div>
-<div class="paragraph">
-<p>This allows you to keep track of all changes made at any level of the Stack,
-using <a href="gitops.html" class="page">Continuous Deployment</a> in a GitOps approach.</p>
 </div>
+<div class="sect1">
+<h2 id="_developers_need_love"><a class="anchor" href="#_developers_need_love"></a>Developers need love</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p><a href="#:ROOT:getting_started.adoc" class="page unresolved">Get Started</a></p>
+<p>In the near future, we really want to invest significantly in aspects related
+to day 0 by improving the DevOps Stack in that direction,
+especially the software factory and development best practices
+related to Kubernetes integration.
+This is closely linked to the generalization
+of the <a href="https://12factor.net/">Twelve-Factor App</a>
+methodology, as well as breaking silos and embracing DevOps principles.
+These good practices should be applied as early as possible in projects.
+It is absolutely necessary.</p>
+</div>
+</div>
 </div>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
