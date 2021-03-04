@@ -108,6 +108,9 @@ module "argocd" {
         azure_dns_label_name                         = local.azure_dns_label_name
         kube_prometheus_stack_prometheus_resource_id = azurerm_user_assigned_identity.kube_prometheus_stack_prometheus.id
         kube_prometheus_stack_prometheus_client_id   = azurerm_user_assigned_identity.kube_prometheus_stack_prometheus.client_id
+        loki_container_name                          = azurerm_storage_container.loki.name
+        loki_account_name                            = azurerm_storage_account.this.name
+        loki_account_key                             = azurerm_storage_account.this.primary_access_key
       }
     ),
     var.app_of_apps_values_overrides,
@@ -143,6 +146,27 @@ resource "azurerm_user_assigned_identity" "cert_manager" {
   resource_group_name = module.cluster.node_resource_group
   location            = data.azurerm_resource_group.this.location
   name                = "cert-manager"
+}
+
+resource "random_string" "storage_account" {
+  length  = 24
+  lower   = true
+  upper   = false
+  special = false
+}
+
+resource "azurerm_storage_account" "this" {
+  name                     = random_string.storage_account.result
+  resource_group_name      = module.cluster.node_resource_group
+  location                 = data.azurerm_resource_group.this.location
+  account_tier             = "Standard"
+  account_replication_type = "GRS"
+}
+
+resource "azurerm_storage_container" "loki" {
+  name                  = "loki"
+  storage_account_name  = azurerm_storage_account.this.name
+  container_access_type = "private"
 }
 
 # TODO: I'm not sure this is required
