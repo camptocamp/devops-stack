@@ -3,3 +3,10 @@
 Nobody likes to be locked-in. That’s why the DevOps Stack provides a Cloud abstraction so you can deploy it on top of multiple Cloud platforms, in an agnostic way.
 
 Good "agnostic" automation practices offer many benefits.
+
+== Getting started
+
+* xref:ROOT:howtos/quickstart_eks.adoc[Get started with EKS]
+* xref:ROOT:howtos/quickstart_aks.adoc[Get started with AKS]
+* xref:ROOT:howtos/quickstart_k3s_docker.adoc[Get started with K3S on Docker]
+* xref:ROOT:howtos/quickstart_k3s_libvirt.adoc[Get started with K3S on LibVirt]
