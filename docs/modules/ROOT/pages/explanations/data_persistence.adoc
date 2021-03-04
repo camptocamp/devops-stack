@@ -4,7 +4,7 @@ Although not mandatory, it is recommended to have a clear separation between
 compute workload and storage when setting up a Kubernetes cluster.
 
 In particular, this approach makes it much easier to adopt a
-xref:ROOT:explanations/upgrade_strategy.adoc#green_field_upgrade[greenfield cluster upgrade strategy].
+xref:ROOT:explanations/upgrade_strategy.adoc#_green_field_upgrade[greenfield cluster upgrade strategy].
 
 In order to achieve this, clusters need to be totally stateless and
 achieve data persistence outside of the cluster
