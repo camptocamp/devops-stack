@@ -178,16 +178,22 @@
 <article class="doc">
 <h1 class="page">Data Persistence</h1>
 <div class="paragraph">
-<p>At Camptocamp, we prefer to have a clear separation
-between compute workload and storage.
-Hence, we try to have our clusters totally stateless and do data persistence
-out of the cluster (external RDBMS, NoSQL databases or object storage).</p>
+<p>Although not mandatory, it is recommended to have a clear separation between
+compute workload and storage when setting up a Kubernetes cluster.</p>
 </div>
 <div class="paragraph">
-<p>That means that we don&#8217;t use storageClasses that would allow self provisioning
-of Persistent Volumes (PVs).
-Moreover, usage of storageClasses would break the blue/green infrastructure
-paradigm that the DevOps Stack supports.</p>
+<p>In particular, this approach makes it much easier to adopt a
+<a href="upgrade_strategy.html#green_field_upgrade" class="page">greenfield cluster upgrade strategy</a>.</p>
+</div>
+<div class="paragraph">
+<p>In order to achieve this, clusters need to be totally stateless and
+achieve data persistence outside of the cluster
+(using external RDBMS, NoSQL databases, or object storage).</p>
+</div>
+<div class="paragraph">
+<p>We thus recommend to avoid the use of storageClasses,
+which allow self provisioning of Persistent Volumes (PVs), as it breaks
+the blue/green infrastructure paradigm that the DevOps Stack supports.</p>
 </div>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
