@@ -93,7 +93,7 @@ services:
       button:
         enable : true
         label : "Show me the Cloud Menu"
-        link : "/docs/camptocamp-devops-stack/__VERSION__/explanations/cloud-agnostic.html"
+        link : "/docs/camptocamp-devops-stack/__VERSION__/explanations/cloud_agnostic.html"
         
     # service item loop
     - title : "Defined as Code"
