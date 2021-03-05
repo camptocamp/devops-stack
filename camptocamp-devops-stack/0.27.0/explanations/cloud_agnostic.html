@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Lifecycle Operations :: Camptocamp’s DevOps Stack</title>
-    <link rel="canonical" href="https://devops-stack.io/camptocamp-devops-stack/camptocamp-devops-stack/0.27.0/explanations/lifecycle_operations.html">
+    <title>Cloud Agnostic :: Camptocamp’s DevOps Stack</title>
+    <link rel="canonical" href="https://devops-stack.io/camptocamp-devops-stack/camptocamp-devops-stack/0.27.0/explanations/cloud_agnostic.html">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../../_/css/site.css">
     <link rel="icon" href="../../../_/img/c2c_favicon.png" type="image/x-icon">
@@ -107,7 +107,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="purpose.html">Purpose</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="cloud_agnostic.html">Cloud Agnostic</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -116,7 +116,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="gitops.html">Continuous Delivery</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="lifecycle_operations.html">Lifecycle Operations</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -170,72 +170,41 @@
   <ul>
     <li><a href="../index.html">Camptocamp’s DevOps Stack</a></li>
     <li>Explanations</li>
-    <li><a href="lifecycle_operations.html">Lifecycle Operations</a></li>
+    <li><a href="cloud_agnostic.html">Cloud Agnostic</a></li>
   </ul>
 </nav>
 </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Lifecycle Operations</h1>
+<h1 class="page">Cloud Agnostic</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>It is not easy to describe the different phases of an IT project,
-especially when you also want to talk about operational aspects.
-One way to do this, which seems to be used more and more,
-is to talk about "days".</p>
+<p>Nobody likes to be locked-in. That’s why the DevOps Stack provides a Cloud abstraction so you can deploy it on top of multiple Cloud platforms, in an agnostic way.</p>
+</div>
+<div class="paragraph">
+<p>Good "agnostic" automation practices offer many benefits.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_what_days_are_all_about"><a class="anchor" href="#_what_days_are_all_about"></a>What "days" are all about</h2>
+<h2 id="_getting_started"><a class="anchor" href="#_getting_started"></a>Getting started</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>To make it very simple, here are some explanations:</p>
-</div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Day 0</strong> is related to software development,
-questions about requirements, architecture and design.</p>
+<p><a href="../howtos/quickstart_eks.html" class="page">Get started with EKS</a></p>
 </li>
 <li>
-<p><strong>Day 1</strong> is more about deploying software developed
-in the <strong>Day 0</strong> and starting to build and configure
-the hosting infrastructure.</p>
+<p><a href="../howtos/quickstart_aks.html" class="page">Get started with AKS</a></p>
 </li>
 <li>
-<p><strong>Day 2</strong> is the time to go live and hope that the efforts
-made in <strong>Day 1</strong> are adequate.
-This is a crucial moment, when it is imperative to have metrics,
-monitoring, tools and best practices to do efficient troubleshooting.</p>
+<p><a href="../howtos/quickstart_k3s_docker.html" class="page">Get started with K3S on Docker</a></p>
+</li>
+<li>
+<p><a href="../howtos/quickstart_k3s_libvirt.html" class="page">Get started with K3S on LibVirt</a></p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>For now, the DevOps Stack is very focused on the points relating to days 1 and 2.
-In particular, the aspects related to the provisioning of a Kubernetes platform
-as well as the mandatory services related to its operational management.
-We must also take into account that using the Cloud and Cloud Native development
-practices make it much easier to handle changes related to software life cycle.
-The boundaries and responsibilities between these different phases
-have become more blurred, less strict.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_developers_need_love"><a class="anchor" href="#_developers_need_love"></a>Developers need love</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>In the near future, we really want to invest significantly in aspects related
-to day 0 by improving the DevOps Stack in that direction,
-especially the software factory and development best practices
-related to Kubernetes integration.
-This is closely linked to the generalization
-of the <a href="https://12factor.net/">Twelve-Factor App</a>
-methodology, as well as breaking silos and embracing DevOps principles.
-These good practices should be applied as early as possible in projects.
-It is absolutely necessary.</p>
 </div>
 </div>
 </div>
