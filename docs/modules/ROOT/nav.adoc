@@ -16,7 +16,7 @@
 ** xref:ROOT:references/changelog.adoc[Changelog]
 * Explanations
 ** xref:ROOT:explanations/purpose.adoc[Purpose]
-** xref:ROOT:explanations/cloud-agnostic.adoc[Cloud Agnostic]
+** xref:ROOT:explanations/cloud_agnostic.adoc[Cloud Agnostic]
 ** xref:ROOT:explanations/infrastructure-as-code.adoc[Infrastructure As Code]
 ** xref:ROOT:explanations/gitops.adoc[Continuous Delivery]
 ** xref:ROOT:explanations/lifecycle_operations.adoc[Lifecycle Operations]
