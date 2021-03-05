@@ -1,7 +1,5 @@
 locals {
-  base_domain     = "example.com"
-  repo_url        = "https://github.com/camptocamp/camptocamp-devops-stack.git"
-  target_revision = "v0.26.0"
+  base_domain = "example.com"
 
   kubernetes_host                   = module.cluster.kubernetes_host
   kubernetes_cluster_ca_certificate = module.cluster.kubernetes_cluster_ca_certificate
@@ -25,7 +23,7 @@ data "aws_iam_role" "eks_admin" {
 }
 
 module "cluster" {
-  source = "git::https://github.com/camptocamp/camptocamp-devops-stack.git//modules/eks/aws?ref=v0.26.0"
+  source = "git::https://github.com/camptocamp/camptocamp-devops-stack.git//modules/eks/aws?ref=v0.28.0"
 
   cluster_name                         = terraform.workspace
   cluster_endpoint_public_access_cidrs = local.cluster_endpoint_public_access_cidrs
@@ -41,9 +39,7 @@ module "cluster" {
 
   map_roles = local.map_roles
 
-  base_domain     = local.base_domain
-  repo_url        = local.repo_url
-  target_revision = local.target_revision
+  base_domain = local.base_domain
 
   cognito_user_pool_id     = aws_cognito_user_pool.pool.id
   cognito_user_pool_domain = aws_cognito_user_pool_domain.pool_domain.domain
