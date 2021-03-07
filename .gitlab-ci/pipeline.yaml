@@ -91,37 +91,9 @@ pb:terraform:apply:
     - terraform init
     - terraform apply --auto-approve
     - terraform plan --detailed-exitcode
-    - terraform output -json kubeconfig | jq -r . > "$CI_PROJECT_DIR/kubeconfig"
-    - echo "ARGOCD_AUTH_TOKEN=$(terraform output -json argocd_auth_token | jq -r .)" >> "$CI_PROJECT_DIR/.env"
-  artifacts:
-    paths:
-      - kubeconfig
-      - .env
-    expire_in: 1 hour
-    when: always
   environment:
     name: cluster/$CI_COMMIT_REF_NAME
     on_stop: pb:terraform:destroy
-  rules:
-    - if: '$CI_COMMIT_REF_PROTECTED == "true"'
-
-pb:argocd:wait-for-app-of-apps:
-  stage: argocd
-  image:
-    name: argoproj/argocd:v${ARGOCD_VERSION}
-  variables:
-    KUBECONFIG: "$CI_PROJECT_DIR/kubeconfig"
-  before_script:
-    - python3 -c "from urllib.request import urlretrieve; urlretrieve('https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/aws-iam-authenticator', '/tmp/aws-iam-authenticator')"
-    - chmod +x /tmp/aws-iam-authenticator
-    - export PATH="/tmp:$PATH"
-  script:
-    - set -o allexport && . .env && set +o allexport
-    - python3 -c "import urllib.request; print(urllib.request.urlopen('https://raw.githubusercontent.com/camptocamp/camptocamp-devops-stack/v$CAMPTOCAMP_DEVOPS_STACK_VERSION/scripts/wait-for-app-of-apps.sh').read().decode())" | bash
-  needs:
-    - job: pb:terraform:apply
-      artifacts: true
-  allow_failure: true
   rules:
     - if: '$CI_COMMIT_REF_PROTECTED == "true"'
 

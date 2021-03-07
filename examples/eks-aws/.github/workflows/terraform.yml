@@ -90,16 +90,3 @@ jobs:
       - name: Terraform Plan
         if: github.event_name == 'push'
         run: terraform plan --detailed-exitcode -no-color
-
-      - name: Set env
-        run: |
-          terraform-bin output -json kubeconfig | jq -r . > ${{ github.workspace }}/kubeconfig
-          echo "ARGOCD_AUTH_TOKEN=$(terraform-bin output -json argocd_auth_token | jq -r .)" >> $GITHUB_ENV
-
-      - name: Wait for App of Apps
-        if: github.event_name == 'push'
-        uses: docker://argoproj/argocd:v1.8.5
-        env:
-          KUBECONFIG: ${{ github.workspace }}/kubeconfig
-        with:
-          entrypoint: .github/scripts/wait-for-app-of-apps.sh

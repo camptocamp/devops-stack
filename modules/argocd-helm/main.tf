@@ -97,6 +97,23 @@ resource "helm_release" "app_of_apps" {
   ]
 }
 
+resource "null_resource" "wait_for_app_of_apps" {
+  depends_on = [
+    helm_release.app_of_apps
+  ]
+
+  provisioner "local-exec" {
+    command     = "while ! KUBECONFIG=<(echo \"$KUBECONFIG_CONTENT\") argocd app wait apps --sync --health --timeout 30; do echo Retry; done"
+    interpreter = ["/bin/bash", "-c"]
+
+    environment = {
+      ARGOCD_OPTS        = "--plaintext --port-forward --port-forward-namespace argocd"
+      KUBECONFIG_CONTENT = var.kubeconfig
+      ARGOCD_AUTH_TOKEN  = jwt_hashed_token.argocd.token
+    }
+  }
+}
+
 resource "random_password" "oauth2_cookie_secret" {
   length  = 16
   special = false
