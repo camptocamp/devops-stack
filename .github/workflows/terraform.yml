@@ -32,6 +32,13 @@ jobs:
         with:
           terraform_version: 0.14.6
 
+      - name: Setup ArgoCD
+        run: |
+          mkdir "$GITHUB_WORKSPACE/bin"
+          curl -L https://github.com/argoproj/argo-cd/releases/download/v1.8.7/argocd-linux-amd64 > "$GITHUB_WORKSPACE/bin/argocd"
+          echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
+          chmod +x "$GITHUB_WORKSPACE/bin/argocd"
+
       - name: Terraform Format
         run: terraform fmt -check -diff -recursive
 
@@ -71,18 +78,6 @@ jobs:
         env:
           TF_VAR_repo_url: ${{ github.server_url }}/${{ github.repository }}
         run: terraform plan --detailed-exitcode -no-color
-
-      - name: Set env
-        run: |
-          terraform-bin output -json kubeconfig | jq -r . > ${{ github.workspace }}/kubeconfig
-          echo "ARGOCD_AUTH_TOKEN=$(terraform-bin output -json argocd_auth_token | jq -r .)" >> $GITHUB_ENV
-
-      - name: Wait for App of Apps
-        uses: docker://argoproj/argocd:v1.8.7
-        env:
-          KUBECONFIG: ${{ github.workspace }}/kubeconfig
-        with:
-          entrypoint: ./scripts/wait-for-app-of-apps.sh
 
       - name: Destroy Cluster
         run: terraform destroy --auto-approve
@@ -128,18 +123,6 @@ jobs:
           TF_VAR_repo_url: ${{ github.server_url }}/camptocamp/camptocamp-devops-stack.git
           TF_VAR_target_revision: ${{ github.base_ref }}
         run: terraform plan --detailed-exitcode -no-color
-
-      - name: Set env
-        run: |
-          terraform-bin output -json kubeconfig | jq -r . > ${{ github.workspace }}/kubeconfig
-          echo "ARGOCD_AUTH_TOKEN=$(terraform-bin output -json argocd_auth_token | jq -r .)" >> $GITHUB_ENV
-
-      - name: Wait for App of Apps
-        uses: docker://argoproj/argocd:v1.8.7
-        env:
-          KUBECONFIG: ${{ github.workspace }}/kubeconfig
-        with:
-          entrypoint: ./scripts/wait-for-app-of-apps.sh
 
       - name: Checkout ${{ github.ref }}
         uses: actions/checkout@v2
@@ -194,13 +177,6 @@ jobs:
           TF_VAR_repo_url: ${{ github.server_url }}/${{ github.actor }}/camptocamp-devops-stack.git
           TF_VAR_target_revision: ${{ github.head_ref }}
         run: terraform apply --auto-approve
-
-      - name: Wait for App of Apps
-        uses: docker://argoproj/argocd:v1.8.7
-        env:
-          KUBECONFIG: ${{ github.workspace }}/kubeconfig
-        with:
-          entrypoint: ./scripts/wait-for-app-of-apps.sh
 
       - name: Destroy Cluster
         run: terraform destroy --auto-approve

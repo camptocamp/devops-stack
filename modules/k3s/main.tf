@@ -31,6 +31,7 @@ provider "kubernetes" {
 module "argocd" {
   source = "../../argocd-helm"
 
+  kubeconfig      = local.kubeconfig
   repo_url        = var.repo_url
   target_revision = var.target_revision
   extra_apps      = var.extra_apps

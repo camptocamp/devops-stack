@@ -105,6 +105,7 @@ resource "aws_security_group_rule" "workers_ingress_healthcheck_http" {
 module "argocd" {
   source = "../../argocd-helm"
 
+  kubeconfig      = local.kubeconfig
   repo_url        = var.repo_url
   target_revision = var.target_revision
   extra_apps      = var.extra_apps

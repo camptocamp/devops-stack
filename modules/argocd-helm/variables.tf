@@ -1,3 +1,8 @@
+variable "kubeconfig" {
+  description = "The content of the KUBECONFIG file."
+  type        = string
+}
+
 variable "repo_url" {
   description = "The source repo URL of ArgoCD's app of apps."
   type        = string
@@ -94,4 +99,3 @@ variable "metrics_archives" {
   type        = any
   default     = {}
 }
-
