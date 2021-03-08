@@ -106,6 +106,13 @@ jobs:
         with:
           ref: ${{ github.base_ref }}
 
+      - name: Setup ArgoCD
+        run: |
+          mkdir "$GITHUB_WORKSPACE/bin"
+          curl -L https://github.com/argoproj/argo-cd/releases/download/v1.8.7/argocd-linux-amd64 > "$GITHUB_WORKSPACE/bin/argocd"
+          echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
+          chmod +x "$GITHUB_WORKSPACE/bin/argocd"
+
       - name: Terraform Init
         run: terraform init
 
