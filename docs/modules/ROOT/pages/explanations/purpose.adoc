@@ -23,7 +23,7 @@ ecosystem of open source projects that address all the needs related
 to this paradigm shift.
 We have learned a lot during all these years and the
 DevOps Stack is our answer to implement our best practices in a
-containerized world where Kubernetes is the De Facto standard for
+containerized world where Kubernetes is the _de facto_ standard for
 application platforms.
 
 
