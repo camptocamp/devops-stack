@@ -23,6 +23,8 @@ mr:terraform:plan:
   before_script:
     - wget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 -O /tmp/jq
     - chmod +x /tmp/jq
+    - wget https://github.com/argoproj/argo-cd/releases/download/v1.8.7/argocd-linux-amd64 -O /tmp/argocd
+    - chmod +x /tmp/argocd
     - export PATH="/tmp:$PATH"
   script:
     - cd "$TF_ROOT"
@@ -83,6 +85,8 @@ pb:terraform:apply:
   before_script:
     - wget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 -O /tmp/jq
     - chmod +x /tmp/jq
+    - wget https://github.com/argoproj/argo-cd/releases/download/v1.8.7/argocd-linux-amd64 -O /tmp/argocd
+    - chmod +x /tmp/argocd
     - export PATH="/tmp:$PATH"
   script:
     - cd "$TF_ROOT"
