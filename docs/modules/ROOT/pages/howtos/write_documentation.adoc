@@ -45,7 +45,7 @@ You can generate the doc using the docker image of antora and put it in a local 
 
 [source,shell]
 --------------
-docker run --rm -it --user 1000:1000 -v $LOCAL_ABSOLUTE_PATH/camptocamp-devops-stack:/tmp/docs docker.io/antora/antora:2.3.4 generate /tmp/docs/antora-playbook.yml  --to-dir /tmp/docs/docs/output
+docker run --rm -it --user $(id -u)  -v $LOCAL_ABSOLUTE_PATH/camptocamp-devops-stack:/tmp/docs docker.io/antora/antora:2.3.4 generate /tmp/docs/antora-playbook.yml  --to-dir /tmp/docs/docs/output --cache-dir=./.cache
 --------------
 
 Then to visualize your result you can open your browser to the file `$LOCAL_ABSOLUTE_PATH/camptocamp-devops-stack/docs/output/index.html` and browse your doc.
