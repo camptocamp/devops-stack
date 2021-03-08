@@ -1,21 +1,23 @@
-= Infrastructure as Code
+= Infrastructure as Code (IaC)
 
 Deploying Kubernetes clusters from scratch has become an easy task with IaaS interfaces.
 However, the proper management of all components that make up the cluster
 and its ecosystem can quickly become a nightmare if everything was done manually.
 
-The Infrastructure as Code approach has long proved its worth to deploy
-and maintain complex environments on the long run.
-In particular, in the context of Cloud resources, it allows to make sure
+The IaC approach has long proved its worth when deploying and maintaining complex environments 
+on the long run.
+In particular, in the context of Cloud resources, it allows sysadmins to make sure
 all resources are managed centrally and destroyed in their proper context.
-This is important to control the financial consequences of numerous deployments.
+These two are extremely important for keeping control over the economical cost of your numerous 
+deployments.
 
-The DevOps Stack is strongly founded on the idea that every one of
-its components should be managed as code:
+The DevOps Stack is strongly founded on the idea that every single component of the infrastructure 
+should be managed as code:
+
 - The underlying Kubernetes cluster and its components are managed with Terraform
 - The Cluster Applications are deployed using Helm charts orchestrated by Argo CD
 
-This allows you to keep track of all changes made at any level of the Stack,
+This enables you to keep track of all changes made at any level of the Stack,
 using xref:ROOT:explanations/gitops.adoc[Continuous Deployment] in a GitOps approach.
 
 xref::ROOT:getting_started.adoc[Get Started]
