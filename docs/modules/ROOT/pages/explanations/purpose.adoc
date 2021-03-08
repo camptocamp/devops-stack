@@ -5,8 +5,8 @@
 
 Since about 2006, the IT industry has been totally disrupted by the
 conjunction of several factors, including the virtualization of
-resources and the possibility of obtaining on-demand resources.
-This new way of managing IT resources is widely known under the term "Cloud Computing".
+resources and the possibility of obtaining them on-demand.
+This new way of managing IT resources is widely known as "Cloud Computing".
 It has become a kind of standard, or at least an objective
 pursued also by people wishing to maintain on-premises infrastructures.
 The long-awaited dream of finally being able to consider IT as a simple
@@ -14,17 +14,16 @@ commodity. Well that's what many believed.
 
 The concrete consequences of this revolution for IT companies like
 Camptocamp have mainly been the incredible growth in the number of
-resources to be provisioned and managed.
-Automating our processes was
-not an option, it was just mandatory to avoid losing the control,
-maintain quality service and remain competitive.
+resources to be provisioned and managed. Extensive process automation
+engaged by our teams allowed us to cope with such a growth without lowering
+our quality standards, therefore remaining competitive.
 
-We had no respite in this automation journey, open source projects have
-emerged from all sides to address all of the needs related to this
-paradigm shift.
+We had no respite in this automation journey and made the best out of a thriving
+ecosystem of open source projects that address all the needs related
+to this paradigm shift.
 We have learned a lot during all these years and the
 DevOps Stack is our answer to implement our best practices in a
-containerized world where Kubernetes clusters became kings of
+containerized world where Kubernetes is the _de facto_ standard for
 application platforms.
 
 
@@ -33,14 +32,14 @@ application platforms.
 Nowadays, the question is not so much whether there is software to solve
 a problem, but which one to use. Like a Linux distribution, we have
 container orchestrators (Kubernetes as a kernel) and many other projects
-revolving around and offering different features. These features are
-sometimes oriented for developers, operators or both (e.g. observability
-tools).  
+revolving around it and offering different features. These features are
+sometimes oriented towards developers, operators or both (e.g. observability
+tools). 
 
 As for a Linux distribution, what we need is consistency, components
-that work together, easy to install and maintain. But unlike a Linux
-distribution which is by definition server-centric, the promise of
-containers and Kubernetes is portability.  The possibility of moving
+that work together and that are easy to install and maintain. But unlike a
+Linux distribution which is by definition server-centric, the promise of
+containers and Kubernetes is portability. The possibility of moving
 from one cloud (or on-prem infrastructure) to another, of distributing
 the workloads on different platforms. At the end, this DevOps Stack is
 simply a "Cloud Agnostic Kubernetes Distribution".
@@ -51,22 +50,22 @@ simply a "Cloud Agnostic Kubernetes Distribution".
 
 image::without_devops-stack.png[Without the DevOps Stack]
 
-The illustration above tries to easily show that if it is relatively
-simple to manage one Kubernetes project, the difficulties become
-significant when you add more and more projects and you want to keep a
-certain homogeneity between the projects. The main problems observed
+The illustration above tries to show that while it is quite
+simple to manage one Kubernetes project, the complexity increases
+dramatically when you add more and more projects and you want to keep a
+certain homogeneity between them. The main problems observed
 are:
 
-* it does not scale
-* there is a lot of code duplications
-* there is no implementation reference
-* improvements not always backported to other projects
+* It does not scale
+* There is a lot of code duplications
+* There is no implementation reference
+* Improvements are not always backported to other projects
 * It is very hard to maintain
-* all projects will eventually diverge
-* each project points to differents versions of dependencies
+* All projects will eventually diverge
+* Each project points to different versions of dependencies
 
 This is not a new IT problem. Two decades ago, it was not really easy to
-manage hundreds, or even thousands of machines in a homogeneous way.
+manage thousands, or even hundreds of hosts in a homogeneous way.
 This problem has been successfully addressed by solutions like CFEngine,
 Puppet or more recently by Ansible. Today, we must adapt these
 principles for Kubernetes. There are many open source components out
@@ -77,21 +76,21 @@ there, we just need a smart way to interconnect them.
 
 image::with_devops-stack.png[Without the DevOps Stack]
 
-By creating this DevOps Stack (a kind of abstraction layer), it becomes
+By creating the DevOps Stack (a kind of abstraction layer), it becomes
 possible to instantiate all the components through a logical and
 coherent process. The main advantages are:
 
-* it scales
-* no or few code duplication
-* a reference implementation
-* improvements can be easily backported to other projects
-* dependency pining is done on the DevOps Stack to ensure reproducibility
+* It scales
+* Minimal code duplication
+* A reference implementation
+* Improvements can be easily backported to other projects
+* Dependency pining is done on the DevOps Stack to ensure reproducibility
 
 == Summary
 
 In the end, the DevOps Stack provides:
 
-* A Playground to test/prototype new stuffs related to k8s world
+* A Playground to test/prototype new stuff related to k8s world
 * An opinionated abstraction layer to deploy and manage our Kubernetes
 deployments
 * Enforce DevOps best practices:
@@ -111,14 +110,14 @@ deployments
 
 With the following main features:
 
-* supports multiple Kubernetes distributions (AWS EKS, Azure AKS, Local
-k3s for development and testing purpose),
-* supports blue/green or prod/qa/int/dev patterns,
-* fully automated with GitLab CI pipelines,
-* infrastructure as Code with Terraform,
-* automatic deployment of "core apps" (cert-manager, prometheus,
+* Supports multiple Kubernetes distributions (AWS EKS, Azure AKS, Local
+k3s for development and testing purposes),
+* Supports blue/green or prod/qa/int/dev patterns,
+* Fully automated with GitLab CI pipelines,
+* Infrastructure as Code with Terraform,
+* Automatic deployment of "core apps" (cert-manager, prometheus,
 alertmanager, grafana, loki, ingress controller…) in GitOps spirit with
 ArgoCD,Central point of documentations with Antora.
 
-A summary of good practices used daily and experiences accumulated over
+A summary of good practices used daily and experiences acquired over
 the time by the DevOps experts at Camptocamp.
