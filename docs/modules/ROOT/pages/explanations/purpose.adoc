@@ -121,3 +121,5 @@ ArgoCD,Central point of documentations with Antora.
 
 A summary of good practices used daily and experiences acquired over
 the time by the DevOps experts at Camptocamp.
+
+xref:ROOT:getting_started.adoc[Get Started]
