@@ -1,6 +1,6 @@
 * xref:ROOT:index.adoc[Home]
 * Tutorials
-** xref::ROOT:getting_started.adoc[Getting Started]
+** xref:ROOT:getting_started.adoc[Getting Started]
 * Howtos
 ** xref:ROOT:quickstart.adoc[Quickstarts]
 *** xref:ROOT:howtos/quickstart_eks.adoc[EKS]
