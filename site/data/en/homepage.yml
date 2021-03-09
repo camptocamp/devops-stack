@@ -20,8 +20,8 @@ banner:
         link: "/docs/camptocamp-devops-stack/__VERSION__/howtos/quickstart_eks.html"
       - label: AKS
         link: "/docs/camptocamp-devops-stack/__VERSION__/howtos/quickstart_aks.html"
-      - label: SKS
-        link: "/docs/camptocamp-devops-stack/__VERSION__/howtos/quickstart_sks.html"
+      #- label: SKS
+      #  link: "/docs/camptocamp-devops-stack/__VERSION__/howtos/quickstart_sks.html"
       - label: K3S
         link: "/docs/camptocamp-devops-stack/__VERSION__/howtos/quickstart_k3s_docker.html"
 
@@ -88,7 +88,7 @@ services:
       - "images/banner/aws-eks.png"
       - "images/banner/azure-aks.png"
       - "images/banner/rancher-k3s.png"
-      - "images/banner/exoscale.png"
+      #- "images/banner/exoscale.png"
       content : "Whether you want to deploy AKS on Azure, EKS on Amazon, or K3S for a local playground, the DevOps Stack has you covered with ready-to-go Terraform modules."
       button:
         enable : true
