@@ -18,4 +18,4 @@ its components should be managed as code:
 This allows you to keep track of all changes made at any level of the Stack,
 using xref:ROOT:explanations/gitops.adoc[Continuous Deployment] in a GitOps approach.
 
-xref::ROOT:getting_started.adoc[Get Started]
+xref:ROOT:getting_started.adoc[Get Started]
