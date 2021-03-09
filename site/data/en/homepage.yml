@@ -7,7 +7,7 @@ banner:
   content: |
     The DevOps Stack provides a standard Kubernetes Platform, bringing together
     automated Provisioning as Code, Continuous Application Deployment,
-    and readily-made configurations for the best tools in the industry.
+    and readily-made configurations for the best Cloud Native tools in the industry.
 
   button:
     enable: false
