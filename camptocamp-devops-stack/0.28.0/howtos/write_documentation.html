@@ -255,7 +255,7 @@ Use the <a href="https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/">
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">docker run --rm -it --user 1000:1000 -v $LOCAL_ABSOLUTE_PATH/camptocamp-devops-stack:/tmp/docs docker.io/antora/antora:2.3.4 generate /tmp/docs/antora-playbook.yml  --to-dir /tmp/docs/docs/output</code></pre>
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">docker run --rm -it --user $(id -u)  -v $LOCAL_ABSOLUTE_PATH/camptocamp-devops-stack:/tmp/docs docker.io/antora/antora:2.3.4 generate /tmp/docs/antora-playbook.yml  --to-dir /tmp/docs/docs/output --cache-dir=./.cache</code></pre>
 </div>
 </div>
 <div class="paragraph">
