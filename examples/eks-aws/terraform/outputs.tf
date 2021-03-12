@@ -8,6 +8,10 @@ output "kubeconfig" {
   value     = module.cluster.kubeconfig
 }
 
+output "argocd_server" {
+  value = module.cluster.argocd_server
+}
+
 output "repo_url" {
   value = module.cluster.repo_url
 }

@@ -166,6 +166,7 @@ jobs:
           echo "TARGET_REVISION=$(terraform-bin output -json target_revision | jq -r .)" >> $GITHUB_ENV
           # FIXME: find a more robust way to do this
           terraform-bin show -json plan > plan.json
+          echo "ARGOCD_SERVER=$(jq -r '.planned_values.outputs.argocd_server.value' plan.json)" >> $GITHUB_ENV
           jq -r '.planned_values.outputs.app_of_apps_values.value[0]' plan.json > ${{ github.workspace }}/values0.yaml
           jq -r '.planned_values.outputs.app_of_apps_values.value[1]' plan.json > ${{ github.workspace }}/values1.yaml
           jq -r '.planned_values.outputs.app_of_apps_values.value[2]' plan.json > ${{ github.workspace }}/values2.yaml
