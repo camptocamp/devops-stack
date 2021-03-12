@@ -3,7 +3,10 @@
 # This script requires this environment variables to be set:
 #
 # - KUBECONFIG: pointing to a file containing the Kubernetes context to use as we use port-forwarding
+# - ARGOCD_SERVER: The URL of the ArgoCD server
 # - ARGOCD_AUTH_TOKEN: a read-only token that is allowed to perform argocd app list and argocd app diff
+# - REPO_URL: the repoUrl of the destination DevOps stack
+# - TARGET_REVISION: the targetRevision of the destination DevOps Stack
 #
 # It also requires 2 files ro be present (TODO: find a better approach for this):
 # - values0.yaml
@@ -13,7 +16,8 @@
 set -e
 
 export KUBECTL_EXTERNAL_DIFF="diff -u"
-export ARGOCD_OPTS="--plaintext --port-forward --port-forward-namespace argocd"
+# TODO: find a way to disable this flags
+export ARGOCD_OPTS="--insecure --grpc-web"
 
 cd /tmp || exit
 

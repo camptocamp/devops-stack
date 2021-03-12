@@ -57,6 +57,7 @@ jobs:
           terraform-bin output -json kubeconfig | jq -r . > ${{ github.workspace }}/kubeconfig
           echo "ARGOCD_AUTH_TOKEN=$(terraform-bin output -json argocd_auth_token | jq -r .)" >> $GITHUB_ENV
           terraform-bin show -json plan > plan.json
+          echo "ARGOCD_SERVER=$(jq -r '.planned_values.outputs.argocd_server.value' plan.json)" >> $GITHUB_ENV
           echo "REPO_URL=$(jq -r '.planned_values.outputs.repo_url.value' plan.json)" >> $GITHUB_ENV
           jq -r '.planned_values.outputs.kubeconfig.value' plan.json > ${{ github.workspace }}/kubeconfig
           echo "TARGET_REVISION=$(jq -r '.planned_values.outputs.target_revision.value' plan.json)" >> $GITHUB_ENV

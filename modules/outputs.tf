@@ -10,6 +10,11 @@ output "kubeconfig" {
   sensitive   = true
 }
 
+output "argocd_server" {
+  description = "The URL of the ArgoCD server."
+  value       = format("argocd.apps.%s.%s:443", var.cluster_name, local.base_domain)
+}
+
 output "repo_url" {
   value = var.repo_url
 }
