@@ -17,6 +17,8 @@ locals {
   )
 
   argocd_chart = yamldecode(file("${path.module}/../../argocd/argocd/Chart.yaml")).dependencies.0
+
+  argocd_server_secretkey = var.argocd_server_secretkey == null ? random_string.argocd_server_secretkey.0.result : var.argocd_server_secretkey
 }
 
 resource "time_static" "iat" {}
@@ -49,21 +51,14 @@ resource "helm_release" "argocd" {
         extra:
           oidc.default.clientSecret: ${var.oidc.client_secret}
           accounts.pipeline.tokens: '${local.argocd_accounts_pipeline_tokens}'
-          server.secretkey: ${var.argocd_server_secretkey == null ? random_string.argocd_server_secretkey.0.result : var.argocd_server_secretkey}
+          server.secretkey: ${local.argocd_server_secretkey}
     EOT
   ]
 }
 
-data "kubernetes_secret" "argocd_secret" {
-  metadata {
-    name      = "argocd-secret"
-    namespace = helm_release.argocd.namespace
-  }
-}
-
 resource "jwt_hashed_token" "argocd" {
   algorithm   = "HS256"
-  secret      = lookup(data.kubernetes_secret.argocd_secret.data, "server.secretkey")
+  secret      = local.argocd_server_secretkey
   claims_json = jsonencode(local.jwt_token_payload)
 }
 
