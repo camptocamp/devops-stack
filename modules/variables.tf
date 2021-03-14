@@ -46,3 +46,9 @@ variable "argocd_server_secretkey" {
   type        = string
   default     = null
 }
+
+variable "grafana_admin_password" {
+  description = "The admin password for Grafana."
+  type        = string
+  default     = null
+}
