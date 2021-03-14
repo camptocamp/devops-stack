@@ -154,7 +154,7 @@ keycloak:
 kube-prometheus-stack:
   alertmanager:
     enabled: ${ alertmanager.enable }
-%{ if alertmanager.enable }  
+%{ if alertmanager.enable }
     alertmanagerSpec:
       containers:
         - args:
@@ -196,11 +196,12 @@ kube-prometheus-stack:
       targetPort: 9095
     serviceMonitor:
       selfMonitor: false
-%{ endif }  # alertmanager config    
+%{ endif }  # alertmanager config
 
   grafana:
     enabled: ${grafana.enable}
 %{ if grafana.enable }
+    adminPassword: ${grafana.admin_password}
     grafana.ini:
       auth.generic_oauth:
         enabled: true

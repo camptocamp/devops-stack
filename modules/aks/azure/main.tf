@@ -92,6 +92,10 @@ module "argocd" {
     client_secret = azuread_application_password.oauth2_apps.0.value
   }
 
+  grafana = {
+    admin_password = local.grafana_admin_password
+  }
+
   app_of_apps_values_overrides = [
     templatefile("${path.module}/values.tmpl.yaml",
       {

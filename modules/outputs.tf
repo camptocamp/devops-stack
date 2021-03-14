@@ -23,6 +23,12 @@ output "target_revision" {
   value = var.target_revision
 }
 
+output "grafana_admin_password" {
+  description = "The admin password for Grafana."
+  value       = local.grafana_admin_password
+  sensitive   = true
+}
+
 output "app_of_apps_values" {
   value = module.argocd.app_of_apps_values
 }

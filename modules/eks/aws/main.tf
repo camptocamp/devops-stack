@@ -129,6 +129,10 @@ module "argocd" {
     enable = var.enable_efs
   }
 
+  grafana = {
+    admin_password = local.grafana_admin_password
+  }
+
   app_of_apps_values_overrides = [
     templatefile("${path.module}/values.tmpl.yaml",
       {
