@@ -111,12 +111,12 @@ resource "null_resource" "wait_for_app_of_apps" {
   ]
 
   provisioner "local-exec" {
-    command     = "while ! KUBECONFIG=<(echo \"$KUBECONFIG_CONTENT\") argocd app wait apps --sync --health --timeout 30; do echo Retry; done"
-    interpreter = ["/bin/bash", "-c"]
+    command = "echo \"$KUBECONFIG_CONTENT\" > kubeconfig.yaml && while ! argocd app wait apps --sync --health --timeout 30; do echo Retry; done"
 
     environment = {
       ARGOCD_OPTS        = "--plaintext --port-forward --port-forward-namespace argocd"
       KUBECONFIG_CONTENT = var.kubeconfig
+      KUBECONFIG         = "kubeconfig.yaml"
       ARGOCD_AUTH_TOKEN  = jwt_hashed_token.argocd.token
     }
   }
