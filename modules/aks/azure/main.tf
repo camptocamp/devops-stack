@@ -84,12 +84,13 @@ module "argocd" {
   argocd_server_secretkey = var.argocd_server_secretkey
 
   oidc = var.oidc != null ? var.oidc : {
-    issuer_url    = format("https://login.microsoftonline.com/%s/v2.0", data.azurerm_client_config.current.tenant_id)
-    oauth_url     = format("https://login.microsoftonline.com/%s/oauth2/authorize", data.azurerm_client_config.current.tenant_id)
-    token_url     = format("https://login.microsoftonline.com/%s/oauth2/token", data.azurerm_client_config.current.tenant_id)
-    api_url       = format("https://graph.microsoft.com/oidc/userinfo")
-    client_id     = azuread_application.oauth2_apps.0.application_id
-    client_secret = azuread_application_password.oauth2_apps.0.value
+    issuer_url              = format("https://login.microsoftonline.com/%s/v2.0", data.azurerm_client_config.current.tenant_id)
+    oauth_url               = format("https://login.microsoftonline.com/%s/oauth2/authorize", data.azurerm_client_config.current.tenant_id)
+    token_url               = format("https://login.microsoftonline.com/%s/oauth2/token", data.azurerm_client_config.current.tenant_id)
+    api_url                 = format("https://graph.microsoft.com/oidc/userinfo")
+    client_id               = azuread_application.oauth2_apps.0.application_id
+    client_secret           = azuread_application_password.oauth2_apps.0.value
+    oauth2_proxy_extra_args = []
   }
 
   grafana = {
@@ -232,7 +233,7 @@ resource "azuread_application_password" "oauth2_apps" {
 
   application_object_id = azuread_application.oauth2_apps.0.id
   end_date              = "2299-12-30T23:00:00Z"
-  value                 = random_password.oauth2_apps.result
+  value                 = random_password.oauth2_apps.0.result
 }
 
 data "azurerm_policy_set_definition" "restricted" {
