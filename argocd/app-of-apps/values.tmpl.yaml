@@ -18,7 +18,7 @@ apps:
   argocd:
     enabled: true
   cert-manager:
-    enabled: true
+    enabled: ${cert_manager.enable}
   csi-secrets-store-provider-azure:
     enabled: false
   efs-provisioner:
@@ -26,11 +26,11 @@ apps:
   keycloak:
     enabled: ${keycloak.enable}
   kube-prometheus-stack:
-    enabled: true
+    enabled: ${kube_prometheus_stack.enable}
   loki-stack:
-    enabled: true
+    enabled: ${loki.enable}
   metrics-server:
-    enabled: true
+    enabled: ${metrics_server.enable}
   minio:
     enabled: ${minio.enable}
   namespaces:
@@ -38,7 +38,7 @@ apps:
   secrets-store-csi-driver:
     enabled: false
   traefik:
-    enabled: true
+    enabled: ${traefik.enable}
   vault:
     enabled: false
 
@@ -100,10 +100,15 @@ argo-cd:
         g, argocd-admin, role:admin
       scopes: '[groups, cognito:groups, roles]'
 
+%{ if cert_manager.enable }
 cert-manager: {}
+%{ endif }
 
+%{ if efs_provisioner.enable }
 efs-provisioner: {}
+%{ endif }
 
+%{ if keycloak.enable }
 keycloak:
   ingress:
     enabled: true
@@ -143,9 +148,13 @@ keycloak:
         - https://${alertmanager.domain}/oauth2/callback
   keycloakUser:
     password: "${keycloak.admin_password}"
+%{ endif }
 
+%{ if kube_prometheus_stack.enable }
 kube-prometheus-stack:
   alertmanager:
+    enabled: ${ alertmanager.enable }
+%{ if alertmanager.enable }  
     alertmanagerSpec:
       containers:
         - args:
@@ -187,8 +196,11 @@ kube-prometheus-stack:
       targetPort: 9095
     serviceMonitor:
       selfMonitor: false
+%{ endif }  # alertmanager config    
 
   grafana:
+    enabled: ${grafana.enable}
+%{ if grafana.enable }
     grafana.ini:
       auth.generic_oauth:
         enabled: true
@@ -236,8 +248,11 @@ kube-prometheus-stack:
           hosts:
             - grafana.apps.${base_domain}
             - ${grafana.domain}
+%{ endif } # Grafana config
 
   prometheus:
+    enabled: ${prometheus.enable}
+%{ if prometheus.enable }
     ingress:
       enabled: true
       annotations:
@@ -321,9 +336,16 @@ kube-prometheus-stack:
 %{ if can(metrics_archives.bucket_config) }
   ${ indent(4,yamlencode({"thanosObjectStorageConfig": metrics_archives.bucket_config})) }
 %{ endif }
-loki-stack: {}
+%{ endif } # Prometheus config
+%{ endif } # kube-prometheus-stack config
 
+%{ if loki.enable }
+loki-stack: {}
+%{ endif }
+
+%{ if metrics_server.enable}
 metrics-server: {}
+%{ endif }
 
 %{ if minio.enable }
 minio:
@@ -356,6 +378,8 @@ minio:
 
 secrets-store-csi-driver: {}
 
+%{ if traefik.enable }
 traefik: {}
+%{ endif }
 
 vault: {}

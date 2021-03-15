@@ -89,13 +89,17 @@ resource "helm_release" "app_of_apps" {
         cookie_secret                   = random_password.oauth2_cookie_secret.result
         minio                           = local.minio
         loki                            = local.loki
+        traefik                         = local.traefik
         efs_provisioner                 = local.efs_provisioner
         argocd                          = local.argocd
         keycloak                        = local.keycloak
         grafana                         = local.grafana
         prometheus                      = local.prometheus
         alertmanager                    = local.alertmanager
+        metrics_server                  = local.metrics_server
         metrics_archives                = local.metrics_archives
+        cert_manager                    = local.cert_manager
+        kube_prometheus_stack           = local.kube_prometheus_stack
       }
     )],
     var.app_of_apps_values_overrides,

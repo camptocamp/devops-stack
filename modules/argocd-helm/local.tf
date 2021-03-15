@@ -22,6 +22,7 @@ locals {
   )
 
   grafana_defaults = {
+    enable                   = true
     generic_oauth_extra_args = {}
     domain                   = "grafana.apps.${var.cluster_name}.${var.base_domain}"
   }
@@ -29,9 +30,16 @@ locals {
     local.grafana_defaults,
     var.grafana,
   )
-
+  metrics_server_defaults = {
+    enable = true
+  }
+  metrics_server = merge(
+    local.metrics_server_defaults,
+    var.metrics_server,
+  )
   prometheus_defaults = {
     domain = "prometheus.apps.${var.cluster_name}.${var.base_domain}"
+    enable = true
   }
   prometheus = merge(
     local.prometheus_defaults,
@@ -39,15 +47,24 @@ locals {
   )
 
   alertmanager_defaults = {
+    enable = true
     domain = "alertmanager.apps.${var.cluster_name}.${var.base_domain}"
   }
   alertmanager = merge(
     local.alertmanager_defaults,
     var.alertmanager,
   )
+  traefik_defaults = {
+    enable = true
+  }
+  traefik = merge(
+    local.traefik_defaults,
+    var.traefik,
+  )
 
   loki_defaults = {
     bucket_name = ""
+    enable = true
   }
   loki = merge(
     local.loki_defaults,
@@ -88,5 +105,19 @@ locals {
   metrics_archives = merge(
     local.metrics_archives_defaults,
     var.metrics_archives,
+  )
+  cert_manager_defaults = {
+    enable = true
+  }
+  cert_manager = merge(
+    local.cert_manager_defaults,
+    var.cert_manager,
+  ) 
+  kube_prometheus_stack_defaults = {
+    enable = true
+  }
+  kube_prometheus_stack = merge(
+    local.kube_prometheus_stack_defaults,
+    var.kube_prometheus_stack,
   )
 }
