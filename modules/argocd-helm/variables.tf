@@ -70,6 +70,12 @@ variable "loki" {
   default     = {}
 }
 
+variable "traefik" {
+  description = "Trafik settings"
+  type        = any
+  default     = {}
+}
+
 variable "efs_provisioner" {
   description = "EFS provisioner settings"
   type        = any
@@ -94,8 +100,26 @@ variable "app_of_apps_values_overrides" {
   default     = []
 }
 
+variable "metrics_server" {
+  description = "Metrics server settings"
+  type        = any
+  default     = {}
+}
+
 variable "metrics_archives" {
   description = "Metrics archives settings"
+  type        = any
+  default     = {}
+}
+
+variable "cert_manager" {
+  description = "Cert Manager settings"
+  type        = any
+  default     = {}
+}
+
+variable "kube_prometheus_stack" {
+  description = "Kube-prometheus-stack settings"
   type        = any
   default     = {}
 }
