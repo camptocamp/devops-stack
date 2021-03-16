@@ -21,7 +21,7 @@ Here is a minimal working example:
 # terraform/main.tf
 
 locals {
-  cluster_name = terraform.workspace
+  cluster_name = "my-cluster"
 }
 resource "azurerm_resource_group" "this" {
   name     = local.cluster_name

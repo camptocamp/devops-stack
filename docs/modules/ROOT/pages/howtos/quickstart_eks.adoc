@@ -21,7 +21,7 @@ Here is a minimal working example:
 # terraform/main.tf
 
 locals {
-  cluster_name = terraform.workspace
+  cluster_name = "my-cluster"
 }
 
 data "aws_availability_zones" "available" {}
@@ -105,26 +105,8 @@ include::partial$deploy_workstation.adoc[]
 
 == Deploying from pipelines
 
-When using pipelines, the DevOps Stack creates one Kubernetes cluster per protected branch.
-Each cluster's state is saved in a separate
-https://www.terraform.io/docs/language/state/workspaces.html[Terraform workspace].
-
-
-NOTE: On GitLab, the DevOps Stack creates one
-https://docs.gitlab.com/ee/ci/environments/[GitLab CI Environment] per cluster.
-This links the cluster’s lifecycle to the GitLab environment.
-In particular, it allows to automatically destroy a cluster when the
-associated branch is deleted or the environment is stopped.
-
-1 protected branch == 1 Kubernetes cluster == 1 Terraform workspace (== 1 GitLab environment)
-
-This behavior allows you to either have one cluster per line (prod, qa, int, dev…)
-or adopt a blue/green infrastructure philosophy.
-Of course, if you want to share some resources between multiple clusters,
-a VPC and RDS cluster or whatever stateful resources,
-you should define them in a separated Terraform project and use datasources
-to lookup them in the cluster Terraform project.
-
+When using pipelines, the DevOps Stack runs a dry-run on Merge Request and applies
+the modification on commit on a protected branch.
 
 include::partial$pipelines_gitlab.adoc[ci-variables, terraform-provider, terraform-provider-link]
 
