@@ -200,7 +200,7 @@ data "azurerm_client_config" "current" {}
 resource "azuread_application" "oauth2_apps" {
   count = var.oidc == null ? 1 : 0
 
-  name = "oauth2-apps-${terraform.workspace}"
+  name = "oauth2-apps-${var.cluster_name}"
   reply_urls = [
     format("https://argocd.apps.%s.%s/auth/callback", var.cluster_name, var.base_domain),
     format("https://grafana.apps.%s.%s/login/generic_oauth", var.cluster_name, var.base_domain),
@@ -269,7 +269,7 @@ data "azurerm_policy_set_definition" "baseline" {
 }
 
 resource "azurerm_policy_assignment" "baseline" {
-  name                 = "${terraform.workspace}-baseline"
+  name                 = "${var.cluster_name}-baseline"
   scope                = format("%s/resourcegroups/%s", data.azurerm_subscription.primary.id, data.azurerm_resource_group.this.name)
   policy_definition_id = data.azurerm_policy_set_definition.baseline.id
   parameters           = <<PARAMETERS
