@@ -1,7 +1,7 @@
 module "cluster" {
   source = "../../../modules/k3s/libvirt"
 
-  cluster_name = terraform.workspace
+  cluster_name = "default"
   node_count   = 0
 
   repo_url        = var.repo_url

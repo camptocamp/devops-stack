@@ -18,8 +18,6 @@ mr:terraform:plan:
   image:
     name: hashicorp/terraform:$TERRAFORM_VERSION
     entrypoint: [""]
-  variables:
-    TF_WORKSPACE: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
   before_script:
     - wget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 -O /tmp/jq
     - chmod +x /tmp/jq
@@ -92,36 +90,7 @@ pb:terraform:apply:
   script:
     - cd "$TF_ROOT"
     - terraform init
-    - terraform workspace select "$CI_COMMIT_REF_NAME" || terraform workspace new "$CI_COMMIT_REF_NAME"
-    - terraform init
     - terraform apply --auto-approve
     - terraform plan --detailed-exitcode
-  environment:
-    name: cluster/$CI_COMMIT_REF_NAME
-    on_stop: pb:terraform:destroy
   rules:
     - if: '$CI_COMMIT_REF_PROTECTED == "true"'
-
-###
-# On-stop action for Gitlab CI environment
-#
-
-pb:terraform:destroy:
-  stage: terraform
-  image:
-    name: hashicorp/terraform:$TERRAFORM_VERSION
-    entrypoint: [""]
-  variables:
-    TF_WORKSPACE: $CI_COMMIT_REF_NAME
-  script:
-    - cd "$TF_ROOT"
-    - terraform init
-    - terraform destroy --auto-approve
-    - if [ "$TF_WORKSPACE" != "default" ]; then WORKSPACE="$TF_WORKSPACE"; unset TF_WORKSPACE; terraform workspace select default; terraform workspace delete "$WORKSPACE"; fi
-  environment:
-    name: cluster/$CI_COMMIT_REF_NAME
-    action: stop
-  allow_failure: true
-  rules:
-    - if: '$CI_COMMIT_REF_PROTECTED == "true"'
-      when: manual

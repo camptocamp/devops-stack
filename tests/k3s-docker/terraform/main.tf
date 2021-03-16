@@ -1,7 +1,7 @@
 module "cluster" {
   source = "../../../modules/k3s/docker"
 
-  cluster_name = terraform.workspace
+  cluster_name = "default"
   node_count   = 1
 
   repo_url        = var.repo_url

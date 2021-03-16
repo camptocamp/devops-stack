@@ -25,7 +25,7 @@ data "aws_iam_role" "eks_admin" {
 module "cluster" {
   source = "git::https://github.com/camptocamp/camptocamp-devops-stack.git//modules/eks/aws?ref=v0.28.0"
 
-  cluster_name                         = terraform.workspace
+  cluster_name                         = "my-cluster"
   cluster_endpoint_public_access_cidrs = local.cluster_endpoint_public_access_cidrs
   vpc_id                               = data.aws_vpc.this.id
 

@@ -28,16 +28,6 @@ jobs:
         with:
           terraform_version: 0.14.6
 
-      - name: Set Terraform workspace
-        if: github.event_name == 'pull_request'
-        shell: bash
-        run: echo "TF_WORKSPACE=${{ github.base_ref }}" >> $GITHUB_ENV
-
-      - name: Set Terraform workspace
-        if: github.event_name == 'push'
-        shell: bash
-        run: echo "TF_WORKSPACE=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
-
       - name: Terraform Format
         run: terraform fmt -check -diff -recursive
 
