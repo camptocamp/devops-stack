@@ -34,6 +34,8 @@ argo-cd:
   server:
     config:
       admin.enabled: "false"
+    extraArgs:
+      - --insecure
     resources:
       limits:
         memory: 128Mi
