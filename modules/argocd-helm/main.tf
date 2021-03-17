@@ -19,57 +19,8 @@ locals {
   argocd_chart = yamldecode(file("${path.module}/../../argocd/argocd/Chart.yaml")).dependencies.0
 
   argocd_server_secretkey = var.argocd_server_secretkey == null ? random_string.argocd_server_secretkey.0.result : var.argocd_server_secretkey
-}
 
-resource "time_static" "iat" {}
-
-resource "random_uuid" "jti" {}
-
-resource "random_string" "argocd_server_secretkey" {
-  count = var.argocd_server_secretkey == null ? 1 : 0
-
-  length  = 32
-  special = false
-}
-
-resource "helm_release" "argocd" {
-  name       = "argocd"
-  repository = local.argocd_chart.repository
-  chart      = "argo-cd"
-  version    = local.argocd_chart.version
-
-  namespace         = "argocd"
-  dependency_update = true
-  create_namespace  = true
-  timeout           = 10800
-
-  values = [
-    yamlencode(yamldecode(file("${path.module}/../../argocd/argocd/values.yaml")).argo-cd),
-    <<EOT
-    configs:
-      secret:
-        extra:
-          oidc.default.clientSecret: ${var.oidc.client_secret}
-          accounts.pipeline.tokens: '${local.argocd_accounts_pipeline_tokens}'
-          server.secretkey: ${local.argocd_server_secretkey}
-    EOT
-  ]
-}
-
-resource "jwt_hashed_token" "argocd" {
-  algorithm   = "HS256"
-  secret      = local.argocd_server_secretkey
-  claims_json = jsonencode(local.jwt_token_payload)
-}
-
-resource "helm_release" "app_of_apps" {
-  name              = "app-of-apps"
-  chart             = "${path.module}/../../argocd/app-of-apps"
-  namespace         = "argocd"
-  dependency_update = true
-  create_namespace  = true
-
-  values = concat([
+  app_of_apps_values = concat([
     templatefile("${path.module}/../../argocd/app-of-apps/values.tmpl.yaml",
       {
         repo_url                        = var.repo_url
@@ -99,6 +50,50 @@ resource "helm_release" "app_of_apps" {
     )],
     var.app_of_apps_values_overrides,
   )
+}
+
+resource "time_static" "iat" {}
+
+resource "random_uuid" "jti" {}
+
+resource "random_string" "argocd_server_secretkey" {
+  count = var.argocd_server_secretkey == null ? 1 : 0
+
+  length  = 32
+  special = false
+}
+
+resource "helm_release" "argocd" {
+  name       = "argocd"
+  repository = local.argocd_chart.repository
+  chart      = "argo-cd"
+  version    = local.argocd_chart.version
+
+  namespace         = "argocd"
+  dependency_update = true
+  create_namespace  = true
+  timeout           = 10800
+
+  values = compact([
+    yamlencode(yamldecode(local.app_of_apps_values.0).argo-cd),
+    local.app_of_apps_values.1 == "" ? "" : try(yamlencode(yamldecode(local.app_of_apps_values.1).argo-cd), ""),
+    local.app_of_apps_values.2 == "" ? "" : try(yamlencode(yamldecode(local.app_of_apps_values.2).argo-cd), ""),
+  ])
+}
+
+resource "jwt_hashed_token" "argocd" {
+  algorithm   = "HS256"
+  secret      = local.argocd_server_secretkey
+  claims_json = jsonencode(local.jwt_token_payload)
+}
+
+resource "helm_release" "app_of_apps" {
+  name              = "app-of-apps"
+  chart             = "${path.module}/../../argocd/app-of-apps"
+  namespace         = "argocd"
+  dependency_update = true
+  create_namespace  = true
+  values            = local.app_of_apps_values
 
   depends_on = [
     helm_release.argocd
