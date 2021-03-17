@@ -50,6 +50,14 @@ locals {
     )],
     var.app_of_apps_values_overrides,
   )
+
+  argocd_values = compact([
+    yamlencode(yamldecode(local.app_of_apps_values.0).argo-cd),
+    local.app_of_apps_values.1 == "" ? "" : try(yamlencode(yamldecode(local.app_of_apps_values.1).argo-cd), ""),
+    local.app_of_apps_values.2 == "" ? "" : try(yamlencode(yamldecode(local.app_of_apps_values.2).argo-cd), ""),
+  ])
+
+  argocd_opts = (contains(try(yamldecode(local.argocd_values.0).server.extraArgs, []), "--insecure") || contains(try(yamldecode(local.argocd_values.1).server.extraArgs, []), "--insecure") || contains(try(yamldecode(local.argocd_values.2).server.extraArgs, []), "--insecure")) ? "--plaintext --port-forward --port-forward-namespace argocd" : "--port-forward --port-forward-namespace argocd"
 }
 
 resource "time_static" "iat" {}
@@ -73,12 +81,7 @@ resource "helm_release" "argocd" {
   dependency_update = true
   create_namespace  = true
   timeout           = 10800
-
-  values = compact([
-    yamlencode(yamldecode(local.app_of_apps_values.0).argo-cd),
-    local.app_of_apps_values.1 == "" ? "" : try(yamlencode(yamldecode(local.app_of_apps_values.1).argo-cd), ""),
-    local.app_of_apps_values.2 == "" ? "" : try(yamlencode(yamldecode(local.app_of_apps_values.2).argo-cd), ""),
-  ])
+  values            = local.argocd_values
 }
 
 resource "jwt_hashed_token" "argocd" {
@@ -109,7 +112,7 @@ resource "null_resource" "wait_for_app_of_apps" {
     command = "KUBECONFIG=$(mktemp /tmp/kubeconfig.XXXXXX) ; echo \"$KUBECONFIG_CONTENT\" > \"$KUBECONFIG\" ; export KUBECONFIG ; while ! argocd app wait apps --sync --health --timeout 30; do echo Retry; done ; rm \"$KUBECONFIG\""
 
     environment = {
-      ARGOCD_OPTS        = "--plaintext --port-forward --port-forward-namespace argocd"
+      ARGOCD_OPTS        = local.argocd_opts
       KUBECONFIG_CONTENT = var.kubeconfig
       ARGOCD_AUTH_TOKEN  = jwt_hashed_token.argocd.token
     }
