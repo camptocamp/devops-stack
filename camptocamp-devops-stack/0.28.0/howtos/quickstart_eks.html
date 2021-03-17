@@ -211,7 +211,7 @@ has to be instantiated from the Terraform root module.</p>
 <pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl"># terraform/main.tf
 
 locals {
-  cluster_name = terraform.workspace
+  cluster_name = "my-cluster"
 }
 
 data "aws_availability_zones" "available" {}
@@ -368,36 +368,8 @@ $ terraform apply</code></pre>
 <h2 id="_deploying_from_pipelines"><a class="anchor" href="#_deploying_from_pipelines"></a>Deploying from pipelines</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When using pipelines, the DevOps Stack creates one Kubernetes cluster per protected branch.
-Each cluster&#8217;s state is saved in a separate
-<a href="https://www.terraform.io/docs/language/state/workspaces.html">Terraform workspace</a>.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-On GitLab, the DevOps Stack creates one
-<a href="https://docs.gitlab.com/ee/ci/environments/">GitLab CI Environment</a> per cluster.
-This links the cluster’s lifecycle to the GitLab environment.
-In particular, it allows to automatically destroy a cluster when the
-associated branch is deleted or the environment is stopped.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>1 protected branch == 1 Kubernetes cluster == 1 Terraform workspace (== 1 GitLab environment)</p>
-</div>
-<div class="paragraph">
-<p>This behavior allows you to either have one cluster per line (prod, qa, int, dev…)
-or adopt a blue/green infrastructure philosophy.
-Of course, if you want to share some resources between multiple clusters,
-a VPC and RDS cluster or whatever stateful resources,
-you should define them in a separated Terraform project and use datasources
-to lookup them in the cluster Terraform project.</p>
+<p>When using pipelines, the DevOps Stack runs a dry-run on Merge Request and applies
+the modification on commit on a protected branch.</p>
 </div>
 <div class="sect2">
 <h3 id="_gitlab_ci"><a class="anchor" href="#_gitlab_ci"></a>GitLab CI</h3>

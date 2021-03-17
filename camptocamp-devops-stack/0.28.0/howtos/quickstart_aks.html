@@ -211,7 +211,7 @@ that has to be instantiated from the Terraform root module.</p>
 <pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl"># terraform/main.tf
 
 locals {
-  cluster_name = terraform.workspace
+  cluster_name = "my-cluster"
 }
 resource "azurerm_resource_group" "this" {
   name     = local.cluster_name
