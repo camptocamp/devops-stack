@@ -178,6 +178,93 @@
 <article class="doc">
 <h1 class="page">Changelog</h1>
 <div class="sect1">
+<h2 id="_0_29_0_2021_03_18"><a class="anchor" href="#_0_29_0_2021_03_18"></a><a href="https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.29.0">0.29.0</a> (2021-03-18)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As this release removes the dependency on Terraform workspaces, upgrading is not supported due to changes in the pipelines.
+You should spawn a new cluster.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.28.0&#8230;&#8203;v0.29.0">Full Changelog</a></p>
+</div>
+<div class="paragraph">
+<p><strong>Implemented enhancements:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Wait for app of apps in Terraform <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/517">#517</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Allow to use arbitray OIDC issuer <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/504">#504</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Allow to pass ArgoCD&#8217;s Server SecretKey <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/505">#505</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Don&#8217;t use port-forward to show app diff <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/522">#522</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Making components to be enabled or not <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/526">#526</a> (<a href="https://github.com/pburgisser">pburgisser</a>)</p>
+</li>
+<li>
+<p>Don&#8217;t lookup ArgoCD&#8217;s server secretkey to generate JWT token <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/524">#524</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Generate random admin password for Grafana <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/525">#525</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Persist Loki logs on Azure Blob Storage <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/513">#513</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Don&#8217;t use terraform.workspace variable in module <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/529">#529</a> <a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Move ArgoCD&#8217;s insecure arg to specific values.yaml <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/447">#447</a> <a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Fixed Bugs:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Install ArgoCD CLI in pipeline <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/518">#518</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Fix regressions introduced by #504 <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/527">#527</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Don&#8217;t depend on bash-ism <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/528">#528</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Pass all values when installing ArgoCD <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/534">#534</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Configure ArgoCD on install (except metrics) <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/536">#536</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Don&#8217;t use plaintext to connect to ArgoCD if not in insecure mode <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/535">#535</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Documentations:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Use default Antora generate parameters for avoiding 'EACCES: permission denied' <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/519">#519</a> (<a href="https://github.com/fsismondi">fsismondi</a>)</p>
+</li>
+<li>
+<p>Proposed changes - purpose section <a href="https://github.com/camptocamp/camptocamp-devops-stack/pull/521">#521</a> (<a href="https://github.com/modridi">modridi</a>)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_0_28_0_2021_03_05"><a class="anchor" href="#_0_28_0_2021_03_05"></a><a href="https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.28.0">0.28.0</a> (2021-03-05)</h2>
 <div class="sectionbody">
 <div class="paragraph">
