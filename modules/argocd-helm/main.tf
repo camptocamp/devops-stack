@@ -21,7 +21,7 @@ locals {
   argocd_server_secretkey = var.argocd_server_secretkey == null ? random_string.argocd_server_secretkey.result : var.argocd_server_secretkey
 
   app_of_apps_values = concat([
-    templatefile("${path.module}/../../argocd/app-of-apps/values.tmpl.yaml",
+    templatefile("${path.module}/../values.tmpl.yaml",
       {
         repo_url                        = var.repo_url
         target_revision                 = var.target_revision
