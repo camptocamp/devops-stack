@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Data Persistence :: Camptocamp’s DevOps Stack</title>
+    <link rel="canonical" href="https://devops-stack.io/camptocamp-devops-stack/camptocamp-devops-stack/0.29.0/explanations/data_persistence.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <link rel="icon" href="../../../_/img/c2c_favicon.png" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://devops-stack.io/camptocamp-devops-stack">Camptocamp’s DevOps Stack</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="camptocamp-devops-stack" data-version="0.29.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Camptocamp’s DevOps Stack</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Tutorials</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../getting_started.html">Getting Started</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Howtos</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../quickstart.html">Quickstarts</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../howtos/quickstart_eks.html">EKS</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../howtos/quickstart_aks.html">AKS</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../howtos/quickstart_k3s_docker.html">K3s on Docker</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../howtos/quickstart_k3s_libvirt.html">K3s on Libvirt</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#ROOT:howtos/contributions.adoc">Contribution</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../howtos/development.html">Development</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../howtos/write_documentation.html">Documentation</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../howtos/release.html">Release a new version</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">References</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../references/authentication.html">Authentication</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../references/changelog.html">Changelog</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Explanations</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="purpose.html">Purpose</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="cloud_agnostic.html">Cloud Agnostic</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="infrastructure-as-code.html">Infrastructure As Code</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="gitops.html">Continuous Delivery</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="lifecycle_operations.html">Lifecycle Operations</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="data_persistence.html">Data Persistence</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="upgrade_strategy.html">Kubernetes Upgrade Strategy</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="documentation.html">Docs as Code</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Camptocamp’s DevOps Stack</span>
+    <span class="version">0.29.0</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <span class="title">Antora UI for c2c</span>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../antora-ui-c2c/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <span class="title">Camptocamp’s DevOps Stack</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">0.29.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Camptocamp’s DevOps Stack</a></li>
+    <li>Explanations</li>
+    <li><a href="data_persistence.html">Data Persistence</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Data Persistence</h1>
+<div class="paragraph">
+<p>Although not mandatory, it is recommended to have a clear separation between
+compute workload and storage when setting up a Kubernetes cluster.</p>
+</div>
+<div class="paragraph">
+<p>In particular, this approach makes it much easier to adopt a
+<a href="upgrade_strategy.html#_green_field_upgrade" class="page">greenfield cluster upgrade strategy</a>.</p>
+</div>
+<div class="paragraph">
+<p>In order to achieve this, clusters need to be totally stateless and
+achieve data persistence outside of the cluster
+(using external RDBMS, NoSQL databases, or object storage).</p>
+</div>
+<div class="paragraph">
+<p>We thus recommend to avoid the use of storageClasses,
+which allow self provisioning of Persistent Volumes (PVs), as it breaks
+the blue/green infrastructure paradigm that the DevOps Stack supports.</p>
+</div>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/terraform.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
