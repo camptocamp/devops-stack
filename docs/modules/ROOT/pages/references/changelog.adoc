@@ -1,5 +1,39 @@
 = Changelog
 
+== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.29.0[0.29.0] (2021-03-18)
+
+As this release removes the dependency on Terraform workspaces, upgrading is not supported due to changes in the pipelines.
+You should spawn a new cluster.
+
+https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.28.0...v0.29.0[Full Changelog]
+
+*Implemented enhancements:*
+
+* Wait for app of apps in Terraform https://github.com/camptocamp/camptocamp-devops-stack/pull/517[#517] (https://github.com/mcanevet[mcanevet])
+* Allow to use arbitray OIDC issuer https://github.com/camptocamp/camptocamp-devops-stack/pull/504[#504] (https://github.com/mcanevet[mcanevet])
+* Allow to pass ArgoCD's Server SecretKey https://github.com/camptocamp/camptocamp-devops-stack/pull/505[#505] (https://github.com/mcanevet[mcanevet])
+* Don't use port-forward to show app diff https://github.com/camptocamp/camptocamp-devops-stack/pull/522[#522] (https://github.com/mcanevet[mcanevet])
+* Making components to be enabled or not https://github.com/camptocamp/camptocamp-devops-stack/pull/526[#526] (https://github.com/pburgisser[pburgisser])
+* Don't lookup ArgoCD's server secretkey to generate JWT token https://github.com/camptocamp/camptocamp-devops-stack/pull/524[#524] (https://github.com/mcanevet[mcanevet])
+* Generate random admin password for Grafana https://github.com/camptocamp/camptocamp-devops-stack/pull/525[#525] (https://github.com/mcanevet[mcanevet])
+* Persist Loki logs on Azure Blob Storage https://github.com/camptocamp/camptocamp-devops-stack/pull/513[#513] (https://github.com/mcanevet[mcanevet])
+* Don't use terraform.workspace variable in module https://github.com/camptocamp/camptocamp-devops-stack/pull/529[#529] https://github.com/mcanevet[mcanevet])
+* Move ArgoCD's insecure arg to specific values.yaml https://github.com/camptocamp/camptocamp-devops-stack/pull/447[#447] https://github.com/mcanevet[mcanevet])
+
+*Fixed Bugs:*
+
+* Install ArgoCD CLI in pipeline https://github.com/camptocamp/camptocamp-devops-stack/pull/518[#518] (https://github.com/mcanevet[mcanevet])
+* Fix regressions introduced by #504 https://github.com/camptocamp/camptocamp-devops-stack/pull/527[#527] (https://github.com/mcanevet[mcanevet])
+* Don't depend on bash-ism https://github.com/camptocamp/camptocamp-devops-stack/pull/528[#528] (https://github.com/mcanevet[mcanevet])
+* Pass all values when installing ArgoCD https://github.com/camptocamp/camptocamp-devops-stack/pull/534[#534] (https://github.com/mcanevet[mcanevet])
+* Configure ArgoCD on install (except metrics) https://github.com/camptocamp/camptocamp-devops-stack/pull/536[#536] (https://github.com/mcanevet[mcanevet])
+* Don't use plaintext to connect to ArgoCD if not in insecure mode https://github.com/camptocamp/camptocamp-devops-stack/pull/535[#535] (https://github.com/mcanevet[mcanevet])
+
+*Documentations:*
+
+* Use default Antora generate parameters for avoiding 'EACCES: permission denied' https://github.com/camptocamp/camptocamp-devops-stack/pull/519[#519] (https://github.com/fsismondi[fsismondi])
+* Proposed changes - purpose section https://github.com/camptocamp/camptocamp-devops-stack/pull/521[#521] (https://github.com/modridi[modridi])
+
 == https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.28.0[0.28.0] (2021-03-05)
 
 https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.27.0...v0.28.0[Full Changelog]
