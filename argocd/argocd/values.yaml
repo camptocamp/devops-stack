@@ -1,13 +1,5 @@
 ---
 argo-cd:
-  installCRDs: false
-  global:
-    image:
-      tag: v1.8.7
-  configs:
-    secret:
-      argocdServerAdminPassword: "$2a$10$wzUzrdx.jMb7lHIbW6VutuRpV4OnpPA3ItWBDiP04QVHfGqzAoj6i"  # argocd
-      argocdServerAdminPasswordMtime: '2020-07-23T11:31:23Z'
   controller:
     metrics:
       serviceMonitor:
@@ -43,38 +35,6 @@ argo-cd:
     metrics:
       serviceMonitor:
         enabled: true
-    config:
-      accounts.pipeline: apiKey
-      resource.customizations: |
-        argoproj.io/Application:
-          health.lua: |
-            hs = {}
-            hs.status = "Healthy"
-            hs.message = ""
-            if obj.status ~= nil then
-              if obj.status.health ~= nil then
-                hs.status = obj.status.health.status
-                hs.message = obj.status.health.message
-              end
-            end
-            return hs
-        networking.k8s.io/Ingress:
-          health.lua: |
-            hs = {}
-            hs.status = "Healthy"
-            return hs
-      configManagementPlugins: |
-        - name: kustomized-helm
-          init:
-            command: ["/bin/sh", "-c"]
-            args: ["helm dependency build || true"]
-          generate:
-            command: ["/bin/sh", "-c"]
-            args: ["echo \"$HELM_VALUES\" | helm template . --name-template $ARGOCD_APP_NAME --namespace $ARGOCD_APP_NAMESPACE $HELM_ARGS -f - --include-crds > all.yaml && kustomize build"]
-    rbacConfig:
-      policy.default: role:readonly
-      policy.csv: |
-        g, pipeline, role:readonly
   repoServer:
     metrics:
       serviceMonitor:
