@@ -45,6 +45,19 @@ $ terraform output admin_password
 ```
 
 
+== Inspect the DevOps Stack Applications
+
+
+You can view the various ingress routes with:
+
+```
+$ kubectl get ingress --all-namespaces
+```
+
+Access the URLs in https, and use the OIDC/OAuth2 to log in, using the `admin`
+account with the password previously retrieved.
+
+
 == Destroy the cluster
 
 ```shell
