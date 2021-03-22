@@ -19,6 +19,9 @@ spec:
       - temporary: false
         type: password
         value: {{ .Values.keycloakUser.password }}
+    clientRoles:
+      account:
+        - manage-account
   realmSelector:
     matchLabels:
       app: sso
