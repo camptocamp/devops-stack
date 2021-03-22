@@ -319,6 +319,11 @@ output "target_revision" {
 output "app_of_apps_values" {
   sensitive = true
   value     = module.cluster.app_of_apps_values
+}
+
+output "admin_password" {
+  sensitive = true
+  value     = module.cluster.admin_password
 }</code></pre>
 </div>
 </div>
@@ -615,6 +620,33 @@ region = &lt;YOUR_REGION&gt;</code></pre>
 </div>
 <div class="paragraph">
 <p>Then, you should be able to use <code>kubectl</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_inspect_the_devops_stack_applications"><a class="anchor" href="#_inspect_the_devops_stack_applications"></a>Inspect the DevOps Stack Applications</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can view the ingress routes for the various DevOps Stack Applications with:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code>$ kubectl get ingress --all-namespaces</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Access the URLs in https, and use the OIDC/OAuth2 to log in, using the <code>admin</code>
+account with the password previously retrieved.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_destroy_the_cluster"><a class="anchor" href="#_destroy_the_cluster"></a>Destroy the cluster</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ terraform destroy</code></pre>
+</div>
 </div>
 </div>
 </div>

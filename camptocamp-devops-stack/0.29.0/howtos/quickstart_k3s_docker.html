@@ -242,6 +242,11 @@ output "target_revision" {
 output "app_of_apps_values" {
   sensitive = true
   value     = module.cluster.app_of_apps_values
+}
+
+output "admin_password" {
+  sensitive = true
+  value     = module.cluster.admin_password
 }</code></pre>
 </div>
 </div>
@@ -263,12 +268,80 @@ $ terraform apply</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_get_kubeconfig"><a class="anchor" href="#_get_kubeconfig"></a>Get kubeconfig</h2>
+<h2 id="_get_kubeconfig_and_admin_password"><a class="anchor" href="#_get_kubeconfig_and_admin_password"></a>Get kubeconfig and admin password</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Retrieve the Kubeconfig file:</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ terraform output -json kubeconfig | jq -r .</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Retrieve the Keycloak password for the <code>admin</code> user of the <code>kubernetes</code> realm:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ terraform output admin_password</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will use this user and password to log in to applications.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_wait_for_keycloak_to_be_ready"><a class="anchor" href="#_wait_for_keycloak_to_be_ready"></a>Wait for Keycloak to be ready</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ kubectl -n keycloak get sts
+NAME       READY   AGE
+keycloak   1/1     8m58s</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Wait until the <code>READY</code> column says <code>1/1</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_inspect_the_devops_stack_applications"><a class="anchor" href="#_inspect_the_devops_stack_applications"></a>Inspect the DevOps Stack Applications</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can view the ingress routes for the various DevOps Stack Applications with:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code>$ kubectl get ingress --all-namespaces</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Access the URLs in https, and use the OIDC/OAuth2 to log in, using the <code>admin</code>
+account with the password previously retrieved.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_access_the_keycloak_dashboard"><a class="anchor" href="#_access_the_keycloak_dashboard"></a>Access the Keycloak dashboard</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The keycloak dashboard uses the <code>kubernetes</code> realm. You can log in to it using
+the <code>/auth/realms/kubernetes/account/</code> path with the Keycloak ingress.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+there is currently an issue when accessing applications
+and login details in Keycloak.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
