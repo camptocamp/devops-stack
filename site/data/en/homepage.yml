@@ -5,7 +5,7 @@ banner:
   #image: "images/g3458.png"
   #image: "images/g3099.png"
   #image: "images/g3147.png"
-  image: "images/devops-stack-logo_by_c2c_black3.png"
+  image: "images/devops-stack-logo_large.png"
   
   content: |
     The DevOps Stack provides a standard Kubernetes Platform, bringing together
