@@ -45,6 +45,17 @@ $ terraform output admin_password
 ```
 
 
+== Verify that Keycloak is ready
+
+```shell
+$ kubectl -n keycloak get sts
+NAME       READY   AGE
+keycloak   1/1     8m58s
+```
+
+Wait until the `READY` column says `1/1`.
+
+
 == Inspect the DevOps Stack Applications
 
 
