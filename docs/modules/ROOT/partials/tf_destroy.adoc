@@ -1,0 +1,5 @@
+== Destroy the cluster
+
+```shell
+$ terraform destroy
+```

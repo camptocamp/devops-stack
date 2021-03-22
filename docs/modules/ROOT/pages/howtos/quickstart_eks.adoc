@@ -132,3 +132,9 @@ aws --profile <ACCOUNT_NAME> eks --region <YOUR_REGION> update-kubeconfig --name
 ```
 
 Then, you should be able to use `kubectl`.
+
+
+
+include::partial$inspect_apps.adoc[]
+
+include::partial$tf_destroy.adoc[]

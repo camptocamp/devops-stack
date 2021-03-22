@@ -20,67 +20,14 @@ module "cluster" {
 include::partial$pipeline_outputs.adoc[]
 
 
-== Deploy the cluster
+include::partial$tf_apply.adoc[]
 
-```shell
-$ terraform init
-$ terraform apply
-```
+include::partial$k3s_kubeconfig_keycloak.adoc[]
 
-You should see the services URL as Terraform outputs.
+include::partial$wait_for_keycloak.adoc[]
 
-== Get kubeconfig and admin password
+include::partial$inspect_apps.adoc[]
 
-Retrieve the Kubeconfig file:
+include::partial$access_keycloak.adoc[]
 
-```shell
-$ terraform output -json kubeconfig | jq -r .
-```
-
-
-Retrieve the Keycloak password for the admin user of the the `kubernetes` realm:
-
-```shell
-$ terraform output admin_password
-```
-
-
-== Verify that Keycloak is ready
-
-```shell
-$ kubectl -n keycloak get sts
-NAME       READY   AGE
-keycloak   1/1     8m58s
-```
-
-Wait until the `READY` column says `1/1`.
-
-
-== Inspect the DevOps Stack Applications
-
-
-You can view the various ingress routes with:
-
-```
-$ kubectl get ingress --all-namespaces
-```
-
-Access the URLs in https, and use the OIDC/OAuth2 to log in, using the `admin`
-account with the password previously retrieved.
-
-
-
-== Access the Keycloak dashboard
-
-The keycloak dashboard uses the `kubernetes` realm. You can log in to it using
-the `/auth/realms/kubernetes/account/` path with the Keycloak ingress.
-
-NOTE: there is currently an issue when accessing applications
-and login details in Keycloak.
-
-
-== Destroy the cluster
-
-```shell
-$ terraform destroy
-```
+include::partial$tf_destroy.adoc[]
