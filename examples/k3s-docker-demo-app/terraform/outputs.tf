@@ -26,3 +26,8 @@ output "app_of_apps_values" {
   sensitive = true
   value     = module.cluster.app_of_apps_values
 }
+
+output "admin_password" {
+  sensitive = true
+  value     = module.cluster.admin_password
+}
