@@ -1,9 +1,3 @@
-=== Terraform Outputs
-
-
-Define outputs:
-
-```hcl
 # terraform/outputs.tf
 
 output "argocd_auth_token" {
@@ -37,4 +31,3 @@ output "admin_password" {
   sensitive = true
   value     = module.cluster.admin_password
 }
-```
