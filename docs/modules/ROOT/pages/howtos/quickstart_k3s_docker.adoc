@@ -29,11 +29,21 @@ $ terraform apply
 
 You should see the services URL as Terraform outputs.
 
-== Get kubeconfig
+== Get kubeconfig and admin password
+
+Retrieve the Kubeconfig file:
 
 ```shell
 $ terraform output -json kubeconfig | jq -r .
 ```
+
+
+Retrieve the Keycloak admin password:
+
+```shell
+$ terraform output admin_password
+```
+
 
 == Destroy the cluster
 
