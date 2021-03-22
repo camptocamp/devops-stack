@@ -69,6 +69,16 @@ Access the URLs in https, and use the OIDC/OAuth2 to log in, using the `admin`
 account with the password previously retrieved.
 
 
+
+== Access the Keycloak dashboard
+
+The keycloak dashboard uses the `kubernetes` realm. You can log in to it using
+the `/auth/realms/kubernetes/account/` path with the Keycloak ingress.
+
+NOTE: there is currently an issue when accessing applications
+and login details in Keycloak.
+
+
 == Destroy the cluster
 
 ```shell
