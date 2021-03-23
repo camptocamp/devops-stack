@@ -12,15 +12,7 @@ output "argocd_server" {
   value = module.cluster.argocd_server
 }
 
-output "repo_url" {
-  value = module.cluster.repo_url
-}
-
-output "target_revision" {
-  value = module.cluster.target_revision
-}
-
-output "app_of_apps_values" {
+output "grafana_admin_password" {
   sensitive = true
-  value     = module.cluster.app_of_apps_values
+  value     = module.cluster.grafana_admin_password
 }
