@@ -6,15 +6,13 @@
 - CGroupv2 disabled (K3s does not support it for now),
 - Knowledge of https://terraform.io[Terraform] basics
 
-== Create your Terraform files
+== Create your Terraform root module
 
 Camptocamp's DevOps stack is a Terraform composition module
-has to be instantiated from the Terraform root module.
+that has to be instantiated from the Terraform root module.
 
 Here is a minimal working example:
 
-
-=== Terraform root module
 
 ```hcl
 # terraform/main.tf
