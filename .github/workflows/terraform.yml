@@ -180,7 +180,7 @@ jobs:
           APP_OF_APPS_VALUES_1 : ${{ github.workspace }}/values1.yaml
           APP_OF_APPS_VALUES_2 : ${{ github.workspace }}/values2.yaml
         with:
-          entrypoint: ./scripts/app-diff.sh
+          entrypoint: ./.github/scripts/app-diff.sh
 
       - name: Terraform Apply on ${{ github.ref }}
         env:
