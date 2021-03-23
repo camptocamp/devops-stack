@@ -35,7 +35,6 @@ Here is a minimal working example:
 ```hcl
 # terraform/main.tf
 
-```hcl
 module "cluster" {
   source = "git::https://github.com/camptocamp/camptocamp-devops-stack.git//modules/k3s/libvirt?ref=master"
 
@@ -45,7 +44,6 @@ module "cluster" {
 ```
 
 include::partial$pipeline_outputs.adoc[]
-
 
 include::partial$tf_apply.adoc[]
 
