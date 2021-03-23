@@ -82,7 +82,7 @@ pb:terraform:apply:
     name: hashicorp/terraform:$TERRAFORM_VERSION
     entrypoint: [""]
   before_script:
-    - python3 -c "from urllib.request import urlretrieve; urlretrieve('https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/aws-iam-authenticator', '/tmp/aws-iam-authenticator')"
+    - python -c "from urllib.request import urlretrieve; urlretrieve('https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/aws-iam-authenticator', '/tmp/aws-iam-authenticator')"
     - chmod +x /tmp/aws-iam-authenticator
     - wget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 -O /tmp/jq
     - chmod +x /tmp/jq
