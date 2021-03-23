@@ -1,8 +1,5 @@
 === Terraform Outputs
 
-
-Define outputs:
-
 ```hcl
 # terraform/outputs.tf
 

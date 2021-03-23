@@ -6,9 +6,19 @@
 - CGroupv2 disabled (K3s does not support it for now),
 - Knowledge of https://terraform.io[Terraform] basics
 
-== Create the Terraform root module
+== Create your Terraform files
+
+Camptocamp's DevOps stack is a Terraform composition module
+has to be instantiated from the Terraform root module.
+
+Here is a minimal working example:
+
+
+=== Terraform root module
 
 ```hcl
+# terraform/main.tf
+
 module "cluster" {
   source = "git::https://github.com/camptocamp/camptocamp-devops-stack.git//modules/k3s/docker?ref=master"
 
@@ -16,9 +26,7 @@ module "cluster" {
 }
 ```
 
-
 include::partial$pipeline_outputs.adoc[]
-
 
 include::partial$tf_apply.adoc[]
 

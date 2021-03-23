@@ -10,12 +10,15 @@
 - Knowledge of https://terraform.io[Terraform] basics
 
 
-== Create your Terraform root module
+== Create your Terraform files
 
 Camptocamp's DevOps stack is a Terraform composition module
 has to be instantiated from the Terraform root module.
 
 Here is a minimal working example:
+
+
+=== Terraform root module
 
 ```hcl
 # terraform/main.tf
