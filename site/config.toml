@@ -107,9 +107,9 @@ weight = 2
 #weight = 4
 #
 # footer menu left
-[[menu.footer_left]]
-name = "About Us"
-url = "https://camptocamp.com"
+#[[menu.footer_left]]
+#name = "About Us"
+#url = "https://camptocamp.com"
 
 #[[menu.footer_left]]
 #name = "Our Expertise"
