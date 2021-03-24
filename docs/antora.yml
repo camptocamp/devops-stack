@@ -1,7 +1,6 @@
 ---
 name: main
 title: DevOps Stack
-github: https://github.com/camptocamp/devops-stack
 version: 0.29.0
 nav:
   - modules/ROOT/nav.adoc

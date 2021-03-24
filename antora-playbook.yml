@@ -2,6 +2,7 @@ site:
   title: DevOps Stack
   # the 404 page and sitemap files only get generated when the url property is set
   url: https://devops-stack.io
+  github: https://github.com/camptocamp/devops-stack
   start_page: main::index.adoc
 content:
   sources:
