@@ -10,6 +10,9 @@ The DevOps Stack provides a standard Kubernetes Platform, bringing together
 automated Provisioning as Code, Continuous Application Deployment,
 and readily-made configurations for the best Cloud Native tools in the industry.
 
+See the xref:ROOT:explanations/purpose.adoc[purpose of the DevOps Stack page]
+for more details.
+
 image::devops-stack-logo_large.png[DevOps Stack]
 
 TIP: The easiest way to get started with the DevOps Stack is to follow
@@ -17,16 +20,6 @@ the xref:howtos/quickstart_k3s_docker.adoc[K3s on Docker Quickstart].
 This way you will leave you with a fully operational https://k3s.io/[K3s]
 playground on your local machine.
 
-
-== Purpose
-
-> The DevOps Stack provides a standard Kubernetes Platform,
-> bringing together automated Provisioning as Code, Continuous
-> Application Deployment, and readily-made configurations for the best
-> Cloud Native tools in the industry.
-
-See the xref:ROOT:explanations/purpose.adoc[purpose of the DevOps Stack page]
-for more details.
 
 
 == Project sponsor
