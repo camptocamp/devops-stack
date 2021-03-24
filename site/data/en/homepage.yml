@@ -149,6 +149,6 @@ call_to_action:
     - label: "Technical documentation"
       link : "docs"
     - label: "Request a demo"
-      link : "demo"
+      link : "mailto:info@camptocamp.com?subject=DevOps Stack Demo"
     - label: "Professional services"
       link : "https://www.camptocamp.com/infrastructure_solutions_and_services"
