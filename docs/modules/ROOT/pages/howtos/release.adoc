@@ -2,15 +2,15 @@
 
 * Update `docs/modules/ROOT/pages/references/changelog.adoc`
 * Update the version number (e.g. `v0.29.0`) in the following files (mandatory):
-** https://github.com/camptocamp/camptocamp-devops-stack/blob/master/docs/antora.yml#L4[docs/antora.yml]
-** https://github.com/camptocamp/camptocamp-devops-stack/blob/master/.gitlab-ci/pipeline.yaml[.gitlab-ci/pipeline.yaml]
-** https://github.com/camptocamp/camptocamp-devops-stack/blob/master/modules/variables.tf[modules/variables.tf]
+** https://github.com/camptocamp/devops-stack/blob/master/docs/antora.yml#L4[docs/antora.yml]
+** https://github.com/camptocamp/devops-stack/blob/master/.gitlab-ci/pipeline.yaml[.gitlab-ci/pipeline.yaml]
+** https://github.com/camptocamp/devops-stack/blob/master/modules/variables.tf[modules/variables.tf]
 * Optionally update the version number in the following files:
-** https://github.com/camptocamp/camptocamp-devops-stack/blob/master/examples/eks-aws/.gitlab-ci.yml[examples/eks-aws/.gitlab-ci.yml]
-** https://github.com/camptocamp/camptocamp-devops-stack/blob/master/modules/eks-aws/main.tf[examples/eks-aws/terraform/main.tf]
-** https://github.com/camptocamp/camptocamp-devops-stack/blob/master/modules/k3o-libvirt/main.tf[examples/k3s-libvirt-demo-app/terraform/main.tf]
-** https://github.com/camptocamp/camptocamp-devops-stack/blob/master/modules/k3s-docker/main.tf[examples/k3s-docker-demo-app/terraform/main.tf]
+** https://github.com/camptocamp/devops-stack/blob/master/examples/eks-aws/.gitlab-ci.yml[examples/eks-aws/.gitlab-ci.yml]
+** https://github.com/camptocamp/devops-stack/blob/master/modules/eks-aws/main.tf[examples/eks-aws/terraform/main.tf]
+** https://github.com/camptocamp/devops-stack/blob/master/modules/k3o-libvirt/main.tf[examples/k3s-libvirt-demo-app/terraform/main.tf]
+** https://github.com/camptocamp/devops-stack/blob/master/modules/k3s-docker/main.tf[examples/k3s-docker-demo-app/terraform/main.tf]
 * Create a pull request with the updated version. Once it has been reviewed and approved, merge it to `master`
 * Tag the merged commit (e.g. `v0.29.0`)
 * Push the tag
-* Create a new https://github.com/camptocamp/camptocamp-devops-stack/releases[release] via the GitHub release page, naming it the same as the version number - e.g. `v0.29.0`. Ensure to state what's new in the release
+* Create a new https://github.com/camptocamp/devops-stack/releases[release] via the GitHub release page, naming it the same as the version number - e.g. `v0.29.0`. Ensure to state what's new in the release

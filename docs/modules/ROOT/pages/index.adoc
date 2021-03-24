@@ -1,9 +1,9 @@
-= Camptocamp's DevOps Stack
+= DevOps Stack
 
 :description: This repository contains the DevOps Stack of Camptocamp's Infrastructure Solutions Department.
 :keywords: terraform, docker, kubernetes, k3s, eks, aks, terraform, argocd, grafana, loki, traefik, prometheus, cert-manager, openid-connect, antora
 :sectanchors:
-:url-repo: https://github.com/camptocamp/camptocamp-devops-stack.git
+:url-repo: https://github.com/camptocamp/devops-stack.git
 :url-c2c: https://www.camptocamp.com/
 
 TIP: The easiest way to get started with the DevOps Stack is to follow

@@ -8,7 +8,7 @@ locals {
 }
 
 module "cluster" {
-  source = "git::https://github.com/camptocamp/camptocamp-devops-stack.git//modules/k3s/docker?ref=v0.29.0"
+  source = "git::https://github.com/camptocamp/devops-stack.git//modules/k3s/docker?ref=v0.29.0"
 
   cluster_name = "my-cluster"
   node_count   = 1
@@ -30,7 +30,7 @@ module "cluster" {
             values = <<EOT
 spec:
   source:
-    repoURL: https://github.com/camptocamp/camptocamp-devops-stack.git
+    repoURL: https://github.com/camptocamp/devops-stack.git
     targetRevision: v0.29.0
           EOT
           }

@@ -34,7 +34,7 @@ you have to create a `.gitlab-ci.yml` file in the root level of your project.
 ```yaml
 ---
 include:
-  - https://raw.githubusercontent.com/camptocamp/camptocamp-devops-stack/v0.26.0/.gitlab-ci/pipeline.yaml
+  - https://raw.githubusercontent.com/camptocamp/devops-stack/v0.26.0/.gitlab-ci/pipeline.yaml
 ```
 
 ==== Trigger pipeline

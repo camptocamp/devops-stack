@@ -41,7 +41,7 @@ module "network" {
 }
 
 module "cluster" {
- source = "git::https://github.com/camptocamp/camptocamp-devops-stack.git//modules/aks/azure?ref=v0.26.0"
+ source = "git::https://github.com/camptocamp/devops-stack.git//modules/aks/azure?ref=v0.26.0"
 
   vnet_subnet_id      = module.network.vnet_subnets[0]
   resource_group_name = azurerm_resource_group.this.name

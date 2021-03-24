@@ -1,456 +1,456 @@
 = Changelog
 
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.29.0[0.29.0] (2021-03-18)
+== https://github.com/camptocamp/devops-stack/tree/v0.29.0[0.29.0] (2021-03-18)
 
 As this release removes the dependency on Terraform workspaces, upgrading is not supported due to changes in the pipelines.
 You should spawn a new cluster.
 
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.28.0...v0.29.0[Full Changelog]
+https://github.com/camptocamp/devops-stack/compare/v0.28.0...v0.29.0[Full Changelog]
 
 *Implemented enhancements:*
 
-* Wait for app of apps in Terraform https://github.com/camptocamp/camptocamp-devops-stack/pull/517[#517] (https://github.com/mcanevet[mcanevet])
-* Allow to use arbitray OIDC issuer https://github.com/camptocamp/camptocamp-devops-stack/pull/504[#504] (https://github.com/mcanevet[mcanevet])
-* Allow to pass ArgoCD's Server SecretKey https://github.com/camptocamp/camptocamp-devops-stack/pull/505[#505] (https://github.com/mcanevet[mcanevet])
-* Don't use port-forward to show app diff https://github.com/camptocamp/camptocamp-devops-stack/pull/522[#522] (https://github.com/mcanevet[mcanevet])
-* Making components to be enabled or not https://github.com/camptocamp/camptocamp-devops-stack/pull/526[#526] (https://github.com/pburgisser[pburgisser])
-* Don't lookup ArgoCD's server secretkey to generate JWT token https://github.com/camptocamp/camptocamp-devops-stack/pull/524[#524] (https://github.com/mcanevet[mcanevet])
-* Generate random admin password for Grafana https://github.com/camptocamp/camptocamp-devops-stack/pull/525[#525] (https://github.com/mcanevet[mcanevet])
-* Persist Loki logs on Azure Blob Storage https://github.com/camptocamp/camptocamp-devops-stack/pull/513[#513] (https://github.com/mcanevet[mcanevet])
-* Don't use terraform.workspace variable in module https://github.com/camptocamp/camptocamp-devops-stack/pull/529[#529] https://github.com/mcanevet[mcanevet])
-* Move ArgoCD's insecure arg to specific values.yaml https://github.com/camptocamp/camptocamp-devops-stack/pull/447[#447] https://github.com/mcanevet[mcanevet])
+* Wait for app of apps in Terraform https://github.com/camptocamp/devops-stack/pull/517[#517] (https://github.com/mcanevet[mcanevet])
+* Allow to use arbitray OIDC issuer https://github.com/camptocamp/devops-stack/pull/504[#504] (https://github.com/mcanevet[mcanevet])
+* Allow to pass ArgoCD's Server SecretKey https://github.com/camptocamp/devops-stack/pull/505[#505] (https://github.com/mcanevet[mcanevet])
+* Don't use port-forward to show app diff https://github.com/camptocamp/devops-stack/pull/522[#522] (https://github.com/mcanevet[mcanevet])
+* Making components to be enabled or not https://github.com/camptocamp/devops-stack/pull/526[#526] (https://github.com/pburgisser[pburgisser])
+* Don't lookup ArgoCD's server secretkey to generate JWT token https://github.com/camptocamp/devops-stack/pull/524[#524] (https://github.com/mcanevet[mcanevet])
+* Generate random admin password for Grafana https://github.com/camptocamp/devops-stack/pull/525[#525] (https://github.com/mcanevet[mcanevet])
+* Persist Loki logs on Azure Blob Storage https://github.com/camptocamp/devops-stack/pull/513[#513] (https://github.com/mcanevet[mcanevet])
+* Don't use terraform.workspace variable in module https://github.com/camptocamp/devops-stack/pull/529[#529] https://github.com/mcanevet[mcanevet])
+* Move ArgoCD's insecure arg to specific values.yaml https://github.com/camptocamp/devops-stack/pull/447[#447] https://github.com/mcanevet[mcanevet])
 
 *Fixed Bugs:*
 
-* Install ArgoCD CLI in pipeline https://github.com/camptocamp/camptocamp-devops-stack/pull/518[#518] (https://github.com/mcanevet[mcanevet])
-* Fix regressions introduced by #504 https://github.com/camptocamp/camptocamp-devops-stack/pull/527[#527] (https://github.com/mcanevet[mcanevet])
-* Don't depend on bash-ism https://github.com/camptocamp/camptocamp-devops-stack/pull/528[#528] (https://github.com/mcanevet[mcanevet])
-* Pass all values when installing ArgoCD https://github.com/camptocamp/camptocamp-devops-stack/pull/534[#534] (https://github.com/mcanevet[mcanevet])
-* Configure ArgoCD on install (except metrics) https://github.com/camptocamp/camptocamp-devops-stack/pull/536[#536] (https://github.com/mcanevet[mcanevet])
-* Don't use plaintext to connect to ArgoCD if not in insecure mode https://github.com/camptocamp/camptocamp-devops-stack/pull/535[#535] (https://github.com/mcanevet[mcanevet])
+* Install ArgoCD CLI in pipeline https://github.com/camptocamp/devops-stack/pull/518[#518] (https://github.com/mcanevet[mcanevet])
+* Fix regressions introduced by #504 https://github.com/camptocamp/devops-stack/pull/527[#527] (https://github.com/mcanevet[mcanevet])
+* Don't depend on bash-ism https://github.com/camptocamp/devops-stack/pull/528[#528] (https://github.com/mcanevet[mcanevet])
+* Pass all values when installing ArgoCD https://github.com/camptocamp/devops-stack/pull/534[#534] (https://github.com/mcanevet[mcanevet])
+* Configure ArgoCD on install (except metrics) https://github.com/camptocamp/devops-stack/pull/536[#536] (https://github.com/mcanevet[mcanevet])
+* Don't use plaintext to connect to ArgoCD if not in insecure mode https://github.com/camptocamp/devops-stack/pull/535[#535] (https://github.com/mcanevet[mcanevet])
 
 *Documentations:*
 
-* Use default Antora generate parameters for avoiding 'EACCES: permission denied' https://github.com/camptocamp/camptocamp-devops-stack/pull/519[#519] (https://github.com/fsismondi[fsismondi])
-* Proposed changes - purpose section https://github.com/camptocamp/camptocamp-devops-stack/pull/521[#521] (https://github.com/modridi[modridi])
+* Use default Antora generate parameters for avoiding 'EACCES: permission denied' https://github.com/camptocamp/devops-stack/pull/519[#519] (https://github.com/fsismondi[fsismondi])
+* Proposed changes - purpose section https://github.com/camptocamp/devops-stack/pull/521[#521] (https://github.com/modridi[modridi])
 
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.28.0[0.28.0] (2021-03-05)
+== https://github.com/camptocamp/devops-stack/tree/v0.28.0[0.28.0] (2021-03-05)
 
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.27.0...v0.28.0[Full Changelog]
+https://github.com/camptocamp/devops-stack/compare/v0.27.0...v0.28.0[Full Changelog]
 
 *Upgraded components:*
 
-* Upgrade ArgoCD to 1.8.7 https://github.com/camptocamp/camptocamp-devops-stack/pull/506[#506] (https://github.com/mcanevet[mcanevet])
+* Upgrade ArgoCD to 1.8.7 https://github.com/camptocamp/devops-stack/pull/506[#506] (https://github.com/mcanevet[mcanevet])
 
 *Fixed Bugs:*
 
-* Update Kube-prometheus-stack values https://github.com/camptocamp/camptocamp-devops-stack/pull/516[#516] (https://github.com/madridi91[madridi91])
+* Update Kube-prometheus-stack values https://github.com/camptocamp/devops-stack/pull/516[#516] (https://github.com/madridi91[madridi91])
 
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.27.0[0.27.0] (2021-03-03)
+== https://github.com/camptocamp/devops-stack/tree/v0.27.0[0.27.0] (2021-03-03)
 
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.26.0...v0.27.0[Full Changelog]
+https://github.com/camptocamp/devops-stack/compare/v0.26.0...v0.27.0[Full Changelog]
 
 *Implemented enhancements:*
 
-* Set default repoURL and targetRevision to latest DevOps stack version https://github.com/camptocamp/camptocamp-devops-stack/pull/494[#494] (https://github.com/mcanevet[mcanevet])
-* Get rid of outputs.json https://github.com/camptocamp/camptocamp-devops-stack/pull/508[#508] (https://github.com/mcanevet[mcanevet])
+* Set default repoURL and targetRevision to latest DevOps stack version https://github.com/camptocamp/devops-stack/pull/494[#494] (https://github.com/mcanevet[mcanevet])
+* Get rid of outputs.json https://github.com/camptocamp/devops-stack/pull/508[#508] (https://github.com/mcanevet[mcanevet])
 
 *Fixed Bugs:*
 
-* Fix csi-secrets-store-provider-azure override https://github.com/camptocamp/camptocamp-devops-stack/pull/507[#507] (https://github.com/mcanevet[mcanevet])
-* Use aws-iam-authenticator instead of the temporary token https://github.com/camptocamp/camptocamp-devops-stack/pull/509[#509] (https://github.com/mcanevet[mcanevet])
+* Fix csi-secrets-store-provider-azure override https://github.com/camptocamp/devops-stack/pull/507[#507] (https://github.com/mcanevet[mcanevet])
+* Use aws-iam-authenticator instead of the temporary token https://github.com/camptocamp/devops-stack/pull/509[#509] (https://github.com/mcanevet[mcanevet])
 
 *Pipelines:*
 
-* Run Terraform workflow unless only doc modification https://github.com/camptocamp/camptocamp-devops-stack/pull/499[#499] (https://github.com/mcanevet[mcanevet])
+* Run Terraform workflow unless only doc modification https://github.com/camptocamp/devops-stack/pull/499[#499] (https://github.com/mcanevet[mcanevet])
 
 *Documentations:*
 
 * Lot of documentation improvements.
 
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.26.0[0.26.0] (2021-02-24)
+== https://github.com/camptocamp/devops-stack/tree/v0.26.0[0.26.0] (2021-02-24)
 
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.25.0...v0.26.0[Full Changelog]
-
-*Upgraded components:*
-
-* Upgrade Azure/aks/azurerm module to 4.7.0 https://github.com/camptocamp/camptocamp-devops-stack/pull/480[#480] (https://github.com/mcanevet[mcanevet])
-* Upgrade ArgoCD to 1.8.5 https://github.com/camptocamp/camptocamp-devops-stack/pull/481[#481] (https://github.com/mcanevet[mcanevet])
-* Upgrade hashicorp/azurerm provider to 2.48.0 https://github.com/camptocamp/camptocamp-devops-stack/pull/491[#491] (https://github.com/mcanevet[mcanevet])
-* Upgrade AAD Pod Identity to 1.7.4 https://github.com/camptocamp/camptocamp-devops-stack/pull/492[#492] (https://github.com/mcanevet[mcanevet])
-* Upgrade CSI secrets store provider Azure to 0.0.13 https://github.com/camptocamp/camptocamp-devops-stack/pull/493[#493] (https://github.com/mcanevet[mcanevet])
-
-*Fixed Bugs:*
-
-* Fix chicken and egg problem in Azure https://github.com/camptocamp/camptocamp-devops-stack/pull/486[#486] (https://github.com/mcanevet[mcanevet])
-* Create Terraform workspace if it does not exist https://github.com/camptocamp/camptocamp-devops-stack/pull/489[#489] (https://github.com/mcanevet[mcanevet])
-
-*Implemented enhancements:*
-
-* Wait for app of apps in gitlab CI pipeline https://github.com/camptocamp/camptocamp-devops-stack/pull/490[#490] (https://github.com/mcanevet[mcanevet])
-* Create LICENSE https://github.com/camptocamp/camptocamp-devops-stack/pull/488[#488] (https://github.com/mcanevet[mcanevet])
-
-*Documentations:*
-
-* Doc: Cleaning and restructuring https://github.com/camptocamp/camptocamp-devops-stack/pull/485[#485] (https://github.com/mbornoz[mbornoz])
-
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.25.0[0.25.0] (2021-02-23)
-
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.24.0...v0.25.0[Full Changelog]
+https://github.com/camptocamp/devops-stack/compare/v0.25.0...v0.26.0[Full Changelog]
 
 *Upgraded components:*
 
-* Upgrade Terraform to v0.14.6 https://github.com/camptocamp/camptocamp-devops-stack/pull/388[#388] (https://github.com/mcanevet[mcanevet])
-* Upgrade cert-manager to 1.1.1 https://github.com/camptocamp/camptocamp-devops-stack/pull/466[#466] (https://github.com/mcanevet[mcanevet])
-* Upgrade kube-prometheus-stack to 13.10.0 https://github.com/camptocamp/camptocamp-devops-stack/pull/470[#470] (https://github.com/mcanevet[mcanevet])
+* Upgrade Azure/aks/azurerm module to 4.7.0 https://github.com/camptocamp/devops-stack/pull/480[#480] (https://github.com/mcanevet[mcanevet])
+* Upgrade ArgoCD to 1.8.5 https://github.com/camptocamp/devops-stack/pull/481[#481] (https://github.com/mcanevet[mcanevet])
+* Upgrade hashicorp/azurerm provider to 2.48.0 https://github.com/camptocamp/devops-stack/pull/491[#491] (https://github.com/mcanevet[mcanevet])
+* Upgrade AAD Pod Identity to 1.7.4 https://github.com/camptocamp/devops-stack/pull/492[#492] (https://github.com/mcanevet[mcanevet])
+* Upgrade CSI secrets store provider Azure to 0.0.13 https://github.com/camptocamp/devops-stack/pull/493[#493] (https://github.com/mcanevet[mcanevet])
 
 *Fixed Bugs:*
 
-* Fix Terraform lint issue https://github.com/camptocamp/camptocamp-devops-stack/pull/457[#457] (https://github.com/mcanevet[mcanevet])
-* Mark some outputs as sensitive https://github.com/camptocamp/camptocamp-devops-stack/pull/460[#460] (https://github.com/mcanevet[mcanevet])
-* Don't run helm dep update explicitely (workaround) https://github.com/camptocamp/camptocamp-devops-stack/pull/463[#463] (https://github.com/mcanevet[mcanevet])
+* Fix chicken and egg problem in Azure https://github.com/camptocamp/devops-stack/pull/486[#486] (https://github.com/mcanevet[mcanevet])
+* Create Terraform workspace if it does not exist https://github.com/camptocamp/devops-stack/pull/489[#489] (https://github.com/mcanevet[mcanevet])
 
 *Implemented enhancements:*
 
-* Set default values for tests https://github.com/camptocamp/camptocamp-devops-stack/pull/461[#461] (https://github.com/mcanevet[mcanevet])
-* Remove Makefile (only brings confusion now) https://github.com/camptocamp/camptocamp-devops-stack/pull/464[#464] (https://github.com/mcanevet[mcanevet])
-* Use Terraform wrapper in github workflowhttps://github.com/camptocamp/camptocamp-devops-stack/pull/468[#468] (https://github.com/mcanevet[mcanevet])
-* Set kubernetes.io/ingress.allow-http: "false" annotation for all ingresses https://github.com/camptocamp/camptocamp-devops-stack/pull/477[#477] (https://github.com/mcanevet[mcanevet])
+* Wait for app of apps in gitlab CI pipeline https://github.com/camptocamp/devops-stack/pull/490[#490] (https://github.com/mcanevet[mcanevet])
+* Create LICENSE https://github.com/camptocamp/devops-stack/pull/488[#488] (https://github.com/mcanevet[mcanevet])
 
 *Documentations:*
 
-* Improve EKS example https://github.com/camptocamp/camptocamp-devops-stack/pull/455[#455] (https://github.com/mcanevet[mcanevet])
+* Doc: Cleaning and restructuring https://github.com/camptocamp/devops-stack/pull/485[#485] (https://github.com/mbornoz[mbornoz])
+
+== https://github.com/camptocamp/devops-stack/tree/v0.25.0[0.25.0] (2021-02-23)
+
+https://github.com/camptocamp/devops-stack/compare/v0.24.0...v0.25.0[Full Changelog]
+
+*Upgraded components:*
+
+* Upgrade Terraform to v0.14.6 https://github.com/camptocamp/devops-stack/pull/388[#388] (https://github.com/mcanevet[mcanevet])
+* Upgrade cert-manager to 1.1.1 https://github.com/camptocamp/devops-stack/pull/466[#466] (https://github.com/mcanevet[mcanevet])
+* Upgrade kube-prometheus-stack to 13.10.0 https://github.com/camptocamp/devops-stack/pull/470[#470] (https://github.com/mcanevet[mcanevet])
+
+*Fixed Bugs:*
+
+* Fix Terraform lint issue https://github.com/camptocamp/devops-stack/pull/457[#457] (https://github.com/mcanevet[mcanevet])
+* Mark some outputs as sensitive https://github.com/camptocamp/devops-stack/pull/460[#460] (https://github.com/mcanevet[mcanevet])
+* Don't run helm dep update explicitely (workaround) https://github.com/camptocamp/devops-stack/pull/463[#463] (https://github.com/mcanevet[mcanevet])
+
+*Implemented enhancements:*
+
+* Set default values for tests https://github.com/camptocamp/devops-stack/pull/461[#461] (https://github.com/mcanevet[mcanevet])
+* Remove Makefile (only brings confusion now) https://github.com/camptocamp/devops-stack/pull/464[#464] (https://github.com/mcanevet[mcanevet])
+* Use Terraform wrapper in github workflowhttps://github.com/camptocamp/devops-stack/pull/468[#468] (https://github.com/mcanevet[mcanevet])
+* Set kubernetes.io/ingress.allow-http: "false" annotation for all ingresses https://github.com/camptocamp/devops-stack/pull/477[#477] (https://github.com/mcanevet[mcanevet])
+
+*Documentations:*
+
+* Improve EKS example https://github.com/camptocamp/devops-stack/pull/455[#455] (https://github.com/mcanevet[mcanevet])
 
 *Pipelines:*
 
-* Use hashicorp/setup-terraform action in github workflow https://github.com/camptocamp/camptocamp-devops-stack/pull/456[#456] (https://github.com/mcanevet[mcanevet])
-* Don't upgrade dependencies when running terraform https://github.com/camptocamp/camptocamp-devops-stack/pull/458[#458] (https://github.com/mcanevet[mcanevet])
-* Don't set CLUSTER_NAME in tests https://github.com/camptocamp/camptocamp-devops-stack/pull/471[#471] (https://github.com/mcanevet[mcanevet])
-* Update example github workflow https://github.com/camptocamp/camptocamp-devops-stack/pull/473[#473] (https://github.com/mcanevet[mcanevet])
-* Don't use script in Gitlab CI pipeline https://github.com/camptocamp/camptocamp-devops-stack/pull/474[#474] (https://github.com/mcanevet[mcanevet])
+* Use hashicorp/setup-terraform action in github workflow https://github.com/camptocamp/devops-stack/pull/456[#456] (https://github.com/mcanevet[mcanevet])
+* Don't upgrade dependencies when running terraform https://github.com/camptocamp/devops-stack/pull/458[#458] (https://github.com/mcanevet[mcanevet])
+* Don't set CLUSTER_NAME in tests https://github.com/camptocamp/devops-stack/pull/471[#471] (https://github.com/mcanevet[mcanevet])
+* Update example github workflow https://github.com/camptocamp/devops-stack/pull/473[#473] (https://github.com/mcanevet[mcanevet])
+* Don't use script in Gitlab CI pipeline https://github.com/camptocamp/devops-stack/pull/474[#474] (https://github.com/mcanevet[mcanevet])
 
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.24.0[0.24.0] (2021-02-10)
+== https://github.com/camptocamp/devops-stack/tree/v0.24.0[0.24.0] (2021-02-10)
 
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.23.0...v0.24.0[Full Changelog]
+https://github.com/camptocamp/devops-stack/compare/v0.23.0...v0.24.0[Full Changelog]
 
 *Implemented enhancements:*
 
-* Removing olm https://github.com/camptocamp/camptocamp-devops-stack/pull/436[#436] (https://github.com/pburgisser[pburgisser])
-* [k3s/docker] Add registry mirror for registry.access.redhat.com https://github.com/camptocamp/camptocamp-devops-stack/pull/439[#439] (https://github.com/mcanevet[mcanevet])
-* [k3s/docker] Add registry mirror for k8s.gcr.io https://github.com/camptocamp/camptocamp-devops-stack/pull/440[#440] (https://github.com/mcanevet[mcanevet])
-* Install keycloak operator from github https://github.com/camptocamp/camptocamp-devops-stack/pull/443[#443] (https://github.com/mcanevet[mcanevet])
-* Move github actions scripts to .github/scripts https://github.com/camptocamp/camptocamp-devops-stack/pull/448[#448] (https://github.com/mcanevet[mcanevet])
-* Remove debug https://github.com/camptocamp/camptocamp-devops-stack/pull/449[#449] (https://github.com/mcanevet[mcanevet])
-* Move jq and helm installation in provision.sh https://github.com/camptocamp/camptocamp-devops-stack/pull/450[#450] (https://github.com/mcanevet[mcanevet])
-* Allow to override TF_ROOT https://github.com/camptocamp/camptocamp-devops-stack/pull/451[#451] (https://github.com/mcanevet[mcanevet])
-* Simplify CI by using TF_ROOT https://github.com/camptocamp/camptocamp-devops-stack/pull/452[#452] (https://github.com/mcanevet[mcanevet])
-* Refactor CI scripts https://github.com/camptocamp/camptocamp-devops-stack/pull/453[#453] (https://github.com/mcanevet[mcanevet])
-* Install jq only if needed in script/plan.sh https://github.com/camptocamp/camptocamp-devops-stack/pull/454[#454] (https://github.com/mcanevet[mcanevet])
+* Removing olm https://github.com/camptocamp/devops-stack/pull/436[#436] (https://github.com/pburgisser[pburgisser])
+* [k3s/docker] Add registry mirror for registry.access.redhat.com https://github.com/camptocamp/devops-stack/pull/439[#439] (https://github.com/mcanevet[mcanevet])
+* [k3s/docker] Add registry mirror for k8s.gcr.io https://github.com/camptocamp/devops-stack/pull/440[#440] (https://github.com/mcanevet[mcanevet])
+* Install keycloak operator from github https://github.com/camptocamp/devops-stack/pull/443[#443] (https://github.com/mcanevet[mcanevet])
+* Move github actions scripts to .github/scripts https://github.com/camptocamp/devops-stack/pull/448[#448] (https://github.com/mcanevet[mcanevet])
+* Remove debug https://github.com/camptocamp/devops-stack/pull/449[#449] (https://github.com/mcanevet[mcanevet])
+* Move jq and helm installation in provision.sh https://github.com/camptocamp/devops-stack/pull/450[#450] (https://github.com/mcanevet[mcanevet])
+* Allow to override TF_ROOT https://github.com/camptocamp/devops-stack/pull/451[#451] (https://github.com/mcanevet[mcanevet])
+* Simplify CI by using TF_ROOT https://github.com/camptocamp/devops-stack/pull/452[#452] (https://github.com/mcanevet[mcanevet])
+* Refactor CI scripts https://github.com/camptocamp/devops-stack/pull/453[#453] (https://github.com/mcanevet[mcanevet])
+* Install jq only if needed in script/plan.sh https://github.com/camptocamp/devops-stack/pull/454[#454] (https://github.com/mcanevet[mcanevet])
 
 *Upgraded components:*
 
-* Upgrade Kubernetes provider to v2.0.2 https://github.com/camptocamp/camptocamp-devops-stack/pull/437[#437] (https://github.com/mcanevet[mcanevet])
-* Upgrade oauth2-proxy to 7.0.0 https://github.com/camptocamp/camptocamp-devops-stack/pull/441[#441] (https://github.com/mcanevet[mcanevet])
-* Upgrade kube-prometheus-stack to v13.5.0 https://github.com/camptocamp/camptocamp-devops-stack/pull/438[#438] (https://github.com/mcanevet[mcanevet])
-* Deploy new version of ArgOCD's Grafana dashboard https://github.com/camptocamp/camptocamp-devops-stack/pull/444[#444] (https://github.com/mcanevet[mcanevet])
-* Upgrade Terraform to 0.13.6 https://github.com/camptocamp/camptocamp-devops-stack/pull/445[#445] (https://github.com/mcanevet[mcanevet])
-* Upgrade ArgoCD to 1.7.12 https://github.com/camptocamp/camptocamp-devops-stack/pull/446[#446] (https://github.com/mcanevet[mcanevet])
+* Upgrade Kubernetes provider to v2.0.2 https://github.com/camptocamp/devops-stack/pull/437[#437] (https://github.com/mcanevet[mcanevet])
+* Upgrade oauth2-proxy to 7.0.0 https://github.com/camptocamp/devops-stack/pull/441[#441] (https://github.com/mcanevet[mcanevet])
+* Upgrade kube-prometheus-stack to v13.5.0 https://github.com/camptocamp/devops-stack/pull/438[#438] (https://github.com/mcanevet[mcanevet])
+* Deploy new version of ArgOCD's Grafana dashboard https://github.com/camptocamp/devops-stack/pull/444[#444] (https://github.com/mcanevet[mcanevet])
+* Upgrade Terraform to 0.13.6 https://github.com/camptocamp/devops-stack/pull/445[#445] (https://github.com/mcanevet[mcanevet])
+* Upgrade ArgoCD to 1.7.12 https://github.com/camptocamp/devops-stack/pull/446[#446] (https://github.com/mcanevet[mcanevet])
 
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.23.0[0.23.0] (2021-02-03)
+== https://github.com/camptocamp/devops-stack/tree/v0.23.0[0.23.0] (2021-02-03)
 
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.22.0...v0.23.0[Full Changelog]
-
-*Implemented enhancements:*
-
-* Moving away from olm https://github.com/camptocamp/camptocamp-devops-stack/pull/431[#431] (https://github.com/pburgisser[pburgisser])
-* Add output for prometheus identity https://github.com/camptocamp/camptocamp-devops-stack/pull/435[#435] (https://github.com/mcanevet[mcanevet])
-
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.22.0[0.22.0] (2021-02-03)
-
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.21.1...v0.22.0[Full Changelog]
+https://github.com/camptocamp/devops-stack/compare/v0.22.0...v0.23.0[Full Changelog]
 
 *Implemented enhancements:*
 
-* Integration of thanos together with minio S3 buckets https://github.com/camptocamp/camptocamp-devops-stack/pull/430[#430] (https://github.com/pburgisser[pburgisser])
-* Add aadpodidentity to Prometheus https://github.com/camptocamp/camptocamp-devops-stack/pull/432[#432] (https://github.com/mcanevet[mcanevet])
-* Allow to create SecretProviderClass for Prometheus https://github.com/camptocamp/camptocamp-devops-stack/pull/433[#433] (https://github.com/mcanevet[mcanevet])
+* Moving away from olm https://github.com/camptocamp/devops-stack/pull/431[#431] (https://github.com/pburgisser[pburgisser])
+* Add output for prometheus identity https://github.com/camptocamp/devops-stack/pull/435[#435] (https://github.com/mcanevet[mcanevet])
+
+== https://github.com/camptocamp/devops-stack/tree/v0.22.0[0.22.0] (2021-02-03)
+
+https://github.com/camptocamp/devops-stack/compare/v0.21.1...v0.22.0[Full Changelog]
+
+*Implemented enhancements:*
+
+* Integration of thanos together with minio S3 buckets https://github.com/camptocamp/devops-stack/pull/430[#430] (https://github.com/pburgisser[pburgisser])
+* Add aadpodidentity to Prometheus https://github.com/camptocamp/devops-stack/pull/432[#432] (https://github.com/mcanevet[mcanevet])
+* Allow to create SecretProviderClass for Prometheus https://github.com/camptocamp/devops-stack/pull/433[#433] (https://github.com/mcanevet[mcanevet])
 
 *Upgraded components:*
 
-* Upgrade ArgoCD helm chart https://github.com/camptocamp/camptocamp-devops-stack/pull/429[#429] (https://github.com/mcanevet[mcanevet])
+* Upgrade ArgoCD helm chart https://github.com/camptocamp/devops-stack/pull/429[#429] (https://github.com/mcanevet[mcanevet])
 
 *Fixed Bugs*
 
-* [k3s-docker] don't use insecure connection in helm provider https://github.com/camptocamp/camptocamp-devops-stack/pull/426[#426] (https://github.com/mcanevet[mcanevet])
-* Fix wait for app of apps script https://github.com/camptocamp/camptocamp-devops-stack/pull/428[#428] (https://github.com/mcanevet[mcanevet])
+* [k3s-docker] don't use insecure connection in helm provider https://github.com/camptocamp/devops-stack/pull/426[#426] (https://github.com/mcanevet[mcanevet])
+* Fix wait for app of apps script https://github.com/camptocamp/devops-stack/pull/428[#428] (https://github.com/mcanevet[mcanevet])
 
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.21.1[0.21.1] (2021-01-27)
+== https://github.com/camptocamp/devops-stack/tree/v0.21.1[0.21.1] (2021-01-27)
 
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.21.0...v0.21.1[Full Changelog]
+https://github.com/camptocamp/devops-stack/compare/v0.21.0...v0.21.1[Full Changelog]
 
 *Fixed bugs:*
 
-* AKS : Add missing providers pining https://github.com/camptocamp/camptocamp-devops-stack/pull/425[#425] (https://github.com/mcanevet[mcanevet])
+* AKS : Add missing providers pining https://github.com/camptocamp/devops-stack/pull/425[#425] (https://github.com/mcanevet[mcanevet])
 
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.21.0[0.21.0] (2021-01-27)
+== https://github.com/camptocamp/devops-stack/tree/v0.21.0[0.21.0] (2021-01-27)
 
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.20.0...v0.21.0[Full Changelog]
+https://github.com/camptocamp/devops-stack/compare/v0.20.0...v0.21.0[Full Changelog]
 
 *Breaking Changes:*
 
-* Rename k3os/libvirt to k3s/libvirt https://github.com/camptocamp/camptocamp-devops-stack/pull/404[#404] (https://github.com/mcanevet[mcanevet])
-* Factorize Terraform code per distrib variant https://github.com/camptocamp/camptocamp-devops-stack/pull/405[#405] (https://github.com/mcanevet[mcanevet])
+* Rename k3os/libvirt to k3s/libvirt https://github.com/camptocamp/devops-stack/pull/404[#404] (https://github.com/mcanevet[mcanevet])
+* Factorize Terraform code per distrib variant https://github.com/camptocamp/devops-stack/pull/405[#405] (https://github.com/mcanevet[mcanevet])
 
 *Implemented enhancements:*
 
-* Factorize more code https://github.com/camptocamp/camptocamp-devops-stack/pull/406[#406] (https://github.com/mcanevet[mcanevet])
-* Adding redirect to ssl target https://github.com/camptocamp/camptocamp-devops-stack/pull/415[#415] (https://github.com/pburgisser[pburgisser])
-* Expose kubernetes version for AKS https://github.com/camptocamp/camptocamp-devops-stack/pull/422[#422] (https://github.com/mcanevet[mcanevet])
-* Expose cluster version for EKS https://github.com/camptocamp/camptocamp-devops-stack/pull/423[#423] (https://github.com/mcanevet[mcanevet])
+* Factorize more code https://github.com/camptocamp/devops-stack/pull/406[#406] (https://github.com/mcanevet[mcanevet])
+* Adding redirect to ssl target https://github.com/camptocamp/devops-stack/pull/415[#415] (https://github.com/pburgisser[pburgisser])
+* Expose kubernetes version for AKS https://github.com/camptocamp/devops-stack/pull/422[#422] (https://github.com/mcanevet[mcanevet])
+* Expose cluster version for EKS https://github.com/camptocamp/devops-stack/pull/423[#423] (https://github.com/mcanevet[mcanevet])
 
 *Upgraded components:*
 
-* Upgrade camptocamp/k3s/docker module to 0.7.1 https://github.com/camptocamp/camptocamp-devops-stack/pull/416[#416] (https://github.com/mcanevet[mcanevet])
-* Upgrade docker provider to 2.11.0 https://github.com/camptocamp/camptocamp-devops-stack/pull/417[#417] (https://github.com/mcanevet[mcanevet])
-* Rollback ArgoCD to 1.7.11 https://github.com/camptocamp/camptocamp-devops-stack/pull/418[#418] (https://github.com/mcanevet[mcanevet])
-* Upgrade Loki to 2.1.0 https://github.com/camptocamp/camptocamp-devops-stack/pull/419[#419] (https://github.com/mcanevet[mcanevet])
-* Upgrade k3s to v1.18.15-k3s1 https://github.com/camptocamp/camptocamp-devops-stack/pull/420[#420] (https://github.com/mcanevet[mcanevet])
-* Upgrade helm provider to 2.0.2 https://github.com/camptocamp/camptocamp-devops-stack/pull/421[#421] (https://github.com/mcanevet[mcanevet])
-* Set default version for AKS to 1.18.14 https://github.com/camptocamp/camptocamp-devops-stack/pull/424[#424] (https://github.com/mcanevet[mcanevet])
+* Upgrade camptocamp/k3s/docker module to 0.7.1 https://github.com/camptocamp/devops-stack/pull/416[#416] (https://github.com/mcanevet[mcanevet])
+* Upgrade docker provider to 2.11.0 https://github.com/camptocamp/devops-stack/pull/417[#417] (https://github.com/mcanevet[mcanevet])
+* Rollback ArgoCD to 1.7.11 https://github.com/camptocamp/devops-stack/pull/418[#418] (https://github.com/mcanevet[mcanevet])
+* Upgrade Loki to 2.1.0 https://github.com/camptocamp/devops-stack/pull/419[#419] (https://github.com/mcanevet[mcanevet])
+* Upgrade k3s to v1.18.15-k3s1 https://github.com/camptocamp/devops-stack/pull/420[#420] (https://github.com/mcanevet[mcanevet])
+* Upgrade helm provider to 2.0.2 https://github.com/camptocamp/devops-stack/pull/421[#421] (https://github.com/mcanevet[mcanevet])
+* Set default version for AKS to 1.18.14 https://github.com/camptocamp/devops-stack/pull/424[#424] (https://github.com/mcanevet[mcanevet])
 
 *Fixed bugs:*
 
-* Change git repo URL to ssh https://github.com/camptocamp/camptocamp-devops-stack/pull/408[#408] (https://github.com/saimonn[saimonn])
-* K3s-libvirt : Extending default memory to 8Gb for better stability https://github.com/camptocamp/camptocamp-devops-stack/pull/410[#410] (https://github.com/pburgisser[pburgisser])
-* k3s-libvirt : Show repo when cloning with https https://github.com/camptocamp/camptocamp-devops-stack/pull/412[#412] (https://github.com/chornberger-c2c[chornberger-c2c])
-* k3s-docker : Show repo when cloning with https https://github.com/camptocamp/camptocamp-devops-stack/pull/413[#413] (https://github.com/chornberger-c2c[chornberger-c2c])
+* Change git repo URL to ssh https://github.com/camptocamp/devops-stack/pull/408[#408] (https://github.com/saimonn[saimonn])
+* K3s-libvirt : Extending default memory to 8Gb for better stability https://github.com/camptocamp/devops-stack/pull/410[#410] (https://github.com/pburgisser[pburgisser])
+* k3s-libvirt : Show repo when cloning with https https://github.com/camptocamp/devops-stack/pull/412[#412] (https://github.com/chornberger-c2c[chornberger-c2c])
+* k3s-docker : Show repo when cloning with https https://github.com/camptocamp/devops-stack/pull/413[#413] (https://github.com/chornberger-c2c[chornberger-c2c])
 
 *Documentation:*
 
-* Describe access to kube api for eks https://github.com/camptocamp/camptocamp-devops-stack/pull/409[#409] (https://github.com/cryptobioz[cryptobioz])
-* Refactor documentation and add information about how to test the DevOps Stack https://github.com/camptocamp/camptocamp-devops-stack/pull/411[#411] (https://github.com/dabelenda[dabelenda])
+* Describe access to kube api for eks https://github.com/camptocamp/devops-stack/pull/409[#409] (https://github.com/cryptobioz[cryptobioz])
+* Refactor documentation and add information about how to test the DevOps Stack https://github.com/camptocamp/devops-stack/pull/411[#411] (https://github.com/dabelenda[dabelenda])
 
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.20.0[0.20.0] (2020-12-22)
+== https://github.com/camptocamp/devops-stack/tree/v0.20.0[0.20.0] (2020-12-22)
 
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.19.0...v0.20.0[Full Changelog]
+https://github.com/camptocamp/devops-stack/compare/v0.19.0...v0.20.0[Full Changelog]
 
 *Upgraded components:*
 
-* Upgrade terraform helm provider to v2.0.1 https://github.com/camptocamp/camptocamp-devops-stack/pull/401[#401] (https://github.com/mcanevet[mcanevet])
-* Use released version of Azure AKS module (4.5.0) https://github.com/camptocamp/camptocamp-devops-stack/pull/403[#403] (https://github.com/mcanevet[mcanevet])
+* Upgrade terraform helm provider to v2.0.1 https://github.com/camptocamp/devops-stack/pull/401[#401] (https://github.com/mcanevet[mcanevet])
+* Use released version of Azure AKS module (4.5.0) https://github.com/camptocamp/devops-stack/pull/403[#403] (https://github.com/mcanevet[mcanevet])
 
 *Fixed bugs:*
 
-* Prune app of apps only when syncPolicy is set https://github.com/camptocamp/camptocamp-devops-stack/pull/402[#402] (https://github.com/mcanevet[mcanevet])
+* Prune app of apps only when syncPolicy is set https://github.com/camptocamp/devops-stack/pull/402[#402] (https://github.com/mcanevet[mcanevet])
 
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.19.0[0.19.0] (2020-12-17)
+== https://github.com/camptocamp/devops-stack/tree/v0.19.0[0.19.0] (2020-12-17)
 
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.18.0...v0.19.0[Full Changelog]
+https://github.com/camptocamp/devops-stack/compare/v0.18.0...v0.19.0[Full Changelog]
 
 *Implemented enhancements:*
 
-* Enable automatic pruning of resources https://github.com/camptocamp/camptocamp-devops-stack/pull/400[#400] (https://github.com/mcanevet[mcanevet])
+* Enable automatic pruning of resources https://github.com/camptocamp/devops-stack/pull/400[#400] (https://github.com/mcanevet[mcanevet])
 
 *Upgraded components:*
 
-* Upgrade dependencies for eks-aws https://github.com/camptocamp/camptocamp-devops-stack/pull/397[#397] (https://github.com/mcanevet[mcanevet])
-* Upgrade AAD Pod Identity to 1.7.1 https://github.com/camptocamp/camptocamp-devops-stack/pull/399[#399] (https://github.com/mcanevet[mcanevet])
+* Upgrade dependencies for eks-aws https://github.com/camptocamp/devops-stack/pull/397[#397] (https://github.com/mcanevet[mcanevet])
+* Upgrade AAD Pod Identity to 1.7.1 https://github.com/camptocamp/devops-stack/pull/399[#399] (https://github.com/mcanevet[mcanevet])
 
 *Fixed bugs:*
 
-* Don't set provider version in generic module https://github.com/camptocamp/camptocamp-devops-stack/pull/396[#396] (https://github.com/mcanevet[mcanevet])
+* Don't set provider version in generic module https://github.com/camptocamp/devops-stack/pull/396[#396] (https://github.com/mcanevet[mcanevet])
 
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.18.0[0.18.0] (2020-12-15)
+== https://github.com/camptocamp/devops-stack/tree/v0.18.0[0.18.0] (2020-12-15)
 
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.17.0...v0.18.0[Full Changelog]
+https://github.com/camptocamp/devops-stack/compare/v0.17.0...v0.18.0[Full Changelog]
 
 *Implemented enhancements:*
 
-* Instantiate the app of apps inside the argocd-helm module https://github.com/camptocamp/camptocamp-devops-stack/pull/377[#377] (https://github.com/raphink[raphink])
-* Check Terraform syntaxe on Pull Requests https://github.com/camptocamp/camptocamp-devops-stack/pull/379[#379] (https://github.com/mcanevet[mcanevet])
-* Allow to set app domains https://github.com/camptocamp/camptocamp-devops-stack/pull/375[#375] (https://github.com/raphink[raphink])
-* Hardcode AKS version to 1.18.10 https://github.com/camptocamp/camptocamp-devops-stack/pull/392[#392] (https://github.com/mcanevet[mcanevet])
+* Instantiate the app of apps inside the argocd-helm module https://github.com/camptocamp/devops-stack/pull/377[#377] (https://github.com/raphink[raphink])
+* Check Terraform syntaxe on Pull Requests https://github.com/camptocamp/devops-stack/pull/379[#379] (https://github.com/mcanevet[mcanevet])
+* Allow to set app domains https://github.com/camptocamp/devops-stack/pull/375[#375] (https://github.com/raphink[raphink])
+* Hardcode AKS version to 1.18.10 https://github.com/camptocamp/devops-stack/pull/392[#392] (https://github.com/mcanevet[mcanevet])
 
 *Upgraded components:*
 
-* Upgrade k3s to v1.18.13 https://github.com/camptocamp/camptocamp-devops-stack/pull/393[#393] (https://github.com/mcanevet[mcanevet])
-* Upgrade ArgoCD to v1.8.1 https://github.com/camptocamp/camptocamp-devops-stack/pull/387[#387] (https://github.com/mcanevet[mcanevet])
-* Upgrade csi-secrets-store-provider-azure chart to 0.0.15 https://github.com/camptocamp/camptocamp-devops-stack/pull/395[#395] (https://github.com/mcanevet[mcanevet])
+* Upgrade k3s to v1.18.13 https://github.com/camptocamp/devops-stack/pull/393[#393] (https://github.com/mcanevet[mcanevet])
+* Upgrade ArgoCD to v1.8.1 https://github.com/camptocamp/devops-stack/pull/387[#387] (https://github.com/mcanevet[mcanevet])
+* Upgrade csi-secrets-store-provider-azure chart to 0.0.15 https://github.com/camptocamp/devops-stack/pull/395[#395] (https://github.com/mcanevet[mcanevet])
 
 *Fixed bugs:*
 
-* Increase argocd helm release timeout https://github.com/camptocamp/camptocamp-devops-stack/pull/381[#381] (https://github.com/mcanevet[mcanevet])
+* Increase argocd helm release timeout https://github.com/camptocamp/devops-stack/pull/381[#381] (https://github.com/mcanevet[mcanevet])
 
 *Documentation:*
 
-* Update new_project when releasing https://github.com/camptocamp/camptocamp-devops-stack/pull/382[#382] (https://github.com/raphink[raphink])
-* Add reference > authentication https://github.com/camptocamp/camptocamp-devops-stack/pull/383[#383] (https://github.com/raphink[raphink])
+* Update new_project when releasing https://github.com/camptocamp/devops-stack/pull/382[#382] (https://github.com/raphink[raphink])
+* Add reference > authentication https://github.com/camptocamp/devops-stack/pull/383[#383] (https://github.com/raphink[raphink])
 
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.17.0[0.17.0] (2020-12-07)
+== https://github.com/camptocamp/devops-stack/tree/v0.17.0[0.17.0] (2020-12-07)
 
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.16.0...v0.17.0[Full Changelog]
+https://github.com/camptocamp/devops-stack/compare/v0.16.0...v0.17.0[Full Changelog]
 
 *Implemented enhancements:*
 
-* Instantiate the app of apps inside the argocd-helm module https://github.com/camptocamp/camptocamp-devops-stack/pull/351[#351] (https://github.com/raphink[raphink])
-* Scale traefik to 2 by default https://github.com/camptocamp/camptocamp-devops-stack/pull/369[#369] (https://github.com/mcanevet[mcanevet])
-* Use Azure CNI network plugin https://github.com/camptocamp/camptocamp-devops-stack/pull/366[#366] (https://github.com/mcanevet[mcanevet])
-* Upgrade camptocamp/k3s/docker to 0.6.0 https://github.com/camptocamp/camptocamp-devops-stack/pull/361[#361] (https://github.com/mcanevet[mcanevet])
-* Run github workflow in container https://github.com/camptocamp/camptocamp-devops-stack/pull/352[#352] (https://github.com/mcanevet[mcanevet])
-* Don't use terraform workspace select with TF_WORKSPACE env var https://github.com/camptocamp/camptocamp-devops-stack/pull/345[#345] (https://github.com/mcanevet[mcanevet])
-* Cleanup tests https://github.com/camptocamp/camptocamp-devops-stack/pull/349[#349] (https://github.com/mcanevet[mcanevet])
+* Instantiate the app of apps inside the argocd-helm module https://github.com/camptocamp/devops-stack/pull/351[#351] (https://github.com/raphink[raphink])
+* Scale traefik to 2 by default https://github.com/camptocamp/devops-stack/pull/369[#369] (https://github.com/mcanevet[mcanevet])
+* Use Azure CNI network plugin https://github.com/camptocamp/devops-stack/pull/366[#366] (https://github.com/mcanevet[mcanevet])
+* Upgrade camptocamp/k3s/docker to 0.6.0 https://github.com/camptocamp/devops-stack/pull/361[#361] (https://github.com/mcanevet[mcanevet])
+* Run github workflow in container https://github.com/camptocamp/devops-stack/pull/352[#352] (https://github.com/mcanevet[mcanevet])
+* Don't use terraform workspace select with TF_WORKSPACE env var https://github.com/camptocamp/devops-stack/pull/345[#345] (https://github.com/mcanevet[mcanevet])
+* Cleanup tests https://github.com/camptocamp/devops-stack/pull/349[#349] (https://github.com/mcanevet[mcanevet])
 
 *Upgraded applications:*
 
-* Upgrade csi-secrets-store-provider-azure https://github.com/camptocamp/camptocamp-devops-stack/pull/367[#367] (https://github.com/mcanevet[mcanevet])
-* Upgrade aad-pod-identity https://github.com/camptocamp/camptocamp-devops-stack/pull/365[#365] (https://github.com/mcanevet[mcanevet])
-* Upgrade kube-prometheus-stack to v12.5.0 https://github.com/camptocamp/camptocamp-devops-stack/pull/364[#364] (https://github.com/mcanevet[mcanevet])
-* Upgrade camptocamp/k3s/docker to 0.6.0 https://github.com/camptocamp/camptocamp-devops-stack/pull/361[#361] (https://github.com/mcanevet[mcanevet])
-* Upgrade cert-manager to 1.1.0 https://github.com/camptocamp/camptocamp-devops-stack/pull/358[#358] (https://github.com/mcanevet[mcanevet])
-* Upgrade to ArgoCD 1.7.10 https://github.com/camptocamp/camptocamp-devops-stack/pull/353[#353] (https://github.com/mcanevet[mcanevet])
+* Upgrade csi-secrets-store-provider-azure https://github.com/camptocamp/devops-stack/pull/367[#367] (https://github.com/mcanevet[mcanevet])
+* Upgrade aad-pod-identity https://github.com/camptocamp/devops-stack/pull/365[#365] (https://github.com/mcanevet[mcanevet])
+* Upgrade kube-prometheus-stack to v12.5.0 https://github.com/camptocamp/devops-stack/pull/364[#364] (https://github.com/mcanevet[mcanevet])
+* Upgrade camptocamp/k3s/docker to 0.6.0 https://github.com/camptocamp/devops-stack/pull/361[#361] (https://github.com/mcanevet[mcanevet])
+* Upgrade cert-manager to 1.1.0 https://github.com/camptocamp/devops-stack/pull/358[#358] (https://github.com/mcanevet[mcanevet])
+* Upgrade to ArgoCD 1.7.10 https://github.com/camptocamp/devops-stack/pull/353[#353] (https://github.com/mcanevet[mcanevet])
 
 *Fixed bugs:*
 
-* Fix AzureIdentity for cert-manager https://github.com/camptocamp/camptocamp-devops-stack/pull/368[#368] (https://github.com/mcanevet[mcanevet])
-* Fix pipeline https://github.com/camptocamp/camptocamp-devops-stack/pull/357[#357] (https://github.com/mcanevet[mcanevet])
-* Fix some issues with github workflow https://github.com/camptocamp/camptocamp-devops-stack/pull/356[#356] (https://github.com/mcanevet[mcanevet])
-* Fix github workflow https://github.com/camptocamp/camptocamp-devops-stack/pull/355[#355] (https://github.com/mcanevet[mcanevet])
-* Force destroy Loki's bucket https://github.com/camptocamp/camptocamp-devops-stack/pull/374[#374] (https://github.com/mcanevet[mcanevet])
+* Fix AzureIdentity for cert-manager https://github.com/camptocamp/devops-stack/pull/368[#368] (https://github.com/mcanevet[mcanevet])
+* Fix pipeline https://github.com/camptocamp/devops-stack/pull/357[#357] (https://github.com/mcanevet[mcanevet])
+* Fix some issues with github workflow https://github.com/camptocamp/devops-stack/pull/356[#356] (https://github.com/mcanevet[mcanevet])
+* Fix github workflow https://github.com/camptocamp/devops-stack/pull/355[#355] (https://github.com/mcanevet[mcanevet])
+* Force destroy Loki's bucket https://github.com/camptocamp/devops-stack/pull/374[#374] (https://github.com/mcanevet[mcanevet])
 
 
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.16.0[0.16.0] (2020-12-04)
+== https://github.com/camptocamp/devops-stack/tree/v0.16.0[0.16.0] (2020-12-04)
 
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.15.0...v0.16.0[Full Changelog]
+https://github.com/camptocamp/devops-stack/compare/v0.15.0...v0.16.0[Full Changelog]
 
 *Implemented enhancements:*
 
-* Create key and cert for CA https://github.com/camptocamp/camptocamp-devops-stack/pull/314[#314] (https://github.com/mcanevet[mcanevet])
-* Merge keycloak-operator and keycloak Applications https://github.com/camptocamp/camptocamp-devops-stack/pull/316[#316] (https://github.com/mcanevet[mcanevet])
-* Enable Traefik access logs https://github.com/camptocamp/camptocamp-devops-stack/pull/321[#321] (https://github.com/mcanevet[mcanevet])
-* [k3os-libvirt] Adding support RAM sizing https://github.com/camptocamp/camptocamp-devops-stack/pull/328[#328] (https://github.com/pburgisser[pburgisser])
-* Enable minio metrics https://github.com/camptocamp/camptocamp-devops-stack/pull/330[#330] (https://github.com/mcanevet[mcanevet])
-* Enable persistence for minio https://github.com/camptocamp/camptocamp-devops-stack/pull/333[#333] (https://github.com/mcanevet[mcanevet])
-* Enable minio by default for k3s/k3os https://github.com/camptocamp/camptocamp-devops-stack/pull/334[#334] (https://github.com/mcanevet[mcanevet])
-* Create bucket for loki https://github.com/camptocamp/camptocamp-devops-stack/pull/335[#335] (https://github.com/mcanevet[mcanevet])
-* Add support for AKS https://github.com/camptocamp/camptocamp-devops-stack/pull/337[#337] (https://github.com/mcanevet[mcanevet])
-* Allow to specify more than just values in extra apps' helm https://github.com/camptocamp/camptocamp-devops-stack/pull/341[#341] (https://github.com/mcanevet[mcanevet])
-* Use a secret for ArgoCD's OIDC's client secret https://github.com/camptocamp/camptocamp-devops-stack/pull/342[#342] (https://github.com/mcanevet[mcanevet])
-* Add Azure DNS label annotation to Traefik's Load balancer https://github.com/camptocamp/camptocamp-devops-stack/pull/344[#344] (https://github.com/mcanevet[mcanevet])
+* Create key and cert for CA https://github.com/camptocamp/devops-stack/pull/314[#314] (https://github.com/mcanevet[mcanevet])
+* Merge keycloak-operator and keycloak Applications https://github.com/camptocamp/devops-stack/pull/316[#316] (https://github.com/mcanevet[mcanevet])
+* Enable Traefik access logs https://github.com/camptocamp/devops-stack/pull/321[#321] (https://github.com/mcanevet[mcanevet])
+* [k3os-libvirt] Adding support RAM sizing https://github.com/camptocamp/devops-stack/pull/328[#328] (https://github.com/pburgisser[pburgisser])
+* Enable minio metrics https://github.com/camptocamp/devops-stack/pull/330[#330] (https://github.com/mcanevet[mcanevet])
+* Enable persistence for minio https://github.com/camptocamp/devops-stack/pull/333[#333] (https://github.com/mcanevet[mcanevet])
+* Enable minio by default for k3s/k3os https://github.com/camptocamp/devops-stack/pull/334[#334] (https://github.com/mcanevet[mcanevet])
+* Create bucket for loki https://github.com/camptocamp/devops-stack/pull/335[#335] (https://github.com/mcanevet[mcanevet])
+* Add support for AKS https://github.com/camptocamp/devops-stack/pull/337[#337] (https://github.com/mcanevet[mcanevet])
+* Allow to specify more than just values in extra apps' helm https://github.com/camptocamp/devops-stack/pull/341[#341] (https://github.com/mcanevet[mcanevet])
+* Use a secret for ArgoCD's OIDC's client secret https://github.com/camptocamp/devops-stack/pull/342[#342] (https://github.com/mcanevet[mcanevet])
+* Add Azure DNS label annotation to Traefik's Load balancer https://github.com/camptocamp/devops-stack/pull/344[#344] (https://github.com/mcanevet[mcanevet])
 
 *New applications:*
 
-* Add metrics-server application https://github.com/camptocamp/camptocamp-devops-stack/pull/308[#308] (https://github.com/raphink[raphink])
+* Add metrics-server application https://github.com/camptocamp/devops-stack/pull/308[#308] (https://github.com/raphink[raphink])
 
 *Upgraded applications:*
 
-* Upgrade traefik helm chart version https://github.com/camptocamp/camptocamp-devops-stack/pull/321[#321] (https://github.com/mcanevet[mcanevet])
+* Upgrade traefik helm chart version https://github.com/camptocamp/devops-stack/pull/321[#321] (https://github.com/mcanevet[mcanevet])
 
 *Fixed bugs:*
 
-* Add missing dependencies pining https://github.com/camptocamp/camptocamp-devops-stack/pull/327[#327] (https://github.com/mcanevet[mcanevet])
-* Reduce minio memory requests https://github.com/camptocamp/camptocamp-devops-stack/pull/331[#331] (https://github.com/mcanevet[mcanevet])
-* Don't declare minio values if not enabled https://github.com/camptocamp/camptocamp-devops-stack/pull/332[#332] (https://github.com/mcanevet[mcanevet])
-* Use kube admin config for AKS https://github.com/camptocamp/camptocamp-devops-stack/pull/343[#343] (https://github.com/mcanevet[mcanevet])
+* Add missing dependencies pining https://github.com/camptocamp/devops-stack/pull/327[#327] (https://github.com/mcanevet[mcanevet])
+* Reduce minio memory requests https://github.com/camptocamp/devops-stack/pull/331[#331] (https://github.com/mcanevet[mcanevet])
+* Don't declare minio values if not enabled https://github.com/camptocamp/devops-stack/pull/332[#332] (https://github.com/mcanevet[mcanevet])
+* Use kube admin config for AKS https://github.com/camptocamp/devops-stack/pull/343[#343] (https://github.com/mcanevet[mcanevet])
 
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.15.0[0.15.0] (2020-11-26)
+== https://github.com/camptocamp/devops-stack/tree/v0.15.0[0.15.0] (2020-11-26)
 
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.14.2...v0.15.0[Full Changelog]
+https://github.com/camptocamp/devops-stack/compare/v0.14.2...v0.15.0[Full Changelog]
 
 *Implemented enhancements:*
 
-* Mutualize most configuration https://github.com/camptocamp/camptocamp-devops-stack/pull/310[#310] (https://github.com/mcanevet[mcanevet])
-* Configure Applications to use Keycloak https://github.com/camptocamp/camptocamp-devops-stack/pull/312[#312] (https://github.com/mcanevet[mcanevet])
+* Mutualize most configuration https://github.com/camptocamp/devops-stack/pull/310[#310] (https://github.com/mcanevet[mcanevet])
+* Configure Applications to use Keycloak https://github.com/camptocamp/devops-stack/pull/312[#312] (https://github.com/mcanevet[mcanevet])
 
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.14.2[0.14.2] (2020-11-26)
+== https://github.com/camptocamp/devops-stack/tree/v0.14.2[0.14.2] (2020-11-26)
 
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.14.1...v0.14.2[Full Changelog]
+https://github.com/camptocamp/devops-stack/compare/v0.14.1...v0.14.2[Full Changelog]
 
 *Fixed bugs:*
 
-* Fix cognito groups https://github.com/camptocamp/camptocamp-devops-stack/pull/307[#307] (https://github.com/mcanevet[mcanevet])
-* Disable ArgoCD's admin user for EKS https://github.com/camptocamp/camptocamp-devops-stack/pull/309[#309] (https://github.com/mcanevet[mcanevet])
+* Fix cognito groups https://github.com/camptocamp/devops-stack/pull/307[#307] (https://github.com/mcanevet[mcanevet])
+* Disable ArgoCD's admin user for EKS https://github.com/camptocamp/devops-stack/pull/309[#309] (https://github.com/mcanevet[mcanevet])
 
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.14.1[0.14.1] (2020-11-25)
+== https://github.com/camptocamp/devops-stack/tree/v0.14.1[0.14.1] (2020-11-25)
 
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.14.0...v0.14.1[Full Changelog]
-
-*Fixed bugs:*
-
-* Fix IRSA for loki https://github.com/camptocamp/camptocamp-devops-stack/pull/306[#306] (https://github.com/mcanevet[mcanevet])
-
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.14.0[0.14.0] (2020-11-25)
-
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.13.0...v0.14.0[Full Changelog]
-
-*Implemented enhancements:*
-
-* Use token in EKS' kubeconfig https://github.com/camptocamp/camptocamp-devops-stack/pull/298[#298] (https://github.com/mcanevet[mcanevet])
-* Rename loki Application to loki-stack and deploys it in its own namespace https://github.com/camptocamp/camptocamp-devops-stack/pull/300[#300] (https://github.com/mcanevet[mcanevet])
-* Explicitly use "set" directive in shell scripts https://github.com/camptocamp/camptocamp-devops-stack/pull/302[#302] (https://github.com/mcanevet[mcanevet])
-* Move common app of apps values in a template https://github.com/camptocamp/camptocamp-devops-stack/pull/303[#303] (https://github.com/mcanevet[mcanevet])
-* Allow to deploy additional applications https://github.com/camptocamp/camptocamp-devops-stack/pull/304[#304] (https://github.com/mcanevet[mcanevet])
-
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.13.0[0.13.0] (2020-11-24)
-
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.12.0...v0.13.0[Full Changelog]
-
-*Implemented enhancements:*
-
-* Allow to override Applications' syncPolicy https://github.com/camptocamp/camptocamp-devops-stack/pull/292[#292] (https://github.com/mcanevet[mcanevet])
-* Add common outputs to modules https://github.com/camptocamp/camptocamp-devops-stack/pull/293[#293] (https://github.com/mcanevet[mcanevet])
-* Apply Applications object to have a more accurate diff on PR/MR https://github.com/camptocamp/camptocamp-devops-stack/pull/297[#297] (https://github.com/mcanevet[mcanevet])
+https://github.com/camptocamp/devops-stack/compare/v0.14.0...v0.14.1[Full Changelog]
 
 *Fixed bugs:*
 
-* Sync app-of-apps and apps values.yaml https://github.com/camptocamp/camptocamp-devops-stack/pull/291[#291] (https://github.com/mcanevet[mcanevet])
-* Use planned outputs instead of outputs for dry-run https://github.com/camptocamp/camptocamp-devops-stack/pull/294[#294] (https://github.com/mcanevet[mcanevet])
-* Fix target branch for dry-run in tests https://github.com/camptocamp/camptocamp-devops-stack/pull/295[#295] (https://github.com/mcanevet[mcanevet])
+* Fix IRSA for loki https://github.com/camptocamp/devops-stack/pull/306[#306] (https://github.com/mcanevet[mcanevet])
 
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.12.0[0.12.0] (2020-11-24)
+== https://github.com/camptocamp/devops-stack/tree/v0.14.0[0.14.0] (2020-11-25)
 
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.11.0...v0.12.0[Full Changelog]
+https://github.com/camptocamp/devops-stack/compare/v0.13.0...v0.14.0[Full Changelog]
 
 *Implemented enhancements:*
 
-* Rename test project from k3s-docker-demo-app to k3s-docker https://github.com/camptocamp/camptocamp-devops-stack/pull/280[#280] (https://github.com/mcanevet[mcanevet])
-* Add k3os-libvirt test project https://github.com/camptocamp/camptocamp-devops-stack/pull/281[#281] (https://github.com/mcanevet[mcanevet])
-* Use ubuntu-18.04 instead of ubuntu-latest for pipeline https://github.com/camptocamp/camptocamp-devops-stack/pull/282[#282] (https://github.com/mcanevet[mcanevet])
-* Add strategy to github actions workflow https://github.com/camptocamp/camptocamp-devops-stack/pull/283[#283] (https://github.com/mcanevet[mcanevet])
-* Use camptocamp/k3os/libvirt 0.2.4 https://github.com/camptocamp/camptocamp-devops-stack/pull/284[#284] (https://github.com/mcanevet[mcanevet])
-* Deploy ArgoCD using argo-helm module https://github.com/camptocamp/camptocamp-devops-stack/pull/285[#285] (https://github.com/mcanevet[mcanevet])
-* Create ArgoCD's pipeline token with Terraform https://github.com/camptocamp/camptocamp-devops-stack/pull/286[#286] (https://github.com/mcanevet[mcanevet])
-* Generate JWT token in Terraform https://github.com/camptocamp/camptocamp-devops-stack/pull/287[#287] (https://github.com/mcanevet[mcanevet])
-* Get ARGOCD_AUTH_TOKEN and KUBECONFIG from terraform outputs https://github.com/camptocamp/camptocamp-devops-stack/pull/288[#288] (https://github.com/mcanevet[mcanevet])
-* Don't depend on jq https://github.com/camptocamp/camptocamp-devops-stack/pull/289[#289] (https://github.com/mcanevet[mcanevet])
+* Use token in EKS' kubeconfig https://github.com/camptocamp/devops-stack/pull/298[#298] (https://github.com/mcanevet[mcanevet])
+* Rename loki Application to loki-stack and deploys it in its own namespace https://github.com/camptocamp/devops-stack/pull/300[#300] (https://github.com/mcanevet[mcanevet])
+* Explicitly use "set" directive in shell scripts https://github.com/camptocamp/devops-stack/pull/302[#302] (https://github.com/mcanevet[mcanevet])
+* Move common app of apps values in a template https://github.com/camptocamp/devops-stack/pull/303[#303] (https://github.com/mcanevet[mcanevet])
+* Allow to deploy additional applications https://github.com/camptocamp/devops-stack/pull/304[#304] (https://github.com/mcanevet[mcanevet])
+
+== https://github.com/camptocamp/devops-stack/tree/v0.13.0[0.13.0] (2020-11-24)
+
+https://github.com/camptocamp/devops-stack/compare/v0.12.0...v0.13.0[Full Changelog]
+
+*Implemented enhancements:*
+
+* Allow to override Applications' syncPolicy https://github.com/camptocamp/devops-stack/pull/292[#292] (https://github.com/mcanevet[mcanevet])
+* Add common outputs to modules https://github.com/camptocamp/devops-stack/pull/293[#293] (https://github.com/mcanevet[mcanevet])
+* Apply Applications object to have a more accurate diff on PR/MR https://github.com/camptocamp/devops-stack/pull/297[#297] (https://github.com/mcanevet[mcanevet])
+
+*Fixed bugs:*
+
+* Sync app-of-apps and apps values.yaml https://github.com/camptocamp/devops-stack/pull/291[#291] (https://github.com/mcanevet[mcanevet])
+* Use planned outputs instead of outputs for dry-run https://github.com/camptocamp/devops-stack/pull/294[#294] (https://github.com/mcanevet[mcanevet])
+* Fix target branch for dry-run in tests https://github.com/camptocamp/devops-stack/pull/295[#295] (https://github.com/mcanevet[mcanevet])
+
+== https://github.com/camptocamp/devops-stack/tree/v0.12.0[0.12.0] (2020-11-24)
+
+https://github.com/camptocamp/devops-stack/compare/v0.11.0...v0.12.0[Full Changelog]
+
+*Implemented enhancements:*
+
+* Rename test project from k3s-docker-demo-app to k3s-docker https://github.com/camptocamp/devops-stack/pull/280[#280] (https://github.com/mcanevet[mcanevet])
+* Add k3os-libvirt test project https://github.com/camptocamp/devops-stack/pull/281[#281] (https://github.com/mcanevet[mcanevet])
+* Use ubuntu-18.04 instead of ubuntu-latest for pipeline https://github.com/camptocamp/devops-stack/pull/282[#282] (https://github.com/mcanevet[mcanevet])
+* Add strategy to github actions workflow https://github.com/camptocamp/devops-stack/pull/283[#283] (https://github.com/mcanevet[mcanevet])
+* Use camptocamp/k3os/libvirt 0.2.4 https://github.com/camptocamp/devops-stack/pull/284[#284] (https://github.com/mcanevet[mcanevet])
+* Deploy ArgoCD using argo-helm module https://github.com/camptocamp/devops-stack/pull/285[#285] (https://github.com/mcanevet[mcanevet])
+* Create ArgoCD's pipeline token with Terraform https://github.com/camptocamp/devops-stack/pull/286[#286] (https://github.com/mcanevet[mcanevet])
+* Generate JWT token in Terraform https://github.com/camptocamp/devops-stack/pull/287[#287] (https://github.com/mcanevet[mcanevet])
+* Get ARGOCD_AUTH_TOKEN and KUBECONFIG from terraform outputs https://github.com/camptocamp/devops-stack/pull/288[#288] (https://github.com/mcanevet[mcanevet])
+* Don't depend on jq https://github.com/camptocamp/devops-stack/pull/289[#289] (https://github.com/mcanevet[mcanevet])
 
 *New applications:*
 
-* Enable minio https://github.com/camptocamp/camptocamp-devops-stack/pull/277[#277] (https://github.com/pburgisser[pburgisser])
+* Enable minio https://github.com/camptocamp/devops-stack/pull/277[#277] (https://github.com/pburgisser[pburgisser])
 
 *Fixed bugs:*
 
-* Fixing k3o https://github.com/camptocamp/camptocamp-devops-stack/pull/274[#274] (https://github.com/pburgisser[pburgisser])
+* Fixing k3o https://github.com/camptocamp/devops-stack/pull/274[#274] (https://github.com/pburgisser[pburgisser])
 
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.11.0[0.11.0] (2020-11-19)
+== https://github.com/camptocamp/devops-stack/tree/v0.11.0[0.11.0] (2020-11-19)
 
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.10.1...v0.11.0[Full Changelog]
+https://github.com/camptocamp/devops-stack/compare/v0.10.1...v0.11.0[Full Changelog]
 
 *Implemented enhancements:*
 
-* [eks-aws] Add support for creating a private NLB https://github.com/camptocamp/camptocamp-devops-stack/pull/268[#268] (https://github.com/ckaenzig[ckaenzig])
-* [pipeline] Variabilize version in gitlab-ci pipeline https://github.com/camptocamp/camptocamp-devops-stack/pull/269[#269] (https://github.com/mcanevet[mcanevet])
+* [eks-aws] Add support for creating a private NLB https://github.com/camptocamp/devops-stack/pull/268[#268] (https://github.com/ckaenzig[ckaenzig])
+* [pipeline] Variabilize version in gitlab-ci pipeline https://github.com/camptocamp/devops-stack/pull/269[#269] (https://github.com/mcanevet[mcanevet])
 
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.10.1[0.10.1] (2020-11-18)
+== https://github.com/camptocamp/devops-stack/tree/v0.10.1[0.10.1] (2020-11-18)
 
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.10.0...v0.10.1[Full Changelog]
+https://github.com/camptocamp/devops-stack/compare/v0.10.0...v0.10.1[Full Changelog]
 
 *Fixed bugs:*
 
-* Install jq and helm in gitlab-ci pipeline https://github.com/camptocamp/camptocamp-devops-stack/pull/266[#266] (https://github.com/mcanevet[mcanevet])
+* Install jq and helm in gitlab-ci pipeline https://github.com/camptocamp/devops-stack/pull/266[#266] (https://github.com/mcanevet[mcanevet])
 
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.10.0[0.10.0] (2020-11-18)
+== https://github.com/camptocamp/devops-stack/tree/v0.10.0[0.10.0] (2020-11-18)
 
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.9.0...v0.10.0[Full Changelog]
+https://github.com/camptocamp/devops-stack/compare/v0.9.0...v0.10.0[Full Changelog]
 
 *Breaking changes:*
 
@@ -458,249 +458,249 @@ https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.9.0...v0.10.0[F
 
 *Implemented enhancements:*
 
-* Use diff as differ https://github.com/camptocamp/camptocamp-devops-stack/pull/258[#258] (https://github.com/mcanevet[mcanevet])
-* Apply modifications on pull requests in pipeline https://github.com/camptocamp/camptocamp-devops-stack/pull/262[#262] (https://github.com/mcanevet[mcanevet])
+* Use diff as differ https://github.com/camptocamp/devops-stack/pull/258[#258] (https://github.com/mcanevet[mcanevet])
+* Apply modifications on pull requests in pipeline https://github.com/camptocamp/devops-stack/pull/262[#262] (https://github.com/mcanevet[mcanevet])
 
 *Upgraded applications:*
 
-* Upgrade kube-prometheus-stack to v12.0.1 https://github.com/camptocamp/camptocamp-devops-stack/pull/256[#256] (https://github.com/mcanevet[mcanevet])
+* Upgrade kube-prometheus-stack to v12.0.1 https://github.com/camptocamp/devops-stack/pull/256[#256] (https://github.com/mcanevet[mcanevet])
 
 *Documentation:*
 
-* Document how to release a new version https://github.com/camptocamp/camptocamp-devops-stack/pull/257[#257] (https://github.com/mcanevet[mcanevet])
-* Fix release documentation https://github.com/camptocamp/camptocamp-devops-stack/pull/265[#265] (https://github.com/mcanevet[mcanevet])
+* Document how to release a new version https://github.com/camptocamp/devops-stack/pull/257[#257] (https://github.com/mcanevet[mcanevet])
+* Fix release documentation https://github.com/camptocamp/devops-stack/pull/265[#265] (https://github.com/mcanevet[mcanevet])
 
 *Fixed bugs:*
 
-* Fix devops-stack version in gitlab pipeline and example https://github.com/camptocamp/camptocamp-devops-stack/pull/255[#255] (https://github.com/mcanevet[mcanevet])
-* Replace cognito_user_pool_domain resource with module argument https://github.com/camptocamp/camptocamp-devops-stack/pull/263[#263] (https://github.com/ckaenzig[ckaenzig])
-* Fix eks-aws example https://github.com/camptocamp/camptocamp-devops-stack/pull/264[#264] (https://github.com/mcanevet[mcanevet])
+* Fix devops-stack version in gitlab pipeline and example https://github.com/camptocamp/devops-stack/pull/255[#255] (https://github.com/mcanevet[mcanevet])
+* Replace cognito_user_pool_domain resource with module argument https://github.com/camptocamp/devops-stack/pull/263[#263] (https://github.com/ckaenzig[ckaenzig])
+* Fix eks-aws example https://github.com/camptocamp/devops-stack/pull/264[#264] (https://github.com/mcanevet[mcanevet])
 
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.9.0[0.9.0] (2020-11-17)
+== https://github.com/camptocamp/devops-stack/tree/v0.9.0[0.9.0] (2020-11-17)
 
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.8.0...v0.9.0[Full Changelog]
+https://github.com/camptocamp/devops-stack/compare/v0.8.0...v0.9.0[Full Changelog]
 
 *Implemented enhancements:*
 
-* Add OAuth to Grafana for EKS https://github.com/camptocamp/camptocamp-devops-stack/pull/230[#230] (https://github.com/raphink[raphink])
-* Merge prometheus-operator and cluster-monitoring Applications into kube-prometheus-stack https://github.com/camptocamp/camptocamp-devops-stack/pull/237[#237] (https://github.com/mcanevet[mcanevet])
-* Remove namespaces Application https://github.com/camptocamp/camptocamp-devops-stack/pull/238[#238] (https://github.com/mcanevet[mcanevet])
-* Make pipeline less verbose https://github.com/camptocamp/camptocamp-devops-stack/pull/240[#240] (https://github.com/mcanevet[mcanevet])
-* Update k3s/k3os modules to support local storage https://github.com/camptocamp/camptocamp-devops-stack/pull/245[#245] (https://github.com/mcanevet[mcanevet])
+* Add OAuth to Grafana for EKS https://github.com/camptocamp/devops-stack/pull/230[#230] (https://github.com/raphink[raphink])
+* Merge prometheus-operator and cluster-monitoring Applications into kube-prometheus-stack https://github.com/camptocamp/devops-stack/pull/237[#237] (https://github.com/mcanevet[mcanevet])
+* Remove namespaces Application https://github.com/camptocamp/devops-stack/pull/238[#238] (https://github.com/mcanevet[mcanevet])
+* Make pipeline less verbose https://github.com/camptocamp/devops-stack/pull/240[#240] (https://github.com/mcanevet[mcanevet])
+* Update k3s/k3os modules to support local storage https://github.com/camptocamp/devops-stack/pull/245[#245] (https://github.com/mcanevet[mcanevet])
 
 *Upgraded applications:*
 
-* Upgrade kube-prometheus-stack https://github.com/camptocamp/camptocamp-devops-stack/pull/229[#229] (https://github.com/mcanevet[mcanevet])
-* Upgrade argocd chart to 2.9.5 https://github.com/camptocamp/camptocamp-devops-stack/pull/233[#233] (https://github.com/mcanevet[mcanevet])
-* Upgrade cert-manager to 1.0.4 https://github.com/camptocamp/camptocamp-devops-stack/pull/239[#239] (https://github.com/mcanevet[mcanevet])
-* Upgrade Traefik chart to 9.10.1 https://github.com/camptocamp/camptocamp-devops-stack/pull/241[#241] (https://github.com/mcanevet[mcanevet])
-* Upgrade k3s to v1.18.12-k3s1 https://github.com/camptocamp/camptocamp-devops-stack/pull/246[#246] (https://github.com/mcanevet[mcanevet])
+* Upgrade kube-prometheus-stack https://github.com/camptocamp/devops-stack/pull/229[#229] (https://github.com/mcanevet[mcanevet])
+* Upgrade argocd chart to 2.9.5 https://github.com/camptocamp/devops-stack/pull/233[#233] (https://github.com/mcanevet[mcanevet])
+* Upgrade cert-manager to 1.0.4 https://github.com/camptocamp/devops-stack/pull/239[#239] (https://github.com/mcanevet[mcanevet])
+* Upgrade Traefik chart to 9.10.1 https://github.com/camptocamp/devops-stack/pull/241[#241] (https://github.com/mcanevet[mcanevet])
+* Upgrade k3s to v1.18.12-k3s1 https://github.com/camptocamp/devops-stack/pull/246[#246] (https://github.com/mcanevet[mcanevet])
 
 *New applications:*
 
-* Deploy OLM https://github.com/camptocamp/camptocamp-devops-stack/pull/243[#243] (https://github.com/mcanevet[mcanevet])
-* Deploy Keycloak Operator https://github.com/camptocamp/camptocamp-devops-stack/pull/247[#247] (https://github.com/mcanevet[mcanevet])
-* Deploy Keycloak https://github.com/camptocamp/camptocamp-devops-stack/pull/250[#250] (https://github.com/mcanevet[mcanevet])
+* Deploy OLM https://github.com/camptocamp/devops-stack/pull/243[#243] (https://github.com/mcanevet[mcanevet])
+* Deploy Keycloak Operator https://github.com/camptocamp/devops-stack/pull/247[#247] (https://github.com/mcanevet[mcanevet])
+* Deploy Keycloak https://github.com/camptocamp/devops-stack/pull/250[#250] (https://github.com/mcanevet[mcanevet])
 
 *Fixed bugs:*
 
-* Enable ArgoCD metrics everywhere https://github.com/camptocamp/camptocamp-devops-stack/pull/231[#231] (https://github.com/mcanevet[mcanevet])
-* Manage app of apps with itself https://github.com/camptocamp/camptocamp-devops-stack/pull/232[#232] (https://github.com/mcanevet[mcanevet])
-* Fix bootstrap https://github.com/camptocamp/camptocamp-devops-stack/pull/235[#235] (https://github.com/mcanevet[mcanevet])
-* Fix bootstrap https://github.com/camptocamp/camptocamp-devops-stack/pull/236[#236] (https://github.com/mcanevet[mcanevet])
-* Use a dedicated secret for ingress tls certs https://github.com/camptocamp/camptocamp-devops-stack/pull/242[#242] (https://github.com/raphink[raphink])
-* Update prometheus datasource to use kube-prometheus-stack svc https://github.com/camptocamp/camptocamp-devops-stack/pull/244[#244] (https://github.com/raphink[raphink])
+* Enable ArgoCD metrics everywhere https://github.com/camptocamp/devops-stack/pull/231[#231] (https://github.com/mcanevet[mcanevet])
+* Manage app of apps with itself https://github.com/camptocamp/devops-stack/pull/232[#232] (https://github.com/mcanevet[mcanevet])
+* Fix bootstrap https://github.com/camptocamp/devops-stack/pull/235[#235] (https://github.com/mcanevet[mcanevet])
+* Fix bootstrap https://github.com/camptocamp/devops-stack/pull/236[#236] (https://github.com/mcanevet[mcanevet])
+* Use a dedicated secret for ingress tls certs https://github.com/camptocamp/devops-stack/pull/242[#242] (https://github.com/raphink[raphink])
+* Update prometheus datasource to use kube-prometheus-stack svc https://github.com/camptocamp/devops-stack/pull/244[#244] (https://github.com/raphink[raphink])
 
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.8.0[0.8.0] (2020-11-12)
+== https://github.com/camptocamp/devops-stack/tree/v0.8.0[0.8.0] (2020-11-12)
 
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.7.0...v0.8.0[Full Changelog]
+https://github.com/camptocamp/devops-stack/compare/v0.7.0...v0.8.0[Full Changelog]
 
 *Implemented enhancements:*
 
-* Add pipeline for Gitlab CI https://github.com/camptocamp/camptocamp-devops-stack/pull/203[#203] (https://github.com/mcanevet[mcanevet])
-* Add Gitlab CI pipeline in examples https://github.com/camptocamp/camptocamp-devops-stack/pull/204[#204] (https://github.com/mcanevet[mcanevet])
-* Allow to manipulate kubeconfig https://github.com/camptocamp/camptocamp-devops-stack/pull/205[#205] (https://github.com/raphink[raphink])
-* Add example for EKS https://github.com/camptocamp/camptocamp-devops-stack/pull/206[#206] (https://github.com/mcanevet[mcanevet])
-* Use TF_WORKSPACE environment variable https://github.com/camptocamp/camptocamp-devops-stack/pull/207[#207] (https://github.com/mcanevet[mcanevet])
-* Add kubeconfig output to every modules https://github.com/camptocamp/camptocamp-devops-stack/pull/208[#208] (https://github.com/mcanevet[mcanevet])
-* Add ArgoCD app diff in the pipeline https://github.com/camptocamp/camptocamp-devops-stack/pull/215[#215] https://github.com/camptocamp/camptocamp-devops-stack/pull/216[#216] (https://github.com/mcanevet[mcanevet])
+* Add pipeline for Gitlab CI https://github.com/camptocamp/devops-stack/pull/203[#203] (https://github.com/mcanevet[mcanevet])
+* Add Gitlab CI pipeline in examples https://github.com/camptocamp/devops-stack/pull/204[#204] (https://github.com/mcanevet[mcanevet])
+* Allow to manipulate kubeconfig https://github.com/camptocamp/devops-stack/pull/205[#205] (https://github.com/raphink[raphink])
+* Add example for EKS https://github.com/camptocamp/devops-stack/pull/206[#206] (https://github.com/mcanevet[mcanevet])
+* Use TF_WORKSPACE environment variable https://github.com/camptocamp/devops-stack/pull/207[#207] (https://github.com/mcanevet[mcanevet])
+* Add kubeconfig output to every modules https://github.com/camptocamp/devops-stack/pull/208[#208] (https://github.com/mcanevet[mcanevet])
+* Add ArgoCD app diff in the pipeline https://github.com/camptocamp/devops-stack/pull/215[#215] https://github.com/camptocamp/devops-stack/pull/216[#216] (https://github.com/mcanevet[mcanevet])
 
 *Upgraded applications:*
 
-* Upgrade Loki to 2.0.2 https://github.com/camptocamp/camptocamp-devops-stack/pull/224[#224] (https://github.com/mcanevet[mcanevet])
+* Upgrade Loki to 2.0.2 https://github.com/camptocamp/devops-stack/pull/224[#224] (https://github.com/mcanevet[mcanevet])
 
 *New applications:*
 
-* Add efs-provisioner to eks-aws module https://github.com/camptocamp/camptocamp-devops-stack/pull/222[#222] (https://github.com/raphink[raphink])
+* Add efs-provisioner to eks-aws module https://github.com/camptocamp/devops-stack/pull/222[#222] (https://github.com/raphink[raphink])
 
 *Fixed bugs:*
 
-* Fix cert-manager deployment https://github.com/camptocamp/camptocamp-devops-stack/pull/209[#209] (https://github.com/mcanevet[mcanevet])
-* Rename prometheus port and add web port again https://github.com/camptocamp/camptocamp-devops-stack/pull/210[#210] (https://github.com/raphink[raphink])
-* Disable Vault and secrets store CSI driver for now https://github.com/camptocamp/camptocamp-devops-stack/pull/212[#212] (https://github.com/mcanevet[mcanevet])
-* Fix race condition when updating kubeconfig https://github.com/camptocamp/camptocamp-devops-stack/pull/225[#225] (https://github.com/mcanevet[mcanevet])
-* Don't run plan with detailed-exit-code https://github.com/camptocamp/camptocamp-devops-stack/pull/226[#226] (https://github.com/mcanevet[mcanevet])
+* Fix cert-manager deployment https://github.com/camptocamp/devops-stack/pull/209[#209] (https://github.com/mcanevet[mcanevet])
+* Rename prometheus port and add web port again https://github.com/camptocamp/devops-stack/pull/210[#210] (https://github.com/raphink[raphink])
+* Disable Vault and secrets store CSI driver for now https://github.com/camptocamp/devops-stack/pull/212[#212] (https://github.com/mcanevet[mcanevet])
+* Fix race condition when updating kubeconfig https://github.com/camptocamp/devops-stack/pull/225[#225] (https://github.com/mcanevet[mcanevet])
+* Don't run plan with detailed-exit-code https://github.com/camptocamp/devops-stack/pull/226[#226] (https://github.com/mcanevet[mcanevet])
 
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.7.0[0.7.0] (2020-11-05)
+== https://github.com/camptocamp/devops-stack/tree/v0.7.0[0.7.0] (2020-11-05)
 
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.6.0...v0.7.0[Full Changelog]
+https://github.com/camptocamp/devops-stack/compare/v0.6.0...v0.7.0[Full Changelog]
 
 *Implemented enhancements:*
 
-* Add provision.sh and destroy.sh scripts https://github.com/camptocamp/camptocamp-devops-stack/pull/170[#170] (https://github.com/mcanevet[mcanevet])
-* Remove dependency on Docker https://github.com/camptocamp/camptocamp-devops-stack/pull/174[#174] (https://github.com/mcanevet[mcanevet])
-* Add support for libvirt https://github.com/camptocamp/camptocamp-devops-stack/pull/175[#175] (https://github.com/mcanevet[mcanevet])
-* Add example for libvirt https://github.com/camptocamp/camptocamp-devops-stack/pull/176[#176] (https://github.com/mcanevet[mcanevet])
-* Improve GitHub actions workflow https://github.com/camptocamp/camptocamp-devops-stack/pull/182[#182] (https://github.com/mcanevet[mcanevet])
-* Add support for EKS https://github.com/camptocamp/camptocamp-devops-stack/pull/184[#184] (https://github.com/mcanevet[mcanevet])
-* Move distro specific configuration to distro's values.yaml https://github.com/camptocamp/camptocamp-devops-stack/pull/187[#187] (https://github.com/mcanevet[mcanevet])
-* Allow to override app of apps parameters https://github.com/camptocamp/camptocamp-devops-stack/pull/190[#190] (https://github.com/mcanevet[mcanevet])
-* Create tests and use it for CI instead of examples https://github.com/camptocamp/camptocamp-devops-stack/pull/199[#199] (https://github.com/mcanevet[mcanevet])
+* Add provision.sh and destroy.sh scripts https://github.com/camptocamp/devops-stack/pull/170[#170] (https://github.com/mcanevet[mcanevet])
+* Remove dependency on Docker https://github.com/camptocamp/devops-stack/pull/174[#174] (https://github.com/mcanevet[mcanevet])
+* Add support for libvirt https://github.com/camptocamp/devops-stack/pull/175[#175] (https://github.com/mcanevet[mcanevet])
+* Add example for libvirt https://github.com/camptocamp/devops-stack/pull/176[#176] (https://github.com/mcanevet[mcanevet])
+* Improve GitHub actions workflow https://github.com/camptocamp/devops-stack/pull/182[#182] (https://github.com/mcanevet[mcanevet])
+* Add support for EKS https://github.com/camptocamp/devops-stack/pull/184[#184] (https://github.com/mcanevet[mcanevet])
+* Move distro specific configuration to distro's values.yaml https://github.com/camptocamp/devops-stack/pull/187[#187] (https://github.com/mcanevet[mcanevet])
+* Allow to override app of apps parameters https://github.com/camptocamp/devops-stack/pull/190[#190] (https://github.com/mcanevet[mcanevet])
+* Create tests and use it for CI instead of examples https://github.com/camptocamp/devops-stack/pull/199[#199] (https://github.com/mcanevet[mcanevet])
 
 *Upgraded applications:*
 
-* Use k3s v1.18 https://github.com/camptocamp/camptocamp-devops-stack/pull/189[#189] (https://github.com/mcanevet[mcanevet])
+* Use k3s v1.18 https://github.com/camptocamp/devops-stack/pull/189[#189] (https://github.com/mcanevet[mcanevet])
 
 *Fixed bugs:*
 
-* Don't validate certificate when using helm provider https://github.com/camptocamp/camptocamp-devops-stack/pull/171[#171] (https://github.com/mcanevet[mcanevet])
-* Fix .gitignore https://github.com/camptocamp/camptocamp-devops-stack/pull/172[#172] (https://github.com/mcanevet[mcanevet])
-* Fix scripts https://github.com/camptocamp/camptocamp-devops-stack/pull/173[#173] (https://github.com/mcanevet[mcanevet])
-* Don't manage app of apps with itself https://github.com/camptocamp/camptocamp-devops-stack/pull/179[#179] (https://github.com/mcanevet[mcanevet])
-* Fix Terraform workspace create https://github.com/camptocamp/camptocamp-devops-stack/pull/180[#180] (https://github.com/mcanevet[mcanevet])
-* Correct deprecation warning during Antora build https://github.com/camptocamp/camptocamp-devops-stack/pull/185[#185] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
-* Fix Cognito zone https://github.com/camptocamp/camptocamp-devops-stack/pull/191[#191] (https://github.com/mcanevet[mcanevet])
-* Configure helm provider to not load config file https://github.com/camptocamp/camptocamp-devops-stack/pull/194[#194] (https://github.com/mcanevet[mcanevet])
-* Use prod letsencrypt issuer https://github.com/camptocamp/camptocamp-devops-stack/pull/197[#197] (https://github.com/raphink[raphink])
-* Don't use kubernetes-alpha provider https://github.com/camptocamp/camptocamp-devops-stack/pull/198[#198] (https://github.com/mcanevet[mcanevet])
+* Don't validate certificate when using helm provider https://github.com/camptocamp/devops-stack/pull/171[#171] (https://github.com/mcanevet[mcanevet])
+* Fix .gitignore https://github.com/camptocamp/devops-stack/pull/172[#172] (https://github.com/mcanevet[mcanevet])
+* Fix scripts https://github.com/camptocamp/devops-stack/pull/173[#173] (https://github.com/mcanevet[mcanevet])
+* Don't manage app of apps with itself https://github.com/camptocamp/devops-stack/pull/179[#179] (https://github.com/mcanevet[mcanevet])
+* Fix Terraform workspace create https://github.com/camptocamp/devops-stack/pull/180[#180] (https://github.com/mcanevet[mcanevet])
+* Correct deprecation warning during Antora build https://github.com/camptocamp/devops-stack/pull/185[#185] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
+* Fix Cognito zone https://github.com/camptocamp/devops-stack/pull/191[#191] (https://github.com/mcanevet[mcanevet])
+* Configure helm provider to not load config file https://github.com/camptocamp/devops-stack/pull/194[#194] (https://github.com/mcanevet[mcanevet])
+* Use prod letsencrypt issuer https://github.com/camptocamp/devops-stack/pull/197[#197] (https://github.com/raphink[raphink])
+* Don't use kubernetes-alpha provider https://github.com/camptocamp/devops-stack/pull/198[#198] (https://github.com/mcanevet[mcanevet])
 
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.6.0[0.6.0] (2020-10-28)
+== https://github.com/camptocamp/devops-stack/tree/v0.6.0[0.6.0] (2020-10-28)
 
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.5.0...v0.6.0[Full Changelog]
+https://github.com/camptocamp/devops-stack/compare/v0.5.0...v0.6.0[Full Changelog]
 
 *Implemented enhancements:*
 
 * Allow to instantiate the DevOps Stack (https://github.com/mcanevet[mcanevet])
 
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.5.0[0.5.0] (2020-10-20)
+== https://github.com/camptocamp/devops-stack/tree/v0.5.0[0.5.0] (2020-10-20)
 
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.4.0...v0.5.0[Full Changelog]
+https://github.com/camptocamp/devops-stack/compare/v0.4.0...v0.5.0[Full Changelog]
 
 *Implemented enhancements:*
 
-* Allow to disable every application https://github.com/camptocamp/camptocamp-devops-stack/pull/123[#123] (https://github.com/mcanevet[mcanevet])
-* Pin docker provider version https://github.com/camptocamp/camptocamp-devops-stack/pull/125[#125] (https://github.com/mcanevet[mcanevet])
-* Fetch kubeconfig from regular path https://github.com/camptocamp/camptocamp-devops-stack/pull/127[#127] (https://github.com/mcanevet[mcanevet])
-* Always use current working dir in docker containers https://github.com/camptocamp/camptocamp-devops-stack/pull/130[#130] (https://github.com/mcanevet[mcanevet])
-* Use absolute path for ARTIFACTS_DIR https://github.com/camptocamp/camptocamp-devops-stack/pull/131[#131] (https://github.com/mcanevet[mcanevet])
-* Add abstraction to support for multiple distributions https://github.com/camptocamp/camptocamp-devops-stack/pull/134[#134] (https://github.com/mcanevet[mcanevet])
-* Factorize Docker common args in a variable https://github.com/camptocamp/camptocamp-devops-stack/pull/136[#136] (https://github.com/mcanevet[mcanevet])
-* Make get-kubeconfig distribution specific https://github.com/camptocamp/camptocamp-devops-stack/pull/141[#141] (https://github.com/mcanevet[mcanevet])
-* Make get-base-domain distribution specific https://github.com/camptocamp/camptocamp-devops-stack/pull/142[#142] (https://github.com/mcanevet[mcanevet])
-* Use terraform.tfstate instead of terraform.tfstate.json https://github.com/camptocamp/camptocamp-devops-stack/pull/143[#143] (https://github.com/mcanevet[mcanevet])
-* Remove dependency between get-kubeconfig.sh and get-base-domain.sh https://github.com/camptocamp/camptocamp-devops-stack/pull/145[#145] (https://github.com/mcanevet[mcanevet])
-* Don't use user's terraform plugin-cache dir https://github.com/camptocamp/camptocamp-devops-stack/pull/126[#126], https://github.com/camptocamp/camptocamp-devops-stack/pull/129[#129], https://github.com/camptocamp/camptocamp-devops-stack/pull/146[#146] and https://github.com/camptocamp/camptocamp-devops-stack/pull/147[#147] (https://github.com/mcanevet[mcanevet])
+* Allow to disable every application https://github.com/camptocamp/devops-stack/pull/123[#123] (https://github.com/mcanevet[mcanevet])
+* Pin docker provider version https://github.com/camptocamp/devops-stack/pull/125[#125] (https://github.com/mcanevet[mcanevet])
+* Fetch kubeconfig from regular path https://github.com/camptocamp/devops-stack/pull/127[#127] (https://github.com/mcanevet[mcanevet])
+* Always use current working dir in docker containers https://github.com/camptocamp/devops-stack/pull/130[#130] (https://github.com/mcanevet[mcanevet])
+* Use absolute path for ARTIFACTS_DIR https://github.com/camptocamp/devops-stack/pull/131[#131] (https://github.com/mcanevet[mcanevet])
+* Add abstraction to support for multiple distributions https://github.com/camptocamp/devops-stack/pull/134[#134] (https://github.com/mcanevet[mcanevet])
+* Factorize Docker common args in a variable https://github.com/camptocamp/devops-stack/pull/136[#136] (https://github.com/mcanevet[mcanevet])
+* Make get-kubeconfig distribution specific https://github.com/camptocamp/devops-stack/pull/141[#141] (https://github.com/mcanevet[mcanevet])
+* Make get-base-domain distribution specific https://github.com/camptocamp/devops-stack/pull/142[#142] (https://github.com/mcanevet[mcanevet])
+* Use terraform.tfstate instead of terraform.tfstate.json https://github.com/camptocamp/devops-stack/pull/143[#143] (https://github.com/mcanevet[mcanevet])
+* Remove dependency between get-kubeconfig.sh and get-base-domain.sh https://github.com/camptocamp/devops-stack/pull/145[#145] (https://github.com/mcanevet[mcanevet])
+* Don't use user's terraform plugin-cache dir https://github.com/camptocamp/devops-stack/pull/126[#126], https://github.com/camptocamp/devops-stack/pull/129[#129], https://github.com/camptocamp/devops-stack/pull/146[#146] and https://github.com/camptocamp/devops-stack/pull/147[#147] (https://github.com/mcanevet[mcanevet])
 
 *Documentation:*
 
-* Document how to write documentation in this project https://github.com/camptocamp/camptocamp-devops-stack/pull/122[#122] and https://github.com/camptocamp/camptocamp-devops-stack/pull/132[#132] (https://github.com/acampergue-camptocamp[acampergue-camptocamp]), closes https://github.com/camptocamp/camptocamp-devops-stack/issues/107[issue #107].
-* Add a link to the Github repo https://github.com/camptocamp/camptocamp-devops-stack/pull/138[#138] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
+* Document how to write documentation in this project https://github.com/camptocamp/devops-stack/pull/122[#122] and https://github.com/camptocamp/devops-stack/pull/132[#132] (https://github.com/acampergue-camptocamp[acampergue-camptocamp]), closes https://github.com/camptocamp/devops-stack/issues/107[issue #107].
+* Add a link to the Github repo https://github.com/camptocamp/devops-stack/pull/138[#138] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
 
 *Fixed bugs:*
 
-* Don't build and deploy the documentation on PR to master, since useless and might cause issues https://github.com/camptocamp/camptocamp-devops-stack/pull/128[#128] (https://github.com/acampergue-camptocamp[acampergue-camptocamp]), closes https://github.com/camptocamp/camptocamp-devops-stack/issues/124[issue #124]
-* Always use network mode host https://github.com/camptocamp/camptocamp-devops-stack/pull/133[#133] (https://github.com/mcanevet[mcanevet])
+* Don't build and deploy the documentation on PR to master, since useless and might cause issues https://github.com/camptocamp/devops-stack/pull/128[#128] (https://github.com/acampergue-camptocamp[acampergue-camptocamp]), closes https://github.com/camptocamp/devops-stack/issues/124[issue #124]
+* Always use network mode host https://github.com/camptocamp/devops-stack/pull/133[#133] (https://github.com/mcanevet[mcanevet])
 
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.4.0[0.4.0] (2020-10-10)
+== https://github.com/camptocamp/devops-stack/tree/v0.4.0[0.4.0] (2020-10-10)
 
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.3.0...v0.4.0[Full Changelog]
+https://github.com/camptocamp/devops-stack/compare/v0.3.0...v0.4.0[Full Changelog]
 
 *Implemented enhancements:*
 
-* Add randomly generated exemple https://github.com/camptocamp/camptocamp-devops-stack/pull/100[#100] (https://github.com/JGodin-C2C[JGodin-C2C])
-* Use a local registry as a pull through cache https://github.com/camptocamp/camptocamp-devops-stack/pull/102[#102] (https://github.com/mcanevet[mcanevet])
-* Add cache for quay.io, gcr.io and us.gcr.io registries https://github.com/camptocamp/camptocamp-devops-stack/pull/103[#103] (https://github.com/mcanevet[mcanevet])
-* Update test workflow conditions https://github.com/camptocamp/camptocamp-devops-stack/pull/112[#112] (https://github.com/mcanevet[mcanevet])
-* Destroy Terraform workspace for Vault on clean https://github.com/camptocamp/camptocamp-devops-stack/pull/117[#117] (https://github.com/mcanevet[mcanevet])
+* Add randomly generated exemple https://github.com/camptocamp/devops-stack/pull/100[#100] (https://github.com/JGodin-C2C[JGodin-C2C])
+* Use a local registry as a pull through cache https://github.com/camptocamp/devops-stack/pull/102[#102] (https://github.com/mcanevet[mcanevet])
+* Add cache for quay.io, gcr.io and us.gcr.io registries https://github.com/camptocamp/devops-stack/pull/103[#103] (https://github.com/mcanevet[mcanevet])
+* Update test workflow conditions https://github.com/camptocamp/devops-stack/pull/112[#112] (https://github.com/mcanevet[mcanevet])
+* Destroy Terraform workspace for Vault on clean https://github.com/camptocamp/devops-stack/pull/117[#117] (https://github.com/mcanevet[mcanevet])
 
 *Upgraded applications:*
 
-* Upgrade Terraform to 0.13.4 https://github.com/camptocamp/camptocamp-devops-stack/pull/104[#104] (https://github.com/mcanevet[mcanevet])
-* Upgrade prometheus-operator to 10.0.1 https://github.com/camptocamp/camptocamp-devops-stack/pull/113[#113] (https://github.com/mcanevet[mcanevet])
-* Upgrade secrets-store-csi-driver to 0.0.16 https://github.com/camptocamp/camptocamp-devops-stack/pull/115[#115] (https://github.com/mcanevet[mcanevet])
+* Upgrade Terraform to 0.13.4 https://github.com/camptocamp/devops-stack/pull/104[#104] (https://github.com/mcanevet[mcanevet])
+* Upgrade prometheus-operator to 10.0.1 https://github.com/camptocamp/devops-stack/pull/113[#113] (https://github.com/mcanevet[mcanevet])
+* Upgrade secrets-store-csi-driver to 0.0.16 https://github.com/camptocamp/devops-stack/pull/115[#115] (https://github.com/mcanevet[mcanevet])
 
 *Fixed bugs:*
 
-* Wait for argocd-repo-server before deploying the app of apps https://github.com/camptocamp/camptocamp-devops-stack/pull/116[#116] (https://github.com/mcanevet[mcanevet])
-* Remove all pods before cleanup to release volumes mounted with rshared propagation https://github.com/camptocamp/camptocamp-devops-stack/pull/119[#119] (https://github.com/mcanevet[mcanevet])
+* Wait for argocd-repo-server before deploying the app of apps https://github.com/camptocamp/devops-stack/pull/116[#116] (https://github.com/mcanevet[mcanevet])
+* Remove all pods before cleanup to release volumes mounted with rshared propagation https://github.com/camptocamp/devops-stack/pull/119[#119] (https://github.com/mcanevet[mcanevet])
 
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.3.0[0.3.0] (2020-10-05)
+== https://github.com/camptocamp/devops-stack/tree/v0.3.0[0.3.0] (2020-10-05)
 
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.2.0...v0.3.0[Full Changelog]
+https://github.com/camptocamp/devops-stack/compare/v0.2.0...v0.3.0[Full Changelog]
 
 
 *New applications:*
 
-* Deploy Vault https://github.com/camptocamp/camptocamp-devops-stack/pull/74[#74] (https://github.com/mcanevet[mcanevet])
-* Deploy secret store csi driver https://github.com/camptocamp/camptocamp-devops-stack/pull/92[#92] (https://github.com/mcanevet[mcanevet])
-* Deploy demo-app https://github.com/camptocamp/camptocamp-devops-stack/pull/93[#93] (https://github.com/mcanevet[mcanevet])
+* Deploy Vault https://github.com/camptocamp/devops-stack/pull/74[#74] (https://github.com/mcanevet[mcanevet])
+* Deploy secret store csi driver https://github.com/camptocamp/devops-stack/pull/92[#92] (https://github.com/mcanevet[mcanevet])
+* Deploy demo-app https://github.com/camptocamp/devops-stack/pull/93[#93] (https://github.com/mcanevet[mcanevet])
 
 *Upgraded applications:*
 
-* Upgrade K3s to v1.19.2 https://github.com/camptocamp/camptocamp-devops-stack/pull/54[#54] (https://github.com/mcanevet[mcanevet])
-* Upgrade ArgoCD to 1.7.6 https://github.com/camptocamp/camptocamp-devops-stack/pull/71[#71] (https://github.com/mcanevet[mcanevet])
-* Upgrade cert-manager to 1.0.2 https://github.com/camptocamp/camptocamp-devops-stack/pull/72[#72] (https://github.com/mcanevet[mcanevet])
+* Upgrade K3s to v1.19.2 https://github.com/camptocamp/devops-stack/pull/54[#54] (https://github.com/mcanevet[mcanevet])
+* Upgrade ArgoCD to 1.7.6 https://github.com/camptocamp/devops-stack/pull/71[#71] (https://github.com/mcanevet[mcanevet])
+* Upgrade cert-manager to 1.0.2 https://github.com/camptocamp/devops-stack/pull/72[#72] (https://github.com/mcanevet[mcanevet])
 
 *Implemented enhancements:*
 
-* Support deploying multiple cluster in parallel https://github.com/camptocamp/camptocamp-devops-stack/pull/61[#61] (https://github.com/mcanevet[mcanevet])
-* Use docker cp to get Kubernetes context https://github.com/camptocamp/camptocamp-devops-stack/pull/64[#64] (https://github.com/mcanevet[mcanevet])
-* Don’t create 2 vhost per service https://github.com/camptocamp/camptocamp-devops-stack/pull/66[#66] (https://github.com/mcanevet[mcanevet])
-* Use Ingress instead of IngressRoute https://github.com/camptocamp/camptocamp-devops-stack/pull/70[#70] (https://github.com/mcanevet[mcanevet])
-* Allow to scale agents https://github.com/camptocamp/camptocamp-devops-stack/pull/73[#73] (https://github.com/mcanevet[mcanevet])
-* Configure kubernetes auth backend for vault https://github.com/camptocamp/camptocamp-devops-stack/pull/76[#76] (https://github.com/mcanevet[mcanevet])
-* Automate Vault configuration https://github.com/camptocamp/camptocamp-devops-stack/pull/81[#81] (https://github.com/mcanevet[mcanevet])
-* Improve Vault configuration https://github.com/camptocamp/camptocamp-devops-stack/pull/83[#83] (https://github.com/mcanevet[mcanevet])
-* Show list of pods instead of list of apps in wait loop https://github.com/camptocamp/camptocamp-devops-stack/pull/85[#85] (https://github.com/mcanevet[mcanevet])
-* Use mounts instead of tmpfs and volumes https://github.com/camptocamp/camptocamp-devops-stack/pull/90[#90] (https://github.com/mcanevet[mcanevet])
-* Mount /var/lib/kubelet with propagation https://github.com/camptocamp/camptocamp-devops-stack/pull/91[#91] (https://github.com/mcanevet[mcanevet])
-* Inject secret in demo-app using vault-injector https://github.com/camptocamp/camptocamp-devops-stack/pull/98[#98] (https://github.com/mcanevet[mcanevet])
-* Inject secret in demo-app using secrets store csi driver https://github.com/camptocamp/camptocamp-devops-stack/pull/99[#99] (https://github.com/mcanevet[mcanevet])
+* Support deploying multiple cluster in parallel https://github.com/camptocamp/devops-stack/pull/61[#61] (https://github.com/mcanevet[mcanevet])
+* Use docker cp to get Kubernetes context https://github.com/camptocamp/devops-stack/pull/64[#64] (https://github.com/mcanevet[mcanevet])
+* Don’t create 2 vhost per service https://github.com/camptocamp/devops-stack/pull/66[#66] (https://github.com/mcanevet[mcanevet])
+* Use Ingress instead of IngressRoute https://github.com/camptocamp/devops-stack/pull/70[#70] (https://github.com/mcanevet[mcanevet])
+* Allow to scale agents https://github.com/camptocamp/devops-stack/pull/73[#73] (https://github.com/mcanevet[mcanevet])
+* Configure kubernetes auth backend for vault https://github.com/camptocamp/devops-stack/pull/76[#76] (https://github.com/mcanevet[mcanevet])
+* Automate Vault configuration https://github.com/camptocamp/devops-stack/pull/81[#81] (https://github.com/mcanevet[mcanevet])
+* Improve Vault configuration https://github.com/camptocamp/devops-stack/pull/83[#83] (https://github.com/mcanevet[mcanevet])
+* Show list of pods instead of list of apps in wait loop https://github.com/camptocamp/devops-stack/pull/85[#85] (https://github.com/mcanevet[mcanevet])
+* Use mounts instead of tmpfs and volumes https://github.com/camptocamp/devops-stack/pull/90[#90] (https://github.com/mcanevet[mcanevet])
+* Mount /var/lib/kubelet with propagation https://github.com/camptocamp/devops-stack/pull/91[#91] (https://github.com/mcanevet[mcanevet])
+* Inject secret in demo-app using vault-injector https://github.com/camptocamp/devops-stack/pull/98[#98] (https://github.com/mcanevet[mcanevet])
+* Inject secret in demo-app using secrets store csi driver https://github.com/camptocamp/devops-stack/pull/99[#99] (https://github.com/mcanevet[mcanevet])
 
 *Fixed bugs:*
 
-* https://github.com/camptocamp/camptocamp-devops-stack/commit/1a1d0a02343b80e7aa81e8a746c8037c25531839[Fix Issue with some versions of Make] (https://github.com/sbrunner[sbrunner])
-* Don’t delete Docker image on cleanup https://github.com/camptocamp/camptocamp-devops-stack/pull/65[#65] (https://github.com/mcanevet[mcanevet])
-* Ignore Ingress status https://github.com/camptocamp/camptocamp-devops-stack/pull/69[#69] (https://github.com/mcanevet[mcanevet])
-* Improve remote branch detection https://github.com/camptocamp/camptocamp-devops-stack/pull/84[#84] (https://github.com/mcanevet[mcanevet])
+* https://github.com/camptocamp/devops-stack/commit/1a1d0a02343b80e7aa81e8a746c8037c25531839[Fix Issue with some versions of Make] (https://github.com/sbrunner[sbrunner])
+* Don’t delete Docker image on cleanup https://github.com/camptocamp/devops-stack/pull/65[#65] (https://github.com/mcanevet[mcanevet])
+* Ignore Ingress status https://github.com/camptocamp/devops-stack/pull/69[#69] (https://github.com/mcanevet[mcanevet])
+* Improve remote branch detection https://github.com/camptocamp/devops-stack/pull/84[#84] (https://github.com/mcanevet[mcanevet])
 
 *Documentation:*
 
-* Convert to asciidoc, integrate with Antora https://github.com/camptocamp/camptocamp-devops-stack/pull/63[#63] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
-* Use local directory for project's reference instead of github link https://github.com/camptocamp/camptocamp-devops-stack/pull/67[#67] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
-* Convert CHANGELOG from md to adoc https://github.com/camptocamp/camptocamp-devops-stack/pull/68[#68] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
-* Integrate changelog page in antora doc https://github.com/camptocamp/camptocamp-devops-stack/pull/77[#77] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
-* Change of structure to match https://documentation.divio.com/ recommendations https://github.com/camptocamp/camptocamp-devops-stack/pull/79[#79] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
-* Use camptocamp's version of Antora-ui, add Metadata, Antora always build current branch https://github.com/camptocamp/camptocamp-devops-stack/pull/80[#80] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
-* Start documenting Vault https://documentation.divio.com/ recommendations https://github.com/camptocamp/camptocamp-devops-stack/pull/87[#87] (https://github.com/mcanevet[mcanevet])
-* Document how to develop https://documentation.divio.com/ recommendations https://github.com/camptocamp/camptocamp-devops-stack/pull/88[#88] (https://github.com/mcanevet[mcanevet])
+* Convert to asciidoc, integrate with Antora https://github.com/camptocamp/devops-stack/pull/63[#63] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
+* Use local directory for project's reference instead of github link https://github.com/camptocamp/devops-stack/pull/67[#67] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
+* Convert CHANGELOG from md to adoc https://github.com/camptocamp/devops-stack/pull/68[#68] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
+* Integrate changelog page in antora doc https://github.com/camptocamp/devops-stack/pull/77[#77] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
+* Change of structure to match https://documentation.divio.com/ recommendations https://github.com/camptocamp/devops-stack/pull/79[#79] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
+* Use camptocamp's version of Antora-ui, add Metadata, Antora always build current branch https://github.com/camptocamp/devops-stack/pull/80[#80] (https://github.com/acampergue-camptocamp[acampergue-camptocamp])
+* Start documenting Vault https://documentation.divio.com/ recommendations https://github.com/camptocamp/devops-stack/pull/87[#87] (https://github.com/mcanevet[mcanevet])
+* Document how to develop https://documentation.divio.com/ recommendations https://github.com/camptocamp/devops-stack/pull/88[#88] (https://github.com/mcanevet[mcanevet])
 
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.2.0[0.2.0] (2020-09-20)
+== https://github.com/camptocamp/devops-stack/tree/v0.2.0[0.2.0] (2020-09-20)
 
-https://github.com/camptocamp/camptocamp-devops-stack/compare/v0.1.0...v0.2.0[Full Changelog]
+https://github.com/camptocamp/devops-stack/compare/v0.1.0...v0.2.0[Full Changelog]
 
 *Implemented enhancements:*
 
-* Add debug target to Makefile https://github.com/camptocamp/camptocamp-devops-stack/pull/30[#30] (https://github.com/mcanevet[mcanevet])
-* Fetch repo URL and cluster name from remote https://github.com/camptocamp/camptocamp-devops-stack/pull/35[#35] (https://github.com/mcanevet[mcanevet])
-* Don’t set ResourceQuota on demo https://github.com/camptocamp/camptocamp-devops-stack/pull/36[#36] (https://github.com/mcanevet[mcanevet])
-* Enable Prometheus metrics for Traefik https://github.com/camptocamp/camptocamp-devops-stack/pull/38[#38] (https://github.com/mcanevet[mcanevet])
-* Deploy prometheus-operator and kube-prometheus-stack https://github.com/camptocamp/camptocamp-devops-stack/pull/40[#40] (https://github.com/mcanevet[mcanevet])
-* Add monitoring for ArgoCD and cert-manager https://github.com/camptocamp/camptocamp-devops-stack/pull/44[#44] (https://github.com/mcanevet[mcanevet])
-* [grafana] Search for dashboard and datasource in all namespaces https://github.com/camptocamp/camptocamp-devops-stack/pull/49[#49] (https://github.com/mcanevet[mcanevet])
-* Deploy Loki https://github.com/camptocamp/camptocamp-devops-stack/pull/50[#50] (https://github.com/mcanevet[mcanevet])
+* Add debug target to Makefile https://github.com/camptocamp/devops-stack/pull/30[#30] (https://github.com/mcanevet[mcanevet])
+* Fetch repo URL and cluster name from remote https://github.com/camptocamp/devops-stack/pull/35[#35] (https://github.com/mcanevet[mcanevet])
+* Don’t set ResourceQuota on demo https://github.com/camptocamp/devops-stack/pull/36[#36] (https://github.com/mcanevet[mcanevet])
+* Enable Prometheus metrics for Traefik https://github.com/camptocamp/devops-stack/pull/38[#38] (https://github.com/mcanevet[mcanevet])
+* Deploy prometheus-operator and kube-prometheus-stack https://github.com/camptocamp/devops-stack/pull/40[#40] (https://github.com/mcanevet[mcanevet])
+* Add monitoring for ArgoCD and cert-manager https://github.com/camptocamp/devops-stack/pull/44[#44] (https://github.com/mcanevet[mcanevet])
+* [grafana] Search for dashboard and datasource in all namespaces https://github.com/camptocamp/devops-stack/pull/49[#49] (https://github.com/mcanevet[mcanevet])
+* Deploy Loki https://github.com/camptocamp/devops-stack/pull/50[#50] (https://github.com/mcanevet[mcanevet])
 
-== https://github.com/camptocamp/camptocamp-devops-stack/tree/v0.1.0[0.1.0] (2020-09-19)
+== https://github.com/camptocamp/devops-stack/tree/v0.1.0[0.1.0] (2020-09-19)
 
 *Implemented enhancements:*
 
