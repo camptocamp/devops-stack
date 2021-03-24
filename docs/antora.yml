@@ -1,7 +1,6 @@
 ---
 name: main
 title: DevOps Stack
-url: https://devops-stack.io
 version: 0.29.0
 nav:
   - modules/ROOT/nav.adoc
