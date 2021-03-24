@@ -147,7 +147,7 @@ url = "https://bivac.io"
 #url = "faq"
 
 [languages.en]
-footer_menu_left = "Camptocamp"
-footer_menu_middle = "Our Projects"
+footer_menu_left = "Our Projects"
+footer_menu_middle = "Camptocamp"
 footer_menu_right = "Support"
 footer_content = "We automate your way to the Cloud"
