@@ -96,6 +96,19 @@ pre = "<i class='fab fa-github'></i> "
 url = "https://github.com/camptocamp/camptocamp-devops-stack"
 weight = 2
 
+# footer menu middle
+[[menu.footer_left]]
+name = "FacterDB"
+url = "https://camptocamp.github.io/facterdb/"
+
+[[menu.footer_left]]
+name = "Terraboard"
+url = "https://terraboard.io"
+
+[[menu.footer_left]]
+name = "Bivac"
+url = "https://bivac.io"
+
 #[[menu.main]]
 #name = "Contact"
 #url = "contact"
@@ -119,19 +132,6 @@ weight = 2
 #name = "Our Services"
 #url = "https://camptocamp.com"
 
-
-# footer menu middle
-[[menu.footer_middle]]
-name = "FacterDB"
-url = "https://camptocamp.github.io/facterdb/"
-
-[[menu.footer_middle]]
-name = "Terraboard"
-url = "https://terraboard.io"
-
-[[menu.footer_middle]]
-name = "Bivac"
-url = "https://bivac.io"
 
 # footer menu right
 #[[menu.footer_right]]
