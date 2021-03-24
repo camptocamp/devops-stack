@@ -7,11 +7,9 @@ content:
   sources:
   - url: ./
     branches: HEAD
-    edit_url: false
     start_path: docs
   - url: https://github.com/camptocamp/antora-ui.git
     branches: ['master']
-    edit_url: false
     start_path: docs
 ui:
   bundle:
