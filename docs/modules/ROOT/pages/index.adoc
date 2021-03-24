@@ -6,6 +6,8 @@
 :url-repo: https://github.com/camptocamp/devops-stack.git
 :url-c2c: https://www.camptocamp.com/
 
+image::devops-stack-logo_large.png[DevOps Stack]
+
 TIP: The easiest way to get started with the DevOps Stack is to follow
 the xref:howtos/quickstart_k3s_docker.adoc[K3s on Docker Quickstart].
 This way you will leave you with a fully operational https://k3s.io/[K3s]
