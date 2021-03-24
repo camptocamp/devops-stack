@@ -6,6 +6,10 @@
 :url-repo: https://github.com/camptocamp/devops-stack.git
 :url-c2c: https://www.camptocamp.com/
 
+The DevOps Stack provides a standard Kubernetes Platform, bringing together
+automated Provisioning as Code, Continuous Application Deployment,
+and readily-made configurations for the best Cloud Native tools in the industry.
+
 image::devops-stack-logo_large.png[DevOps Stack]
 
 TIP: The easiest way to get started with the DevOps Stack is to follow
