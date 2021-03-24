@@ -24,9 +24,9 @@ banner:
         link: "/docs/devops-stack/__VERSION__/howtos/quickstart_eks.html"
       - label: AKS Quickstart
         link: "/docs/devops-stack/__VERSION__/howtos/quickstart_aks.html"
-      - label: SKS (coming soon)
+        #- label: SKS (coming soon)
         #link: "/docs/devops-stack/__VERSION__/howtos/quickstart_sks.html"
-      - label: OpenShift (coming soon)
+        #- label: OpenShift (coming soon)
         #link: "/docs/devops-stack/__VERSION__/howtos/quickstart_openshift.html"
       - label: K3S Quickstart
         link: "/docs/devops-stack/__VERSION__/howtos/quickstart_k3s_docker.html"
