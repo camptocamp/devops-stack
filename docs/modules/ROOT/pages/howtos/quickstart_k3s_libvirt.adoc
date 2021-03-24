@@ -23,7 +23,7 @@ mv terraform-provider-libvirt ~/.local/share/terraform/plugins/registry.terrafor
 - Knowledge of https://terraform.io[Terraform] basics
 
 
-== Create the Terraform root module
+include::partial$terraform_instant_intro.adoc[]
 
 ```hcl
 module "cluster" {

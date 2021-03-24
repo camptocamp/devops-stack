@@ -1,0 +1,151 @@
+baseURL = "https://devops-stack.io/"
+languageCode = "en-us"
+title = "DevOps Stack"
+theme = "bigspring"
+
+
+[params]
+author = "Camptocamp"
+#logo = "images/devops-stack-logo_wave_by_c2c_black2.png"
+logo = "images/devops-stack-logo_by_c2c_black.png"
+logo_width = "200px"
+
+org_name = "Camptocamp"
+org_logo = "images/logo/camptocamp.png"
+org_logo_width = "200px"
+org_url = "https://camptocamp.com"
+
+version = "0.29.0"
+
+google_analytics = "G-GDBX9466LL"
+
+############################# social site ########################
+[[params.social]]
+title = "GitHub"
+icon = "fab fa-github"
+link = "https://github.com/camptocamp"
+
+[[params.social]]
+title = "GitLab"
+icon = "fab fa-gitlab"
+link = "https://gitlab.com/camptocamp"
+
+[[params.social]]
+title = "Dev"
+icon = "fab fa-dev"
+link = "https://dev.to/camptocamp-ops"
+
+[[params.social]]
+title = "Twitter"
+icon = "fab fa-twitter"
+link = "https://twitter.com/camptocamp"
+
+[[params.social]]
+title = "LinkedIn"
+icon = "fab fa-linkedin"
+link = "https://www.linkedin.com/company/camptocamp-sa/"
+
+[[params.social]]
+title = "YouTube"
+icon = "fab fa-youtube"
+link = "https://www.youtube.com/user/CamptocampOnline"
+
+[[params.social]]
+title = "Facebook"
+icon = "fab fa-facebook"
+link = "https://www.facebook.com/camptocampsa"
+
+[[params.social]]
+title = "StackShare"
+icon = "fas fa-share-alt"
+link = "https://stackshare.io/camptocamp/infrastructure"
+
+
+
+
+############################# Plugins ##############################
+
+# CSS Plugins
+[[params.plugins.css]]
+link = "plugins/bootstrap/bootstrap.min.css"
+[[params.plugins.css]]
+link = "plugins/fontawesome/css/all.min.css"
+[[params.plugins.css]]
+link = "plugins/slick/slick.css"
+
+# JS Plugins
+[[params.plugins.js]]
+link = "plugins/jQuery/jquery.min.js"
+[[params.plugins.js]]
+link = "plugins/bootstrap/bootstrap.min.js"
+[[params.plugins.js]]
+link = "plugins/slick/slick.min.js"
+
+############################## navigation ###############################
+
+# main menu
+[[menu.main]]
+name = "Docs"
+pre = "<i class='fas fa-book'></i> "
+url = "docs"
+weight = 1
+
+[[menu.main]]
+name = "GitHub"
+pre = "<i class='fab fa-github'></i> "
+url = "https://github.com/camptocamp/devops-stack"
+weight = 2
+
+#[[menu.main]]
+#name = "Contact"
+#url = "contact"
+#weight = 3
+#
+#[[menu.main]]
+#name = "FAQ"
+#url = "faq"
+#weight = 4
+
+
+# footer menu left
+[[menu.footer_left]]
+name = "Camptocamp"
+url = "https://camptocamp.com"
+
+[[menu.footer_left]]
+name = "Our Services"
+url = "https://www.camptocamp.com/infrastructure_solutions_and_services"
+
+
+# footer menu middle
+[[menu.footer_middle]]
+name = "FacterDB"
+url = "https://camptocamp.github.io/facterdb/"
+
+[[menu.footer_middle]]
+name = "Terraboard"
+url = "https://terraboard.io"
+
+[[menu.footer_middle]]
+name = "Bivac"
+url = "https://bivac.io"
+
+
+# footer menu right
+[[menu.footer_right]]
+name = "Documentation"
+url = "docs"
+
+[[menu.footer_right]]
+name = "Sources"
+url = "https://github.com/camptocamp/devops-stack"
+
+#[[menu.footer_right]]
+#name = "FAQ"
+#url = "faq"
+
+[languages.en]
+footer_menu_left = "Who We Are"
+footer_menu_middle = "Our Projects"
+footer_menu_right = "Support"
+footer_content = "We automate your way to the Cloud"

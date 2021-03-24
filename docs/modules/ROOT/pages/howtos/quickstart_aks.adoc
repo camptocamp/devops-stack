@@ -6,16 +6,12 @@
 
 == Prerequisites
 
-- Access to API keys allowing to create required resources in AWS,
+- Access to API keys allowing to create required resources in Azure,
 - Access to GitLab or GitHub (only supported CI/CD for now),
 - Knowledge of https://terraform.io[Terraform] basics
 
-== Create your Terraform root module
 
-Camptocamp's DevOps stack is a Terraform composition module
-that has to be instantiated from the Terraform root module.
-
-Here is a minimal working example:
+include::partial$terraform_instant_intro.adoc[]
 
 ```hcl
 # terraform/main.tf

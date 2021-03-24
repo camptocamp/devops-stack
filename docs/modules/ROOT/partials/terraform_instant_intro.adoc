@@ -1,0 +1,5 @@
+== Create your Terraform root module
+
+Camptocamp's DevOps Stack is instantiated using a Terraform composition module.
+
+Here is a minimal working example:

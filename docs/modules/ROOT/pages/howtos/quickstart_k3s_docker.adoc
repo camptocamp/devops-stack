@@ -6,7 +6,8 @@
 - CGroupv2 disabled (K3s does not support it for now),
 - Knowledge of https://terraform.io[Terraform] basics
 
-== Create the Terraform root module
+
+include::partial$terraform_instant_intro.adoc[]
 
 ```hcl
 module "cluster" {

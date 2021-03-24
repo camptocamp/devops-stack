@@ -1,19 +1,16 @@
 site:
   title: DevOps Stack
   # the 404 page and sitemap files only get generated when the url property is set
-  url: https://devops-stack.io/devops-stack/
-  start_page: devops-stack::index.adoc
+  url: https://devops-stack.io
+  start_page: main::index.adoc
 content:
   sources:
   - url: ./
     branches: HEAD
     start_path: docs
-  - url: https://github.com/camptocamp/antora-ui.git
-    branches: ['master']
-    start_path: docs
 ui:
   bundle:
-    url: https://github.com/camptocamp/antora-ui/releases/download/LATEST/ui-bundle.zip
+    url: https://github.com/camptocamp/devops-stack-antora-ui/releases/download/master-LATEST/ui-bundle.zip
     snapshot: true
   supplemental_files:
   - path: ui.yml
