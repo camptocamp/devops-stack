@@ -24,8 +24,8 @@ banner:
         link: "/docs/camptocamp-devops-stack/__VERSION__/howtos/quickstart_eks.html"
       - label: AKS
         link: "/docs/camptocamp-devops-stack/__VERSION__/howtos/quickstart_aks.html"
-      #- label: SKS
-      #  link: "/docs/camptocamp-devops-stack/__VERSION__/howtos/quickstart_sks.html"
+      - label: SKS (soon)
+        #link: "/docs/camptocamp-devops-stack/__VERSION__/howtos/quickstart_sks.html"
       - label: K3S
         link: "/docs/camptocamp-devops-stack/__VERSION__/howtos/quickstart_k3s_docker.html"
 
