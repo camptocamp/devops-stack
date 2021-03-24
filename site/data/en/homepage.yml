@@ -20,13 +20,13 @@ banner:
 
   quickstart:
     item:
-      - label: EKS
+      - label: EKS Quickstart
         link: "/docs/camptocamp-devops-stack/__VERSION__/howtos/quickstart_eks.html"
-      - label: AKS
+      - label: AKS Quickstart
         link: "/docs/camptocamp-devops-stack/__VERSION__/howtos/quickstart_aks.html"
       - label: SKS (soon)
         #link: "/docs/camptocamp-devops-stack/__VERSION__/howtos/quickstart_sks.html"
-      - label: K3S
+      - label: K3S Quickstart
         link: "/docs/camptocamp-devops-stack/__VERSION__/howtos/quickstart_k3s_docker.html"
 
 # Components
