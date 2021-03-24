@@ -111,13 +111,13 @@ weight = 2
 name = "About Us"
 url = "https://camptocamp.com"
 
-[[menu.footer_left]]
-name = "Our Expertise"
-url = "https://camptocamp.com"
-
-[[menu.footer_left]]
-name = "Our Services"
-url = "https://camptocamp.com"
+#[[menu.footer_left]]
+#name = "Our Expertise"
+#url = "https://camptocamp.com"
+#
+#[[menu.footer_left]]
+#name = "Our Services"
+#url = "https://camptocamp.com"
 
 
 # footer menu middle
@@ -134,13 +134,13 @@ name = "Bivac"
 url = "https://bivac.io"
 
 # footer menu right
-[[menu.footer_right]]
-name = "Privacy Policy"
-url = "privacy-policy"
-
-[[menu.footer_right]]
-name = "Terms & Conditions"
-url = "terms-conditions"
+#[[menu.footer_right]]
+#name = "Privacy Policy"
+#url = "privacy-policy"
+#
+#[[menu.footer_right]]
+#name = "Terms & Conditions"
+#url = "terms-conditions"
 
 [[menu.footer_right]]
 name = "FAQ"
