@@ -66,7 +66,7 @@ module "vpc" {
 }
 
 module "cluster" {
-  source = "git::https://github.com/camptocamp/camptocamp-devops-stack.git//modules/eks/aws?ref=v0.26.0"
+  source = "git::https://github.com/camptocamp/devops-stack.git//modules/eks/aws?ref=v0.26.0"
 
   cluster_name = local.cluster_name
   vpc_id       = module.vpc.vpc_id

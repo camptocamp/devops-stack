@@ -22,12 +22,12 @@ export ARGOCD_OPTS="--insecure --grpc-web"
 cd /tmp || exit
 
 git clone "$REPO_URL"
-cd camptocamp-devops-stack || exit
+cd devops-stack || exit
 git checkout "$TARGET_REVISION"
 cd - || exit
 
 echo Update app of apps without syncPolicy
-helm -n argocd upgrade app-of-apps camptocamp-devops-stack/argocd/app-of-apps \
+helm -n argocd upgrade app-of-apps devops-stack/argocd/app-of-apps \
 	-f "$APP_OF_APPS_VALUES_0" \
 	-f "$APP_OF_APPS_VALUES_1" \
 	-f "$APP_OF_APPS_VALUES_2" \

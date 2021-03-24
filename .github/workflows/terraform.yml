@@ -20,7 +20,7 @@ jobs:
         tf_root:
           - tests/k3s-docker/terraform
     env:
-      TF_VAR_repo_url: ${{ github.server_url }}/${{ github.actor }}/camptocamp-devops-stack.git
+      TF_VAR_repo_url: ${{ github.server_url }}/${{ github.actor }}/devops-stack.git
       TF_VAR_target_revision: ${{ github.head_ref }}
     defaults:
       run:
@@ -53,7 +53,7 @@ jobs:
       - name: Terraform Apply
         if: github.event_name == 'pull_request'
         env:
-          TF_VAR_repo_url: ${{ github.server_url }}/${{ github.actor }}/camptocamp-devops-stack.git
+          TF_VAR_repo_url: ${{ github.server_url }}/${{ github.actor }}/devops-stack.git
           TF_VAR_target_revision: ${{ github.head_ref }}
         run: terraform apply --auto-approve
 
@@ -71,7 +71,7 @@ jobs:
       - name: Terraform Plan
         if: github.event_name == 'pull_request'
         env:
-          TF_VAR_repo_url: ${{ github.server_url }}/${{ github.actor }}/camptocamp-devops-stack.git
+          TF_VAR_repo_url: ${{ github.server_url }}/${{ github.actor }}/devops-stack.git
           TF_VAR_target_revision: ${{ github.head_ref }}
         run: terraform plan --detailed-exitcode -no-color
 
@@ -123,13 +123,13 @@ jobs:
 
       - name: Terraform Apply
         env:
-          TF_VAR_repo_url: ${{ github.server_url }}/camptocamp/camptocamp-devops-stack.git
+          TF_VAR_repo_url: ${{ github.server_url }}/camptocamp/devops-stack.git
           TF_VAR_target_revision: ${{ github.base_ref }}
         run: terraform apply --auto-approve
 
       - name: Terraform Plan
         env:
-          TF_VAR_repo_url: ${{ github.server_url }}/camptocamp/camptocamp-devops-stack.git
+          TF_VAR_repo_url: ${{ github.server_url }}/camptocamp/devops-stack.git
           TF_VAR_target_revision: ${{ github.base_ref }}
         run: terraform plan --detailed-exitcode -no-color
 
@@ -154,7 +154,7 @@ jobs:
       - name: Terraform Plan on ${{ github.ref }}
         id: plan
         env:
-          TF_VAR_repo_url: ${{ github.server_url }}/${{ github.actor }}/camptocamp-devops-stack.git
+          TF_VAR_repo_url: ${{ github.server_url }}/${{ github.actor }}/devops-stack.git
           TF_VAR_target_revision: ${{ github.head_ref }}
         run: terraform plan -no-color -out plan
 
@@ -184,7 +184,7 @@ jobs:
 
       - name: Terraform Apply on ${{ github.ref }}
         env:
-          TF_VAR_repo_url: ${{ github.server_url }}/${{ github.actor }}/camptocamp-devops-stack.git
+          TF_VAR_repo_url: ${{ github.server_url }}/${{ github.actor }}/devops-stack.git
           TF_VAR_target_revision: ${{ github.head_ref }}
         run: terraform apply --auto-approve
 
