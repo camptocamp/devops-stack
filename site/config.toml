@@ -141,10 +141,10 @@ url = "https://bivac.io"
 #[[menu.footer_right]]
 #name = "Terms & Conditions"
 #url = "terms-conditions"
-
-[[menu.footer_right]]
-name = "FAQ"
-url = "faq"
+#
+#[[menu.footer_right]]
+#name = "FAQ"
+#url = "faq"
 
 [languages.en]
 footer_menu_left = "Camptocamp"
