@@ -10,7 +10,7 @@ content:
     start_path: docs
 ui:
   bundle:
-    url: https://github.com/camptocamp/antora-ui/releases/download/LATEST/ui-bundle.zip
+    url: https://github.com/camptocamp/antora-ui/releases/download/devops-stack-LATEST/ui-bundle.zip
     snapshot: true
   supplemental_files:
   - path: ui.yml
