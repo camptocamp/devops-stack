@@ -8,9 +8,6 @@ content:
   - url: ./
     branches: HEAD
     start_path: docs
-  - url: https://github.com/camptocamp/antora-ui.git
-    branches: ['master']
-    start_path: docs
 ui:
   bundle:
     url: https://github.com/camptocamp/antora-ui/releases/download/LATEST/ui-bundle.zip
