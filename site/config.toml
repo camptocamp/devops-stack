@@ -96,19 +96,6 @@ pre = "<i class='fab fa-github'></i> "
 url = "https://github.com/camptocamp/camptocamp-devops-stack"
 weight = 2
 
-# footer menu middle
-[[menu.footer_left]]
-name = "FacterDB"
-url = "https://camptocamp.github.io/facterdb/"
-
-[[menu.footer_left]]
-name = "Terraboard"
-url = "https://terraboard.io"
-
-[[menu.footer_left]]
-name = "Bivac"
-url = "https://bivac.io"
-
 #[[menu.main]]
 #name = "Contact"
 #url = "contact"
@@ -118,36 +105,47 @@ url = "https://bivac.io"
 #name = "FAQ"
 #url = "faq"
 #weight = 4
-#
-# footer menu left
-#[[menu.footer_left]]
-#name = "About Us"
-#url = "https://camptocamp.com"
 
-#[[menu.footer_left]]
-#name = "Our Expertise"
-#url = "https://camptocamp.com"
-#
-#[[menu.footer_left]]
-#name = "Our Services"
-#url = "https://camptocamp.com"
+
+# footer menu left
+[[menu.footer_left]]
+name = "Camptocamp"
+url = "https://camptocamp.com"
+
+[[menu.footer_left]]
+name = "Our Services"
+url = "https://www.camptocamp.com/infrastructure_solutions_and_services"
+
+
+# footer menu middle
+[[menu.footer_middle]]
+name = "FacterDB"
+url = "https://camptocamp.github.io/facterdb/"
+
+[[menu.footer_middle]]
+name = "Terraboard"
+url = "https://terraboard.io"
+
+[[menu.footer_middle]]
+name = "Bivac"
+url = "https://bivac.io"
 
 
 # footer menu right
-#[[menu.footer_right]]
-#name = "Privacy Policy"
-#url = "privacy-policy"
-#
-#[[menu.footer_right]]
-#name = "Terms & Conditions"
-#url = "terms-conditions"
-#
+[[menu.footer_right]]
+name = "Documentation"
+url = "docs"
+
+[[menu.footer_right]]
+name = "Sources"
+url = "https://github.com/camptocamp/devops-stack"
+
 #[[menu.footer_right]]
 #name = "FAQ"
 #url = "faq"
 
 [languages.en]
-footer_menu_left = "Our Projects"
-footer_menu_middle = "Camptocamp"
+footer_menu_left = "Who We Are"
+footer_menu_middle = "Our Projects"
 footer_menu_right = "Support"
 footer_content = "We automate your way to the Cloud"
