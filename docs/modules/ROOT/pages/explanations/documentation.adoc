@@ -16,7 +16,6 @@ The website for our documentation can be automatically built and published on ht
 == Highly customizable appearance
 
 The appearance of the website is externalized in an  https://github.com/camptocamp/antora-ui/[independant project] and packaged as UI bundle. It can be highly adapted to ones needs and be can reused over multiple documentation projects.
-== Documentation
 
 == Structure
 
