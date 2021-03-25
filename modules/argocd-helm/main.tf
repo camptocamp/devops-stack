@@ -104,6 +104,8 @@ resource "helm_release" "app_of_apps" {
 }
 
 resource "null_resource" "wait_for_app_of_apps" {
+  count = var.wait_for_app_of_apps ? 1 : 0
+
   depends_on = [
     helm_release.app_of_apps
   ]
