@@ -129,3 +129,9 @@ variable "kube_prometheus_stack" {
   type        = any
   default     = {}
 }
+
+variable "wait_for_app_of_apps" {
+  description = "Allow to disable wait for app of apps"
+  type        = bool
+  default     = true
+}
