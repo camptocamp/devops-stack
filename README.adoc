@@ -1,12 +1,5 @@
 = Camptocamp's DevOps Stack
 
-== Overview
-
-This repository contains the reference implementation of https://www.camptocamp.com[Camptocamp]'s https://www.camptocamp.com/infrastructure_solutions_and_services[Infrastructure Solutions & Services] department.
-
-== Documentation
-
-The documentation is written using Asciidoc and Antora and located in the docs/ folder.
-The https://documentation.divio.com/structure/[Divio documentation structure] is used to organize its content.
+The DevOps Stack provides a standard Kubernetes Platform, bringing together automated Provisioning as Code, Continuous Application Deployment, and readily-made configurations for the best Cloud Native tools in the industry.
 
 The documentation is published here: https://devops-stack.io
