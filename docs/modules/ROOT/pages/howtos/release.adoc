@@ -16,3 +16,4 @@
 * Push the tag
 * Create a new https://github.com/camptocamp/devops-stack/releases[release] via the GitHub release page, naming it the same as the version number - e.g. `v0.29.0`. Ensure to state what's new in the release
 * Set back the release to `latest` in https://github.com/camptocamp/devops-stack/blob/master/docs/antora.yml#L4[docs/antora.yml]
+* Set back the target_revision to `master` in https://github.com/camptocamp/devops-stack/blob/master/modules/variables.tf#15[modules/variables.tf]
