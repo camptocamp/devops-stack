@@ -43,6 +43,6 @@ It is absolutely necessary.
 == Sysadmins want control
 
 The DevOps Stack provisions our k8s cluster with a set of administration and monitoring tools out-of-the-box.
-Here below some of the services' dashboards:
+Here below some of the services' dashboards.
 
 include::partial$dashboards.adoc[]
