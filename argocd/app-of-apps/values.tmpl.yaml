@@ -27,6 +27,8 @@ apps:
     enabled: ${keycloak.enable}
   kube-prometheus-stack:
     enabled: ${kube_prometheus_stack.enable}
+  local-path-provisioner:
+    enabled: false
   loki-stack:
     enabled: ${loki.enable}
   metrics-server:
