@@ -27,6 +27,7 @@ practices make it much easier to handle changes related to software life cycle.
 The boundaries and responsibilities between these different phases
 have become more blurred, less strict.
 
+
 == Developers need love
 
 In the near future, we really want to invest significantly in aspects related
@@ -38,3 +39,10 @@ of the https://12factor.net/[Twelve-Factor App]
 methodology, as well as breaking silos and embracing DevOps principles.
 These good practices should be applied as early as possible in projects.
 It is absolutely necessary.
+
+== Sysadmins want control
+
+The DevOps Stack provisions our k8s cluster with a set of administration and monitoring tools out-of-the-box.
+Here below some of the services' dashboards:
+
+include::partial$dashboards.adoc[]
