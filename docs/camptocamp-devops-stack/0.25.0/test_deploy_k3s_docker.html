@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: DevOps Stack</title>
+    <link rel="canonical" href="https://devops-stack.io/camptocamp-devops-stack/0.25.0/test_deploy_k3s_docker.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script>var uiRootPath = '../../_'</script>
+    <link rel="icon" href="../../_/img/favicon.png" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://devops-stack.io"><img width="200px" src="/images/devops-stack-logo_light_by_c2c_black.png"/></a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/camptocamp/devops-stack"><i class="fa fa-github-alt"></i>&nbsp;GitHub</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Products</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://terraboard.io">Terraboard</a>
+            <a class="navbar-item" href="https://bivac.io">Bivac</a>
+            <a class="navbar-item" href="https://camptocamp.github.io/facterdb">FacterDB</a>
+          </div>
+        </div>
+        <a class="navbar-item" href="https://camptocamp.com">Camptocamp</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="camptocamp-devops-stack" data-version="0.25.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Camptocamp’s DevOps stack</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Tutorials</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="using_the_devops_stack.html">Using the DevOps Stack</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="deploy_devops_stack_in_eks.html">Deploy the DevOps Stack on EKS</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">How-to guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#ROOT:quickstart.adoc">Quickstarts</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="quickstart_k3s_docker.html">K3s on Docker</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="quickstart_k3s_libvirt.html">K3s on Libvirt</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="develop.html">Improve the DevOps stack</a>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="test_deploy_k3s_docker.html">Test DevOps Stack using k3s on docker</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="test_deploy_k3s_libvirt.html">Test DevOps Stack using k3s on libvirt</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="new_project.html">Create a new Project</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="release.html">Release a new version</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="how_to_write_doc.html">Write documentation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#antora-ui-c2c:ROOT:index.adoc">Customize UI</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Reference Guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="provisioning.html">Provisioning</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="deployment.html">Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="authentication.html">Authentication</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ref_documentation.html">Documentation</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Explanations</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="why_k3s.html">Why k3s?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="why_terraform.html">Why Terraform?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="why_automated_sync.html">Why Automated Sync Policy?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="why_antora.html">Why Antora for the documentation?</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">DevOps Stack modules</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">alertmanager</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="alertmanager/howto_access.html">Howto access alertmanager</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">grafana</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="grafana/howto_access.html">Howto access grafana</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">prometheus</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="prometheus/howto_access.html">Howto access prometheus</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">traefik</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="traefik/howto_access.html">Howto access traefik</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">ArgoCD</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="argocd/howto_access.html">Howto Access ArgoCD</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="CHANGELOG.html">Changelog</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Camptocamp’s DevOps Stack</span>
+    <span class="version">0.25.0</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../0.29.0/index.html">Camptocamp’s DevOps Stack</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../0.29.0/index.html">0.29.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.28.0/index.html">0.28.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.27.0/index.html">0.27.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.26.0/index.html">0.26.0</a>
+        </li>
+        <li class="version is-current">
+          <a href="index.html">0.25.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.24.0/index.html">0.24.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.23.0/index.html">0.23.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.22.0/index.html">0.22.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.21.1/index.html">0.21.1</a>
+        </li>
+        <li class="version">
+          <a href="../0.21.0/index.html">0.21.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.20.0/index.html">0.20.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.19.0/index.html">0.19.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.18.0/index.html">0.18.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.17.0/index.html">0.17.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.16.0/index.html">0.16.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.15.0/index.html">0.15.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.14.2/index.html">0.14.2</a>
+        </li>
+        <li class="version">
+          <a href="../0.14.1/index.html">0.14.1</a>
+        </li>
+        <li class="version">
+          <a href="../0.14.0/index.html">0.14.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.13.0/index.html">0.13.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.12.0/index.html">0.12.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.11.0/index.html">0.11.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.10.1/index.html">0.10.1</a>
+        </li>
+        <li class="version">
+          <a href="../0.10.0/index.html">0.10.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../devops-stack/latest/index.html">DevOps Stack</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../devops-stack/latest/index.html">latest</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../devops-stack/latest/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Camptocamp’s DevOps stack</a></li>
+    <li>How-to guides</li>
+    <li><a href="develop.html">Improve the DevOps stack</a></li>
+    <li><a href="test_deploy_k3s_docker.html">Test DevOps Stack using k3s on docker</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">0.25.0</button>
+  <div class="version-menu">
+    <a class="version is-missing" href="../0.29.0/index.html">0.29.0</a>
+    <a class="version is-missing" href="../0.28.0/index.html">0.28.0</a>
+    <a class="version is-missing" href="../0.27.0/index.html">0.27.0</a>
+    <a class="version is-missing" href="../0.26.0/index.html">0.26.0</a>
+    <a class="version is-current" href="test_deploy_k3s_docker.html">0.25.0</a>
+    <a class="version" href="../0.24.0/test_deploy_k3s_docker.html">0.24.0</a>
+    <a class="version" href="../0.23.0/test_deploy_k3s_docker.html">0.23.0</a>
+    <a class="version" href="../0.22.0/test_deploy_k3s_docker.html">0.22.0</a>
+    <a class="version" href="../0.21.1/test_deploy_k3s_docker.html">0.21.1</a>
+    <a class="version" href="../0.21.0/test_deploy_k3s_docker.html">0.21.0</a>
+    <a class="version is-missing" href="../0.20.0/index.html">0.20.0</a>
+    <a class="version is-missing" href="../0.19.0/index.html">0.19.0</a>
+    <a class="version is-missing" href="../0.18.0/index.html">0.18.0</a>
+    <a class="version is-missing" href="../0.17.0/index.html">0.17.0</a>
+    <a class="version is-missing" href="../0.16.0/index.html">0.16.0</a>
+    <a class="version is-missing" href="../0.15.0/index.html">0.15.0</a>
+    <a class="version is-missing" href="../0.14.2/index.html">0.14.2</a>
+    <a class="version is-missing" href="../0.14.1/index.html">0.14.1</a>
+    <a class="version is-missing" href="../0.14.0/index.html">0.14.0</a>
+    <a class="version is-missing" href="../0.13.0/index.html">0.13.0</a>
+    <a class="version is-missing" href="../0.12.0/index.html">0.12.0</a>
+    <a class="version is-missing" href="../0.11.0/index.html">0.11.0</a>
+    <a class="version is-missing" href="../0.10.1/index.html">0.10.1</a>
+    <a class="version is-missing" href="../0.10.0/index.html">0.10.0</a>
+  </div>
+</div>
+  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/blob/v0.25.0/docs/modules/ROOT/pages/test_deploy_k3s_docker.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
+  </div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<div class="sect1">
+<h2 id="_test_devops_stack_using_k3s_on_docker"><a class="anchor" href="#_test_devops_stack_using_k3s_on_docker"></a>Test DevOps stack using k3s on docker</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_finding_the_flavor"><a class="anchor" href="#_finding_the_flavor"></a>Finding the flavor</h3>
+<div class="paragraph">
+<p>In the <code>tests</code> folder at the root of the repository, you can find all flavors that are ready to use. The name of the folders describe the flavor of the DevOps stack that will be installed. For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ ls tests/
+k3s-docker
+k3s-libvirt</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can see that, here, both flavors are <code>k3s</code> and one installs it using <code>docker</code> while the other uses <code>libvirt</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_deploying_using_makefile"><a class="anchor" href="#_deploying_using_makefile"></a>Deploying using Makefile</h3>
+<div class="paragraph">
+<p>The folder of the flavor you are trying to test contains a terraform repository. Typing <code>terraform init &amp;&amp; terraform apply</code> in that folder is sufficient to deploy the DevOps stack.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cleaning_up"><a class="anchor" href="#_cleaning_up"></a>Cleaning up</h3>
+<div class="paragraph">
+<p><code>terraform destroy</code> will delete everything that was deployed for the test.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_finding_the_urls_of_the_services"><a class="anchor" href="#_finding_the_urls_of_the_services"></a>Finding the URLs of the services</h3>
+<div class="paragraph">
+<p>The Access URLs are found as output of terraform, look in your console for something like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">Outputs:
+
+admin_password = "dEzq88Zx0SY2FSFQ"
+alertmanager_url = "https://alertmanager.apps.10-17-3-127.nip.io"
+app_of_apps_values = &lt;sensitive&gt;
+argocd_auth_token = &lt;sensitive&gt;
+argocd_url = "https://argocd.apps.10-17-3-127.nip.io"
+base_domain = "10-17-3-127.nip.io"
+grafana_url = "https://grafana.apps.10-17-3-127.nip.io"
+kubeconfig = &lt;sensitive&gt;
+prometheus_url = "https://prometheus.apps.10-17-3-127.nip.io"
+repo_url = "https://github.com/.git"
+target_revision = "master"</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_finding_the_kubeconfig"><a class="anchor" href="#_finding_the_kubeconfig"></a>Finding the kubeconfig</h3>
+<div class="paragraph">
+<p>The kubeconfig file is written on disk by terraform the path is <code>terraform/kubeconfig.yaml</code> in the flavor directory.</p>
+</div>
+<div class="paragraph">
+<p>Exporting the <code>KUBECONFIG</code> variable to point to that file will allow you to use the <code>kubectl</code> and other kubernetes tools to manipulate your cluster.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_testing_a_terraform_change"><a class="anchor" href="#_testing_a_terraform_change"></a>Testing a terraform change</h3>
+<div class="paragraph">
+<p>By simply running the Makefile again all changes to the terraform code will be applied.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_making_a_change_to_an_application_deployed_by_argocd"><a class="anchor" href="#_making_a_change_to_an_application_deployed_by_argocd"></a>Making a change to an Application deployed by ArgoCD</h3>
+<div class="paragraph">
+<p>Due to how ArgoCD works, you need to commit and push your change to a fork of the project for it to be visible.
+ArgoCD should be in auto-sync by default, if it is not, you can visit the administration page of ArgoCD which url was given in the terraform ouput and manually sync.</p>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>Copyright © Camptocamp 2021 — All Rights Reserved.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/terraform.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

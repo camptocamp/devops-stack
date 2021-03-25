@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: DevOps Stack</title>
+    <link rel="canonical" href="https://devops-stack.io/camptocamp-devops-stack/0.25.0/release.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script>var uiRootPath = '../../_'</script>
+    <link rel="icon" href="../../_/img/favicon.png" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://devops-stack.io"><img width="200px" src="/images/devops-stack-logo_light_by_c2c_black.png"/></a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/camptocamp/devops-stack"><i class="fa fa-github-alt"></i>&nbsp;GitHub</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Products</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://terraboard.io">Terraboard</a>
+            <a class="navbar-item" href="https://bivac.io">Bivac</a>
+            <a class="navbar-item" href="https://camptocamp.github.io/facterdb">FacterDB</a>
+          </div>
+        </div>
+        <a class="navbar-item" href="https://camptocamp.com">Camptocamp</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="camptocamp-devops-stack" data-version="0.19.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Camptocamp’s DevOps stack</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">Tutorials</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">How-to guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="new_project.html">Create a new Project</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="release.html">Release a new version</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="develop.html">Develop the stack</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="how_to_write_doc.html">Write documentation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#antora-ui-c2c:ROOT:index.adoc">Customize UI</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="access_services_in_cluster.html">Access Services in the cluster</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="access_kubernetes_api.html">Access Kubernetes API</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="access_argocd_webui.html">Access ArgoCD web UI</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="access_traefik_dashboard.html">Access Traefik dashboard</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="access_grafana_dashboard.html">Access Grafana dashboard</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="access_prometheus_dashboard.html">Access Prometheus dashboard</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="access_alertmanager_dashboard.html">Access Alertmanager dashboard</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Reference Guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="provisioning.html">Provisioning</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="deployment.html">Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="authentication.html">Authentication</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ref_documentation.html">Documentation</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Explanations</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="why_k3s.html">Why k3s?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="why_terraform.html">Why Terraform?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="why_automated_sync.html">Why Automated Sync Policy?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="why_antora.html">Why Antora for the documentation?</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="CHANGELOG.html">Changelog</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Camptocamp’s DevOps Stack</span>
+    <span class="version">0.19.0</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../0.29.0/index.html">Camptocamp’s DevOps Stack</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../0.29.0/index.html">0.29.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.28.0/index.html">0.28.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.27.0/index.html">0.27.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.26.0/index.html">0.26.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.25.0/index.html">0.25.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.24.0/index.html">0.24.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.23.0/index.html">0.23.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.22.0/index.html">0.22.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.21.1/index.html">0.21.1</a>
+        </li>
+        <li class="version">
+          <a href="../0.21.0/index.html">0.21.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.20.0/index.html">0.20.0</a>
+        </li>
+        <li class="version is-current">
+          <a href="index.html">0.19.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.18.0/index.html">0.18.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.17.0/index.html">0.17.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.16.0/index.html">0.16.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.15.0/index.html">0.15.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.14.2/index.html">0.14.2</a>
+        </li>
+        <li class="version">
+          <a href="../0.14.1/index.html">0.14.1</a>
+        </li>
+        <li class="version">
+          <a href="../0.14.0/index.html">0.14.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.13.0/index.html">0.13.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.12.0/index.html">0.12.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.11.0/index.html">0.11.0</a>
+        </li>
+        <li class="version">
+          <a href="../0.10.1/index.html">0.10.1</a>
+        </li>
+        <li class="version">
+          <a href="../0.10.0/index.html">0.10.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../devops-stack/latest/index.html">DevOps Stack</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../devops-stack/latest/index.html">latest</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../devops-stack/latest/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Camptocamp’s DevOps stack</a></li>
+    <li>How-to guides</li>
+    <li><a href="release.html">Release a new version</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">0.19.0</button>
+  <div class="version-menu">
+    <a class="version is-missing" href="../0.29.0/index.html">0.29.0</a>
+    <a class="version is-missing" href="../0.28.0/index.html">0.28.0</a>
+    <a class="version is-missing" href="../0.27.0/index.html">0.27.0</a>
+    <a class="version is-missing" href="../0.26.0/index.html">0.26.0</a>
+    <a class="version" href="../0.25.0/release.html">0.25.0</a>
+    <a class="version" href="../0.24.0/release.html">0.24.0</a>
+    <a class="version" href="../0.23.0/release.html">0.23.0</a>
+    <a class="version" href="../0.22.0/release.html">0.22.0</a>
+    <a class="version" href="../0.21.1/release.html">0.21.1</a>
+    <a class="version" href="../0.21.0/release.html">0.21.0</a>
+    <a class="version" href="../0.20.0/release.html">0.20.0</a>
+    <a class="version is-current" href="release.html">0.19.0</a>
+    <a class="version" href="../0.18.0/release.html">0.18.0</a>
+    <a class="version" href="../0.17.0/release.html">0.17.0</a>
+    <a class="version" href="../0.16.0/release.html">0.16.0</a>
+    <a class="version" href="../0.15.0/release.html">0.15.0</a>
+    <a class="version" href="../0.14.2/release.html">0.14.2</a>
+    <a class="version" href="../0.14.1/release.html">0.14.1</a>
+    <a class="version" href="../0.14.0/release.html">0.14.0</a>
+    <a class="version" href="../0.13.0/release.html">0.13.0</a>
+    <a class="version" href="../0.12.0/release.html">0.12.0</a>
+    <a class="version" href="../0.11.0/release.html">0.11.0</a>
+    <a class="version" href="../0.10.1/release.html">0.10.1</a>
+    <a class="version" href="../0.10.0/release.html">0.10.0</a>
+  </div>
+</div>
+  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/blob/v0.19.0/docs/modules/ROOT/pages/release.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
+  </div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<div class="sect1">
+<h2 id="_release"><a class="anchor" href="#_release"></a>Release</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Update <code>docs/modules/ROOT/pages/CHANGELOG.adoc</code></p>
+</li>
+<li>
+<p>Update the version number (e.g. <code>v0.9.0</code>) in the following files (mandatory): <a href="https://github.com/camptocamp/camptocamp-devops-stack/blob/master/docs/antora.yml#L4">docs/antora.yml</a> <a href="https://github.com/camptocamp/camptocamp-devops-stack/blob/master/.gitlab-ci/pipeline.yaml">.gitlab-ci/pipeline.yaml</a></p>
+</li>
+<li>
+<p>Optionally update the version number in the following files: <a href="https://github.com/camptocamp/camptocamp-devops-stack/blob/master/examples/eks-aws/.gitlab-ci.yml">examples/eks-aws/.gitlab-ci.yml</a> <a href="https://github.com/camptocamp/camptocamp-devops-stack/blob/master/modules/eks-aws/main.tf">examples/eks-aws/terraform/main.tf</a> <a href="https://github.com/camptocamp/camptocamp-devops-stack/blob/master/modules/k3os-libvirt/main.tf">examples/k3os-libvirt-demo-app/terraform/main.tf</a> <a href="https://github.com/camptocamp/camptocamp-devops-stack/blob/master/modules/k3s-docker/main.tf">examples/k3s-docker-demo-app/terraform/main.tf</a> <a href="https://github.com/camptocamp/camptocamp-devops-stack/blob/master/docs/modules/ROOT/pages/new_project.adoc">docs/modules/ROOT/pages/new_project.adoc</a></p>
+</li>
+<li>
+<p>Create a pull request with the updated version. Once it has been reviewed and approved, merge it to <code>master</code></p>
+</li>
+<li>
+<p>Tag the merged commit (e.g. <code>v0.9.0</code>)</p>
+</li>
+<li>
+<p>Push the tag</p>
+</li>
+<li>
+<p>Create a new <a href="https://github.com/camptocamp/camptocamp-devops-stack/releases">release</a> via the GitHub release page, naming it the same as the version number - e.g. <code>v0.9.0</code>. Ensure to state what&#8217;s new in the release</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>Copyright © Camptocamp 2021 — All Rights Reserved.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/terraform.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
