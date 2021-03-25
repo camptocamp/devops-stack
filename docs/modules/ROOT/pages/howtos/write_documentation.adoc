@@ -31,14 +31,6 @@ To include your page in the resulting website, edit the `docs/modules/ROOT/nav.a
 ** xref:module_name:my_documentation_under_Section.adoc[My documentation's title]
 ----
 
-== Customize the appearance
-
-The UI of the documentation is built in an external project named https://github.com/camptocamp/antora-ui/blob/master/README.adoc#antora-ui-for-camptocamp[Antora-ui for Camptocamp].
-
-First make sure to follow the https://github.com/camptocamp/antora-ui/blob/master/README.adoc#development-quickstart[development quickstart], then https://github.com/camptocamp/antora-ui/blob/master/README.adoc#clone-and-initialize-the-ui-project[clone and initialize the UI Project].
-
-For detailled information on the way to customize the UI, please refer to the xref:antora-ui-c2c:ROOT:index.adoc[corresponding documentation here].
-
 == Viewing your changes locally
 
 You can generate the doc using the docker image of antora and put it in a local directory. For example with the following:
