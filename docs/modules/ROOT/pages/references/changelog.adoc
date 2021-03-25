@@ -1,5 +1,32 @@
 = Changelog
 
+== https://github.com/camptocamp/devops-stack/tree/v0.30.0[0.30.0] (2021-03-25)
+
+https://github.com/camptocamp/devops-stack/compare/v0.29.0...v0.30.0[Full Changelog]
+
+*Implemented enhancements:*
+
+* Use app-diff.sh only in integration tests https://github.com/camptocamp/devops-stack/pull/546[#546] (https://github.com/mcanevet[mcanevet])
+* Rename project camptocamp-devops-stack to devops-stack https://github.com/camptocamp/devops-stack/pull/548[#548] (https://github.com/raphink[raphink])
+* Allow to disable wait for app of apps https://github.com/camptocamp/devops-stack/pull/553[#553] (https://github.com/mcanevet[mcanevet])
+
+*New applications:*
+
+* Add local-path-provisioner app https://github.com/camptocamp/devops-stack/pull/552[#552] (https://github.com/raphink[raphink])
+
+*Fixed Bugs:*
+
+* Add account.manage-account client role to Keycloak admin user https://github.com/camptocamp/devops-stack/pull/539[#539] (https://github.com/raphink[raphink])
+* Install aws-iam-authenticator in gitlab pipeline and github workflows https://github.com/camptocamp/devops-stack/pull/542[#542] (https://github.com/ckaenzig[ckaenzig])
+
+*Documentations:*
+
+* Add outputs.tf to k3s example, as per documentation https://github.com/camptocamp/devops-stack/pull/538[#538] (https://github.com/raphink[raphink])
+* Update doc with grafana admin password output https://github.com/camptocamp/devops-stack/pull/544[#544] (https://github.com/fsismondi[fsismondi])
+* Add new main page to the website https://github.com/camptocamp/devops-stack/pull/549[#549] (https://github.com/raphink[raphink])
+* Add dashboards snapshots to documentation https://github.com/camptocamp/devops-stack/pull/551[#551] (https://github.com/fsismondi[fsismondi])
+* Generate Antora docs from tags https://github.com/camptocamp/devops-stack/pull/550[#550] (https://github.com/raphink[raphink])
+
 == https://github.com/camptocamp/devops-stack/tree/v0.29.0[0.29.0] (2021-03-18)
 
 As this release removes the dependency on Terraform workspaces, upgrading is not supported due to changes in the pipelines.
