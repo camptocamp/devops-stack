@@ -100,7 +100,9 @@ locals {
     var.minio,
   )
   metrics_archives_defaults = {
-    bucket_name = "thanos"
+    bucket_name      = "thanos"
+    query_domain     = "thanos-query.${var.cluster_name}.${var.base_domain}"
+    bucketweb_domain = "thanos-bucketweb.${var.cluster_name}.${var.base_domain}"
   }
   metrics_archives = merge(
     local.metrics_archives_defaults,
