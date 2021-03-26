@@ -16,18 +16,18 @@ banner:
 
   quickstart:
     item:
-      - label: EKS Quickstart
-        icon: fab fa-aws
+      - label: "EKS Quickstart"
+        icon: "fab fa-aws"
         link: "/docs/devops-stack/__VERSION__/howtos/quickstart_eks.html"
-      - label: AKS Quickstart
-        icon: fab fa-microsoft
+      - label: "AKS Quickstart"
+        icon: "fab fa-microsoft"
         link: "/docs/devops-stack/__VERSION__/howtos/quickstart_aks.html"
-        #- label: SKS (coming soon)
+        #- label: "SKS Quickstart"
         #link: "/docs/devops-stack/__VERSION__/howtos/quickstart_sks.html"
-        #- label: OpenShift (coming soon)
+        #- label: "OpenShift Quickstart"
         #link: "/docs/devops-stack/__VERSION__/howtos/quickstart_openshift.html"
-      - label: K3S Quickstart
-        icon: fa fa-hat-cowboy-side
+      - label: "K3S Quickstart"
+        icon: "fa fa-hat-cowboy-side"
         link: "/docs/devops-stack/__VERSION__/howtos/quickstart_k3s_docker.html"
 
 # Components
@@ -149,7 +149,10 @@ call_to_action:
   buttons:
     - label: "Technical documentation"
       link: "docs"
+      icon: "fa fa-book"
     - label: "Request a demo"
       link: "mailto:info@camptocamp.com?subject=DevOps Stack Demo"
+      icon: "fa fa-chalkboard-teacher"
     - label: "Professional services"
       link: "https://www.camptocamp.com/infrastructure_solutions_and_services"
+      icon: "fa fa-user-tie"
