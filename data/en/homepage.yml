@@ -1,0 +1,156 @@
+---
+banner:
+  title: "DevOps Stack"
+  subtitle: "Your Kubernetes Platform is one Git commit away."
+  #image: "images/g3458.png"
+  #image: "images/g3099.png"
+  #image: "images/g3147.png"
+  #image: "images/devops-stack-logo_wave_large2.png"
+  image: "images/devops-stack-logo_large.png"
+  
+  content: |
+    The DevOps Stack provides a standard Kubernetes Platform, bringing together
+    automated Provisioning as Code, Continuous Application Deployment,
+    and readily-made configurations for the best Cloud Native tools in the industry.
+
+  button:
+    enable: false
+    label: "Learn more"
+    link: "docs"
+
+  quickstart:
+    item:
+      - label: EKS Quickstart
+        link: "/docs/devops-stack/__VERSION__/howtos/quickstart_eks.html"
+      - label: AKS Quickstart
+        link: "/docs/devops-stack/__VERSION__/howtos/quickstart_aks.html"
+        #- label: SKS (coming soon)
+        #link: "/docs/devops-stack/__VERSION__/howtos/quickstart_sks.html"
+        #- label: OpenShift (coming soon)
+        #link: "/docs/devops-stack/__VERSION__/howtos/quickstart_openshift.html"
+      - label: K3S Quickstart
+        link: "/docs/devops-stack/__VERSION__/howtos/quickstart_k3s_docker.html"
+
+# Components
+components:
+  enable : true
+  title : "Stack Components"
+  items:
+    - name : "Kubernetes"
+      icon : "kubernetes.png"
+      link: "https://kubernetes.io"
+      content : "At the heart of the DevOps Stack, Kubernetes powers all application deployments, and more."
+
+    - name : "Terraform"
+      icon : "terraform.png"
+      link: "https://terraform.io"
+      content : "The base layer of the Stack, provisioning the whole Infrastructure as Code, from IaaS to Argo CD."
+
+    - name : "Argo CD"
+      icon : "argocd.png"
+      link: "https://argoproj.github.io/argo-cd/"
+      content : "DevOps Stack Applications are deployed in a GitOps fashion, using Continuous Deployment for Kubernetes Resources."
+
+    - name : "Prometheus"
+      icon : "prometheus.png"
+      link: "https://prometheus.io"
+      content : "The standard in Kubernetes Time Series Database, set up for the whole Stack out-of-the-box."
+      
+    - name : "Grafana"
+      icon : "grafana.png"
+      link: "https://grafana.com"
+      content : "Readily-made Observability Dashboards are provided for the Kubernetes cluster and Stack Components."
+      
+    - name : "Loki"
+      icon : "loki.png"
+      link: "https://grafana.com/oss/loki/"
+      content : "Logs from the Stack components and additional applications are gathered and made accessible in Grafana using Loki."
+      
+    - name : "Cert-Manager"
+      icon : "cert-manager.png"
+      link: "https://cert-manager.io"
+      content : "Valid public certificates are automatically provided for all Stack Components, courtesy of Let's Encrypt."
+      
+    - name : "Open ID Connect"
+      icon : "oidc.png"
+      link: "https://openid.net/connect/"
+      content : "Authentication is set up for all Components in the Stack, using either the platform's authentication system, or Keycloak."
+
+    - name : "Traefik"
+      icon : "traefik.jpeg"
+      link: "https://traefik.io/"
+      content : "The Traefik Ingress controller is used to route web access to all Components, on your domain of choice."
+      
+
+
+
+######################### Service #####################
+services:
+  enable : true
+  items:
+    # service item loop
+    - title : "Choose your Cloud"
+      images:
+      - "images/banner/aws-eks.png"
+      - "images/banner/azure-aks.png"
+      - "images/banner/rancher-k3s.png"
+      #- "images/banner/exoscale.png"
+      content : "Whether you want to deploy AKS on Azure, EKS on Amazon, or K3S for a local playground, the DevOps Stack has you covered with ready-to-go Terraform modules."
+      button:
+        enable : true
+        label : "Show me the Cloud Menu"
+        link : "/docs/devops-stack/__VERSION__/explanations/cloud_agnostic.html"
+        
+    # service item loop
+    - title : "Defined as Code"
+      images:
+      - "images/devops-tf-shot.jpg"
+      content : "The DevOps Stack is based on Open Source Terraform modules so you get a declarative, convergent Kubernetes platform, leveraging the Infrastructure as Code approach."
+      button:
+        enable : true
+        label : "I want to code!"
+        link : "/docs/devops-stack/__VERSION__/explanations/infrastructure-as-code.html"
+        
+    # service item loop
+    - title : "Continuously Deployed"
+      images:
+      - "images/banner/argo.png"
+      - "images/banner/gitlab.png"
+      - "images/banner/github_actions.png"
+      content : "At the core of the DevOps Stack, ArgoCD manages applications and deploys them continually to the Kubernetes cluster. We also include a collection of CI/CD pipeline libraries you can use with GitLab or GitHub Actions to set up a GitOps workflow for your entire Kubernetes infrastructure."
+      button:
+        enable : true
+        label : "Deploy it"
+        link : "/docs/devops-stack/__VERSION__/explanations/gitops.html"
+        
+    # service item loop
+    - title : "Operate"
+      images:
+      - "images/helm_540x.png"
+      content : "With the integration of state-of-art of Observability tools, you can easily keep an eye on both your Kubernetes platform, and the applications running on it."
+      button:
+        enable : true
+        label : "Show me the dashboards"
+        link : "/docs/devops-stack/__VERSION__/explanations/lifecycle_operations.html"
+        
+################### Screenshot ########################
+screenshot:
+  enable : true
+  title : "From Zero to Hero, in a few lines a code"
+  image : "images/devops-stack_vscode.png"
+
+  
+
+##################### Call to action #####################
+call_to_action:
+  enable : true
+  title : "Ready to get started?"
+  image : "images/cta.svg"
+  content : "Wherever you are in your Cloud Native journey, you can either dive straight into the technical documentation, or contact us for a demo or a consulting session."
+  buttons:
+    - label: "Technical documentation"
+      link : "docs"
+    - label: "Request a demo"
+      link : "mailto:info@camptocamp.com?subject=DevOps Stack Demo"
+    - label: "Professional services"
+      link : "https://www.camptocamp.com/infrastructure_solutions_and_services"
