@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <sitemap>
-<loc>https://devops-stack.io/sitemap-camptocamp-devops-stack.xml</loc>
+<loc>https://devops-stack.io/docs/sitemap-camptocamp-devops-stack.xml</loc>
 </sitemap>
 <sitemap>
-<loc>https://devops-stack.io/sitemap-devops-stack.xml</loc>
+<loc>https://devops-stack.io/docs/sitemap-devops-stack.xml</loc>
 </sitemap>
 </sitemapindex>
