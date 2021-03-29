@@ -1,8 +1,13 @@
 ---
 apiVersion: "v2"
-name: "argocd"
+name: "ArgoCD"
 version: "0"
-description: "This chart installs and configures ArgoCD"
+description: |
+  This chart installs and configures ArgoCD
+
+  * ArgoCD itself
+  * A Grafana dashaboard for ArgoCD
+  * An `OAuthClient` Kubernetes object if the OpenShift 4 option is enabled
 dependencies:
   - name: "argo-cd"
     version: "2.14.7"

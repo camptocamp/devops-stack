@@ -1,4 +1,6 @@
-# Auto-generated Reference
+---
+title: {{ template "chart.name" . }}
+---
 
 {{ template "chart.description" . }}
 

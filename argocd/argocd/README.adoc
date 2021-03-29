@@ -1,9 +1,0 @@
-= ArgoCD Application
-
-This application installs and configures:
-
-* ArgoCD itself
-* A Grafana dashaboard for ArgoCD
-* An `OAuthClient` Kubernetes object if the OpenShift 4 option is enabled
-
-
