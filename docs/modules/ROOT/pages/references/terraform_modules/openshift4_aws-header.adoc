@@ -1,0 +1,12 @@
+// Generate this doc with:
+//   terraform-docs asciidoc --header-from ../../../docs/modules/ROOT/pages/references/terraform_modules/openshift4_aws-header.adoc modules/openshift4/aws > docs/modules/ROOT/pages/references/terraform_modules/openshift4_aws.adoc
+= OpenShift 4 on AWS Terraform Module
+
+The `openshift4/aws` Terraform module provides a way to install and configure:
+
+* An OpenShift 4 cluster based using AWS
+* The xref:ROOT:references/terraform_modules/argocd-helm.adoc[ArgoCD Helm] module
+
+
+
+
