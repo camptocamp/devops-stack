@@ -15,7 +15,7 @@ app_refs: $(APP_REFS)
 docs/modules/ROOT/pages/references/applications/%.adoc: argocd/%/REFERENCE.md
 	cat argocd/$*/README.md argocd/$*/REFERENCE.md | pandoc -o $@
 
-argocd/%/REFERENCE.md: helm-docs
+argocd/%/REFERENCE.md: helm-docs argocd/%/values.yaml
 	touch $@
 
 helm-docs:
