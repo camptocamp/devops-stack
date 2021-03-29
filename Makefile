@@ -8,6 +8,7 @@ docs/modules/ROOT/pages/references/applications/%.adoc: argocd/%/README.md
 	pandoc $< -o $@
 
 argocd/%/README.md: helm-docs
+	touch $@
 
 helm-docs:
 	helm-docs
