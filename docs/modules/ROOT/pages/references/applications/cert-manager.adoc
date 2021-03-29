@@ -13,12 +13,12 @@ image:https://img.shields.io/badge/Version-0-informational?style=flat-square[Ver
 
 === Values
 
-[cols=",,,",options="header",]
+[width="100%",cols="16%,18%,27%,39%",options="header",]
 |===
 |Key |Type |Default |Description
-|cert-manager.installCRDs |bool |`true` |
-|cert-manager.prometheus.servicemonitor.enabled |bool |`true` |
-|cert-manager.securityContext.fsGroup |int |`999` |
+|cert-manager |object
+|`{"installCRDs":true,"prometheus":{"servicemonitor":{"enabled":true}},"securityContext":{"fsGroup":999}}`
+|Values passed to the cert-manager chart
 |===
 
 '''''

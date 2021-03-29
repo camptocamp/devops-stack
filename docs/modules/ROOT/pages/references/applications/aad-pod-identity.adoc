@@ -14,16 +14,12 @@ image:https://img.shields.io/badge/Version-0-informational?style=flat-square[Ver
 
 === Values
 
-[cols=",,,",options="header",]
+[width="100%",cols="16%,18%,27%,39%",options="header",]
 |===
 |Key |Type |Default |Description
-|aad-pod-identity.forceNameSpaced |bool |`true` |
-|aad-pod-identity.mic.prometheusPort |int |`8888` |
-|aad-pod-identity.mic.resources.limits.memory |string |`"32Mi"` |
-|aad-pod-identity.mic.resources.requests.memory |string |`"16Mi"` |
-|aad-pod-identity.nmi.prometheusPort |int |`9090` |
-|aad-pod-identity.nmi.resources.limits.memory |string |`"32Mi"` |
-|aad-pod-identity.nmi.resources.requests.memory |string |`"16Mi"` |
+|aad-pod-identity |object
+|`{"forceNameSpaced":true,"mic":{"prometheusPort":8888,"resources":{"limits":{"memory":"32Mi"},"requests":{"memory":"16Mi"}}},"nmi":{"prometheusPort":9090,"resources":{"limits":{"memory":"32Mi"},"requests":{"memory":"16Mi"}}}}`
+|Values passed to the add-pod-identity chart
 |===
 
 '''''

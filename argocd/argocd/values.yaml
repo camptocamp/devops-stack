@@ -1,5 +1,5 @@
 ---
-# -- values passed to the argo-cd chart
+# -- Values passed to the argo-cd chart
 argo-cd:
   controller:
     metrics:
