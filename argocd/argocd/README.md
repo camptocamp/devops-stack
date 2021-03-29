@@ -26,6 +26,7 @@
 | argo-cd.controller.metrics.rules.spec[1].for | string | `"12h"` |  |
 | argo-cd.controller.metrics.rules.spec[1].labels.severity | string | `"warning"` |  |
 | argo-cd.controller.metrics.serviceMonitor.enabled | bool | `true` |  |
+| argo-cd.openshift.enabled | bool | `false` | whether to enable OpenShift 4 integration |
 | argo-cd.repoServer.metrics.serviceMonitor.enabled | bool | `true` |  |
 | argo-cd.server.metrics.serviceMonitor.enabled | bool | `true` |  |
 
