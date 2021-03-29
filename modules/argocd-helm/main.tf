@@ -18,7 +18,7 @@ locals {
 
   argocd_chart = yamldecode(file("${path.module}/../../argocd/argocd/Chart.yaml")).dependencies.0
 
-  argocd_server_secretkey = var.argocd_server_secretkey == null ? random_string.argocd_server_secretkey.0.result : var.argocd_server_secretkey
+  argocd_server_secretkey = var.argocd_server_secretkey == null ? random_string.argocd_server_secretkey.result : var.argocd_server_secretkey
 
   app_of_apps_values = concat([
     templatefile("${path.module}/../../argocd/app-of-apps/values.tmpl.yaml",
@@ -26,7 +26,7 @@ locals {
         repo_url                        = var.repo_url
         target_revision                 = var.target_revision
         argocd_accounts_pipeline_tokens = local.argocd_accounts_pipeline_tokens
-        argocd_server_secretkey         = var.argocd_server_secretkey == null ? random_string.argocd_server_secretkey.0.result : var.argocd_server_secretkey
+        argocd_server_secretkey         = local.argocd_server_secretkey
         extra_apps                      = var.extra_apps
         cluster_name                    = var.cluster_name
         base_domain                     = var.base_domain
@@ -65,8 +65,6 @@ resource "time_static" "iat" {}
 resource "random_uuid" "jti" {}
 
 resource "random_string" "argocd_server_secretkey" {
-  count = var.argocd_server_secretkey == null ? 1 : 0
-
   length  = 32
   special = false
 }
