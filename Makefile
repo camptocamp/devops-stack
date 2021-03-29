@@ -5,6 +5,8 @@ APPLICATIONS = $(shell ls argocd)
 APP_REFS = $(addsuffix .adoc,$(addprefix docs/modules/ROOT/pages/references/applications/,$(APPLICATIONS)))
 APP_BASE_REFS = $(addsuffix /REFERENCE.adoc,$(addprefix argocd/,$(APPLICATIONS)))
 
+refs: mod_refs app_refs
+
 mod_refs: $(MOD_REFS)
 
 docs/modules/ROOT/pages/references/terraform_modules/%.adoc:
