@@ -1,5 +1,23 @@
 = Changelog
 
+== https://github.com/camptocamp/devops-stack/tree/v0.31.0[0.31.0] (2021-03-29)
+
+https://github.com/camptocamp/devops-stack/compare/v0.30.0...v0.31.0[Full Changelog]
+
+*New flavor*
+
+* Add support for Openshift4 on AWS https://github.com/camptocamp/devops-stack/pull/547[#547] (https://github.com/pburgisser[pburgisser])
+
+*Fixed Bugs:*
+
+* Fix passing Grafana admin password https://github.com/camptocamp/devops-stack/pull/558[#558] (https://github.com/mcanevet[mcanevet])
+* Fix passing ArgoCD server secretkey https://github.com/camptocamp/devops-stack/pull/559[#559] (https://github.com/mcanevet[mcanevet])
+
+*Documentations:*
+
+* Add Terraform module references https://github.com/camptocamp/devops-stack/pull/556[#556] (https://github.com/raphink[raphink])
+* app references https://github.com/camptocamp/devops-stack/pull/557[#557] (https://github.com/raphink[raphink])
+
 == https://github.com/camptocamp/devops-stack/tree/v0.30.0[0.30.0] (2021-03-25)
 
 https://github.com/camptocamp/devops-stack/compare/v0.29.0...v0.30.0[Full Changelog]
