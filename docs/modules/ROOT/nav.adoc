@@ -13,6 +13,13 @@
 *** xref:ROOT:howtos/release.adoc[Release a new version]
 * References
 ** xref:ROOT:references/authentication.adoc[Authentication]
+** xref:ROOT:references/terraform_modules.adoc[Terraform Modules]
+*** xref:ROOT:references/terraform_modules/argocd-helm.adoc[ArgoCD Helm]
+*** xref:ROOT:references/terraform_modules/aks_azure.adoc[Azure AKS]
+*** xref:ROOT:references/terraform_modules/eks_aws.adoc[AWS EKS]
+*** xref:ROOT:references/terraform_modules/k3s_docker.adoc[K3s Docker]
+*** xref:ROOT:references/terraform_modules/k3s_libvirt.adoc[K3s Libvirt]
+*** xref:ROOT:references/terraform_modules/openshift4_aws.adoc[OpenShift 4 on AWS]
 ** xref:ROOT:references/changelog.adoc[Changelog]
 * Explanations
 ** xref:ROOT:explanations/purpose.adoc[Purpose]

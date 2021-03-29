@@ -48,3 +48,8 @@ include::partial$inspect_apps.adoc[]
 include::partial$access_keycloak.adoc[]
 
 include::partial$tf_destroy.adoc[]
+
+
+== Reference
+
+See the xref:ROOT:references/terraform_modules/k3s_libvirt.adoc[K3s Libvirt reference page].

@@ -1,0 +1,10 @@
+// Generate this doc with:
+//   terraform-docs asciidoc --header-from ../../../docs/modules/ROOT/pages/references/terraform_modules/aks_azure-header.adoc modules/aks/azure > docs/modules/ROOT/pages/references/terraform_modules/aks_azure.adoc
+= Azure AKS Terraform Module
+
+The `aks/azure` Terraform module provides a way to install and configure:
+
+* An AKS cluster
+* The xref:ROOT:references/terraform_modules/argocd-helm.adoc[ArgoCD Helm] module
+
+
