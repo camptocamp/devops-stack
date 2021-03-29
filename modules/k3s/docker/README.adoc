@@ -1,0 +1,8 @@
+= K3S Docker Terraform Module
+
+The `k3s/docker` Terraform module provides a way to install and configure:
+
+* A K3s cluster based on Docker
+* The xref:ROOT:references/terraform_modules/argocd-helm.adoc[ArgoCD Helm] module
+
+

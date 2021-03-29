@@ -1,0 +1,7 @@
+= Azure AKS Terraform Module
+
+The `aks/azure` Terraform module provides a way to install and configure:
+
+* An AKS cluster
+* The xref:ROOT:references/terraform_modules/argocd-helm.adoc[ArgoCD Helm] module
+

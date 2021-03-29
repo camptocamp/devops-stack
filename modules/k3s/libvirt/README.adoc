@@ -1,0 +1,9 @@
+= K3S Libvirt Terraform Module
+
+The `k3s/libvirt` Terraform module provides a way to install and configure:
+
+* A K3s cluster based using Libvirt
+* The xref:ROOT:references/terraform_modules/argocd-helm.adoc[ArgoCD Helm] module
+
+
+

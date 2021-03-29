@@ -1,5 +1,3 @@
-// Generate this doc with:
-//   terraform-docs asciidoc --header-from ../../../docs/modules/ROOT/pages/references/terraform_modules/k3s_libvirt-header.adoc modules/k3s/libvirt > docs/modules/ROOT/pages/references/terraform_modules/k3s_libvirt.adoc
 = K3S Libvirt Terraform Module
 
 The `k3s/libvirt` Terraform module provides a way to install and configure:

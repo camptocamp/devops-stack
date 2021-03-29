@@ -1,5 +1,3 @@
-// Generate this doc with:
-//   terraform-docs asciidoc --header-from ../../../docs/modules/ROOT/pages/references/terraform_modules/k3s_docker-header.adoc modules/k3s/docker > docs/modules/ROOT/pages/references/terraform_modules/k3s_docker.adoc
 = K3S Docker Terraform Module
 
 The `k3s/docker` Terraform module provides a way to install and configure:
