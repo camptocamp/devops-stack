@@ -1,8 +1,6 @@
 ---
+# -- values passed to the argo-cd chart
 argo-cd:
-  openshift:
-    # -- whether to enable OpenShift 4 integration
-    enabled: false
   controller:
     metrics:
       serviceMonitor:
