@@ -3,6 +3,7 @@ MOD_REFS = $(addsuffix .adoc,$(addprefix docs/modules/ROOT/pages/references/terr
 
 APPLICATIONS = $(shell ls argocd)
 APP_REFS = $(addsuffix .adoc,$(addprefix docs/modules/ROOT/pages/references/applications/,$(APPLICATIONS)))
+APP_BASE_REFS = $(addsuffix /REFERENCE.adoc,$(addprefix argocd/,$(APPLICATIONS)))
 
 mod_refs: $(MOD_REFS)
 
@@ -11,12 +12,11 @@ docs/modules/ROOT/pages/references/terraform_modules/%.adoc:
 	terraform-docs asciidoc --header-from README.adoc modules/$* > $@
 
 app_refs: $(APP_REFS)
+app_base_refs: $(APP_BASE_REFS)
 
-docs/modules/ROOT/pages/references/applications/%.adoc: argocd/%/REFERENCE.md
-	cat argocd/$*/README.md argocd/$*/REFERENCE.md | pandoc -o $@
+docs/modules/ROOT/pages/references/applications/%.adoc: argocd/%/REFERENCE.adoc
+	-cat argocd/$*/README.adoc argocd/$*/REFERENCE.adoc > $@
 
-argocd/%/REFERENCE.md: helm-docs argocd/%/values.yaml
+argocd/%/REFERENCE.adoc:
+	helm-docs --chart-search-root argocd/$* --dry-run | pandoc -o $@
 	touch $@
-
-helm-docs:
-	helm-docs -o REFERENCE.md
