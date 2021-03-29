@@ -133,3 +133,8 @@ Then, you should be able to use `kubectl`.
 include::partial$inspect_apps.adoc[]
 
 include::partial$tf_destroy.adoc[]
+
+
+== Reference
+
+See the xref:ROOT:references/terraform_modules/eks_aws.adoc[AWS EKS reference page].

@@ -57,3 +57,8 @@ include::partial$deploy_workstation.adoc[]
 include::partial$inspect_apps.adoc[]
 
 include::partial$tf_destroy.adoc[]
+
+
+== Reference
+
+See the xref:ROOT:references/terraform_modules/aks_azure.adoc[Azure AKS reference page].
