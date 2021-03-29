@@ -2,6 +2,7 @@
 apiVersion: "v2"
 name: "argocd"
 version: "0"
+description: "This chart installs and configures ArgoCD"
 dependencies:
   - name: "argo-cd"
     version: "2.14.7"

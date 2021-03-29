@@ -1,7 +1,7 @@
 MODULES = argocd-helm aks/azure eks/aws openshift4/aws k3s/docker k3s/libvirt
 MOD_REFS = $(addsuffix .adoc,$(addprefix docs/modules/ROOT/pages/references/terraform_modules/,$(MODULES)))
 
-APPLICATIONS = $(shell ls argocd)
+APPLICATIONS = $(shell ls -d argocd/*/ | cut -f2 -d'/')
 APP_REFS = $(addsuffix .adoc,$(addprefix docs/modules/ROOT/pages/references/applications/,$(APPLICATIONS)))
 APP_BASE_REFS = $(addsuffix /REFERENCE.adoc,$(addprefix argocd/,$(APPLICATIONS)))
 
@@ -25,5 +25,5 @@ docs/modules/ROOT/pages/references/applications/%.adoc: argocd/%/REFERENCE.adoc
 	-cat argocd/$*/README.adoc argocd/$*/REFERENCE.adoc > $@
 
 argocd/%/REFERENCE.adoc:
-	helm-docs --chart-search-root argocd/$* --dry-run | pandoc -o $@
+	helm-docs --template-files ../README.tmpl.md --chart-search-root argocd/$* --dry-run | pandoc -o $@
 	touch $@
