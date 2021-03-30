@@ -1,17 +1,20 @@
 = traefik
 
+This chart installs Traefik as the Kubernetes cluster Ingress
+Controller.
+
 == Requirements
 
 [cols=",,",options="header",]
-|===
+|================================================
 |Repository |Name |Version
 |https://helm.traefik.io/traefik |traefik |9.11.0
-|===
+|================================================
 
 == Values
 
 [width="100%",cols="16%,18%,27%,39%",options="header",]
-|===
+|=======================================================================
 |Key |Type |Default |Description
 |traefik.additionalArguments[0] |string |`"--metrics.prometheus=true"` |
 
@@ -21,4 +24,4 @@
 |traefik.deployment.replicas |int |`2` |
 
 |traefik.logs.access.enabled |bool |`true` |
-|===
+|=======================================================================

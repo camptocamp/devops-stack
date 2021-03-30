@@ -1,2 +1,3 @@
 = app-of-apps
 
+This chart and its subcharts install an app, as ArgoCD application.

@@ -1,18 +1,20 @@
 = minio
 
+This chart installs MinIO, a High Performance Object Storage.
+
 == Requirements
 
 [cols=",,",options="header",]
-|===
+|==================================
 |Repository |Name |Version
 |https://helm.min.io/ |minio |8.0.3
-|===
+|==================================
 
 == Values
 
 [cols=",,,",options="header",]
-|===
+|====================================================
 |Key |Type |Default |Description
 |minio.metrics.serviceMonitor.enabled |bool |`true` |
 |minio.resources.requests.memory |string |`"24Mi"` |
-|===
+|====================================================

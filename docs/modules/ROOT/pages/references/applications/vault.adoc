@@ -1,19 +1,22 @@
 = vault
 
+This chart installs hashicorp Vault component into the Kubernetes
+cluster.
+
 == Requirements
 
 [cols=",,",options="header",]
-|===
+|=================================================
 |Repository |Name |Version
 |https://helm.releases.hashicorp.com |vault |0.7.0
-|===
+|=================================================
 
 == Values
 
 [cols=",,,",options="header",]
-|===
+|==============================================
 |Key |Type |Default |Description
 |vault.global.psp.enable |bool |`true` |
 |vault.injector.metrics.enabled |bool |`true` |
 |vault.server.dev.enabled |bool |`true` |
-|===
+|==============================================

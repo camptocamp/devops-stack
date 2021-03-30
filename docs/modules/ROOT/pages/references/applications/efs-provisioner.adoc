@@ -1,17 +1,21 @@
 = efs-provisioner
 
+The chart installs provisioner enabling:
+
+* mounting EFS storage as PersistentVolumes in kubernetes
+
 == Requirements
 
 [cols=",,",options="header",]
-|===
+|======================================================
 |Repository |Name |Version
 |https://charts.helm.sh/stable |efs-provisioner |0.13.0
-|===
+|======================================================
 
 == Values
 
 [cols=",,,",options="header",]
-|===
+|===============================
 |Key |Type |Default |Description
 |efsProvisioner |object |`{}` |
-|===
+|===============================

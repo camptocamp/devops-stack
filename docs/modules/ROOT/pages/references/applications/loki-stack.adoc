@@ -1,19 +1,22 @@
 = loki-stack
 
+This chart installs loki-stack. loki is the log aggregation system
+inspired by Prometheus.
+
 == Requirements
 
 [cols=",,",options="header",]
-|===
+|========================================================
 |Repository |Name |Version
 |https://grafana.github.io/helm-charts |loki-stack |2.3.1
-|===
+|========================================================
 
 == Values
 
 [cols=",,,",options="header",]
-|===
+|================================================================
 |Key |Type |Default |Description
 |loki-stack.loki.serviceMonitor.enabled |bool |`true` |
 |loki-stack.loki.serviceName |string |`"loki-stack.loki-stack"` |
 |loki-stack.promtail.serviceMonitor.enabled |bool |`true` |
-|===
+|================================================================
