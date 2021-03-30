@@ -36,4 +36,4 @@ include::partial$tf_destroy.adoc[]
 
 == Reference
 
-See the xref:ROOT:references/terraform_modules/k3s_docker.adoc[K3s Docker reference page].
+See the xref:ROOT:references/terraform_modules/k3s/docker.adoc[K3s Docker reference page].

@@ -61,4 +61,4 @@ include::partial$tf_destroy.adoc[]
 
 == Reference
 
-See the xref:ROOT:references/terraform_modules/aks_azure.adoc[Azure AKS reference page].
+See the xref:ROOT:references/terraform_modules/aks/azure.adoc[Azure AKS reference page].

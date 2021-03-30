@@ -137,4 +137,4 @@ include::partial$tf_destroy.adoc[]
 
 == Reference
 
-See the xref:ROOT:references/terraform_modules/eks_aws.adoc[AWS EKS reference page].
+See the xref:ROOT:references/terraform_modules/eks/aws.adoc[AWS EKS reference page].

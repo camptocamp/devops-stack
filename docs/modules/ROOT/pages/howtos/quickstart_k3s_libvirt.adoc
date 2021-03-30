@@ -52,4 +52,4 @@ include::partial$tf_destroy.adoc[]
 
 == Reference
 
-See the xref:ROOT:references/terraform_modules/k3s_libvirt.adoc[K3s Libvirt reference page].
+See the xref:ROOT:references/terraform_modules/k3s/libvirt.adoc[K3s Libvirt reference page].
