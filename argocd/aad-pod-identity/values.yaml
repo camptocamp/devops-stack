@@ -1,7 +1,11 @@
 ---
-# -- Values passed to the add-pod-identity chart
-aad-pod-identity:
+aad-pod-identity: 
+  # -- By default, AAD Pod Identity matches pods to identities across namespaces.
+  # To match only pods in the namespace containing AzureIdentity set this to true.
+  # [more](https://github.com/Azure/aad-pod-identity/blob/master/charts/aad-pod-identity/values.yaml)
   forceNameSpaced: true
+  # -- Managed Identity Controller parameters.
+  # [more](https://github.com/Azure/aad-pod-identity/blob/master/charts/aad-pod-identity/values.yaml) 
   mic:
     prometheusPort: 8888
     resources:
@@ -9,6 +13,9 @@ aad-pod-identity:
         memory: 32Mi
       requests:
         memory: 16Mi
+
+  # -- Node Managed Identity parameters.
+  # [more](https://github.com/Azure/aad-pod-identity/blob/master/charts/aad-pod-identity/values.yaml)
   nmi:
     prometheusPort: 9090
     resources:
