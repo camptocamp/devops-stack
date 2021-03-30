@@ -3,7 +3,7 @@ apiVersion: "v2"
 name: "ArgoCD"
 version: "0"
 description: |
-  This chart installs and configures ArgoCD
+  This chart installs and configures:
 
   * ArgoCD itself
   * A Grafana dashaboard for ArgoCD
