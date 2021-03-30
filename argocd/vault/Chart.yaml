@@ -2,6 +2,8 @@
 apiVersion: "v2"
 name: "vault"
 version: "0"
+description: |
+  This chart installs hashicorp Vault component into the Kubernetes cluster.
 dependencies:
   - name: "vault"
     version: "0.7.0"

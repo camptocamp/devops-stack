@@ -2,6 +2,8 @@
 apiVersion: "v2"
 name: "aad-pod-identity"
 version: "0"
+description: |
+  This chart enables Kubernetes applications to access cloud resources securely with Azure Active Directory (AAD).
 dependencies:
   - name: "aad-pod-identity"
     version: "3.0.3"

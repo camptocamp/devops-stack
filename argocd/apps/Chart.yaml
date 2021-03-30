@@ -2,3 +2,7 @@
 apiVersion: "v2"
 name: "apps"
 version: "0"
+description: |
+  This chart instantiates the 
+  [App of Apps](https://argoproj.github.io/argo-cd/operator-manual/cluster-bootstrapping/#app-of-apps-pattern) 
+  as an ArgoCD application.

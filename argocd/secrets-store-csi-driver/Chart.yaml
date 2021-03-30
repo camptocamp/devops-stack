@@ -2,6 +2,8 @@
 apiVersion: "v2"
 name: "secrets-store-csi-driver"
 version: "0"
+description: |
+  This chart installs a driver enabling volume mounts for Secrets Store access. 
 dependencies:
   - name: "secrets-store-csi-driver"
     version: "0.0.16"
