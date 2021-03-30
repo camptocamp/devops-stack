@@ -1,2 +1,5 @@
 = apps
 
+This chart instantiates the
+https://argoproj.github.io/argo-cd/operator-manual/cluster-bootstrapping/#app-of-apps-pattern[App
+of Apps] as an ArgoCD application.

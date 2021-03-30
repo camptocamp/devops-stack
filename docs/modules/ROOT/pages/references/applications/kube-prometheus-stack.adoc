@@ -1,18 +1,21 @@
 = kube-prometheus-stack
 
+This chart installs the kube-prometheus-stack and configures Grafana
+dashboards for monitoring Kubernetes cluster with Prometheus.
+
 == Requirements
 
 [width="100%",cols="45%,22%,33%",options="header",]
-|===
+|=======================================================================
 |Repository |Name |Version
 |https://prometheus-community.github.io/helm-charts
 |kube-prometheus-stack |13.10.0
-|===
+|=======================================================================
 
 == Values
 
 [width="100%",cols="16%,18%,27%,39%",options="header",]
-|===
+|=======================================================================
 |Key |Type |Default |Description
 |kube-prometheus-stack.grafana.plugins[0] |string
 |`"grafana-piechart-panel"` |
@@ -81,4 +84,4 @@
 |`false` |
 
 |kube-prometheus-stack.thanosObjectStorageConfig |string |`nil` |
-|===
+|=======================================================================
