@@ -1,9 +1,14 @@
 ---
-# -- Values passed to the cert-manager chart
 cert-manager:
+  # -- cert-manager requires a number of CRD resources to be installed into your cluster as part of installation.
+  # This can either be done manually, using kubectl, or using the installCRDs option when installing the Helm chart.
   installCRDs: true
+  # -- Configure a Security Context of Pod
+  # [more](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
   securityContext:
     fsGroup: 999
+  
   prometheus:
     servicemonitor:
+      # -- Specifies whether to enable Prometheus monitoring 
       enabled: true

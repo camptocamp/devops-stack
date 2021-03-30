@@ -20,7 +20,15 @@ sources
 [width="100%",cols="16%,18%,27%,39%",options="header",]
 |=======================================================================
 |Key |Type |Default |Description
-|cert-manager |object
-|`{"installCRDs":true,"prometheus":{"servicemonitor":{"enabled":true}},"securityContext":{"fsGroup":999}}`
-|Values passed to the cert-manager chart
+|cert-manager.installCRDs |bool |`true` |cert-manager requires a number
+of CRD resources to be installed into your cluster as part of
+installation. This can either be done manually, using kubectl, or using
+the installCRDs option when installing the Helm chart.
+
+|cert-manager.prometheus.servicemonitor.enabled |bool |`true` |Specifies
+whether to enable Prometheus monitoring
+
+|cert-manager.securityContext |object |`{"fsGroup":999}` |Configure a
+Security Context of Pod
+https://kubernetes.io/docs/tasks/configure-pod-container/security-context/[more]
 |=======================================================================
