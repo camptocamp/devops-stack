@@ -8,7 +8,7 @@ metadata:
 spec:
   project: {{ .spec.project }}
   source:
-    path: {{ .spec.source.path }}
+    path: {{ .spec.source.path | default "." }}
     repoURL: {{ .spec.source.repoURL }}
     targetRevision: {{ .spec.source.targetRevision }}
     helm:
