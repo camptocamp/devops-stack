@@ -17,71 +17,7 @@ dashboards for monitoring Kubernetes cluster with Prometheus.
 [width="100%",cols="16%,18%,27%,39%",options="header",]
 |=======================================================================
 |Key |Type |Default |Description
-|kube-prometheus-stack.grafana.plugins[0] |string
-|`"grafana-piechart-panel"` |
-
-|kube-prometheus-stack.grafana.sidecar.dashboards.searchNamespace
-|string |`"ALL"` |
-
-|kube-prometheus-stack.grafana.sidecar.datasources.searchNamespace
-|string |`"ALL"` |
-
-|kube-prometheus-stack.kubeControllerManager.enabled |bool |`false` |
-
-|kube-prometheus-stack.kubeEtcd.enabled |bool |`false` |
-
-|kube-prometheus-stack.kubeProxy.enabled |bool |`false` |
-
-|kube-prometheus-stack.kubeScheduler.enabled |bool |`false` |
-
-|kube-prometheus-stack.prometheus.additionalPodMonitors[0].jobLabel
-|string |`"traefik"` |
-
-|kube-prometheus-stack.prometheus.additionalPodMonitors[0].name |string
-|`"traefik"` |
-
-|kube-prometheus-stack.prometheus.additionalPodMonitors[0].namespaceSelector.any
-|bool |`true` |
-
-|kube-prometheus-stack.prometheus.additionalPodMonitors[0].podMetricsEndpoints[0].path
-|string |`"/metrics"` |
-
-|kube-prometheus-stack.prometheus.additionalPodMonitors[0].podMetricsEndpoints[0].port
-|string |`"traefik"` |
-
-|kube-prometheus-stack.prometheus.additionalPodMonitors[0].podMetricsEndpoints[0].scheme
-|string |`"http"` |
-
-|kube-prometheus-stack.prometheus.additionalPodMonitors[0].selector.matchLabels.``app.kubernetes.io/instance''
-|string |`"traefik"` |
-
-|kube-prometheus-stack.prometheus.additionalPodMonitors[0].selector.matchLabels.``app.kubernetes.io/name''
-|string |`"traefik"` |
-
-|kube-prometheus-stack.prometheus.prometheusSpec.podMonitorSelectorNilUsesHelmValues
-|bool |`false` |
-
-|kube-prometheus-stack.prometheus.prometheusSpec.ruleSelectorNilUsesHelmValues
-|bool |`false` |
-
-|kube-prometheus-stack.prometheus.prometheusSpec.serviceMonitorSelectorNilUsesHelmValues
-|bool |`false` |
-
-|kube-prometheus-stack.prometheus.prometheusSpec.thanos.image |string
-|`"quay.io/thanos/thanos:v0.15.0"` |
-
-|kube-prometheus-stack.prometheus.prometheusSpec.thanos.version |string
-|`"v0.15.0"` |
-
-|kube-prometheus-stack.prometheusOperator.admissionWebhooks.enabled
-|bool |`false` |
-
-|kube-prometheus-stack.prometheusOperator.manageCrds |bool |`false` |
-
-|kube-prometheus-stack.prometheusOperator.tls.enabled |bool |`false` |
-
-|kube-prometheus-stack.prometheusOperator.tlsProxy.enabled |bool
-|`false` |
-
-|kube-prometheus-stack.thanosObjectStorageConfig |string |`nil` |
+|kube-prometheus-stack |object
+|`{"grafana":{"plugins":["grafana-piechart-panel"],"sidecar":{"dashboards":{"searchNamespace":"ALL"},"datasources":{"searchNamespace":"ALL"}}},"kubeControllerManager":{"enabled":false},"kubeEtcd":{"enabled":false},"kubeProxy":{"enabled":false},"kubeScheduler":{"enabled":false},"prometheus":{"additionalPodMonitors":[{"jobLabel":"traefik","name":"traefik","namespaceSelector":{"any":true},"podMetricsEndpoints":[{"path":"/metrics","port":"traefik","scheme":"http"}],"selector":{"matchLabels":{"app.kubernetes.io/instance":"traefik","app.kubernetes.io/name":"traefik"}}}],"prometheusSpec":{"podMonitorSelectorNilUsesHelmValues":false,"ruleSelectorNilUsesHelmValues":false,"serviceMonitorSelectorNilUsesHelmValues":false,"thanos":{"image":"quay.io/thanos/thanos:v0.15.0","version":"v0.15.0"}}},"prometheusOperator":{"admissionWebhooks":{"enabled":false},"manageCrds":false,"tls":{"enabled":false},"tlsProxy":{"enabled":false}},"thanosObjectStorageConfig":null}`
+|Values passed to the kube-prometheurs chart
 |=======================================================================

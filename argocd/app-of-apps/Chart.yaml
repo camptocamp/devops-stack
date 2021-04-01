@@ -4,4 +4,3 @@ name: "app-of-apps"
 version: "0"
 description: |
   This chart and its subcharts install an app, as ArgoCD application.
-  

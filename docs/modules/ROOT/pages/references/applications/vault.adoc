@@ -13,10 +13,10 @@ cluster.
 
 == Values
 
-[cols=",,,",options="header",]
-|==============================================
+[width="100%",cols="16%,18%,27%,39%",options="header",]
+|=======================================================================
 |Key |Type |Default |Description
-|vault.global.psp.enable |bool |`true` |
-|vault.injector.metrics.enabled |bool |`true` |
-|vault.server.dev.enabled |bool |`true` |
-|==============================================
+|vault |object
+|`{"global":{"psp":{"enable":true}},"injector":{"metrics":{"enabled":true}},"server":{"dev":{"enabled":true}}}`
+|Values passed to the vault chart
+|=======================================================================

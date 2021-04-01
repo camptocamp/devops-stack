@@ -15,7 +15,8 @@ The chart installs provisioner enabling:
 == Values
 
 [cols=",,,",options="header",]
-|===============================
+|=======================================================================
 |Key |Type |Default |Description
-|efsProvisioner |object |`{}` |
-|===============================
+|efsProvisioner |object |`{}` |Values passed to the efs-provisioner
+chart
+|=======================================================================

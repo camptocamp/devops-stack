@@ -1,4 +1,5 @@
 ---
+# -- Values passed to the vault chart
 vault:
   global:
     psp:

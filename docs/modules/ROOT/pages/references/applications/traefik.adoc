@@ -16,12 +16,7 @@ Controller.
 [width="100%",cols="16%,18%,27%,39%",options="header",]
 |=======================================================================
 |Key |Type |Default |Description
-|traefik.additionalArguments[0] |string |`"--metrics.prometheus=true"` |
-
-|traefik.additionalArguments[1] |string
-|`"--serversTransport.insecureSkipVerify=true"` |
-
-|traefik.deployment.replicas |int |`2` |
-
-|traefik.logs.access.enabled |bool |`true` |
+|traefik |object
+|`{"additionalArguments":["--metrics.prometheus=true","--serversTransport.insecureSkipVerify=true"],"deployment":{"replicas":2},"logs":{"access":{"enabled":true}}}`
+|Values passed to the traefik chart
 |=======================================================================

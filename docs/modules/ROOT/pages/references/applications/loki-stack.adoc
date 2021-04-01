@@ -13,10 +13,10 @@ inspired by Prometheus.
 
 == Values
 
-[cols=",,,",options="header",]
-|================================================================
+[width="100%",cols="16%,18%,27%,39%",options="header",]
+|=======================================================================
 |Key |Type |Default |Description
-|loki-stack.loki.serviceMonitor.enabled |bool |`true` |
-|loki-stack.loki.serviceName |string |`"loki-stack.loki-stack"` |
-|loki-stack.promtail.serviceMonitor.enabled |bool |`true` |
-|================================================================
+|loki-stack |object
+|`{"loki":{"serviceMonitor":{"enabled":true},"serviceName":"loki-stack.loki-stack"},"promtail":{"serviceMonitor":{"enabled":true}}}`
+|Values passed to the loki-stack chart
+|=======================================================================

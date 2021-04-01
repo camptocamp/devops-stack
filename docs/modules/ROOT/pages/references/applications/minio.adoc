@@ -12,9 +12,10 @@ This chart installs MinIO, a High Performance Object Storage.
 
 == Values
 
-[cols=",,,",options="header",]
-|====================================================
+[width="100%",cols="16%,18%,27%,39%",options="header",]
+|=======================================================================
 |Key |Type |Default |Description
-|minio.metrics.serviceMonitor.enabled |bool |`true` |
-|minio.resources.requests.memory |string |`"24Mi"` |
-|====================================================
+|minio |object
+|`{"metrics":{"serviceMonitor":{"enabled":true}},"resources":{"requests":{"memory":"24Mi"}}}`
+|Values passed to the minio chart
+|=======================================================================
