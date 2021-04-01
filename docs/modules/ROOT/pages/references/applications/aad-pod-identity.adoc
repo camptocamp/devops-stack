@@ -17,18 +17,7 @@ securely with Azure Active Directory (AAD).
 [width="100%",cols="16%,18%,27%,39%",options="header",]
 |=======================================================================
 |Key |Type |Default |Description
-|aad-pod-identity.forceNameSpaced |bool |`true` |By default, AAD Pod
-Identity matches pods to identities across namespaces. To match only
-pods in the namespace containing AzureIdentity set this to true.
-https://github.com/Azure/aad-pod-identity/blob/master/charts/aad-pod-identity/values.yaml[more]
-
-|aad-pod-identity.mic |object
-|`{"prometheusPort":8888,"resources":{"limits":{"memory":"32Mi"},"requests":{"memory":"16Mi"}}}`
-|Managed Identity Controller parameters.
-https://github.com/Azure/aad-pod-identity/blob/master/charts/aad-pod-identity/values.yaml[more]
-
-|aad-pod-identity.nmi |object
-|`{"prometheusPort":9090,"resources":{"limits":{"memory":"32Mi"},"requests":{"memory":"16Mi"}}}`
-|Node Managed Identity parameters.
-https://github.com/Azure/aad-pod-identity/blob/master/charts/aad-pod-identity/values.yaml[more]
+|aad-pod-identity |object
+|`{"forceNameSpaced":true,"mic":{"prometheusPort":8888,"resources":{"limits":{"memory":"32Mi"},"requests":{"memory":"16Mi"}}},"nmi":{"prometheusPort":9090,"resources":{"limits":{"memory":"32Mi"},"requests":{"memory":"16Mi"}}}}`
+|Values passed to the add-pod-identity chart
 |=======================================================================

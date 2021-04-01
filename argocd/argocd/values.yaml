@@ -1,14 +1,12 @@
 ---
+# -- Values passed to the argo-cd chart
 argo-cd:
-  controller: 
+  controller:
     metrics:
       serviceMonitor:
-        # -- Specifies whether to enable Prometheus metrics of ArgoCD controller
         enabled: true
       rules:
-        # -- Specifies whether to enable Prometheus metrics rules of ArgoCD controller
         enabled: true
-        # -- Specifies Metric Rules of ArgoCD controller
         spec:
           - alert: ArgoAppMissing
             expr: |
@@ -37,7 +35,6 @@ argo-cd:
   server:
     metrics:
       serviceMonitor:
-        # -- Specifies whether to enable Prometheus metrics of ArgoCD Server
         enabled: true
     volumeMounts:
       - name: certificate
@@ -50,5 +47,4 @@ argo-cd:
   repoServer:
     metrics:
       serviceMonitor:
-        # -- Specifies whether to enable Prometheus metrics of ArgoCD repoServer
         enabled: true
