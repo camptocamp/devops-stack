@@ -1,7 +1,7 @@
 ---
 # -- Values passed to the add-pod-identity chart
 aad-pod-identity:
-  forceNameSpaced: true 
+  forceNameSpaced: true
   mic:
     prometheusPort: 8888
     resources:
