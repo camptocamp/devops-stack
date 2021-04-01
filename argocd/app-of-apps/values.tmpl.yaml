@@ -110,10 +110,6 @@ argo-cd:
           - openid
           - profile
           - email
-    rbacConfig:
-      policy.default: role:readonly
-      policy.csv: |
-        g, pipeline, role:readonly
     ingress:
       enabled: true
       annotations:
