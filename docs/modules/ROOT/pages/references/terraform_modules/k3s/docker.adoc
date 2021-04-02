@@ -96,7 +96,7 @@ The `k3s/docker` Terraform module provides a way to install and configure:
 |[[input_k3s_version]] <<input_k3s_version,k3s_version>>
 |The K3s version to use
 |`string`
-|`"v1.18.15-k3s1"`
+|`"v1.20.5-k3s1"`
 |no
 
 |[[input_node_count]] <<input_node_count,node_count>>
@@ -151,10 +151,6 @@ object({
 |[[output_base_domain]] <<output_base_domain,base_domain>> |n/a
 |[[output_grafana_admin_password]] <<output_grafana_admin_password,grafana_admin_password>> |The admin password for Grafana.
 |[[output_kubeconfig]] <<output_kubeconfig,kubeconfig>> |The content of the KUBECONFIG file.
-|[[output_kubernetes_cluster_ca_certificate]] <<output_kubernetes_cluster_ca_certificate,kubernetes_cluster_ca_certificate>> |n/a
-|[[output_kubernetes_host]] <<output_kubernetes_host,kubernetes_host>> |n/a
-|[[output_kubernetes_password]] <<output_kubernetes_password,kubernetes_password>> |n/a
-|[[output_kubernetes_username]] <<output_kubernetes_username,kubernetes_username>> |n/a
 |[[output_repo_url]] <<output_repo_url,repo_url>> |n/a
 |[[output_target_revision]] <<output_target_revision,target_revision>> |n/a
 |===
