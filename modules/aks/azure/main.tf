@@ -55,6 +55,7 @@ module "cluster" {
   prefix              = var.cluster_name
   network_plugin      = "azure"
   vnet_subnet_id      = var.vnet_subnet_id
+  agents_count        = var.agents_count
   agents_size         = var.agents_size
   os_disk_size_gb     = var.os_disk_size_gb
 
