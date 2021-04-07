@@ -3,6 +3,8 @@ apiVersion: "v2"
 name: "csi-secrets-store-provider-azure"
 version: "0"
 description: |
+  NOTE: This chart is enabled only when deploying DevOps Stack to AKS.
+  
   This chart installs a driver to interface with Azure Key Vault provider.
   This driver enables:
 

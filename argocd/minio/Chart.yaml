@@ -3,6 +3,8 @@ apiVersion: "v2"
 name: "minio"
 version: "0"
 description: |
+  NOTE: This chart is enabled only when deploying DevOps Stack to K3s.
+  
   This chart installs MinIO, a High Performance Object Storage.
 dependencies:
   - name: "minio"

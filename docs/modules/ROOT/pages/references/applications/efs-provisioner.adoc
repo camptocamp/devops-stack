@@ -1,8 +1,11 @@
 = efs-provisioner
 
+NOTE: This chart is enabled only when deploying DevOps Stack to EKS.
+
 The chart installs provisioner enabling:
 
-* mounting EFS storage as PersistentVolumes in kubernetes
+* creation and management of `efs` StorageClass resources for dynamic
+PersistentVolumes in the kubernetes cluster
 
 == Requirements
 
@@ -11,12 +14,3 @@ The chart installs provisioner enabling:
 |Repository |Name |Version
 |https://charts.helm.sh/stable |efs-provisioner |0.13.0
 |======================================================
-
-== Values
-
-[cols=",,,",options="header",]
-|=======================================================================
-|Key |Type |Default |Description
-|efsProvisioner |object |`{}` |Values passed to the efs-provisioner
-chart
-|=======================================================================

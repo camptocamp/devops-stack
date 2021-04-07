@@ -1,1 +1,16 @@
+= keycloak
 
+NOTE: This chart is enabled only when deploying DevOps Stack to K3s.
+
+This chart installs keycloak for the identity and access management. It
+handles:
+
+* installation and configuration of keycloak
+* creation `kubernetes` realm and `admin` user account under
+`kubernetes` realm
+* adds the following DevOps stack apps as clients to OAuth2/OIDC
+authentication server:
+** argocd +
+** grafana
+** prometheus
+** alertmanager

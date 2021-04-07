@@ -3,6 +3,17 @@ apiVersion: "v2"
 name: "apps"
 version: "0"
 description: |
-  This chart instantiates the 
-  [App of Apps](https://argoproj.github.io/argo-cd/operator-manual/cluster-bootstrapping/#app-of-apps-pattern) 
-  as an ArgoCD application.
+  This chart is a composition of subcharts.
+  Each of the subcharts install one app of the `argocd/app-of-apps` (if parametrized as `enabled`).
+  
+  The following is a non-comprehensive list of the apps included:
+
+  * argocd
+  * cert-manager
+  * loki-stack
+  * kube-prometheus-stack
+  * minio
+  * keycloak
+
+  Some of the apps are automatically disabled based on the type of cloud platform used. 
+  To enable/disable apps please see xref:ROOT:howtos/user_parameters.adoc[User Parameters]   

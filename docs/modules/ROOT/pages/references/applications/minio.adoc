@@ -1,5 +1,7 @@
 = minio
 
+NOTE: This chart is enabled only when deploying DevOps Stack to K3s.
+
 This chart installs MinIO, a High Performance Object Storage.
 
 == Requirements
