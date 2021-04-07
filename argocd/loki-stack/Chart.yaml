@@ -4,7 +4,7 @@ name: "loki-stack"
 version: "0"
 description: |
   This chart installs loki-stack. 
-  loki is the log aggregation system inspired by Prometheus.
+  Loki is a log aggregation system made by Grafana Labs, and inspired by Prometheus.
 dependencies:
   - name: "loki-stack"
     version: "2.3.1"

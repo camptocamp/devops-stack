@@ -3,7 +3,7 @@ apiVersion: "v2"
 name: "csi-secrets-store-provider-azure"
 version: "0"
 description: |
-  This chart installs driver to interface with Azure Key Vault provider.
+  This chart installs a driver to interface with Azure Key Vault provider.
   This driver enables:
 
   * getting secrets from Azure Key Vault

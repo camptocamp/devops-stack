@@ -3,7 +3,7 @@ apiVersion: "v2"
 name: "efs-provisioner"
 version: "0"
 description: |
-  The chart installs provisioner enabling:
+  This chart installs a provisioner enabling:
 
   * mounting EFS storage as PersistentVolumes in kubernetes
 dependencies:

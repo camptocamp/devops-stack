@@ -3,8 +3,8 @@ apiVersion: "v2"
 name: "apps"
 version: "0"
 description: |
-  This chart installs keycloak for the identity and access management.
+  This chart installs Keycloak for the identity and access management.
   It handles:
   
-  * installation and configuration of keycloak
+  * installation and configuration of Keycloak
   * creation of users and clients ids (OAuth2 and OIDC) for applications installed the DevOps Stack

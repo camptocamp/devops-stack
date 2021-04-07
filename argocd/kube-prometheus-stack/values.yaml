@@ -1,5 +1,5 @@
 ---
-# -- Values passed to the kube-prometheurs chart 
+# -- Values passed to the kube-prometheus-stack chart 
 kube-prometheus-stack:
   thanosObjectStorageConfig:
 
