@@ -19,6 +19,12 @@ variable "vnet_subnet_id" {
   type        = string
 }
 
+variable "agents_count" {
+  description = "The number of Agents that should exist in the Agent Pool. Please set `agents_count` `null` while `enable_auto_scaling` is `true` to avoid possible `agents_count` changes."
+  type        = number
+  default     = 2
+}
+
 variable "agents_size" {
   description = "The default virtual machine size for the Kubernetes agents"
   type        = string
