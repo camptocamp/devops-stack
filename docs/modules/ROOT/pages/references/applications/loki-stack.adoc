@@ -1,7 +1,7 @@
 = loki-stack
 
-This chart installs loki-stack. loki is the log aggregation system
-inspired by Prometheus.
+This chart installs loki-stack. Loki is a log aggregation system made by
+Grafana Labs, and inspired by Prometheus.
 
 == Requirements
 

@@ -1,7 +1,7 @@
 = traefik
 
-This chart installs Traefik as the Kubernetes cluster Ingress
-Controller.
+This chart installs Traefik and configures it as the default Kubernetes
+cluster Ingress Controller.
 
 == Requirements
 
