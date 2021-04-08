@@ -25,6 +25,12 @@ variable "agents_count" {
   default     = 2
 }
 
+variable "agents_max_pods" {
+  description = "(Optional) The maximum number of pods that can run on each agent. Changing this forces a new resource to be created."
+  type        = number
+  default     = null
+}
+
 variable "agents_size" {
   description = "The default virtual machine size for the Kubernetes agents"
   type        = string
