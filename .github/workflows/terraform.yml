@@ -32,7 +32,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: 0.14.6
+          terraform_version: 0.14.10
 
       - name: Setup ArgoCD
         run: |
@@ -101,7 +101,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: 0.14.6
+          terraform_version: 0.14.10
 
       - name: Checkout ${{ github.base_ref }}
         uses: actions/checkout@v2
