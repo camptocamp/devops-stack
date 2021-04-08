@@ -4,7 +4,7 @@ NOTE: This chart is enabled only when deploying DevOps Stack to EKS.
 
 The chart installs a provisioner enabling:
 
-* creation and management of `efs` StorageClass resources for dynamic
+* creation and management of `efs` StorageClass for dynamic
 PersistentVolumes in the kubernetes cluster
 
 == Requirements
