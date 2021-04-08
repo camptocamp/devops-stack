@@ -1,5 +1,24 @@
 = Changelog
 
+== https://github.com/camptocamp/devops-stack/tree/v0.32.0[0.32.0] (2021-04-08)
+
+https://github.com/camptocamp/devops-stack/compare/v0.31.0...v0.32.0[Full Changelog]
+
+*Implemented enhancements:*
+
+* [aks] Allow to override agents_count https://github.com/camptocamp/devops-stack/pull/570[#570] (https://github.com/mcanevet[mcanevet])
+* [aks] Allow to override agents_max_pods https://github.com/camptocamp/devops-stack/pull/571[#571] (https://github.com/mcanevet[mcanevet])
+
+*Upgraded components:*
+
+* Upgrade k3s to v1.20.x https://github.com/camptocamp/devops-stack/pull/476[#476] (https://github.com/mcanevet[mcanevet])
+* Upgrade Terraform version to 0.14.10 https://github.com/camptocamp/devops-stack/pull/572[#572] (https://github.com/mcanevet[mcanevet])
+
+*Fixed Bugs:*
+
+* Fix error on link ref in navigation file https://github.com/camptocamp/devops-stack/pull/562[#562] (https://github.com/fsismondi[fsismondi])
+* Remove duplicate key in ArgoCD's RBAC configuration https://github.com/camptocamp/devops-stack/pull/565[#565] (https://github.com/mcanevet[mcanevet])
+
 == https://github.com/camptocamp/devops-stack/tree/v0.31.0[0.31.0] (2021-03-29)
 
 https://github.com/camptocamp/devops-stack/compare/v0.30.0...v0.31.0[Full Changelog]
