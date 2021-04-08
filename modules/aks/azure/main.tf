@@ -57,6 +57,7 @@ module "cluster" {
   vnet_subnet_id      = var.vnet_subnet_id
   agents_count        = var.agents_count
   agents_size         = var.agents_size
+  agents_max_pods     = var.agents_max_pods
   os_disk_size_gb     = var.os_disk_size_gb
 
   public_ssh_key = var.public_ssh_key
