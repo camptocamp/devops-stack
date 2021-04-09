@@ -2,7 +2,7 @@ argocd:
   openshift:
     enabled: true
     oauthclient:
-      secret: ${openshift_oauthclient_secret} 
+      secret: ${openshift_oauthclient_secret}
 argo-cd:
   openshift:
     enabled: true
@@ -15,9 +15,6 @@ argo-cd:
       argocdServerAdminPassword: "$2a$10$wzUzrdx.jMb7lHIbW6VutuRpV4OnpPA3ItWBDiP04QVHfGqzAoj6i"  # argocd
       argocdServerAdminPasswordMtime: '2020-07-23T11:31:23Z'
   installCRDs: false
-  global:
-    image:
-      tag: v1.8.7
   controller:
     metrics:
       enabled: true

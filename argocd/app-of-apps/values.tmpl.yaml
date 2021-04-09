@@ -48,9 +48,6 @@ ${yamlencode({"extraApps": extra_apps})}
 
 argo-cd:
   installCRDs: false
-  global:
-    image:
-      tag: v1.8.7
   configs:
     secret:
       argocdServerAdminPassword: "$2a$10$wzUzrdx.jMb7lHIbW6VutuRpV4OnpPA3ItWBDiP04QVHfGqzAoj6i"  # argocd
