@@ -48,3 +48,6 @@ argo-cd:
     metrics:
       serviceMonitor:
         enabled: true
+
+argocd-applicationset:
+  installCRDs: false
