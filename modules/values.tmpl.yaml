@@ -137,6 +137,8 @@ argo-cd:
         g, argocd-admin, role:admin
       scopes: '[groups, cognito:groups, roles]'
 
+argocd-applicationset: {}
+
 %{ if cert_manager.enable }
 cert-manager: {}
 %{ endif }
