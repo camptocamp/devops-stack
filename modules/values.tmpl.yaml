@@ -138,6 +138,7 @@ argo-cd:
       scopes: '[groups, cognito:groups, roles]'
 
 argocd-applicationset: {}
+argocd-notifications: {}
 
 %{ if cert_manager.enable }
 cert-manager: {}
