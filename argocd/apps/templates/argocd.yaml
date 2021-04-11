@@ -17,6 +17,8 @@ spec:
           {{- index .Values "argo-cd" | toYaml | nindent 10 }}
         argocd-applicationset:
           {{- index .Values "argocd-applicationset" | toYaml | nindent 10 }}
+        argocd-notifications:
+          {{- index .Values "argocd-notifications" | toYaml | nindent 10 }}
   destination:
     namespace: argocd
     server: {{ .Values.spec.destination.server }}
