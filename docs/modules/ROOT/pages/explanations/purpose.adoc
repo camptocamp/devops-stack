@@ -117,7 +117,8 @@ k3s for development and testing purposes),
 * Infrastructure as Code with Terraform,
 * Automatic deployment of "core apps" (cert-manager, prometheus,
 alertmanager, grafana, loki, ingress controller…) in GitOps spirit with
-ArgoCD,Central point of documentations with Antora.
+ArgoCD,
+* Central point of documentations with Antora.
 
 A summary of good practices used daily and experiences acquired over
 the time by the DevOps experts at Camptocamp.
