@@ -5,5 +5,6 @@ output "argocd_auth_token" {
 
 output "app_of_apps_values" {
   description = "App of Apps values"
+  sensitive   = true
   value       = helm_release.app_of_apps.values
 }
