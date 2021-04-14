@@ -30,5 +30,7 @@ output "grafana_admin_password" {
 }
 
 output "app_of_apps_values" {
-  value = module.argocd.app_of_apps_values
+  description = "App of Apps values"
+  sensitive   = true
+  value       = module.argocd.app_of_apps_values
 }
