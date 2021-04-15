@@ -1,0 +1,99 @@
+= Deploying the DevOps Stack to OpenShift IPI
+:ci-variables: aws
+:terraform-provider: AWS
+:terraform-provider-link: https://registry.terraform.io/providers/hashicorp/aws/latest/docs
+
+== Prerequisites
+
+- Access to API keys allowing to create required resources in AWS,
+- Access to portal https://cloud.redhat.com to generate a PullSecret,
+- Binary https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest[openshift-install] in your $PATH,
+- Knowledge of https://terraform.io[Terraform] basics
+
+
+include::partial$terraform_instant_intro.adoc[]
+
+```yaml
+# install-config.yaml
+
+apiVersion: v1
+baseDomain: example.com
+controlPlane: 
+  hyperthreading: Enabled   
+  name: master
+  platform:
+    aws:
+      zones:
+      - eu-west-1a
+      - eu-west-1b
+      - eu-west-1c
+  replicas: 3
+compute: 
+- hyperthreading: Enabled 
+  name: worker
+  platform:
+    aws:
+      zones:
+      - eu-west-1a
+      - eu-west-1b
+      - eu-west-1c
+  replicas: 3
+metadata:
+  name: ocp
+platform:
+  aws:
+    region: eu-west-1
+pullSecret: '<PULL SECRET KEY>'
+fips: false 
+sshKey: <SSH KEY>
+```
+
+```hcl
+# terraform/main.tf
+
+locals {
+  install_config_path = "install-config.yaml"
+  region              = "eu-west-1"
+  base_domain         = "example.com"
+  cluster_name        = "ocp"  
+}
+
+
+module "cluster" {
+  source              = "git::https://github.com/camptocamp/devops-stack.git//modules/openshift4/aws?ref=v0.32.0"
+  install_config_path = local.install_config_path
+  base_domain         = local.base_domain
+  cluster_name        = local.cluster_name
+  region              = local.region
+}
+
+```
+
+include::partial$pipeline_outputs_ocp.adoc[]
+
+include::partial$terraform_backend.adoc[]
+
+include::partial$deploy_workstation.adoc[]
+
+== Follow deployment process
+
+OpenShift is deployed using a nested terraform where a specific version is packaged within the openshift-install binary. When DevOps Stack terraform is running, we cannot follow the child process.
+
+Thus, we can track the deployment in terraform/<CLUSTER NAME>/.openshift_install.log
+
+```bash
+tail -f terraform/<CLUSTER NAME>/.openshift_install.log
+```
+include::partial$k3s_kubeconfig_keycloak.adoc[]
+
+include::partial$inspect_apps_ocp.adoc[]
+
+include::partial$tf_destroy.adoc[]
+
+
+== Reference
+
+See the xref:ROOT:references/terraform_modules/openshift4/aws.adoc[AWS OCP reference page].
+See the https://github.com/openshift/installer/blob/master/docs/user/customization.md[install-config.yaml customization].
+See the https://docs.openshift.com/container-platform/4.7/installing/installing_aws/installing-aws-customizations.html#installing-aws-customizations[AWS Configuration for OCP IPI]
+See the https://github.com/openshift/installer/blob/master/docs/user/customization.md[install-config.yaml customization].
