@@ -104,9 +104,9 @@ resource "helm_release" "app_of_apps" {
 resource "null_resource" "wait_for_app_of_apps" {
   count = var.wait_for_app_of_apps ? 1 : 0
 
-  depends_on = [
-    helm_release.app_of_apps
-  ]
+  triggers = {
+    app_of_apps_values = join("---\n", helm_release.app_of_apps.values)
+  }
 
   provisioner "local-exec" {
     command = "KUBECONFIG=$(mktemp /tmp/kubeconfig.XXXXXX) ; echo \"$KUBECONFIG_CONTENT\" > \"$KUBECONFIG\" ; export KUBECONFIG ; while ! argocd app wait apps --sync --health --timeout 30; do echo Retry; done ; rm \"$KUBECONFIG\""
