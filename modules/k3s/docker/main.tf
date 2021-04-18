@@ -1,6 +1,6 @@
 module "cluster" {
   source  = "camptocamp/k3s/docker"
-  version = "0.7.1"
+  version = "0.10.1"
 
   network_name = "bridge"
   cluster_name = var.cluster_name
