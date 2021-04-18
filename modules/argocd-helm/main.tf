@@ -109,7 +109,17 @@ resource "null_resource" "wait_for_app_of_apps" {
   ]
 
   provisioner "local-exec" {
-    command = "KUBECONFIG=$(mktemp /tmp/kubeconfig.XXXXXX) ; echo \"$KUBECONFIG_CONTENT\" > \"$KUBECONFIG\" ; export KUBECONFIG ; while ! argocd app wait apps --sync --health --timeout 30; do echo Retry; done ; rm \"$KUBECONFIG\""
+    command = <<EOT
+    KUBECONFIG=$(mktemp /tmp/kubeconfig.XXXXXX)
+    echo "$KUBECONFIG_CONTENT" > "$KUBECONFIG"
+    export KUBECONFIG
+    for i in `seq 1 60`; do
+      argocd app wait apps --sync --health --timeout 30 && rm "$KUBECONFIG" && exit 0
+    done
+    echo TIMEOUT
+    rm "$KUBECONFIG"
+    exit 1
+    EOT
 
     environment = {
       ARGOCD_OPTS        = local.argocd_opts
