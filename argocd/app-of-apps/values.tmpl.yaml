@@ -43,6 +43,8 @@ apps:
     enabled: ${traefik.enable}
   vault:
     enabled: false
+  thanos:
+    enabled: ${ can(metrics_archives.bucket_config) ? true : false }
 
 ${yamlencode({"extraApps": extra_apps})}
 
@@ -258,7 +260,7 @@ kube-prometheus-stack:
         type: prometheus
         # TODO: fix this 9091 with oauthPassThru
         #url: http://kube-prometheus-stack-prometheus:9091/
-        url: http://kube-prometheus-stack-prometheus:9090/
+        url: ${ can(metrics_archives.bucket_config) ? "http://thanos-query.thanos:9090" : "http://kube-prometheus-stack-prometheus:9090"}
         access: proxy
         isDefault: true
         jsonData:
@@ -285,6 +287,8 @@ kube-prometheus-stack:
 
   prometheus:
     enabled: ${prometheus.enable}
+    thanosService:
+      enabled: ${ can(metrics_archives.bucket_config) ? true : false  }
 %{ if prometheus.enable }
     ingress:
       enabled: true
@@ -416,3 +420,56 @@ traefik: {}
 %{ endif }
 
 vault: {}
+
+%{ if can(metrics_archives.bucket_config) }
+thanos:
+  ${ indent(4,yamlencode({"objstoreConfig": metrics_archives.bucket_config})) }
+
+  storegateway:
+    enabled: true
+    createConfigMap: true
+
+  query:
+    dnsDiscovery:
+      sidecarsService: kube-prometheus-stack-thanos-discovery
+      sidecarsNamespace: kube-prometheus-stack
+
+  bucketweb:
+    enabled: true
+    ingress:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: ${cluster_issuer}
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+        ingress.kubernetes.io/ssl-redirect: "true"
+        kubernetes.io/ingress.allow-http: "false"
+      hostname: thanos-bucketweb.apps.${base_domain}
+      extraHosts:
+        - name: ${metrics_archives.bucketweb_domain}
+      tls: true
+      extraTls:
+        - secretName: thanos-bucketweb-tls
+          hosts:
+            - ${metrics_archives.bucketweb_domain}
+            - thanos-query.apps.${base_domain}
+
+  queryFrontend:
+    ingress:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: ${cluster_issuer}
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+        ingress.kubernetes.io/ssl-redirect: "true"
+        kubernetes.io/ingress.allow-http: "false"
+      hostname: thanos-query.apps.${base_domain}
+      extraHosts:
+        - name: ${metrics_archives.query_domain}
+      tls: true
+      extraTls:
+        - secretName: thanos-query-tls
+          hosts:
+            - ${metrics_archives.query_domain}
+            - thanos-query.apps.${base_domain}
+%{ endif }
