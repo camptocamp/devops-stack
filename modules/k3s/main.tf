@@ -1,5 +1,5 @@
 locals {
-  base_domain                       = format("%s.nip.io", replace(module.cluster.ingress_ip_address, ".", "-"))
+  base_domain                       = coalesce(var.base_domain, format("%s.nip.io", replace(module.cluster.ingress_ip_address, ".", "-")))
   context                           = yamldecode(module.cluster.kubeconfig)
   kubernetes_host                   = local.context.clusters.0.cluster.server
   kubernetes_client_certificate     = base64decode(local.context.users.0.user.client-certificate-data)
