@@ -10,5 +10,5 @@ description: |
   * An `OAuthClient` Kubernetes object if the OpenShift 4 option is enabled
 dependencies:
   - name: "argo-cd"
-    version: "3.0.0"
+    version: "3.1.1"
     repository: "https://argoproj.github.io/argo-helm"
