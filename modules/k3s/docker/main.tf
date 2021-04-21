@@ -6,6 +6,8 @@ module "cluster" {
   cluster_name = var.cluster_name
   k3s_version  = var.k3s_version
   node_count   = var.node_count
+  server_ports = var.server_ports
+
   server_config = [
     "--disable", "traefik",
     "--disable", "metrics-server",
