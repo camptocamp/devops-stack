@@ -3,3 +3,15 @@ variable "k3s_version" {
   type        = string
   default     = "v1.20.5-k3s1"
 }
+
+variable "server_ports" {
+  description = "Port mappings of the server container."
+  default     = []
+
+  type = set(object({
+    internal = number
+    external = optional(number)
+    ip       = optional(string)
+    protocol = optional(string)
+  }))
+}
