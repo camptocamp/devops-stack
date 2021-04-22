@@ -4,10 +4,10 @@ locals {
   base_domain         = "example.com"
   cluster_name        = "ocp"  
 }
+
 provider "aws" {
   region = local.region
 }
-
 
 module "cluster" {
   source              = "git::https://github.com/camptocamp/devops-stack.git//modules/openshift4/aws?ref=v0.32.0"
