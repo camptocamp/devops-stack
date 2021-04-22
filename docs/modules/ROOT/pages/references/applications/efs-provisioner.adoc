@@ -14,3 +14,11 @@ PersistentVolumes in the kubernetes cluster
 |Repository |Name |Version
 |https://charts.helm.sh/stable |efs-provisioner |0.13.0
 |======================================================
+
+== Values
+
+[cols=",,,",options="header",]
+|===============================
+|Key |Type |Default |Description
+|efsProvisioner |object |`{}` |
+|===============================

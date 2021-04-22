@@ -80,6 +80,18 @@ The `aks/azure` Terraform module provides a way to install and configure:
 |`[]`
 |no
 
+|[[input_agents_count]] <<input_agents_count,agents_count>>
+|The number of Agents that should exist in the Agent Pool. Please set `agents_count` `null` while `enable_auto_scaling` is `true` to avoid possible `agents_count` changes.
+|`number`
+|`2`
+|no
+
+|[[input_agents_max_pods]] <<input_agents_max_pods,agents_max_pods>>
+|(Optional) The maximum number of pods that can run on each agent. Changing this forces a new resource to be created.
+|`number`
+|`null`
+|no
+
 |[[input_agents_size]] <<input_agents_size,agents_size>>
 |The default virtual machine size for the Kubernetes agents
 |`string`
@@ -191,7 +203,7 @@ object({
 [cols="a,a",options="header,autowidth"]
 |===
 |Name |Description
-|[[output_app_of_apps_values]] <<output_app_of_apps_values,app_of_apps_values>> |n/a
+|[[output_app_of_apps_values]] <<output_app_of_apps_values,app_of_apps_values>> |App of Apps values
 |[[output_argocd_auth_token]] <<output_argocd_auth_token,argocd_auth_token>> |The token to set in ARGOCD_AUTH_TOKEN environment variable.
 |[[output_argocd_server]] <<output_argocd_server,argocd_server>> |The URL of the ArgoCD server.
 |[[output_grafana_admin_password]] <<output_grafana_admin_password,grafana_admin_password>> |The admin password for Grafana.
