@@ -1,4 +1,4 @@
-= Deploying the DevOps Stack to OpenShift IPI
+= Deploying the DevOps Stack to OpenShift (IPI) on AWS
 :ci-variables: aws
 :terraform-provider: AWS
 :terraform-provider-link: https://registry.terraform.io/providers/hashicorp/aws/latest/docs
