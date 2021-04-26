@@ -1,4 +1,5 @@
 ---
+# -- Values passed to the traefik chart
 traefik:
   deployment:
     replicas: 2

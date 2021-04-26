@@ -2,6 +2,12 @@
 apiVersion: "v2"
 name: "efs-provisioner"
 version: "0"
+description: |  
+  NOTE: This chart is enabled only when deploying DevOps Stack to EKS.
+  
+  The chart installs a provisioner enabling:
+  
+  * creation and management of `efs` StorageClass for dynamic PersistentVolumes in the kubernetes cluster
 dependencies:
   - name: "efs-provisioner"
     version: "0.13.0"

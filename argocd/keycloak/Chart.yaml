@@ -1,4 +1,17 @@
 ---
 apiVersion: "v2"
-name: "apps"
+name: "keycloak"
 version: "0"
+description: |
+  NOTE: This chart is enabled only when deploying DevOps Stack to clouds not providing OIDC out of the box.
+
+  This chart installs Keycloak for the identity and access management.
+  It handles:
+  
+  * installation and configuration of Keycloak
+  * creating `kubernetes` realm and `admin` user account under a `kubernetes` realm
+  * adds the following DevOps stack apps as clients to OAuth2/OIDC authentication server:
+    * argocd        
+    * grafana
+    * prometheus
+    * alertmanager
