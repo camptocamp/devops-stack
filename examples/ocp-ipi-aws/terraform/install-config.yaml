@@ -1,0 +1,30 @@
+apiVersion: v1
+baseDomain: example.com
+controlPlane: 
+  hyperthreading: Enabled   
+  name: master
+  platform:
+    aws:
+      zones:
+      - eu-west-1a
+      - eu-west-1b
+      - eu-west-1c
+  replicas: 3
+compute: 
+- hyperthreading: Enabled 
+  name: worker
+  platform:
+    aws:
+      zones:
+      - eu-west-1a
+      - eu-west-1b
+      - eu-west-1c
+  replicas: 3
+metadata:
+  name: ocp
+platform:
+  aws:
+    region: eu-west-1
+pullSecret: '<PULLSECRET>'
+fips: false 
+sshKey: <SSH KEY>

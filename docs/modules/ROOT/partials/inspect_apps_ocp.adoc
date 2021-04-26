@@ -1,0 +1,8 @@
+== Inspect the DevOps Stack Applications
+
+
+You can view the ingress routes for the various DevOps Stack Applications with:
+
+```
+$ oc get route --all-namespaces
+```

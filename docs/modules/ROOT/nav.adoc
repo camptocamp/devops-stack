@@ -5,6 +5,7 @@
 ** xref:ROOT:quickstart.adoc[Quickstarts]
 *** xref:ROOT:howtos/quickstart_eks.adoc[EKS]
 *** xref:ROOT:howtos/quickstart_aks.adoc[AKS]
+*** xref:ROOT:howtos/quickstart_ocp_ipi_aws.adoc[OpenShift (IPI) on AWS]
 *** xref:ROOT:howtos/quickstart_k3s_docker.adoc[K3s on Docker]
 *** xref:ROOT:howtos/quickstart_k3s_libvirt.adoc[K3s on Libvirt]
 ** xref:ROOT:howtos/contributions.adoc[Contribution]

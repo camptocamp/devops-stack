@@ -1,0 +1,70 @@
+= Deploying the DevOps Stack to OpenShift (IPI) on AWS
+:ci-variables: aws
+:terraform-provider: AWS
+:terraform-provider-link: https://registry.terraform.io/providers/hashicorp/aws/latest/docs
+
+IMPORTANT: The example given below is made to work on AWS, other cloud providers such as Azure will come later.
+
+== Prerequisites
+
+- Access to API keys allowing to create required resources in AWS,
+- Meet the requirements for OCP deployment such as SSH public key and https://cloud.redhat.com[PullSecret] from Red Hat,
+- The https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest[openshift-install] binary is in your `$PATH`,
+- The https://aws.amazon.com/cli/[AWS cli] binary is in your `$PATH`,
+- Knowledge of https://terraform.io[Terraform] basics
+
+
+include::partial$terraform_instant_intro.adoc[]
+
+```hcl
+# terraform/main.tf
+
+locals {
+  install_config_path = "install-config.yaml"
+  region              = "eu-west-1"
+  base_domain         = "example.com"
+  cluster_name        = "ocp"  
+}
+
+
+module "cluster" {
+  source              = "git::https://github.com/camptocamp/devops-stack.git//modules/openshift4/aws?ref=v0.32.0"
+  install_config_path = local.install_config_path
+  base_domain         = local.base_domain
+  cluster_name        = local.cluster_name
+  region              = local.region
+}
+
+```
+
+include::partial$pipeline_outputs_ocp.adoc[]
+
+include::partial$terraform_backend.adoc[]
+
+include::partial$ocp_ipi_instant_intro.adoc[]
+
+include::partial$deploy_workstation.adoc[]
+
+== Deployment Process
+
+OpenShift is deployed using the `openshift-install` binary, which embarks a nested Terraform version. When the DevOps Stack Terraform is running, we cannot follow the child process.
+
+Thus, we can track the deployment progress in `terraform/<CLUSTER NAME>/.openshift_install.log`
+
+```shell
+$ tail -f terraform/<CLUSTER NAME>/.openshift_install.log
+```
+include::partial$ocp_kubeconfig.adoc[]
+
+include::partial$inspect_apps_ocp.adoc[]
+
+include::partial$tf_destroy.adoc[]
+
+
+== Reference
+
+See the xref:ROOT:references/terraform_modules/openshift4/aws.adoc[AWS OCP reference page].
+
+See the https://github.com/openshift/installer/blob/master/docs/user/customization.md[install-config.yaml customization].
+
+See the https://docs.openshift.com/container-platform/4.7/installing/installing_aws/installing-aws-customizations.html#installing-aws-customizations[AWS Configuration for OCP IPI].
