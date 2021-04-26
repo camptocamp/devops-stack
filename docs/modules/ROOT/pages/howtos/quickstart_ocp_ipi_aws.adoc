@@ -10,7 +10,7 @@ IMPORTANT: The example given below is made to work on AWS, other cloud providers
 - Access to API keys allowing to create required resources in AWS,
 - Meet the requirements for OCP deployment such as SSH public key and https://cloud.redhat.com[PullSecret] from Red Hat,
 - The https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest[openshift-install] binary is in your `$PATH`,
-- Binary https://aws.amazon.com/cli/[AWS cli] in your $PATH,
+- The https://aws.amazon.com/cli/[AWS cli] binary is in your `$PATH`,
 - Knowledge of https://terraform.io[Terraform] basics
 
 
