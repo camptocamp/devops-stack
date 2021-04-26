@@ -17,6 +17,32 @@ module "cluster" {
 }
 ```
 
+If your docker setup doesn't support the bridge0 like on MacOSX, you cannot access to the container IP so the computed base domain isn't reachable.
+You can specify the published ports of the K3S master and the base domain to use your computer's IP.
+
+```hcl
+module "cluster" {
+  source = "git::https://github.com/camptocamp/devops-stack.git//modules/k3s/docker?ref=master"
+
+  cluster_name = "my-cluster"
+  cluster_endpoint = "192-168-1-118.nip.io"
+  base_domain      = "192-168-1-118.nip.io"
+  server_ports = [
+    {
+      internal = 6443
+      external = 6443
+    },
+    {
+      internal = 80
+      external = 80
+    },
+    {
+      internal = 443
+      external = 443
+    },
+  ]  
+}
+```
 
 include::partial$pipeline_outputs.adoc[]
 
