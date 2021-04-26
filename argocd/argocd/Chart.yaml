@@ -6,7 +6,7 @@ description: |
   This chart installs and configures:
 
   * ArgoCD itself
-  * A Grafana dashaboard for ArgoCD
+  * A Grafana dashboard for ArgoCD
   * An `OAuthClient` Kubernetes object if the OpenShift 4 option is enabled
 dependencies:
   - name: "argo-cd"
