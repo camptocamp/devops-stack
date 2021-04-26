@@ -1,6 +1,6 @@
 = keycloak
 
-NOTE: This chart is enabled only when deploying DevOps Stack to K3s.
+NOTE: This chart is enabled only when deploying DevOps Stack to clouds not providing OIDC out of the box.
 
 This chart installs Keycloak for the identity and access management. It
 handles:
