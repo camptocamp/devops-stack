@@ -1,6 +1,6 @@
 == Create your IPI response file
 
-The install-config.yaml file required to perform silent install of OpenShift
+Create the `install-config.yaml` file required to perform silent install of OpenShift:
 
 ```yaml
 # install-config.yaml
