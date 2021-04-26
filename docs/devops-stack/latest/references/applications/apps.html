@@ -279,7 +279,40 @@
 </aside>
 <article class="doc">
 <h1 class="page">apps</h1>
-
+<div class="paragraph">
+<p>This chart is a composition of subcharts. Each of the subcharts install
+one app of the <code>argocd/app-of-apps</code> (if parametrized as <code>enabled</code>).</p>
+</div>
+<div class="paragraph">
+<p>The following is a non-comprehensive list of the apps included:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>argocd</p>
+</li>
+<li>
+<p>cert-manager</p>
+</li>
+<li>
+<p>loki-stack</p>
+</li>
+<li>
+<p>kube-prometheus-stack</p>
+</li>
+<li>
+<p>minio</p>
+</li>
+<li>
+<p>keycloak</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Some of the apps are automatically disabled based on the type of cloud
+platform used. To enable/disable apps please see
+<a href="#ROOT:howtos/user_parameters.adoc" class="page unresolved">User Parameters</a></p>
+</div>
 </article>
   </div>
 </main>

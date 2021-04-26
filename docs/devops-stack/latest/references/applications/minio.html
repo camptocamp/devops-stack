@@ -279,6 +279,25 @@
 </aside>
 <article class="doc">
 <h1 class="page">minio</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This chart is enabled only when deploying DevOps Stack to clouds not providing OIDC out of the box.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>This chart installs MinIO, a High Performance Object Storage.</p>
+</div>
+</div>
+</div>
 <div class="sect1">
 <h2 id="_requirements"><a class="anchor" href="#_requirements"></a>Requirements</h2>
 <div class="sectionbody">
@@ -310,10 +329,10 @@
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
+<col style="width: 16%;">
+<col style="width: 18%;">
+<col style="width: 27%;">
+<col style="width: 39%;">
 </colgroup>
 <thead>
 <tr>
@@ -325,16 +344,10 @@
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">minio.metrics.serviceMonitor.enabled</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">bool</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">minio.resources.requests.memory</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>"24Mi"</code></p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">minio</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>{"metrics":{"serviceMonitor":{"enabled":true}},"resources":{"requests":{"memory":"24Mi"}}}</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Values passed to the minio chart</p></td>
 </tr>
 </tbody>
 </table>

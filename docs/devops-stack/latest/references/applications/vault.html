@@ -279,6 +279,14 @@
 </aside>
 <article class="doc">
 <h1 class="page">vault</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>This chart installs hashicorp Vault component into the Kubernetes
+cluster.</p>
+</div>
+</div>
+</div>
 <div class="sect1">
 <h2 id="_requirements"><a class="anchor" href="#_requirements"></a>Requirements</h2>
 <div class="sectionbody">
@@ -310,10 +318,10 @@
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
+<col style="width: 16%;">
+<col style="width: 18%;">
+<col style="width: 27%;">
+<col style="width: 39%;">
 </colgroup>
 <thead>
 <tr>
@@ -325,22 +333,10 @@
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">vault.global.psp.enable</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">bool</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">vault.injector.metrics.enabled</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">bool</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">vault.server.dev.enabled</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">bool</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">vault</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>{"global":{"psp":{"enable":true}},"injector":{"metrics":{"enabled":true}},"server":{"dev":{"enabled":true}}}</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Values passed to the vault chart</p></td>
 </tr>
 </tbody>
 </table>
