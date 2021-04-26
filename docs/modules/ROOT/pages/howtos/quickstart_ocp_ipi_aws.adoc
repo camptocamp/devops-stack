@@ -45,7 +45,7 @@ include::partial$ocp_ipi_instant_intro.adoc[]
 
 include::partial$deploy_workstation.adoc[]
 
-== Follow deployment process
+== Deployment Process
 
 OpenShift is deployed using the `openshift-install` binary, which embarks a nested Terraform version. When the DevOps Stack Terraform is running, we cannot follow the child process.
 
