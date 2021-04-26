@@ -49,7 +49,7 @@ include::partial$deploy_workstation.adoc[]
 
 OpenShift is deployed using the `openshift-install` binary, which embarks a nested Terraform version. When the DevOps Stack Terraform is running, we cannot follow the child process.
 
-Thus, we can track the deployment in terraform/<CLUSTER NAME>/.openshift_install.log
+Thus, we can track the deployment progress in `terraform/<CLUSTER NAME>/.openshift_install.log`
 
 ```shell
 $ tail -f terraform/<CLUSTER NAME>/.openshift_install.log
