@@ -318,6 +318,35 @@
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>If your docker setup doesn&#8217;t support the bridge0 like on MacOSX, you cannot access to the container IP so the computed base domain isn&#8217;t reachable.
+You can specify the published ports of the K3S master and the base domain to use your computer&#8217;s IP.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">module "cluster" {
+  source = "git::https://github.com/camptocamp/devops-stack.git//modules/k3s/docker?ref=master"
+
+  cluster_name = "my-cluster"
+  cluster_endpoint = "192-168-1-118.nip.io"
+  base_domain      = "192-168-1-118.nip.io"
+  server_ports = [
+    {
+      internal = 6443
+      external = 6443
+    },
+    {
+      internal = 80
+      external = 80
+    },
+    {
+      internal = 443
+      external = 443
+    },
+  ]
+}</code></pre>
+</div>
+</div>
 <div class="sect2">
 <h3 id="_terraform_outputs"><a class="anchor" href="#_terraform_outputs"></a>Terraform Outputs</h3>
 <div class="paragraph">
