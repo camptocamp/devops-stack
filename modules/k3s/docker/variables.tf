@@ -15,3 +15,9 @@ variable "server_ports" {
     protocol = optional(string)
   }))
 }
+
+variable "cluster_endpoint" {
+  description = "The api endpoint, when empty it's the container's IP."
+  type        = string
+  default     = null
+}
