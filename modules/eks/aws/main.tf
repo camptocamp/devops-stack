@@ -60,7 +60,7 @@ locals {
 
 module "cluster" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "13.2.1"
+  version = "15.1.0"
 
   cluster_name    = var.cluster_name
   cluster_version = var.cluster_version
