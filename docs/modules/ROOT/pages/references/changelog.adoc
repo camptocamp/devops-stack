@@ -1,5 +1,45 @@
 = Changelog
 
+== https://github.com/camptocamp/devops-stack/tree/v0.33.0[0.33.0] (2021-04-27)
+
+https://github.com/camptocamp/devops-stack/compare/v0.32.0...v0.33.0[Full Changelog]
+
+*Implemented enhancements:*
+
+* Mark app_of_apps_values output as sensitive https://github.com/camptocamp/devops-stack/pull/580[#580] (https://github.com/mcanevet[mcanevet])
+* Move default values file to a more logical location https://github.com/camptocamp/devops-stack/pull/537[#537] (https://github.com/mcanevet[mcanevet])
+* [k3s] Allow to override base_domain https://github.com/camptocamp/devops-stack/pull/590[#590] (https://github.com/mcanevet[mcanevet])
+* Allow publish ports https://github.com/camptocamp/devops-stack/pull/589[#589] (https://github.com/mcanevet[mcanevet])
+* Allow to override cluster endpoint https://github.com/camptocamp/devops-stack/pull/592[#592] (https://github.com/pburgisser[pburgisser])
+
+*Upgraded components:*
+
+* Upgrade to ArgoCD 2.0.0 https://github.com/camptocamp/devops-stack/pull/575[#575] (https://github.com/mcanevet[mcanevet])
+* Upgrade camptocamp/k3s/docker to 0.10.1 https://github.com/camptocamp/devops-stack/pull/584[#584] (https://github.com/mcanevet[mcanevet])
+* Upgrade Keycloak Operator to 12.0.4 https://github.com/camptocamp/devops-stack/pull/583[#583] (https://github.com/mcanevet[mcanevet])
+* Upgrade ArgoCD to 2.0.1 https://github.com/camptocamp/devops-stack/pull/588[#588] (https://github.com/mcanevet[mcanevet])
+* Upgrade Terraform to v0.15.1 https://github.com/camptocamp/devops-stack/pull/579[#579] (https://github.com/mcanevet[mcanevet])
+
+*New applications:*
+
+* Adding support of Thanos when a bucket is provided https://github.com/camptocamp/devops-stack/pull/555[#555] (https://github.com/pburgisser[pburgisser])
+* Deploy ArgoCD applicationset https://github.com/camptocamp/devops-stack/pull/576[#576] (https://github.com/mcanevet[mcanevet])
+* Deploy ArgoCD notifications https://github.com/camptocamp/devops-stack/pull/577[#577] (https://github.com/mcanevet[mcanevet])
+
+*Fixed Bugs:*
+
+* Fix oidc certificate issue for argocd - k3s https://github.com/camptocamp/devops-stack/pull/578[#578] (https://github.com/modridi[modridi])
+* Don't clone repo in integration tests https://github.com/camptocamp/devops-stack/pull/591[#591] (https://github.com/mcanevet[mcanevet])
+* Add timeout on wait for app of apps https://github.com/camptocamp/devops-stack/pull/585[#585] (https://github.com/mcanevet[mcanevet])
+* Use triggers instead of depends_on in wait_for_app_of_apps https://github.com/camptocamp/devops-stack/pull/586[#586] (https://github.com/mcanevet[mcanevet])
+* Upgrade AWS modules to work with Terraform 0.15 https://github.com/camptocamp/devops-stack/pull/594[#594] (https://github.com/mcanevet[mcanevet])
+
+*Documentations:*
+
+* Update Helm's Charts and Values. Regenerate adoc https://github.com/camptocamp/devops-stack/pull/563[#563] (https://github.com/fsismondi[fsismondi])
+* Adding OCP doc https://github.com/camptocamp/devops-stack/pull/581[#581] (https://github.com/pburgisser[pburgisser])
+* Adding no bridge support documentation https://github.com/camptocamp/devops-stack/pull/593[#593] (https://github.com/pburgisser[pburgisser])
+
 == https://github.com/camptocamp/devops-stack/tree/v0.32.0[0.32.0] (2021-04-08)
 
 https://github.com/camptocamp/devops-stack/compare/v0.31.0...v0.32.0[Full Changelog]
