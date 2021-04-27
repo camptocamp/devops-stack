@@ -138,8 +138,8 @@ module "argocd" {
     templatefile("${path.module}/values.tmpl.yaml",
       {
         aws_default_region              = data.aws_region.current.name
-        cert_manager_assumable_role_arn = module.iam_assumable_role_cert_manager.this_iam_role_arn,
-        loki_assumable_role_arn         = module.iam_assumable_role_loki.this_iam_role_arn,
+        cert_manager_assumable_role_arn = module.iam_assumable_role_cert_manager.iam_role_arn,
+        loki_assumable_role_arn         = module.iam_assumable_role_loki.iam_role_arn,
         loki_bucket_name                = aws_s3_bucket.loki.id,
         efs_filesystem_id               = var.enable_efs ? module.efs.0.this_efs_mount_target_file_system_id : ""
         efs_dns_name                    = var.enable_efs ? module.efs.0.this_efs_mount_target_full_dns_name : ""
