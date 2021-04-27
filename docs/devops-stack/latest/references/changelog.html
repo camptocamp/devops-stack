@@ -238,6 +238,9 @@
           <a href="../index.html">latest</a>
         </li>
         <li class="version">
+          <a href="../../0.33.0/index.html">0.33.0</a>
+        </li>
+        <li class="version">
           <a href="../../0.32.0/index.html">0.32.0</a>
         </li>
         <li class="version">
@@ -268,6 +271,7 @@
   <button class="version-menu-toggle" title="Show other versions of page">latest</button>
   <div class="version-menu">
     <a class="version is-current" href="changelog.html">latest</a>
+    <a class="version" href="../../0.33.0/references/changelog.html">0.33.0</a>
     <a class="version" href="../../0.32.0/references/changelog.html">0.32.0</a>
     <a class="version" href="../../0.31.0/references/changelog.html">0.31.0</a>
     <a class="version" href="../../0.30.0/references/changelog.html">0.30.0</a>
@@ -281,6 +285,112 @@
 </aside>
 <article class="doc">
 <h1 class="page">Changelog</h1>
+<div class="sect1">
+<h2 id="_0_33_0_2021_04_27"><a class="anchor" href="#_0_33_0_2021_04_27"></a><a href="https://github.com/camptocamp/devops-stack/tree/v0.33.0">0.33.0</a> (2021-04-27)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://github.com/camptocamp/devops-stack/compare/v0.32.0&#8230;&#8203;v0.33.0">Full Changelog</a></p>
+</div>
+<div class="paragraph">
+<p><strong>Implemented enhancements:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Mark app_of_apps_values output as sensitive <a href="https://github.com/camptocamp/devops-stack/pull/580">#580</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Move default values file to a more logical location <a href="https://github.com/camptocamp/devops-stack/pull/537">#537</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>[k3s] Allow to override base_domain <a href="https://github.com/camptocamp/devops-stack/pull/590">#590</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Allow publish ports <a href="https://github.com/camptocamp/devops-stack/pull/589">#589</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Allow to override cluster endpoint <a href="https://github.com/camptocamp/devops-stack/pull/592">#592</a> (<a href="https://github.com/pburgisser">pburgisser</a>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Upgraded components:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Upgrade to ArgoCD 2.0.0 <a href="https://github.com/camptocamp/devops-stack/pull/575">#575</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Upgrade camptocamp/k3s/docker to 0.10.1 <a href="https://github.com/camptocamp/devops-stack/pull/584">#584</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Upgrade Keycloak Operator to 12.0.4 <a href="https://github.com/camptocamp/devops-stack/pull/583">#583</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Upgrade ArgoCD to 2.0.1 <a href="https://github.com/camptocamp/devops-stack/pull/588">#588</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Upgrade Terraform to v0.15.1 <a href="https://github.com/camptocamp/devops-stack/pull/579">#579</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>New applications:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Adding support of Thanos when a bucket is provided <a href="https://github.com/camptocamp/devops-stack/pull/555">#555</a> (<a href="https://github.com/pburgisser">pburgisser</a>)</p>
+</li>
+<li>
+<p>Deploy ArgoCD applicationset <a href="https://github.com/camptocamp/devops-stack/pull/576">#576</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Deploy ArgoCD notifications <a href="https://github.com/camptocamp/devops-stack/pull/577">#577</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Fixed Bugs:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Fix oidc certificate issue for argocd - k3s <a href="https://github.com/camptocamp/devops-stack/pull/578">#578</a> (<a href="https://github.com/modridi">modridi</a>)</p>
+</li>
+<li>
+<p>Don&#8217;t clone repo in integration tests <a href="https://github.com/camptocamp/devops-stack/pull/591">#591</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Add timeout on wait for app of apps <a href="https://github.com/camptocamp/devops-stack/pull/585">#585</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Use triggers instead of depends_on in wait_for_app_of_apps <a href="https://github.com/camptocamp/devops-stack/pull/586">#586</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+<li>
+<p>Upgrade AWS modules to work with Terraform 0.15 <a href="https://github.com/camptocamp/devops-stack/pull/594">#594</a> (<a href="https://github.com/mcanevet">mcanevet</a>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Documentations:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Update Helm&#8217;s Charts and Values. Regenerate adoc <a href="https://github.com/camptocamp/devops-stack/pull/563">#563</a> (<a href="https://github.com/fsismondi">fsismondi</a>)</p>
+</li>
+<li>
+<p>Adding OCP doc <a href="https://github.com/camptocamp/devops-stack/pull/581">#581</a> (<a href="https://github.com/pburgisser">pburgisser</a>)</p>
+</li>
+<li>
+<p>Adding no bridge support documentation <a href="https://github.com/camptocamp/devops-stack/pull/593">#593</a> (<a href="https://github.com/pburgisser">pburgisser</a>)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 <div class="sect1">
 <h2 id="_0_32_0_2021_04_08"><a class="anchor" href="#_0_32_0_2021_04_08"></a><a href="https://github.com/camptocamp/devops-stack/tree/v0.32.0">0.32.0</a> (2021-04-08)</h2>
 <div class="sectionbody">
