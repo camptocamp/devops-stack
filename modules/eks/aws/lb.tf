@@ -4,7 +4,7 @@ locals {
 
 module "nlb" {
   source  = "terraform-aws-modules/alb/aws"
-  version = "5.10.0"
+  version = "6.0.0"
 
   create_lb = var.create_public_nlb
 
@@ -97,6 +97,6 @@ resource "aws_route53_record" "wildcard" {
   type    = "CNAME"
   ttl     = "300"
   records = [
-    var.create_public_nlb ? module.nlb.this_lb_dns_name : module.nlb_private.this_lb_dns_name,
+    var.create_public_nlb ? module.nlb.lb_dns_name : module.nlb_private.lb_dns_name,
   ]
 }
