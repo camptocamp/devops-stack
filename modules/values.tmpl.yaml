@@ -144,6 +144,8 @@ argocd-notifications: {}
 cert-manager: {}
 %{ endif }
 
+csi-secrets-store-provider-azure: {}
+
 %{ if efs_provisioner.enable }
 efs-provisioner: {}
 %{ endif }
