@@ -15,6 +15,7 @@ stages:
 
 mr:terraform:plan:
   stage: terraform
+  resource_group: terraform
   image:
     name: hashicorp/terraform:$TERRAFORM_VERSION
     entrypoint: [""]
@@ -35,6 +36,7 @@ mr:terraform:plan:
 
 pb:terraform:apply:
   stage: terraform
+  resource_group: terraform
   image:
     name: hashicorp/terraform:$TERRAFORM_VERSION
     entrypoint: [""]
