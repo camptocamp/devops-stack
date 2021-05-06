@@ -1,0 +1,16 @@
+---
+argo-cd:
+  server:
+    extraArgs:
+      - --insecure
+  global:
+    securityContext:
+      fsGroup: 65534
+
+traefik:
+  service:
+    annotations:
+      kubernetes.io/elb.class: union
+      kubernetes.io/session-affinity-mode: SOURCE_IP
+      kubernetes.io/elb.id: ${elb_id}
+      kubernetes.io/elb.subnet-id: ${elb_subnet_id}
