@@ -3,8 +3,9 @@
 == Prerequisites
 
 - Access to a functional Docker Engine,
-- CGroupv2 disabled (K3s does not support it for now),
+- [.line-through]#CGroupv2 disabled (K3s does not support it for now)#
 - Knowledge of https://terraform.io[Terraform] basics
+- Minimal Terraform version: 0.14 
 
 
 include::partial$terraform_instant_intro.adoc[]
