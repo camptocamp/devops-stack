@@ -1,5 +1,18 @@
 = Changelog
 
+== https://github.com/camptocamp/devops-stack/tree/v0.33.1[0.33.1] (2021-05-12)
+
+https://github.com/camptocamp/devops-stack/compare/v0.33.0...v0.33.1[Full Changelog]
+
+*Fixed Bugs:*
+
+* Use resource group in Gitlab CI pipeline https://github.com/camptocamp/devops-stack/pull/599[#599] (https://github.com/mcanevet[mcanevet])
+* Fix csi-secrets-store-provider-azure deployment https://github.com/camptocamp/devops-stack/pull/598[#598] (https://github.com/mcanevet[mcanevet])
+
+*Documentations:*
+
+* Activate OCP quickstart link on website https://github.com/camptocamp/devops-stack/pull/597[#597] (https://github.com/raphink[raphink])
+
 == https://github.com/camptocamp/devops-stack/tree/v0.33.0[0.33.0] (2021-04-27)
 
 https://github.com/camptocamp/devops-stack/compare/v0.32.0...v0.33.0[Full Changelog]
