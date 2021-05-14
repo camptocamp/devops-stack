@@ -19,6 +19,8 @@ version = "0.33.2"
 
 google_analytics = "G-GDBX9466LL"
 
+contact_form_action = "https://kwes.io/api/foreign/forms/FGzCbmO0jIjih6M1qbSG"
+
 ############################# social site ########################
 [[params.social]]
 title = "GitHub"
@@ -80,6 +82,8 @@ link = "plugins/jQuery/jquery.min.js"
 link = "plugins/bootstrap/bootstrap.min.js"
 [[params.plugins.js]]
 link = "plugins/slick/slick.min.js"
+[[params.plugins.js]]
+link = "https://kwes.io/v2/kwes-script.js"
 
 ############################## navigation ###############################
 
@@ -96,11 +100,11 @@ pre = "<i class='fab fa-github'></i> "
 url = "https://github.com/camptocamp/devops-stack"
 weight = 2
 
-#[[menu.main]]
-#name = "Contact"
-#url = "contact"
-#weight = 3
-#
+[[menu.main]]
+name = "Contact"
+url = "contact"
+weight = 3
+
 #[[menu.main]]
 #name = "FAQ"
 #url = "faq"
@@ -145,7 +149,11 @@ url = "https://github.com/camptocamp/devops-stack"
 #url = "faq"
 
 [languages.en]
+languageName = "En"
+contentDir = "content/en"
+weight = 1
 footer_menu_left = "Who We Are"
 footer_menu_middle = "Our Projects"
 footer_menu_right = "Support"
 footer_content = "We automate your way to the Cloud"
+
