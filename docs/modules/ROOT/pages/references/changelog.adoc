@@ -1,5 +1,13 @@
 = Changelog
 
+== https://github.com/camptocamp/devops-stack/tree/v0.33.2[0.33.2] (2021-05-14)
+
+https://github.com/camptocamp/devops-stack/compare/v0.33.1...v0.33.2[Full Changelog]
+
+*Fixed Bugs:*
+
+* eks/aws: fix multiple worker groups support https://github.com/camptocamp/devops-stack/pull/607[#607] (https://github.com/cryptobioz[cryptobioz])
+
 == https://github.com/camptocamp/devops-stack/tree/v0.33.1[0.33.1] (2021-05-12)
 
 https://github.com/camptocamp/devops-stack/compare/v0.33.0...v0.33.1[Full Changelog]
