@@ -153,7 +153,7 @@ call_to_action:
       link: "docs"
       icon: "fa fa-book"
     - label: "Request a demo"
-      link: "mailto:info@camptocamp.com?subject=DevOps Stack Demo"
+      link: "/contact"
       icon: "fa fa-chalkboard-teacher"
     - label: "Professional services"
       link: "https://www.camptocamp.com/infrastructure_solutions_and_services"
