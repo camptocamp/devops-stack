@@ -18,7 +18,7 @@ locals {
 
   argocd_chart = yamldecode(file("${path.module}/../../argocd/argocd/Chart.yaml")).dependencies.0
 
-  argocd_server_secretkey = var.argocd_server_secretkey == null ? random_string.argocd_server_secretkey.result : var.argocd_server_secretkey
+  argocd_server_secretkey = var.argocd_server_secretkey == null ? random_password.argocd_server_secretkey.result : var.argocd_server_secretkey
 
   app_of_apps_values = concat([
     templatefile("${path.module}/../values.tmpl.yaml",
@@ -64,7 +64,7 @@ resource "time_static" "iat" {}
 
 resource "random_uuid" "jti" {}
 
-resource "random_string" "argocd_server_secretkey" {
+resource "random_password" "argocd_server_secretkey" {
   length  = 32
   special = false
 }
