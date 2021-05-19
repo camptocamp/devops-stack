@@ -58,9 +58,9 @@ argo-cd:
       argocdServerAdminPassword: "$2a$10$wzUzrdx.jMb7lHIbW6VutuRpV4OnpPA3ItWBDiP04QVHfGqzAoj6i"  # argocd
       argocdServerAdminPasswordMtime: '2020-07-23T11:31:23Z'
       extra:
-        oidc.default.clientSecret: ${oidc.client_secret}
-        accounts.pipeline.tokens: '${argocd_accounts_pipeline_tokens}'
-        server.secretkey: ${argocd_server_secretkey}
+        oidc.default.clientSecret: "${replace(oidc.client_secret, "\"", "\\\"")}"
+        accounts.pipeline.tokens: "${replace(argocd_accounts_pipeline_tokens, "\"", "\\\"")}"
+        server.secretkey: "${replace(argocd_server_secretkey, "\"", "\\\"")}"
   controller:
     metrics:
       enabled: true
@@ -99,11 +99,11 @@ argo-cd:
           generate:
             command: ["/bin/sh", "-c"]
             args: ["echo \"$HELM_VALUES\" | helm template . --name-template $ARGOCD_APP_NAME --namespace $ARGOCD_APP_NAMESPACE $HELM_ARGS -f - --include-crds > all.yaml && kustomize build"]
-      url: https://${argocd.domain}
+      url: "https://${argocd.domain}"
       oidc.config: |
         name: OIDC
-        issuer: ${oidc.issuer_url}
-        clientID: ${oidc.client_id}
+        issuer: "${replace(oidc.issuer_url, "\"", "\\\"")}"
+        clientID: "${replace(oidc.client_id, "\"", "\\\"")}"
         clientSecret: $oidc.default.clientSecret
         requestedIDTokenClaims:
           groups:
@@ -115,19 +115,19 @@ argo-cd:
     ingress:
       enabled: true
       annotations:
-        cert-manager.io/cluster-issuer: ${cluster_issuer}
+        cert-manager.io/cluster-issuer: "${cluster_issuer}"
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
         ingress.kubernetes.io/ssl-redirect: "true"
         kubernetes.io/ingress.allow-http: "false"
       hosts:
-        - ${argocd.domain}
-        - argocd.apps.${base_domain}
+        - "${argocd.domain}"
+        - "argocd.apps.${base_domain}"
       tls:
         - secretName: argocd-tls
           hosts:
-            - ${argocd.domain}
-            - argocd.apps.${base_domain}
+            - "${argocd.domain}"
+            - "argocd.apps.${base_domain}"
     metrics:
       enabled: true
     rbacConfig:
@@ -155,39 +155,39 @@ keycloak:
   ingress:
     enabled: true
     annotations:
-      cert-manager.io/cluster-issuer: ${cluster_issuer}
+      cert-manager.io/cluster-issuer: "${cluster_issuer}"
       traefik.ingress.kubernetes.io/router.entrypoints: websecure
       traefik.ingress.kubernetes.io/router.tls: "true"
       ingress.kubernetes.io/ssl-redirect: "true"
       kubernetes.io/ingress.allow-http: "false"
     hosts:
-      - host: ${keycloak.domain}
+      - host: "${keycloak.domain}"
         paths:
           - /
-      - host: keycloak.apps.${base_domain}
+      - host: "keycloak.apps.${base_domain}"
         paths:
           - /
     tls:
       - secretName: keycloak-tls
         hosts:
-          - ${keycloak.domain}
-          - keycloak.apps.${base_domain}
+          - "${keycloak.domain}"
+          - "keycloak.apps.${base_domain}"
   service:
     annotations:
       traefik.ingress.kubernetes.io/service.serversscheme: https
   keycloakClient:
     client:
-      clientId: ${oidc.client_id}
-      secret: ${oidc.client_secret}
+      clientId: "${replace(oidc.client_id, "\"", "\\\"")}"
+      secret: "${replace(oidc.client_secret, "\"", "\\\"")}"
       redirectUris:
-        - https://argocd.apps.${base_domain}/auth/callback
-        - https://${argocd.domain}/auth/callback
-        - https://grafana.apps.${base_domain}/login/generic_oauth
-        - https://${grafana.domain}/login/generic_oauth
-        - https://prometheus.apps.${base_domain}/oauth2/callback
-        - https://${prometheus.domain}/oauth2/callback
-        - https://alertmanager.apps.${base_domain}/oauth2/callback
-        - https://${alertmanager.domain}/oauth2/callback
+        - "https://argocd.apps.${base_domain}/auth/callback"
+        - "https://${argocd.domain}/auth/callback"
+        - "https://grafana.apps.${base_domain}/login/generic_oauth"
+        - "https://${grafana.domain}/login/generic_oauth"
+        - "https://prometheus.apps.${base_domain}/oauth2/callback"
+        - "https://${prometheus.domain}/oauth2/callback"
+        - "https://alertmanager.apps.${base_domain}/oauth2/callback"
+        - "https://${alertmanager.domain}/oauth2/callback"
   keycloakUser:
     password: "${keycloak.admin_password}"
 %{ endif }
@@ -203,13 +203,13 @@ kube-prometheus-stack:
             - --http-address=0.0.0.0:9095
             - --upstream=http://localhost:9093
             - --provider=oidc
-            - --oidc-issuer-url=${oidc.issuer_url}
-            - --client-id=${oidc.client_id}
-            - --client-secret=${oidc.client_secret}
+            - --oidc-issuer-url="${replace(oidc.issuer_url, "\"", "\\\"")}"
+            - --client-id="${replace(oidc.client_id, "\"", "\\\"")}"
+            - --client-secret="${replace(oidc.client_secret, "\"", "\\\"")}"
             - --cookie-secure=false
-            - --cookie-secret=${cookie_secret}
+            - --cookie-secret="${replace(cookie_secret, "\"", "\\\"")}"
             - --email-domain=*
-            - --redirect-url=https://${alertmanager.domain}/oauth2/callback
+            - --redirect-url="https://${alertmanager.domain}/oauth2/callback"
             %{ for arg in oidc.oauth2_proxy_extra_args }
             - ${arg}
             %{ endfor }
@@ -221,19 +221,19 @@ kube-prometheus-stack:
     ingress:
       enabled: true
       annotations:
-        cert-manager.io/cluster-issuer: ${cluster_issuer}
+        cert-manager.io/cluster-issuer: "${cluster_issuer}"
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
         ingress.kubernetes.io/ssl-redirect: "true"
         kubernetes.io/ingress.allow-http: "false"
       hosts:
-        - ${alertmanager.domain}
-        - alertmanager.apps.${base_domain}
+        - "${alertmanager.domain}"
+        - "alertmanager.apps.${base_domain}"
       tls:
         - secretName: alertmanager-tls
           hosts:
-            - ${alertmanager.domain}
-            - alertmanager.apps.${base_domain}
+            - "${alertmanager.domain}"
+            - "alertmanager.apps.${base_domain}"
     service:
       targetPort: 9095
     serviceMonitor:
@@ -243,22 +243,22 @@ kube-prometheus-stack:
   grafana:
     enabled: ${grafana.enable}
 %{ if grafana.enable }
-    adminPassword: ${grafana.admin_password}
+    adminPassword: "${replace(grafana.admin_password, "\"", "\\\"")}"
     grafana.ini:
       auth.generic_oauth:
         enabled: true
         allow_sign_up: true
-        client_id: ${oidc.client_id}
-        client_secret: ${oidc.client_secret}
+        client_id: "${replace(oidc.client_id, "\"", "\\\"")}"
+        client_secret: "${replace(oidc.client_secret, "\"", "\\\"")}"
         scopes: "openid profile email"
-        auth_url: ${oidc.oauth_url}
-        token_url: ${oidc.token_url}
-        api_url: ${oidc.api_url}
+        auth_url: "${replace(oidc.oauth_url, "\"", "\\\"")}"
+        token_url: "${replace(oidc.token_url, "\"", "\\\"")}"
+        api_url: "${replace(oidc.api_url, "\"", "\\\"")}"
         %{ for k, v in grafana.generic_oauth_extra_args }
         ${k}: ${v}
         %{ endfor }
       server:
-        domain: ${grafana.domain}
+        domain: "${grafana.domain}"
         root_url: "https://%(domain)s"
     sidecar:
       datasources:
@@ -278,19 +278,19 @@ kube-prometheus-stack:
     ingress:
       enabled: true
       annotations:
-        cert-manager.io/cluster-issuer: ${cluster_issuer}
+        cert-manager.io/cluster-issuer: "${cluster_issuer}"
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
         ingress.kubernetes.io/ssl-redirect: "true"
         kubernetes.io/ingress.allow-http: "false"
       hosts:
-        - ${grafana.domain}
-        - grafana.apps.${base_domain}
+        - "${grafana.domain}"
+        - "grafana.apps.${base_domain}"
       tls:
         - secretName: grafana-tls
           hosts:
-            - grafana.apps.${base_domain}
-            - ${grafana.domain}
+            - "grafana.apps.${base_domain}"
+            - "${grafana.domain}"
 %{ endif } # Grafana config
 
   prometheus:
@@ -301,19 +301,19 @@ kube-prometheus-stack:
     ingress:
       enabled: true
       annotations:
-        cert-manager.io/cluster-issuer: ${cluster_issuer}
+        cert-manager.io/cluster-issuer: "${cluster_issuer}"
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
         ingress.kubernetes.io/ssl-redirect: "true"
         kubernetes.io/ingress.allow-http: "false"
       hosts:
-        - ${prometheus.domain}
-        - prometheus.apps.${base_domain}
+        - "${prometheus.domain}"
+        - "prometheus.apps.${base_domain}"
       tls:
         - secretName: prometheus-tls
           hosts:
-            - ${prometheus.domain}
-            - prometheus.apps.${base_domain}
+            - "${prometheus.domain}"
+            - "prometheus.apps.${base_domain}"
     prometheusSpec:
 %{ if can(metrics_archives.bucket_config) }
       thanos:
@@ -327,13 +327,13 @@ kube-prometheus-stack:
             - --http-address=0.0.0.0:9091
             - --upstream=http://localhost:9090
             - --provider=oidc
-            - --oidc-issuer-url=${oidc.issuer_url}
-            - --client-id=${oidc.client_id}
-            - --client-secret=${oidc.client_secret}
+            - --oidc-issuer-url="${replace(oidc.issuer_url, "\"", "\\\"")}"
+            - --client-id="${replace(oidc.client_id, "\"", "\\\"")}"
+            - --client-secret="${replace(oidc.client_secret, "\"", "\\\"")}"
             - --cookie-secure=false
-            - --cookie-secret=${cookie_secret}
+            - --cookie-secret="${replace(cookie_secret, "\"", "\\\"")}"
             - --email-domain=*
-            - --redirect-url=https://${prometheus.domain}/oauth2/callback
+            - --redirect-url="https://${prometheus.domain}/oauth2/callback"
             %{ for arg in oidc.oauth2_proxy_extra_args }
             - ${arg}
             %{ endfor }
@@ -394,29 +394,29 @@ metrics-server: {}
 
 %{ if minio.enable }
 minio:
-  accessKey: ${minio.access_key}
-  secretKey: ${minio.secret_key}
+  accessKey: "${replace(minio.access_key, "\"", "\\\"")}"
+  secretKey: "${replace(minio.secret_key, "\"", "\\\"")}"
   ingress:
     enabled: true
     annotations:
-      cert-manager.io/cluster-issuer: ${cluster_issuer}
+      cert-manager.io/cluster-issuer: "${cluster_issuer}"
       traefik.ingress.kubernetes.io/router.entrypoints: websecure
       traefik.ingress.kubernetes.io/router.tls: "true"
       ingress.kubernetes.io/ssl-redirect: "true"
       kubernetes.io/ingress.allow-http: "false"
     hosts:
-      - ${minio.domain}
-      - minio.apps.${base_domain}
+      - "${minio.domain}"
+      - "minio.apps.${base_domain}"
     tls:
       - secretName: minio-tls
         hosts:
-          - ${minio.domain}
-          - minio.apps.${base_domain}
+          - "${minio.domain}"
+          - "minio.apps.${base_domain}"
   buckets:
-    - name: ${loki.bucket_name}
+    - name: "${loki.bucket_name}"
       policy: none
       purge: false
-    - name: ${metrics_archives.bucket_name}
+    - name: "${metrics_archives.bucket_name}"
       policy: none
       purge: false
 %{ endif }
@@ -447,37 +447,37 @@ thanos:
     ingress:
       enabled: true
       annotations:
-        cert-manager.io/cluster-issuer: ${cluster_issuer}
+        cert-manager.io/cluster-issuer: "${cluster_issuer}"
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
         ingress.kubernetes.io/ssl-redirect: "true"
         kubernetes.io/ingress.allow-http: "false"
-      hostname: thanos-bucketweb.apps.${base_domain}
+      hostname: "thanos-bucketweb.apps.${base_domain}"
       extraHosts:
-        - name: ${metrics_archives.bucketweb_domain}
+        - name: "${metrics_archives.bucketweb_domain}"
       tls: true
       extraTls:
         - secretName: thanos-bucketweb-tls
           hosts:
-            - ${metrics_archives.bucketweb_domain}
-            - thanos-query.apps.${base_domain}
+            - "${metrics_archives.bucketweb_domain}"
+            - "thanos-query.apps.${base_domain}"
 
   queryFrontend:
     ingress:
       enabled: true
       annotations:
-        cert-manager.io/cluster-issuer: ${cluster_issuer}
+        cert-manager.io/cluster-issuer: "${cluster_issuer}"
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
         ingress.kubernetes.io/ssl-redirect: "true"
         kubernetes.io/ingress.allow-http: "false"
-      hostname: thanos-query.apps.${base_domain}
+      hostname: "thanos-query.apps.${base_domain}"
       extraHosts:
-        - name: ${metrics_archives.query_domain}
+        - name: "${metrics_archives.query_domain}"
       tls: true
       extraTls:
         - secretName: thanos-query-tls
           hosts:
-            - ${metrics_archives.query_domain}
-            - thanos-query.apps.${base_domain}
+            - "${metrics_archives.query_domain}"
+            - "thanos-query.apps.${base_domain}"
 %{ endif }
