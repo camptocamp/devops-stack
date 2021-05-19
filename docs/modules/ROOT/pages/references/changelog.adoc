@@ -1,5 +1,14 @@
 = Changelog
 
+== https://github.com/camptocamp/devops-stack/tree/v0.33.3[0.33.3] (2021-05-19)
+
+https://github.com/camptocamp/devops-stack/compare/v0.33.2...v0.33.3[Full Changelog]
+
+*Fixed Bugs:*
+
+* fix: use random_password instead of random_string https://github.com/camptocamp/devops-stack/pull/612[#612] (https://github.com/mcanevet[mcanevet])
+* use quotes for variable strings in values template https://github.com/camptocamp/devops-stack/pull/613[#613] (https://github.com/cryptobioz[cryptobioz])
+
 == https://github.com/camptocamp/devops-stack/tree/v0.33.2[0.33.2] (2021-05-14)
 
 https://github.com/camptocamp/devops-stack/compare/v0.33.1...v0.33.2[Full Changelog]
