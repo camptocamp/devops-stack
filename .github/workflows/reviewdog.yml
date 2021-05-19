@@ -1,0 +1,14 @@
+---
+name: "reviewdog"
+on: ["pull_request"]  # yamllint disable-line rule:truthy
+jobs:
+  yamllint:
+    name: "runner / yamllint"
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: "actions/checkout@v1"
+      - name: "yamllint"
+        uses: "reviewdog/action-yamllint@v1"
+        with:
+          reporter: "github-pr-check"
+          filter_mode: "nofilter"
