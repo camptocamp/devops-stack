@@ -1,24 +1,27 @@
+---
 site:
   title: DevOps Stack
-  # the 404 page and sitemap files only get generated when the url property is set
+  # the 404 page and sitemap files only get generated when the url property is
+  # set
   url: https://devops-stack.io/docs
   keys:
     google_analytics: "G-GDBX9466LL"
   start_page: devops-stack::index.adoc
 content:
   branches: HEAD
-  tags: 
-  - "v0.3*"
-  - "!v0.3.0"
+  tags:
+    - "v0.3*"
+    - "!v0.3.0"
   sources:
-  - url: ./
-    start_path: docs
+    - url: ./
+      start_path: docs
 ui:
   bundle:
+    # yamllint disable-line rule:line-length
     url: https://github.com/camptocamp/devops-stack-antora-ui/releases/download/master-LATEST/ui-bundle.zip
     snapshot: true
   supplemental_files:
-  - path: ui.yml
-    contents: |
-      static_files: [ .nojekyll ]
-  - path: .nojekyll
+    - path: ui.yml
+      contents: |
+        static_files: [ .nojekyll ]
+    - path: .nojekyll

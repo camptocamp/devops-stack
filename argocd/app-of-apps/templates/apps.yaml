@@ -1,23 +1,25 @@
+# yamllint disable-file
+# This file is not valid YAML because it is a Jinja template
 ---
-apiVersion: argoproj.io/v1alpha1
-kind: Application
+apiVersion: "argoproj.io/v1alpha1"
+kind: "Application"
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "5"
-  name: apps
-  namespace: argocd
+  name: "apps"
+  namespace: "argocd"
 spec:
-  project: default
+  project: "default"
   source:
-    path: argocd/apps
-    repoURL: {{ .Values.spec.source.repoURL }}
-    targetRevision: {{ .Values.spec.source.targetRevision }}
+    path: "argocd/apps"
+    repoURL: {{ .Values.spec.source.repoURL | quote }}
+    targetRevision: {{ .Values.spec.source.targetRevision | quote }}
     helm:
       values: |
         {{ toYaml .Values | nindent 8 }}
   destination:
-    namespace: default
-    server: {{ .Values.spec.destination.server }}
+    namespace: "default"
+    server: {{ .Values.spec.destination.server | quote }}
   syncPolicy:
     automated:
       {{- if .Values.spec.syncPolicy }}
