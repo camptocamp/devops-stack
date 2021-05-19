@@ -15,7 +15,7 @@ org_logo = "images/logo/camptocamp.png"
 org_logo_width = "200px"
 org_url = "https://camptocamp.com"
 
-version = "0.33.2"
+version = "0.33.3"
 
 google_analytics = "G-GDBX9466LL"
 
@@ -156,4 +156,3 @@ footer_menu_left = "Who We Are"
 footer_menu_middle = "Our Projects"
 footer_menu_right = "Support"
 footer_content = "We automate your way to the Cloud"
-
