@@ -200,16 +200,16 @@ kube-prometheus-stack:
     alertmanagerSpec:
       containers:
         - args:
-            - --http-address=0.0.0.0:9095
-            - --upstream=http://localhost:9093
-            - --provider=oidc
-            - --oidc-issuer-url="${replace(oidc.issuer_url, "\"", "\\\"")}"
-            - --client-id="${replace(oidc.client_id, "\"", "\\\"")}"
-            - --client-secret="${replace(oidc.client_secret, "\"", "\\\"")}"
-            - --cookie-secure=false
-            - --cookie-secret="${replace(cookie_secret, "\"", "\\\"")}"
-            - --email-domain=*
-            - --redirect-url="https://${alertmanager.domain}/oauth2/callback"
+            - "--http-address=0.0.0.0:9095"
+            - "--upstream=http://localhost:9093"
+            - "--provider=oidc"
+            - "--oidc-issuer-url=${replace(oidc.issuer_url, "\"", "\\\"")}"
+            - "--client-id=${replace(oidc.client_id, "\"", "\\\"")}"
+            - "--client-secret=${replace(oidc.client_secret, "\"", "\\\"")}"
+            - "--cookie-secure=false"
+            - "--cookie-secret=${replace(cookie_secret, "\"", "\\\"")}"
+            - "--email-domain=*"
+            - "--redirect-url=https://${alertmanager.domain}/oauth2/callback"
             %{ for arg in oidc.oauth2_proxy_extra_args }
             - ${arg}
             %{ endfor }
@@ -324,16 +324,16 @@ kube-prometheus-stack:
       portName: proxy
       containers:
         - args:
-            - --http-address=0.0.0.0:9091
-            - --upstream=http://localhost:9090
-            - --provider=oidc
-            - --oidc-issuer-url="${replace(oidc.issuer_url, "\"", "\\\"")}"
-            - --client-id="${replace(oidc.client_id, "\"", "\\\"")}"
-            - --client-secret="${replace(oidc.client_secret, "\"", "\\\"")}"
-            - --cookie-secure=false
-            - --cookie-secret="${replace(cookie_secret, "\"", "\\\"")}"
-            - --email-domain=*
-            - --redirect-url="https://${prometheus.domain}/oauth2/callback"
+            - "--http-address=0.0.0.0:9091"
+            - "--upstream=http://localhost:9090"
+            - "--provider=oidc"
+            - "--oidc-issuer-url=${replace(oidc.issuer_url, "\"", "\\\"")}"
+            - "--client-id=${replace(oidc.client_id, "\"", "\\\"")}"
+            - "--client-secret=${replace(oidc.client_secret, "\"", "\\\"")}"
+            - "--cookie-secure=false"
+            - "--cookie-secret=${replace(cookie_secret, "\"", "\\\"")}"
+            - "--email-domain=*"
+            - "--redirect-url=https://${prometheus.domain}/oauth2/callback"
             %{ for arg in oidc.oauth2_proxy_extra_args }
             - ${arg}
             %{ endfor }
