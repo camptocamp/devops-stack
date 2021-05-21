@@ -213,7 +213,7 @@ kube-prometheus-stack:
             %{ for arg in oidc.oauth2_proxy_extra_args }
             - ${arg}
             %{ endfor }
-          image: quay.io/oauth2-proxy/oauth2-proxy:v7.0.0
+          image: quay.io/oauth2-proxy/oauth2-proxy:v7.1.3
           name: alertmanager-proxy
           ports:
             - containerPort: 9095
@@ -337,7 +337,7 @@ kube-prometheus-stack:
             %{ for arg in oidc.oauth2_proxy_extra_args }
             - ${arg}
             %{ endfor }
-          image: quay.io/oauth2-proxy/oauth2-proxy:v7.0.0
+          image: quay.io/oauth2-proxy/oauth2-proxy:v7.1.3
           name: prometheus-proxy
           ports:
             - containerPort: 9091
