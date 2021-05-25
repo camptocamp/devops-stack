@@ -1,5 +1,16 @@
 = Changelog
 
+== https://github.com/camptocamp/devops-stack/tree/v0.34.0[0.34.0] (2021-05-25)
+
+https://github.com/camptocamp/devops-stack/compare/v0.33.4...v0.34.0[Full Changelog]
+
+*Upgraded components:*
+
+* feat: upgrade azurerm provider to 2.60.0 https://github.com/camptocamp/devops-stack/pull/618[#618] (https://github.com/mcanevet[mcanevet])
+* Upgrade Terraform version to 0.15.4 https://github.com/camptocamp/devops-stack/pull/619[#619] (https://github.com/mcanevet[mcanevet])
+* feat(azuread): upgrade provider version 1.5.0 https://github.com/camptocamp/devops-stack/pull/634[#634] (https://github.com/mcanevet[mcanevet])
+* feat(k3s-docker): upgrade K3s to v1.20.7-k3s1 https://github.com/camptocamp/devops-stack/pull/625[#625] (https://github.com/mcanevet[mcanevet])
+
 == https://github.com/camptocamp/devops-stack/tree/v0.33.4[0.33.4] (2021-05-21)
 
 https://github.com/camptocamp/devops-stack/compare/v0.33.3...v0.33.4[Full Changelog]
