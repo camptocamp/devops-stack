@@ -13,8 +13,9 @@ locals {
 }
 
 module "cluster" {
-  source = "camptocamp/openshift4/aws"
+  source  = "camptocamp/openshift4/aws"
   version = "0.1.0"
+
   install_config_path = var.install_config_path
   base_domain         = var.base_domain
   cluster_name        = var.cluster_name
@@ -40,51 +41,61 @@ provider "kubernetes" {
 module "argocd" {
   source = "../../argocd-helm"
 
-  kubeconfig      = local.kubeconfig
-  repo_url        = var.repo_url
-  target_revision = var.target_revision
-  extra_apps      = var.extra_apps
-  cluster_name    = var.cluster_name
-  base_domain     = var.base_domain
-  cluster_issuer  = "letsencrypt-prod"
-  oidc =  {
+  kubeconfig         = local.kubeconfig
+  repo_url           = var.repo_url
+  target_revision    = var.target_revision
+  extra_apps         = var.extra_apps
+  extra_app_projects = var.extra_app_projects
+  cluster_name       = var.cluster_name
+  base_domain        = var.base_domain
+  cluster_issuer     = "letsencrypt-prod"
+
+  oidc = {
     client_secret = random_password.clientsecret.result
   }
 
   loki = {
     enable = false
   }
+
   cert_manager = {
     enable = false
   }
+
   keycloak = {
     enable = false
   }
+
   kube_prometheus_stack = {
     enable = false
   }
+
   metrics_server = {
     enable = false
   }
+
   minio = {
     enable = false
   }
+
   traefik = {
     enable = false
   }
+
   efs_provisioner = {
     enable = false
   }
 
   app_of_apps_values_overrides = [
-    templatefile("${path.module}/values.tmpl.yaml", 
-    {
-      openshift_oauthclient_secret = random_password.clientsecret.result
-      cluster_name = var.cluster_name
-      base_domain  = var.base_domain
+    templatefile("${path.module}/values.tmpl.yaml",
+      {
+        openshift_oauthclient_secret = random_password.clientsecret.result
+        cluster_name                 = var.cluster_name
+        base_domain                  = var.base_domain
     }),
     var.app_of_apps_values_overrides,
   ]
+
   depends_on = [
     module.cluster,
   ]

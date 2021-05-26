@@ -14,7 +14,13 @@ variable "target_revision" {
 }
 
 variable "extra_apps" {
-  description = "Extra applications to deploy."
+  description = "Extra Applications objects to deploy."
+  type        = list(any)
+  default     = []
+}
+
+variable "extra_app_projects" {
+  description = "Extra AppProjects objects to deploy."
   type        = list(any)
   default     = []
 }

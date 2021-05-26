@@ -28,6 +28,7 @@ locals {
         argocd_accounts_pipeline_tokens = local.argocd_accounts_pipeline_tokens
         argocd_server_secretkey         = local.argocd_server_secretkey
         extra_apps                      = var.extra_apps
+        extra_app_projects              = var.extra_app_projects
         cluster_name                    = var.cluster_name
         base_domain                     = var.base_domain
         cluster_issuer                  = var.cluster_issuer

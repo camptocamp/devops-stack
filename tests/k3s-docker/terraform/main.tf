@@ -7,13 +7,40 @@ module "cluster" {
   repo_url        = var.repo_url
   target_revision = var.target_revision
 
+  extra_app_projects = [
+    {
+      metadata = {
+        name      = "demo-project"
+        namespace = "argocd"
+      }
+      spec = {
+        description = "Demo project"
+        sourceRepos = ["*"]
+
+        destinations = [
+          {
+            server    = "https://kubernetes.default.svc"
+            namespace = "demo-app"
+          }
+        ]
+
+        clusterResourceWhitelist = [
+          {
+            group = ""
+            kind  = "Namespace"
+          }
+        ]
+      }
+    }
+  ]
+
   extra_apps = [
     {
       metadata = {
         name = "demo-app"
       }
       spec = {
-        project = "default"
+        project = "demo-project"
 
         source = {
           path           = "tests/k3s-docker/argocd/demo-app"

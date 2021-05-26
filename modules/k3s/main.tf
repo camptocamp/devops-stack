@@ -35,6 +35,7 @@ module "argocd" {
   repo_url                = var.repo_url
   target_revision         = var.target_revision
   extra_apps              = var.extra_apps
+  extra_app_projects      = var.extra_app_projects
   cluster_name            = var.cluster_name
   base_domain             = local.base_domain
   argocd_server_secretkey = var.argocd_server_secretkey
