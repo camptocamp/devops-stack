@@ -1,0 +1,9 @@
+{{- range .Values.extraAppProjects }}
+---
+apiVersion: "argoproj.io/v1alpha1"
+kind: "AppProject"
+metadata:
+  {{- .metadata | toYaml | nindent 2 }}
+spec:
+  {{- .spec | toYaml | nindent 2 }}
+{{- end }}

@@ -47,6 +47,7 @@ apps:
     enabled: ${ can(metrics_archives.bucket_config) ? true : false }
 
 ${yamlencode({"extraApps": extra_apps})}
+${yamlencode({"extraAppProjects": extra_app_projects})}
 
 argo-cd:
   installCRDs: false
