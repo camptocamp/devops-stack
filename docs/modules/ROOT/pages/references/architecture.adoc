@@ -1,4 +1,27 @@
 = Architecture
 
 
+Below is an architecture schema displaying which components are instantiated when using the DevOps Stack on EKS:
+
 image::architecture.png[architecture]
+
+
+The steps are:
+
+1. the user instantiates the `eks/aws` Terraform module, passing parameters
+2. the `eks/aws` module instantiates:
+  - the `terraform-aws-modules/eks/aws` public module to set up the EKS cluster
+  - the `argocd-helm` internal module to install and configure Argo CD.
+    This step adds app-of-apps values via a `values.tmpl.yaml` template
+    to the optional user values passed through the `app_of_apps_values_overrides` parameter.
+3. the `argocd-helm` module instantiates two Helm charts:
+  - the `argocd` chart, which sets up an Argo CD application deploying the `argocd` public chart
+  - the `app-of-apps` chart, which manages the `apps` application.
+    This step adds app-of-apps values via a new `values.tmpl.yaml` template.
+4. the `apps` Argo CD application manages all the Argo CD applications:
+  - the `apps` application itself
+  - `argocd`
+  - `kube-prometheus-stack`
+  - `cert-manager`
+  - …
+  - an `extra-apps` application for user-defined applications

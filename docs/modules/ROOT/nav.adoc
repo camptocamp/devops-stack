@@ -13,6 +13,7 @@
 *** xref:ROOT:howtos/write_documentation.adoc[Documentation]
 *** xref:ROOT:howtos/release.adoc[Release a new version]
 * References
+** xref:ROOT:references/architecture.adoc[Architecture]
 ** xref:ROOT:references/authentication.adoc[Authentication]
 ** xref:ROOT:references/terraform_modules.adoc[Terraform Modules]
 *** xref:ROOT:references/terraform_modules/argocd-helm.adoc[ArgoCD Helm]
