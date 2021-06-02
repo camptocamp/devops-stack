@@ -107,6 +107,9 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">References</span>
 <ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="architecture.html">Architecture</a>
+  </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="authentication.html">Authentication</a>
   </li>
@@ -275,6 +278,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">DevOps Stack</a></li>
+    <li>References</li>
     <li><a href="architecture.html">Architecture</a></li>
   </ul>
 </nav>
@@ -301,10 +305,77 @@
 </aside>
 <article class="doc">
 <h1 class="page">Architecture</h1>
+<div class="paragraph">
+<p>Below is an architecture schema displaying which components are instantiated when using the DevOps Stack on EKS:</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="../_images/architecture.png" alt="architecture">
 </div>
+</div>
+<div class="paragraph">
+<p>The steps are:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>the user instantiates the <code>eks/aws</code> Terraform module, passing parameters</p>
+</li>
+<li>
+<p>the <code>eks/aws</code> module instantiates:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>the <code>terraform-aws-modules/eks/aws</code> public module to set up the EKS cluster</p>
+</li>
+<li>
+<p>the <code>argocd-helm</code> internal module to install and configure Argo CD.
+This step adds app-of-apps values via a <code>values.tmpl.yaml</code> template
+to the optional user values passed through the <code>app_of_apps_values_overrides</code> parameter.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>the <code>argocd-helm</code> module instantiates two Helm charts:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>the <code>argocd</code> chart, which sets up an Argo CD application deploying the <code>argocd</code> public chart</p>
+</li>
+<li>
+<p>the <code>app-of-apps</code> chart, which manages the <code>apps</code> application.
+This step adds app-of-apps values via a new <code>values.tmpl.yaml</code> template.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>the <code>apps</code> Argo CD application manages all the Argo CD applications:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>the <code>apps</code> application itself</p>
+</li>
+<li>
+<p><code>argocd</code></p>
+</li>
+<li>
+<p><code>kube-prometheus-stack</code></p>
+</li>
+<li>
+<p><code>cert-manager</code></p>
+</li>
+<li>
+<p>…</p>
+</li>
+<li>
+<p>an <code>extra-apps</code> application for user-defined applications</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
 </div>
 </article>
   </div>
