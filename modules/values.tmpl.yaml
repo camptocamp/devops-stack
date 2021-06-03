@@ -45,6 +45,8 @@ apps:
     enabled: false
   thanos:
     enabled: ${ can(metrics_archives.bucket_config) ? true : false }
+  cluster-autoscaler:
+    enabled: ${cluster_autoscaler.enable}
 
 ${yamlencode({"extraApps": extra_apps})}
 ${yamlencode({"extraAppProjects": extra_app_projects})}
@@ -481,4 +483,8 @@ thanos:
           hosts:
             - "${metrics_archives.query_domain}"
             - "thanos-query.apps.${base_domain}"
+%{ endif }
+
+%{ if cluster_autoscaler.enable }
+cluster-autoscaler: {}
 %{ endif }

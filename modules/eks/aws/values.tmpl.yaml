@@ -59,3 +59,15 @@ traefik:
       hostPort: 443
   service:
     type: NodePort
+
+cluster-autoscaler:
+  awsRegion: ${aws_default_region}
+  rbac:
+    create: true
+    serviceAccount:
+      name: cluster-autoscaler
+      annotations:
+        eks.amazonaws.com/role-arn: ${cluster_autoscaler_role_arn}
+  autoDiscovery:
+    clusterName: ${cluster_name}
+    enabled: true

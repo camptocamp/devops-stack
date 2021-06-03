@@ -47,6 +47,7 @@ locals {
         metrics_archives                = local.metrics_archives
         cert_manager                    = local.cert_manager
         kube_prometheus_stack           = local.kube_prometheus_stack
+        cluster_autoscaler              = local.cluster_autoscaler
       }
     )],
     var.app_of_apps_values_overrides,
