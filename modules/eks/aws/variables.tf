@@ -75,3 +75,9 @@ variable "create_private_nlb" {
   type        = bool
   default     = false
 }
+
+variable "enable_cluster_autoscaler" {
+  description = "Whether to setup a cluster autoscaler"
+  type        = bool
+  default     = false
+}

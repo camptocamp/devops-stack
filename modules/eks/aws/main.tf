@@ -135,6 +135,10 @@ module "argocd" {
     admin_password = local.grafana_admin_password
   }
 
+  cluster_autoscaler = {
+    enable = var.enable_cluster_autoscaler
+  }
+
   app_of_apps_values_overrides = [
     templatefile("${path.module}/values.tmpl.yaml",
       {
@@ -144,6 +148,8 @@ module "argocd" {
         loki_bucket_name                = aws_s3_bucket.loki.id,
         efs_filesystem_id               = var.enable_efs ? module.efs.0.this_efs_mount_target_file_system_id : ""
         efs_dns_name                    = var.enable_efs ? module.efs.0.this_efs_mount_target_full_dns_name : ""
+        cluster_name                    = var.cluster_name
+        cluster_autoscaler_role_arn     = var.enable_cluster_autoscaler ? module.iam_assumable_role_cluster_autoscaler[0].iam_role_arn : ""
       }
     ),
     var.app_of_apps_values_overrides,

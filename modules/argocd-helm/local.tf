@@ -64,7 +64,7 @@ locals {
 
   loki_defaults = {
     bucket_name = ""
-    enable = true
+    enable      = true
   }
   loki = merge(
     local.loki_defaults,
@@ -114,12 +114,20 @@ locals {
   cert_manager = merge(
     local.cert_manager_defaults,
     var.cert_manager,
-  ) 
+  )
   kube_prometheus_stack_defaults = {
     enable = true
   }
   kube_prometheus_stack = merge(
     local.kube_prometheus_stack_defaults,
     var.kube_prometheus_stack,
+  )
+
+  cluster_autoscaler_defaults = {
+    enable = false
+  }
+  cluster_autoscaler = merge(
+    local.cluster_autoscaler_defaults,
+    var.cluster_autoscaler,
   )
 }
