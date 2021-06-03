@@ -7,3 +7,12 @@ cert-manager:
   prometheus:
     servicemonitor:
       enabled: true
+letsencrypt:
+  # -- ClusterIssuers configuration
+  issuers:
+    letsencrypt-prod:
+      email: letsencrypt@camptocamp.com
+      server: https://acme-v02.api.letsencrypt.org/directory
+    letsencrypt-staging:
+      email: letsencrypt@camptocamp.com
+      server: https://acme-staging-v02.api.letsencrypt.org/directory
