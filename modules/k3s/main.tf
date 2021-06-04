@@ -86,8 +86,12 @@ module "argocd" {
   app_of_apps_values_overrides = [
     templatefile("${path.module}/../values.tmpl.yaml",
       {
-        root_cert = base64encode(tls_self_signed_cert.root.cert_pem)
-        root_key  = base64encode(tls_private_key.root.private_key_pem)
+        base_domain      = local.base_domain
+        cluster_name     = var.cluster_name
+        minio_access_key = local.minio.access_key
+        minio_secret_key = local.minio.secret_key
+        root_cert        = base64encode(tls_self_signed_cert.root.cert_pem)
+        root_key         = base64encode(tls_private_key.root.private_key_pem)
       }
     ),
     var.app_of_apps_values_overrides,
