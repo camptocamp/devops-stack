@@ -23,7 +23,7 @@ data "aws_iam_role" "eks_admin" {
 }
 
 module "cluster" {
-  source = "git::https://github.com/camptocamp/devops-stack.git//modules/eks/aws?ref=v0.34.0"
+  source = "git::https://github.com/camptocamp/devops-stack.git//modules/eks/aws?ref=v0.35.0"
 
   cluster_name                         = "my-cluster"
   cluster_endpoint_public_access_cidrs = local.cluster_endpoint_public_access_cidrs
