@@ -83,10 +83,6 @@ module "argocd" {
     enable = false
   }
 
-  efs_provisioner = {
-    enable = false
-  }
-
   app_of_apps_values_overrides = [
     templatefile("${path.module}/values.tmpl.yaml",
       {

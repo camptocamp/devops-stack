@@ -1,4 +1,8 @@
 ---
+apps:
+  efs-provisioner:
+    enabled: ${enable_efs}
+
 argo-cd:
   server:
     config:

@@ -94,12 +94,6 @@ variable "traefik" {
   default     = {}
 }
 
-variable "efs_provisioner" {
-  description = "EFS provisioner settings"
-  type        = any
-  default     = {}
-}
-
 variable "keycloak" {
   description = "Keycloak settings"
   type        = any
