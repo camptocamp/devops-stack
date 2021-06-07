@@ -28,7 +28,7 @@ locals {
 
 
 module "cluster" {
-  source              = "git::https://github.com/camptocamp/devops-stack.git//modules/openshift4/aws?ref=v0.34.0"
+  source              = "git::https://github.com/camptocamp/devops-stack.git//modules/openshift4/aws?ref=v0.35.0"
   install_config_path = local.install_config_path
   base_domain         = local.base_domain
   cluster_name        = local.cluster_name

@@ -1,5 +1,28 @@
 = Changelog
 
+== https://github.com/camptocamp/devops-stack/tree/v0.35.0[0.35.0] (2021-06-07)
+
+https://github.com/camptocamp/devops-stack/compare/v0.34.0...v0.35.0[Full Changelog]
+
+*Continuous Integration:*
+
+* feat: add conventional commits check https://github.com/camptocamp/devops-stack/pull/648[#648] (https://github.com/mcanevet[mcanevet])
+
+*Documentation:*
+
+* Add architecture schema https://github.com/camptocamp/devops-stack/pull/647[#647] (https://github.com/raphink[raphink])
+* Add architecture page to navigation https://github.com/camptocamp/devops-stack/pull/649[#649] (https://github.com/raphink[raphink])
+
+*Implemented enhancements:*
+
+* feat: output clusterid. This is used for group management https://github.com/camptocamp/devops-stack/pull/650[#650] (https://github.com/JGodin-C2C[JGodin-C2C])
+* feat: allow to deploy extra AppProject objects https://github.com/camptocamp/devops-stack/pull/644[#644] (https://github.com/mcanevet[mcanevet])
+* feat(k3s): use minio as unique storage solution for Loki https://github.com/camptocamp/devops-stack/pull/653[#653] (https://github.com/mbornoz[mbornoz])
+
+*Upgraded components:*
+
+* feat: upgrade azurerm provider to 2.62.0 https://github.com/camptocamp/devops-stack/pull/654[#654] (https://github.com/modridi[modridi])
+
 == https://github.com/camptocamp/devops-stack/tree/v0.34.0[0.34.0] (2021-05-25)
 
 https://github.com/camptocamp/devops-stack/compare/v0.33.4...v0.34.0[Full Changelog]
