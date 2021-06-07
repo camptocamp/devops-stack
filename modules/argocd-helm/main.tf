@@ -37,7 +37,6 @@ locals {
         minio                           = local.minio
         loki                            = local.loki
         traefik                         = local.traefik
-        efs_provisioner                 = local.efs_provisioner
         argocd                          = local.argocd
         keycloak                        = local.keycloak
         grafana                         = local.grafana

@@ -127,9 +127,6 @@ module "argocd" {
   loki = {
     bucket_name = aws_s3_bucket.loki.id,
   }
-  efs_provisioner = {
-    enable = var.enable_efs
-  }
 
   grafana = {
     admin_password = local.grafana_admin_password
@@ -142,6 +139,7 @@ module "argocd" {
         cert_manager_assumable_role_arn = module.iam_assumable_role_cert_manager.iam_role_arn,
         loki_assumable_role_arn         = module.iam_assumable_role_loki.iam_role_arn,
         loki_bucket_name                = aws_s3_bucket.loki.id,
+        enable_efs                      = var.enable_efs
         efs_filesystem_id               = var.enable_efs ? module.efs.0.this_efs_mount_target_file_system_id : ""
         efs_dns_name                    = var.enable_efs ? module.efs.0.this_efs_mount_target_full_dns_name : ""
       }

@@ -71,14 +71,6 @@ locals {
     var.loki,
   )
 
-  efs_provisioner_defaults = {
-    enable = false
-  }
-  efs_provisioner = merge(
-    local.efs_provisioner_defaults,
-    var.efs_provisioner,
-  )
-
   keycloak_defaults = {
     enable         = false
     admin_password = ""

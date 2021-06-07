@@ -22,7 +22,7 @@ apps:
   csi-secrets-store-provider-azure:
     enabled: false
   efs-provisioner:
-    enabled: ${efs_provisioner.enable}
+    enabled: false
   keycloak:
     enabled: ${keycloak.enable}
   kube-prometheus-stack:
@@ -146,10 +146,6 @@ cert-manager: {}
 %{ endif }
 
 csi-secrets-store-provider-azure: {}
-
-%{ if efs_provisioner.enable }
-efs-provisioner: {}
-%{ endif }
 
 %{ if keycloak.enable }
 keycloak:
