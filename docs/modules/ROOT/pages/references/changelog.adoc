@@ -1,5 +1,13 @@
 = Changelog
 
+== https://github.com/camptocamp/devops-stack/tree/v0.36.0[0.36.0] (2021-06-08)
+
+https://github.com/camptocamp/devops-stack/compare/v0.35.0...v0.36.0[Full Changelog]
+
+*Implemented enhancements:*
+
+* feat(eks): add cluster-autoscaler https://github.com/camptocamp/devops-stack/pull/651[#651] (https://github.com/cryptobioz[cryptobioz])
+
 == https://github.com/camptocamp/devops-stack/tree/v0.35.0[0.35.0] (2021-06-07)
 
 https://github.com/camptocamp/devops-stack/compare/v0.34.0...v0.35.0[Full Changelog]
