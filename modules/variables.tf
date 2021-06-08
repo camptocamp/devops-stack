@@ -33,6 +33,12 @@ variable "extra_app_projects" {
   default     = []
 }
 
+variable "extra_application_sets" {
+  description = "Extra ApplicationSets objects to deploy."
+  type        = list(any)
+  default     = []
+}
+
 variable "oidc" {
   description = "OIDC configuration for core applications."
   type = object({

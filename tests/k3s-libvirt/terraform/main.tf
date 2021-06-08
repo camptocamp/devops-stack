@@ -7,39 +7,89 @@ module "cluster" {
   repo_url        = var.repo_url
   target_revision = var.target_revision
   server_memory   = 8192
-  extra_apps = [
+
+  extra_app_projects = [
     {
       metadata = {
-        name = "demo-app"
+        name      = "demo-project"
+        namespace = "argocd"
       }
       spec = {
-        project = "default"
+        description = "Demo project"
+        sourceRepos = ["*"]
 
-        source = {
-          path           = "tests/k3s-docker/argocd/demo-app"
-          repoURL        = var.repo_url
-          targetRevision = var.target_revision
-
-          helm = {
-            values = <<EOT
-spec:
-  source:
-    repoURL: ${var.repo_url}
-    targetRevision: ${var.target_revision}
-
-baseDomain: ${module.cluster.base_domain}
-          EOT
+        destinations = [
+          {
+            server    = "https://kubernetes.default.svc"
+            namespace = "demo-app"
           }
-        }
+        ]
 
-        destination = {
-          namespace = "demo-app"
-          server    = "https://kubernetes.default.svc"
-        }
+        clusterResourceWhitelist = [
+          {
+            group = ""
+            kind  = "Namespace"
+          }
+        ]
+      }
+    }
+  ]
 
-        syncPolicy = {
-          automated = {
-            selfHeal = true
+  extra_application_sets = [
+    {
+      metadata = {
+        name      = "demo-apps"
+        namespace = "argocd"
+
+        annotations = {
+          "argocd.argoproj.io/sync-options" = "SkipDryRunOnMissingResource=true"
+        }
+      }
+
+      spec = {
+        generators = [
+          {
+            git = {
+              repoURL  = var.repo_url
+              revision = var.target_revision
+
+              directories = [
+                {
+                  path = "tests/k3s-libvirt/argocd/*"
+                }
+              ]
+            }
+          }
+        ]
+
+        template = {
+          metadata = {
+            name = "{{path.basename}}"
+          }
+
+          spec = {
+            project = "demo-project"
+
+            source = {
+              repoURL        = var.repo_url
+              targetRevision = var.target_revision
+              path           = "{{path}}"
+            }
+
+            destination = {
+              server    = "https://kubernetes.default.svc"
+              namespace = "demo-app"
+            }
+
+            syncPolicy = {
+              automated = {
+                selfHeal = true
+              }
+
+              syncOptions = [
+                "CreateNamespace=true"
+              ]
+            }
           }
         }
       }

@@ -34,39 +34,61 @@ module "cluster" {
     }
   ]
 
-  extra_apps = [
+  extra_application_sets = [
     {
       metadata = {
-        name = "demo-app"
+        name      = "demo-apps"
+        namespace = "argocd"
+
+        annotations = {
+          "argocd.argoproj.io/sync-options" = "SkipDryRunOnMissingResource=true"
+        }
       }
+
       spec = {
-        project = "demo-project"
+        generators = [
+          {
+            git = {
+              repoURL  = var.repo_url
+              revision = var.target_revision
 
-        source = {
-          path           = "tests/k3s-docker/argocd/demo-app"
-          repoURL        = var.repo_url
-          targetRevision = var.target_revision
-
-          helm = {
-            values = <<EOT
-spec:
-  source:
-    repoURL: ${var.repo_url}
-    targetRevision: ${var.target_revision}
-
-baseDomain: ${module.cluster.base_domain}
-          EOT
+              directories = [
+                {
+                  path = "tests/k3s-docker/argocd/*"
+                }
+              ]
+            }
           }
-        }
+        ]
 
-        destination = {
-          namespace = "demo-app"
-          server    = "https://kubernetes.default.svc"
-        }
+        template = {
+          metadata = {
+            name = "{{path.basename}}"
+          }
 
-        syncPolicy = {
-          automated = {
-            selfHeal = true
+          spec = {
+            project = "demo-project"
+
+            source = {
+              repoURL        = var.repo_url
+              targetRevision = var.target_revision
+              path           = "{{path}}"
+            }
+
+            destination = {
+              server    = "https://kubernetes.default.svc"
+              namespace = "demo-app"
+            }
+
+            syncPolicy = {
+              automated = {
+                selfHeal = true
+              }
+
+              syncOptions = [
+                "CreateNamespace=true"
+              ]
+            }
           }
         }
       }
