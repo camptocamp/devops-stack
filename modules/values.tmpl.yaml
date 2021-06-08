@@ -50,6 +50,7 @@ apps:
 
 ${yamlencode({"extraApps": extra_apps})}
 ${yamlencode({"extraAppProjects": extra_app_projects})}
+${yamlencode({"extraApplicationSets": extra_application_sets})}
 
 argo-cd:
   installCRDs: false

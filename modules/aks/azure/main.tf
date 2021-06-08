@@ -81,6 +81,7 @@ module "argocd" {
   target_revision         = var.target_revision
   extra_apps              = var.extra_apps
   extra_app_projects      = var.extra_app_projects
+  extra_application_sets  = var.extra_application_sets
   cluster_name            = var.cluster_name
   base_domain             = var.base_domain
   cluster_issuer          = "letsencrypt-prod"

@@ -25,6 +25,12 @@ variable "extra_app_projects" {
   default     = []
 }
 
+variable "extra_application_sets" {
+  description = "Extra ApplicationSets objects to deploy."
+  type        = list(any)
+  default     = []
+}
+
 variable "argocd_server_secretkey" {
   description = "ArgoCD Server Secert Key to avoid regenerate token on redeploy."
   type        = string
