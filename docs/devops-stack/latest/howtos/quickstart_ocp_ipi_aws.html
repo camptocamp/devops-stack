@@ -238,6 +238,9 @@
           <a href="../index.html">latest</a>
         </li>
         <li class="version">
+          <a href="../../0.37.0/index.html">0.37.0</a>
+        </li>
+        <li class="version">
           <a href="../../0.36.0/index.html">0.36.0</a>
         </li>
         <li class="version">
@@ -293,6 +296,7 @@
   <button class="version-menu-toggle" title="Show other versions of page">latest</button>
   <div class="version-menu">
     <a class="version is-current" href="quickstart_ocp_ipi_aws.html">latest</a>
+    <a class="version" href="../../0.37.0/howtos/quickstart_ocp_ipi_aws.html">0.37.0</a>
     <a class="version" href="../../0.36.0/howtos/quickstart_ocp_ipi_aws.html">0.36.0</a>
     <a class="version" href="../../0.35.0/howtos/quickstart_ocp_ipi_aws.html">0.35.0</a>
     <a class="version" href="../../0.34.0/howtos/quickstart_ocp_ipi_aws.html">0.34.0</a>
@@ -376,7 +380,7 @@ locals {
 
 
 module "cluster" {
-  source              = "git::https://github.com/camptocamp/devops-stack.git//modules/openshift4/aws?ref=v0.36.0"
+  source              = "git::https://github.com/camptocamp/devops-stack.git//modules/openshift4/aws?ref=v0.37.0"
   install_config_path = local.install_config_path
   base_domain         = local.base_domain
   cluster_name        = local.cluster_name
