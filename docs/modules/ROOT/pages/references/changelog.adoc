@@ -1,5 +1,13 @@
 = Changelog
 
+== https://github.com/camptocamp/devops-stack/tree/v0.37.1[0.37.1] (2021-06-11)
+
+https://github.com/camptocamp/devops-stack/compare/v0.37.0...v0.37.1[Full Changelog]
+
+*Fixed Bugs:*
+
+* fix cluster-issuer deployment refactoring https://github.com/camptocamp/devops-stack/pull/669[#669] (https://github.com/mcanevet[mcanevet])
+
 == https://github.com/camptocamp/devops-stack/tree/v0.37.0[0.37.0] (2021-06-10)
 
 https://github.com/camptocamp/devops-stack/compare/v0.36.0...v0.37.0[Full Changelog]
