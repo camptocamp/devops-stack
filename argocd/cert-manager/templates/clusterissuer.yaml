@@ -23,7 +23,7 @@ spec:
 {{- if index $.Values "cert-manager" "clusterIssuers" }}
 {{- if index $.Values "cert-manager" "clusterIssuers" "letsencrypt" }}
 {{- if index $.Values "cert-manager" "clusterIssuers" "letsencrypt" "enabled" }}
-{{- range $name, $issuer := $.Values "letsencrypt" "issuers" }}
+{{- range $name, $issuer := index $.Values "letsencrypt" "issuers" }}
 ---
 apiVersion: cert-manager.io/v1alpha3
 kind: ClusterIssuer
