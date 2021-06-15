@@ -137,6 +137,16 @@ argo-cd:
         g, pipeline, role:readonly
         g, argocd-admin, role:admin
       scopes: '[groups, cognito:groups, roles]'
+%{ if !bootstrap && cluster_issuer == "ca-issuer" && keycloak.enable }
+    volumeMounts:
+      - name: certificate
+        mountPath: /etc/ssl/certs/ca.crt
+        subPath: ca.crt
+    volumes:
+      - name: certificate
+        secret:
+          secretName: argocd-tls
+%{ endif }
 
 argocd-applicationset: {}
 argocd-notifications: {}

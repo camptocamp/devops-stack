@@ -36,14 +36,6 @@ argo-cd:
     metrics:
       serviceMonitor:
         enabled: true
-    volumeMounts:
-      - name: certificate
-        mountPath: /etc/ssl/certs/ca.crt
-        subPath: ca.crt
-    volumes:
-      - name: certificate
-        secret:
-          secretName: argocd-tls
   repoServer:
     metrics:
       serviceMonitor:

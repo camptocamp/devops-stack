@@ -20,9 +20,7 @@ locals {
 
   argocd_server_secretkey = var.argocd_server_secretkey == null ? random_password.argocd_server_secretkey.result : var.argocd_server_secretkey
 
-  app_of_apps_values = concat([
-    templatefile("${path.module}/../values.tmpl.yaml",
-      {
+  app_of_apps_tmpl_defaults = {
         repo_url                        = var.repo_url
         target_revision                 = var.target_revision
         argocd_accounts_pipeline_tokens = local.argocd_accounts_pipeline_tokens
@@ -49,14 +47,25 @@ locals {
         kube_prometheus_stack           = local.kube_prometheus_stack
         cluster_autoscaler              = local.cluster_autoscaler
       }
+      
+  app_of_apps_values_bootstrap = concat([
+    templatefile("${path.module}/../values.tmpl.yaml",
+      merge(local.app_of_apps_tmpl_defaults, {bootstrap = true})
+    )],
+    var.app_of_apps_values_overrides,
+  )
+
+  app_of_apps_values = concat([
+    templatefile("${path.module}/../values.tmpl.yaml",
+      merge(local.app_of_apps_tmpl_defaults, {bootstrap = false})
     )],
     var.app_of_apps_values_overrides,
   )
 
   argocd_values = compact([
-    yamlencode(yamldecode(local.app_of_apps_values.0).argo-cd),
-    local.app_of_apps_values.1 == "" ? "" : try(yamlencode(yamldecode(local.app_of_apps_values.1).argo-cd), ""),
-    local.app_of_apps_values.2 == "" ? "" : try(yamlencode(yamldecode(local.app_of_apps_values.2).argo-cd), ""),
+    yamlencode(yamldecode(local.app_of_apps_values_bootstrap.0).argo-cd),
+    local.app_of_apps_values_bootstrap.1 == "" ? "" : try(yamlencode(yamldecode(local.app_of_apps_values_bootstrap.1).argo-cd), ""),
+    local.app_of_apps_values_bootstrap.2 == "" ? "" : try(yamlencode(yamldecode(local.app_of_apps_values_bootstrap.2).argo-cd), ""),
   ])
 
   argocd_opts = (contains(try(yamldecode(local.argocd_values.0).server.extraArgs, []), "--insecure") || contains(try(yamldecode(local.argocd_values.1).server.extraArgs, []), "--insecure") || contains(try(yamldecode(local.argocd_values.2).server.extraArgs, []), "--insecure")) ? "--plaintext --port-forward --port-forward-namespace argocd" : "--port-forward --port-forward-namespace argocd"
