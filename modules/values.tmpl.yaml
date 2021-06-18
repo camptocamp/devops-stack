@@ -132,7 +132,7 @@ argo-cd:
     metrics:
       enabled: true
     rbacConfig:
-      policy.default: role:readonly
+      policy.default: ''
       policy.csv: |
         g, pipeline, role:readonly
         g, argocd-admin, role:admin
