@@ -1,5 +1,21 @@
 = Changelog
 
+== https://github.com/camptocamp/devops-stack/tree/v0.38.0[0.38.0] (2021-06-22)
+
+https://github.com/camptocamp/devops-stack/compare/v0.37.1...v0.38.0[Full Changelog]
+
+*Breaking Changes:*
+
+* feat: change ArgoCD's default policy from read-only to none https://github.com/camptocamp/devops-stack/pull/672[#672] (https://github.com/mcanevet[mcanevet])
+
+*Implemented enhancements:*
+
+* feat: allow to set AppProject's status https://github.com/camptocamp/devops-stack/pull/673[#673] (https://github.com/mcanevet[mcanevet])
+
+*Fixed Bugs:*
+
+* fix: argocd secret dependency https://github.com/camptocamp/devops-stack/pull/667[#667] (https://github.com/modridi[modridi])
+
 == https://github.com/camptocamp/devops-stack/tree/v0.37.1[0.37.1] (2021-06-11)
 
 https://github.com/camptocamp/devops-stack/compare/v0.37.0...v0.37.1[Full Changelog]
