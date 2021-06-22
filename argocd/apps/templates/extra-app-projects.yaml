@@ -6,4 +6,8 @@ metadata:
   {{- .metadata | toYaml | nindent 2 }}
 spec:
   {{- .spec | toYaml | nindent 2 }}
+{{- if .status }}
+status:
+  {{- .status | toYaml | nindent 2 }}
+{{- end }}
 {{- end }}
