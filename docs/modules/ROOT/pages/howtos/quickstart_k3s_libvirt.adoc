@@ -21,11 +21,15 @@ mv terraform-provider-libvirt ~/.local/share/terraform/plugins/registry.terrafor
 
 - Access to a functional Libvirt daemon
 - Knowledge of https://terraform.io[Terraform] basics
+- `jq` binary
+- https://argoproj.github.io/argo-cd/cli_installation/[argocd] CLI
 
 
 include::partial$terraform_instant_intro.adoc[]
 
 ```hcl
+# terraform/main.tf
+
 module "cluster" {
   source = "git::https://github.com/camptocamp/devops-stack.git//modules/k3s/libvirt?ref=master"
 
