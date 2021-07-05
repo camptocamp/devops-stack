@@ -1,5 +1,19 @@
 = Changelog
 
+== https://github.com/camptocamp/devops-stack/tree/v0.39.0[0.39.0] (2021-07-05)
+
+https://github.com/camptocamp/devops-stack/compare/v0.38.0...v0.39.0[Full Changelog]
+
+*Implemented enhancements:*
+
+* feat: add support for tfmigrate in gitlab ci pipeline https://github.com/camptocamp/devops-stack/pull/677[#677] (https://github.com/mcanevet[mcanevet])
+* feat(aks): add kube_admin_config output https://github.com/camptocamp/devops-stack/pull/682[#682] (https://github.com/mcanevet[mcanevet])
+
+*Documentation:*
+
+* docs(pipelines): add howtos about pipeline creation with gitlab, github, terraform and tfmigrate https://github.com/camptocamp/devops-stack/pull/679[#679] (https://github.com/fsismondi[fsismondi])
+* doc(k3s): update k3s quickstart documentation https://github.com/camptocamp/devops-stack/pull/681[#681] (https://github.com/mcanevet[mcanevet])
+
 == https://github.com/camptocamp/devops-stack/tree/v0.38.0[0.38.0] (2021-06-22)
 
 https://github.com/camptocamp/devops-stack/compare/v0.37.1...v0.38.0[Full Changelog]
