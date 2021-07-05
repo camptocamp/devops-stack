@@ -380,6 +380,12 @@ mv terraform-provider-libvirt ~/.local/share/terraform/plugins/registry.terrafor
 <li>
 <p>Knowledge of <a href="https://terraform.io">Terraform</a> basics</p>
 </li>
+<li>
+<p><code>jq</code> binary</p>
+</li>
+<li>
+<p><a href="https://argoproj.github.io/argo-cd/cli_installation/">argocd</a> CLI</p>
+</li>
 </ul>
 </div>
 </div>
@@ -395,7 +401,9 @@ mv terraform-provider-libvirt ~/.local/share/terraform/plugins/registry.terrafor
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">module "cluster" {
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl"># terraform/main.tf
+
+module "cluster" {
   source = "git::https://github.com/camptocamp/devops-stack.git//modules/k3s/libvirt?ref=master"
 
   cluster_name = "my-cluster"
