@@ -8,7 +8,7 @@ metadata:
   name: traefik
   namespace: argocd
 spec:
-  project: default
+  project: "devops-stack"
   source:
     path: argocd/traefik
     repoURL: {{ .Values.spec.source.repoURL }}

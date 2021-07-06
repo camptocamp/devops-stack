@@ -8,7 +8,7 @@ metadata:
   name: kube-prometheus-stack
   namespace: argocd
 spec:
-  project: default
+  project: "devops-stack"
   source:
     path: argocd/kube-prometheus-stack
     repoURL: {{ .Values.spec.source.repoURL }}

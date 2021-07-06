@@ -6,7 +6,7 @@ metadata:
   name: efs-provisioner
   namespace: argocd
 spec:
-  project: default
+  project: "devops-stack"
   source:
     path: argocd/efs-provisioner
     repoURL: {{ .Values.spec.source.repoURL }}

@@ -8,7 +8,7 @@ metadata:
   name: cert-manager
   namespace: argocd
 spec:
-  project: default
+  project: "devops-stack"
   source:
     path: argocd/cert-manager
     repoURL: {{ .Values.spec.source.repoURL }}

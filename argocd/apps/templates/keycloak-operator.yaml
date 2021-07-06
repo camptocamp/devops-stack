@@ -8,7 +8,7 @@ metadata:
   name: keycloak-operator
   namespace: argocd
 spec:
-  project: default
+  project: "devops-stack"
   source:
     path: deploy
     repoURL: https://github.com/keycloak/keycloak-operator.git
