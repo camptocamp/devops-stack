@@ -6,7 +6,7 @@ metadata:
   name: argocd
   namespace: argocd
 spec:
-  project: default
+  project: "devops-stack"
   source:
     path: argocd/argocd
     repoURL: {{ .Values.spec.source.repoURL }}

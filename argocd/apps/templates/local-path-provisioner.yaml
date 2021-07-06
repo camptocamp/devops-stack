@@ -8,7 +8,7 @@ metadata:
   name: local-path-provisioner
   namespace: argocd
 spec:
-  project: default
+  project: "devops-stack"
   source:
     repoURL: https://github.com/rancher/local-path-provisioner
     path: deploy/chart

@@ -8,7 +8,7 @@ metadata:
   name: vault
   namespace: argocd
 spec:
-  project: default
+  project: "devops-stack"
   source:
     path: argocd/vault
     repoURL: {{ .Values.spec.source.repoURL }}

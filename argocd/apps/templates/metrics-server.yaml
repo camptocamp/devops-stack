@@ -6,7 +6,7 @@ metadata:
   name: metrics-server
   namespace: argocd
 spec:
-  project: default
+  project: "devops-stack"
   source:
     repoURL: https://github.com/kubernetes-sigs/metrics-server.git
     path: deploy/1.8+
