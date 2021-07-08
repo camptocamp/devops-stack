@@ -137,6 +137,8 @@ module "argocd" {
     enable = var.enable_cluster_autoscaler
   }
 
+  repositories = var.repositories
+
   app_of_apps_values_overrides = [
     templatefile("${path.module}/values.tmpl.yaml",
       {

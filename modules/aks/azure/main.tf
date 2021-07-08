@@ -101,6 +101,8 @@ module "argocd" {
     admin_password = local.grafana_admin_password
   }
 
+  repositories = var.repositories
+
   app_of_apps_values_overrides = [
     templatefile("${path.module}/values.tmpl.yaml",
       {
