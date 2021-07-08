@@ -8,3 +8,12 @@ output "app_of_apps_values" {
   sensitive   = true
   value       = helm_release.app_of_apps.values
 }
+
+output "repositories_public_keys_openssh" {
+  description = "Public key of SSH keys allowed to access repositories"
+
+  value = tomap({
+    for repository in var.repositories :
+    repository => tls_private_key.repositories[repository].public_key_openssh
+  })
+}

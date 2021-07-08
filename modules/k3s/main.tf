@@ -91,6 +91,8 @@ module "argocd" {
     }
   }
 
+  repositories = var.repositories
+
   app_of_apps_values_overrides = [
     templatefile("${path.module}/../values.tmpl.yaml",
       {
