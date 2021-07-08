@@ -40,8 +40,8 @@ module "argocd" {
   cluster_name            = var.cluster_name
   base_domain             = local.base_domain
   argocd_server_secretkey = var.argocd_server_secretkey
+  cluster_issuer          = "ca-issuer"
 
-  cluster_issuer = "ca-issuer"
   oidc = var.oidc != null ? var.oidc : {
     issuer_url    = format("https://keycloak.apps.%s/auth/realms/kubernetes", local.base_domain)
     oauth_url     = format("https://keycloak.apps.%s/auth/realms/kubernetes/protocol/openid-connect/auth", local.base_domain)
@@ -54,18 +54,22 @@ module "argocd" {
       "--ssl-insecure-skip-verify=true",
     ]
   }
+
   minio = {
     enable     = var.enable_minio
     access_key = local.minio.access_key
     secret_key = local.minio.secret_key
   }
+
   keycloak = {
     enable         = var.oidc == null ? true : false
     admin_password = random_password.admin_password.result
   }
+
   loki = {
     bucket_name = "loki"
   }
+
   metrics_archives = {
     bucket_name = "thanos",
     bucket_config = {
@@ -79,12 +83,14 @@ module "argocd" {
       }
     }
   }
+
   grafana = {
     admin_password = local.grafana_admin_password
     generic_oauth_extra_args = {
       tls_skip_verify_insecure = true
     }
   }
+
   app_of_apps_values_overrides = [
     templatefile("${path.module}/../values.tmpl.yaml",
       {
@@ -98,6 +104,7 @@ module "argocd" {
     ),
     var.app_of_apps_values_overrides,
   ]
+
   depends_on = [
     module.cluster,
   ]
