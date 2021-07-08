@@ -46,13 +46,7 @@ locals {
     cert_manager                    = local.cert_manager
     kube_prometheus_stack           = local.kube_prometheus_stack
     cluster_autoscaler              = local.cluster_autoscaler
-
-    repositories = tomap(
-      {
-        for repository in var.repositories :
-        repository => tls_private_key.repositories[repository].private_key_pem
-      }
-    )
+    repositories                    = var.repositories
   }
 
   app_of_apps_values_bootstrap = concat([
@@ -150,11 +144,4 @@ resource "null_resource" "wait_for_app_of_apps" {
 resource "random_password" "oauth2_cookie_secret" {
   length  = 16
   special = false
-}
-
-resource "tls_private_key" "repositories" {
-  for_each = toset(var.repositories)
-
-  algorithm   = "ECDSA"
-  ecdsa_curve = "P384"
 }

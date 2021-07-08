@@ -150,6 +150,6 @@ variable "wait_for_app_of_apps" {
 
 variable "repositories" {
   description = "A list of repositories to add to ArgoCD."
-  type        = list(string)
-  default     = []
+  type        = map(string)
+  default     = {}
 }
