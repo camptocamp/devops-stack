@@ -34,8 +34,3 @@ output "app_of_apps_values" {
   sensitive   = true
   value       = module.argocd.app_of_apps_values
 }
-
-output "repositories_public_keys_openssh" {
-  description = "Public key of SSH keys allowed to access repositories"
-  value       = module.argocd.repositories_public_keys_openssh
-}
