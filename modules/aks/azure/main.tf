@@ -9,6 +9,15 @@ locals {
 
   azure_dns_label_name = format("%s-%s", var.cluster_name, replace(var.base_domain, ".", "-"))
   kubeconfig           = data.azurerm_kubernetes_cluster.cluster.kube_admin_config_raw
+
+  azureidentities = { for v in var.azureidentities :
+    format("%s.%s", v.namespace, v.name) => {
+      name        = v.name
+      namespace   = v.namespace
+      resource_id = azurerm_user_assigned_identity.this[format("%s.%s", v.namespace, v.name)].id
+      client_id   = azurerm_user_assigned_identity.this[format("%s.%s", v.namespace, v.name)].client_id
+    }
+  }
 }
 
 provider "helm" {
@@ -117,6 +126,7 @@ module "argocd" {
         loki_container_name                          = azurerm_storage_container.loki.name
         loki_account_name                            = azurerm_storage_account.this.name
         loki_account_key                             = azurerm_storage_account.this.primary_access_key
+        azureidentities                              = local.azureidentities
       }
     ),
     var.app_of_apps_values_overrides,
@@ -297,4 +307,14 @@ resource "azurerm_policy_assignment" "baseline" {
 }
 PARAMETERS
 
+}
+
+resource "azurerm_user_assigned_identity" "this" {
+  for_each = {
+    for k, v in var.azureidentities :
+    format("%s.%s", v.namespace, v.name) => v
+  }
+  resource_group_name = module.cluster.node_resource_group
+  location            = data.azurerm_resource_group.this.location
+  name                = format("%s-%s-%s", each.value.namespace, each.value.name, var.cluster_name)
 }

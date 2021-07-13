@@ -54,3 +54,12 @@ variable "public_ssh_key" {
   type        = string
   default     = ""
 }
+
+variable "azureidentities" {
+  description = "Azure User Assigned Identities to create"
+  type = list(object({
+    namespace = string
+    name      = string
+  }))
+  default = []
+}
