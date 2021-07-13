@@ -42,8 +42,8 @@ No modules.
 |https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release[helm_release.argocd] |resource
 |https://registry.terraform.io/providers/camptocamp/jwt/latest/docs/resources/hashed_token[jwt_hashed_token.argocd] |resource
 |https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource[null_resource.wait_for_app_of_apps] |resource
+|https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password[random_password.argocd_server_secretkey] |resource
 |https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password[random_password.oauth2_cookie_secret] |resource
-|https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string[random_string.argocd_server_secretkey] |resource
 |https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/uuid[random_uuid.jti] |resource
 |https://registry.terraform.io/providers/hashicorp/time/0.6.0/docs/resources/static[time_static.iat] |resource
 |===
@@ -89,6 +89,12 @@ No modules.
 |`{}`
 |no
 
+|[[input_cluster_autoscaler]] <<input_cluster_autoscaler,cluster_autoscaler>>
+|Cluster Autoscaler settings
+|`any`
+|`{}`
+|no
+
 |[[input_cluster_issuer]] <<input_cluster_issuer,cluster_issuer>>
 |Cluster Issuer
 |`string`
@@ -101,14 +107,20 @@ No modules.
 |n/a
 |yes
 
-|[[input_efs_provisioner]] <<input_efs_provisioner,efs_provisioner>>
-|EFS provisioner settings
-|`any`
-|`{}`
+|[[input_extra_app_projects]] <<input_extra_app_projects,extra_app_projects>>
+|Extra AppProjects objects to deploy.
+|`list(any)`
+|`[]`
+|no
+
+|[[input_extra_application_sets]] <<input_extra_application_sets,extra_application_sets>>
+|Extra ApplicationSets objects to deploy.
+|`list(any)`
+|`[]`
 |no
 
 |[[input_extra_apps]] <<input_extra_apps,extra_apps>>
-|Extra applications to deploy.
+|Extra Applications objects to deploy.
 |`list(any)`
 |`[]`
 |no
@@ -178,6 +190,12 @@ No modules.
 |`string`
 |n/a
 |yes
+
+|[[input_repositories]] <<input_repositories,repositories>>
+|A list of repositories to add to ArgoCD.
+|`map(string)`
+|`{}`
+|no
 
 |[[input_target_revision]] <<input_target_revision,target_revision>>
 |The source target revision of ArgoCD's app of apps.

@@ -11,7 +11,7 @@ The `eks/aws` Terraform module provides a way to install and configure:
 |===
 |Name |Version
 |[[requirement_terraform]] <<requirement_terraform,terraform>> |>= 0.13
-|[[requirement_aws]] <<requirement_aws,aws>> |3.21.0
+|[[requirement_aws]] <<requirement_aws,aws>> |3.37.0
 |[[requirement_helm]] <<requirement_helm,helm>> |2.0.2
 |[[requirement_kubernetes]] <<requirement_kubernetes,kubernetes>> |2.0.2
 |[[requirement_local]] <<requirement_local,local>> |2.0.0
@@ -24,7 +24,7 @@ The `eks/aws` Terraform module provides a way to install and configure:
 [cols="a,a",options="header,autowidth"]
 |===
 |Name |Version
-|[[provider_aws]] <<provider_aws,aws>> |3.21.0
+|[[provider_aws]] <<provider_aws,aws>> |3.37.0
 |[[provider_random]] <<provider_random,random>> |3.0.0
 |===
 
@@ -34,11 +34,12 @@ The `eks/aws` Terraform module provides a way to install and configure:
 |===
 |Name|Source|Version|
 |[[module_argocd]] <<module_argocd,argocd>>|../../argocd-helm|
-|[[module_cluster]] <<module_cluster,cluster>>|terraform-aws-modules/eks/aws|13.2.1
+|[[module_cluster]] <<module_cluster,cluster>>|terraform-aws-modules/eks/aws|15.1.0
 |[[module_efs]] <<module_efs,efs>>|camptocamp/efs/aws|
-|[[module_iam_assumable_role_cert_manager]] <<module_iam_assumable_role_cert_manager,iam_assumable_role_cert_manager>>|terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc|3.6.0
-|[[module_iam_assumable_role_loki]] <<module_iam_assumable_role_loki,iam_assumable_role_loki>>|terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc|3.6.0
-|[[module_nlb]] <<module_nlb,nlb>>|terraform-aws-modules/alb/aws|5.10.0
+|[[module_iam_assumable_role_cert_manager]] <<module_iam_assumable_role_cert_manager,iam_assumable_role_cert_manager>>|terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc|4.0.0
+|[[module_iam_assumable_role_cluster_autoscaler]] <<module_iam_assumable_role_cluster_autoscaler,iam_assumable_role_cluster_autoscaler>>|terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc|4.0.0
+|[[module_iam_assumable_role_loki]] <<module_iam_assumable_role_loki,iam_assumable_role_loki>>|terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc|4.0.0
+|[[module_nlb]] <<module_nlb,nlb>>|terraform-aws-modules/alb/aws|6.0.0
 |[[module_nlb_private]] <<module_nlb_private,nlb_private>>|terraform-aws-modules/alb/aws|5.10.0
 |===
 
@@ -47,24 +48,26 @@ The `eks/aws` Terraform module provides a way to install and configure:
 [cols="a,a",options="header,autowidth"]
 |===
 |Name |Type
-|https://registry.terraform.io/providers/hashicorp/aws/3.21.0/docs/resources/cognito_user_pool_client[aws_cognito_user_pool_client.client] |resource
-|https://registry.terraform.io/providers/hashicorp/aws/3.21.0/docs/resources/iam_policy[aws_iam_policy.cert_manager] |resource
-|https://registry.terraform.io/providers/hashicorp/aws/3.21.0/docs/resources/iam_policy[aws_iam_policy.loki] |resource
-|https://registry.terraform.io/providers/hashicorp/aws/3.21.0/docs/resources/route53_record[aws_route53_record.wildcard] |resource
-|https://registry.terraform.io/providers/hashicorp/aws/3.21.0/docs/resources/s3_bucket[aws_s3_bucket.loki] |resource
-|https://registry.terraform.io/providers/hashicorp/aws/3.21.0/docs/resources/security_group_rule[aws_security_group_rule.workers_ingress_healthcheck_http] |resource
-|https://registry.terraform.io/providers/hashicorp/aws/3.21.0/docs/resources/security_group_rule[aws_security_group_rule.workers_ingress_healthcheck_https] |resource
+|https://registry.terraform.io/providers/hashicorp/aws/3.37.0/docs/resources/cognito_user_pool_client[aws_cognito_user_pool_client.client] |resource
+|https://registry.terraform.io/providers/hashicorp/aws/3.37.0/docs/resources/iam_policy[aws_iam_policy.cert_manager] |resource
+|https://registry.terraform.io/providers/hashicorp/aws/3.37.0/docs/resources/iam_policy[aws_iam_policy.cluster_autoscaler] |resource
+|https://registry.terraform.io/providers/hashicorp/aws/3.37.0/docs/resources/iam_policy[aws_iam_policy.loki] |resource
+|https://registry.terraform.io/providers/hashicorp/aws/3.37.0/docs/resources/route53_record[aws_route53_record.wildcard] |resource
+|https://registry.terraform.io/providers/hashicorp/aws/3.37.0/docs/resources/s3_bucket[aws_s3_bucket.loki] |resource
+|https://registry.terraform.io/providers/hashicorp/aws/3.37.0/docs/resources/security_group_rule[aws_security_group_rule.workers_ingress_healthcheck_http] |resource
+|https://registry.terraform.io/providers/hashicorp/aws/3.37.0/docs/resources/security_group_rule[aws_security_group_rule.workers_ingress_healthcheck_https] |resource
 |https://registry.terraform.io/providers/hashicorp/random/3.0.0/docs/resources/password[random_password.grafana_admin_password] |resource
-|https://registry.terraform.io/providers/hashicorp/aws/3.21.0/docs/data-sources/eks_cluster[aws_eks_cluster.cluster] |data source
-|https://registry.terraform.io/providers/hashicorp/aws/3.21.0/docs/data-sources/eks_cluster_auth[aws_eks_cluster_auth.cluster] |data source
-|https://registry.terraform.io/providers/hashicorp/aws/3.21.0/docs/data-sources/iam_policy_document[aws_iam_policy_document.cert_manager] |data source
-|https://registry.terraform.io/providers/hashicorp/aws/3.21.0/docs/data-sources/iam_policy_document[aws_iam_policy_document.loki] |data source
-|https://registry.terraform.io/providers/hashicorp/aws/3.21.0/docs/data-sources/nat_gateway[aws_nat_gateway.this] |data source
-|https://registry.terraform.io/providers/hashicorp/aws/3.21.0/docs/data-sources/region[aws_region.current] |data source
-|https://registry.terraform.io/providers/hashicorp/aws/3.21.0/docs/data-sources/route53_zone[aws_route53_zone.this] |data source
-|https://registry.terraform.io/providers/hashicorp/aws/3.21.0/docs/data-sources/subnet_ids[aws_subnet_ids.private] |data source
-|https://registry.terraform.io/providers/hashicorp/aws/3.21.0/docs/data-sources/subnet_ids[aws_subnet_ids.public] |data source
-|https://registry.terraform.io/providers/hashicorp/aws/3.21.0/docs/data-sources/vpc[aws_vpc.this] |data source
+|https://registry.terraform.io/providers/hashicorp/aws/3.37.0/docs/data-sources/eks_cluster[aws_eks_cluster.cluster] |data source
+|https://registry.terraform.io/providers/hashicorp/aws/3.37.0/docs/data-sources/eks_cluster_auth[aws_eks_cluster_auth.cluster] |data source
+|https://registry.terraform.io/providers/hashicorp/aws/3.37.0/docs/data-sources/iam_policy_document[aws_iam_policy_document.cert_manager] |data source
+|https://registry.terraform.io/providers/hashicorp/aws/3.37.0/docs/data-sources/iam_policy_document[aws_iam_policy_document.cluster_autoscaler] |data source
+|https://registry.terraform.io/providers/hashicorp/aws/3.37.0/docs/data-sources/iam_policy_document[aws_iam_policy_document.loki] |data source
+|https://registry.terraform.io/providers/hashicorp/aws/3.37.0/docs/data-sources/nat_gateway[aws_nat_gateway.this] |data source
+|https://registry.terraform.io/providers/hashicorp/aws/3.37.0/docs/data-sources/region[aws_region.current] |data source
+|https://registry.terraform.io/providers/hashicorp/aws/3.37.0/docs/data-sources/route53_zone[aws_route53_zone.this] |data source
+|https://registry.terraform.io/providers/hashicorp/aws/3.37.0/docs/data-sources/subnet_ids[aws_subnet_ids.private] |data source
+|https://registry.terraform.io/providers/hashicorp/aws/3.37.0/docs/data-sources/subnet_ids[aws_subnet_ids.public] |data source
+|https://registry.terraform.io/providers/hashicorp/aws/3.37.0/docs/data-sources/vpc[aws_vpc.this] |data source
 |===
 
 == Inputs
@@ -140,14 +143,32 @@ The `eks/aws` Terraform module provides a way to install and configure:
 |`true`
 |no
 
+|[[input_enable_cluster_autoscaler]] <<input_enable_cluster_autoscaler,enable_cluster_autoscaler>>
+|Whether to setup a cluster autoscaler
+|`bool`
+|`false`
+|no
+
 |[[input_enable_efs]] <<input_enable_efs,enable_efs>>
 |Whether to provision an EFS filesystem, along with a provisioner
 |`bool`
 |`false`
 |no
 
+|[[input_extra_app_projects]] <<input_extra_app_projects,extra_app_projects>>
+|Extra AppProjects objects to deploy.
+|`list(any)`
+|`[]`
+|no
+
+|[[input_extra_application_sets]] <<input_extra_application_sets,extra_application_sets>>
+|Extra ApplicationSets objects to deploy.
+|`list(any)`
+|`[]`
+|no
+
 |[[input_extra_apps]] <<input_extra_apps,extra_apps>>
-|Extra applications to deploy.
+|Extra Applications objects to deploy.
 |`list(any)`
 |`[]`
 |no
@@ -210,6 +231,12 @@ object({
 |The source repo URL of ArgoCD's app of apps.
 |`string`
 |`"https://github.com/camptocamp/devops-stack.git"`
+|no
+
+|[[input_repositories]] <<input_repositories,repositories>>
+|A list of repositories to add to ArgoCD.
+|`map(string)`
+|`{}`
 |no
 
 |[[input_target_revision]] <<input_target_revision,target_revision>>

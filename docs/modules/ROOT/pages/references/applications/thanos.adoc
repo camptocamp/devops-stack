@@ -3,15 +3,15 @@
 == Requirements
 
 [cols=",,",options="header",]
-|===
+|==================================================
 |Repository |Name |Version
 |https://charts.bitnami.com/bitnami |thanos |3.14.0
-|===
+|==================================================
 
 == Values
 
 [cols=",,,",options="header",]
-|===
+|===============================
 |Key |Type |Default |Description
 |thanos |object |`{}` |
-|===
+|===============================
