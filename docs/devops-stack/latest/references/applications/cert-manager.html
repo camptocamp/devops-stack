@@ -354,7 +354,7 @@
 sources</p>
 </li>
 <li>
-<p>ensuring certificates are valid and up to date</p>
+<p>ensuring certificates are valid and up-to-date</p>
 </li>
 <li>
 <p>renewal of certificates at an appropriate time before expiry</p>
@@ -413,6 +413,12 @@ sources</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>{"installCRDs":true,"prometheus":{"servicemonitor":{"enabled":true}},"securityContext":{"fsGroup":999}}</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Values passed to the cert-manager chart</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">letsencrypt.issuers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>{"letsencrypt-prod":{"email":"<a href="mailto:letsencrypt@camptocamp.com">letsencrypt@camptocamp.com</a>","server":"https://acme-v02.api.letsencrypt.org/directory"},"letsencrypt-staging":{"email":"<a href="mailto:letsencrypt@camptocamp.com">letsencrypt@camptocamp.com</a>","server":"https://acme-staging-v02.api.letsencrypt.org/directory"}}</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ClusterIssuers configuration</p></td>
 </tr>
 </tbody>
 </table>

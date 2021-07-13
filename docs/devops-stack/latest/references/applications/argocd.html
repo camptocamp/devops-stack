@@ -353,11 +353,17 @@
 <p>ArgoCD itself</p>
 </li>
 <li>
-<p>A Grafana dashaboard for ArgoCD</p>
+<p>A Grafana dashboard for ArgoCD</p>
 </li>
 <li>
 <p>An <code>OAuthClient</code> Kubernetes object if the OpenShift 4 option is
 enabled</p>
+</li>
+<li>
+<p>ArgoCD ApplicationSet</p>
+</li>
+<li>
+<p>ArgoCD Notifications</p>
 </li>
 </ul>
 </div>
@@ -383,7 +389,17 @@ enabled</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://argoproj.github.io/argo-helm" class="bare">https://argoproj.github.io/argo-helm</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">argo-cd</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">3.0.0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3.6.8</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://argoproj.github.io/argo-helm" class="bare">https://argoproj.github.io/argo-helm</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">argocd-applicationset</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0.1.6</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://argoproj.github.io/argo-helm" class="bare">https://argoproj.github.io/argo-helm</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">argocd-notifications</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.4.0</p></td>
 </tr>
 </tbody>
 </table>
@@ -411,8 +427,14 @@ enabled</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">argo-cd</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>{"controller":{"metrics":{"rules":{"enabled":true,"spec":[{"alert":"ArgoAppMissing","annotations":{"description":"ArgoCD has not reported any applications data for the past 15 minutes which means that it must be down or not functioning properly.  This needs to be resolved for this cloud to continue to maintain state.\n","summary":"[ArgoCD] No reported applications"},"expr":"absent(argocd_app_info)\n","for":"15m","labels":{"severity":"critical"}},{"alert":"ArgoAppNotSynced","annotations":{"description":"The application [{{</code>\{\{\($labels.name}}`}} has not been synchronized for over 12 hours which means that the state of this cloud has drifted away from the state inside Git.\n","summary":"[{{`{{$\)labels.name}}`}}] Application not synchronized"},"expr":"argocd_app_info{sync_status!=\"Synced\"} == 1\n","for":"12h","labels":{"severity":"warning"}}]},"serviceMonitor":{"enabled":true}}},"repoServer":{"metrics":{"serviceMonitor":{"enabled":true}}},"server":{"metrics":{"serviceMonitor":{"enabled":true}},"volumeMounts":[{"mountPath":"/etc/ssl/certs/ca.crt","name":"certificate","subPath":"ca.crt"}],"volumes":[{"name":"certificate","secret":{"secretName":"argocd-tls"}}]}}`</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>{"controller":{"metrics":{"rules":{"enabled":true,"spec":[{"alert":"ArgoAppMissing","annotations":{"description":"ArgoCD has not reported any applications data for the past 15 minutes which means that it must be down or not functioning properly.  This needs to be resolved for this cloud to continue to maintain state.\n","summary":"[ArgoCD] No reported applications"},"expr":"absent(argocd_app_info)\n","for":"15m","labels":{"severity":"critical"}},{"alert":"ArgoAppNotSynced","annotations":{"description":"The application [{{</code>\{\{\($labels.name}}`}} has not been synchronized for over 12 hours which means that the state of this cloud has drifted away from the state inside Git.\n","summary":"[{{`{{$\)labels.name}}`}}] Application not synchronized"},"expr":"argocd_app_info{sync_status!=\"Synced\"} == 1\n","for":"12h","labels":{"severity":"warning"}}]},"serviceMonitor":{"enabled":true}}},"repoServer":{"metrics":{"serviceMonitor":{"enabled":true}}},"server":{"metrics":{"serviceMonitor":{"enabled":true}}}}`</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Values passed to the argo-cd chart</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">argocd-applicationset.installCRDs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bool</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 </tbody>
 </table>
