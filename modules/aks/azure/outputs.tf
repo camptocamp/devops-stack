@@ -20,3 +20,8 @@ output "kube_admin_config" {
     password               = module.cluster.admin_password
   }
 }
+
+output "azureidentities" {
+  description = "Azure User Assigned Identities created"
+  value       = local.azureidentities
+}
