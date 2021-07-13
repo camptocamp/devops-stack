@@ -11,8 +11,8 @@ The `aks/azure` Terraform module provides a way to install and configure:
 |===
 |Name |Version
 |[[requirement_terraform]] <<requirement_terraform,terraform>> |>= 0.13
-|[[requirement_azuread]] <<requirement_azuread,azuread>> |1.0.0
-|[[requirement_azurerm]] <<requirement_azurerm,azurerm>> |2.48.0
+|[[requirement_azuread]] <<requirement_azuread,azuread>> |1.5.0
+|[[requirement_azurerm]] <<requirement_azurerm,azurerm>> |2.62.1
 |[[requirement_helm]] <<requirement_helm,helm>> |2.0.2
 |[[requirement_kubernetes]] <<requirement_kubernetes,kubernetes>> |2.0.2
 |[[requirement_local]] <<requirement_local,local>> |2.0.0
@@ -25,8 +25,8 @@ The `aks/azure` Terraform module provides a way to install and configure:
 [cols="a,a",options="header,autowidth"]
 |===
 |Name |Version
-|[[provider_azuread]] <<provider_azuread,azuread>> |1.0.0
-|[[provider_azurerm]] <<provider_azurerm,azurerm>> |2.48.0
+|[[provider_azuread]] <<provider_azuread,azuread>> |1.5.0
+|[[provider_azurerm]] <<provider_azurerm,azurerm>> |2.62.1
 |[[provider_random]] <<provider_random,random>> |3.0.0
 |===
 
@@ -44,29 +44,29 @@ The `aks/azure` Terraform module provides a way to install and configure:
 [cols="a,a",options="header,autowidth"]
 |===
 |Name |Type
-|https://registry.terraform.io/providers/hashicorp/azuread/1.0.0/docs/resources/application[azuread_application.oauth2_apps] |resource
-|https://registry.terraform.io/providers/hashicorp/azuread/1.0.0/docs/resources/application_app_role[azuread_application_app_role.argocd_admin] |resource
-|https://registry.terraform.io/providers/hashicorp/azuread/1.0.0/docs/resources/application_password[azuread_application_password.oauth2_apps] |resource
-|https://registry.terraform.io/providers/hashicorp/azurerm/2.48.0/docs/resources/dns_cname_record[azurerm_dns_cname_record.wildcard] |resource
-|https://registry.terraform.io/providers/hashicorp/azurerm/2.48.0/docs/resources/policy_assignment[azurerm_policy_assignment.baseline] |resource
-|https://registry.terraform.io/providers/hashicorp/azurerm/2.48.0/docs/resources/role_assignment[azurerm_role_assignment.dns_zone_contributor] |resource
-|https://registry.terraform.io/providers/hashicorp/azurerm/2.48.0/docs/resources/role_assignment[azurerm_role_assignment.managed_identity_operator] |resource
-|https://registry.terraform.io/providers/hashicorp/azurerm/2.48.0/docs/resources/role_assignment[azurerm_role_assignment.reader] |resource
-|https://registry.terraform.io/providers/hashicorp/azurerm/2.48.0/docs/resources/role_assignment[azurerm_role_assignment.virtual_machine_contributor] |resource
-|https://registry.terraform.io/providers/hashicorp/azurerm/2.48.0/docs/resources/storage_account[azurerm_storage_account.this] |resource
-|https://registry.terraform.io/providers/hashicorp/azurerm/2.48.0/docs/resources/storage_container[azurerm_storage_container.loki] |resource
-|https://registry.terraform.io/providers/hashicorp/azurerm/2.48.0/docs/resources/user_assigned_identity[azurerm_user_assigned_identity.cert_manager] |resource
-|https://registry.terraform.io/providers/hashicorp/azurerm/2.48.0/docs/resources/user_assigned_identity[azurerm_user_assigned_identity.kube_prometheus_stack_prometheus] |resource
+|https://registry.terraform.io/providers/hashicorp/azuread/1.5.0/docs/resources/application[azuread_application.oauth2_apps] |resource
+|https://registry.terraform.io/providers/hashicorp/azuread/1.5.0/docs/resources/application_app_role[azuread_application_app_role.argocd_admin] |resource
+|https://registry.terraform.io/providers/hashicorp/azuread/1.5.0/docs/resources/application_password[azuread_application_password.oauth2_apps] |resource
+|https://registry.terraform.io/providers/hashicorp/azurerm/2.62.1/docs/resources/dns_cname_record[azurerm_dns_cname_record.wildcard] |resource
+|https://registry.terraform.io/providers/hashicorp/azurerm/2.62.1/docs/resources/policy_assignment[azurerm_policy_assignment.baseline] |resource
+|https://registry.terraform.io/providers/hashicorp/azurerm/2.62.1/docs/resources/role_assignment[azurerm_role_assignment.dns_zone_contributor] |resource
+|https://registry.terraform.io/providers/hashicorp/azurerm/2.62.1/docs/resources/role_assignment[azurerm_role_assignment.managed_identity_operator] |resource
+|https://registry.terraform.io/providers/hashicorp/azurerm/2.62.1/docs/resources/role_assignment[azurerm_role_assignment.reader] |resource
+|https://registry.terraform.io/providers/hashicorp/azurerm/2.62.1/docs/resources/role_assignment[azurerm_role_assignment.virtual_machine_contributor] |resource
+|https://registry.terraform.io/providers/hashicorp/azurerm/2.62.1/docs/resources/storage_account[azurerm_storage_account.this] |resource
+|https://registry.terraform.io/providers/hashicorp/azurerm/2.62.1/docs/resources/storage_container[azurerm_storage_container.loki] |resource
+|https://registry.terraform.io/providers/hashicorp/azurerm/2.62.1/docs/resources/user_assigned_identity[azurerm_user_assigned_identity.cert_manager] |resource
+|https://registry.terraform.io/providers/hashicorp/azurerm/2.62.1/docs/resources/user_assigned_identity[azurerm_user_assigned_identity.kube_prometheus_stack_prometheus] |resource
 |https://registry.terraform.io/providers/hashicorp/random/3.0.0/docs/resources/password[random_password.grafana_admin_password] |resource
 |https://registry.terraform.io/providers/hashicorp/random/3.0.0/docs/resources/password[random_password.oauth2_apps] |resource
 |https://registry.terraform.io/providers/hashicorp/random/3.0.0/docs/resources/string[random_string.storage_account] |resource
-|https://registry.terraform.io/providers/hashicorp/azurerm/2.48.0/docs/data-sources/client_config[azurerm_client_config.current] |data source
-|https://registry.terraform.io/providers/hashicorp/azurerm/2.48.0/docs/data-sources/dns_zone[azurerm_dns_zone.this] |data source
-|https://registry.terraform.io/providers/hashicorp/azurerm/2.48.0/docs/data-sources/kubernetes_cluster[azurerm_kubernetes_cluster.cluster] |data source
-|https://registry.terraform.io/providers/hashicorp/azurerm/2.48.0/docs/data-sources/policy_set_definition[azurerm_policy_set_definition.baseline] |data source
-|https://registry.terraform.io/providers/hashicorp/azurerm/2.48.0/docs/data-sources/policy_set_definition[azurerm_policy_set_definition.restricted] |data source
-|https://registry.terraform.io/providers/hashicorp/azurerm/2.48.0/docs/data-sources/resource_group[azurerm_resource_group.this] |data source
-|https://registry.terraform.io/providers/hashicorp/azurerm/2.48.0/docs/data-sources/subscription[azurerm_subscription.primary] |data source
+|https://registry.terraform.io/providers/hashicorp/azurerm/2.62.1/docs/data-sources/client_config[azurerm_client_config.current] |data source
+|https://registry.terraform.io/providers/hashicorp/azurerm/2.62.1/docs/data-sources/dns_zone[azurerm_dns_zone.this] |data source
+|https://registry.terraform.io/providers/hashicorp/azurerm/2.62.1/docs/data-sources/kubernetes_cluster[azurerm_kubernetes_cluster.cluster] |data source
+|https://registry.terraform.io/providers/hashicorp/azurerm/2.62.1/docs/data-sources/policy_set_definition[azurerm_policy_set_definition.baseline] |data source
+|https://registry.terraform.io/providers/hashicorp/azurerm/2.62.1/docs/data-sources/policy_set_definition[azurerm_policy_set_definition.restricted] |data source
+|https://registry.terraform.io/providers/hashicorp/azurerm/2.62.1/docs/data-sources/resource_group[azurerm_resource_group.this] |data source
+|https://registry.terraform.io/providers/hashicorp/azurerm/2.62.1/docs/data-sources/subscription[azurerm_subscription.primary] |data source
 |===
 
 == Inputs
@@ -122,8 +122,20 @@ The `aks/azure` Terraform module provides a way to install and configure:
 |n/a
 |yes
 
+|[[input_extra_app_projects]] <<input_extra_app_projects,extra_app_projects>>
+|Extra AppProjects objects to deploy.
+|`list(any)`
+|`[]`
+|no
+
+|[[input_extra_application_sets]] <<input_extra_application_sets,extra_application_sets>>
+|Extra ApplicationSets objects to deploy.
+|`list(any)`
+|`[]`
+|no
+
 |[[input_extra_apps]] <<input_extra_apps,extra_apps>>
-|Extra applications to deploy.
+|Extra Applications objects to deploy.
 |`list(any)`
 |`[]`
 |no
@@ -178,6 +190,12 @@ object({
 |`"https://github.com/camptocamp/devops-stack.git"`
 |no
 
+|[[input_repositories]] <<input_repositories,repositories>>
+|A list of repositories to add to ArgoCD.
+|`map(string)`
+|`{}`
+|no
+
 |[[input_resource_group_name]] <<input_resource_group_name,resource_group_name>>
 |The Resource Group where the Managed Kubernetes Cluster should exist.
 |`string`
@@ -206,7 +224,9 @@ object({
 |[[output_app_of_apps_values]] <<output_app_of_apps_values,app_of_apps_values>> |App of Apps values
 |[[output_argocd_auth_token]] <<output_argocd_auth_token,argocd_auth_token>> |The token to set in ARGOCD_AUTH_TOKEN environment variable.
 |[[output_argocd_server]] <<output_argocd_server,argocd_server>> |The URL of the ArgoCD server.
+|[[output_cluster_id]] <<output_cluster_id,cluster_id>> |n/a
 |[[output_grafana_admin_password]] <<output_grafana_admin_password,grafana_admin_password>> |The admin password for Grafana.
+|[[output_kube_admin_config]] <<output_kube_admin_config,kube_admin_config>> |n/a
 |[[output_kubeconfig]] <<output_kubeconfig,kubeconfig>> |The content of the KUBECONFIG file.
 |[[output_node_resource_group]] <<output_node_resource_group,node_resource_group>> |n/a
 |[[output_prometheus_user_assigned_identity_principal_id]] <<output_prometheus_user_assigned_identity_principal_id,prometheus_user_assigned_identity_principal_id>> |n/a

@@ -10,7 +10,7 @@ The `k3s/docker` Terraform module provides a way to install and configure:
 [cols="a,a",options="header,autowidth"]
 |===
 |Name |Version
-|[[requirement_terraform]] <<requirement_terraform,terraform>> |>= 0.13
+|[[requirement_terraform]] <<requirement_terraform,terraform>> |>= 0.14
 |[[requirement_docker]] <<requirement_docker,docker>> |2.11.0
 |[[requirement_helm]] <<requirement_helm,helm>> |2.0.2
 |[[requirement_kubernetes]] <<requirement_kubernetes,kubernetes>> |2.0.2
@@ -35,7 +35,7 @@ The `k3s/docker` Terraform module provides a way to install and configure:
 |===
 |Name|Source|Version|
 |[[module_argocd]] <<module_argocd,argocd>>|../../argocd-helm|
-|[[module_cluster]] <<module_cluster,cluster>>|camptocamp/k3s/docker|0.7.1
+|[[module_cluster]] <<module_cluster,cluster>>|camptocamp/k3s/docker|0.11.0
 |===
 
 == Resources
@@ -69,6 +69,18 @@ The `k3s/docker` Terraform module provides a way to install and configure:
 |`null`
 |no
 
+|[[input_base_domain]] <<input_base_domain,base_domain>>
+|The base domain used for Ingresses.
+|`string`
+|`null`
+|no
+
+|[[input_cluster_endpoint]] <<input_cluster_endpoint,cluster_endpoint>>
+|The api endpoint, when empty it's the container's IP.
+|`string`
+|`null`
+|no
+
 |[[input_cluster_name]] <<input_cluster_name,cluster_name>>
 |The name of the Kubernetes cluster to create.
 |`string`
@@ -81,8 +93,20 @@ The `k3s/docker` Terraform module provides a way to install and configure:
 |`true`
 |no
 
+|[[input_extra_app_projects]] <<input_extra_app_projects,extra_app_projects>>
+|Extra AppProjects objects to deploy.
+|`list(any)`
+|`[]`
+|no
+
+|[[input_extra_application_sets]] <<input_extra_application_sets,extra_application_sets>>
+|Extra ApplicationSets objects to deploy.
+|`list(any)`
+|`[]`
+|no
+
 |[[input_extra_apps]] <<input_extra_apps,extra_apps>>
-|Extra applications to deploy.
+|Extra Applications objects to deploy.
 |`list(any)`
 |`[]`
 |no
@@ -96,7 +120,7 @@ The `k3s/docker` Terraform module provides a way to install and configure:
 |[[input_k3s_version]] <<input_k3s_version,k3s_version>>
 |The K3s version to use
 |`string`
-|`"v1.20.5-k3s1"`
+|`"v1.20.7-k3s1"`
 |no
 
 |[[input_node_count]] <<input_node_count,node_count>>
@@ -129,6 +153,29 @@ object({
 |The source repo URL of ArgoCD's app of apps.
 |`string`
 |`"https://github.com/camptocamp/devops-stack.git"`
+|no
+
+|[[input_repositories]] <<input_repositories,repositories>>
+|A list of repositories to add to ArgoCD.
+|`map(string)`
+|`{}`
+|no
+
+|[[input_server_ports]] <<input_server_ports,server_ports>>
+|Port mappings of the server container.
+|
+
+[source]
+----
+set(object({
+    internal = number
+    external = optional(number)
+    ip       = optional(string)
+    protocol = optional(string)
+  }))
+----
+
+|`[]`
 |no
 
 |[[input_target_revision]] <<input_target_revision,target_revision>>

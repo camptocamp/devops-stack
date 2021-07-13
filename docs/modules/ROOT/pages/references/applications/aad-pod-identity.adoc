@@ -11,7 +11,7 @@ Kubernetes applications.
 |=======================================================================
 |Repository |Name |Version
 |https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts
-|aad-pod-identity |3.0.3
+|aad-pod-identity |4.1.1
 |=======================================================================
 
 == Values
