@@ -57,6 +57,7 @@ The `aks/azure` Terraform module provides a way to install and configure:
 |https://registry.terraform.io/providers/hashicorp/azurerm/2.62.1/docs/resources/storage_container[azurerm_storage_container.loki] |resource
 |https://registry.terraform.io/providers/hashicorp/azurerm/2.62.1/docs/resources/user_assigned_identity[azurerm_user_assigned_identity.cert_manager] |resource
 |https://registry.terraform.io/providers/hashicorp/azurerm/2.62.1/docs/resources/user_assigned_identity[azurerm_user_assigned_identity.kube_prometheus_stack_prometheus] |resource
+|https://registry.terraform.io/providers/hashicorp/azurerm/2.62.1/docs/resources/user_assigned_identity[azurerm_user_assigned_identity.this] |resource
 |https://registry.terraform.io/providers/hashicorp/random/3.0.0/docs/resources/password[random_password.grafana_admin_password] |resource
 |https://registry.terraform.io/providers/hashicorp/random/3.0.0/docs/resources/password[random_password.oauth2_apps] |resource
 |https://registry.terraform.io/providers/hashicorp/random/3.0.0/docs/resources/string[random_string.storage_account] |resource
@@ -108,6 +109,21 @@ The `aks/azure` Terraform module provides a way to install and configure:
 |ArgoCD Server Secert Key to avoid regenerate token on redeploy.
 |`string`
 |`null`
+|no
+
+|[[input_azureidentities]] <<input_azureidentities,azureidentities>>
+|Azure User Assigned Identities to create
+|
+
+[source]
+----
+list(object({
+    namespace = string
+    name      = string
+  }))
+----
+
+|`[]`
 |no
 
 |[[input_base_domain]] <<input_base_domain,base_domain>>
@@ -224,6 +240,7 @@ object({
 |[[output_app_of_apps_values]] <<output_app_of_apps_values,app_of_apps_values>> |App of Apps values
 |[[output_argocd_auth_token]] <<output_argocd_auth_token,argocd_auth_token>> |The token to set in ARGOCD_AUTH_TOKEN environment variable.
 |[[output_argocd_server]] <<output_argocd_server,argocd_server>> |The URL of the ArgoCD server.
+|[[output_azureidentities]] <<output_azureidentities,azureidentities>> |Azure User Assigned Identities created
 |[[output_cluster_id]] <<output_cluster_id,cluster_id>> |n/a
 |[[output_grafana_admin_password]] <<output_grafana_admin_password,grafana_admin_password>> |The admin password for Grafana.
 |[[output_kube_admin_config]] <<output_kube_admin_config,kube_admin_config>> |n/a
