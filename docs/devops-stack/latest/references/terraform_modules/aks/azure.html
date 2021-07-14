@@ -643,6 +643,14 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/azurerm/2.62.1/docs/resources/user_assigned_identity">azurerm_user_assigned_identity.this</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="https://registry.terraform.io/providers/hashicorp/random/3.0.0/docs/resources/password">random_password.grafana_admin_password</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -843,6 +851,28 @@
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>null</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_azureidentities"></a> <a href="#input_azureidentities">azureidentities</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Azure User Assigned Identities to create</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code>list(object({
+    namespace = string
+    name      = string
+  }))</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>[]</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
@@ -1154,6 +1184,14 @@
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The URL of the ArgoCD server.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_azureidentities"></a> <a href="#output_azureidentities">azureidentities</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Azure User Assigned Identities created</p>
 </div></div></td>
 </tr>
 <tr>
