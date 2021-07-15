@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Purpose of the DevOps Stack :: DevOps Stack</title>
+    <title>Terraform Resource Migration :: DevOps Stack</title>
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../../_/css/site.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -70,19 +70,19 @@
     <a class="nav-link" href="../quickstart.html">Quickstarts</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../howtos/quickstart_eks.html">EKS</a>
+    <a class="nav-link" href="quickstart_eks.html">EKS</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../howtos/quickstart_aks.html">AKS</a>
+    <a class="nav-link" href="quickstart_aks.html">AKS</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../howtos/quickstart_ocp_ipi_aws.html">OpenShift (IPI) on AWS</a>
+    <a class="nav-link" href="quickstart_ocp_ipi_aws.html">OpenShift (IPI) on AWS</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../howtos/quickstart_k3s_docker.html">K3s on Docker</a>
+    <a class="nav-link" href="quickstart_k3s_docker.html">K3s on Docker</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../howtos/quickstart_k3s_libvirt.html">K3s on Libvirt</a>
+    <a class="nav-link" href="quickstart_k3s_libvirt.html">K3s on Libvirt</a>
   </li>
 </ul>
   </li>
@@ -91,16 +91,16 @@
     <span class="nav-text">Pipelines</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../howtos/pipelines.html">Deploying with Pipelines</a>
+    <a class="nav-link" href="pipelines.html">Deploying with Pipelines</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../howtos/pipelines_gitlab.html">Create your GitLab Pipeline</a>
+    <a class="nav-link" href="pipelines_gitlab.html">Create your GitLab Pipeline</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../howtos/pipelines_github.html">Create your Github Pipeline</a>
+    <a class="nav-link" href="pipelines_github.html">Create your Github Pipeline</a>
   </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../howtos/pipelines_terraform_resource_migration.html">Operating terraform state using Pipeline</a>
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="pipelines_terraform_resource_migration.html">Operating terraform state using Pipeline</a>
   </li>
 </ul>
   </li>
@@ -109,13 +109,13 @@
     <a class="nav-link" href="#ROOT:howtos/contributions.adoc">Contribution</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../howtos/development.html">Development</a>
+    <a class="nav-link" href="development.html">Development</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../howtos/write_documentation.html">Documentation</a>
+    <a class="nav-link" href="write_documentation.html">Documentation</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../howtos/release.html">Release a new version</a>
+    <a class="nav-link" href="release.html">Release a new version</a>
   </li>
 </ul>
   </li>
@@ -212,29 +212,29 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Explanations</span>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="purpose.html">Purpose</a>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../explanations/purpose.html">Purpose</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cloud_agnostic.html">Cloud Agnostic</a>
+    <a class="nav-link" href="../explanations/cloud_agnostic.html">Cloud Agnostic</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="infrastructure-as-code.html">Infrastructure As Code</a>
+    <a class="nav-link" href="../explanations/infrastructure-as-code.html">Infrastructure As Code</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="gitops.html">Continuous Delivery</a>
+    <a class="nav-link" href="../explanations/gitops.html">Continuous Delivery</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="lifecycle_operations.html">Lifecycle Operations</a>
+    <a class="nav-link" href="../explanations/lifecycle_operations.html">Lifecycle Operations</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="data_persistence.html">Data Persistence</a>
+    <a class="nav-link" href="../explanations/data_persistence.html">Data Persistence</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="upgrade_strategy.html">Kubernetes Upgrade Strategy</a>
+    <a class="nav-link" href="../explanations/upgrade_strategy.html">Kubernetes Upgrade Strategy</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="documentation.html">Docs as Code</a>
+    <a class="nav-link" href="../explanations/documentation.html">Docs as Code</a>
   </li>
 </ul>
   </li>
@@ -314,277 +314,123 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">DevOps Stack</a></li>
-    <li>Explanations</li>
-    <li><a href="purpose.html">Purpose</a></li>
+    <li>Howtos</li>
+    <li>Pipelines</li>
+    <li><a href="pipelines_terraform_resource_migration.html">Operating terraform state using Pipeline</a></li>
   </ul>
 </nav>
 <div class="page-versions">
   <button class="version-menu-toggle" title="Show other versions of page">latest</button>
   <div class="version-menu">
-    <a class="version is-current" href="purpose.html">latest</a>
-    <a class="version" href="../../0.39.0/explanations/purpose.html">0.39.0</a>
-    <a class="version" href="../../0.38.0/explanations/purpose.html">0.38.0</a>
-    <a class="version" href="../../0.37.1/explanations/purpose.html">0.37.1</a>
-    <a class="version" href="../../0.37.0/explanations/purpose.html">0.37.0</a>
-    <a class="version" href="../../0.36.0/explanations/purpose.html">0.36.0</a>
-    <a class="version" href="../../0.35.0/explanations/purpose.html">0.35.0</a>
-    <a class="version" href="../../0.34.0/explanations/purpose.html">0.34.0</a>
-    <a class="version" href="../../0.33.4/explanations/purpose.html">0.33.4</a>
-    <a class="version" href="../../0.33.3/explanations/purpose.html">0.33.3</a>
-    <a class="version" href="../../0.33.2/explanations/purpose.html">0.33.2</a>
-    <a class="version" href="../../0.33.1/explanations/purpose.html">0.33.1</a>
-    <a class="version" href="../../0.33.0/explanations/purpose.html">0.33.0</a>
-    <a class="version" href="../../0.32.0/explanations/purpose.html">0.32.0</a>
-    <a class="version" href="../../0.31.0/explanations/purpose.html">0.31.0</a>
-    <a class="version" href="../../0.30.0/explanations/purpose.html">0.30.0</a>
+    <a class="version is-current" href="pipelines_terraform_resource_migration.html">latest</a>
+    <a class="version is-missing" href="../../0.39.0/index.html">0.39.0</a>
+    <a class="version is-missing" href="../../0.38.0/index.html">0.38.0</a>
+    <a class="version is-missing" href="../../0.37.1/index.html">0.37.1</a>
+    <a class="version is-missing" href="../../0.37.0/index.html">0.37.0</a>
+    <a class="version is-missing" href="../../0.36.0/index.html">0.36.0</a>
+    <a class="version is-missing" href="../../0.35.0/index.html">0.35.0</a>
+    <a class="version is-missing" href="../../0.34.0/index.html">0.34.0</a>
+    <a class="version is-missing" href="../../0.33.4/index.html">0.33.4</a>
+    <a class="version is-missing" href="../../0.33.3/index.html">0.33.3</a>
+    <a class="version is-missing" href="../../0.33.2/index.html">0.33.2</a>
+    <a class="version is-missing" href="../../0.33.1/index.html">0.33.1</a>
+    <a class="version is-missing" href="../../0.33.0/index.html">0.33.0</a>
+    <a class="version is-missing" href="../../0.32.0/index.html">0.32.0</a>
+    <a class="version is-missing" href="../../0.31.0/index.html">0.31.0</a>
+    <a class="version is-missing" href="../../0.30.0/index.html">0.30.0</a>
   </div>
 </div>
-  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/edit/master/docs/modules/ROOT/pages/explanations/purpose.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/edit/master/docs/modules/ROOT/pages/howtos/pipelines_terraform_resource_migration.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Purpose of the DevOps Stack</h1>
-<div class="sect1">
-<h2 id="_introduction"><a class="anchor" href="#_introduction"></a>Introduction</h2>
+<h1 class="page">Terraform Resource Migration</h1>
+<div id="preamble">
 <div class="sectionbody">
-<div class="paragraph">
-<p>Since about 2006, the IT industry has been totally disrupted by the
-conjunction of several factors, including the virtualization of
-resources and the possibility of obtaining them on-demand.
-This new way of managing IT resources is widely known as "Cloud Computing".
-It has become a kind of standard, or at least an objective
-pursued also by people wishing to maintain on-premises infrastructures.
-The long-awaited dream of finally being able to consider IT as a simple
-commodity. Well that&#8217;s what many believed.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+tfmigrate is only installed by default in the GiLab Pipeline
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>The concrete consequences of this revolution for IT companies like
-Camptocamp have mainly been the incredible growth in the number of
-resources to be provisioned and managed. Extensive process automation
-engaged by our teams allowed us to cope with such a growth without lowering
-our quality standards, therefore remaining competitive.</p>
+<p>The GitLab pipeline integrates <a href="https://github.com/minamijoyo/tfmigrate">tfmigrate</a>.
+It can handle automatically <code>terraform state mv</code> for renaming terraform resources when using remote state.</p>
 </div>
 <div class="paragraph">
-<p>We had no respite in this automation journey and made the best out of a thriving
-ecosystem of open source projects that address all the needs related
-to this paradigm shift.
-We have learned a lot during all these years and the
-DevOps Stack is our answer to implement our best practices in a
-containerized world where Kubernetes is the <em>de facto</em> standard for
-application platforms.</p>
+<p>Why do we need this? Please see <a href="https://github.com/minamijoyo/tfmigrate#why">official documentation</a></p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_cloud_agnostic_kubernetes_distribution"><a class="anchor" href="#_cloud_agnostic_kubernetes_distribution"></a>Cloud Agnostic Kubernetes Distribution</h2>
+<h2 id="_workflow"><a class="anchor" href="#_workflow"></a>Workflow</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>Nowadays, the question is not so much whether there is software to solve
-a problem, but which one to use. Like a Linux distribution, we have
-container orchestrators (Kubernetes as a kernel) and many other projects
-revolving around it and offering different features. These features are
-sometimes oriented towards developers, operators or both (e.g. observability
-tools).</p>
-</div>
-<div class="paragraph">
-<p>As for a Linux distribution, what we need is consistency, components
-that work together and that are easy to install and maintain. But unlike a
-Linux distribution which is by definition server-centric, the promise of
-containers and Kubernetes is portability. The possibility of moving
-from one cloud (or on-prem infrastructure) to another, of distributing
-the workloads on different platforms. At the end, this DevOps Stack is
-simply a "Cloud Agnostic Kubernetes Distribution".</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Push your tf renamed resources and create a merge request (MR).
+Make sure introduced changes  <strong>do not introduce a new tf resource, nor changes arguments</strong>
+(for every planned ADD there should be a DELETE and vice-versa).
+Other type of planned changes <code>tfmigrate</code> will output an error later on.</p>
+</li>
+<li>
+<p>Check pipeline output.
+Verify the <code>terraform plan</code>.
+If previous statement is not respected, remove whatever extra bit you added, and go back to step 1.</p>
+</li>
+<li>
+<p>Create <code>tfmigrate.hcl</code> file and describe those operations.
+Each MOVE operation should correspond to a ADD and DELETE planned operation. See <a href="#_example">Example</a></p>
+</li>
+<li>
+<p>Commit and push file into MR, check pipeline (<code>tfmigrate plan</code> output).</p>
+</li>
+<li>
+<p>Merge MR (this corresponds to a <code>tfmigrate apply</code>, equivalent to moving the states).</p>
+</li>
+<li>
+<p>Delete <code>tfmigrate.hcl</code> file, push and merge.</p>
+</li>
+<li>
+<p>Proceed with any other terraform code modification.</p>
+</li>
+</ol>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_without_the_devops_stack"><a class="anchor" href="#_without_the_devops_stack"></a>Without the DevOps Stack</h2>
+<h2 id="_example"><a class="anchor" href="#_example"></a>Example</h2>
 <div class="sectionbody">
-<div class="imageblock">
+<div class="listingblock">
 <div class="content">
-<img src="../_images/without_devops-stack.png" alt="Without the DevOps Stack">
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">migration "state" "test" {
+    actions = [
+        "mv azurerm_key_vault.bar azurerm_key_vault.bar2", <i class="conum" data-value="1"></i><b>(1)</b>
+        "mv module.my_old_module.azurerm_key_vault.vault_test module.my_new_module.azurerm_key_vault.this", <i class="conum" data-value="2"></i><b>(2)</b>
+    ]
+}</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>The illustration above tries to show that while it is quite
-simple to manage one Kubernetes project, the complexity increases
-dramatically when you add more and more projects and you want to keep a
-certain homogeneity between them. The main problems observed
-are:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>It does not scale</p>
-</li>
-<li>
-<p>There is a lot of code duplications</p>
-</li>
-<li>
-<p>There is no implementation reference</p>
-</li>
-<li>
-<p>Improvements are not always backported to other projects</p>
-</li>
-<li>
-<p>It is very hard to maintain</p>
-</li>
-<li>
-<p>All projects will eventually diverge</p>
-</li>
-<li>
-<p>Each project points to different versions of dependencies</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>This is not a new IT problem. Two decades ago, it was not really easy to
-manage thousands, or even hundreds of hosts in a homogeneous way.
-This problem has been successfully addressed by solutions like CFEngine,
-Puppet or more recently by Ansible. Today, we must adapt these
-principles for Kubernetes. There are many open source components out
-there, we just need a smart way to interconnect them.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_with_the_devops_stack"><a class="anchor" href="#_with_the_devops_stack"></a>With the DevOps Stack</h2>
-<div class="sectionbody">
-<div class="imageblock">
-<div class="content">
-<img src="../_images/with_devops-stack.png" alt="Without the DevOps Stack">
-</div>
-</div>
-<div class="paragraph">
-<p>By creating the DevOps Stack (a kind of abstraction layer), it becomes
-possible to instantiate all the components through a logical and
-coherent process. The main advantages are:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>It scales</p>
-</li>
-<li>
-<p>Minimal code duplication</p>
-</li>
-<li>
-<p>A reference implementation</p>
-</li>
-<li>
-<p>Improvements can be easily backported to other projects</p>
-</li>
-<li>
-<p>Dependency pining is done on the DevOps Stack to ensure reproducibility</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>In the end, the DevOps Stack provides:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>A Playground to test/prototype new stuff related to k8s world</p>
-</li>
-<li>
-<p>An opinionated abstraction layer to deploy and manage our Kubernetes
-deployments</p>
-</li>
-<li>
-<p>Enforce DevOps best practices:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Infrastructure as Code (IaC)</p>
-</li>
-<li>
-<p>Configuration Management (CM)</p>
-</li>
-<li>
-<p>GitOps</p>
-</li>
-<li>
-<p>Continuous Integration (CI)</p>
-</li>
-<li>
-<p>Continuous Delivery (CD)</p>
-</li>
-<li>
-<p>Documentation as Code</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>A consistent toolset</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Observability (monitoring, logging, alerting, trending)</p>
-</li>
-<li>
-<p>Continuous Delivery (change management + Git features)</p>
-</li>
-<li>
-<p>Dynamic Web Routing</p>
-</li>
-<li>
-<p>Dynamic Storage Provisioning</p>
-</li>
-<li>
-<p>Dynamic Certificate Management</p>
-</li>
-<li>
-<p>Authentication and Authorization</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>With the following main features:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Supports multiple Kubernetes distributions (AWS EKS, Azure AKS, Local
-k3s for development and testing purposes),</p>
-</li>
-<li>
-<p>Supports blue/green or prod/qa/int/dev patterns,</p>
-</li>
-<li>
-<p>Fully automated with GitLab CI pipelines,</p>
-</li>
-<li>
-<p>Infrastructure as Code with Terraform,</p>
-</li>
-<li>
-<p>Automatic deployment of "core apps" (cert-manager, prometheus,
-alertmanager, grafana, loki, ingress controller…) in GitOps spirit with
-ArgoCD,</p>
-</li>
-<li>
-<p>Central point of documentations with Antora.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>A summary of good practices used daily and experiences acquired over
-the time by the DevOps experts at Camptocamp.</p>
-</div>
-<div class="paragraph">
-<p><a href="../getting_started.html" class="page">Get Started</a></p>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>updates resource name</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>moves a resource from <code>my_old_module</code> to <code>my_new_module</code>, and renames it from <code>vault_test</code> to <code>this</code></td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -598,7 +444,7 @@ the time by the DevOps experts at Camptocamp.</p>
 <script>
   window.antora = window.antora || {}
   window.antora.basePath = '../../..'
-  window.antora.pagePath = '/devops-stack/latest/explanations/purpose.html'
+  window.antora.pagePath = '/devops-stack/latest/howtos/pipelines_terraform_resource_migration.html'
 </script>
 <script src="../../../_/js/site.js"></script>
 <script async src="../../../_/js/vendor/terraform.js"></script>
