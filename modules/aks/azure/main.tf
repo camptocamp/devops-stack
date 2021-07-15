@@ -12,10 +12,11 @@ locals {
 
   azureidentities = { for v in var.azureidentities :
     format("%s.%s", v.namespace, v.name) => {
-      name        = v.name
-      namespace   = v.namespace
-      resource_id = azurerm_user_assigned_identity.this[format("%s.%s", v.namespace, v.name)].id
-      client_id   = azurerm_user_assigned_identity.this[format("%s.%s", v.namespace, v.name)].client_id
+      name         = v.name
+      namespace    = v.namespace
+      resource_id  = azurerm_user_assigned_identity.this[format("%s.%s", v.namespace, v.name)].id
+      client_id    = azurerm_user_assigned_identity.this[format("%s.%s", v.namespace, v.name)].client_id
+      principal_id = azurerm_user_assigned_identity.this[format("%s.%s", v.namespace, v.name)].principal_id
     }
   }
 }
