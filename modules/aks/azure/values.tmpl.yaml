@@ -75,9 +75,6 @@ cert-manager:
       enabled: true
     acme:
       solvers:
-        - selector:
-            dnsZones:
-              - ${base_domain}
         - dns01:
             azuredns:
               subscriptionID: ${subscription_id}
@@ -85,6 +82,9 @@ cert-manager:
               hostedZoneName: ${base_domain}
               # Azure Cloud Environment, default to AzurePublicCloud
               environment: AzurePublicCloud
+          selector:
+            dnsZones:
+              - ${base_domain}
   replicaCount: 2
   podLabels:
     aadpodidbinding: cert-manager
