@@ -75,6 +75,9 @@ cert-manager:
       enabled: true
     acme:
       solvers:
+        - selector:
+            dnsZones:
+              - ${base_domain}
         - dns01:
             azuredns:
               subscriptionID: ${subscription_id}
