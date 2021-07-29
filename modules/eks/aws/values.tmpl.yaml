@@ -19,6 +19,9 @@ cert-manager:
       enabled: true
     acme:
       solvers:
+        - selector:
+            dnsZones:
+              - ${base_domain}
         - dns01:
             route53:
               region: ${aws_default_region}
