@@ -77,7 +77,9 @@ module "cluster" {
   vpc_id           = var.vpc_id
   enable_irsa      = true
   write_kubeconfig = false
+  map_accounts     = var.map_accounts
   map_roles        = var.map_roles
+  map_users        = var.map_users
 
   worker_groups = concat([local.ingress_worker_group], try(slice(var.worker_groups, 1, length(var.worker_groups)), []))
 
