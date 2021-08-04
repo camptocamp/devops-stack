@@ -6,6 +6,7 @@ locals {
   kubernetes_client_key             = base64decode(local.context.users.0.user.client-key-data)
   kubernetes_cluster_ca_certificate = base64decode(local.context.clusters.0.cluster.certificate-authority-data)
   kubeconfig                        = module.cluster.kubeconfig
+  ingress_listeners                 = var.ingress_listeners
 }
 
 provider "helm" {
@@ -25,8 +26,8 @@ provider "kubernetes" {
 }
 
 module "cluster" {
-  source  = "camptocamp/cce/opentelekomcloud"
-  version = "0.2.0"
+  source = "git@github.com:chornberger-c2c/terraform-opentelekomcloud-cce.git?ref=b1c8499"
+  #version = "0.2.0"
 
   flavor_id    = var.flavor_id
   vpc_id       = var.vpc_id
@@ -122,3 +123,33 @@ resource "tls_self_signed_cert" "root" {
 
   is_ca_certificate = true
 }
+
+resource "opentelekomcloud_lb_loadbalancer_v2" "ingress" {
+  name          = "devopsstack-ingress"
+  vip_subnet_id = var.subnet_id
+}
+
+resource "opentelekomcloud_lb_listener_v2" "ingress" {
+  count           = length(local.ingress_listeners)
+  protocol        = "TCP"
+  protocol_port   = local.ingress_listeners[count.index]
+  loadbalancer_id = opentelekomcloud_lb_loadbalancer_v2.ingress.id
+}
+
+resource "opentelekomcloud_lb_pool_v2" "ingress" {
+  count       = length(local.ingress_listeners)
+  protocol    = "TCP"
+  lb_method   = "ROUND_ROBIN"
+  listener_id = opentelekomcloud_lb_listener_v2.ingress[count.index].id
+}
+
+resource "opentelekomcloud_lb_member_v2" "ingress" {
+  count = length(module.cluster.node_ips) * length(local.ingress_listeners)
+
+  pool_id       = opentelekomcloud_lb_pool_v2.ingress[floor(count.index / 3)].id
+  subnet_id     = var.subnet_id
+  address       = module.cluster.node_ips[count.index % 3]
+  protocol_port = local.ingress_listeners[floor(count.index / 3)]
+}
+
+

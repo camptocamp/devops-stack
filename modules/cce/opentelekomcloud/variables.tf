@@ -29,3 +29,9 @@ variable "node_pools" {
   type        = map(map(any))
   default     = {}
 }
+
+variable "ingress_listeners" {
+  description = "The ports the ELB should listen to."
+  type        = list(any)
+  default     = [80, 443]
+}

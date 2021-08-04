@@ -6,3 +6,4 @@ variable "base_domain" {}
 variable "key_pair" {}
 variable "postinstall" {}
 variable "app_of_apps_values_overrides" {}
+variable "ingress_listeners" {}
