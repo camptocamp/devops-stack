@@ -1,0 +1,188 @@
+= Continous Deployment for a gitflow Workflow
+
+This article describes how to add your app to a DevOps Stack instance and make use of the continuous deployment features (Argo CD).
+
+== Objective
+
+- Learning how to Continously Deploy our code from git to a kubernetes cluster using DevOps Stack.
+- Deploying to three environments: dev, int and prod (target environments). 
+- Synchonizing git branches (dev, int and prod) to their corresponding target environemnets (environment isolation implemented using kubenetes namespaces).
+
+== Prerequisites
+
+- You already created a DevOps Stack cluster following one of the link:quickstart.html[Quickstart]
+- Check out the demo git repo https://github.com/fsismondi/example-worflow-2-apps[DevOps Stack's example app], fork and modify as you please to play with the CD
+
+[NOTE]
+====
+
+* If you want to use a private repository or other type of setup you can join us on the `#camptocamp-devops-stack` channel on the https://slack.k8s.io/[Kubernetes Slack Server].
+====
+ 
+
+== Git workflow and cluster environments 
+
+This article will focus on implementing a https://nvie.com/posts/a-successful-git-branching-model/[gitflow] workflow but others are posible too.
+
+The git project for the app has 3 different branches: dev, int and prod and follows a project structure as the following:
+
+```
+deployment
+├─ charts
+│  ├─ chart-app-1
+│  │  ├─ Chart.yaml
+│  │  ├─ README.md
+│  │  ├─ templates
+│  │  └─ values.yaml
+│  └─ chart-app-2
+│     ├─ Chart.yaml
+│     ├─ README.md
+│     ├─ templates
+│     └─ values.yaml
+└─ apps
+   ├─ app-1
+   │  ├─ Chart.yaml
+   │  ├─ values_common.yaml
+   │  ├─ values_dev.yaml
+   │  ├─ values_int.yaml
+   │  └─ values_prod.yaml
+   └─ app-2
+      ├─ Chart.yaml
+      ├─ values_common.yaml
+      ├─ values_dev.yaml
+      ├─ values_int.yaml
+      └─ values_prod.yaml
+```
+
+== Add the Application Project(s) to the cluster
+
+Add into terraform cluster module instantiation an Application Project for each different environemnt you want to create in the cluster (env-dev, env-int and env-prod in our case):
+
+```hcl
+# terraform/main.tf
+
+module "cluster" {
+  ...
+  extra_app_projects = [
+    {
+      metadata = {
+        name      = "env-dev"
+        namespace = "argocd"
+      }
+      spec = {
+        description = "Demo project"
+        sourceRepos = ["*"]
+
+        destinations = [
+          {
+            server    = "https://kubernetes.default.svc"
+            namespace = "dev"
+          }
+        ]
+
+        clusterResourceWhitelist = [
+          {
+            group = ""
+            kind  = "Namespace"
+          }
+        ]
+      }
+    }
+  ]
+
+  ...
+}
+```
+
+
+== Add the Application Set(s) to the cluster
+
+Add into terraform cluster module instantiation an Application Set for each different environemnt you want to create in the cluster (env-dev, env-int and env-prod in our case):
+
+```hcl
+# terraform/main.tf
+
+module "cluster" {
+  ...
+extra_application_sets = [
+    {
+      metadata = {
+        name      = "env-dev"
+        namespace = "argocd"
+
+        annotations = {
+          "argocd.argoproj.io/sync-options" = "SkipDryRunOnMissingResource=true"
+        }
+      }
+
+      spec = {
+        generators = [
+          {
+            git = {
+              repoURL  = "https://github.com/fsismondi/example-worflow-2-apps.git"
+              revision = "dev"
+              directories = [
+                {
+                  path = "apps/*"
+                }
+              ]
+            }
+          }
+        ]
+
+        template = {
+          metadata = {
+            name = "{{path.basename}}-dev"
+          }
+
+          spec = {
+            project = "env-dev"
+
+            source = {
+              repoURL        = "https://github.com/fsismondi/example-worflow-2-apps.git"
+              targetRevision = "dev"
+              path           = "{{path}}"
+              helm = {
+                valueFiles = [
+                  "values_common.yaml",
+                  "values_dev.yaml",
+                ]
+              }
+            }
+
+            destination = {
+              server    = "https://kubernetes.default.svc"
+              namespace = "dev"
+            }
+
+            syncPolicy = {
+              automated = {
+                prune    = true
+                selfHeal = false
+              }
+
+              syncOptions = [
+                "CreateNamespace=true"
+              ]
+            }
+          }
+        }
+      }
+    },
+  ]
+
+  ...
+}
+```
+
+
+== More
+
+Checkout a complete Argo CD configuration at: https://github.com/fsismondi/example-worflow-2-apps/blob/dev/terraform/main.tf[terraform cluster w/ CD to a dev, int and prod]
+
+
+== ToDo 
+
+Demo how a change introduced into git dev branch can be promoted to int and prod ?
+
+

@@ -17,6 +17,9 @@
 *** xref:ROOT:howtos/development.adoc[Development]
 *** xref:ROOT:howtos/write_documentation.adoc[Documentation]
 *** xref:ROOT:howtos/release.adoc[Release a new version]
+** Deploy Your App
+*** xref:ROOT:howtos/deploy_own_app.adoc[Deploy Your App]
+*** xref:ROOT:howtos/continuous_delivery_gitflow_workflow.adoc[Continous Deployment for a Gitflow Workflow]
 * References
 ** xref:ROOT:references/architecture.adoc[Architecture]
 ** xref:ROOT:references/authentication.adoc[Authentication]
