@@ -25,6 +25,8 @@ cert-manager:
           selector:
             dnsZones:
               - ${base_domain}
+        - http01:
+￼           ingress: {}
 
 efs-provisioner:
   efsProvisioner:
