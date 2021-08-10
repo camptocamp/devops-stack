@@ -203,9 +203,6 @@
   </li>
 </ul>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../references/changelog.html">Changelog</a>
-  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -351,10 +348,14 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Update <code>docs/modules/ROOT/pages/references/changelog.adoc</code></p>
+<p>Create and merge a Pull Request with:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>subject can be something like: <code>chore: prepare release vX.Y.Z</code></p>
 </li>
 <li>
-<p>Update the version number (e.g. <code>v0.29.0</code>) in the following files (mandatory):</p>
+<p>updated version number (e.g. <code>v0.41.0</code>) in the following files (mandatory):</p>
 <div class="ulist">
 <ul>
 <li>
@@ -370,41 +371,39 @@
 </div>
 </li>
 <li>
-<p>Optionally update the version number in the following files:</p>
+<p>updated version number in the following files (optional):</p>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://github.com/camptocamp/devops-stack/blob/master/examples/eks-aws/.gitlab-ci.yml">examples/eks-aws/.gitlab-ci.yml</a></p>
+<p><a href="https://github.com/camptocamp/devops-stack/blob/master/examples/" class="bare">https://github.com/camptocamp/devops-stack/blob/master/examples/</a><strong>/.gitlab-ci.yml[examples/</strong>/.gitlab-ci.yml]</p>
 </li>
 <li>
-<p><a href="https://github.com/camptocamp/devops-stack/blob/master/modules/eks-aws/main.tf">examples/eks-aws/terraform/main.tf</a></p>
+<p><a href="https://github.com/camptocamp/devops-stack/blob/master/modules/" class="bare">https://github.com/camptocamp/devops-stack/blob/master/modules/</a><strong>/main.tf[examples/</strong>/terraform/main.tf]</p>
 </li>
-<li>
-<p><a href="https://github.com/camptocamp/devops-stack/blob/master/modules/k3o-libvirt/main.tf">examples/k3s-libvirt-demo-app/terraform/main.tf</a></p>
-</li>
-<li>
-<p><a href="https://github.com/camptocamp/devops-stack/blob/master/modules/k3s-docker/main.tf">examples/k3s-docker-demo-app/terraform/main.tf</a></p>
+</ul>
+</div>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Create a pull request with the updated version. Once it has been reviewed and approved, merge it to <code>master</code></p>
+<p>Merge the Pull Request with label <code>autorelease:pending</code> managed by <a href="https://github.com/googleapis/release-please">Release Please</a></p>
 </li>
 <li>
-<p>Tag the merged commit (e.g. <code>v0.29.0</code>)</p>
+<p>Create and merge a Pull Request with:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>subject can be something like: <code>chore: create post-release commit</code></p>
 </li>
 <li>
-<p>Push the tag</p>
+<p>version in <a href="https://github.com/camptocamp/devops-stack/blob/master/docs/antora.yml#L4">docs/antora.yml</a> set back to <code>latest</code></p>
 </li>
 <li>
-<p>Create a new <a href="https://github.com/camptocamp/devops-stack/releases">release</a> via the GitHub release page, naming it the same as the version number - e.g. <code>v0.29.0</code>. Ensure to state what&#8217;s new in the release</p>
+<p>target_revision in <a href="https://github.com/camptocamp/devops-stack/blob/master/modules/variables.tf#15">modules/variables.tf</a> set back to <code>master</code></p>
 </li>
-<li>
-<p>Set back the release to <code>latest</code> in <a href="https://github.com/camptocamp/devops-stack/blob/master/docs/antora.yml#L4">docs/antora.yml</a></p>
-</li>
-<li>
-<p>Set back the target_revision to <code>master</code> in <a href="https://github.com/camptocamp/devops-stack/blob/master/modules/variables.tf#15">modules/variables.tf</a></p>
+</ul>
+</div>
 </li>
 </ul>
 </div>
