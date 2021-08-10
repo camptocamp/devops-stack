@@ -280,6 +280,8 @@ kube-prometheus-stack:
         %{ for k, v in grafana.generic_oauth_extra_args }
         ${k}: ${v}
         %{ endfor }
+      users:
+        auto_assign_org_role: Editor
       server:
         domain: "${grafana.domain}"
         root_url: "https://%(domain)s"
