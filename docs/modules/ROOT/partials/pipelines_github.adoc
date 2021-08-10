@@ -38,7 +38,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
 include::partial$variables-{ci-variables}-github.adoc[]
-      CAMPTOCAMP_DEVOPS_STACK_VERSION: 0.26.0
       TF_ROOT: terraform
     defaults:
       run:

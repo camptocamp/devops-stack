@@ -4,7 +4,6 @@
 * Update the version number (e.g. `v0.29.0`) in the following files (mandatory):
 ** https://github.com/camptocamp/devops-stack/blob/master/docs/antora.yml#L4[docs/antora.yml]
 ** https://github.com/camptocamp/devops-stack/blob/master/site/config.toml#L18[site/config.toml]
-** https://github.com/camptocamp/devops-stack/blob/master/.gitlab-ci/pipeline.yaml[.gitlab-ci/pipeline.yaml]
 ** https://github.com/camptocamp/devops-stack/blob/master/modules/variables.tf[modules/variables.tf]
 * Optionally update the version number in the following files:
 ** https://github.com/camptocamp/devops-stack/blob/master/examples/eks-aws/.gitlab-ci.yml[examples/eks-aws/.gitlab-ci.yml]
