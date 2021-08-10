@@ -8,7 +8,7 @@ locals {
 }
 
 module "cluster" {
-  source = "git::https://github.com/camptocamp/devops-stack.git//modules/k3s/libvirt?ref=v0.40.0"
+  source = "git::https://github.com/camptocamp/devops-stack.git//modules/k3s/libvirt?ref=master"
 
   cluster_name = "my-cluster"
   node_count   = 1
@@ -31,7 +31,7 @@ module "cluster" {
 spec:
   source:
     repoURL: https://github.com/camptocamp/devops-stack.git
-    targetRevision: v0.40.0
+    targetRevision: master
           EOT
           }
         }
