@@ -1,18 +1,16 @@
 = Release
 
-* Update `docs/modules/ROOT/pages/references/changelog.adoc`
-* Update the version number (e.g. `v0.29.0`) in the following files (mandatory):
-** https://github.com/camptocamp/devops-stack/blob/master/docs/antora.yml#L4[docs/antora.yml]
-** https://github.com/camptocamp/devops-stack/blob/master/site/config.toml#L18[site/config.toml]
-** https://github.com/camptocamp/devops-stack/blob/master/modules/variables.tf[modules/variables.tf]
-* Optionally update the version number in the following files:
-** https://github.com/camptocamp/devops-stack/blob/master/examples/eks-aws/.gitlab-ci.yml[examples/eks-aws/.gitlab-ci.yml]
-** https://github.com/camptocamp/devops-stack/blob/master/modules/eks-aws/main.tf[examples/eks-aws/terraform/main.tf]
-** https://github.com/camptocamp/devops-stack/blob/master/modules/k3o-libvirt/main.tf[examples/k3s-libvirt-demo-app/terraform/main.tf]
-** https://github.com/camptocamp/devops-stack/blob/master/modules/k3s-docker/main.tf[examples/k3s-docker-demo-app/terraform/main.tf]
-* Create a pull request with the updated version. Once it has been reviewed and approved, merge it to `master`
-* Tag the merged commit (e.g. `v0.29.0`)
-* Push the tag
-* Create a new https://github.com/camptocamp/devops-stack/releases[release] via the GitHub release page, naming it the same as the version number - e.g. `v0.29.0`. Ensure to state what's new in the release
-* Set back the release to `latest` in https://github.com/camptocamp/devops-stack/blob/master/docs/antora.yml#L4[docs/antora.yml]
-* Set back the target_revision to `master` in https://github.com/camptocamp/devops-stack/blob/master/modules/variables.tf#15[modules/variables.tf]
+* Create and merge a Pull Request with:
+** subject can be something like: `chore: prepare release vX.Y.Z`
+** updated version number (e.g. `v0.41.0`) in the following files (mandatory):
+*** https://github.com/camptocamp/devops-stack/blob/master/docs/antora.yml#L4[docs/antora.yml]
+*** https://github.com/camptocamp/devops-stack/blob/master/site/config.toml#L18[site/config.toml]
+*** https://github.com/camptocamp/devops-stack/blob/master/modules/variables.tf[modules/variables.tf]
+** updated version number in the following files (optional):
+*** https://github.com/camptocamp/devops-stack/blob/master/examples/*/.gitlab-ci.yml[examples/*/.gitlab-ci.yml]
+*** https://github.com/camptocamp/devops-stack/blob/master/modules/*/main.tf[examples/*/terraform/main.tf]
+* Merge the Pull Request with label `autorelease:pending` managed by https://github.com/googleapis/release-please[Release Please]
+* Create and merge a Pull Request with:
+** subject can be something like: `chore: create post-release commit`
+** version in https://github.com/camptocamp/devops-stack/blob/master/docs/antora.yml#L4[docs/antora.yml] set back to `latest`
+** target_revision in https://github.com/camptocamp/devops-stack/blob/master/modules/variables.tf#15[modules/variables.tf] set back to `master`
