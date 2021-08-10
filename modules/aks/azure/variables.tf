@@ -63,3 +63,9 @@ variable "azureidentities" {
   }))
   default = []
 }
+
+variable "network_policy" {
+  description = "Enable network policy for the azure CNI"
+  type        = string
+  default     = null
+}

@@ -64,6 +64,7 @@ module "cluster" {
   resource_group_name = data.azurerm_resource_group.this.name
   prefix              = var.cluster_name
   network_plugin      = "azure"
+  network_policy      = var.network_policy
   vnet_subnet_id      = var.vnet_subnet_id
   agents_count        = var.agents_count
   agents_size         = var.agents_size
