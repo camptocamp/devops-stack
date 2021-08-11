@@ -1,5 +1,5 @@
 locals {
-  base_domain                       = var.base_domain
+  base_domain                       = coalesce(var.base_domain, format("%s.nip.io", replace(data.dns_a_record_set.nlb.addrs[0], ".", "-")))
   kubernetes_host                   = data.aws_eks_cluster.cluster.endpoint
   kubernetes_cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
   kubernetes_token                  = data.aws_eks_cluster_auth.cluster.token
@@ -24,12 +24,6 @@ data "aws_subnet_ids" "public" {
   tags = {
     "kubernetes.io/role/elb" = "1"
   }
-}
-
-data "aws_nat_gateway" "this" {
-  for_each  = data.aws_subnet_ids.public.ids
-  subnet_id = each.value
-  state     = "available"
 }
 
 data "aws_eks_cluster" "cluster" {
@@ -65,13 +59,7 @@ module "cluster" {
   cluster_name    = var.cluster_name
   cluster_version = var.cluster_version
 
-  cluster_endpoint_public_access_cidrs = concat(
-    [
-      for nat_gateway in data.aws_nat_gateway.this :
-      format("%s/32", nat_gateway.public_ip)
-    ],
-    var.cluster_endpoint_public_access_cidrs
-  )
+  cluster_endpoint_public_access_cidrs = var.cluster_endpoint_public_access_cidrs
 
   subnets          = data.aws_subnet_ids.private.ids
   vpc_id           = var.vpc_id
@@ -114,10 +102,11 @@ module "argocd" {
   extra_app_projects      = var.extra_app_projects
   extra_application_sets  = var.extra_application_sets
   cluster_name            = var.cluster_name
-  base_domain             = var.base_domain
+  base_domain             = local.base_domain
   argocd_server_secretkey = var.argocd_server_secretkey
+  cluster_issuer          = "letsencrypt-prod"
+  wait_for_app_of_apps    = var.wait_for_app_of_apps
 
-  cluster_issuer = "letsencrypt-prod"
   oidc = var.oidc != null ? var.oidc : {
     issuer_url              = format("https://cognito-idp.%s.amazonaws.com/%s", data.aws_region.current.name, var.cognito_user_pool_id)
     oauth_url               = format("https://%s.auth.%s.amazoncognito.com/oauth2/authorize", var.cognito_user_pool_domain, data.aws_region.current.name)
@@ -145,7 +134,8 @@ module "argocd" {
     templatefile("${path.module}/values.tmpl.yaml",
       {
         aws_default_region              = data.aws_region.current.name
-        cert_manager_assumable_role_arn = module.iam_assumable_role_cert_manager.iam_role_arn,
+        base_domain                     = local.base_domain
+        cert_manager_assumable_role_arn = var.base_domain == null ? "" : module.iam_assumable_role_cert_manager.0.iam_role_arn,
         loki_assumable_role_arn         = module.iam_assumable_role_loki.iam_role_arn,
         loki_bucket_name                = aws_s3_bucket.loki.id,
         enable_efs                      = var.enable_efs

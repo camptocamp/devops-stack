@@ -65,8 +65,23 @@ variable "grafana_admin_password" {
   default     = null
 }
 
+
+variable "grafana_generic_oauth_extra_args" {
+  description = "override default oauth value(s)"
+  type        = map(string)
+  default = {
+    autoassign_org_role       = "Editor"
+  }
+}
+
 variable "repositories" {
   description = "A list of repositories to add to ArgoCD."
-  type        = map(string)
+  type        = map(map(string))
   default     = {}
+}
+
+variable "wait_for_app_of_apps" {
+  description = "Allow to disable wait for app of apps"
+  type        = bool
+  default     = true
 }

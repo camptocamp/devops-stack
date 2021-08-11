@@ -56,7 +56,7 @@ data "azurerm_kubernetes_cluster" "cluster" {
 
 module "cluster" {
   source  = "Azure/aks/azurerm"
-  version = "4.7.0"
+  version = "4.13.0"
 
   kubernetes_version   = var.kubernetes_version
   orchestrator_version = var.kubernetes_version
@@ -84,6 +84,26 @@ module "cluster" {
   enable_log_analytics_workspace  = false
 }
 
+resource "azurerm_kubernetes_cluster_node_pool" "this" {
+  for_each              = var.node_pools
+  name                  = each.key
+  kubernetes_cluster_id = module.cluster.aks_id
+  vm_size               = each.value.vm_size
+  node_count            = each.value.node_count
+
+  availability_zones  = lookup(each.value, "availability_zones", null)
+  enable_auto_scaling = lookup(each.value, "enable_auto_scaling", null)
+  max_count           = lookup(each.value, "max_count", null)
+  min_count           = lookup(each.value, "min_count", null)
+  max_pods            = lookup(each.value, "max_pods", null)
+  node_taints         = lookup(each.value, "node_taints", null)
+  os_disk_size_gb     = lookup(each.value, "os_disk_size_gb", null)
+  os_type             = lookup(each.value, "os_type", "Linux")
+  vnet_subnet_id      = lookup(each.value, "vnet_subnet_id", var.vnet_subnet_id)
+  node_labels         = lookup(each.value, "node_labels", null)
+  mode                = lookup(each.value, "mode", null)
+}
+
 module "argocd" {
   source = "../../argocd-helm"
 
@@ -97,6 +117,7 @@ module "argocd" {
   base_domain             = var.base_domain
   cluster_issuer          = "letsencrypt-prod"
   argocd_server_secretkey = var.argocd_server_secretkey
+  wait_for_app_of_apps    = var.wait_for_app_of_apps
 
   oidc = var.oidc != null ? var.oidc : {
     issuer_url              = format("https://login.microsoftonline.com/%s/v2.0", data.azurerm_client_config.current.tenant_id)

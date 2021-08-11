@@ -41,13 +41,14 @@ module "argocd" {
   base_domain             = local.base_domain
   argocd_server_secretkey = var.argocd_server_secretkey
   cluster_issuer          = "ca-issuer"
+  wait_for_app_of_apps    = var.wait_for_app_of_apps
 
   oidc = var.oidc != null ? var.oidc : {
     issuer_url    = format("https://keycloak.apps.%s.%s/auth/realms/kubernetes", var.cluster_name, local.base_domain)
     oauth_url     = format("https://keycloak.apps.%s.%s/auth/realms/kubernetes/protocol/openid-connect/auth", var.cluster_name, local.base_domain)
     token_url     = format("https://keycloak.apps.%s.%s/auth/realms/kubernetes/protocol/openid-connect/token", var.cluster_name, local.base_domain)
     api_url       = format("https://keycloak.apps.%s.%s/auth/realms/kubernetes/protocol/openid-connect/userinfo", var.cluster_name, local.base_domain)
-    client_id     = "applications"
+    client_id     = "devops-stack-applications"
     client_secret = random_password.clientsecret.result
     oauth2_proxy_extra_args = [
       "--insecure-oidc-skip-issuer-verification=true",
@@ -62,8 +63,8 @@ module "argocd" {
   }
 
   keycloak = {
-    enable         = var.oidc == null ? true : false
-    admin_password = random_password.admin_password.result
+    enable        = var.oidc == null ? true : false
+    jdoe_password = random_password.jdoe_password.result
   }
 
   loki = {
@@ -126,7 +127,7 @@ resource "random_password" "clientsecret" {
   special = false
 }
 
-resource "random_password" "admin_password" {
+resource "random_password" "jdoe_password" {
   length  = 16
   special = false
 }

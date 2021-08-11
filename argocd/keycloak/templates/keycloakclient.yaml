@@ -1,20 +1,23 @@
 ---
-apiVersion: keycloak.org/v1alpha1
-kind: KeycloakClient
+apiVersion: "keycloak.org/v1alpha1"
+kind: "KeycloakClient"
 metadata:
   annotations:
-    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
-  name: applications
+    argocd.argoproj.io/sync-options: "SkipDryRunOnMissingResource=true"
+  name: "devops-stack-applications"
   labels:
-    app: sso
+    app: "sso"
 spec:
   realmSelector:
     matchLabels:
-      app: sso
+      app: "sso"
   client:
-    clientId: {{ .Values.keycloakClient.client.clientId }}
-    secret: {{ .Values.keycloakClient.client.secret }}
-    clientAuthenticatorType: client-secret
+    clientId: "{{ .Values.keycloakClient.client.clientId }}"
+    secret: "{{ .Values.keycloakClient.client.secret }}"
+    clientAuthenticatorType: "client-secret"
     standardFlowEnabled: true
     redirectUris:
       {{- toYaml .Values.keycloakClient.client.redirectUris | nindent 6}}
+    defaultClientScopes:
+      - "email"
+      - "profile"

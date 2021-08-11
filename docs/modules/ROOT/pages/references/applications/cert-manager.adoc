@@ -10,15 +10,15 @@ sources
 == Requirements
 
 [cols=",,",options="header",]
-|===============================================
+|===
 |Repository |Name |Version
-|https://charts.jetstack.io |cert-manager |1.1.1
-|===============================================
+|https://charts.jetstack.io |cert-manager |1.4.3
+|===
 
 == Values
 
 [width="100%",cols="16%,18%,27%,39%",options="header",]
-|=======================================================================
+|===
 |Key |Type |Default |Description
 |cert-manager |object
 |`{"installCRDs":true,"prometheus":{"servicemonitor":{"enabled":true}},"securityContext":{"fsGroup":999}}`
@@ -27,4 +27,4 @@ sources
 |letsencrypt.issuers |object
 |`{"letsencrypt-prod":{"email":"letsencrypt@camptocamp.com","server":"https://acme-v02.api.letsencrypt.org/directory"},"letsencrypt-staging":{"email":"letsencrypt@camptocamp.com","server":"https://acme-staging-v02.api.letsencrypt.org/directory"}}`
 |ClusterIssuers configuration
-|=======================================================================
+|===

@@ -24,6 +24,10 @@ terraform {
       source  = "hashicorp/null"
       version = "~> 3.0"
     }
+    htpasswd = {
+      source  = "loafoe/htpasswd"
+      version = "~> 0.9"
+    }
   }
   required_version = ">= 0.13"
 }

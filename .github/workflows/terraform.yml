@@ -18,7 +18,7 @@ jobs:
     strategy:
       matrix:
         tf_root:
-          - tests/k3s-docker/terraform
+          - tests/k3s-docker
     env:
       TF_VAR_repo_url: ${{ github.server_url }}/${{ github.actor }}/devops-stack.git
       TF_VAR_target_revision: ${{ github.head_ref }}
@@ -32,12 +32,12 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: 1.0.0
+          terraform_version: 1.0.4
 
       - name: Setup ArgoCD
         run: |
           mkdir "$GITHUB_WORKSPACE/bin"
-          curl -L https://github.com/argoproj/argo-cd/releases/download/v2.0.3/argocd-linux-amd64 > "$GITHUB_WORKSPACE/bin/argocd"
+          curl -L https://github.com/argoproj/argo-cd/releases/download/v2.0.5/argocd-linux-amd64 > "$GITHUB_WORKSPACE/bin/argocd"
           echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
           chmod +x "$GITHUB_WORKSPACE/bin/argocd"
 
@@ -91,7 +91,7 @@ jobs:
     strategy:
       matrix:
         tf_root:
-          - tests/k3s-docker/terraform
+          - tests/k3s-docker
     env:
       TF_ROOT: ${{ matrix.tf_root }}
     defaults:
@@ -101,7 +101,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: 1.0.0
+          terraform_version: 1.0.4
 
       - name: Checkout ${{ github.base_ref }}
         uses: actions/checkout@v2
@@ -111,7 +111,7 @@ jobs:
       - name: Setup ArgoCD
         run: |
           mkdir "$GITHUB_WORKSPACE/bin"
-          curl -L https://github.com/argoproj/argo-cd/releases/download/v2.0.3/argocd-linux-amd64 > "$GITHUB_WORKSPACE/bin/argocd"
+          curl -L https://github.com/argoproj/argo-cd/releases/download/v2.0.5/argocd-linux-amd64 > "$GITHUB_WORKSPACE/bin/argocd"
           echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
           chmod +x "$GITHUB_WORKSPACE/bin/argocd"
 
@@ -171,7 +171,7 @@ jobs:
 
       - name: ArgoCD app diff with ${{ github.ref }}
         id: app-diff
-        uses: docker://argoproj/argocd:v2.0.3
+        uses: docker://argoproj/argocd:v2.0.5
         env:
           KUBECONFIG: ${{ github.workspace }}/kubeconfig
           APP_OF_APPS_VALUES_0 : ${{ github.workspace }}/values0.yaml

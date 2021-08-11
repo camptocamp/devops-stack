@@ -17,6 +17,10 @@
 *** xref:ROOT:howtos/development.adoc[Development]
 *** xref:ROOT:howtos/write_documentation.adoc[Documentation]
 *** xref:ROOT:howtos/release.adoc[Release a new version]
+** Deploy Your App
+*** xref:ROOT:howtos/deploy_own_app.adoc[Deploy Your App]
+*** xref:ROOT:howtos/continuous_delivery_gitflow_workflow.adoc[Continous Deployment for a Gitflow Workflow]
+** xref:ROOT:howtos/filebeat_logging.adoc[Filebeat logging]
 * References
 ** xref:ROOT:references/architecture.adoc[Architecture]
 ** xref:ROOT:references/authentication.adoc[Authentication]
@@ -27,6 +31,7 @@
 *** xref:ROOT:references/terraform_modules/k3s/docker.adoc[K3s Docker]
 *** xref:ROOT:references/terraform_modules/k3s/libvirt.adoc[K3s Libvirt]
 *** xref:ROOT:references/terraform_modules/openshift4/aws.adoc[OpenShift 4 on AWS]
+*** xref:ROOT:references/terraform_modules/sks/exoscale.adoc[Exoscale SKS]
 ** xref:ROOT:references/applications.adoc[Applications]
 *** xref:ROOT:references/applications/apps.adoc[Umbrella App]
 *** xref:ROOT:references/applications/app-of-apps.adoc[App of Apps]

@@ -86,7 +86,7 @@ cert-manager:
             dnsZones:
               - ${base_domain}
         - http01:
-￼           ingress: {}
+            ingress: {}
   replicaCount: 2
   podLabels:
     aadpodidbinding: cert-manager

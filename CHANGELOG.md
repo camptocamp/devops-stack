@@ -1,5 +1,114 @@
 # Changelog
 
+## [0.47.0](https://www.github.com/camptocamp/devops-stack/compare/v0.46.0...v0.47.0) (2021-09-15)
+
+
+### Features
+
+* **keycloak:** rename client to devops-stack-applications ([ead90c7](https://www.github.com/camptocamp/devops-stack/commit/ead90c7502e23fb1b23fcf20478cd07c225cd943))
+* **keycloak:** upgrade to v15.0.1 ([c7dfdbb](https://www.github.com/camptocamp/devops-stack/commit/c7dfdbb9a998729b090168d1fa0405f4d3ee5666))
+* **loki-stack:** add monitoring when filebeat logging is enabled ([5038df4](https://www.github.com/camptocamp/devops-stack/commit/5038df422e4f0dbdc2594ce5735876d090476119))
+
+
+### Bug Fixes
+
+* **keycloak:** add missing scopes to client ([a86403b](https://www.github.com/camptocamp/devops-stack/commit/a86403b086af1fb518ce739235516423a5ae36cb))
+
+## [0.46.0](https://www.github.com/camptocamp/devops-stack/compare/v0.45.0...v0.46.0) (2021-09-10)
+
+
+### Features
+
+* Add initial support for OpenTelekomCloud's CCE ([a7e374b](https://www.github.com/camptocamp/devops-stack/commit/a7e374bdae98da58548902f2ef80c49b104e0394))
+* **aks:** add support for node pools in AKS ([edb9813](https://www.github.com/camptocamp/devops-stack/commit/edb981339ef566e21ae16338bc7e6c17699da9d9))
+* allow to disable wait_for_app_of_apps ([a01303b](https://www.github.com/camptocamp/devops-stack/commit/a01303bcce252e40a2cf063d7fb2bd58aa4e58c2))
+* **antora:** use lunr generator in github action for building documentation search index ([2307150](https://www.github.com/camptocamp/devops-stack/commit/23071502923435ac4aef026858f3ae3f49aa748b))
+* **aws:** add test example ([7ddef46](https://www.github.com/camptocamp/devops-stack/commit/7ddef46ae4c07d57bea85355059bb7980adb5c63))
+* **aws:** use nip.io by default ([947380c](https://www.github.com/camptocamp/devops-stack/commit/947380c9a2db763d380e3e11cc7d9384bbee4978))
+* **keycloak:** rename user=admin to user=jdoe ([7ad68c5](https://www.github.com/camptocamp/devops-stack/commit/7ad68c5314a1073e5dd6dc04eaca2b418d4585ed))
+* randomize argocd admin password ([1cf91f0](https://www.github.com/camptocamp/devops-stack/commit/1cf91f0aee30d369bc8ea8d0ad2a43c714c18a70))
+* **sks:** add node anti-affinity on router nodes for cert-manager ([#753](https://www.github.com/camptocamp/devops-stack/issues/753)) ([dc3a4a3](https://www.github.com/camptocamp/devops-stack/commit/dc3a4a35f6b1250d852440d165b3775ce700aa6d))
+* **sks:** add output for nlb ip address ([35d4ba9](https://www.github.com/camptocamp/devops-stack/commit/35d4ba9cca1a022eaecad63a3083659fe72c0132))
+* **sks:** use Kubernetes 1.21.4 by default ([a95d813](https://www.github.com/camptocamp/devops-stack/commit/a95d8135e962a03bf2a12845815af1af94cc2469))
+* **sks:** use letsencrypt-prod when there is more than 1 node pool ([#754](https://www.github.com/camptocamp/devops-stack/issues/754)) ([0f8179c](https://www.github.com/camptocamp/devops-stack/commit/0f8179c0d83654442e658ead302ffd5f995a563d))
+
+
+### Bug Fixes
+
+* **argocd:** fix health assessment for Applications ([c7a46cb](https://www.github.com/camptocamp/devops-stack/commit/c7a46cbe0b3aa4cc134c0e20bd034a883c146e3f))
+* **aws:** don't add nat gateway to cluster_endpoint_public_access_cidrs by default ([54625b0](https://www.github.com/camptocamp/devops-stack/commit/54625b04199b9c9920d5bed9b43c769018093a5b))
+* **aws:** use local.base_domain instead of var.base_domain ([2583e09](https://www.github.com/camptocamp/devops-stack/commit/2583e092b27651bfb60508805b972136825681af))
+* format with terraform fmt ([33a499e](https://www.github.com/camptocamp/devops-stack/commit/33a499e2e6f6ec12a75b1d43f402cacbcc409869))
+* **sks:** pass down missing variables to argocd-helm ([#748](https://www.github.com/camptocamp/devops-stack/issues/748)) ([97f3973](https://www.github.com/camptocamp/devops-stack/commit/97f397369e558c0b7a32841cedded4027214f8c5))
+
+## [0.45.0](https://www.github.com/camptocamp/devops-stack/compare/v0.44.0...v0.45.0) (2021-08-27)
+
+
+### Features
+
+* **kube-prometheus-stack:** upgrade chart to 18.0.1 ([#743](https://www.github.com/camptocamp/devops-stack/issues/743)) ([103dfc6](https://www.github.com/camptocamp/devops-stack/commit/103dfc67be8bfd0ee72ebd6fda60507211fdf163))
+
+## [0.44.0](https://www.github.com/camptocamp/devops-stack/compare/v0.43.0...v0.44.0) (2021-08-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* **argocd:** upgrade ArgoCD charts and use new repositories spec (#741)
+
+### Features
+
+* **argocd:** upgrade ArgoCD charts and use new repositories spec ([#741](https://www.github.com/camptocamp/devops-stack/issues/741)) ([d4979c7](https://www.github.com/camptocamp/devops-stack/commit/d4979c7808ccddecbda1a5bb431a05bc2f4428ff))
+* **k3s:** upgrade camptocamp/k3s/docker module ([0c419db](https://www.github.com/camptocamp/devops-stack/commit/0c419dbce706c12018d0bed6f3fe670d0d76bd7b))
+* **k3s:** upgrade K3s to 1.20.10+k3s1 ([6477ac6](https://www.github.com/camptocamp/devops-stack/commit/6477ac6be446392d8fa87a8823968125395574cf))
+
+## [0.43.0](https://www.github.com/camptocamp/devops-stack/compare/v0.42.0...v0.43.0) (2021-08-24)
+
+
+### Features
+
+* **aks:** set kubernetes version to current default ([4580f26](https://www.github.com/camptocamp/devops-stack/commit/4580f2631b70da36a71b73c0acae8aa386fd6dcd))
+* **aks:** upgrade Azure/aks/azurerm module to 4.13.0 ([f47168c](https://www.github.com/camptocamp/devops-stack/commit/f47168c796fee935b36c7afacad5527ef2c9ce87))
+* **argocd:** upgrade to v2.1.0 ([3479d25](https://www.github.com/camptocamp/devops-stack/commit/3479d2569d30c9eb71dcefa95244babc9758d712))
+* **csi-secrets-store-provider-azure:** upgrade to 0.2.0 ([9a86472](https://www.github.com/camptocamp/devops-stack/commit/9a86472dd102c114f3e1df360870db9bd00c2ac3))
+* **sks:** add experimental SKS support ([7e5e929](https://www.github.com/camptocamp/devops-stack/commit/7e5e9294b675c01bd8ac211c242e6cdcbc57ee5c))
+
+## [0.42.0](https://www.github.com/camptocamp/devops-stack/compare/v0.41.2...v0.42.0) (2021-08-19)
+
+
+### Features
+
+* **aad-pod-identity:** create identities Namespaces ([0358f2d](https://www.github.com/camptocamp/devops-stack/commit/0358f2d5ad55e42892d41a053150b99f8a088375))
+* **argocd-applicationset:** upgrade chart version to 1.0.0 ([16fee9d](https://www.github.com/camptocamp/devops-stack/commit/16fee9d65a4310141c0d9b8932cfe5de393a1e9d))
+* **argocd-notifications:** upgrade chart version to 1.4.1 ([da3f52c](https://www.github.com/camptocamp/devops-stack/commit/da3f52c5722c88660d7d40241f9991aae1df0344))
+* **argocd:** upgrade to v2.0.5 ([f467290](https://www.github.com/camptocamp/devops-stack/commit/f467290c965de75f7d7580da52d71dbb886cbc4b))
+* **k3s-docker:** add registry mirror for ghcr.io ([2d26d03](https://www.github.com/camptocamp/devops-stack/commit/2d26d0325478e59ec1d07fd8c24066a1843aa8cd))
+* **kube-prometheus-stack:** upgrade to 17.2.1 ([e065fd6](https://www.github.com/camptocamp/devops-stack/commit/e065fd65cfe1730fc94c2d1b7d98b9f45dd6aa18))
+* **kube-prometheus-stack:** upgrade to v18.0.0 ([3a299ed](https://www.github.com/camptocamp/devops-stack/commit/3a299edb4aebdd417903c153f355630b7b6e7f8b))
+* **loki:** upgrade v2.2.0 ([55ca7e2](https://www.github.com/camptocamp/devops-stack/commit/55ca7e242382ac82fc49e32100b9a53b90812739))
+* set CreateNamespace=true syncOption ([53bcc64](https://www.github.com/camptocamp/devops-stack/commit/53bcc649b5d16af7b58c56465a5c8bd9cbc0b3ac))
+* **terraform:** upgrade to v1.0.4 ([d2984e4](https://www.github.com/camptocamp/devops-stack/commit/d2984e418a541824d1960e1346a42251d0d6852b))
+* **traefik:** upgrade to 2.4.13 ([f26a32e](https://www.github.com/camptocamp/devops-stack/commit/f26a32e25464f0572035bf8b72b2524128218466))
+
+
+### Bug Fixes
+
+* add missing pathType in Ingress ([f22de25](https://www.github.com/camptocamp/devops-stack/commit/f22de25f6f3629e5d15eb1c6fd21526b54538a7d))
+* upgrade k3s/docker module ([774f3e7](https://www.github.com/camptocamp/devops-stack/commit/774f3e7c61465eadc54c1c634420d4b6c247fe94))
+
+### [0.41.2](https://www.github.com/camptocamp/devops-stack/compare/v0.41.1...v0.41.2) (2021-08-12)
+
+
+### Bug Fixes
+
+* fix weird character in template ([6c903c3](https://www.github.com/camptocamp/devops-stack/commit/6c903c34706b21050adc1a3446e7ea374bbad419))
+
+### [0.41.1](https://www.github.com/camptocamp/devops-stack/compare/v0.41.0...v0.41.1) (2021-08-12)
+
+
+### Bug Fixes
+
+* **eks:** pass missing arg to function ([5b72586](https://www.github.com/camptocamp/devops-stack/commit/5b725867cd2ef5e95bb148b2cfe678d932843ce8))
+
 ## [0.41.0](https://www.github.com/camptocamp/devops-stack/compare/v0.40.0...v0.41.0) (2021-08-11)
 
 

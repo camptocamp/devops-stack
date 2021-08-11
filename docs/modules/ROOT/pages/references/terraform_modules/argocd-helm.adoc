@@ -13,8 +13,12 @@ The `argocd-helm` Terraform module provides a way to install and configure:
 |Name |Version
 |[[requirement_terraform]] <<requirement_terraform,terraform>> |>= 0.13
 |[[requirement_helm]] <<requirement_helm,helm>> |~> 2.0
+|[[requirement_htpasswd]] <<requirement_htpasswd,htpasswd>> |~> 0.9
 |[[requirement_jwt]] <<requirement_jwt,jwt>> |>= 0.0.3
-|[[requirement_time]] <<requirement_time,time>> |0.6.0
+|[[requirement_kubernetes]] <<requirement_kubernetes,kubernetes>> |~> 2.0
+|[[requirement_null]] <<requirement_null,null>> |~> 3.0
+|[[requirement_random]] <<requirement_random,random>> |~> 3.0
+|[[requirement_time]] <<requirement_time,time>> |~> 0.6
 |===
 
 == Providers
@@ -23,10 +27,11 @@ The `argocd-helm` Terraform module provides a way to install and configure:
 |===
 |Name |Version
 |[[provider_helm]] <<provider_helm,helm>> |~> 2.0
+|[[provider_htpasswd]] <<provider_htpasswd,htpasswd>> |~> 0.9
 |[[provider_jwt]] <<provider_jwt,jwt>> |>= 0.0.3
-|[[provider_null]] <<provider_null,null>> |n/a
-|[[provider_random]] <<provider_random,random>> |n/a
-|[[provider_time]] <<provider_time,time>> |0.6.0
+|[[provider_null]] <<provider_null,null>> |~> 3.0
+|[[provider_random]] <<provider_random,random>> |~> 3.0
+|[[provider_time]] <<provider_time,time>> |~> 0.6
 |===
 
 == Modules
@@ -40,12 +45,14 @@ No modules.
 |Name |Type
 |https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release[helm_release.app_of_apps] |resource
 |https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release[helm_release.argocd] |resource
+|https://registry.terraform.io/providers/loafoe/htpasswd/latest/docs/resources/password[htpasswd_password.argocd_server_admin] |resource
 |https://registry.terraform.io/providers/camptocamp/jwt/latest/docs/resources/hashed_token[jwt_hashed_token.argocd] |resource
 |https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource[null_resource.wait_for_app_of_apps] |resource
+|https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password[random_password.argocd_server_admin] |resource
 |https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password[random_password.argocd_server_secretkey] |resource
 |https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password[random_password.oauth2_cookie_secret] |resource
 |https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/uuid[random_uuid.jti] |resource
-|https://registry.terraform.io/providers/hashicorp/time/0.6.0/docs/resources/static[time_static.iat] |resource
+|https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/static[time_static.iat] |resource
 |===
 
 == Inputs
@@ -193,7 +200,7 @@ No modules.
 
 |[[input_repositories]] <<input_repositories,repositories>>
 |A list of repositories to add to ArgoCD.
-|`map(string)`
+|`map(map(string))`
 |`{}`
 |no
 
@@ -224,4 +231,5 @@ No modules.
 |Name |Description
 |[[output_app_of_apps_values]] <<output_app_of_apps_values,app_of_apps_values>> |App of Apps values
 |[[output_argocd_auth_token]] <<output_argocd_auth_token,argocd_auth_token>> |The token to set in ARGOCD_AUTH_TOKEN environment variable.
+|[[output_argocd_server_admin_password]] <<output_argocd_server_admin_password,argocd_server_admin_password>> |The ArgoCD admin password.
 |===

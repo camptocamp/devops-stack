@@ -1,0 +1,145 @@
+= Logging with filebeat
+
+If needed filebeat logging can be activated on the devops stack to send the logs of chosen pods to any of the available https://www.elastic.co/guide/en/beats/filebeat/current/configuring-output.html[outputs].
+
+
+== Prerequisites
+
+- Devops Stack version > 0.46.0
+
+== Activate filebeat
+
+The deployment of filebeat is part of the loki-stack chart and needs to be set in the *app_of_apps_values_overrides* in your terraform modules :
+
+[source,hcl]
+----
+ app_of_apps_values_overrides =  <<EOT
+---
+loki-stack:
+ filebeat:
+   enabled: true
+   filebeatConfig:
+     filebeat.yml: |
+       filebeat.autodiscover:
+         providers:
+           - type: kubernetes
+             templates:
+             - condition:
+                 equals:
+                   kubernetes.labels.filebeat/ingest: "true"
+               config:
+                 - type: container
+                   paths:
+                     - '/var/log/containers/*-$${data.kubernetes.container.id}.log'
+  EOT
+}
+----
+
+
+IMPORTANT: Only the pods with the label *filebeat/ingest* set to "true" will be ingested.
+
+Then you need a valid configuration to send the logs to an output, see some examples below.
+
+== Configuration examples
+
+=== Kafka
+
+==== With user credentials :
+
+[source,hcl]
+----
+ app_of_apps_values_overrides =  <<EOT
+---
+loki-stack:
+  filebeat:
+    enabled: true
+    filebeatConfig:
+      filebeat.yml: |
+        filebeat.autodiscover:
+          providers:
+            - type: kubernetes
+              templates:
+              - condition:
+                  equals:
+                    kubernetes.labels.filebeat/ingest: "true"
+                config:
+                  - type: container
+                    paths:
+                      - '/var/log/containers/*-$${data.kubernetes.container.id}.log'
+        output.file:
+          enabled: false
+        output.kafka:
+          topic: "devopstack"
+          hosts:
+             - "kafka-broker-0.logs.test.com"
+             - "kafka-broker-1.logs.test.com"
+          username: "user"
+          password: "secret"
+          sasl.mechanism: "SCRAM-SHA-512"
+  EOT
+}
+----
+
+
+==== With TLS client certificates :
+
+[source,hcl]
+----
+  app_of_apps_values_overrides =  <<EOT
+---
+loki-stack:
+  filebeat:
+    enabled: true
+    filebeatConfig:
+      filebeat.yml: |
+        filebeat.autodiscover:
+          providers:
+            - type: kubernetes
+              templates:
+              - condition:
+                  equals:
+                    kubernetes.labels.filebeat/ingest: "true"
+                config:
+                  - type: container
+                    paths:
+                      - '/var/log/containers/*-$${data.kubernetes.container.id}.log'
+        output.file:
+          enabled: false
+        output.kafka:
+          topic: "devopstack"
+          hosts:
+            - "kafka-broker-0.elk.camptocamp.com:9092"
+            - "kafka-broker-1.elk.camptocamp.com:9092"
+            - "kafka-broker-2.elk.camptocamp.com:9092"
+          ssl.enabled: true
+          ssl.certificate_authorities: "/usr/share/filebeat/certs/ca.crt"
+          ssl.certificate: "/usr/share/filebeat/certs/tls.crt"
+          ssl.key: "/usr/share/filebeat/certs/tls.key"
+    secretMounts:
+      - name: filebeat-certificates
+        secretName: filebeat-certificates
+        path: /usr/share/filebeat/certs
+  EOT
+}
+----
+
+
+TIP: If you are bootstrapping a devops stack you can inject the certificates and key directly in the values, for example:
+
+[source,yaml]
+----
+      filebeat.yml: |
+          [...]
+          ssl.certificate: "/usr/share/filebeat/tls.crt"
+          ssl.key: "/usr/share/filebeat/tls.key"
+      tls.crt: |
+       -----BEGIN CERTIFICATE-----
+       MIIE...
+       -----END CERTIFICATE-----
+      tls.key: |
+       -----BEGIN PRIVATE KEY-----
+       MIIE..
+       -----END PRIVATE KEY-----
+  EOT
+}
+----

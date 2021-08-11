@@ -25,6 +25,7 @@ locals {
     target_revision                 = var.target_revision
     argocd_accounts_pipeline_tokens = local.argocd_accounts_pipeline_tokens
     argocd_server_secretkey         = local.argocd_server_secretkey
+    argocd_server_admin_password    = htpasswd_password.argocd_server_admin.bcrypt
     extra_apps                      = var.extra_apps
     extra_app_projects              = var.extra_app_projects
     extra_application_sets          = var.extra_application_sets
@@ -144,4 +145,13 @@ resource "null_resource" "wait_for_app_of_apps" {
 resource "random_password" "oauth2_cookie_secret" {
   length  = 16
   special = false
+}
+
+resource "random_password" "argocd_server_admin" {
+  length  = 16
+  special = false
+}
+
+resource "htpasswd_password" "argocd_server_admin" {
+  password = random_password.argocd_server_admin.result
 }

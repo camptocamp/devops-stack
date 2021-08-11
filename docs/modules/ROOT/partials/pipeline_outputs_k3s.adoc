@@ -1,0 +1,53 @@
+=== Terraform Outputs
+
+
+Define outputs:
+
+```hcl
+# terraform/outputs.tf
+
+output "kubeconfig" {
+  sensitive = true
+  value     = module.cluster.kubeconfig
+}
+
+output "argocd_url" {
+  value = format("https://argocd.apps.%s.%s", var.cluster_name, module.cluster.base_domain)
+}
+
+output "keycloak_url" {
+  value = format("https://keycloak.apps.%s.%s", var.cluster_name, module.cluster.base_domain)
+}
+
+output "grafana_url" {
+  value = format("https://grafana.apps.%s.%s", var.cluster_name, module.cluster.base_domain)
+}
+
+output "prometheus_url" {
+  value = format("https://prometheus.apps.%s.%s", var.cluster_name, module.cluster.base_domain)
+}
+
+output "alertmanager_url" {
+  value = format("https://alertmanager.apps.%s.%s", var.cluster_name, module.cluster.base_domain)
+}
+
+output "argocd_server_admin_password" {
+  sensitive = true
+  value     = module.cluster.argocd_server_admin_password
+}
+
+output "keycloak_admin_password" {
+  sensitive = true
+  value     = module.cluster.keycloak_admin_password
+}
+
+output "grafana_admin_password" {
+  sensitive = true
+  value     = module.cluster.grafana_admin_password
+}
+
+output "jdoe_password" {
+  value     = module.cluster.jdoe_password
+  sensitive = true
+}
+```

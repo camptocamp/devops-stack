@@ -6,7 +6,7 @@ variable "base_domain" {
 variable "kubernetes_version" {
   description = "Specify which Kubernetes release to use."
   type        = string
-  default     = "1.18.14"
+  default     = "1.20.7"
 }
 
 variable "resource_group_name" {
@@ -68,4 +68,10 @@ variable "network_policy" {
   description = "Enable network policy for the azure CNI"
   type        = string
   default     = null
+}
+
+variable "node_pools" {
+  default     = {}
+  description = "List of node pools with minimal configuration"
+  type        = map(any)
 }
