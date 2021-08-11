@@ -30,23 +30,23 @@ output "app_of_apps_values" {
 }
 
 output "argocd_url" {
-  value = format("https://argocd.apps.%s", module.cluster.base_domain)
+  value = format("https://argocd.apps.%s.%s", var.cluster_name, module.cluster.base_domain)
 }
 
 output "grafana_url" {
-  value = format("https://grafana.apps.%s", module.cluster.base_domain)
+  value = format("https://grafana.apps.%s.%s", var.cluster_name, module.cluster.base_domain)
 }
 
 output "prometheus_url" {
-  value = format("https://prometheus.apps.%s", module.cluster.base_domain)
+  value = format("https://prometheus.apps.%s.%s", var.cluster_name, module.cluster.base_domain)
 }
 
 output "alertmanager_url" {
-  value = format("https://alertmanager.apps.%s", module.cluster.base_domain)
+  value = format("https://alertmanager.apps.%s.%s", var.cluster_name, module.cluster.base_domain)
 }
 
 output "keycloak_url" {
-  value = format("https://keycloak.apps.%s/auth/realms/kubernetes/account", module.cluster.base_domain)
+  value = format("https://keycloak.apps.%s.%s/auth/realms/kubernetes/account", var.cluster_name, module.cluster.base_domain)
 }
 
 output "admin_password" {
