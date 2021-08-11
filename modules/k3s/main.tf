@@ -43,10 +43,10 @@ module "argocd" {
   cluster_issuer          = "ca-issuer"
 
   oidc = var.oidc != null ? var.oidc : {
-    issuer_url    = format("https://keycloak.apps.%s/auth/realms/kubernetes", local.base_domain)
-    oauth_url     = format("https://keycloak.apps.%s/auth/realms/kubernetes/protocol/openid-connect/auth", local.base_domain)
-    token_url     = format("https://keycloak.apps.%s/auth/realms/kubernetes/protocol/openid-connect/token", local.base_domain)
-    api_url       = format("https://keycloak.apps.%s/auth/realms/kubernetes/protocol/openid-connect/userinfo", local.base_domain)
+    issuer_url    = format("https://keycloak.apps.%s.%s/auth/realms/kubernetes", var.cluster_name, local.base_domain)
+    oauth_url     = format("https://keycloak.apps.%s.%s/auth/realms/kubernetes/protocol/openid-connect/auth", var.cluster_name, local.base_domain)
+    token_url     = format("https://keycloak.apps.%s.%s/auth/realms/kubernetes/protocol/openid-connect/token", var.cluster_name, local.base_domain)
+    api_url       = format("https://keycloak.apps.%s.%s/auth/realms/kubernetes/protocol/openid-connect/userinfo", var.cluster_name, local.base_domain)
     client_id     = "applications"
     client_secret = random_password.clientsecret.result
     oauth2_proxy_extra_args = [
