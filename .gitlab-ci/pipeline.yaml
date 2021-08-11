@@ -1,6 +1,6 @@
 ---
 variables:
-  ARGOCD_VERSION: "2.0.3"
+  ARGOCD_VERSION: "2.0.5"
   TERRAFORM_VERSION: "1.0.4"
   TF_ROOT: "terraform"
 
