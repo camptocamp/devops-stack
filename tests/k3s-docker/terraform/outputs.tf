@@ -49,6 +49,11 @@ output "keycloak_url" {
   value = format("https://keycloak.apps.%s.%s/auth/realms/kubernetes/account", var.cluster_name, module.cluster.base_domain)
 }
 
+output "keycloak_admin_password" {
+  sensitive = true
+  value     = module.cluster.keycloak_admin_password
+}
+
 output "admin_password" {
   sensitive = true
   value     = module.cluster.admin_password

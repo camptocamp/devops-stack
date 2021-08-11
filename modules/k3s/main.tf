@@ -112,6 +112,15 @@ module "argocd" {
   ]
 }
 
+data "kubernetes_secret" "keycloak_admin_password" {
+  metadata {
+    name      = "credential-keycloak"
+    namespace = "keycloak"
+  }
+
+  depends_on = [module.argocd]
+}
+
 resource "random_password" "clientsecret" {
   length  = 16
   special = false
