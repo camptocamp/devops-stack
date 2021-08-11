@@ -348,33 +348,32 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Create and merge a Pull Request with:</p>
+<p>Update and merge the Pull Request with label <code>autorelease:pending</code> managed by <a href="https://github.com/googleapis/release-please">Release Please</a>:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>subject can be something like: <code>chore: prepare release vX.Y.Z</code></p>
+<p>checkout <code>release-vX.Y.Z</code> branch</p>
 </li>
 <li>
-<p>updated version number (e.g. <code>v0.41.0</code>) in the following files:</p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://github.com/camptocamp/devops-stack/blob/master/docs/antora.yml#L4">docs/antora.yml</a></p>
+<p>set <code>version</code> to <code>X.Y.Z</code> in <a href="https://github.com/camptocamp/devops-stack/blob/master/docs/antora.yml#L4">docs/antora.yml</a></p>
 </li>
 <li>
-<p><a href="https://github.com/camptocamp/devops-stack/blob/master/site/config.toml#L18">site/config.toml</a></p>
+<p>set <code>target_revision</code> 's default to <code>vX.Y.Z</code> in <a href="https://github.com/camptocamp/devops-stack/blob/master/modules/variables.tf">modules/variables.tf</a></p>
 </li>
 <li>
-<p><a href="https://github.com/camptocamp/devops-stack/blob/master/modules/variables.tf">modules/variables.tf</a></p>
+<p>set <code>version</code> in <code>[params]</code> section to <code>X.Y.Z</code> in <a href="https://github.com/camptocamp/devops-stack/blob/master/site/config.toml#L18">site/config.toml</a></p>
+</li>
+<li>
+<p>amend the commit</p>
+</li>
+<li>
+<p>push force the branch</p>
+</li>
+<li>
+<p>merge the PR</p>
 </li>
 </ul>
 </div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Merge the Pull Request with label <code>autorelease:pending</code> managed by <a href="https://github.com/googleapis/release-please">Release Please</a></p>
 </li>
 <li>
 <p>Create and merge a Pull Request with:</p>
@@ -384,10 +383,10 @@
 <p>subject can be something like: <code>chore: create post-release commit</code></p>
 </li>
 <li>
-<p>version in <a href="https://github.com/camptocamp/devops-stack/blob/master/docs/antora.yml#L4">docs/antora.yml</a> set back to <code>latest</code></p>
+<p><code>version</code> in <a href="https://github.com/camptocamp/devops-stack/blob/master/docs/antora.yml#L4">docs/antora.yml</a> set back to <code>latest</code></p>
 </li>
 <li>
-<p>target_revision in <a href="https://github.com/camptocamp/devops-stack/blob/master/modules/variables.tf#15">modules/variables.tf</a> set back to <code>master</code></p>
+<p><code>target_revision</code> in <a href="https://github.com/camptocamp/devops-stack/blob/master/modules/variables.tf#15">modules/variables.tf</a> set back to <code>master</code></p>
 </li>
 </ul>
 </div>
