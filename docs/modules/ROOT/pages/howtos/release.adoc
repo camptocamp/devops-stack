@@ -1,13 +1,14 @@
 = Release
 
-* Create and merge a Pull Request with:
-** subject can be something like: `chore: prepare release vX.Y.Z`
-** updated version number (e.g. `v0.41.0`) in the following files:
-*** https://github.com/camptocamp/devops-stack/blob/master/docs/antora.yml#L4[docs/antora.yml]
-*** https://github.com/camptocamp/devops-stack/blob/master/site/config.toml#L18[site/config.toml]
-*** https://github.com/camptocamp/devops-stack/blob/master/modules/variables.tf[modules/variables.tf]
-* Merge the Pull Request with label `autorelease:pending` managed by https://github.com/googleapis/release-please[Release Please]
+* Update and merge the Pull Request with label `autorelease:pending` managed by https://github.com/googleapis/release-please[Release Please]:
+** checkout `release-vX.Y.Z` branch
+** set `version` to `X.Y.Z` in https://github.com/camptocamp/devops-stack/blob/master/docs/antora.yml#L4[docs/antora.yml]
+** set `target_revision` 's default to `vX.Y.Z` in https://github.com/camptocamp/devops-stack/blob/master/modules/variables.tf[modules/variables.tf]
+** set `version` in `[params]` section to `X.Y.Z` in https://github.com/camptocamp/devops-stack/blob/master/site/config.toml#L18[site/config.toml]
+** amend the commit
+** push force the branch
+** merge the PR
 * Create and merge a Pull Request with:
 ** subject can be something like: `chore: create post-release commit`
-** version in https://github.com/camptocamp/devops-stack/blob/master/docs/antora.yml#L4[docs/antora.yml] set back to `latest`
-** target_revision in https://github.com/camptocamp/devops-stack/blob/master/modules/variables.tf#15[modules/variables.tf] set back to `master`
+** `version` in https://github.com/camptocamp/devops-stack/blob/master/docs/antora.yml#L4[docs/antora.yml] set back to `latest`
+** `target_revision` in https://github.com/camptocamp/devops-stack/blob/master/modules/variables.tf#15[modules/variables.tf] set back to `master`
