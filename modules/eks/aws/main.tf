@@ -145,6 +145,7 @@ module "argocd" {
     templatefile("${path.module}/values.tmpl.yaml",
       {
         aws_default_region              = data.aws_region.current.name
+        base_domain                     = var.base_domain
         cert_manager_assumable_role_arn = module.iam_assumable_role_cert_manager.iam_role_arn,
         loki_assumable_role_arn         = module.iam_assumable_role_loki.iam_role_arn,
         loki_bucket_name                = aws_s3_bucket.loki.id,
