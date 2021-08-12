@@ -334,6 +334,7 @@ kube-prometheus-stack:
       hosts:
         - "${prometheus.domain}"
         - "prometheus.apps.${base_domain}"
+      pathType: "ImplementationSpecific"
       tls:
         - secretName: prometheus-tls
           hosts:
