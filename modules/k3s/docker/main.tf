@@ -1,17 +1,20 @@
 module "cluster" {
   source  = "camptocamp/k3s/docker"
-  version = "0.11.0"
+  version = "0.11.1"
 
-  network_name     = "bridge"
-  cluster_name     = var.cluster_name
-  k3s_version      = var.k3s_version
-  node_count       = var.node_count
-  server_config    = [
+  network_name = "bridge"
+  cluster_name = var.cluster_name
+  k3s_version  = var.k3s_version
+  node_count   = var.node_count
+
+  server_config = [
     "--disable", "traefik",
     "--disable", "metrics-server",
   ]
+
   cluster_endpoint = var.cluster_endpoint
   server_ports     = var.server_ports
+
   registry_mirrors = {
     "docker.io" = [
       "REGISTRY_PROXY_REMOTEURL=https://registry-1.docker.io",
