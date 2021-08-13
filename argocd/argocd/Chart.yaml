@@ -18,5 +18,5 @@ dependencies:
     version: "1.0.0"
     repository: "https://argoproj.github.io/argo-helm"
   - name: "argocd-notifications"
-    version: "1.4.0"
+    version: "1.4.1"
     repository: "https://argoproj.github.io/argo-helm"
