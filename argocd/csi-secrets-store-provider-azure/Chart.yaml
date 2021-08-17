@@ -12,5 +12,5 @@ description: |
   * mounting secrets into Kubernetes pods
 dependencies:
   - name: "csi-secrets-store-provider-azure"
-    version: "0.0.19"
+    version: "0.2.0"
     repository: "https://raw.githubusercontent.com/Azure/secrets-store-csi-driver-provider-azure/master/charts"
