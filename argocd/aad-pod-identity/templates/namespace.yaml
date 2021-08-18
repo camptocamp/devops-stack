@@ -1,0 +1,13 @@
+{{- if not (empty (index .Values "aad-pod-identity" "azureIdentities")) }}
+{{- $namespaces := dict }}
+{{- range $k, $v := index .Values "aad-pod-identity" "azureIdentities" }}
+{{- $_ := set $namespaces $v.namespace true }}
+{{- end }}
+{{- range $k, $v := $namespaces }}
+---
+apiVersion: "v1"
+kind: "Namespace"
+metadata:
+  name: "{{ $k }}"
+{{- end }}
+{{- end -}}
