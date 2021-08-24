@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Deploying with pipelines :: DevOps Stack</title>
+    <title>Continous Deployment for a gitflow Workflow :: DevOps Stack</title>
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../../_/css/site.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -90,7 +90,7 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Pipelines</span>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="3">
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="pipelines.html">Deploying with Pipelines</a>
   </li>
   <li class="nav-item" data-depth="3">
@@ -126,7 +126,7 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="deploy_own_app.html">Deploy Your App</a>
   </li>
-  <li class="nav-item" data-depth="3">
+  <li class="nav-item is-current-page" data-depth="3">
     <a class="nav-link" href="continuous_delivery_gitflow_workflow.html">Continous Deployment for a Gitflow Workflow</a>
   </li>
 </ul>
@@ -324,15 +324,15 @@
   <ul>
     <li><a href="../index.html">DevOps Stack</a></li>
     <li>Howtos</li>
-    <li>Pipelines</li>
-    <li><a href="pipelines.html">Deploying with Pipelines</a></li>
+    <li>Deploy Your App</li>
+    <li><a href="continuous_delivery_gitflow_workflow.html">Continous Deployment for a Gitflow Workflow</a></li>
   </ul>
 </nav>
 <div class="page-versions">
   <button class="version-menu-toggle" title="Show other versions of page">latest</button>
   <div class="version-menu">
-    <a class="version is-current" href="pipelines.html">latest</a>
-    <a class="version" href="../../0.39.0/howtos/pipelines.html">0.39.0</a>
+    <a class="version is-current" href="continuous_delivery_gitflow_workflow.html">latest</a>
+    <a class="version is-missing" href="../../0.39.0/index.html">0.39.0</a>
     <a class="version is-missing" href="../../0.38.0/index.html">0.38.0</a>
     <a class="version is-missing" href="../../0.37.1/index.html">0.37.1</a>
     <a class="version is-missing" href="../../0.37.0/index.html">0.37.0</a>
@@ -349,18 +349,36 @@
     <a class="version is-missing" href="../../0.30.0/index.html">0.30.0</a>
   </div>
 </div>
-  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/edit/master/docs/modules/ROOT/pages/howtos/pipelines.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/edit/master/docs/modules/ROOT/pages/howtos/continuous_delivery_gitflow_workflow.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Deploying with pipelines</h1>
+<h1 class="page">Continous Deployment for a gitflow Workflow</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This document describes how to set up a CI/CD environment using Devops Stack and GitLab/GitHub pipelines.</p>
+<p>This article describes how to add your app to a DevOps Stack instance and make use of the continuous deployment features (Argo CD).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_objective"><a class="anchor" href="#_objective"></a>Objective</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Learning how to Continously Deploy our code from git to a kubernetes cluster using DevOps Stack.</p>
+</li>
+<li>
+<p>Deploying to three environments: dev, int and prod (target environments).</p>
+</li>
+<li>
+<p>Synchonizing git branches (dev, int and prod) to their corresponding target environemnets (environment isolation implemented using kubenetes namespaces).</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -370,44 +388,27 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Access to API keys allowing to create required resources cloud environment,</p>
+<p>You already created a DevOps Stack cluster following one of the <a href="quickstart.html">Quickstart</a></p>
 </li>
 <li>
-<p>Access to GitLab or GitHub (only supported CI/CD for now),</p>
-</li>
-<li>
-<p>Knowledge of <a href="https://terraform.io">Terraform</a> basics</p>
+<p>Check out the demo git repo <a href="https://github.com/fsismondi/example-worflow-2-apps">DevOps Stack&#8217;s example app</a>, fork and modify as you please to play with the CD</p>
 </li>
 </ul>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_standard_workflow"><a class="anchor" href="#_standard_workflow"></a>Standard Workflow</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>When deploying with pipelines, the DevOps Stack runs a dry-run on <strong>Merge Request</strong> and applies the modification on <strong>Commit on a Protected Branch</strong>.
-Depending on the nature of the pipeline trigger we will find the following behaviors:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>If pipeline is being triggered by a Merge Request then it will run a <code>terraform plan</code>, this will provide user with the output of the planned changes in the infrastructure.
-This will not touch your infra-structure.</p>
-</li>
-<li>
-<p>If pipeline is being triggered by a Commit on a Protected Branch (e.g. by an approved merge request into your main branch) then it will run a self-approved <code>terraform apply</code>. This will update your infrastructure according to the the <code>terraform plan</code>.</p>
-</li>
-</ul>
-</div>
-<div class="admonitionblock important">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-important" title="Important"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-It is highly recommended to prohibit (at an admin level) committing changes directly to your <code>protected branch</code>, hence forcing developers to review the <code>terraform plan</code> in the MR before applying any changes to the infrastructure.
+<div class="ulist">
+<ul>
+<li>
+<p>If you want to use a private repository or other type of setup you can join us on the <code>#camptocamp-devops-stack</code> channel on the <a href="https://slack.k8s.io/">Kubernetes Slack Server</a>.</p>
+</li>
+</ul>
+</div>
 </td>
 </tr>
 </table>
@@ -415,16 +416,188 @@ It is highly recommended to prohibit (at an admin level) committing changes dire
 </div>
 </div>
 <div class="sect1">
+<h2 id="_git_workflow_and_cluster_environments"><a class="anchor" href="#_git_workflow_and_cluster_environments"></a>Git workflow and cluster environments</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This article will focus on implementing a <a href="https://nvie.com/posts/a-successful-git-branching-model/">gitflow</a> workflow but others are posible too.</p>
+</div>
+<div class="paragraph">
+<p>The git project for the app has 3 different branches: dev, int and prod and follows a project structure as the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code>deployment
+├─ charts
+│  ├─ chart-app-1
+│  │  ├─ Chart.yaml
+│  │  ├─ README.md
+│  │  ├─ templates
+│  │  └─ values.yaml
+│  └─ chart-app-2
+│     ├─ Chart.yaml
+│     ├─ README.md
+│     ├─ templates
+│     └─ values.yaml
+└─ apps
+   ├─ app-1
+   │  ├─ Chart.yaml
+   │  ├─ values_common.yaml
+   │  ├─ values_dev.yaml
+   │  ├─ values_int.yaml
+   │  └─ values_prod.yaml
+   └─ app-2
+      ├─ Chart.yaml
+      ├─ values_common.yaml
+      ├─ values_dev.yaml
+      ├─ values_int.yaml
+      └─ values_prod.yaml</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_add_the_application_projects_to_the_cluster"><a class="anchor" href="#_add_the_application_projects_to_the_cluster"></a>Add the Application Project(s) to the cluster</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Add into terraform cluster module instantiation an Application Project for each different environemnt you want to create in the cluster (env-dev, env-int and env-prod in our case):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl"># terraform/main.tf
+
+module "cluster" {
+  ...
+  extra_app_projects = [
+    {
+      metadata = {
+        name      = "env-dev"
+        namespace = "argocd"
+      }
+      spec = {
+        description = "Demo project"
+        sourceRepos = ["*"]
+
+        destinations = [
+          {
+            server    = "https://kubernetes.default.svc"
+            namespace = "dev"
+          }
+        ]
+
+        clusterResourceWhitelist = [
+          {
+            group = ""
+            kind  = "Namespace"
+          }
+        ]
+      }
+    }
+  ]
+
+  ...
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_add_the_application_sets_to_the_cluster"><a class="anchor" href="#_add_the_application_sets_to_the_cluster"></a>Add the Application Set(s) to the cluster</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Add into terraform cluster module instantiation an Application Set for each different environemnt you want to create in the cluster (env-dev, env-int and env-prod in our case):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl"># terraform/main.tf
+
+module "cluster" {
+  ...
+extra_application_sets = [
+    {
+      metadata = {
+        name      = "env-dev"
+        namespace = "argocd"
+
+        annotations = {
+          "argocd.argoproj.io/sync-options" = "SkipDryRunOnMissingResource=true"
+        }
+      }
+
+      spec = {
+        generators = [
+          {
+            git = {
+              repoURL  = "https://github.com/fsismondi/example-worflow-2-apps.git"
+              revision = "dev"
+              directories = [
+                {
+                  path = "apps/*"
+                }
+              ]
+            }
+          }
+        ]
+
+        template = {
+          metadata = {
+            name = "{{path.basename}}-dev"
+          }
+
+          spec = {
+            project = "env-dev"
+
+            source = {
+              repoURL        = "https://github.com/fsismondi/example-worflow-2-apps.git"
+              targetRevision = "dev"
+              path           = "{{path}}"
+              helm = {
+                valueFiles = [
+                  "values_common.yaml",
+                  "values_dev.yaml",
+                ]
+              }
+            }
+
+            destination = {
+              server    = "https://kubernetes.default.svc"
+              namespace = "dev"
+            }
+
+            syncPolicy = {
+              automated = {
+                prune    = true
+                selfHeal = false
+              }
+
+              syncOptions = [
+                "CreateNamespace=true"
+              ]
+            }
+          }
+        }
+      }
+    },
+  ]
+
+  ...
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_more"><a class="anchor" href="#_more"></a>More</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>See the <a href="pipelines_gitlab.html" class="page">Creating your GitLab pipeline</a>.</p>
+<p>Checkout a complete Argo CD configuration at: <a href="https://github.com/fsismondi/example-worflow-2-apps/blob/dev/terraform/main.tf">terraform cluster w/ CD to a dev, int and prod</a></p>
 </div>
-<div class="paragraph">
-<p>See the <a href="pipelines_github.html" class="page">Creating your GitHub pipeline</a>.</p>
 </div>
+</div>
+<div class="sect1">
+<h2 id="_todo"><a class="anchor" href="#_todo"></a>ToDo</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>See the <a href="pipelines_terraform_resource_migration.html" class="page">Moving terraform state using the pipeline</a>.</p>
+<p>Demo how a change introduced into git dev branch can be promoted to int and prod ?</p>
 </div>
 </div>
 </div>
@@ -438,7 +611,7 @@ It is highly recommended to prohibit (at an admin level) committing changes dire
 <script>
   window.antora = window.antora || {}
   window.antora.basePath = '../../..'
-  window.antora.pagePath = '/devops-stack/latest/howtos/pipelines.html'
+  window.antora.pagePath = '/devops-stack/latest/howtos/continuous_delivery_gitflow_workflow.html'
 </script>
 <script src="../../../_/js/site.js"></script>
 <script async src="../../../_/js/vendor/terraform.js"></script>
