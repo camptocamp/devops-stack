@@ -21,3 +21,21 @@ variable "cluster_endpoint" {
   type        = string
   default     = null
 }
+
+variable "worker_groups" {
+  description = "A map defining worker group configurations"
+
+  type = map(object({
+    node_count  = number
+    node_labels = list(string)
+    node_taints = list(string)
+  }))
+
+  default = {
+    "default" = {
+      node_count  = 2
+      node_labels = []
+      node_taints = []
+    }
+  }
+}
