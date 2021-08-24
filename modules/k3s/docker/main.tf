@@ -1,11 +1,11 @@
 module "cluster" {
   source  = "camptocamp/k3s/docker"
-  version = "0.11.1"
+  version = "1.0.1"
 
-  network_name = "bridge"
-  cluster_name = var.cluster_name
-  k3s_version  = var.k3s_version
-  node_count   = var.node_count
+  network_name  = "bridge"
+  cluster_name  = var.cluster_name
+  k3s_version   = var.k3s_version
+  worker_groups = var.worker_groups
 
   server_config = [
     "--disable", "traefik",

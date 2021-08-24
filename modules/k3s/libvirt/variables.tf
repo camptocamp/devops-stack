@@ -4,6 +4,12 @@ variable "k3os_version" {
   default     = "v0.20.7-k3s1r0"
 }
 
+variable "node_count" {
+  description = "Number of nodes to deploy"
+  type        = number
+  default     = 2
+}
+
 variable "server_memory" {
   description = "Server RAM"
   type        = number
