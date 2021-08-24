@@ -2,6 +2,3 @@
 
 The keycloak dashboard uses the `kubernetes` realm. You can log in to it using
 the `/auth/realms/kubernetes/account/` path with the Keycloak ingress.
-
-NOTE: there is currently an issue when accessing applications
-and login details in Keycloak.
