@@ -43,6 +43,8 @@ apps:
     enabled: false
   traefik:
     enabled: ${traefik.enable}
+  telepresence:
+    enabled: false
   vault:
     enabled: false
   thanos:
@@ -512,3 +514,5 @@ thanos:
 %{ if cluster_autoscaler.enable }
 cluster-autoscaler: {}
 %{ endif }
+
+telepresence: {}

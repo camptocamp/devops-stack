@@ -26,6 +26,9 @@ serviceAccount:
 podSecurityContext: {}
   # fsGroup: 2000
 
+podAnnotations:
+  telepresence.getambassador.io/inject-traffic-agent: "enabled"
+
 securityContext: {}
   # capabilities:
   #   drop:

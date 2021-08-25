@@ -6,6 +6,13 @@ module "cluster" {
   repo_url        = var.repo_url
   target_revision = var.target_revision
 
+  app_of_apps_values_overrides = <<EOF
+---
+apps:
+  telepresence:
+    enabled: true
+EOF
+
   extra_app_projects = [
     {
       metadata = {

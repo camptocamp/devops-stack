@@ -1,0 +1,12 @@
+---
+apiVersion: "v2"
+name: "telepresence"
+version: "0"
+description: |
+  This chart installs and configures telepresence.
+  telepresence enables:
+  * local development against a remove Kubernetes or OpenShift cluster
+dependencies:
+  - name: "telepresence"
+    version: "2.4.0"
+    repository: "https://app.getambassador.io"
