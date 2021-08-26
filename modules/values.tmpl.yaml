@@ -58,11 +58,8 @@ argo-cd:
   installCRDs: false
   configs:
     %{ if length(repositories) > 0 }
-    repositoryCredentials:
-      %{ for k, v in repositories }
-      ${replace(k, "/[^-._a-zA-Z0-9]/", "_")}: |
-        ${indent(8, v)}
-      %{ endfor }
+    repositories:
+      ${indent(6, yamlencode(repositories))}
     %{ endif }
     secret:
       argocdServerAdminPassword: "$2a$10$wzUzrdx.jMb7lHIbW6VutuRpV4OnpPA3ItWBDiP04QVHfGqzAoj6i"  # argocd
@@ -83,15 +80,6 @@ argo-cd:
   server:
     config:
       accounts.pipeline: apiKey
-    %{ if length(repositories) > 0 }
-      repositories: |
-      %{ for k, v in repositories }
-        - url: ${k}
-          sshPrivateKeySecret:
-            name: argocd-repository-credentials
-            key: ${replace(k, "/[^-._a-zA-Z0-9]/", "_")}
-      %{ endfor }
-    %{ endif }
       resource.customizations: |
         argoproj.io/Application:
           health.lua: |

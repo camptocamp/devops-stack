@@ -67,6 +67,6 @@ variable "grafana_admin_password" {
 
 variable "repositories" {
   description = "A list of repositories to add to ArgoCD."
-  type        = map(string)
+  type        = map(map(string))
   default     = {}
 }
