@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.45.0](https://www.github.com/camptocamp/devops-stack/compare/v0.44.0...v0.45.0) (2021-08-27)
+
+
+### Features
+
+* **kube-prometheus-stack:** upgrade chart to 18.0.1 ([#743](https://www.github.com/camptocamp/devops-stack/issues/743)) ([103dfc6](https://www.github.com/camptocamp/devops-stack/commit/103dfc67be8bfd0ee72ebd6fda60507211fdf163))
+
 ## [0.44.0](https://www.github.com/camptocamp/devops-stack/compare/v0.43.0...v0.44.0) (2021-08-26)
 
 
