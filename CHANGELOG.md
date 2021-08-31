@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.45.1](https://www.github.com/camptocamp/devops-stack/compare/v0.45.0...v0.45.1) (2021-08-31)
+
+
+### Bug Fixes
+
+* **sks:** pass down missing variables to argocd-helm ([#748](https://www.github.com/camptocamp/devops-stack/issues/748)) ([97f3973](https://www.github.com/camptocamp/devops-stack/commit/97f397369e558c0b7a32841cedded4027214f8c5))
+
 ## [0.45.0](https://www.github.com/camptocamp/devops-stack/compare/v0.44.0...v0.45.0) (2021-08-27)
 
 
