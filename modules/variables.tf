@@ -49,6 +49,7 @@ variable "oidc" {
     client_id               = string
     client_secret           = string
     oauth2_proxy_extra_args = list(string)
+    allowed_domains         = list(string)
   })
   default = null
 }

@@ -267,6 +267,9 @@ kube-prometheus-stack:
         auth_url: "${replace(oidc.oauth_url, "\"", "\\\"")}"
         token_url: "${replace(oidc.token_url, "\"", "\\\"")}"
         api_url: "${replace(oidc.api_url, "\"", "\\\"")}"
+        %{ if oidc.allowed_domains }
+        allowed_domains: ${oidc.allowed_domains}
+        %{ endif }
         %{ for k, v in grafana.generic_oauth_extra_args }
         ${k}: ${v}
         %{ endfor }
