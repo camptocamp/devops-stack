@@ -62,7 +62,7 @@ argo-cd:
       ${indent(6, yamlencode(repositories))}
     %{ endif }
     secret:
-      argocdServerAdminPassword: "$2a$10$wzUzrdx.jMb7lHIbW6VutuRpV4OnpPA3ItWBDiP04QVHfGqzAoj6i"  # argocd
+      argocdServerAdminPassword: "${argocd_server_admin_password}"
       argocdServerAdminPasswordMtime: '2020-07-23T11:31:23Z'
       extra:
         oidc.default.clientSecret: "${replace(oidc.client_secret, "\"", "\\\"")}"
