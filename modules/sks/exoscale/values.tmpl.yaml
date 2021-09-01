@@ -13,6 +13,38 @@ argo-cd:
 cert-manager:
   tlsCrt: "${root_cert}"
   tlsKey: "${root_key}"
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        preference:
+          matchExpressions:
+          - key: "node.exoscale.net/nodepool-id"
+            operator: NotIn
+            values:
+            - "${router_pool_id}"
+  cainjector:
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          preference:
+            matchExpressions:
+            - key: "node.exoscale.net/nodepool-id"
+              operator: NotIn
+              values:
+              - "${router_pool_id}"
+  webhook:
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          preference:
+            matchExpressions:
+            - key: "node.exoscale.net/nodepool-id"
+              operator: NotIn
+              values:
+              - "${router_pool_id}"
 
 loki-stack:
   promtail:
