@@ -444,6 +444,11 @@ module "cluster" {
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl"># terraform/outputs.tf
 
+output "argocd_server_admin_password" {
+  sensitive = true
+  value     = module.cluster.argocd_server_admin_password
+}
+
 output "argocd_auth_token" {
   sensitive = true
   value     = module.cluster.argocd_auth_token
