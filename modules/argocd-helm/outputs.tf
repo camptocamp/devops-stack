@@ -8,3 +8,9 @@ output "app_of_apps_values" {
   sensitive   = true
   value       = helm_release.app_of_apps.values
 }
+
+output "argocd_server_admin_password" {
+  description = "The ArgoCD admin password."
+  sensitive   = true
+  value       = random_password.argocd_server_admin.result
+}

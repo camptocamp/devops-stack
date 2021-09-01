@@ -15,6 +15,12 @@ output "argocd_server" {
   value       = format("argocd.apps.%s.%s:443", var.cluster_name, local.base_domain)
 }
 
+output "argocd_server_admin_password" {
+  description = "The ArgoCD admin password."
+  sensitive   = true
+  value       = module.argocd.argocd_server_admin_password
+}
+
 output "repo_url" {
   value = var.repo_url
 }
