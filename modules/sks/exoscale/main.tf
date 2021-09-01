@@ -19,6 +19,8 @@ locals {
   }
 
   router_nodepool = coalesce(var.router_nodepool, "router-${var.cluster_name}")
+  nodepools       = coalesce(var.nodepools, local.default_nodepools)
+  cluster_issuer  = (length(local.nodepools) > 1) ? "letsencrypt-prod" :  "ca-issuer"
 }
 
 provider "helm" {
@@ -45,7 +47,7 @@ module "cluster" {
   name               = var.cluster_name
   zone               = var.zone
 
-  nodepools = coalesce(var.nodepools, local.default_nodepools)
+  nodepools = local.nodepools
 }
 
 resource "exoscale_nlb" "this" {
@@ -130,7 +132,7 @@ module "argocd" {
   cluster_name            = var.cluster_name
   base_domain             = local.base_domain
   argocd_server_secretkey = var.argocd_server_secretkey
-  cluster_issuer          = "ca-issuer"
+  cluster_issuer          = local.cluster_issuer
 
   oidc = var.oidc != null ? var.oidc : {
     issuer_url    = format("https://keycloak.apps.%s/auth/realms/kubernetes", local.base_domain)
