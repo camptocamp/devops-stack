@@ -161,8 +161,9 @@ module "argocd" {
   app_of_apps_values_overrides = [
     templatefile("${path.module}/values.tmpl.yaml",
       {
-        root_cert = base64encode(tls_self_signed_cert.root.cert_pem)
-        root_key  = base64encode(tls_private_key.root.private_key_pem)
+        root_cert      = base64encode(tls_self_signed_cert.root.cert_pem)
+        root_key       = base64encode(tls_private_key.root.private_key_pem)
+        router_pool_id = module.cluster.nodepools[local.router_nodepool].id
       }
     ),
     var.app_of_apps_values_overrides,
