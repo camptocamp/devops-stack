@@ -126,33 +126,6 @@ resource "tls_self_signed_cert" "root" {
 }
 
 resource "opentelekomcloud_lb_loadbalancer_v2" "ingress" {
-  name               = format("%s.%s", var.cluster_name, var.base_domain)
-  vip_subnet_id      = var.subnet_id
-  security_group_ids = concat(var.security_group_ids, [opentelekomcloud_networking_secgroup_v2.devopsstack])
-}
-
-resource "opentelekomcloud_networking_secgroup_v2" "devopsstack" {
-  name                 = format("sg-%s.%s", var.cluster_name, var.base_domain)
-  description          = "Security Group applied to DevOps Stack instances"
-  delete_default_rules = true
-}
-
-resource "opentelekomcloud_networking_secgroup_rule_v2" "allow_http_in" {
-  direction         = "ingress"
-  ethertype         = "IPv4"
-  protocol          = "tcp"
-  port_range_min    = 80
-  port_range_max    = 80
-  remote_ip_prefix  = "0.0.0.0/0"
-  security_group_id = opentelekomcloud_networking_secgroup_v2.devopsstack.id
-}
-
-resource "opentelekomcloud_networking_secgroup_rule_v2" "allow_https_in" {
-  direction         = "ingress"
-  ethertype         = "IPv4"
-  protocol          = "tcp"
-  port_range_min    = 443
-  port_range_max    = 443
-  remote_ip_prefix  = "0.0.0.0/0"
-  security_group_id = opentelekomcloud_networking_secgroup_v2.devopsstack.id
+  name          = format("%s.%s", var.cluster_name, var.base_domain)
+  vip_subnet_id = var.subnet_id
 }

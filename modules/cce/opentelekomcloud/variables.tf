@@ -34,9 +34,3 @@ variable "node_pools" {
   type        = map(map(any))
   default     = {}
 }
-
-variable "security_group_ids" {
-  description = "The Security Groups that are used"
-  type        = list(any)
-  default     = []
-}
