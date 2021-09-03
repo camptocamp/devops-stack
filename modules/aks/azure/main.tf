@@ -84,6 +84,24 @@ module "cluster" {
   enable_log_analytics_workspace  = false
 }
 
+resource "azurerm_kubernetes_cluster_node_pool" "this" {
+  for_each              = var.node_pools
+  name                  = each.key
+  kubernetes_cluster_id = module.cluster.aks_id
+  vm_size               = each.value.vm_size
+  node_count            = each.value.node_count
+
+  availability_zones  = lookup(each.value, "availability_zones", null)
+  enable_auto_scaling = lookup(each.value, "enable_auto_scaling", null)
+  max_count           = lookup(each.value, "max_count", null)
+  min_count           = lookup(each.value, "min_count", null)
+  max_pods            = lookup(each.value, "max_pods", null)
+  node_taints         = lookup(each.value, "node_taints", null)
+  os_disk_size_gb     = lookup(each.value, "os_disk_size_gb", null)
+  os_type             = lookup(each.value, "os_type", "Linux")
+  vnet_subnet_id      = lookup(each.value, "vnet_subnet_id ", var.vnet_subnet_id)
+}
+
 module "argocd" {
   source = "../../argocd-helm"
 

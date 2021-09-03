@@ -69,3 +69,9 @@ variable "network_policy" {
   type        = string
   default     = null
 }
+
+variable "node_pools" {
+  default     = {}
+  description = "List of node pools with minimal configuration"
+  type        = map(any)
+}
