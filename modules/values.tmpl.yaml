@@ -202,7 +202,7 @@ keycloak:
         - "https://alertmanager.apps.${base_domain}/oauth2/callback"
         - "https://${alertmanager.domain}/oauth2/callback"
   keycloakUser:
-    password: "${keycloak.admin_password}"
+    password: "${keycloak.jdoe_password}"
 %{ endif }
 
 %{ if kube_prometheus_stack.enable }
