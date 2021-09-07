@@ -20,7 +20,7 @@ locals {
 
   router_nodepool = coalesce(var.router_nodepool, "router-${var.cluster_name}")
   nodepools       = coalesce(var.nodepools, local.default_nodepools)
-  cluster_issuer  = (length(local.nodepools) > 1) ? "letsencrypt-prod" :  "ca-issuer"
+  cluster_issuer  = (length(local.nodepools) > 1) ? "letsencrypt-prod" : "ca-issuer"
 }
 
 provider "helm" {
