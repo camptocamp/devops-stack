@@ -133,6 +133,7 @@ module "argocd" {
   base_domain             = local.base_domain
   argocd_server_secretkey = var.argocd_server_secretkey
   cluster_issuer          = local.cluster_issuer
+  wait_for_app_of_apps    = var.wait_for_app_of_apps
 
   oidc = var.oidc != null ? var.oidc : {
     issuer_url    = format("https://keycloak.apps.%s/auth/realms/kubernetes", local.base_domain)

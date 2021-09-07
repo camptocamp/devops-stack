@@ -117,6 +117,7 @@ module "argocd" {
   base_domain             = var.base_domain
   argocd_server_secretkey = var.argocd_server_secretkey
   cluster_issuer          = "letsencrypt-prod"
+  wait_for_app_of_apps    = var.wait_for_app_of_apps
 
   oidc = var.oidc != null ? var.oidc : {
     issuer_url              = format("https://cognito-idp.%s.amazonaws.com/%s", data.aws_region.current.name, var.cognito_user_pool_id)
