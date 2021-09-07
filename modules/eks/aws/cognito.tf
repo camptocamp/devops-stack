@@ -24,9 +24,9 @@ resource "aws_cognito_user_pool_client" "client" {
   allowed_oauth_flows_user_pool_client = true
 
   callback_urls = [
-    format("https://argocd.apps.%s.%s/auth/callback", var.cluster_name, var.base_domain),
-    format("https://grafana.apps.%s.%s/login/generic_oauth", var.cluster_name, var.base_domain),
-    format("https://prometheus.apps.%s.%s/oauth2/callback", var.cluster_name, var.base_domain),
-    format("https://alertmanager.apps.%s.%s/oauth2/callback", var.cluster_name, var.base_domain),
+    format("https://argocd.apps.%s.%s/auth/callback", var.cluster_name, local.base_domain),
+    format("https://grafana.apps.%s.%s/login/generic_oauth", var.cluster_name, local.base_domain),
+    format("https://prometheus.apps.%s.%s/oauth2/callback", var.cluster_name, local.base_domain),
+    format("https://alertmanager.apps.%s.%s/oauth2/callback", var.cluster_name, local.base_domain),
   ]
 }

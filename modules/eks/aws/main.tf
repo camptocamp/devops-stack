@@ -114,7 +114,7 @@ module "argocd" {
   extra_app_projects      = var.extra_app_projects
   extra_application_sets  = var.extra_application_sets
   cluster_name            = var.cluster_name
-  base_domain             = var.base_domain
+  base_domain             = local.base_domain
   argocd_server_secretkey = var.argocd_server_secretkey
   cluster_issuer          = "letsencrypt-prod"
   wait_for_app_of_apps    = var.wait_for_app_of_apps
@@ -146,7 +146,7 @@ module "argocd" {
     templatefile("${path.module}/values.tmpl.yaml",
       {
         aws_default_region              = data.aws_region.current.name
-        base_domain                     = var.base_domain
+        base_domain                     = local.base_domain
         cert_manager_assumable_role_arn = module.iam_assumable_role_cert_manager.iam_role_arn,
         loki_assumable_role_arn         = module.iam_assumable_role_loki.iam_role_arn,
         loki_bucket_name                = aws_s3_bucket.loki.id,
