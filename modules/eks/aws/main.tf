@@ -26,12 +26,6 @@ data "aws_subnet_ids" "public" {
   }
 }
 
-data "aws_nat_gateway" "this" {
-  for_each  = data.aws_subnet_ids.public.ids
-  subnet_id = each.value
-  state     = "available"
-}
-
 data "aws_eks_cluster" "cluster" {
   name = module.cluster.cluster_id
 }
@@ -65,13 +59,7 @@ module "cluster" {
   cluster_name    = var.cluster_name
   cluster_version = var.cluster_version
 
-  cluster_endpoint_public_access_cidrs = concat(
-    [
-      for nat_gateway in data.aws_nat_gateway.this :
-      format("%s/32", nat_gateway.public_ip)
-    ],
-    var.cluster_endpoint_public_access_cidrs
-  )
+  cluster_endpoint_public_access_cidrs = var.cluster_endpoint_public_access_cidrs
 
   subnets          = data.aws_subnet_ids.private.ids
   vpc_id           = var.vpc_id
