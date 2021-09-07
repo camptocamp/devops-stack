@@ -116,8 +116,8 @@ module "argocd" {
   cluster_name            = var.cluster_name
   base_domain             = var.base_domain
   argocd_server_secretkey = var.argocd_server_secretkey
+  cluster_issuer          = "letsencrypt-prod"
 
-  cluster_issuer = "letsencrypt-prod"
   oidc = var.oidc != null ? var.oidc : {
     issuer_url              = format("https://cognito-idp.%s.amazonaws.com/%s", data.aws_region.current.name, var.cognito_user_pool_id)
     oauth_url               = format("https://%s.auth.%s.amazoncognito.com/oauth2/authorize", var.cognito_user_pool_domain, data.aws_region.current.name)
