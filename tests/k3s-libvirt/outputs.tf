@@ -49,7 +49,18 @@ output "keycloak_url" {
   value = format("https://keycloak.apps.%s/auth/realms/kubernetes/account", module.cluster.base_domain)
 }
 
-output "admin_password" {
+output "keycloak_admin_password" {
   sensitive = true
-  value     = module.cluster.admin_password
+  value     = module.cluster.keycloak_admin_password
 }
+
+output "jdoe_password" {
+  sensitive = true
+  value     = module.cluster.jdoe_password
+}
+
+output "grafana_admin_password" {
+  sensitive = true
+  value     = module.cluster.grafana_admin_password
+}
+

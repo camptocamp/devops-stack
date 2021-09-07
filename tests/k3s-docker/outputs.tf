@@ -59,9 +59,9 @@ output "keycloak_admin_password" {
   value     = module.cluster.keycloak_admin_password
 }
 
-output "admin_password" {
+output "jdoe_password" {
   sensitive = true
-  value     = module.cluster.admin_password
+  value     = module.cluster.jdoe_password
 }
 
 output "grafana_admin_password" {

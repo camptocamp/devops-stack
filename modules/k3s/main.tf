@@ -64,7 +64,7 @@ module "argocd" {
 
   keycloak = {
     enable         = var.oidc == null ? true : false
-    admin_password = random_password.admin_password.result
+    jdoe_password = random_password.jdoe_password.result
   }
 
   loki = {
@@ -127,7 +127,7 @@ resource "random_password" "clientsecret" {
   special = false
 }
 
-resource "random_password" "admin_password" {
+resource "random_password" "jdoe_password" {
   length  = 16
   special = false
 }

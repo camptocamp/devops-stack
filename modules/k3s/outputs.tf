@@ -2,8 +2,9 @@ output "base_domain" {
   value = local.base_domain
 }
 
-output "admin_password" {
-  value     = random_password.admin_password.result
+output "jdoe_password" {
+  description = "The password of a regular user jdoe."
+  value     = random_password.jdoe_password.result
   sensitive = true
 }
 

@@ -4,15 +4,15 @@ kind: KeycloakUser
 metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
-  name: admin
+  name: jdoe
   labels:
     app: sso
 spec:
   user:
-    username: admin
+    username: jdoe
     firstName: John
     lastName: Doe
-    email: user@example.com
+    email: jdoe@example.com
     enabled: true
     emailVerified: true
     credentials:
