@@ -1,5 +1,5 @@
 module "cluster" {
-  source = "../../../modules/k3s/docker"
+  source = "../../modules/k3s/docker"
 
   cluster_name = var.cluster_name
 
@@ -53,7 +53,7 @@ module "cluster" {
 
               directories = [
                 {
-                  path = "tests/k3s-docker/argocd/*"
+                  path = "tests/argocd/*"
                 }
               ]
             }
