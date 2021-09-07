@@ -115,6 +115,7 @@ module "argocd" {
   base_domain             = var.base_domain
   cluster_issuer          = "letsencrypt-prod"
   argocd_server_secretkey = var.argocd_server_secretkey
+  wait_for_app_of_apps    = var.wait_for_app_of_apps
 
   oidc = var.oidc != null ? var.oidc : {
     issuer_url              = format("https://login.microsoftonline.com/%s/v2.0", data.azurerm_client_config.current.tenant_id)
