@@ -1,5 +1,5 @@
 module "cluster" {
-  source = "../../../modules/k3s/libvirt"
+  source = "../../modules/k3s/libvirt"
 
   cluster_name = "default"
   node_count   = 0
@@ -55,7 +55,7 @@ module "cluster" {
 
               directories = [
                 {
-                  path = "tests/k3s-libvirt/argocd/*"
+                  path = "tests/argocd/*"
                 }
               ]
             }

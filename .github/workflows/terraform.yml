@@ -18,7 +18,7 @@ jobs:
     strategy:
       matrix:
         tf_root:
-          - tests/k3s-docker/terraform
+          - tests/k3s-docker
     env:
       TF_VAR_repo_url: ${{ github.server_url }}/${{ github.actor }}/devops-stack.git
       TF_VAR_target_revision: ${{ github.head_ref }}
@@ -91,7 +91,7 @@ jobs:
     strategy:
       matrix:
         tf_root:
-          - tests/k3s-docker/terraform
+          - tests/k3s-docker
     env:
       TF_ROOT: ${{ matrix.tf_root }}
     defaults:
