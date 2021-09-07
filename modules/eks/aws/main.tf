@@ -1,5 +1,5 @@
 locals {
-  base_domain                       = var.base_domain
+  base_domain                       = coalesce(var.base_domain, format("%s.nip.io", replace(data.dns_a_record_set.nlb.addrs[0], ".", "-")))
   kubernetes_host                   = data.aws_eks_cluster.cluster.endpoint
   kubernetes_cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
   kubernetes_token                  = data.aws_eks_cluster_auth.cluster.token
@@ -135,7 +135,7 @@ module "argocd" {
       {
         aws_default_region              = data.aws_region.current.name
         base_domain                     = local.base_domain
-        cert_manager_assumable_role_arn = module.iam_assumable_role_cert_manager.iam_role_arn,
+        cert_manager_assumable_role_arn = var.base_domain == null ? "" : module.iam_assumable_role_cert_manager.0.iam_role_arn,
         loki_assumable_role_arn         = module.iam_assumable_role_loki.iam_role_arn,
         loki_bucket_name                = aws_s3_bucket.loki.id,
         enable_efs                      = var.enable_efs
