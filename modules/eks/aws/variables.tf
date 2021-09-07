@@ -7,6 +7,7 @@ variable "cluster_version" {
 variable "base_domain" {
   description = "The base domain used for Ingresses."
   type        = string
+  default     = null
 }
 
 variable "cluster_endpoint_public_access_cidrs" {
