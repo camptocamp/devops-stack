@@ -1,0 +1,6 @@
+= Exoscale SKS Terraform Module
+
+The `sks/exoscale` Terraform module provides a way to install and configure:
+
+* An SKS cluster
+* The xref:ROOT:references/terraform_modules/argocd-helm.adoc[ArgoCD Helm] module
