@@ -30,6 +30,7 @@
 *** xref:ROOT:references/terraform_modules/k3s/docker.adoc[K3s Docker]
 *** xref:ROOT:references/terraform_modules/k3s/libvirt.adoc[K3s Libvirt]
 *** xref:ROOT:references/terraform_modules/openshift4/aws.adoc[OpenShift 4 on AWS]
+*** xref:ROOT:references/terraform_modules/sks/exoscale.adoc[Exoscale SKS]
 ** xref:ROOT:references/applications.adoc[Applications]
 *** xref:ROOT:references/applications/apps.adoc[Umbrella App]
 *** xref:ROOT:references/applications/app-of-apps.adoc[App of Apps]
