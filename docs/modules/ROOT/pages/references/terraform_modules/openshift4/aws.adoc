@@ -21,9 +21,9 @@ No requirements.
 
 [cols="a,a,a",options="header,autowidth"]
 |===
-|Name|Source|Version|
-|[[module_argocd]] <<module_argocd,argocd>>|../../argocd-helm|
-|[[module_cluster]] <<module_cluster,cluster>>|camptocamp/openshift4/aws|0.1.0
+|Name |Source |Version
+|[[module_argocd]] <<module_argocd,argocd>> |../../argocd-helm |
+|[[module_cluster]] <<module_cluster,cluster>> |camptocamp/openshift4/aws |0.1.0
 |===
 
 == Resources
@@ -128,7 +128,7 @@ object({
 
 |[[input_repositories]] <<input_repositories,repositories>>
 |A list of repositories to add to ArgoCD.
-|`map(string)`
+|`map(map(string))`
 |`{}`
 |no
 
@@ -136,6 +136,12 @@ object({
 |The source target revision of ArgoCD's app of apps.
 |`string`
 |`"master"`
+|no
+
+|[[input_wait_for_app_of_apps]] <<input_wait_for_app_of_apps,wait_for_app_of_apps>>
+|Allow to disable wait for app of apps
+|`bool`
+|`true`
 |no
 
 |===
@@ -148,6 +154,7 @@ object({
 |[[output_app_of_apps_values]] <<output_app_of_apps_values,app_of_apps_values>> |App of Apps values
 |[[output_argocd_auth_token]] <<output_argocd_auth_token,argocd_auth_token>> |The token to set in ARGOCD_AUTH_TOKEN environment variable.
 |[[output_argocd_server]] <<output_argocd_server,argocd_server>> |The URL of the ArgoCD server.
+|[[output_argocd_server_admin_password]] <<output_argocd_server_admin_password,argocd_server_admin_password>> |The ArgoCD admin password.
 |[[output_console_url]] <<output_console_url,console_url>> |n/a
 |[[output_grafana_admin_password]] <<output_grafana_admin_password,grafana_admin_password>> |The admin password for Grafana.
 |[[output_kubeadmin_password]] <<output_kubeadmin_password,kubeadmin_password>> |n/a
