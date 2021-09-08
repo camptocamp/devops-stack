@@ -413,6 +413,14 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_htpasswd"></a> <a href="#requirement_htpasswd">htpasswd</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>~&gt; 0.9</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="requirement_jwt"></a> <a href="#requirement_jwt">jwt</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -421,10 +429,34 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_kubernetes"></a> <a href="#requirement_kubernetes">kubernetes</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>~&gt; 2.0</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_null"></a> <a href="#requirement_null">null</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>~&gt; 3.0</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_random"></a> <a href="#requirement_random">random</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>~&gt; 3.0</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="requirement_time"></a> <a href="#requirement_time">time</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>0.6.0</p>
+<p>~&gt; 0.6</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -456,6 +488,14 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_htpasswd"></a> <a href="#provider_htpasswd">htpasswd</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>~&gt; 0.9</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="provider_jwt"></a> <a href="#provider_jwt">jwt</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -467,7 +507,7 @@
 <p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
+<p>~&gt; 3.0</p>
 </div></div></td>
 </tr>
 <tr>
@@ -475,7 +515,7 @@
 <p><a id="provider_random"></a> <a href="#provider_random">random</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
+<p>~&gt; 3.0</p>
 </div></div></td>
 </tr>
 <tr>
@@ -483,7 +523,7 @@
 <p><a id="provider_time"></a> <a href="#provider_time">time</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>0.6.0</p>
+<p>~&gt; 0.6</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -531,6 +571,14 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/loafoe/htpasswd/latest/docs/resources/password">htpasswd_password.argocd_server_admin</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="https://registry.terraform.io/providers/camptocamp/jwt/latest/docs/resources/hashed_token">jwt_hashed_token.argocd</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -540,6 +588,14 @@
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource">null_resource.wait_for_app_of_apps</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password">random_password.argocd_server_admin</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>resource</p>
@@ -571,7 +627,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="https://registry.terraform.io/providers/hashicorp/time/0.6.0/docs/resources/static">time_static.iat</a></p>
+<p><a href="https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/static">time_static.iat</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>resource</p>
@@ -1001,7 +1057,7 @@
 <p>A list of repositories to add to ArgoCD.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>map(string)</code></p>
+<p><code>map(map(string))</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>{}</code></p>
@@ -1094,6 +1150,14 @@
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The token to set in ARGOCD_AUTH_TOKEN environment variable.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_argocd_server_admin_password"></a> <a href="#output_argocd_server_admin_password">argocd_server_admin_password</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The ArgoCD admin password.</p>
 </div></div></td>
 </tr>
 </tbody>
