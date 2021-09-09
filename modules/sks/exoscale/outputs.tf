@@ -12,3 +12,7 @@ output "keycloak_admin_password" {
   value       = data.kubernetes_secret.keycloak_admin_password.data.ADMIN_PASSWORD
   sensitive   = true
 }
+
+output "nlb_ip_address" {
+  value = exoscale_nlb.this.ip_address
+}
