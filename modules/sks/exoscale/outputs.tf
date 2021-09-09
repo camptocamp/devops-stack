@@ -9,6 +9,6 @@ output "admin_password" {
 
 output "keycloak_admin_password" {
   description = "The password of Keycloak's admin user."
-  value       = data.kubernetes_secret.keycloak_admin_password.data.ADMIN_PASSWORD
+  value       = data.kubernetes_secret.keycloak_admin_password.data != null ? data.kubernetes_secret.keycloak_admin_password.data.ADMIN_PASSWORD : null
   sensitive   = true
 }
