@@ -1,4 +1,5 @@
-= apps
+apps
+====
 
 This chart is a composition of subcharts. Each of the subcharts installs
 one app of the `argocd/app-of-apps` (if parameterized as `enabled`).

@@ -1,24 +1,29 @@
-= minio
+minio
+=====
 
 NOTE: This chart is enabled only when deploying DevOps Stack to clouds
 not providing OIDC out of the box.
 
 This chart installs MinIO, a High Performance Object Storage.
 
-== Requirements
+[[requirements]]
+Requirements
+~~~~~~~~~~~~
 
 [cols=",,",options="header",]
-|===
+|==================================
 |Repository |Name |Version
 |https://helm.min.io/ |minio |8.0.3
-|===
+|==================================
 
-== Values
+[[values]]
+Values
+~~~~~~
 
-[width="100%",cols="16%,18%,27%,39%",options="header",]
-|===
+[width="51%",cols="18%,18%,27%,37%",options="header",]
+|=======================================================================
 |Key |Type |Default |Description
 |minio |object
 |`{"metrics":{"serviceMonitor":{"enabled":true}},"resources":{"requests":{"memory":"24Mi"}}}`
 |Values passed to the minio chart
-|===
+|=======================================================================

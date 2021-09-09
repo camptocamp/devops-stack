@@ -64,6 +64,12 @@ No requirements.
 |n/a
 |yes
 
+|[[input_enable_velero]] <<input_enable_velero,enable_velero>>
+|Flag to enable velero
+|`bool`
+|`true`
+|no
+
 |[[input_extra_app_projects]] <<input_extra_app_projects,extra_app_projects>>
 |Extra AppProjects objects to deploy.
 |`list(any)`

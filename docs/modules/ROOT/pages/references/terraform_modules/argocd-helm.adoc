@@ -216,6 +216,12 @@ No modules.
 |`{}`
 |no
 
+|[[input_velero]] <<input_velero,velero>>
+|Velero settings
+|`any`
+|`{}`
+|no
+
 |[[input_wait_for_app_of_apps]] <<input_wait_for_app_of_apps,wait_for_app_of_apps>>
 |Allow to disable wait for app of apps
 |`bool`

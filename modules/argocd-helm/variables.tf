@@ -88,6 +88,12 @@ variable "loki" {
   default     = {}
 }
 
+variable "velero" {
+  description = "Velero settings"
+  type        = any
+  default     = {}
+}
+
 variable "traefik" {
   description = "Trafik settings"
   type        = any

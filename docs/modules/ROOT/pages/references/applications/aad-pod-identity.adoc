@@ -1,25 +1,30 @@
-= aad-pod-identity
+aad-pod-identity
+================
 
 NOTE: This chart is enabled only when deploying DevOps Stack to AKS.
 
 This chart enables assigning Azure Active Directory Identities to
 Kubernetes applications.
 
-== Requirements
+[[requirements]]
+Requirements
+~~~~~~~~~~~~
 
-[width="100%",cols="45%,22%,33%",options="header",]
-|===
+[width="41%",cols="44%,23%,33%",options="header",]
+|=======================================================================
 |Repository |Name |Version
 |https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts
 |aad-pod-identity |4.1.1
-|===
+|=======================================================================
 
-== Values
+[[values]]
+Values
+~~~~~~
 
-[width="100%",cols="16%,18%,27%,39%",options="header",]
-|===
+[width="51%",cols="18%,18%,27%,37%",options="header",]
+|=======================================================================
 |Key |Type |Default |Description
 |aad-pod-identity |object
 |`{"forceNamespaced":true,"mic":{"prometheusPort":8888,"resources":{"limits":{"memory":"32Mi"},"requests":{"memory":"16Mi"}}},"nmi":{"prometheusPort":9090,"resources":{"limits":{"memory":"32Mi"},"requests":{"memory":"16Mi"}}}}`
 |Values passed to the add-pod-identity chart
-|===
+|=======================================================================

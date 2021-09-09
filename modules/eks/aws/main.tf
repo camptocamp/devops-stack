@@ -120,6 +120,10 @@ module "argocd" {
     bucket_name = aws_s3_bucket.loki.id,
   }
 
+  velero = {
+    enable = var.enable_velero
+  }
+
   grafana = {
     admin_password = local.grafana_admin_password
   }

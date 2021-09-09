@@ -65,6 +65,12 @@ variable "grafana_admin_password" {
   default     = null
 }
 
+variable "enable_velero" {
+  description = "Flag to enable velero"
+  type        = bool
+  default     = true
+}
+
 variable "repositories" {
   description = "A list of repositories to add to ArgoCD."
   type        = map(map(string))

@@ -129,6 +129,10 @@ module "argocd" {
     oauth2_proxy_extra_args = []
   }
 
+  velero = {
+    enable = var.enable_velero
+  }
+
   grafana = {
     admin_password = local.grafana_admin_password
   }
