@@ -1,18 +1,19 @@
 ---
-apiVersion: keycloak.org/v1alpha1
-kind: KeycloakRealm
+apiVersion: "keycloak.org/v1alpha1"
+kind: "KeycloakRealm"
 metadata:
   annotations:
-    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
-  name: kubernetes
+    argocd.argoproj.io/sync-options: "SkipDryRunOnMissingResource=true"
+    argocd.argoproj.io/sync-wave: "-3"
+  name: "kubernetes"
   labels:
-    app: sso
+    app: "sso"
 spec:
   realm:
-    id: kubernetes
-    realm: kubernetes
+    id: "kubernetes"
+    realm: "kubernetes"
     enabled: true
-    displayName: Kubernetes Realm
+    displayName: "Kubernetes Realm"
   instanceSelector:
     matchLabels:
-      app: sso
+      app: "sso"
