@@ -63,6 +63,10 @@ module "argocd" {
     secret_key = local.minio.secret_key
   }
 
+  velero = {
+    enable = var.enable_velero
+  }
+
   keycloak = {
     enable   = var.oidc == null ? true : false
     user_map = local.keycloak_user_map

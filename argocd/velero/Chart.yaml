@@ -1,0 +1,11 @@
+---
+apiVersion: "v2"
+name: "velero"
+version: "0"
+description: |
+  This chart installs velero.
+  Velero is an open source tool to safely backup and restore, perform disaster recovery, and migrate Kubernetes cluster resources and persistent volumes.
+dependencies:
+  - name: "velero"
+    version: "2.23.6"
+    repository: "https://vmware-tanzu.github.io/helm-charts/"

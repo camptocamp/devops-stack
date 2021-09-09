@@ -92,6 +92,15 @@ locals {
     local.minio_defaults,
     var.minio,
   )
+
+  velero_defaults = {
+    enable = false
+  }
+  velero = merge(
+    local.velero_defaults,
+    var.velero,
+  )
+
   metrics_archives_defaults = {
     bucket_name      = "thanos"
     query_domain     = "thanos-query.${var.cluster_name}.${var.base_domain}"

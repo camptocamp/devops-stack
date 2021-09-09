@@ -12,3 +12,9 @@ output "keycloak_admin_password" {
   value       = data.kubernetes_secret.keycloak_admin_password.data.ADMIN_PASSWORD
   sensitive   = true
 }
+
+output "minio_keys" {
+  description = "The minio key pair"
+  value       = local.minio
+  sensitive   = true
+}

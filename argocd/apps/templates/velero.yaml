@@ -1,0 +1,25 @@
+{{- if index $.Values "apps" "velero" "enabled" }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: velero
+  namespace: argocd
+spec:
+  project: "devops-stack"
+  source:
+    path: argocd/velero
+    repoURL: {{ .Values.spec.source.repoURL }}
+    targetRevision: {{ .Values.spec.source.targetRevision }}
+    helm:
+      values: |
+        velero:
+          {{- index .Values "velero" | toYaml | nindent 10 }}
+  destination:
+    namespace: velero
+    server: {{ .Values.spec.destination.server }}
+  {{- if .Values.spec.syncPolicy }}
+  syncPolicy:
+    {{ toYaml .Values.spec.syncPolicy | nindent 4 }}
+  {{- end }}
+{{- end }}

@@ -42,6 +42,7 @@ locals {
     grafana                         = local.grafana
     prometheus                      = local.prometheus
     alertmanager                    = local.alertmanager
+    velero                          = local.velero
     metrics_server                  = local.metrics_server
     metrics_archives                = local.metrics_archives
     cert_manager                    = local.cert_manager

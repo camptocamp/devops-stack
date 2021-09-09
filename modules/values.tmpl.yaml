@@ -49,6 +49,8 @@ apps:
     enabled: ${ can(metrics_archives.bucket_config) ? true : false }
   cluster-autoscaler:
     enabled: ${cluster_autoscaler.enable}
+  velero:
+    enabled: ${velero.enable}
 
 ${yamlencode({"extraApps": extra_apps})}
 ${yamlencode({"extraAppProjects": extra_app_projects})}
@@ -460,6 +462,11 @@ minio:
     - name: "${metrics_archives.bucket_name}"
       policy: none
       purge: false
+%{ if velero.enable }
+    - name: velero
+      policy: none
+      purge: false
+%{ endif }
 %{ endif }
 
 secrets-store-csi-driver: {}
@@ -526,3 +533,5 @@ thanos:
 %{ if cluster_autoscaler.enable }
 cluster-autoscaler: {}
 %{ endif }
+
+velero: {}

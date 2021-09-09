@@ -18,10 +18,10 @@ locals {
     },
   }
 
-  router_nodepool = coalesce(var.router_nodepool, "router-${var.cluster_name}")
-  nodepools       = coalesce(var.nodepools, local.default_nodepools)
-  cluster_issuer  = (length(local.nodepools) > 1) ? "letsencrypt-prod" : "ca-issuer"
-  keycloak_user_map = { for username, infos in var.keycloak_users : username => merge(infos, tomap({password = random_password.keycloak_passwords[username].result})) }
+  router_nodepool   = coalesce(var.router_nodepool, "router-${var.cluster_name}")
+  nodepools         = coalesce(var.nodepools, local.default_nodepools)
+  cluster_issuer    = (length(local.nodepools) > 1) ? "letsencrypt-prod" : "ca-issuer"
+  keycloak_user_map = { for username, infos in var.keycloak_users : username => merge(infos, tomap({ password = random_password.keycloak_passwords[username].result })) }
 }
 
 provider "helm" {
@@ -147,12 +147,16 @@ module "argocd" {
     oauth2_proxy_extra_args = []
   }
 
+  velero = {
+    enable = var.enable_velero
+  }
+
   grafana = {
     admin_password = local.grafana_admin_password
   }
 
   keycloak = {
-    enable        = true
+    enable   = true
     user_map = local.keycloak_user_map
   }
 

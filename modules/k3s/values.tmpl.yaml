@@ -58,3 +58,30 @@ loki-stack:
 cert-manager:
   tlsCrt: ${root_cert}
   tlsKey: ${root_key}
+
+velero:
+  initContainers:
+    - name: velero-plugin-for-aws
+      image: velero/velero-plugin-for-aws:v1.1.0
+      imagePullPolicy: IfNotPresent
+      volumeMounts:
+        - mountPath: /target
+          name: plugins
+  configuration:
+    provider: aws
+    backupStorageLocation:
+      caCert: ${root_cert}
+      bucket: velero
+      config:
+        region: minio
+        s3ForcePathStyle: true
+        publicUrl: https://minio.apps.${cluster_name}.${base_domain}
+        s3Url: http://minio.minio.svc.cluster.local:9000
+  credentials:
+    useSecret: true
+    secretContents:
+      cloud: |
+        [default]
+        aws_access_key_id = ${minio_access_key}
+        aws_secret_access_key = ${minio_secret_key}
+  snapshotsEnabled: false

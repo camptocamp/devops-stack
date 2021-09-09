@@ -95,6 +95,12 @@ The `k3s/libvirt` Terraform module provides a way to install and configure:
 |`true`
 |no
 
+|[[input_enable_velero]] <<input_enable_velero,enable_velero>>
+|Flag to enable velero
+|`bool`
+|`false`
+|no
+
 |[[input_extra_app_projects]] <<input_extra_app_projects,extra_app_projects>>
 |Extra AppProjects objects to deploy.
 |`list(any)`
@@ -215,6 +221,7 @@ object({
 |[[output_keycloak_admin_password]] <<output_keycloak_admin_password,keycloak_admin_password>> |The password of Keycloak's admin user.
 |[[output_keycloak_users]] <<output_keycloak_users,keycloak_users>> |n/a
 |[[output_kubeconfig]] <<output_kubeconfig,kubeconfig>> |The content of the KUBECONFIG file.
+|[[output_minio_keys]] <<output_minio_keys,minio_keys>> |The minio key pair
 |[[output_repo_url]] <<output_repo_url,repo_url>> |n/a
 |[[output_target_revision]] <<output_target_revision,target_revision>> |n/a
 |===

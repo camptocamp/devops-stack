@@ -68,3 +68,8 @@ output "grafana_admin_password" {
   sensitive = true
   value     = module.cluster.grafana_admin_password
 }
+
+output "minio_keys" {
+  sensitive = true
+  value     = module.cluster.minio_keys
+}
