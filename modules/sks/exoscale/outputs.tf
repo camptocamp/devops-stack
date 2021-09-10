@@ -10,7 +10,7 @@ output "jdoe_password" {
 
 output "keycloak_admin_password" {
   description = "The password of Keycloak's admin user."
-  value       = data.kubernetes_secret.keycloak_admin_password.data.ADMIN_PASSWORD
+  value       = yamldecode(var.app_of_apps_values_overrides).apps.keycloak.enabled == false ? null : data.kubernetes_secret.keycloak_admin_password.data.ADMIN_PASSWORD
   sensitive   = true
 }
 
