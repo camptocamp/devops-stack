@@ -94,3 +94,35 @@ module "cluster" {
     }
   ]
 }
+
+provider "argocd" {
+  server_addr = module.cluster.argocd_server
+  auth_token  = module.cluster.argocd_auth_token
+  insecure    = true
+  grpc_web    = true
+}
+
+resource "argocd_project" "test" {
+  metadata {
+    name      = "test"
+    namespace = "argocd"
+  }
+
+  spec {
+    description  = "Test application project"
+    source_repos = ["*"]
+
+    destination {
+      server    = "https://kubernetes.default.svc"
+      namespace = "default"
+    }
+
+    orphaned_resources {
+      warn = true
+    }
+  }
+
+  depends_on = [
+    module.cluster
+  ]
+}
