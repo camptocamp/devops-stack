@@ -20,6 +20,7 @@
 ** Deploy Your App
 *** xref:ROOT:howtos/deploy_own_app.adoc[Deploy Your App]
 *** xref:ROOT:howtos/continuous_delivery_gitflow_workflow.adoc[Continous Deployment for a Gitflow Workflow]
+** xref:ROOT:howtos/filebeat_logging.adoc[Filebeat logging]
 * References
 ** xref:ROOT:references/architecture.adoc[Architecture]
 ** xref:ROOT:references/authentication.adoc[Authentication]
