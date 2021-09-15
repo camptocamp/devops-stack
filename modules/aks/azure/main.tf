@@ -99,7 +99,9 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
   node_taints         = lookup(each.value, "node_taints", null)
   os_disk_size_gb     = lookup(each.value, "os_disk_size_gb", null)
   os_type             = lookup(each.value, "os_type", "Linux")
-  vnet_subnet_id      = lookup(each.value, "vnet_subnet_id ", var.vnet_subnet_id)
+  vnet_subnet_id      = lookup(each.value, "vnet_subnet_id", var.vnet_subnet_id)
+  node_labels         = lookup(each.value, "node_labels", null)
+  mode                = lookup(each.value, "mode", null)
 }
 
 module "argocd" {
