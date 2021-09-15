@@ -4,7 +4,7 @@ kind: "KeycloakClient"
 metadata:
   annotations:
     argocd.argoproj.io/sync-options: "SkipDryRunOnMissingResource=true"
-  name: "applications"
+  name: "devops-stack-applications"
   labels:
     app: "sso"
 spec:

@@ -140,7 +140,7 @@ module "argocd" {
     oauth_url     = format("https://keycloak.apps.%s/auth/realms/kubernetes/protocol/openid-connect/auth", local.base_domain)
     token_url     = format("https://keycloak.apps.%s/auth/realms/kubernetes/protocol/openid-connect/token", local.base_domain)
     api_url       = format("https://keycloak.apps.%s/auth/realms/kubernetes/protocol/openid-connect/userinfo", local.base_domain)
-    client_id     = "applications"
+    client_id     = "devops-stack-applications"
     client_secret = random_password.clientsecret.result
 
     oauth2_proxy_extra_args = []
@@ -151,7 +151,7 @@ module "argocd" {
   }
 
   keycloak = {
-    enable         = true
+    enable        = true
     jdoe_password = random_password.jdoe_password.result
   }
 
