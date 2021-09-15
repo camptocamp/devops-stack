@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.47.0](https://www.github.com/camptocamp/devops-stack/compare/v0.46.0...v0.47.0) (2021-09-15)
+
+
+### Features
+
+* **keycloak:** rename client to devops-stack-applications ([ead90c7](https://www.github.com/camptocamp/devops-stack/commit/ead90c7502e23fb1b23fcf20478cd07c225cd943))
+* **keycloak:** upgrade to v15.0.1 ([c7dfdbb](https://www.github.com/camptocamp/devops-stack/commit/c7dfdbb9a998729b090168d1fa0405f4d3ee5666))
+* **loki-stack:** add monitoring when filebeat logging is enabled ([5038df4](https://www.github.com/camptocamp/devops-stack/commit/5038df422e4f0dbdc2594ce5735876d090476119))
+
+
+### Bug Fixes
+
+* **keycloak:** add missing scopes to client ([a86403b](https://www.github.com/camptocamp/devops-stack/commit/a86403b086af1fb518ce739235516423a5ae36cb))
+
 ## [0.46.0](https://www.github.com/camptocamp/devops-stack/compare/v0.45.0...v0.46.0) (2021-09-10)
 
 
