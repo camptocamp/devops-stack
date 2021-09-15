@@ -18,3 +18,6 @@ spec:
     standardFlowEnabled: true
     redirectUris:
       {{- toYaml .Values.keycloakClient.client.redirectUris | nindent 6}}
+    defaultClientScopes:
+      - "email"
+      - "profile"
