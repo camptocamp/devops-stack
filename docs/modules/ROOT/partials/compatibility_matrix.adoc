@@ -1,6 +1,6 @@
 == Compatibility matrix
 
-The devops-stack is above all a Kubernetes cluster - one of the following distributions:
+The DevOps Stack is above all a Kubernetes cluster - one of the following distributions:
 
 * K3s
 * Azure AKS
