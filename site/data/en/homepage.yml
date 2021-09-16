@@ -22,9 +22,9 @@ banner:
       - label: "AKS Quickstart"
         icon: "fab fa-microsoft"
         link: "/docs/devops-stack/__VERSION__/howtos/quickstart_aks.html"
-        #- label: "SKS Quickstart"
-        #  icon: "fas fa-mountain"
-        #  link: "/docs/devops-stack/__VERSION__/howtos/quickstart_sks.html"
+      - label: "SKS Quickstart"
+        icon: "fas fa-mountain"
+        link: "/docs/devops-stack/__VERSION__/howtos/quickstart_sks.html"
       - label: "OpenShift Quickstart"
         icon: "fab fa-redhat"
         link: "/docs/devops-stack/__VERSION__/howtos/quickstart_ocp_ipi_aws.html"
@@ -95,7 +95,7 @@ services:
       - "images/banner/aws-eks.png"
       - "images/banner/azure-aks.png"
       - "images/banner/rancher-k3s.png"
-      #- "images/banner/exoscale.png"
+      - "images/banner/exoscale.png"
       content: "Whether you want to deploy AKS on Azure, EKS on Amazon, or K3S for a local playground, the DevOps Stack has you covered with ready-to-go Terraform modules."
       button:
         enable: true
