@@ -1,0 +1,20 @@
+---
+argo-cd:
+  server:
+    extraArgs:
+      - "--insecure"
+
+cert-manager:
+  tlsCrt: "${root_cert}"
+  tlsKey: "${root_key}"
+
+traefik:
+  deployment:
+    replicas: 1
+  ports:
+    web:
+      hostPort: 80
+    websecure:
+      hostPort: 443
+  service:
+    type: "NodePort"
