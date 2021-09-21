@@ -51,7 +51,7 @@ output "alertmanager_url" {
 }
 
 output "keycloak_url" {
-  value = format("https://keycloak.apps.%s.%s/auth/realms/kubernetes/account", var.cluster_name, module.cluster.base_domain)
+  value = format("https://keycloak.apps.%s.%s/auth/realms/devops-stack/account", var.cluster_name, module.cluster.base_domain)
 }
 
 output "keycloak_admin_password" {
