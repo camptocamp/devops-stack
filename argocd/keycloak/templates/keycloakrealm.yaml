@@ -4,15 +4,15 @@ kind: KeycloakRealm
 metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
-  name: kubernetes
+  name: devops-stack
   labels:
     app: sso
 spec:
   realm:
-    id: kubernetes
-    realm: kubernetes
+    id: devops-stack
+    realm: devops-stack
     enabled: true
-    displayName: Kubernetes Realm
+    displayName: devops-stack Realm
   instanceSelector:
     matchLabels:
       app: sso

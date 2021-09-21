@@ -1,4 +1,4 @@
 == Access the Keycloak dashboard
 
-The keycloak dashboard uses the `kubernetes` realm. You can log in to it using
-the `/auth/realms/kubernetes/account/` path with the Keycloak ingress.
+The keycloak dashboard uses the `devops-stack` realm. You can log in to it using
+the `/auth/realms/devops-stack/account/` path with the Keycloak ingress.

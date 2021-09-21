@@ -9,7 +9,7 @@ description: |
   It handles:
   
   * installation and configuration of Keycloak
-  * creating `kubernetes` realm and `admin` user account under a `kubernetes` realm
+  * creating `devops-stack` realm and `jdoe` user account under a `devops-stack` realm
   * adds the following DevOps stack apps as clients to OAuth2/OIDC authentication server:
     * argocd        
     * grafana
