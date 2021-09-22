@@ -1,3 +1,7 @@
+output "base_domain" {
+  value = local.base_domain
+}
+
 output "node_resource_group" {
   value = module.cluster.node_resource_group
 }
