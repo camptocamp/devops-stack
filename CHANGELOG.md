@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.48.0](https://www.github.com/camptocamp/devops-stack/compare/v0.47.0...v0.48.0) (2021-09-22)
+
+
+### Features
+
+* **aks:** add kubelet identity to outputs ([f883650](https://www.github.com/camptocamp/devops-stack/commit/f883650310fbd6e6828af4531d9ddf1855599653))
+* **aks:** extend accepted params for node pools ([#780](https://www.github.com/camptocamp/devops-stack/issues/780)) ([831557f](https://www.github.com/camptocamp/devops-stack/commit/831557fe323b2bb90ae70685c6b4c0cd0fe9de6c))
+* **docs:** add SKS quickstart ([#784](https://www.github.com/camptocamp/devops-stack/issues/784)) ([e26a5f1](https://www.github.com/camptocamp/devops-stack/commit/e26a5f18fab283b35548629eac2d9b3b2b9e2275))
+
+
+### Bug Fixes
+
+* **aks:** use local.base_domain instead of var.base_domain ([c417678](https://www.github.com/camptocamp/devops-stack/commit/c417678e34b31011def356998dba864668a5cf59))
+* **doc:** homogenize name 'DevOps Stack' ([95c9e82](https://www.github.com/camptocamp/devops-stack/commit/95c9e82449bba7f758dec0ebb9be46d8d481fa3b))
+
 ## [0.47.0](https://www.github.com/camptocamp/devops-stack/compare/v0.46.0...v0.47.0) (2021-09-15)
 
 
