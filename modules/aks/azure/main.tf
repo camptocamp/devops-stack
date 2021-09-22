@@ -1,5 +1,5 @@
 locals {
-  base_domain                       = coalesce(var.base_domain, format("%s.nip.io", replace(data.dns_a_record_set.lb.addrs[0], ".", "-")))
+  base_domain                       = coalesce(var.base_domain, format("%s.nip.io", replace(data.azurerm_public_ip.kubernetes.ip_address, ".", "-")))
   kubernetes_host                   = data.azurerm_kubernetes_cluster.cluster.kube_admin_config.0.host
   kubernetes_username               = data.azurerm_kubernetes_cluster.cluster.kube_admin_config.0.username
   kubernetes_password               = data.azurerm_kubernetes_cluster.cluster.kube_admin_config.0.password
@@ -240,8 +240,14 @@ resource "azurerm_role_assignment" "dns_zone_contributor" {
   principal_id         = azurerm_user_assigned_identity.cert_manager.principal_id
 }
 
-data "dns_a_record_set" "lb" {
-  host = "${local.azure_dns_label_name}.${data.azurerm_resource_group.this.location}.cloudapp.azure.com."
+data "azurerm_lb" "kubernetes" {
+  name                = "kubernetes"
+  resource_group_name = module.cluster.node_resource_group
+}
+
+data "azurerm_public_ip" "kubernetes" {
+  name                = reverse(split("/", data.azurerm_lb.kubernetes.frontend_ip_configuration.1.public_ip_address_id))[0]
+  resource_group_name = module.cluster.node_resource_group
 }
 
 data "azurerm_client_config" "current" {}
