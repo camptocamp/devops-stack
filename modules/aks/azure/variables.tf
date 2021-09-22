@@ -1,6 +1,7 @@
 variable "base_domain" {
   description = "The base domain used for Ingresses."
   type        = string
+  default     = null
 }
 
 variable "kubernetes_version" {
