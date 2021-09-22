@@ -114,7 +114,7 @@ module "argocd" {
   extra_app_projects      = var.extra_app_projects
   extra_application_sets  = var.extra_application_sets
   cluster_name            = var.cluster_name
-  base_domain             = var.base_domain
+  base_domain             = local.base_domain
   cluster_issuer          = "letsencrypt-prod"
   argocd_server_secretkey = var.argocd_server_secretkey
   wait_for_app_of_apps    = var.wait_for_app_of_apps
@@ -140,7 +140,7 @@ module "argocd" {
       {
         subscription_id                              = split("/", data.azurerm_subscription.primary.id)[2]
         resource_group_name                          = var.resource_group_name
-        base_domain                                  = var.base_domain
+        base_domain                                  = local.base_domain
         cert_manager_resource_id                     = azurerm_user_assigned_identity.cert_manager.id
         cert_manager_client_id                       = azurerm_user_assigned_identity.cert_manager.client_id
         azure_dns_label_name                         = local.azure_dns_label_name
@@ -241,10 +241,10 @@ resource "azuread_application" "oauth2_apps" {
 
   name = "oauth2-apps-${var.cluster_name}"
   reply_urls = [
-    format("https://argocd.apps.%s.%s/auth/callback", var.cluster_name, var.base_domain),
-    format("https://grafana.apps.%s.%s/login/generic_oauth", var.cluster_name, var.base_domain),
-    format("https://prometheus.apps.%s.%s/oauth2/callback", var.cluster_name, var.base_domain),
-    format("https://alertmanager.apps.%s.%s/oauth2/callback", var.cluster_name, var.base_domain),
+    format("https://argocd.apps.%s.%s/auth/callback", var.cluster_name, local.base_domain),
+    format("https://grafana.apps.%s.%s/login/generic_oauth", var.cluster_name, local.base_domain),
+    format("https://prometheus.apps.%s.%s/oauth2/callback", var.cluster_name, local.base_domain),
+    format("https://alertmanager.apps.%s.%s/oauth2/callback", var.cluster_name, local.base_domain),
   ]
 
   required_resource_access {
