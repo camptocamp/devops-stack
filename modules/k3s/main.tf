@@ -10,6 +10,7 @@ locals {
     access_key = var.enable_minio ? random_password.minio_accesskey.0.result : ""
     secret_key = var.enable_minio ? random_password.minio_secretkey.0.result : ""
   }
+  keycloak_user_map = { for username, infos in var.keycloak_users : username => merge(infos, tomap({ password = random_password.keycloak_passwords[username].result })) }
 }
 
 provider "helm" {
@@ -63,8 +64,8 @@ module "argocd" {
   }
 
   keycloak = {
-    enable        = var.oidc == null ? true : false
-    jdoe_password = random_password.jdoe_password.result
+    enable   = var.oidc == null ? true : false
+    user_map = local.keycloak_user_map
   }
 
   loki = {
@@ -127,9 +128,10 @@ resource "random_password" "clientsecret" {
   special = false
 }
 
-resource "random_password" "jdoe_password" {
-  length  = 16
-  special = false
+resource "random_password" "keycloak_passwords" {
+  for_each = var.keycloak_users
+  length   = 16
+  special  = false
 }
 
 resource "random_password" "minio_accesskey" {

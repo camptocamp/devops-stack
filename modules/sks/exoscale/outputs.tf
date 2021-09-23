@@ -2,9 +2,8 @@ output "base_domain" {
   value = local.base_domain
 }
 
-output "jdoe_password" {
-  description = "The password of a regular user jdoe."
-  value     = random_password.jdoe_password.result
+output "keycloak_users" {
+  value     = { for username, infos in local.keycloak_user_map : username => lookup(infos, "password") }
   sensitive = true
 }
 

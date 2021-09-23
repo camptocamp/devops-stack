@@ -26,3 +26,9 @@ variable "router_nodepool" {
   type        = string
   default     = null
 }
+
+variable "keycloak_users" {
+  description = "List of keycloak users"
+  type        = map(map(string))
+  default = {}
+}

@@ -34,3 +34,10 @@ variable "node_pools" {
   type        = map(map(any))
   default     = {}
 }
+
+variable "keycloak_users" {
+  description = "List of keycloak users"
+  type        = map(map(string))
+  default = {}
+}
+

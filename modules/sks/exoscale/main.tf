@@ -21,6 +21,7 @@ locals {
   router_nodepool = coalesce(var.router_nodepool, "router-${var.cluster_name}")
   nodepools       = coalesce(var.nodepools, local.default_nodepools)
   cluster_issuer  = (length(local.nodepools) > 1) ? "letsencrypt-prod" : "ca-issuer"
+  keycloak_user_map = { for username, infos in var.keycloak_users : username => merge(infos, tomap({password = random_password.keycloak_passwords[username].result})) }
 }
 
 provider "helm" {
@@ -152,7 +153,7 @@ module "argocd" {
 
   keycloak = {
     enable        = true
-    jdoe_password = random_password.jdoe_password.result
+    user_map = local.keycloak_user_map
   }
 
   loki = {
@@ -191,9 +192,10 @@ resource "random_password" "clientsecret" {
   special = false
 }
 
-resource "random_password" "jdoe_password" {
-  length  = 16
-  special = false
+resource "random_password" "keycloak_passwords" {
+  for_each = var.keycloak_users
+  length   = 16
+  special  = false
 }
 
 resource "tls_private_key" "root" {
