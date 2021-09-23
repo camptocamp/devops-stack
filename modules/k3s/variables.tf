@@ -9,3 +9,15 @@ variable "enable_minio" {
   type        = bool
   default     = true
 }
+
+variable "keycloak_users" {
+  description = "List of keycloak users"
+  type        = map(map(string))
+  default = {
+    jdoe = {
+      name       = "Doe"
+      first_name = "John"
+      email      = "jdoe@example.com"
+    }
+  }
+}

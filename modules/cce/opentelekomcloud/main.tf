@@ -6,6 +6,7 @@ locals {
   kubernetes_client_key             = base64decode(local.context.users.0.user.client-key-data)
   kubernetes_cluster_ca_certificate = base64decode(local.context.clusters.0.cluster.certificate-authority-data)
   kubeconfig                        = module.cluster.kubeconfig
+  keycloak_user_map                 = { for username, infos in var.keycloak_users : username => merge(infos, tomap({ password = random_password.keycloak_passwords[username].result })) }
 }
 
 provider "helm" {
@@ -62,8 +63,8 @@ module "argocd" {
   }
 
   keycloak = {
-    enable        = var.oidc == null ? true : false
-    jdoe_password = random_password.jdoe_password.result
+    enable   = var.oidc == null ? true : false
+    user_map = local.keycloak_user_map
   }
 
   loki = {
@@ -99,9 +100,10 @@ resource "random_password" "clientsecret" {
   special = false
 }
 
-resource "random_password" "jdoe_password" {
-  length  = 16
-  special = false
+resource "random_password" "keycloak_passwords" {
+  for_each = var.keycloak_users
+  length   = 16
+  special  = false
 }
 
 resource "tls_private_key" "root" {

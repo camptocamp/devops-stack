@@ -203,8 +203,14 @@ keycloak:
         - "https://${prometheus.domain}/oauth2/callback"
         - "https://alertmanager.apps.${base_domain}/oauth2/callback"
         - "https://${alertmanager.domain}/oauth2/callback"
-  keycloakUser:
-    password: "${keycloak.jdoe_password}"
+  keycloakUsers:
+    %{ for username, infos in keycloak.user_map }
+    ${username}:
+      name: ${lookup(infos, "name")}
+      first_name: ${lookup(infos, "first_name")}
+      password: ${lookup(infos, "password")}
+      email: ${lookup(infos, "email")}
+    %{ endfor }
 %{ endif }
 
 %{ if kube_prometheus_stack.enable }

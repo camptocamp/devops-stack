@@ -24,6 +24,6 @@ output "console_url" {
 }
 
 output "kubeadmin_password" {
-  value = module.cluster.kubeadmin_password
+  value     = module.cluster.kubeadmin_password
   sensitive = true
 }
