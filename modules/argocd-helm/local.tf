@@ -56,6 +56,7 @@ locals {
   )
   traefik_defaults = {
     enable = true
+    node_pool = ""
   }
   traefik = merge(
     local.traefik_defaults,
@@ -102,7 +103,8 @@ locals {
     var.metrics_archives,
   )
   cert_manager_defaults = {
-    enable = true
+    enable    = true
+    node_pool = ""
   }
   cert_manager = merge(
     local.cert_manager_defaults,

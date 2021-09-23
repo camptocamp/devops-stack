@@ -74,4 +74,19 @@ variable "node_pools" {
   default     = {}
   description = "List of node pools with minimal configuration"
   type        = map(any)
+
+  /* Example for node pools :
+
+  node_pools = {
+    infra = {
+      vm_size    = "Standard_D4s_v3"
+      node_count = 2
+      argo_apps = ["cert-manager","traefik"]
+    }
+    dev = {
+      vm_size    = "Standard_D4s_v3"
+      node_count = 2
+    }
+  }
+  */
 }
