@@ -21,7 +21,7 @@ apps:
     enabled: true
   cert-manager:
     enabled: ${cert_manager.enable}
-    nodePool: ${cert_manager.nodePool}
+    nodePool: ${cert_manager.node_pool}
   csi-secrets-store-provider-azure:
     enabled: false
   efs-provisioner:
@@ -44,7 +44,7 @@ apps:
     enabled: false
   traefik:
     enabled: ${traefik.enable}
-    nodePool: ${traefik.nodePool}
+    nodePool: ${traefik.node_pool}
   vault:
     enabled: false
   thanos:
