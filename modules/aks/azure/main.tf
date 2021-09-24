@@ -135,11 +135,11 @@ module "argocd" {
 
   cert_manager = {
     # retrieve node pool name where component should be deployed
-    node_pool =  coalesce([ for k,v in var.node_pools : contains(v.argo_apps,"cert-manager") ? k : ""])
+    node_pool = coalesce([ for k,v in var.node_pools : contains(v.argo_apps,"cert-manager") ? k : ""]...)
   }
   traefik = {
     # retrieve node pool name where component should be deployed
-    node_pool =  coalesce([ for k,v in var.node_pools : contains(v.argo_apps,"traefik") ? k : ""])
+    node_pool = coalesce([ for k,v in var.node_pools : contains(v.argo_apps,"traefik") ? k : ""]...)
   }
 
   repositories = var.repositories
