@@ -1,5 +1,6 @@
 locals {
-  base_domain                       = "127-0-0-1.nip.io"
+  docker_gateway                    = compact(data.docker_network.kind.ipam_config[*].gateway)[0]
+  base_domain                       = coalesce(var.base_domain, format("%s.nip.io", replace(local.docker_gateway, ".", "-")))
   kubernetes_host                   = kind_cluster.cluster.endpoint
   kubernetes_client_certificate     = kind_cluster.cluster.client_certificate
   kubernetes_client_key             = kind_cluster.cluster.client_key
@@ -10,6 +11,11 @@ locals {
     access_key = var.enable_minio ? random_password.minio_accesskey.0.result : ""
     secret_key = var.enable_minio ? random_password.minio_secretkey.0.result : ""
   }
+}
+
+data "docker_network" "kind" {
+  name = "kind"
+  depends_on = [ kind_cluster.cluster ]
 }
 
 resource "kind_cluster" "cluster" {
