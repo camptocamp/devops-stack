@@ -16,35 +16,38 @@ The deployment of filebeat is part of the loki-stack chart and needs to be set i
  app_of_apps_values_overrides =  <<EOT
 ---
 loki-stack:
- filebeat:
-   enabled: true
-   filebeatConfig:
-     filebeat.yml: |
-       filebeat.autodiscover:
-         providers:
-           - type: kubernetes
-             templates:
-             - condition:
-                 equals:
-                   kubernetes.labels.filebeat/ingest: "true"
-               config:
-                 - type: container
-                   paths:
-                     - '/var/log/containers/*-$${data.kubernetes.container.id}.log'
+  filebeat:
+    enabled: true
+    filebeatConfig:
+      filebeat.yml: |
+        filebeat.autodiscover:
+          providers:
+            - type: kubernetes
+              hints.enabled: true
+              hints.default_config.enabled: false
   EOT
 }
 ----
 
 
-IMPORTANT: Only the pods with the label *filebeat/ingest* set to "true" will be ingested.
+IMPORTANT: Only the pods with the annotation *co.elastic.logs/enabled* set to "true" will be ingested.
 
-Then you need a valid configuration to send the logs to an output, see some examples below.
+[TIP]
+====
+You can also filter the lines with the *include_lines* annotation, for example :
+
+[source,yaml]
+podAnnotations:
+  co.elastic.logs/enabled: "true"
+  co.elastic.logs/include_lines: "[INFO].*"
+====
+
+
+Then you need a valid configuration for filebeat to send the logs to an output, see some examples below.
 
 == Configuration examples
 
-=== Kafka
-
-==== With user credentials :
+=== Kafka with credentials :
 
 [source,hcl]
 ----
@@ -58,14 +61,8 @@ loki-stack:
         filebeat.autodiscover:
           providers:
             - type: kubernetes
-              templates:
-              - condition:
-                  equals:
-                    kubernetes.labels.filebeat/ingest: "true"
-                config:
-                  - type: container
-                    paths:
-                      - '/var/log/containers/*-$${data.kubernetes.container.id}.log'
+              hints.enabled: true
+              hints.default_config.enabled: false
         output.file:
           enabled: false
         output.kafka:
@@ -76,12 +73,13 @@ loki-stack:
           username: "user"
           password: "secret"
           sasl.mechanism: "SCRAM-SHA-512"
+          ssl.enabled: true
   EOT
 }
 ----
 
 
-==== With TLS client certificates :
+=== Kafka with TLS client certificates :
 
 [source,hcl]
 ----
@@ -95,14 +93,8 @@ loki-stack:
         filebeat.autodiscover:
           providers:
             - type: kubernetes
-              templates:
-              - condition:
-                  equals:
-                    kubernetes.labels.filebeat/ingest: "true"
-                config:
-                  - type: container
-                    paths:
-                      - '/var/log/containers/*-$${data.kubernetes.container.id}.log'
+              hints.enabled: true
+              hints.default_config.enabled: false
         output.file:
           enabled: false
         output.kafka:
@@ -140,6 +132,21 @@ TIP: If you are bootstrapping a devops stack you can inject the certificates and
        -----BEGIN PRIVATE KEY-----
        MIIE..
        -----END PRIVATE KEY-----
+  EOT
+}
+----
+
+=== Deploy specific version :
+
+[source,hcl]
+----
+  app_of_apps_values_overrides =  <<EOT
+---
+loki-stack:
+  filebeat:
+    enabled: true
+    image: 'docker.elastic.co/beats/filebeat'
+    imageTag: '7.15.0'
   EOT
 }
 ----
