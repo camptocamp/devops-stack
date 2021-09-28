@@ -398,21 +398,15 @@
 <pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl"> app_of_apps_values_overrides =  &lt;&lt;EOT
 ---
 loki-stack:
- filebeat:
-   enabled: true
-   filebeatConfig:
-     filebeat.yml: |
-       filebeat.autodiscover:
-         providers:
-           - type: kubernetes
-             templates:
-             - condition:
-                 equals:
-                   kubernetes.labels.filebeat/ingest: "true"
-               config:
-                 - type: container
-                   paths:
-                     - '/var/log/containers/*-$${data.kubernetes.container.id}.log'
+  filebeat:
+    enabled: true
+    filebeatConfig:
+      filebeat.yml: |
+        filebeat.autodiscover:
+          providers:
+            - type: kubernetes
+              hints.enabled: true
+              hints.default_config.enabled: false
   EOT
 }</code></pre>
 </div>
@@ -424,13 +418,34 @@ loki-stack:
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Only the pods with the label <strong>filebeat/ingest</strong> set to "true" will be ingested.
+Only the pods with the annotation <strong>co.elastic.logs/enabled</strong> set to "true" will be ingested.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You can also filter the lines with the <strong>include_lines</strong> annotation, for example :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">podAnnotations:
+  co.elastic.logs/enabled: "true"
+  co.elastic.logs/include_lines: "[INFO].*"</code></pre>
+</div>
+</div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Then you need a valid configuration to send the logs to an output, see some examples below.</p>
+<p>Then you need a valid configuration for filebeat to send the logs to an output, see some examples below.</p>
 </div>
 </div>
 </div>
@@ -438,9 +453,7 @@ Only the pods with the label <strong>filebeat/ingest</strong> set to "true" will
 <h2 id="_configuration_examples"><a class="anchor" href="#_configuration_examples"></a>Configuration examples</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_kafka"><a class="anchor" href="#_kafka"></a>Kafka</h3>
-<div class="sect3">
-<h4 id="_with_user_credentials"><a class="anchor" href="#_with_user_credentials"></a>With user credentials :</h4>
+<h3 id="_kafka_with_credentials"><a class="anchor" href="#_kafka_with_credentials"></a>Kafka with credentials :</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl"> app_of_apps_values_overrides =  &lt;&lt;EOT
@@ -453,14 +466,8 @@ loki-stack:
         filebeat.autodiscover:
           providers:
             - type: kubernetes
-              templates:
-              - condition:
-                  equals:
-                    kubernetes.labels.filebeat/ingest: "true"
-                config:
-                  - type: container
-                    paths:
-                      - '/var/log/containers/*-$${data.kubernetes.container.id}.log'
+              hints.enabled: true
+              hints.default_config.enabled: false
         output.file:
           enabled: false
         output.kafka:
@@ -471,13 +478,14 @@ loki-stack:
           username: "user"
           password: "secret"
           sasl.mechanism: "SCRAM-SHA-512"
+          ssl.enabled: true
   EOT
 }</code></pre>
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_with_tls_client_certificates"><a class="anchor" href="#_with_tls_client_certificates"></a>With TLS client certificates :</h4>
+<div class="sect2">
+<h3 id="_kafka_with_tls_client_certificates"><a class="anchor" href="#_kafka_with_tls_client_certificates"></a>Kafka with TLS client certificates :</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">  app_of_apps_values_overrides =  &lt;&lt;EOT
@@ -490,14 +498,8 @@ loki-stack:
         filebeat.autodiscover:
           providers:
             - type: kubernetes
-              templates:
-              - condition:
-                  equals:
-                    kubernetes.labels.filebeat/ingest: "true"
-                config:
-                  - type: container
-                    paths:
-                      - '/var/log/containers/*-$${data.kubernetes.container.id}.log'
+              hints.enabled: true
+              hints.default_config.enabled: false
         output.file:
           enabled: false
         output.kafka:
@@ -547,6 +549,21 @@ If you are bootstrapping a devops stack you can inject the certificates and key 
   EOT
 }</code></pre>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_deploy_specific_version"><a class="anchor" href="#_deploy_specific_version"></a>Deploy specific version :</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">  app_of_apps_values_overrides =  &lt;&lt;EOT
+---
+loki-stack:
+  filebeat:
+    enabled: true
+    image: 'docker.elastic.co/beats/filebeat'
+    imageTag: '7.15.0'
+  EOT
+}</code></pre>
 </div>
 </div>
 </div>
