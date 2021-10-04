@@ -38,7 +38,7 @@ module "cluster" {
 }
 ```
 
-include::partial$pipeline_outputs.adoc[]
+include::partial$pipeline_outputs_k3s.adoc[]
 
 
 include::partial$tf_apply.adoc[]
@@ -47,7 +47,7 @@ include::partial$k3s_kubeconfig_keycloak.adoc[]
 
 include::partial$wait_for_keycloak.adoc[]
 
-include::partial$inspect_apps.adoc[]
+include::partial$inspect_apps_k3s.adoc[]
 
 include::partial$access_keycloak.adoc[]
 
