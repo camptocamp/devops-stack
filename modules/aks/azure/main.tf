@@ -100,7 +100,8 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
   os_disk_size_gb     = lookup(each.value, "os_disk_size_gb", null)
   os_type             = lookup(each.value, "os_type", "Linux")
   vnet_subnet_id      = lookup(each.value, "vnet_subnet_id", var.vnet_subnet_id)
-  node_labels         = lookup(each.value, "node_labels", null)
+  # Add label : devops-stack.io/nodepool=each.key
+  node_labels         = merge({"devops-stack.io/nodepool" = each.key}, lookup(each.value, "node_labels", null))
   mode                = lookup(each.value, "mode", null)
 }
 
