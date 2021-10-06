@@ -7,7 +7,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "-3"
     {{- if index $.Values "apps" "cert-manager" "nodePool" }}
-    scheduler.alpha.kubernetes.io/node-selector: devops-stack.io/nodepool={{ $.Values.apps.cert-manager.nodePool }}
+    scheduler.alpha.kubernetes.io/node-selector: "devops-stack.io/nodepool={{ $.Values.apps.cert-manager.nodePool }}"
     {{- end }}
 ---
 apiVersion: argoproj.io/v1alpha1
