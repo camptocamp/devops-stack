@@ -378,7 +378,7 @@
 <p>Access to a functional Docker Engine,</p>
 </li>
 <li>
-<p><span class="line-through">CGroupv2 disabled (K3s does not support it for now)</span></p>
+<p>CGroupv2 disabled (K3s does not support it for now)</p>
 </li>
 <li>
 <p>Knowledge of <a href="https://terraform.io">Terraform</a> basics</p>
@@ -456,28 +456,49 @@ module "cluster" {
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl"># terraform/outputs.tf
 
-output "argocd_server_admin_password" {
-  sensitive = true
-  value     = module.cluster.argocd_server_admin_password
-}
-
-output "argocd_auth_token" {
-  sensitive = true
-  value     = module.cluster.argocd_auth_token
-}
-
 output "kubeconfig" {
   sensitive = true
   value     = module.cluster.kubeconfig
 }
 
-output "argocd_server" {
-  value = module.cluster.argocd_server
+output "argocd_url" {
+  value = format("https://argocd.apps.%s.%s", var.cluster_name, module.cluster.base_domain)
+}
+
+output "keycloak_url" {
+  value = format("https://keycloak.apps.%s.%s", var.cluster_name, module.cluster.base_domain)
+}
+
+output "grafana_url" {
+  value = format("https://grafana.apps.%s.%s", var.cluster_name, module.cluster.base_domain)
+}
+
+output "prometheus_url" {
+  value = format("https://prometheus.apps.%s.%s", var.cluster_name, module.cluster.base_domain)
+}
+
+output "alertmanager_url" {
+  value = format("https://alertmanager.apps.%s.%s", var.cluster_name, module.cluster.base_domain)
+}
+
+output "argocd_server_admin_password" {
+  sensitive = true
+  value     = module.cluster.argocd_server_admin_password
+}
+
+output "keycloak_admin_password" {
+  sensitive = true
+  value     = module.cluster.keycloak_admin_password
 }
 
 output "grafana_admin_password" {
   sensitive = true
   value     = module.cluster.grafana_admin_password
+}
+
+output "keycloak_users" {
+  value     = module.cluster.keycloak_users
+  sensitive = true
 }</code></pre>
 </div>
 </div>
@@ -499,26 +520,83 @@ $ terraform apply</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_get_kubeconfig_and_admin_password"><a class="anchor" href="#_get_kubeconfig_and_admin_password"></a>Get kubeconfig and admin password</h2>
+<h2 id="_get_kubeconfig_and_keycloak_users_credentials"><a class="anchor" href="#_get_kubeconfig_and_keycloak_users_credentials"></a>Get kubeconfig and Keycloak users credentials</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Retrieve the Kubeconfig file:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ terraform output -json kubeconfig | jq -r .</code></pre>
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ terraform output -json kubeconfig | jq -r . &gt; kubeconfig.yaml
+$ export KUBECONFIG=kubeconfig.yaml</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Retrieve the Keycloak password for the <code>jdoe</code> user of the <code>devops-stack</code> realm:</p>
+<p>By default, two users are defined in Keycloak:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">user</th>
+<th class="tableblock halign-left valign-top">Keycloak role</th>
+<th class="tableblock halign-left valign-top">Keycloak realm</th>
+<th class="tableblock halign-left valign-top">terraform output</th>
+<th class="tableblock halign-left valign-top">comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>admin</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Administrator</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>all</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>keycloak_admin_password</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>This user has admin rights only in Keycloak. Use <code>keycloak_url</code> and select "Administration Console" to login.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>jdoe</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>applications</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>devops-stack</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>keycloak_users</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>This user has related applications rights within Kubernetes realm. Use <code>keycloak_url/auth/realms/devops-stack/account/</code> to login.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>To retrieve password:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ terraform output admin_password</code></pre>
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ terraform output keycloak_admin_password
+$ terraform output keycloak_users
+# a user map is displayed that includes jdoe password</code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p>You will use this user and password to log in to applications.</p>
 </div>
 </div>
 </div>
@@ -549,9 +627,63 @@ keycloak   1/1     8m58s</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Access the URLs in https, and use the OIDC/OAuth2 to log in, using the <code>admin</code>
-account with the password previously retrieved.</p>
+<p>Access the URLs in https or use the URL output from terraform (see table below).</p>
 </div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 15%;">
+<col style="width: 45%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Application</th>
+<th class="tableblock halign-left valign-top">URL</th>
+<th class="tableblock halign-left valign-top">user</th>
+<th class="tableblock halign-left valign-top">password</th>
+<th class="tableblock halign-left valign-top">comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Argo CD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>argocd_url</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">admin</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>argocd_server_admin_password</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Argo CD is a declarative, GitOps continuous delivery tool for Kubernetes. The argo CD web application allows you to visualise the application deployment, configurations, status to name a few.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Grafana</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>grafana_url</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">admin</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>grafana_admin_password</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Grafana is a visualisation web application for metrics or log data. The devops-stack provides pre-defined dashboards ready to use. The devops-stack provides pre-defined dashboards ready to use.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Grafana</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>grafana_url</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jdoe</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>jdoe_password</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To visualise logs in Grafana (use "Explore" menu), users need "Editor" Grafana rights. By default in devops-stack, Grafana user rights is set to "Editor" such as John Doe (our user example).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Prometheus</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>prometheus_url</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">n/a</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">n/a</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Prometheus web app is mainly used to test queries, a one time metrics visualisation. This application is not used for dashboarding but Grafana instead.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alertmanager</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>alertmanager_url</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">n/a</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">n/a</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Alertmanager handles alerts sent by client applications such as the Prometheus server. It takes care of deduplicating, grouping, and routing them to the correct receiver integration (e.g. email, PagerDuty, etc). It also takes care of silencing and inhibition of alerts.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect1">
