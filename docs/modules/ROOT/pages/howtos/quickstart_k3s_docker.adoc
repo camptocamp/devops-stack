@@ -3,7 +3,7 @@
 == Prerequisites
 
 - Access to a functional Docker Engine,
-- [.line-through]#CGroupv2 disabled (K3s does not support it for now)#
+- CGroupv2 disabled (K3s does not support it for now)
 - Knowledge of https://terraform.io[Terraform] basics
 - Minimal Terraform version: 0.14
 - `jq` binary
@@ -51,8 +51,7 @@ module "cluster" {
 }
 ```
 
-include::partial$pipeline_outputs.adoc[]
-
+include::partial$pipeline_outputs_k3s.adoc[]
 
 include::partial$tf_apply.adoc[]
 
@@ -60,7 +59,7 @@ include::partial$k3s_kubeconfig_keycloak.adoc[]
 
 include::partial$wait_for_keycloak.adoc[]
 
-include::partial$inspect_apps.adoc[]
+include::partial$inspect_apps_k3s.adoc[]
 
 include::partial$access_keycloak.adoc[]
 

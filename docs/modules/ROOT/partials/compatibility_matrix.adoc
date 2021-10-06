@@ -1,6 +1,6 @@
 == Compatibility matrix
 
-The DevOps Stack is above all a Kubernetes cluster - one of the following distributions:
+The devops-stack is above all a Kubernetes cluster - one of the following distributions:
 
 * K3s
 * Azure AKS
@@ -9,7 +9,7 @@ The DevOps Stack is above all a Kubernetes cluster - one of the following distri
 
 And the following components deployed in the cluster:
 
-[cols="a,a,a,a,a",options="header]
+[cols="a,a,a,a,a",options="header"]
 |===
 | Component | K3s | Azure AKS | AWS EKS | AWS OpenShift (IPI)
 
@@ -90,4 +90,4 @@ image::logo/thanos.png[Thanos, 50,50, float="left"]
 | `no`
 | `no`
 | `no`
-
+|
