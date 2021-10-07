@@ -72,20 +72,24 @@ variable "network_policy" {
 
 variable "node_pools" {
   default     = {}
-  description = "List of node pools with minimal configuration"
+  description = "List of node pools, each node_pool will be labeled as devops-stack.io/nodepool=<node_pool_name>"
   type        = map(any)
 
   /* Example for node pools :
-
   node_pools = {
     infra = {
       vm_size    = "Standard_D4s_v3"
       node_count = 2
-      argo_apps = ["cert-manager","traefik"]
+      argo_apps  = ["cert-manager"]
+      node_labels = {
+        example_label_name = "toto"
+      }
     }
-    dev = {
+    int = {
       vm_size    = "Standard_D4s_v3"
       node_count = 2
+      argo_apps  = []
+      node_labels = {}
     }
   }
   */
