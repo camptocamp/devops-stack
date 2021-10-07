@@ -15,6 +15,7 @@ locals {
 
   argocd_defaults = {
     domain = "argocd.apps.${var.cluster_name}.${var.base_domain}"
+    node_pool = ""
   }
   argocd = merge(
     local.argocd_defaults,
@@ -66,6 +67,7 @@ locals {
   loki_defaults = {
     bucket_name = ""
     enable      = true
+    node_pool = ""
   }
   loki = merge(
     local.loki_defaults,
@@ -112,6 +114,7 @@ locals {
   )
   kube_prometheus_stack_defaults = {
     enable = true
+    node_pool = ""
   }
   kube_prometheus_stack = merge(
     local.kube_prometheus_stack_defaults,

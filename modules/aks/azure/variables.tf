@@ -80,7 +80,7 @@ variable "node_pools" {
     infra = {
       vm_size    = "Standard_D4s_v3"
       node_count = 2
-      argo_apps  = ["cert-manager"]
+      argo_apps  = ["cert-manager","kube-prometheus-stack"]
       node_labels = {
         example_label_name = "toto"
       }

@@ -5,7 +5,7 @@ kind: Namespace
 metadata:
   name: cert-manager
   annotations:
-    argocd.argoproj.io/sync-wave: "-3"
+    argocd.argoproj.io/sync-wave: "-99"
     {{- if index $.Values "apps" "cert-manager" "nodePool" }}
     scheduler.alpha.kubernetes.io/node-selector: "devops-stack.io/nodepool={{ index $.Values "apps" "cert-manager" "nodePool" }}"
     {{- end }}

@@ -1,4 +1,13 @@
 {{- if index $.Values "apps" "argocd" "enabled" }}
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-99"
+    {{- if index $.Values "apps" "argocd" "nodePool" }}
+    scheduler.alpha.kubernetes.io/node-selector: "devops-stack.io/nodepool={{ index $.Values "apps" "argocd" "nodePool" }}"
+    {{- end }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application

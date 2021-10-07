@@ -1,5 +1,15 @@
 {{- if index $.Values "apps" "loki-stack" "enabled" }}
 ---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: loki-stack
+  annotations:
+    argocd.argoproj.io/sync-wave: "-99"
+    {{- if index $.Values "apps" "loki-stack" "nodePool" }}
+    scheduler.alpha.kubernetes.io/node-selector: "devops-stack.io/nodepool={{ index $.Values "apps" "loki-stack" "nodePool" }}"
+    {{- end }}
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
