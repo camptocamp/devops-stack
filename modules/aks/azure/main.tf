@@ -153,18 +153,19 @@ module "argocd" {
     # retrieve node pool name where component should be deployed
     node_pool = try(coalesce([for k, v in var.node_pools : contains(v.argo_apps, "loki") ? k : ""]...), "")
   }
-  aad_pod_identity = {
-    # retrieve node pool name where component should be deployed
-    node_pool = try(coalesce([for k, v in var.node_pools : contains(v.argo_apps, "aad-pod-identity") ? k : ""]...), "")
-  }
-  csi_secrets_store_provider_azure = {
-    # retrieve node pool name where component should be deployed
-    node_pool = try(coalesce([for k, v in var.node_pools : contains(v.argo_apps, "csi-secrets-store-provider-azure") ? k : ""]...), "")
-  }
-  secrets_store_csi_driver = {
-    # retrieve node pool name where component should be deployed
-    node_pool = try(coalesce([for k, v in var.node_pools : contains(v.argo_apps, "secrets-store-csi-driver") ? k : ""]...), "")
-  }
+  # TODO how do we  
+  # aad_pod_identity = {
+  #   # retrieve node pool name where component should be deployed
+  #   node_pool = try(coalesce([for k, v in var.node_pools : contains(v.argo_apps, "aad-pod-identity") ? k : ""]...), "")
+  # }
+  # csi_secrets_store_provider_azure = {
+  #   # retrieve node pool name where component should be deployed
+  #   node_pool = try(coalesce([for k, v in var.node_pools : contains(v.argo_apps, "csi-secrets-store-provider-azure") ? k : ""]...), "")
+  # }
+  # secrets_store_csi_driver = {
+  #   # retrieve node pool name where component should be deployed
+  #   node_pool = try(coalesce([for k, v in var.node_pools : contains(v.argo_apps, "secrets-store-csi-driver") ? k : ""]...), "")
+  # }
 
   repositories = var.repositories
 
