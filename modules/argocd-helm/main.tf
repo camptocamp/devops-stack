@@ -21,33 +21,36 @@ locals {
   argocd_server_secretkey = var.argocd_server_secretkey == null ? random_password.argocd_server_secretkey.result : var.argocd_server_secretkey
 
   app_of_apps_tmpl_defaults = {
-    repo_url                        = var.repo_url
-    target_revision                 = var.target_revision
-    argocd_accounts_pipeline_tokens = local.argocd_accounts_pipeline_tokens
-    argocd_server_secretkey         = local.argocd_server_secretkey
-    argocd_server_admin_password    = htpasswd_password.argocd_server_admin.bcrypt
-    extra_apps                      = var.extra_apps
-    extra_app_projects              = var.extra_app_projects
-    extra_application_sets          = var.extra_application_sets
-    cluster_name                    = var.cluster_name
-    base_domain                     = var.base_domain
-    cluster_issuer                  = var.cluster_issuer
-    oidc                            = local.oidc
-    cookie_secret                   = random_password.oauth2_cookie_secret.result
-    minio                           = local.minio
-    loki                            = local.loki
-    traefik                         = local.traefik
-    argocd                          = local.argocd
-    keycloak                        = local.keycloak
-    grafana                         = local.grafana
-    prometheus                      = local.prometheus
-    alertmanager                    = local.alertmanager
-    metrics_server                  = local.metrics_server
-    metrics_archives                = local.metrics_archives
-    cert_manager                    = local.cert_manager
-    kube_prometheus_stack           = local.kube_prometheus_stack
-    cluster_autoscaler              = local.cluster_autoscaler
-    repositories                    = var.repositories
+    repo_url                         = var.repo_url
+    target_revision                  = var.target_revision
+    argocd_accounts_pipeline_tokens  = local.argocd_accounts_pipeline_tokens
+    argocd_server_secretkey          = local.argocd_server_secretkey
+    argocd_server_admin_password     = htpasswd_password.argocd_server_admin.bcrypt
+    extra_apps                       = var.extra_apps
+    extra_app_projects               = var.extra_app_projects
+    extra_application_sets           = var.extra_application_sets
+    cluster_name                     = var.cluster_name
+    base_domain                      = var.base_domain
+    cluster_issuer                   = var.cluster_issuer
+    oidc                             = local.oidc
+    cookie_secret                    = random_password.oauth2_cookie_secret.result
+    minio                            = local.minio
+    loki                             = local.loki
+    traefik                          = local.traefik
+    argocd                           = local.argocd
+    keycloak                         = local.keycloak
+    grafana                          = local.grafana
+    prometheus                       = local.prometheus
+    alertmanager                     = local.alertmanager
+    metrics_server                   = local.metrics_server
+    metrics_archives                 = local.metrics_archives
+    cert_manager                     = local.cert_manager
+    kube_prometheus_stack            = local.kube_prometheus_stack
+    aad_pod_identity                 = local.aad_pod_identity
+    csi_secrets_store_provider_azure = local.csi_secrets_store_provider_azure
+    secrets_store_csi_driver         = local.secrets_store_csi_driver
+    cluster_autoscaler               = local.cluster_autoscaler
+    repositories                     = var.repositories
   }
 
   app_of_apps_values_bootstrap = concat([
@@ -93,6 +96,7 @@ resource "helm_release" "argocd" {
   create_namespace  = true
   timeout           = 10800
   values            = local.argocd_values
+
 }
 
 resource "jwt_hashed_token" "argocd" {

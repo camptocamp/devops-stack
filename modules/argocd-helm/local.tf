@@ -14,7 +14,7 @@ locals {
   )
 
   argocd_defaults = {
-    domain = "argocd.apps.${var.cluster_name}.${var.base_domain}"
+    domain    = "argocd.apps.${var.cluster_name}.${var.base_domain}"
     node_pool = ""
   }
   argocd = merge(
@@ -56,7 +56,7 @@ locals {
     var.alertmanager,
   )
   traefik_defaults = {
-    enable = true
+    enable    = true
     node_pool = ""
   }
   traefik = merge(
@@ -67,7 +67,7 @@ locals {
   loki_defaults = {
     bucket_name = ""
     enable      = true
-    node_pool = ""
+    node_pool   = ""
   }
   loki = merge(
     local.loki_defaults,
@@ -113,14 +113,34 @@ locals {
     var.cert_manager,
   )
   kube_prometheus_stack_defaults = {
-    enable = true
+    enable    = true
     node_pool = ""
   }
   kube_prometheus_stack = merge(
     local.kube_prometheus_stack_defaults,
     var.kube_prometheus_stack,
   )
-
+  csi_secrets_store_provider_azure_defaults = {
+    node_pool = ""
+  }
+  csi_secrets_store_provider_azure = merge(
+    local.csi_secrets_store_provider_azure_defaults,
+    var.csi_secrets_store_provider_azure,
+  )
+  secrets_store_csi_driver_defaults = {
+    node_pool = ""
+  }
+  secrets_store_csi_driver = merge(
+    local.secrets_store_csi_driver_defaults,
+    var.secrets_store_csi_driver,
+  )
+  aad_pod_identity_defaults = {
+    node_pool = ""
+  }
+  aad_pod_identity = merge(
+    local.aad_pod_identity_defaults,
+    var.aad_pod_identity,
+  )
   cluster_autoscaler_defaults = {
     enable = false
   }

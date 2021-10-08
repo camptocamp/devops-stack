@@ -136,6 +136,25 @@ variable "kube_prometheus_stack" {
   default     = {}
 }
 
+variable "aad_pod_identity" {
+  description = "aad-pod-identity settings"
+  type        = any
+  default     = {}
+}
+
+variable "csi_secrets_store_provider_azure" {
+  description = "csi-secrets-store-provider-azure settings"
+  type        = any
+  default     = {}
+}
+
+variable "secrets_store_csi_driver" {
+  description = "secrets-store-csi-driver settings"
+  type        = any
+  default     = {}
+}
+
+
 variable "cluster_autoscaler" {
   description = "Cluster Autoscaler settings"
   type        = any
