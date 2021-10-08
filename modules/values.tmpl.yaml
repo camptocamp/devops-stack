@@ -15,7 +15,6 @@ spec:
 apps:
   aad-pod-identity:
     enabled: false
-    #nodePool: ${aad_pod_identity.node_pool}
   apps:
     enabled: true
   argocd:
@@ -26,7 +25,6 @@ apps:
     nodePool: ${cert_manager.node_pool}
   csi-secrets-store-provider-azure:
     enabled: false
-    #nodePool: ${csi_secrets_store_provider_azure.node_pool}
   efs-provisioner:
     enabled: false
   keycloak:
@@ -38,7 +36,7 @@ apps:
     enabled: false
   loki-stack:
     enabled: ${loki.enable}
-    nodePool: ${loki_stack.node_pool}
+    nodePool: ${loki.node_pool}
   metrics-server:
     enabled: ${metrics_server.enable}
   minio:
@@ -47,7 +45,6 @@ apps:
     enabled: true
   secrets-store-csi-driver:
     enabled: false
-    #nodePool: ${secrets_store_csi_driver.node_pool}
   traefik:
     enabled: ${traefik.enable}
     nodePool: ${traefik.node_pool}
