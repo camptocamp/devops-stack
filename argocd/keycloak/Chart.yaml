@@ -15,3 +15,5 @@ description: |
     * grafana
     * prometheus
     * alertmanager
+
+  NOTE: This chart must be instantiated in a sync-wave after the keycloak-operator chart.

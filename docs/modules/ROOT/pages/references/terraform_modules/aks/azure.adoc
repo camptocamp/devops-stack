@@ -261,10 +261,12 @@ object({
 |[[output_argocd_server]] <<output_argocd_server,argocd_server>> |The URL of the ArgoCD server.
 |[[output_argocd_server_admin_password]] <<output_argocd_server_admin_password,argocd_server_admin_password>> |The ArgoCD admin password.
 |[[output_azureidentities]] <<output_azureidentities,azureidentities>> |Azure User Assigned Identities created
+|[[output_base_domain]] <<output_base_domain,base_domain>> |n/a
 |[[output_cluster_id]] <<output_cluster_id,cluster_id>> |n/a
 |[[output_grafana_admin_password]] <<output_grafana_admin_password,grafana_admin_password>> |The admin password for Grafana.
 |[[output_kube_admin_config]] <<output_kube_admin_config,kube_admin_config>> |n/a
 |[[output_kubeconfig]] <<output_kubeconfig,kubeconfig>> |The content of the KUBECONFIG file.
+|[[output_kubelet_identity]] <<output_kubelet_identity,kubelet_identity>> |n/a
 |[[output_node_resource_group]] <<output_node_resource_group,node_resource_group>> |n/a
 |[[output_prometheus_user_assigned_identity_principal_id]] <<output_prometheus_user_assigned_identity_principal_id,prometheus_user_assigned_identity_principal_id>> |n/a
 |[[output_repo_url]] <<output_repo_url,repo_url>> |n/a
