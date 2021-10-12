@@ -7,6 +7,9 @@ sources
 * ensuring certificates are valid and up-to-date
 * renewal of certificates at an appropriate time before expiry
 
+NOTE: This chart must be instantiated in a sync-wave after the
+kube-prometheus-stack chart because it uses Prometheus Custom Resources.
+
 == Requirements
 
 [cols=",,",options="header",]

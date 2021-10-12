@@ -44,9 +44,9 @@ The `k3s/libvirt` Terraform module provides a way to install and configure:
 [cols="a,a",options="header,autowidth"]
 |===
 |Name |Type
-|https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password[random_password.admin_password] |resource
 |https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password[random_password.clientsecret] |resource
 |https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password[random_password.grafana_admin_password] |resource
+|https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password[random_password.keycloak_passwords] |resource
 |https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password[random_password.minio_accesskey] |resource
 |https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password[random_password.minio_secretkey] |resource
 |https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key[tls_private_key.root] |resource
@@ -125,6 +125,24 @@ The `k3s/libvirt` Terraform module provides a way to install and configure:
 |`"v0.20.7-k3s1r0"`
 |no
 
+|[[input_keycloak_users]] <<input_keycloak_users,keycloak_users>>
+|List of keycloak users
+|`map(map(string))`
+|
+
+[source]
+----
+{
+  "jdoe": {
+    "email": "jdoe@example.com",
+    "first_name": "John",
+    "name": "Doe"
+  }
+}
+----
+
+|no
+
 |[[input_node_count]] <<input_node_count,node_count>>
 |Number of nodes to deploy
 |`number`
@@ -188,7 +206,6 @@ object({
 [cols="a,a",options="header,autowidth"]
 |===
 |Name |Description
-|[[output_admin_password]] <<output_admin_password,admin_password>> |n/a
 |[[output_app_of_apps_values]] <<output_app_of_apps_values,app_of_apps_values>> |App of Apps values
 |[[output_argocd_auth_token]] <<output_argocd_auth_token,argocd_auth_token>> |The token to set in ARGOCD_AUTH_TOKEN environment variable.
 |[[output_argocd_server]] <<output_argocd_server,argocd_server>> |The URL of the ArgoCD server.
@@ -196,6 +213,7 @@ object({
 |[[output_base_domain]] <<output_base_domain,base_domain>> |n/a
 |[[output_grafana_admin_password]] <<output_grafana_admin_password,grafana_admin_password>> |The admin password for Grafana.
 |[[output_keycloak_admin_password]] <<output_keycloak_admin_password,keycloak_admin_password>> |The password of Keycloak's admin user.
+|[[output_keycloak_users]] <<output_keycloak_users,keycloak_users>> |n/a
 |[[output_kubeconfig]] <<output_kubeconfig,kubeconfig>> |The content of the KUBECONFIG file.
 |[[output_repo_url]] <<output_repo_url,repo_url>> |n/a
 |[[output_target_revision]] <<output_target_revision,target_revision>> |n/a

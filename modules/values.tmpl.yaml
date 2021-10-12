@@ -219,6 +219,15 @@ kube-prometheus-stack:
     enabled: ${ alertmanager.enable }
 %{ if alertmanager.enable }
     alertmanagerSpec:
+      initContainers:
+        - name: wait-for-oidc
+          image: curlimages/curl:7.79.1
+          command:
+            - "/bin/sh"
+            - "-c"
+          args:
+            # Wait for URL to be available (not 000) and ready (not 404)
+            - until curl -skL -w "%%{http_code}\\n" "${replace(oidc.api_url, "\"", "\\\"")}" -o /dev/null | grep -vq "^\(000\|404\)$"; do echo "waiting for oidc at ${replace(oidc.api_url, "\"", "\\\"")}"; sleep 2; done
       containers:
         - args:
             - "--http-address=0.0.0.0:9095"
@@ -345,6 +354,15 @@ kube-prometheus-stack:
           name: thanos-objectstorage
 %{ endif }
       portName: proxy
+      initContainers:
+        - name: wait-for-oidc
+          image: curlimages/curl:7.79.1
+          command:
+            - "/bin/sh"
+            - "-c"
+          args:
+            # Wait for URL to be available (not 000) and ready (not 404)
+            - until curl -skL -w "%%{http_code}\\n" "${replace(oidc.api_url, "\"", "\\\"")}" -o /dev/null | grep -vq "^\(000\|404\)$"; do echo "waiting for oidc at ${replace(oidc.api_url, "\"", "\\\"")}"; sleep 2; done
       containers:
         - args:
             - "--http-address=0.0.0.0:9091"

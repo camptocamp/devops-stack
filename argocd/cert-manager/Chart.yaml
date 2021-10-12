@@ -9,6 +9,8 @@ description: |
   * management and issuance of TLS certificates from various issuing sources
   * ensuring certificates are valid and up-to-date
   * renewal of certificates at an appropriate time before expiry
+
+  NOTE: This chart must be instantiated in a sync-wave after the kube-prometheus-stack chart because it uses Prometheus Custom Resources.
 dependencies:
   - name: "cert-manager"
     version: "1.4.3"
