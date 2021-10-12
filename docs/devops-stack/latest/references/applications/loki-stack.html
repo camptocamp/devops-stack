@@ -425,7 +425,7 @@ Grafana Labs, and inspired by Prometheus.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">loki-stack</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>{"loki":{"serviceMonitor":{"enabled":true},"serviceName":"loki-stack.loki-stack"},"promtail":{"serviceMonitor":{"enabled":true}}}</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>{"filebeat":{"extraContainers":"- name: filebeat-prometheus-exporter\n  image: \"trustpilot/beat-exporter:0.4.0\"\n  ports:\n    - containerPort: 9479\n      protocol: TCP\n      name: metrics\n"},"loki":{"serviceMonitor":{"enabled":true},"serviceName":"loki-stack.loki-stack"},"promtail":{"serviceMonitor":{"enabled":true}}}</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Values passed to the loki-stack chart</p></td>
 </tr>
 </tbody>
