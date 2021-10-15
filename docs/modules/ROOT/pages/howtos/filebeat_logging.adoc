@@ -100,9 +100,9 @@ loki-stack:
         output.kafka:
           topic: "devopstack"
           hosts:
-            - "kafka-broker-0.elk.camptocamp.com:9092"
-            - "kafka-broker-1.elk.camptocamp.com:9092"
-            - "kafka-broker-2.elk.camptocamp.com:9092"
+            - "kafka-broker-0.logs.test.com:1234"
+            - "kafka-broker-1.logs.test.com:1234"
+            - "kafka-broker-2.logs.test.com:1234"
           ssl.enabled: true
           ssl.certificate_authorities: "/usr/share/filebeat/certs/ca.crt"
           ssl.certificate: "/usr/share/filebeat/certs/tls.crt"
