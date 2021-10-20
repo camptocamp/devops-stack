@@ -14,5 +14,5 @@ output "keycloak_admin_password" {
 }
 
 output "nlb_ip_address" {
-  value = exoscale_nlb.this.ip_address
+  value = var.create_nlb ? exoscale_nlb.this[0].ip_address : null
 }

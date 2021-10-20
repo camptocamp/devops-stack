@@ -1,5 +1,5 @@
 locals {
-  base_domain = coalesce(var.base_domain, format("%s.nip.io", replace(exoscale_nlb.this.ip_address, ".", "-")))
+  base_domain = coalesce(var.base_domain, var.create_nlb ? format("%s.nip.io", replace(exoscale_nlb.this[0].ip_address, ".", "-")) : "example.com")
 
   kubeconfig = module.cluster.kubeconfig
   context    = yamldecode(module.cluster.kubeconfig)
@@ -52,14 +52,18 @@ module "cluster" {
 }
 
 resource "exoscale_nlb" "this" {
+  count = var.create_nlb ? 1 : 0
+
   zone = var.zone
   name = format("ingresses-%s", var.cluster_name)
 }
 
 resource "exoscale_nlb_service" "http" {
-  zone             = exoscale_nlb.this.zone
+  count = var.create_nlb ? 1 : 0
+
+  zone             = exoscale_nlb.this[0].zone
   name             = "ingress-contoller-http"
-  nlb_id           = exoscale_nlb.this.id
+  nlb_id           = exoscale_nlb.this[0].id
   instance_pool_id = module.cluster.nodepools[local.router_nodepool].instance_pool_id
   protocol         = "tcp"
   port             = 80
@@ -76,9 +80,11 @@ resource "exoscale_nlb_service" "http" {
 }
 
 resource "exoscale_nlb_service" "https" {
-  zone             = exoscale_nlb.this.zone
+  count = var.create_nlb ? 1 : 0
+
+  zone             = exoscale_nlb.this[0].zone
   name             = "ingress-contoller-https"
-  nlb_id           = exoscale_nlb.this.id
+  nlb_id           = exoscale_nlb.this[0].id
   instance_pool_id = module.cluster.nodepools[local.router_nodepool].instance_pool_id
   protocol         = "tcp"
   port             = 443
@@ -95,6 +101,8 @@ resource "exoscale_nlb_service" "https" {
 }
 
 resource "exoscale_security_group_rule" "http" {
+  count = var.create_nlb ? 1 : 0
+
   security_group_id = module.cluster.this_security_group_id
   type              = "INGRESS"
   protocol          = "TCP"
@@ -104,6 +112,8 @@ resource "exoscale_security_group_rule" "http" {
 }
 
 resource "exoscale_security_group_rule" "https" {
+  count = var.create_nlb ? 1 : 0
+
   security_group_id = module.cluster.this_security_group_id
   type              = "INGRESS"
   protocol          = "TCP"
@@ -167,7 +177,7 @@ module "argocd" {
       {
         root_cert      = base64encode(tls_self_signed_cert.root.cert_pem)
         root_key       = base64encode(tls_private_key.root.private_key_pem)
-        router_pool_id = module.cluster.nodepools[local.router_nodepool].id
+        router_pool_id = var.create_nlb ? module.cluster.nodepools[local.router_nodepool].id : ""
       }
     ),
     var.app_of_apps_values_overrides,

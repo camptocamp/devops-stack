@@ -32,3 +32,9 @@ variable "keycloak_users" {
   type        = map(map(string))
   default = {}
 }
+
+variable "create_nlb" {
+  description = "Whether to create an NLB"
+  type        = bool
+  default     = true
+}
