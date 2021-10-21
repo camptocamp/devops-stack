@@ -154,6 +154,7 @@ module "argocd" {
         loki_account_name                            = azurerm_storage_account.this.name
         loki_account_key                             = azurerm_storage_account.this.primary_access_key
         azureidentities                              = local.azureidentities
+        velero                                       = var.velero
       }
     ),
     var.app_of_apps_values_overrides,
