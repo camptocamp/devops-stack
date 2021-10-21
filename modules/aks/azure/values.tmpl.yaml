@@ -229,3 +229,19 @@ traefik:
   service:
     annotations:
       service.beta.kubernetes.io/azure-dns-label-name: ${azure_dns_label_name}
+velero:
+  initContainers:
+    - name: velero-plugin-for-microsoft-azure
+      image: velero/velero-plugin-for-microsoft-azure:v1.3.0
+      imagePullPolicy: IfNotPresent
+      volumeMounts:
+        - mountPath: /target
+          name: plugins
+  configuration:
+    provider: azure
+    bucket: "${velero["container"]}"
+    config:
+      subscriptionId: ${subscription_id}
+      storageAccount: "${velero["storage"]}"
+      resourceGroup: "${velero["resource_group"]}"
+

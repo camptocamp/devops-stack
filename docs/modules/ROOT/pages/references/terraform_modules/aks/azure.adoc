@@ -243,6 +243,22 @@ object({
 |`"master"`
 |no
 
+|[[input_velero]] <<input_velero,velero>>
+|Storage account used to configure backup and clusters synchronisation. More info here : http://
+|
+
+[source]
+----
+object({
+    storage        = string
+    container      = string
+    resource_group = string
+  })
+----
+
+|n/a
+|yes
+
 |[[input_vnet_subnet_id]] <<input_vnet_subnet_id,vnet_subnet_id>>
 |The ID of a Subnet where the Kubernetes Node Pool should exist. Changing this forces a new resource to be created.
 |`string`

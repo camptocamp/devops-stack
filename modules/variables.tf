@@ -68,7 +68,7 @@ variable "grafana_admin_password" {
 variable "enable_velero" {
   description = "Flag to enable velero"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "repositories" {

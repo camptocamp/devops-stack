@@ -10,7 +10,29 @@ In order to achieve this, clusters need to be totally stateless and
 achieve data persistence outside of the cluster
 (using external RDBMS, NoSQL databases, or object storage).
 
-We thus recommend to avoid the use of storageClasses,
-which allow self provisioning of Persistent Volumes (PVs), as it breaks
-the blue/green infrastructure paradigm that the DevOps Stack supports.
+= synchronizing
 
+In order to keep the cluster stateless, we will introduce a tool to synchronize
+both blue and green.
+
+This tool is velero. Started as a backup tool, cluster sync as been added as
+a use case.
+
+== Velero
+
+To begin using velero, you will need to settup a blob storage/S3 storage in your
+terraform code.
+
+You can then pass this structure to the devops stack to have it setted up:
+For k3s , configuration is automatic and the backups are stored in the deployed
+minio.
+
+For Azure :
+```
+  velero = {
+    storage        = [storage_name]
+    container      = [containeri(Blob storage) name]
+    resource_group = [resource group]
+  }
+
+```
