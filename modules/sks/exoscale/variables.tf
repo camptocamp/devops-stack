@@ -27,6 +27,12 @@ variable "router_nodepool" {
   default     = null
 }
 
+variable "node_ports_world_accessible" {
+  description = "Whether NodePort services should be accessible without IP restriction."
+  type        = bool
+  default     = true
+}
+
 variable "keycloak_users" {
   description = "List of keycloak users"
   type        = map(map(string))
