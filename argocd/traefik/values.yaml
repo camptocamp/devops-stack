@@ -9,3 +9,6 @@ traefik:
   logs:
     access:
       enabled: true
+  tlsOptions:
+    default:
+      minVersion: VersionTLS12
