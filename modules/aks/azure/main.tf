@@ -236,27 +236,20 @@ resource "azurerm_role_assignment" "dns_zone_contributor" {
 
 data "azurerm_client_config" "current" {}
 
+
 resource "azuread_application" "oauth2_apps" {
   count = var.oidc == null ? 1 : 0
 
-  name = "oauth2-apps-${var.cluster_name}"
-  reply_urls = [
-    format("https://argocd.apps.%s.%s/auth/callback", var.cluster_name, local.base_domain),
-    format("https://grafana.apps.%s.%s/login/generic_oauth", var.cluster_name, local.base_domain),
-    format("https://prometheus.apps.%s.%s/oauth2/callback", var.cluster_name, local.base_domain),
-    format("https://alertmanager.apps.%s.%s/oauth2/callback", var.cluster_name, local.base_domain),
-  ]
+  display_name     = "oauth2-apps-${var.cluster_name}"
 
   required_resource_access {
-    resource_app_id = "00000003-0000-0000-c000-000000000000"
+    resource_app_id = random_uuid.resource_app_id.0.result
 
     resource_access {
       id   = "e1fe6dd8-ba31-4d61-89e7-88639da4683d"
       type = "Scope"
     }
   }
-
-  group_membership_claims = "ApplicationGroup"
 
   optional_claims {
     access_token {
@@ -270,33 +263,45 @@ resource "azuread_application" "oauth2_apps" {
       name                  = "groups"
     }
   }
+
+  web {
+    redirect_uris = [
+      format("https://argocd.apps.%s.%s/auth/callback", var.cluster_name, local.base_domain),
+      format("https://grafana.apps.%s.%s/login/generic_oauth", var.cluster_name, local.base_domain),
+      format("https://prometheus.apps.%s.%s/oauth2/callback", var.cluster_name, local.base_domain),
+      format("https://alertmanager.apps.%s.%s/oauth2/callback", var.cluster_name, local.base_domain),
+    ]
+
+    implicit_grant {
+      access_token_issuance_enabled = true
+      id_token_issuance_enabled     = true
+    }
+  }
+
+  app_role {
+    allowed_member_types = ["User"]
+    description          = "ArgoCD Admins"
+    display_name         = "ArgoCD Administrator"
+    enabled              = true
+    id                   = random_uuid.argocd_app_role.0.result
+    value                = "argocd-admin"
+  }
+
+  group_membership_claims = ["ApplicationGroup"]
 }
 
-resource "azuread_application_app_role" "argocd_admin" {
+resource "random_uuid" "resource_app_id" {
   count = var.oidc == null ? 1 : 0
-
-  application_object_id = azuread_application.oauth2_apps.0.id
-  allowed_member_types  = ["User"]
-  description           = "ArgoCD Admins"
-  display_name          = "ArgoCD Administrator"
-  is_enabled            = true
-  value                 = "argocd-admin"
 }
 
-resource "random_password" "oauth2_apps" {
+resource "random_uuid" "argocd_app_role" {
   count = var.oidc == null ? 1 : 0
-
-  length           = 34
-  special          = true
-  override_special = "-_~."
 }
 
 resource "azuread_application_password" "oauth2_apps" {
   count = var.oidc == null ? 1 : 0
 
-  application_object_id = azuread_application.oauth2_apps.0.id
-  end_date              = "2299-12-30T23:00:00Z"
-  value                 = random_password.oauth2_apps.0.result
+  application_object_id = azuread_application.oauth2_apps.0.object_id
 }
 
 data "azurerm_policy_set_definition" "restricted" {
