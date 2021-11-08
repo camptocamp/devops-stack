@@ -21,9 +21,14 @@ data "docker_network" "kind" {
 resource "kind_cluster" "cluster" {
   name = var.cluster_name
 
+
   kind_config {
     kind        = "Cluster"
     api_version = "kind.x-k8s.io/v1alpha4"
+
+    networking {
+      api_server_address = var.api_server_address
+    }
 
     node {
       role = "control-plane"
