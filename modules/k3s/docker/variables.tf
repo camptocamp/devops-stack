@@ -1,7 +1,7 @@
 variable "k3s_version" {
   description = "The K3s version to use"
   type        = string
-  default     = "v1.20.10-k3s1"
+  default     = "v1.21.6-k3s1"
 }
 
 variable "server_ports" {
