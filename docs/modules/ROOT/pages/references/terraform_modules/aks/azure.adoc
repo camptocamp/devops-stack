@@ -11,7 +11,7 @@ The `aks/azure` Terraform module provides a way to install and configure:
 |===
 |Name |Version
 |[[requirement_terraform]] <<requirement_terraform,terraform>> |>= 0.13
-|[[requirement_azuread]] <<requirement_azuread,azuread>> |~> 1.5
+|[[requirement_azuread]] <<requirement_azuread,azuread>> |~> 2.0
 |[[requirement_azurerm]] <<requirement_azurerm,azurerm>> |~> 2.62
 |[[requirement_helm]] <<requirement_helm,helm>> |~> 2.0
 |[[requirement_kubernetes]] <<requirement_kubernetes,kubernetes>> |~> 2.0
@@ -25,7 +25,7 @@ The `aks/azure` Terraform module provides a way to install and configure:
 [cols="a,a",options="header,autowidth"]
 |===
 |Name |Version
-|[[provider_azuread]] <<provider_azuread,azuread>> |~> 1.5
+|[[provider_azuread]] <<provider_azuread,azuread>> |~> 2.0
 |[[provider_azurerm]] <<provider_azurerm,azurerm>> |~> 2.62
 |[[provider_random]] <<provider_random,random>> |~> 3.0
 |===
@@ -45,7 +45,6 @@ The `aks/azure` Terraform module provides a way to install and configure:
 |===
 |Name |Type
 |https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/application[azuread_application.oauth2_apps] |resource
-|https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/application_app_role[azuread_application_app_role.argocd_admin] |resource
 |https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/application_password[azuread_application_password.oauth2_apps] |resource
 |https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/dns_cname_record[azurerm_dns_cname_record.wildcard] |resource
 |https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster_node_pool[azurerm_kubernetes_cluster_node_pool.this] |resource
@@ -60,8 +59,9 @@ The `aks/azure` Terraform module provides a way to install and configure:
 |https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/user_assigned_identity[azurerm_user_assigned_identity.kube_prometheus_stack_prometheus] |resource
 |https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/user_assigned_identity[azurerm_user_assigned_identity.this] |resource
 |https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password[random_password.grafana_admin_password] |resource
-|https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password[random_password.oauth2_apps] |resource
 |https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string[random_string.storage_account] |resource
+|https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/uuid[random_uuid.argocd_app_role] |resource
+|https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/uuid[random_uuid.resource_app_id] |resource
 |https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config[azurerm_client_config.current] |data source
 |https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/dns_zone[azurerm_dns_zone.this] |data source
 |https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/kubernetes_cluster[azurerm_kubernetes_cluster.cluster] |data source
@@ -166,7 +166,7 @@ list(object({
 |[[input_kubernetes_version]] <<input_kubernetes_version,kubernetes_version>>
 |Specify which Kubernetes release to use.
 |`string`
-|`"1.20.7"`
+|`"1.21.2"`
 |no
 
 |[[input_network_policy]] <<input_network_policy,network_policy>>
