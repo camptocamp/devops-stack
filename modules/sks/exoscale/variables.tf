@@ -7,7 +7,7 @@ variable "base_domain" {
 variable "kubernetes_version" {
   description = "Specify which Kubernetes release to use."
   type        = string
-  default     = "1.21.4"
+  default     = "1.21.5"
 }
 
 variable "zone" {
