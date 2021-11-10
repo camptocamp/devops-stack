@@ -40,7 +40,7 @@ module "nlb" {
     {
       port               = 80
       protocol           = "TCP"
-      target_group_index = 0
+      target_group_index = 1
     },
   ]
 }
