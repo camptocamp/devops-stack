@@ -166,7 +166,7 @@ list(object({
 |[[input_kubernetes_version]] <<input_kubernetes_version,kubernetes_version>>
 |Specify which Kubernetes release to use.
 |`string`
-|`"1.20.7"`
+|`"1.21.2"`
 |no
 
 |[[input_network_policy]] <<input_network_policy,network_policy>>
