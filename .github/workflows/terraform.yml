@@ -127,14 +127,14 @@ jobs:
         env:
           TF_VAR_repo_url: ${{ github.server_url }}/camptocamp/devops-stack.git
           TF_VAR_target_revision: ${{ github.base_ref }}
-          TF_VAR_api_server_address: 0.0.0.0
+          TF_VAR_api_server_address: 172.17.0.1
         run: terraform apply --auto-approve
 
       - name: Terraform Plan
         env:
           TF_VAR_repo_url: ${{ github.server_url }}/camptocamp/devops-stack.git
           TF_VAR_target_revision: ${{ github.base_ref }}
-          TF_VAR_api_server_address: 0.0.0.0
+          TF_VAR_api_server_address: 172.17.0.1
         run: terraform plan --detailed-exitcode -no-color
 
       - name: Checkout ${{ github.ref }}
@@ -155,12 +155,20 @@ jobs:
         id: validate
         run: terraform validate -no-color
 
+      - name: Check kubeconfig
+        id: check-kubeconfig
+        env:
+          TF_VAR_repo_url: ${{ github.server_url }}/${{ github.actor }}/devops-stack.git
+          TF_VAR_target_revision: ${{ github.head_ref }}
+          TF_VAR_api_server_address: 172.17.0.1
+        run: terraform output kubeconfig
+
       - name: Terraform Plan on ${{ github.ref }}
         id: plan
         env:
           TF_VAR_repo_url: ${{ github.server_url }}/${{ github.actor }}/devops-stack.git
           TF_VAR_target_revision: ${{ github.head_ref }}
-          TF_VAR_api_server_address: 0.0.0.0
+          TF_VAR_api_server_address: 172.17.0.1
         run: terraform plan -no-color -out plan
 
       - name: Set env
@@ -189,7 +197,7 @@ jobs:
         env:
           TF_VAR_repo_url: ${{ github.server_url }}/${{ github.actor }}/devops-stack.git
           TF_VAR_target_revision: ${{ github.head_ref }}
-          TF_VAR_api_server_address: 0.0.0.0
+          TF_VAR_api_server_address: 172.17.0.1
         run: terraform apply --auto-approve
 
       - name: Destroy Cluster

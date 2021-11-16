@@ -15,5 +15,5 @@ variable "cluster_name" {
 
 variable "api_server_address" {
   type    = string
-  default = "127.0.0.1"
+  default = "172.17.0.1"
 }
