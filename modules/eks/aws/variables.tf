@@ -1,7 +1,7 @@
 variable "cluster_version" {
   description = "Kubernetes version to use for the EKS cluster."
   type        = string
-  default     = "1.18"
+  default     = "1.21"
 }
 
 variable "base_domain" {

@@ -117,7 +117,7 @@ The `eks/aws` Terraform module provides a way to install and configure:
 |[[input_cluster_version]] <<input_cluster_version,cluster_version>>
 |Kubernetes version to use for the EKS cluster.
 |`string`
-|`"1.18"`
+|`"1.21"`
 |no
 
 |[[input_cognito_user_pool_domain]] <<input_cognito_user_pool_domain,cognito_user_pool_domain>>
