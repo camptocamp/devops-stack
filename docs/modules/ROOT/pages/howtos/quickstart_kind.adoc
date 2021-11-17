@@ -1,0 +1,38 @@
+= Kind Quickstart
+
+== Prerequisites
+
+- Access to a functional Docker Engine,
+- Knowledge of https://terraform.io[Terraform] basics
+- Minimal Terraform version: 0.14
+- `jq` binary
+- https://argoproj.github.io/argo-cd/cli_installation/[argocd] CLI
+
+
+include::partial$terraform_instant_intro.adoc[]
+
+```hcl
+# terraform/main.tf
+
+module "cluster" {
+  source = "git::https://github.com/camptocamp/devops-stack.git//modules/kind/kind?ref=master"
+
+  cluster_name = "my-cluster"
+}
+```
+
+If your docker setup doesn't support the bridge0 like on MacOSX, you cannot access to the container IP so the computed base domain isn't reachable.
+
+
+include::partial$tf_apply.adoc[]
+
+include::partial$wait_for_keycloak.adoc[]
+
+include::partial$access_keycloak.adoc[]
+
+include::partial$tf_destroy.adoc[]
+
+
+== Reference
+
+See the xref:ROOT:references/terraform_modules/kind/kind.adoc[Kind reference page].
