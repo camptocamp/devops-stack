@@ -31,6 +31,9 @@ banner:
       - label: "K3S Quickstart"
         icon: "fa fa-hat-cowboy-side"
         link: "/docs/devops-stack/__VERSION__/howtos/quickstart_k3s_docker.html"
+      - label: "Kind Quickstart"
+        icon: "fa fa-wine-bottle"
+        link: "/docs/devops-stack/__VERSION__/howtos/quickstart_kind.html"
 
 # Components
 components:
