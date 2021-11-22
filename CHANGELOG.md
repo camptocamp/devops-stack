@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.49.0](https://www.github.com/camptocamp/devops-stack/compare/v0.48.0...v0.49.0) (2021-11-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* **eks:** send http traffic on NLB to port 80 on cluster (#810)
+
+### Features
+
+* **keycloak:** pass a user list to keycloak ([#788](https://www.github.com/camptocamp/devops-stack/issues/788)) ([c2835ec](https://www.github.com/camptocamp/devops-stack/commit/c2835ecaba5ffb02908fa77049cffecb976787e3))
+* **kind:** add experimental support for KIND ([#785](https://www.github.com/camptocamp/devops-stack/issues/785)) ([518e3e6](https://www.github.com/camptocamp/devops-stack/commit/518e3e6885082429298607314215e15fcacb0d07))
+* **sks:** add output for cluster security group id ([#816](https://www.github.com/camptocamp/devops-stack/issues/816)) ([de31691](https://www.github.com/camptocamp/devops-stack/commit/de31691b49cdafd7236d8a0395d2af2b8bc30d23))
+* **traefik:** tls version >= 1.2 ([#793](https://www.github.com/camptocamp/devops-stack/issues/793)) ([c49580e](https://www.github.com/camptocamp/devops-stack/commit/c49580efa834d1a5001abb18f0d9cf120970efc3))
+
+
+### Bug Fixes
+
+* **argocd:** fix kube-prometheus-stack dependency on OIDC ([#795](https://www.github.com/camptocamp/devops-stack/issues/795)) ([5848af8](https://www.github.com/camptocamp/devops-stack/commit/5848af8970a8c273b8243fae3f5dd98167af17d2))
+* **eks:** keycloak admin pass output when not installed ([#817](https://www.github.com/camptocamp/devops-stack/issues/817)) ([980979b](https://www.github.com/camptocamp/devops-stack/commit/980979b1f4ab443a6689f6fbce8845b24bebd70f))
+* **eks:** send http traffic on NLB to port 80 on cluster ([#810](https://www.github.com/camptocamp/devops-stack/issues/810)) ([0cbd0eb](https://www.github.com/camptocamp/devops-stack/commit/0cbd0eb05fcb818a623fa70489ad6b5f9302198b))
+
 ## [0.48.0](https://www.github.com/camptocamp/devops-stack/compare/v0.47.0...v0.48.0) (2021-09-22)
 
 
