@@ -9,6 +9,7 @@
 *** xref:ROOT:howtos/quickstart_ocp_ipi_aws.adoc[OpenShift (IPI) on AWS]
 *** xref:ROOT:howtos/quickstart_k3s_docker.adoc[K3s on Docker]
 *** xref:ROOT:howtos/quickstart_k3s_libvirt.adoc[K3s on Libvirt]
+*** xref:ROOT:howtos/quickstart_kind.adoc[KinD]
 ** Pipelines
 *** xref:ROOT:howtos/pipelines.adoc[Deploying with Pipelines]
 *** xref:ROOT:howtos/pipelines_gitlab.adoc[Create your GitLab Pipeline]

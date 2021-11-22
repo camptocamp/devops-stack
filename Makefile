@@ -1,4 +1,4 @@
-MODULES = argocd-helm aks/azure eks/aws openshift4/aws k3s/docker k3s/libvirt sks/exoscale
+MODULES = argocd-helm aks/azure eks/aws openshift4/aws k3s/docker k3s/libvirt sks/exoscale kind/kind
 MOD_REFS = $(addsuffix .adoc,$(addprefix docs/modules/ROOT/pages/references/terraform_modules/,$(MODULES)))
 
 APPLICATIONS = $(shell ls -d argocd/*/ | cut -f2 -d'/')

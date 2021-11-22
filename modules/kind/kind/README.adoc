@@ -1,0 +1,8 @@
+= KinD Terraform Module
+
+The `kind/kind` Terraform module provides a way to install and configure:
+
+* A KinD cluster based on Docker
+* The xref:ROOT:references/terraform_modules/argocd-helm.adoc[ArgoCD Helm] module
+
+
