@@ -1,8 +1,8 @@
-= Exoscale SKS Terraform Module
+= KinD Terraform Module
 
-The `sks/exoscale` Terraform module provides a way to install and configure:
+The `kind/kind` Terraform module provides a way to install and configure:
 
-* An SKS cluster
+* A KinD cluster based on Docker
 * The xref:ROOT:references/terraform_modules/argocd-helm.adoc[ArgoCD Helm] module
 
 == Requirements
@@ -10,9 +10,8 @@ The `sks/exoscale` Terraform module provides a way to install and configure:
 [cols="a,a",options="header,autowidth"]
 |===
 |Name |Version
-|[[requirement_exoscale]] <<requirement_exoscale,exoscale>> |~> 0.24
-|[[requirement_external]] <<requirement_external,external>> |~> 2.1
-|[[requirement_null]] <<requirement_null,null>> |~> 3.1
+|[[requirement_docker]] <<requirement_docker,docker>> |~> 2.15.0
+|[[requirement_kind]] <<requirement_kind,kind>> |~> 0.0.9
 |===
 
 == Providers
@@ -20,10 +19,11 @@ The `sks/exoscale` Terraform module provides a way to install and configure:
 [cols="a,a",options="header,autowidth"]
 |===
 |Name |Version
-|[[provider_exoscale]] <<provider_exoscale,exoscale>> |~> 0.24
-|[[provider_kubernetes]] <<provider_kubernetes,kubernetes>> |n/a
-|[[provider_random]] <<provider_random,random>> |n/a
-|[[provider_tls]] <<provider_tls,tls>> |n/a
+|[[provider_docker]] <<provider_docker,docker>> |~> 2.15.0
+|[[provider_kind]] <<provider_kind,kind>> |0.0.9
+|[[provider_kubernetes]] <<provider_kubernetes,kubernetes>> |2.5.0
+|[[provider_random]] <<provider_random,random>> |3.1.0
+|[[provider_tls]] <<provider_tls,tls>> |3.1.0
 |===
 
 == Modules
@@ -32,7 +32,6 @@ The `sks/exoscale` Terraform module provides a way to install and configure:
 |===
 |Name |Source |Version
 |[[module_argocd]] <<module_argocd,argocd>> |../../argocd-helm |
-|[[module_cluster]] <<module_cluster,cluster>> |camptocamp/sks/exoscale |0.3.0
 |===
 
 == Resources
@@ -40,17 +39,15 @@ The `sks/exoscale` Terraform module provides a way to install and configure:
 [cols="a,a",options="header,autowidth"]
 |===
 |Name |Type
-|https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/nlb[exoscale_nlb.this] |resource
-|https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/nlb_service[exoscale_nlb_service.http] |resource
-|https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/nlb_service[exoscale_nlb_service.https] |resource
-|https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/security_group_rule[exoscale_security_group_rule.all] |resource
-|https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/security_group_rule[exoscale_security_group_rule.http] |resource
-|https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/security_group_rule[exoscale_security_group_rule.https] |resource
+|https://registry.terraform.io/providers/kyma-incubator/kind/latest/docs/resources/cluster[kind_cluster.cluster] |resource
 |https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password[random_password.clientsecret] |resource
 |https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password[random_password.grafana_admin_password] |resource
-|https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password[random_password.keycloak_passwords] |resource
+|https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password[random_password.jdoe_password] |resource
+|https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password[random_password.minio_accesskey] |resource
+|https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password[random_password.minio_secretkey] |resource
 |https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key[tls_private_key.root] |resource
 |https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/self_signed_cert[tls_self_signed_cert.root] |resource
+|https://registry.terraform.io/providers/kreuzwerker/docker/latest/docs/data-sources/network[docker_network.kind] |data source
 |https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/data-sources/secret[kubernetes_secret.keycloak_admin_password] |data source
 |===
 
@@ -83,10 +80,10 @@ The `sks/exoscale` Terraform module provides a way to install and configure:
 |n/a
 |yes
 
-|[[input_enable_velero]] <<input_enable_velero,enable_velero>>
-|Flag to enable velero
+|[[input_enable_minio]] <<input_enable_minio,enable_minio>>
+|Whether to enable minio object storage system
 |`bool`
-|`false`
+|`true`
 |no
 
 |[[input_extra_app_projects]] <<input_extra_app_projects,extra_app_projects>>
@@ -110,24 +107,6 @@ The `sks/exoscale` Terraform module provides a way to install and configure:
 |[[input_grafana_admin_password]] <<input_grafana_admin_password,grafana_admin_password>>
 |The admin password for Grafana.
 |`string`
-|`null`
-|no
-
-|[[input_keycloak_users]] <<input_keycloak_users,keycloak_users>>
-|List of keycloak users
-|`map(map(string))`
-|`{}`
-|no
-
-|[[input_kubernetes_version]] <<input_kubernetes_version,kubernetes_version>>
-|Specify which Kubernetes release to use.
-|`string`
-|`"1.21.6"`
-|no
-
-|[[input_nodepools]] <<input_nodepools,nodepools>>
-|The SKS node pools to create.
-|`map(any)`
 |`null`
 |no
 
@@ -163,12 +142,6 @@ object({
 |`{}`
 |no
 
-|[[input_router_nodepool]] <<input_router_nodepool,router_nodepool>>
-|The node to attach the NLB to.
-|`string`
-|`null`
-|no
-
 |[[input_target_revision]] <<input_target_revision,target_revision>>
 |The source target revision of ArgoCD's app of apps.
 |`string`
@@ -180,12 +153,6 @@ object({
 |`bool`
 |`true`
 |no
-
-|[[input_zone]] <<input_zone,zone>>
-|The name of the zone to deploy the SKS cluster into.
-|`string`
-|n/a
-|yes
 
 |===
 
@@ -199,12 +166,10 @@ object({
 |[[output_argocd_server]] <<output_argocd_server,argocd_server>> |The URL of the ArgoCD server.
 |[[output_argocd_server_admin_password]] <<output_argocd_server_admin_password,argocd_server_admin_password>> |The ArgoCD admin password.
 |[[output_base_domain]] <<output_base_domain,base_domain>> |n/a
-|[[output_cluster_security_group_id]] <<output_cluster_security_group_id,cluster_security_group_id>> |Security group ID attached to the SKS nodepool instances.
 |[[output_grafana_admin_password]] <<output_grafana_admin_password,grafana_admin_password>> |The admin password for Grafana.
+|[[output_jdoe_password]] <<output_jdoe_password,jdoe_password>> |The password of a regular user jdoe.
 |[[output_keycloak_admin_password]] <<output_keycloak_admin_password,keycloak_admin_password>> |The password of Keycloak's admin user.
-|[[output_keycloak_users]] <<output_keycloak_users,keycloak_users>> |n/a
 |[[output_kubeconfig]] <<output_kubeconfig,kubeconfig>> |The content of the KUBECONFIG file.
-|[[output_nlb_ip_address]] <<output_nlb_ip_address,nlb_ip_address>> |n/a
 |[[output_repo_url]] <<output_repo_url,repo_url>> |n/a
 |[[output_target_revision]] <<output_target_revision,target_revision>> |n/a
 |===

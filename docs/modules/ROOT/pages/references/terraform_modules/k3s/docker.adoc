@@ -128,7 +128,7 @@ The `k3s/docker` Terraform module provides a way to install and configure:
 |[[input_k3s_version]] <<input_k3s_version,k3s_version>>
 |The K3s version to use
 |`string`
-|`"v1.21.6+k3s1"`
+|`"v1.21.6-k3s1"`
 |no
 
 |[[input_keycloak_users]] <<input_keycloak_users,keycloak_users>>
