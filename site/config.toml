@@ -15,7 +15,7 @@ org_logo = "images/logo/camptocamp.png"
 org_logo_width = "200px"
 org_url = "https://camptocamp.com"
 
-version = "0.48.0"
+version = "0.49.0"
 
 google_analytics = "G-GDBX9466LL"
 
