@@ -12,7 +12,7 @@ achieve data persistence outside of the cluster
 
 = synchronizing
 
-In order to keep the cluster stateless, we will introduce a tool to synchronize
+In order to keep the cluster stateless, we use a tool to synchronize
 both blue and green.
 
 This tool is velero. Started as a backup tool, cluster sync as been added as
