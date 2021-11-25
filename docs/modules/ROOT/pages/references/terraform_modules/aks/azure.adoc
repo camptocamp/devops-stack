@@ -63,7 +63,6 @@ The `aks/azure` Terraform module provides a way to install and configure:
 |https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/uuid[random_uuid.argocd_app_role] |resource
 |https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/uuid[random_uuid.resource_app_id] |resource
 |https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config[azurerm_client_config.current] |data source
-|https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/dns_zone[azurerm_dns_zone.this] |data source
 |https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/kubernetes_cluster[azurerm_kubernetes_cluster.cluster] |data source
 |https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/policy_set_definition[azurerm_policy_set_definition.baseline] |data source
 |https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/policy_set_definition[azurerm_policy_set_definition.restricted] |data source
@@ -126,6 +125,22 @@ list(object({
 
 |`[]`
 |no
+
+|[[input_azurerm_dns_zone]] <<input_azurerm_dns_zone,azurerm_dns_zone>>
+|Add the dns zone configuration for sub-domains to be managed by azure
+|
+
+[source]
+----
+object({
+    id                  = string
+    name                = string
+    resource_group_name = string
+  })
+----
+
+|n/a
+|yes
 
 |[[input_base_domain]] <<input_base_domain,base_domain>>
 |The base domain used for Ingresses.

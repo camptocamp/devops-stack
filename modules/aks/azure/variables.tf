@@ -75,3 +75,12 @@ variable "node_pools" {
   description = "List of node pools with minimal configuration"
   type        = map(any)
 }
+
+variable "azurerm_dns_zone" {
+  description = "Add the dns zone configuration for sub-domains to be managed by azure"
+  type = object({
+    id                  = string
+    name                = string
+    resource_group_name = string
+  })
+}

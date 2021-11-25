@@ -215,21 +215,16 @@ resource "azurerm_role_assignment" "reader" {
   principal_id         = azurerm_user_assigned_identity.cert_manager.principal_id
 }
 
-data "azurerm_dns_zone" "this" {
-  name                = var.base_domain
-  resource_group_name = var.resource_group_name
-}
-
 resource "azurerm_dns_cname_record" "wildcard" {
   name                = "*.apps.${var.cluster_name}"
-  zone_name           = data.azurerm_dns_zone.this.name
-  resource_group_name = data.azurerm_dns_zone.this.resource_group_name
+  zone_name           = var.azurerm_dns_zone.name
+  resource_group_name = var.azurerm_dns_zone.resource_group_name
   ttl                 = 300
   record              = "${local.azure_dns_label_name}.${data.azurerm_resource_group.this.location}.cloudapp.azure.com."
 }
 
 resource "azurerm_role_assignment" "dns_zone_contributor" {
-  scope                = data.azurerm_dns_zone.this.id
+  scope                = var.azurerm_dns_zone.id
   role_definition_name = "DNS Zone Contributor"
   principal_id         = azurerm_user_assigned_identity.cert_manager.principal_id
 }
@@ -240,7 +235,7 @@ data "azurerm_client_config" "current" {}
 resource "azuread_application" "oauth2_apps" {
   count = var.oidc == null ? 1 : 0
 
-  display_name     = "oauth2-apps-${var.cluster_name}"
+  display_name = "oauth2-apps-${var.cluster_name}"
 
   required_resource_access {
     resource_app_id = random_uuid.resource_app_id.0.result
