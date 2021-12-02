@@ -82,3 +82,9 @@ variable "wait_for_app_of_apps" {
   type        = bool
   default     = true
 }
+
+variable "velero" {
+  description = "Storage account used to configure backup and clusters synchronisation. More info here : http://"
+  default     = default()
+}
+

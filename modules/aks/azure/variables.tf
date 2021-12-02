@@ -75,13 +75,3 @@ variable "node_pools" {
   description = "List of node pools with minimal configuration"
   type        = map(any)
 }
-
-variable "velero" {
-  description = "Storage account used to configure backup and clusters synchronisation. More info here : http://"
-  type = object({
-    storage        = string
-    container      = string
-    resource_group = string
-  })
-}
-
