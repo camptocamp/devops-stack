@@ -1,0 +1,12 @@
+{{- range $key, $value := index $.Values "traefik" "middlewares" "redirections" }}
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: {{ $key }}
+spec:
+  redirectRegex:
+    permanent: {{ $value.permanent }}
+    regex: {{ $value.regex }}
+    replacement: {{ $value.replacement }}
+{{- end }}

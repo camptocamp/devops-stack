@@ -126,6 +126,9 @@ argo-cd:
       annotations:
         cert-manager.io/cluster-issuer: "${cluster_issuer}"
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
+%{ if !bootstrap }
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-withclustername@kubernetescrd
+%{ endif }
         traefik.ingress.kubernetes.io/router.tls: "true"
         ingress.kubernetes.io/ssl-redirect: "true"
         kubernetes.io/ingress.allow-http: "false"
@@ -253,6 +256,7 @@ kube-prometheus-stack:
       annotations:
         cert-manager.io/cluster-issuer: "${cluster_issuer}"
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-withclustername@kubernetescrd
         traefik.ingress.kubernetes.io/router.tls: "true"
         ingress.kubernetes.io/ssl-redirect: "true"
         kubernetes.io/ingress.allow-http: "false"
@@ -312,6 +316,7 @@ kube-prometheus-stack:
       annotations:
         cert-manager.io/cluster-issuer: "${cluster_issuer}"
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-withclustername@kubernetescrd
         traefik.ingress.kubernetes.io/router.tls: "true"
         ingress.kubernetes.io/ssl-redirect: "true"
         kubernetes.io/ingress.allow-http: "false"
@@ -335,6 +340,7 @@ kube-prometheus-stack:
       annotations:
         cert-manager.io/cluster-issuer: "${cluster_issuer}"
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-withclustername@kubernetescrd
         traefik.ingress.kubernetes.io/router.tls: "true"
         ingress.kubernetes.io/ssl-redirect: "true"
         kubernetes.io/ingress.allow-http: "false"
@@ -465,7 +471,17 @@ minio:
 secrets-store-csi-driver: {}
 
 %{ if traefik.enable }
-traefik: {}
+traefik:
+  middlewares:
+    # NOTE: middleware name
+    # A lowercase RFC 1123 subdomain must consist of lower
+    # case alphanumeric characters, '-' or '.', and must start
+    # and end with an alphanumeric character.
+    redirections:
+      withclustername:
+        permanent: false
+        regex: apps.${base_domain}
+        replacement: apps.${cluster_name}.${base_domain}
 %{ endif }
 
 vault: {}
