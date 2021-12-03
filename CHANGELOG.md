@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.50.0](https://www.github.com/camptocamp/devops-stack/compare/v0.49.0...v0.50.0) (2021-12-03)
+
+
+### Features
+
+* **docs:** improve KinD docs ([#820](https://www.github.com/camptocamp/devops-stack/issues/820)) ([62fab9f](https://www.github.com/camptocamp/devops-stack/commit/62fab9f89260a1d4938688afa1e29133aa93d988))
+* enable using url without cluster name ([#823](https://www.github.com/camptocamp/devops-stack/issues/823)) ([7728b0f](https://www.github.com/camptocamp/devops-stack/commit/7728b0f87c14023d89996d2e2b99c3b5dd7ea4ef))
+
 ## [0.49.0](https://www.github.com/camptocamp/devops-stack/compare/v0.48.0...v0.49.0) (2021-11-19)
 
 
