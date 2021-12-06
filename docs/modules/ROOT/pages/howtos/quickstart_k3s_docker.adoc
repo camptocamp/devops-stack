@@ -6,6 +6,7 @@
 - Knowledge of https://terraform.io[Terraform] basics
 - Minimal Terraform version: 0.14
 - `jq` binary
+- `kubectl` binary
 - https://argoproj.github.io/argo-cd/cli_installation/[argocd] CLI
 
 
