@@ -8,7 +8,3 @@
 ** amend the commit
 ** push force the branch
 ** merge the PR
-* Create and merge a Pull Request with:
-** subject can be something like: `chore: create post-release commit`
-** `version` in https://github.com/camptocamp/devops-stack/blob/master/docs/antora.yml#L4[docs/antora.yml] set back to `latest`
-** `target_revision` in https://github.com/camptocamp/devops-stack/blob/master/modules/variables.tf#15[modules/variables.tf] set back to `master`
