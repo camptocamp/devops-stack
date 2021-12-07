@@ -1,5 +1,13 @@
 # Changelog
 
+### [0.50.1](https://www.github.com/camptocamp/devops-stack/compare/v0.50.0...v0.50.1) (2021-12-07)
+
+
+### Bug Fixes
+
+* **docs:** add kubectl note ([#827](https://www.github.com/camptocamp/devops-stack/issues/827)) ([b955051](https://www.github.com/camptocamp/devops-stack/commit/b9550517e755c7b5d48f80a121f3a73447cadf58))
+* **docs:** remove cgroupv2 note ([#825](https://www.github.com/camptocamp/devops-stack/issues/825)) ([97e3437](https://www.github.com/camptocamp/devops-stack/commit/97e34374e5eb32f140c89725ace8101b75bdc5d9))
+
 ## [0.50.0](https://www.github.com/camptocamp/devops-stack/compare/v0.49.0...v0.50.0) (2021-12-03)
 
 
