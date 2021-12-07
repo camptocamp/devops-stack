@@ -1,9 +1,9 @@
 name: Website
 
 on:
-  push:
-    tags: 
-      - v*
+  release:
+    types: published
+
 env:
   SITE_DIR: 'site'
 jobs:
