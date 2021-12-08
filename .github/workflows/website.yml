@@ -3,7 +3,7 @@ name: Website
 on:
   release:
     types:
-      - published
+      - released
 
 env:
   SITE_DIR: 'site'
