@@ -2,7 +2,8 @@ name: Website
 
 on:
   release:
-    types: published
+    types:
+      - published
 
 env:
   SITE_DIR: 'site'
