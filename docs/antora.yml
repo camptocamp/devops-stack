@@ -1,7 +1,7 @@
 ---
 name: "devops-stack"
 title: "DevOps Stack"
-version: "0.50.2"
+version: "0.50.3"
 prerelease: true
 nav:
   - "modules/ROOT/nav.adoc"
