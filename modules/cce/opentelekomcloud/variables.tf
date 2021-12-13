@@ -40,4 +40,3 @@ variable "keycloak_users" {
   type        = map(map(string))
   default = {}
 }
-
