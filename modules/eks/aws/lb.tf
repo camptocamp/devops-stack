@@ -47,7 +47,7 @@ module "nlb" {
 
 module "nlb_private" {
   source  = "terraform-aws-modules/alb/aws"
-  version = "5.10.0"
+  version = "6.0.0"
 
   create_lb = var.create_private_nlb
 
