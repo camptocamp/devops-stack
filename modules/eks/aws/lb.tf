@@ -108,5 +108,5 @@ resource "aws_route53_record" "wildcard" {
 }
 
 data "dns_a_record_set" "nlb" {
-  host = module.nlb.lb_dns_name
+  host = coalesce(module.nlb.lb_dns_name, module.nlb_private.lb_dns_name)
 }
