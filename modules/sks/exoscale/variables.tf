@@ -15,20 +15,34 @@ variable "zone" {
   type        = string
 }
 
-variable "nodepools" {
-  description = "The SKS node pools to create."
-  type        = map(any)
-  default     = null
-}
-
-variable "router_nodepool" {
-  description = "The node to attach the NLB to."
-  type        = string
-  default     = null
-}
-
 variable "keycloak_users" {
   description = "List of keycloak users"
   type        = map(map(string))
   default = {}
+}
+
+variable "node_pools" {
+    description = <<-EOF
+    A list of nodes pools to be provisioned for the cluster.
+    Each node_pool should include at least a `name` key.
+    Entry node_pools.0, if defined, acts as router_node_pool, else a default one will be created.
+
+    Example:
+
+    ```
+    node_pools = [
+      {
+        name = infra
+      },
+      {
+        name = prod
+      },
+      {
+        name = int
+      }
+    ]
+    ```
+  EOF
+  type = list(any)
+  default = []
 }

@@ -71,7 +71,31 @@ variable "network_policy" {
 }
 
 variable "node_pools" {
-  default     = {}
-  description = "List of node pools with minimal configuration"
-  type        = map(any)
+  description = <<-EOF
+    A list of nodes pools to be provisioned for the cluster.
+    Each node_pool should include at least a `name` key.
+    See [provider documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster_node_pool) for allowed
+
+    Example:
+
+    ```
+    node_pools = [
+      {
+        name       = "infra"
+        node_count = 1
+      },
+      {
+        name       = "prod"
+        node_count = 2
+      },
+      {
+        name       = "int"
+        node_count = 1
+      }
+    ]
+    ```
+
+  EOF
+  type = list(any)
+  default = []
 }

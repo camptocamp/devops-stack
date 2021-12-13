@@ -33,7 +33,7 @@ module "cluster" {
   vpc_id       = var.vpc_id
   cluster_name = var.cluster_name
   subnet_id    = var.network_id # somehow the subnet_id in CCE cluster resource is the network_id
-  node_pools   = var.node_pools
+  node_pools   = {for pool in var.node_pools:  pool.name => pool}
 }
 
 module "argocd" {

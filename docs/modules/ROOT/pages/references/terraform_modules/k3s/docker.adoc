@@ -34,9 +34,9 @@ The `k3s/docker` Terraform module provides a way to install and configure:
 
 [cols="a,a,a",options="header,autowidth"]
 |===
-|Name |Source |Version
-|[[module_argocd]] <<module_argocd,argocd>> |../../argocd-helm |
-|[[module_cluster]] <<module_cluster,cluster>> |camptocamp/k3s/docker |1.0.1
+|Name|Source|Version|
+|[[module_argocd]] <<module_argocd,argocd>>|../../argocd-helm|
+|[[module_cluster]] <<module_cluster,cluster>>|camptocamp/k3s/docker|1.0.1
 |===
 
 == Resources
@@ -143,6 +143,46 @@ The `k3s/docker` Terraform module provides a way to install and configure:
 
 |no
 
+|[[input_node_pools]] <<input_node_pools,node_pools>>
+|A list of nodes pools to be provisioned for the cluster.
+Each node_pool should include at least a `name` key.
+Entry node_pools.0, if defined, acts as ingress node pool, else a default one will be created.
+See provider `terraform-aws-modules/eks/aws` workers_group_defaults for valid keys.
+
+Example:
+
+[source]
+----
+node_pools = [
+  {
+    name = infra
+  },
+  {
+    name = prod
+  },
+  {
+    name = int
+  }
+]
+----
+
+|`list(any)`
+|
+
+[source]
+----
+[
+  {
+    "name": "default",
+    "node_count": 2,
+    "node_labels": [],
+    "node_taints": []
+  }
+]
+----
+
+|no
+
 |[[input_oidc]] <<input_oidc,oidc>>
 |OIDC configuration for core applications.
 |
@@ -195,41 +235,13 @@ set(object({
 |[[input_target_revision]] <<input_target_revision,target_revision>>
 |The source target revision of ArgoCD's app of apps.
 |`string`
-|`"master"`
+|`"v0.49.0"`
 |no
 
 |[[input_wait_for_app_of_apps]] <<input_wait_for_app_of_apps,wait_for_app_of_apps>>
-|Allow to disable wait for app of apps
+|Allow to disable wait for app of apps.
 |`bool`
 |`true`
-|no
-
-|[[input_worker_groups]] <<input_worker_groups,worker_groups>>
-|A map defining worker group configurations
-|
-
-[source]
-----
-map(object({
-    node_count  = number
-    node_labels = list(string)
-    node_taints = list(string)
-  }))
-----
-
-|
-
-[source]
-----
-{
-  "default": {
-    "node_count": 2,
-    "node_labels": [],
-    "node_taints": []
-  }
-}
-----
-
 |no
 
 |===

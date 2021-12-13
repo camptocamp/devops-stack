@@ -34,9 +34,9 @@ The `aks/azure` Terraform module provides a way to install and configure:
 
 [cols="a,a,a",options="header,autowidth"]
 |===
-|Name |Source |Version
-|[[module_argocd]] <<module_argocd,argocd>> |../../argocd-helm |
-|[[module_cluster]] <<module_cluster,cluster>> |Azure/aks/azurerm |4.13.0
+|Name|Source|Version|
+|[[module_argocd]] <<module_argocd,argocd>>|../../argocd-helm|
+|[[module_cluster]] <<module_cluster,cluster>>|Azure/aks/azurerm|4.13.0
 |===
 
 == Resources
@@ -176,9 +176,32 @@ list(object({
 |no
 
 |[[input_node_pools]] <<input_node_pools,node_pools>>
-|List of node pools with minimal configuration
-|`map(any)`
-|`{}`
+|A list of nodes pools to be provisioned for the cluster.
+Each node_pool should include at least a `name` key.
+See [provider documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster_node_pool) for allowed
+
+Example:
+
+[source]
+----
+node_pools = [
+  {
+    name       = "infra"
+    node_count = 1
+  },
+  {
+    name       = "prod"
+    node_count = 2
+  },
+  {
+    name       = "int"
+    node_count = 1
+  }
+]
+----
+
+|`list(any)`
+|`[]`
 |no
 
 |[[input_oidc]] <<input_oidc,oidc>>
@@ -234,7 +257,7 @@ object({
 |[[input_target_revision]] <<input_target_revision,target_revision>>
 |The source target revision of ArgoCD's app of apps.
 |`string`
-|`"master"`
+|`"v0.49.0"`
 |no
 
 |[[input_vnet_subnet_id]] <<input_vnet_subnet_id,vnet_subnet_id>>
@@ -244,7 +267,7 @@ object({
 |yes
 
 |[[input_wait_for_app_of_apps]] <<input_wait_for_app_of_apps,wait_for_app_of_apps>>
-|Allow to disable wait for app of apps
+|Allow to disable wait for app of apps.
 |`bool`
 |`true`
 |no

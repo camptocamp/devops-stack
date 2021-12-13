@@ -11,16 +11,16 @@ locals {
     cluster_ca_certificate = base64decode(local.context.clusters.0.cluster.certificate-authority-data)
   }
 
-  default_nodepools = {
+  default_node_pools = {
     "router-${var.cluster_name}" = {
       size          = 2
       instance_type = "standard.large"
     },
   }
 
-  router_nodepool = coalesce(var.router_nodepool, "router-${var.cluster_name}")
-  nodepools       = coalesce(var.nodepools, local.default_nodepools)
-  cluster_issuer  = (length(local.nodepools) > 1) ? "letsencrypt-prod" : "ca-issuer"
+  router_node_pool = coalesce(var.node_pools.0.name, "router-${var.cluster_name}")
+  node_pools       = coalesce({for pool in var.node_pools:  pool.name => pool}, local.default_node_pools)
+  cluster_issuer  = (length(local.node_pools) > 1) ? "letsencrypt-prod" : "ca-issuer"
   keycloak_user_map = { for username, infos in var.keycloak_users : username => merge(infos, tomap({password = random_password.keycloak_passwords[username].result})) }
 }
 
@@ -48,7 +48,7 @@ module "cluster" {
   name               = var.cluster_name
   zone               = var.zone
 
-  nodepools = local.nodepools
+  nodepools = local.node_pools
 }
 
 resource "exoscale_nlb" "this" {
@@ -60,7 +60,7 @@ resource "exoscale_nlb_service" "http" {
   zone             = exoscale_nlb.this.zone
   name             = "ingress-contoller-http"
   nlb_id           = exoscale_nlb.this.id
-  instance_pool_id = module.cluster.nodepools[local.router_nodepool].instance_pool_id
+  instance_pool_id = module.cluster.nodepools[local.router_node_pool].instance_pool_id
   protocol         = "tcp"
   port             = 80
   target_port      = 80
@@ -79,7 +79,7 @@ resource "exoscale_nlb_service" "https" {
   zone             = exoscale_nlb.this.zone
   name             = "ingress-contoller-https"
   nlb_id           = exoscale_nlb.this.id
-  instance_pool_id = module.cluster.nodepools[local.router_nodepool].instance_pool_id
+  instance_pool_id = module.cluster.nodepools[local.router_node_pool].instance_pool_id
   protocol         = "tcp"
   port             = 443
   target_port      = 443
@@ -167,7 +167,7 @@ module "argocd" {
       {
         root_cert      = base64encode(tls_self_signed_cert.root.cert_pem)
         root_key       = base64encode(tls_private_key.root.private_key_pem)
-        router_pool_id = module.cluster.nodepools[local.router_nodepool].id
+        router_pool_id = module.cluster.nodepools[local.router_node_pool].id
       }
     ),
     var.app_of_apps_values_overrides,

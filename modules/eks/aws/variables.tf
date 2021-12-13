@@ -17,7 +17,7 @@ variable "cluster_endpoint_public_access_cidrs" {
 }
 
 variable "vpc_id" {
-  description = "VPC where the cluster and workers will be deployed."
+  description = "VPC where the cluster and nodes/workers will be deployed."
   type        = string
 }
 
@@ -45,12 +45,6 @@ variable "map_users" {
     groups   = list(string)
   }))
   default = []
-}
-
-variable "worker_groups" {
-  description = "A list of maps defining worker group configurations to be defined using AWS Launch Configurations. See workers_group_defaults for valid keys."
-  type        = any
-  default     = []
 }
 
 variable "cognito_user_pool_id" {
@@ -97,4 +91,31 @@ variable "enable_cluster_autoscaler" {
   description = "Whether to setup a cluster autoscaler"
   type        = bool
   default     = false
+}
+
+variable "node_pools" {
+  description = <<-EOF
+    A list of nodes pools to be provisioned for the cluster.
+    Each node_pool should include at least a `name` key.
+    Entry node_pools.0, if defined, acts as ingress node pool, else a default one will be created.
+    See provider `terraform-aws-modules/eks/aws` workers_group_defaults for valid keys.
+
+    Example:
+
+    ```
+    node_pools = [
+      {
+        name = infra
+      },
+      {
+        name = prod
+      },
+      {
+        name = int
+      }
+    ]
+    ```
+  EOF
+  type = list(any)
+  default = []
 }

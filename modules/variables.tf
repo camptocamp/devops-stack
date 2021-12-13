@@ -72,7 +72,7 @@ variable "repositories" {
 }
 
 variable "wait_for_app_of_apps" {
-  description = "Allow to disable wait for app of apps"
+  description = "Allow to disable wait for app of apps."
   type        = bool
   default     = true
 }

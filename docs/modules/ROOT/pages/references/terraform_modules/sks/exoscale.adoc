@@ -30,9 +30,9 @@ The `sks/exoscale` Terraform module provides a way to install and configure:
 
 [cols="a,a,a",options="header,autowidth"]
 |===
-|Name |Source |Version
-|[[module_argocd]] <<module_argocd,argocd>> |../../argocd-helm |
-|[[module_cluster]] <<module_cluster,cluster>> |camptocamp/sks/exoscale |0.3.0
+|Name|Source|Version|
+|[[module_argocd]] <<module_argocd,argocd>>|../../argocd-helm|
+|[[module_cluster]] <<module_cluster,cluster>>|camptocamp/sks/exoscale|0.3.0
 |===
 
 == Resources
@@ -119,10 +119,30 @@ The `sks/exoscale` Terraform module provides a way to install and configure:
 |`"1.21.6"`
 |no
 
-|[[input_nodepools]] <<input_nodepools,nodepools>>
-|The SKS node pools to create.
-|`map(any)`
-|`null`
+|[[input_node_pools]] <<input_node_pools,node_pools>>
+|A list of nodes pools to be provisioned for the cluster.
+Each node_pool should include at least a `name` key.
+Entry node_pools.0, if defined, acts as router_node_pool, else a default one will be created.
+
+Example:
+
+[source]
+----
+node_pools = [
+  {
+    name = infra
+  },
+  {
+    name = prod
+  },
+  {
+    name = int
+  }
+]
+----
+
+|`list(any)`
+|`[]`
 |no
 
 |[[input_oidc]] <<input_oidc,oidc>>
@@ -157,20 +177,14 @@ object({
 |`{}`
 |no
 
-|[[input_router_nodepool]] <<input_router_nodepool,router_nodepool>>
-|The node to attach the NLB to.
-|`string`
-|`null`
-|no
-
 |[[input_target_revision]] <<input_target_revision,target_revision>>
 |The source target revision of ArgoCD's app of apps.
 |`string`
-|`"master"`
+|`"v0.49.0"`
 |no
 
 |[[input_wait_for_app_of_apps]] <<input_wait_for_app_of_apps,wait_for_app_of_apps>>
-|Allow to disable wait for app of apps
+|Allow to disable wait for app of apps.
 |`bool`
 |`true`
 |no

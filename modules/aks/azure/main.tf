@@ -85,7 +85,7 @@ module "cluster" {
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "this" {
-  for_each              = var.node_pools
+  for_each              = { for pool in var.node_pools : pool.name => pool }
   name                  = each.key
   kubernetes_cluster_id = module.cluster.aks_id
   vm_size               = each.value.vm_size
@@ -240,7 +240,7 @@ data "azurerm_client_config" "current" {}
 resource "azuread_application" "oauth2_apps" {
   count = var.oidc == null ? 1 : 0
 
-  display_name     = "oauth2-apps-${var.cluster_name}"
+  display_name = "oauth2-apps-${var.cluster_name}"
 
   required_resource_access {
     resource_app_id = random_uuid.resource_app_id.0.result

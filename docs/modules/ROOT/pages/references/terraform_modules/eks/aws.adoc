@@ -33,15 +33,15 @@ The `eks/aws` Terraform module provides a way to install and configure:
 
 [cols="a,a,a",options="header,autowidth"]
 |===
-|Name |Source |Version
-|[[module_argocd]] <<module_argocd,argocd>> |../../argocd-helm |
-|[[module_cluster]] <<module_cluster,cluster>> |terraform-aws-modules/eks/aws |15.1.0
-|[[module_efs]] <<module_efs,efs>> |camptocamp/efs/aws |
-|[[module_iam_assumable_role_cert_manager]] <<module_iam_assumable_role_cert_manager,iam_assumable_role_cert_manager>> |terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc |4.0.0
-|[[module_iam_assumable_role_cluster_autoscaler]] <<module_iam_assumable_role_cluster_autoscaler,iam_assumable_role_cluster_autoscaler>> |terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc |4.0.0
-|[[module_iam_assumable_role_loki]] <<module_iam_assumable_role_loki,iam_assumable_role_loki>> |terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc |4.0.0
-|[[module_nlb]] <<module_nlb,nlb>> |terraform-aws-modules/alb/aws |6.0.0
-|[[module_nlb_private]] <<module_nlb_private,nlb_private>> |terraform-aws-modules/alb/aws |5.10.0
+|Name|Source|Version|
+|[[module_argocd]] <<module_argocd,argocd>>|../../argocd-helm|
+|[[module_cluster]] <<module_cluster,cluster>>|terraform-aws-modules/eks/aws|15.1.0
+|[[module_efs]] <<module_efs,efs>>|camptocamp/efs/aws|
+|[[module_iam_assumable_role_cert_manager]] <<module_iam_assumable_role_cert_manager,iam_assumable_role_cert_manager>>|terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc|4.0.0
+|[[module_iam_assumable_role_cluster_autoscaler]] <<module_iam_assumable_role_cluster_autoscaler,iam_assumable_role_cluster_autoscaler>>|terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc|4.0.0
+|[[module_iam_assumable_role_loki]] <<module_iam_assumable_role_loki,iam_assumable_role_loki>>|terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc|4.0.0
+|[[module_nlb]] <<module_nlb,nlb>>|terraform-aws-modules/alb/aws|6.0.0
+|[[module_nlb_private]] <<module_nlb_private,nlb_private>>|terraform-aws-modules/alb/aws|5.10.0
 |===
 
 == Resources
@@ -230,6 +230,33 @@ list(object({
 |`[]`
 |no
 
+|[[input_node_pools]] <<input_node_pools,node_pools>>
+|A list of nodes pools to be provisioned for the cluster.
+Each node_pool should include at least a `name` key.
+Entry node_pools.0, if defined, acts as ingress node pool, else a default one will be created.
+See provider `terraform-aws-modules/eks/aws` workers_group_defaults for valid keys.
+
+Example:
+
+[source]
+----
+node_pools = [
+  {
+    name = infra
+  },
+  {
+    name = prod
+  },
+  {
+    name = int
+  }
+]
+----
+
+|`list(any)`
+|`[]`
+|no
+
 |[[input_oidc]] <<input_oidc,oidc>>
 |OIDC configuration for core applications.
 |
@@ -265,25 +292,19 @@ object({
 |[[input_target_revision]] <<input_target_revision,target_revision>>
 |The source target revision of ArgoCD's app of apps.
 |`string`
-|`"master"`
+|`"v0.49.0"`
 |no
 
 |[[input_vpc_id]] <<input_vpc_id,vpc_id>>
-|VPC where the cluster and workers will be deployed.
+|VPC where the cluster and nodes/workers will be deployed.
 |`string`
 |n/a
 |yes
 
 |[[input_wait_for_app_of_apps]] <<input_wait_for_app_of_apps,wait_for_app_of_apps>>
-|Allow to disable wait for app of apps
+|Allow to disable wait for app of apps.
 |`bool`
 |`true`
-|no
-
-|[[input_worker_groups]] <<input_worker_groups,worker_groups>>
-|A list of maps defining worker group configurations to be defined using AWS Launch Configurations. See workers_group_defaults for valid keys.
-|`any`
-|`[]`
 |no
 
 |===

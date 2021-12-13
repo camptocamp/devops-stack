@@ -49,7 +49,7 @@ provider "kubernetes" {
 }
 
 locals {
-  ingress_worker_group = merge(var.worker_groups.0, { target_group_arns = concat(module.nlb.target_group_arns, module.nlb_private.target_group_arns) })
+  ingress_node_pool = merge(var.node_pools.0, { target_group_arns = concat(module.nlb.target_group_arns, module.nlb_private.target_group_arns) })
 }
 
 module "cluster" {
@@ -69,7 +69,7 @@ module "cluster" {
   map_roles        = var.map_roles
   map_users        = var.map_users
 
-  worker_groups = concat([local.ingress_worker_group], try(slice(var.worker_groups, 1, length(var.worker_groups)), []))
+  worker_groups = concat([local.ingress_node_pool], try(slice(var.node_pools, 1, length(var.node_pools)), []))
 
   kubeconfig_aws_authenticator_command      = var.kubeconfig_aws_authenticator_command
   kubeconfig_aws_authenticator_command_args = var.kubeconfig_aws_authenticator_command_args

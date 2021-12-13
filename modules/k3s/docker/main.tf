@@ -5,7 +5,7 @@ module "cluster" {
   network_name  = "bridge"
   cluster_name  = var.cluster_name
   k3s_version   = var.k3s_version
-  worker_groups = var.worker_groups
+  worker_groups = {for pool in var.node_pools:  pool.name => pool}
 
   server_config = [
     "--disable", "traefik",

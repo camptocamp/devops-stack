@@ -21,9 +21,9 @@ No requirements.
 
 [cols="a,a,a",options="header,autowidth"]
 |===
-|Name |Source |Version
-|[[module_argocd]] <<module_argocd,argocd>> |../../argocd-helm |
-|[[module_cluster]] <<module_cluster,cluster>> |camptocamp/openshift4/aws |0.1.0
+|Name|Source|Version|
+|[[module_argocd]] <<module_argocd,argocd>>|../../argocd-helm|
+|[[module_cluster]] <<module_cluster,cluster>>|camptocamp/openshift4/aws|0.1.0
 |===
 
 == Resources
@@ -135,11 +135,11 @@ object({
 |[[input_target_revision]] <<input_target_revision,target_revision>>
 |The source target revision of ArgoCD's app of apps.
 |`string`
-|`"master"`
+|`"v0.49.0"`
 |no
 
 |[[input_wait_for_app_of_apps]] <<input_wait_for_app_of_apps,wait_for_app_of_apps>>
-|Allow to disable wait for app of apps
+|Allow to disable wait for app of apps.
 |`bool`
 |`true`
 |no
