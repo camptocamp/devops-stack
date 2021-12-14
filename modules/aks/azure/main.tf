@@ -198,8 +198,8 @@ resource "azurerm_storage_account" "this" {
   name                     = random_string.storage_account.result
   resource_group_name      = module.cluster.node_resource_group
   location                 = data.azurerm_resource_group.this.location
-  account_tier             = "Standard"
-  account_replication_type = "GRS"
+  account_tier             = var.storage_account_tier
+  account_replication_type = var.storage_account_replication_type
 }
 
 resource "azurerm_storage_container" "loki" {
@@ -240,7 +240,7 @@ data "azurerm_client_config" "current" {}
 resource "azuread_application" "oauth2_apps" {
   count = var.oidc == null ? 1 : 0
 
-  display_name     = "oauth2-apps-${var.cluster_name}"
+  display_name = "oauth2-apps-${var.cluster_name}"
 
   required_resource_access {
     resource_app_id = random_uuid.resource_app_id.0.result

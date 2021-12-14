@@ -75,3 +75,15 @@ variable "node_pools" {
   description = "List of node pools with minimal configuration"
   type        = map(any)
 }
+
+variable "storage_account_tier" {
+  description = "Storage account tier used for storing loki logs"
+  default     = "Standard"
+  type        = string
+}
+
+variable "storage_account_replication_type" {
+  description = "Storage account replication type for storing loki logs"
+  default     = "GRS"
+  type        = string
+}
