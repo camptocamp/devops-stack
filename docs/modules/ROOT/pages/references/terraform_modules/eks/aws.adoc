@@ -33,15 +33,15 @@ The `eks/aws` Terraform module provides a way to install and configure:
 
 [cols="a,a,a",options="header,autowidth"]
 |===
-|Name |Source |Version
-|[[module_argocd]] <<module_argocd,argocd>> |../../argocd-helm |
-|[[module_cluster]] <<module_cluster,cluster>> |terraform-aws-modules/eks/aws |15.1.0
-|[[module_efs]] <<module_efs,efs>> |camptocamp/efs/aws |
-|[[module_iam_assumable_role_cert_manager]] <<module_iam_assumable_role_cert_manager,iam_assumable_role_cert_manager>> |terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc |4.0.0
-|[[module_iam_assumable_role_cluster_autoscaler]] <<module_iam_assumable_role_cluster_autoscaler,iam_assumable_role_cluster_autoscaler>> |terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc |4.0.0
-|[[module_iam_assumable_role_loki]] <<module_iam_assumable_role_loki,iam_assumable_role_loki>> |terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc |4.0.0
-|[[module_nlb]] <<module_nlb,nlb>> |terraform-aws-modules/alb/aws |6.0.0
-|[[module_nlb_private]] <<module_nlb_private,nlb_private>> |terraform-aws-modules/alb/aws |5.10.0
+|Name|Source|Version|
+|[[module_argocd]] <<module_argocd,argocd>>|../../argocd-helm|
+|[[module_cluster]] <<module_cluster,cluster>>|terraform-aws-modules/eks/aws|15.1.0
+|[[module_efs]] <<module_efs,efs>>|camptocamp/efs/aws|
+|[[module_iam_assumable_role_cert_manager]] <<module_iam_assumable_role_cert_manager,iam_assumable_role_cert_manager>>|terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc|4.0.0
+|[[module_iam_assumable_role_cluster_autoscaler]] <<module_iam_assumable_role_cluster_autoscaler,iam_assumable_role_cluster_autoscaler>>|terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc|4.0.0
+|[[module_iam_assumable_role_loki]] <<module_iam_assumable_role_loki,iam_assumable_role_loki>>|terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc|4.0.0
+|[[module_nlb]] <<module_nlb,nlb>>|terraform-aws-modules/alb/aws|6.0.0
+|[[module_nlb_private]] <<module_nlb_private,nlb_private>>|terraform-aws-modules/alb/aws|5.10.0
 |===
 
 == Resources
@@ -265,7 +265,7 @@ object({
 |[[input_target_revision]] <<input_target_revision,target_revision>>
 |The source target revision of ArgoCD's app of apps.
 |`string`
-|`"master"`
+|`"v0.51.1"`
 |no
 
 |[[input_vpc_id]] <<input_vpc_id,vpc_id>>

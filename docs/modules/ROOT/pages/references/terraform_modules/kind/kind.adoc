@@ -20,18 +20,18 @@ The `kind/kind` Terraform module provides a way to install and configure:
 |===
 |Name |Version
 |[[provider_docker]] <<provider_docker,docker>> |~> 2.15.0
-|[[provider_kind]] <<provider_kind,kind>> |0.0.9
-|[[provider_kubernetes]] <<provider_kubernetes,kubernetes>> |2.5.0
-|[[provider_random]] <<provider_random,random>> |3.1.0
-|[[provider_tls]] <<provider_tls,tls>> |3.1.0
+|[[provider_kind]] <<provider_kind,kind>> |~> 0.0.9
+|[[provider_kubernetes]] <<provider_kubernetes,kubernetes>> |n/a
+|[[provider_random]] <<provider_random,random>> |n/a
+|[[provider_tls]] <<provider_tls,tls>> |n/a
 |===
 
 == Modules
 
 [cols="a,a,a",options="header,autowidth"]
 |===
-|Name |Source |Version
-|[[module_argocd]] <<module_argocd,argocd>> |../../argocd-helm |
+|Name|Source|Version|
+|[[module_argocd]] <<module_argocd,argocd>>|../../argocd-helm|
 |===
 
 == Resources
@@ -145,7 +145,7 @@ object({
 |[[input_target_revision]] <<input_target_revision,target_revision>>
 |The source target revision of ArgoCD's app of apps.
 |`string`
-|`"master"`
+|`"v0.51.1"`
 |no
 
 |[[input_wait_for_app_of_apps]] <<input_wait_for_app_of_apps,wait_for_app_of_apps>>
