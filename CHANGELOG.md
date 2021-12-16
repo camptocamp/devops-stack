@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.51.1](https://www.github.com/camptocamp/devops-stack/compare/v0.51.0...v0.51.1) (2021-12-16)
+
+
+### Bug Fixes
+
+* release version ([#839](https://www.github.com/camptocamp/devops-stack/issues/839)) ([e2334c2](https://www.github.com/camptocamp/devops-stack/commit/e2334c2d7bafe99e2d370a0d42a1b0fa18ac14c9))
+
 ## [0.51.0](https://www.github.com/camptocamp/devops-stack/compare/v0.50.4...v0.51.0) (2021-12-14)
 
 
