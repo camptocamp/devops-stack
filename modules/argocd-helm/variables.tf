@@ -64,23 +64,6 @@ variable "argocd" {
   default     = {}
 }
 
-variable "grafana" {
-  description = "Grafana settings"
-  type        = any
-  default     = {}
-}
-
-variable "prometheus" {
-  description = "Prometheus settings"
-  type        = any
-  default     = {}
-}
-
-variable "alertmanager" {
-  description = "Alertmanager settings"
-  type        = any
-  default     = {}
-}
 
 variable "loki" {
   description = "Loki settings"
