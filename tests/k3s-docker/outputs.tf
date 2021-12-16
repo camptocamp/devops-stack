@@ -66,5 +66,5 @@ output "keycloak_users" {
 
 output "grafana_admin_password" {
   sensitive = true
-  value     = module.cluster.grafana_admin_password
+  value     = module.kube-prometheus-stack.grafana_admin_password
 }
