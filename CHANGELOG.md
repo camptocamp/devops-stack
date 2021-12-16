@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.51.2](https://www.github.com/camptocamp/devops-stack/compare/v0.51.1...v0.51.2) (2021-12-16)
+
+
+### Bug Fixes
+
+* **doc:** default target version and a missing aks module's reference ([#841](https://www.github.com/camptocamp/devops-stack/issues/841)) ([4fb1abe](https://www.github.com/camptocamp/devops-stack/commit/4fb1abe2a57af7c9d7841232652448ebd7b92d5b))
+
 ### [0.51.1](https://www.github.com/camptocamp/devops-stack/compare/v0.51.0...v0.51.1) (2021-12-16)
 
 
