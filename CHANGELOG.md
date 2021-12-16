@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.51.0](https://www.github.com/camptocamp/devops-stack/compare/v0.50.4...v0.51.0) (2021-12-14)
+
+
+### Features
+
+* **aks:** enable parametrization of storage account used by loki ([#835](https://www.github.com/camptocamp/devops-stack/issues/835)) ([0be4796](https://www.github.com/camptocamp/devops-stack/commit/0be4796e2574b172fd56b1c083eff18c4e39b17c))
+
 ### [0.50.4](https://www.github.com/camptocamp/devops-stack/compare/v0.50.3...v0.50.4) (2021-12-08)
 
 
