@@ -10,6 +10,15 @@ output "kubeconfig" {
   sensitive   = true
 }
 
+output "kubernetes" {
+  value = {
+    host                   = local.kubernetes_host                                  
+    client_certificate     = local.kubernetes_client_certificate                    
+    client_key             = local.kubernetes_client_key                            
+    cluster_ca_certificate = local.kubernetes_cluster_ca_certificate                
+  }
+}
+
 output "argocd_server" {
   description = "The URL of the ArgoCD server."
   value       = format("argocd.apps.%s.%s:443", var.cluster_name, local.base_domain)
