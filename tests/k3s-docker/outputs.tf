@@ -2,6 +2,11 @@ output "base_domain" {
   value = module.cluster.base_domain
 }
 
+output "oidc" {
+  value = module.cluster.oidc
+  sensitive = true
+}
+
 output "argocd_auth_token" {
   sensitive = true
   value     = module.cluster.argocd_auth_token
