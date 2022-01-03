@@ -3,12 +3,6 @@ output "argocd_auth_token" {
   value       = jwt_hashed_token.argocd.token
 }
 
-output "app_of_apps_values" {
-  description = "App of Apps values"
-  sensitive   = true
-  value       = helm_release.app_of_apps.values
-}
-
 output "argocd_server_admin_password" {
   description = "The ArgoCD admin password."
   sensitive   = true
