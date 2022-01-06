@@ -12,7 +12,6 @@ module "ingress" {
   source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//terraform"
 
   cluster_name   = var.cluster_name
-  oidc           = module.cluster.oidc
   argocd         = {
     server     = module.cluster.argocd_server
     auth_token = module.cluster.argocd_auth_token
@@ -20,7 +19,6 @@ module "ingress" {
   }
   kubernetes     = module.cluster.kubernetes
   base_domain    = module.cluster.base_domain
-  cluster_issuer = "ca-issuer"
 }
 
 #module "oidc" {
