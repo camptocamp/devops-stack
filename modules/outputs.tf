@@ -34,6 +34,10 @@ output "argocd_namespace" {
   value = module.argocd.argo_namespace
 }
 
+output "argocd_domain" {
+  value = module.argocd.argocd_domain
+}
+
 output "repo_url" {
   value = var.repo_url
 }
