@@ -145,7 +145,7 @@ argo-cd:
     rbacConfig:
       policy.default: ''
       policy.csv: |
-        g, pipeline, role:readonly
+        g, pipeline, role:admin
         g, argocd-admin, role:admin
       scopes: '[groups, cognito:groups, roles]'
 %{ if !bootstrap && cluster_issuer == "ca-issuer" && keycloak.enable }
