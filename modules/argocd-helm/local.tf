@@ -46,17 +46,6 @@ locals {
     var.loki,
   )
 
-  keycloak_defaults = {
-    enable   = false
-    user_map = {}
-    domain   = "keycloak.apps.${var.cluster_name}.${var.base_domain}"
-  }
-
-  keycloak = merge(
-    local.keycloak_defaults,
-    var.keycloak,
-  )
-
   minio_defaults = {
     enable     = false
     access_key = ""
