@@ -25,8 +25,6 @@ apps:
     enabled: false
   efs-provisioner:
     enabled: false
-  keycloak:
-    enabled: ${keycloak.enable}
   kube-prometheus-stack:
     enabled: ${kube_prometheus_stack.enable}
   local-path-provisioner:
@@ -41,8 +39,6 @@ apps:
     enabled: true
   secrets-store-csi-driver:
     enabled: false
-  traefik:
-    enabled: ${traefik.enable}
   vault:
     enabled: false
   thanos:
@@ -148,7 +144,7 @@ argo-cd:
         g, pipeline, role:admin
         g, argocd-admin, role:admin
       scopes: '[groups, cognito:groups, roles]'
-%{ if !bootstrap && cluster_issuer == "ca-issuer" && keycloak.enable }
+%{ if !bootstrap && cluster_issuer == "ca-issuer" }
     volumeMounts:
       - name: certificate
         mountPath: /etc/ssl/certs/ca.crt
