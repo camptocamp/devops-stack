@@ -21,9 +21,20 @@ module "ingress" {
   base_domain    = module.cluster.base_domain
 }
 
-#module "oidc" {
-#  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak.git//terraform"
-#}
+module "oidc" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak.git//terraform"
+
+  cluster_name   = var.cluster_name
+  oidc           = module.cluster.oidc
+  argocd         = {
+    server     = module.cluster.argocd_server
+    auth_token = module.cluster.argocd_auth_token
+    namespace  = module.cluster.argocd_namespace
+  }
+  kubernetes     = module.cluster.kubernetes
+  base_domain    = module.cluster.base_domain
+  cluster_issuer = "ca-issuer"
+}
 
 #module "oidc" {
 #  source = "git::https://github.com/camptocamp/devops-stack-module-cognito.git//terraform"
