@@ -30,6 +30,10 @@ output "argocd_server_admin_password" {
   value       = module.argocd.argocd_server_admin_password
 }
 
+output "argocd_namespace" {
+  value = module.argocd.argo_namespace
+}
+
 output "repo_url" {
   value = var.repo_url
 }
