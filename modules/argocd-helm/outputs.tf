@@ -8,3 +8,7 @@ output "argocd_server_admin_password" {
   sensitive   = true
   value       = random_password.argocd_server_admin.result
 }
+
+output "argo_namespace" {
+  value = helm_release.argocd.metadata.0.namespace
+}
