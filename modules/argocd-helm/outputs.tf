@@ -12,3 +12,7 @@ output "argocd_server_admin_password" {
 output "argo_namespace" {
   value = helm_release.argocd.metadata.0.namespace
 }
+
+output "argocd_domain" {
+  value = local.argocd.domain
+}
