@@ -16,6 +16,7 @@ module "kube-prometheus-stack" {
   argocd         = {
     server     = module.cluster.argocd_server
     auth_token = module.cluster.argocd_auth_token
+    namespace  = module.cluster.argocd_namespace
   }
   kubernetes     = module.cluster.kubernetes
   base_domain    = module.cluster.base_domain
