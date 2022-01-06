@@ -60,15 +60,6 @@ loki-stack:
       annotations:
         eks.amazonaws.com/role-arn: ${loki_assumable_role_arn}
 
-traefik:
-  ports:
-    web:
-      hostPort: 80
-    websecure:
-      hostPort: 443
-  service:
-    type: NodePort
-
 cluster-autoscaler:
   awsRegion: ${aws_default_region}
   rbac:
