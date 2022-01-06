@@ -30,6 +30,7 @@ module "oidc" {
     server     = module.cluster.argocd_server
     auth_token = module.cluster.argocd_auth_token
     namespace  = module.cluster.argocd_namespace
+    domain     = module.cluster.argocd_domain
   }
   kubernetes     = module.cluster.kubernetes
   base_domain    = module.cluster.base_domain
