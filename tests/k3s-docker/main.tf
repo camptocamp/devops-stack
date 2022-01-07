@@ -32,6 +32,8 @@ module "ingress" {
     namespace = module.cluster.argocd_namespace
   }
   base_domain    = module.cluster.base_domain
+
+  #profiles = [ "default", "eks" ]
 }
 
 module "oidc" {
@@ -45,6 +47,8 @@ module "oidc" {
   }
   base_domain    = module.cluster.base_domain
   cluster_issuer = "ca-issuer"
+
+  depends_on = [ module.ingress ]
 }
 
 #module "oidc" {
@@ -62,6 +66,8 @@ module "monitoring" {
   base_domain    = module.cluster.base_domain
   cluster_issuer = "ca-issuer"
   metrics_archives = {}
+
+  depends_on = [ module.oidc ]
 }
 
 #module "myownapp" {
