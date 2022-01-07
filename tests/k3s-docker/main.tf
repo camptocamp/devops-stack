@@ -85,6 +85,25 @@ module "monitoring" {
 #  depends_on = [ module.monitoring ]
 #}
 
+
+module "argocd" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//terraform"
+
+  cluster_name   = var.cluster_name
+  oidc           = module.cluster.oidc
+  argocd         = {
+    namespace = module.cluster.argocd_namespace
+    server_secretkey = module.cluster.argocd_server_secretkey
+    accounts_pipeline_tokens = module.cluster.argocd_accounts_pipeline_tokens
+    server_admin_password = module.cluster.argocd_server_admin_password
+    domain = module.cluster.argocd_domain
+  }
+  base_domain    = module.cluster.base_domain
+  cluster_issuer = "ca-issuer"
+
+  depends_on = [ module.monitoring ]
+}
+
 #module "myownapp" {
 #  source = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git"
 #
