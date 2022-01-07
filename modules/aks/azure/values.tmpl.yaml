@@ -218,14 +218,3 @@ loki-stack:
           active_index_directory: /data/loki/index
           shared_store: azure
           cache_location: /data/loki/boltdb-cache
-
-traefik:
-  resources:
-    limits:
-      memory: 48Mi
-    requests:
-      cpu: 10m
-      memory: 32Mi
-  service:
-    annotations:
-      service.beta.kubernetes.io/azure-dns-label-name: ${azure_dns_label_name}
