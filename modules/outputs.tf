@@ -30,6 +30,18 @@ output "argocd_server_admin_password" {
   value       = module.argocd.argocd_server_admin_password
 }
 
+output "argocd_server_secretkey" {
+  description = "ArgoCD Server Secert Key to avoid regenerate token on redeploy."
+  sensitive   = true
+  value       = module.argocd.argocd_server_secretkey
+}
+
+output "argocd_accounts_pipeline_tokens" {
+  description = "The ArgoCD accounts pipeline tokens."
+  sensitive   = true
+  value       = module.argocd.argocd_accounts_pipeline_tokens
+}
+
 output "argocd_namespace" {
   value = module.argocd.argo_namespace
 }

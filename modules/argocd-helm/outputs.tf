@@ -9,6 +9,18 @@ output "argocd_server_admin_password" {
   value       = random_password.argocd_server_admin.result
 }
 
+output "argocd_server_secretkey" {
+  description = "The ArgoCD server secret key."
+  sensitive   = true
+  value       = local.argocd_server_secretkey
+}
+
+output "argocd_accounts_pipeline_tokens" {
+  description = "The ArgoCD accounts pipeline tokens."
+  sensitive   = true
+  value       = local.argocd_accounts_pipeline_tokens
+}
+
 output "argo_namespace" {
   value = helm_release.argocd.metadata.0.namespace
 }
