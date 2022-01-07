@@ -10,24 +10,6 @@ argo-cd:
     extraArgs:
       - --insecure
 
-cert-manager:
-  serviceAccount:
-    annotations:
-      eks.amazonaws.com/role-arn: ${cert_manager_assumable_role_arn}
-  clusterIssuers:
-    letsencrypt:
-      enabled: true
-    acme:
-      solvers:
-        - dns01:
-            route53:
-              region: ${aws_default_region}
-          selector:
-            dnsZones:
-              - ${base_domain}
-        - http01:
-            ingress: {}
-
 efs-provisioner:
   efsProvisioner:
     efsFileSystemId: ${efs_filesystem_id}
