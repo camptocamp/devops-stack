@@ -5,7 +5,7 @@ module "cluster" {
 
   repo_url        = "https://github.com/raphink/devops-stack.git"
   target_revision = "argo_modules"
-  wait_for_app_of_apps = false
+  #  wait_for_app_of_apps = false
 }
 
 provider "argocd" {
@@ -70,21 +70,24 @@ module "monitoring" {
   depends_on = [ module.oidc ]
 }
 
-#module "cert-manager" {
-#  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//terraform"
-#
-#  cluster_name   = var.cluster_name
-#  oidc           = module.cluster.oidc
-#  argocd         = {
-#    namespace = module.cluster.argocd_namespace
-#  }
-#  base_domain    = module.cluster.base_domain
-#  cluster_issuer = "ca-issuer"
-#  metrics_archives = {}
-#
-#  depends_on = [ module.monitoring ]
-#}
 
+module "cert-manager" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//terraform"
+
+  cluster_name   = var.cluster_name
+  oidc           = module.cluster.oidc
+  argocd         = {
+    namespace = module.cluster.argocd_namespace
+  }
+  base_domain    = module.cluster.base_domain
+  cluster_issuer = "ca-issuer"
+
+  #cert_manager   = {
+  #  cluster_oidc_issuer_user = module.cluster.cluster_oidc_issuer_user
+  #}
+
+  depends_on = [ module.monitoring ]
+}
 
 module "argocd" {
   source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//terraform"
@@ -101,7 +104,7 @@ module "argocd" {
   base_domain    = module.cluster.base_domain
   cluster_issuer = "ca-issuer"
 
-  depends_on = [ module.monitoring ]
+  depends_on = [ module.cert-manager ]
 }
 
 #module "myownapp" {
