@@ -54,7 +54,3 @@ loki-stack:
         working_directory: /data/compactor
         shared_store: s3
         compaction_interval: 5m
-
-cert-manager:
-  tlsCrt: ${root_cert}
-  tlsKey: ${root_key}
