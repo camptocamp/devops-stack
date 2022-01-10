@@ -25,7 +25,7 @@ provider "argocd" {
 }
 
 module "ingress" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//terraform"
+  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//modules"
 
   cluster_name   = var.cluster_name
   argocd         = {
@@ -37,7 +37,7 @@ module "ingress" {
 }
 
 module "oidc" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak.git//terraform"
+  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak.git//modules"
 
   cluster_name   = var.cluster_name
   oidc           = module.cluster.oidc
@@ -52,11 +52,11 @@ module "oidc" {
 }
 
 #module "oidc" {
-#  source = "git::https://github.com/camptocamp/devops-stack-module-cognito.git//terraform"
+#  source = "git::https://github.com/camptocamp/devops-stack-module-cognito.git//modules"
 #}
 
 module "monitoring" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//terraform"
+  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//modules"
 
   cluster_name   = var.cluster_name
   oidc           = module.cluster.oidc
@@ -72,7 +72,7 @@ module "monitoring" {
 
 
 module "cert-manager" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//terraform/k3s"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//modules/k3s"
 
   cluster_name   = var.cluster_name
   oidc           = module.cluster.oidc
@@ -89,23 +89,23 @@ module "cert-manager" {
   depends_on = [ module.monitoring ]
 }
 
-#module "argocd" {
-#  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//terraform"
-#
-#  cluster_name   = var.cluster_name
-#  oidc           = module.cluster.oidc
-#  argocd         = {
-#    namespace = module.cluster.argocd_namespace
-#    server_secretkey = module.cluster.argocd_server_secretkey
-#    accounts_pipeline_tokens = module.cluster.argocd_accounts_pipeline_tokens
-#    server_admin_password = module.cluster.argocd_server_admin_password
-#    domain = module.cluster.argocd_domain
-#  }
-#  base_domain    = module.cluster.base_domain
-#  cluster_issuer = "ca-issuer"
-#
-#  depends_on = [ module.cert-manager ]
-#}
+module "argocd" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//modules/k3s"
+
+  cluster_name   = var.cluster_name
+  oidc           = module.cluster.oidc
+  argocd         = {
+    namespace = module.cluster.argocd_namespace
+    server_secretkey = module.cluster.argocd_server_secretkey
+    accounts_pipeline_tokens = module.cluster.argocd_accounts_pipeline_tokens
+    server_admin_password = module.cluster.argocd_server_admin_password
+    domain = module.cluster.argocd_domain
+  }
+  base_domain    = module.cluster.base_domain
+  cluster_issuer = "ca-issuer"
+
+  depends_on = [ module.cert-manager ]
+}
 
 #module "myownapp" {
 #  source = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git"

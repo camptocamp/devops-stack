@@ -1,9 +1,4 @@
 ---
-argo-cd:
-  server:
-    extraArgs:
-      - --insecure
-
 loki-stack:
   loki:
     config:
