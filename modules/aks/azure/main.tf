@@ -246,7 +246,7 @@ resource "azuread_application" "oauth2_apps" {
   display_name = "oauth2-apps-${var.cluster_name}"
 
   required_resource_access {
-    resource_app_id = random_uuid.resource_app_id.0.result
+    resource_app_id = "00000003-0000-0000-c000-000000000000"
 
     resource_access {
       id   = "e1fe6dd8-ba31-4d61-89e7-88639da4683d"
@@ -291,10 +291,6 @@ resource "azuread_application" "oauth2_apps" {
   }
 
   group_membership_claims = ["ApplicationGroup"]
-}
-
-resource "random_uuid" "resource_app_id" {
-  count = var.oidc == null ? 1 : 0
 }
 
 resource "random_uuid" "argocd_app_role" {
