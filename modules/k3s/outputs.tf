@@ -11,8 +11,8 @@ output "keycloak_users" {
   sensitive = true
 }
 
-output "keycloak_admin_password" {
-  description = "The password of Keycloak's admin user."
-  value       = data.kubernetes_secret.keycloak_admin_password.data.ADMIN_PASSWORD
-  sensitive   = true
-}
+#output "keycloak_admin_password" {
+#  description = "The password of Keycloak's admin user."
+#  value       = data.kubernetes_secret.keycloak_admin_password.data.ADMIN_PASSWORD
+#  sensitive   = true
+#}
