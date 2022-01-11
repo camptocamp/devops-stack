@@ -1,3 +1,4 @@
+# bootstrap
 module "cluster" {
   source = "../../modules/k3s/docker"
 
@@ -5,7 +6,6 @@ module "cluster" {
 
   repo_url        = "https://github.com/raphink/devops-stack.git"
   target_revision = "argo_modules"
-  #  wait_for_app_of_apps = false
 }
 
 provider "argocd" {
@@ -108,7 +108,7 @@ module "argocd" {
 }
 
 #module "myownapp" {
-#  source = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git"
+#  source = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git//modules"
 #
 #  cluster_name   = module.cluster.cluster_name
 #  oidc           = module.cluster.oidc
