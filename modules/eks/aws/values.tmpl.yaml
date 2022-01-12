@@ -16,32 +16,6 @@ efs-provisioner:
     awsRegion: ${aws_default_region}
     dnsName: ${efs_dns_name}
 
-loki-stack:
-  loki:
-    config:
-      schema_config:
-        configs:
-          - from: 2020-10-24
-            store: boltdb-shipper
-            object_store: s3
-            schema: v11
-            index:
-              prefix: index_
-              period: 24h
-
-      storage_config:
-        aws:
-          s3: s3://${aws_default_region}/${loki_bucket_name}
-
-        boltdb_shipper:
-          active_index_directory: /data/loki/index
-          shared_store: s3
-          cache_location: /data/loki/boltdb-cache
-
-    serviceAccount:
-      annotations:
-        eks.amazonaws.com/role-arn: ${loki_assumable_role_arn}
-
 cluster-autoscaler:
   awsRegion: ${aws_default_region}
   rbac:

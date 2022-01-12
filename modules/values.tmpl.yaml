@@ -164,10 +164,6 @@ cert-manager: {}
 
 csi-secrets-store-provider-azure: {}
 
-%{ if loki.enable }
-loki-stack: {}
-%{ endif }
-
 %{ if metrics_server.enable}
 metrics-server: {}
 %{ endif }
