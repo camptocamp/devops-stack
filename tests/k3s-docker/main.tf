@@ -72,7 +72,7 @@ module "monitoring" {
 
 
 module "cert-manager" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//modules/k3s"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//modules/self-signed"
 
   cluster_name   = var.cluster_name
   oidc           = module.cluster.oidc
