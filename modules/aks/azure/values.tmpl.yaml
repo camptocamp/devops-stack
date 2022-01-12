@@ -113,26 +113,3 @@ cert-manager:
         cpu: 10m
         memory: 32Mi
 
-loki-stack:
-  loki:
-    config:
-      schema_config:
-        configs:
-          - from: 2020-12-22
-            store: boltdb-shipper
-            object_store: azure
-            schema: v11
-            index:
-              prefix: index_
-              period: 24h
-
-      storage_config:
-        azure:
-          container_name: ${loki_container_name}
-          account_name: ${loki_account_name}
-          account_key: ${loki_account_key}
-
-        boltdb_shipper:
-          active_index_directory: /data/loki/index
-          shared_store: azure
-          cache_location: /data/loki/boltdb-cache
