@@ -61,7 +61,6 @@ The `aks/azure` Terraform module provides a way to install and configure:
 |https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password[random_password.grafana_admin_password] |resource
 |https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string[random_string.storage_account] |resource
 |https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/uuid[random_uuid.argocd_app_role] |resource
-|https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/uuid[random_uuid.resource_app_id] |resource
 |https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config[azurerm_client_config.current] |data source
 |https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/dns_zone[azurerm_dns_zone.this] |data source
 |https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/kubernetes_cluster[azurerm_kubernetes_cluster.cluster] |data source
@@ -88,10 +87,22 @@ The `aks/azure` Terraform module provides a way to install and configure:
 |`2`
 |no
 
+|[[input_agents_labels]] <<input_agents_labels,agents_labels>>
+|A map of Kubernetes labels which should be applied to nodes in the Default Node Pool. Changing this forces a new resource to be created.
+|`map(string)`
+|`{}`
+|no
+
 |[[input_agents_max_pods]] <<input_agents_max_pods,agents_max_pods>>
 |(Optional) The maximum number of pods that can run on each agent. Changing this forces a new resource to be created.
 |`number`
 |`null`
+|no
+
+|[[input_agents_pool_name]] <<input_agents_pool_name,agents_pool_name>>
+|The default Azure AKS agentpool (nodepool) name.
+|`string`
+|`"nodepool"`
 |no
 
 |[[input_agents_size]] <<input_agents_size,agents_size>>
@@ -230,6 +241,12 @@ object({
 |`string`
 |n/a
 |yes
+
+|[[input_sku_tier]] <<input_sku_tier,sku_tier>>
+|The SKU Tier that should be used for this Kubernetes Cluster. Possible values are Free and Paid
+|`string`
+|`"Free"`
+|no
 
 |[[input_storage_account_replication_type]] <<input_storage_account_replication_type,storage_account_replication_type>>
 |Storage account replication type for storing loki logs
