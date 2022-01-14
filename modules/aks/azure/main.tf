@@ -60,12 +60,15 @@ module "cluster" {
 
   kubernetes_version   = var.kubernetes_version
   orchestrator_version = var.kubernetes_version
+  sku_tier             = var.sku_tier
 
   resource_group_name = data.azurerm_resource_group.this.name
   prefix              = var.cluster_name
   network_plugin      = "azure"
   network_policy      = var.network_policy
   vnet_subnet_id      = var.vnet_subnet_id
+  agents_pool_name    = var.agents_pool_name
+  agents_labels       = var.agents_labels
   agents_count        = var.agents_count
   agents_size         = var.agents_size
   agents_max_pods     = var.agents_max_pods
