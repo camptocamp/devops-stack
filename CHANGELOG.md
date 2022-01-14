@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.52.0](https://www.github.com/camptocamp/devops-stack/compare/v0.51.1...v0.52.0) (2022-01-14)
+
+
+### Features
+
+* **aks:** add agents_pool_name, agents_label and sku_tier params to module interface ([#846](https://www.github.com/camptocamp/devops-stack/issues/846)) ([964ed0b](https://www.github.com/camptocamp/devops-stack/commit/964ed0bf8a7f3f137d9f0cd7a8bed8c1c153a596))
+
+
+### Bug Fixes
+
+* **aks:** azuread application use ms graph ([#845](https://www.github.com/camptocamp/devops-stack/issues/845)) ([1ef031e](https://www.github.com/camptocamp/devops-stack/commit/1ef031ed32ab70a3a50eef0b3dd4131a5ea9a80f))
+* **doc:** default target version and a missing aks module's reference ([#841](https://www.github.com/camptocamp/devops-stack/issues/841)) ([4fb1abe](https://www.github.com/camptocamp/devops-stack/commit/4fb1abe2a57af7c9d7841232652448ebd7b92d5b))
+
 ### [0.51.1](https://www.github.com/camptocamp/devops-stack/compare/v0.51.0...v0.51.1) (2021-12-16)
 
 
