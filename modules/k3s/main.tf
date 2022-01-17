@@ -6,10 +6,6 @@ locals {
   kubernetes_client_key             = base64decode(local.context.users.0.user.client-key-data)
   kubernetes_cluster_ca_certificate = base64decode(local.context.clusters.0.cluster.certificate-authority-data)
   kubeconfig                        = module.cluster.kubeconfig
-  minio = {
-    access_key = var.enable_minio ? random_password.minio_accesskey.0.result : ""
-    secret_key = var.enable_minio ? random_password.minio_secretkey.0.result : ""
-  }
   keycloak_user_map = { for username, infos in var.keycloak_users : username => merge(infos, tomap({ password = random_password.keycloak_passwords[username].result })) }
   oidc = var.oidc != null ? var.oidc : {
     issuer_url    = format("https://keycloak.apps.%s.%s/auth/realms/devops-stack", var.cluster_name, local.base_domain)
@@ -58,12 +54,6 @@ module "argocd" {
 
   oidc = local.oidc
 
-  minio = {
-    enable     = var.enable_minio
-    access_key = local.minio.access_key
-    secret_key = local.minio.secret_key
-  }
-
   keycloak = {
     enable   = var.oidc == null ? true : false
     user_map = local.keycloak_user_map
@@ -73,19 +63,19 @@ module "argocd" {
     bucket_name = "loki"
   }
 
-  metrics_archives = {
-    bucket_name = "thanos",
-    bucket_config = {
-      "type" = "S3",
-      "config" = {
-        "bucket"     = "thanos",
-        "endpoint"   = "minio.minio.svc:9000",
-        "insecure"   = true,
-        "access_key" = local.minio.access_key,
-        "secret_key" = local.minio.secret_key
-      }
-    }
-  }
+  #metrics_archives = {
+  #  bucket_name = "thanos",
+  #  bucket_config = {
+  #    "type" = "S3",
+  #    "config" = {
+  #      "bucket"     = "thanos",
+  #      "endpoint"   = "minio.minio.svc:9000",
+  #      "insecure"   = true,
+  #      "access_key" = local.minio.access_key,
+  #      "secret_key" = local.minio.secret_key
+  #    }
+  #  }
+  #}
 
   repositories = var.repositories
 
@@ -94,10 +84,8 @@ module "argocd" {
       {
         base_domain      = local.base_domain
         cluster_name     = var.cluster_name
-        minio_access_key = local.minio.access_key
-        minio_secret_key = local.minio.secret_key
-        root_cert        = base64encode(tls_self_signed_cert.root.cert_pem)
-        root_key         = base64encode(tls_private_key.root.private_key_pem)
+        #root_cert        = base64encode(tls_self_signed_cert.root.cert_pem)
+        #root_key         = base64encode(tls_private_key.root.private_key_pem)
       }
     ),
     var.app_of_apps_values_overrides,
@@ -126,38 +114,4 @@ resource "random_password" "keycloak_passwords" {
   for_each = var.keycloak_users
   length   = 16
   special  = false
-}
-
-resource "random_password" "minio_accesskey" {
-  count   = var.enable_minio ? 1 : 0
-  length  = 16
-  special = false
-}
-
-resource "random_password" "minio_secretkey" {
-  count   = var.enable_minio ? 1 : 0
-  length  = 16
-  special = false
-}
-
-resource "tls_private_key" "root" {
-  algorithm = "ECDSA"
-}
-
-resource "tls_self_signed_cert" "root" {
-  key_algorithm   = "ECDSA"
-  private_key_pem = tls_private_key.root.private_key_pem
-
-  subject {
-    common_name  = "devops-stack.camptocamp.com"
-    organization = "Camptocamp, SA"
-  }
-
-  validity_period_hours = 8760
-
-  allowed_uses = [
-    "cert_signing",
-  ]
-
-  is_ca_certificate = true
 }
