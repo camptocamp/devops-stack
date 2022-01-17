@@ -50,19 +50,29 @@ output "alertmanager_url" {
   value = format("https://alertmanager.apps.%s.%s", var.cluster_name, module.cluster.base_domain)
 }
 
-#output "keycloak_url" {
-#  value = format("https://keycloak.apps.%s.%s/auth/realms/devops-stack/account", var.cluster_name, module.cluster.base_domain)
-#}
-#
+output "keycloak_url" {
+  value = format("https://keycloak.apps.%s.%s/auth/realms/devops-stack/account", var.cluster_name, module.cluster.base_domain)
+}
+
 #output "keycloak_admin_password" {
 #  sensitive = true
-#  value     = module.cluster.keycloak_admin_password
+#  value     = module.oidc.keycloak_admin_password
 #}
-#
-#output "keycloak_users" {
-#  sensitive = true
-#  value     = module.cluster.keycloak_users
-#}
+
+output "keycloak_users" {
+  sensitive = true
+  value     = module.oidc.keycloak_users
+}
+
+output "minio_access_key" {
+  sensitive = true
+  value     = module.storage.access_key
+}
+
+output "minio_secret_key" {
+  sensitive = true
+  value     = module.storage.secret_key
+}
 
 output "grafana_admin_password" {
   sensitive = true

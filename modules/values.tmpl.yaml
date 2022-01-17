@@ -168,35 +168,6 @@ csi-secrets-store-provider-azure: {}
 metrics-server: {}
 %{ endif }
 
-%{ if minio.enable }
-minio:
-  accessKey: "${replace(minio.access_key, "\"", "\\\"")}"
-  secretKey: "${replace(minio.secret_key, "\"", "\\\"")}"
-  ingress:
-    enabled: true
-    annotations:
-      cert-manager.io/cluster-issuer: "${cluster_issuer}"
-      traefik.ingress.kubernetes.io/router.entrypoints: websecure
-      traefik.ingress.kubernetes.io/router.tls: "true"
-      ingress.kubernetes.io/ssl-redirect: "true"
-      kubernetes.io/ingress.allow-http: "false"
-    hosts:
-      - "${minio.domain}"
-      - "minio.apps.${base_domain}"
-    tls:
-      - secretName: minio-tls
-        hosts:
-          - "${minio.domain}"
-          - "minio.apps.${base_domain}"
-  buckets:
-    - name: "${loki.bucket_name}"
-      policy: none
-      purge: false
-    - name: "${metrics_archives.bucket_name}"
-      policy: none
-      purge: false
-%{ endif }
-
 secrets-store-csi-driver: {}
 
 vault: {}

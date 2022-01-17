@@ -41,3 +41,10 @@ output "kubernetes_cluster_ca_certificate" {
 output "kubernetes_token" {
   value = local.kubernetes_token
 }
+
+output "kubernetes" {
+  value = {
+    host                   = local.kubernetes_host
+    cluster_ca_certificate = local.kubernetes_cluster_ca_certificate
+  }
+}

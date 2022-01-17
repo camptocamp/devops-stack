@@ -6,6 +6,15 @@ output "oidc" {
   value = local.oidc
 }
 
+output "kubernetes" {
+  value = {
+    host                   = local.kubernetes_host
+    client_certificate     = local.kubernetes_client_certificate
+    client_key             = local.kubernetes_client_key
+    cluster_ca_certificate = local.kubernetes_cluster_ca_certificate
+  }
+}
+
 output "keycloak_users" {
   value     = { for username, infos in local.keycloak_user_map : username => lookup(infos, "password") }
   sensitive = true
