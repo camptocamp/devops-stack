@@ -1,4 +1,4 @@
-output "base_domain" {
+/* output "base_domain" {
   value = module.cluster.base_domain
 }
 
@@ -54,3 +54,4 @@ output "grafana_admin_password" {
   sensitive = true
   value     = module.cluster.grafana_admin_password
 }
+*/
