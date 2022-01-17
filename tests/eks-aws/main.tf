@@ -36,6 +36,7 @@ module "cluster" {
   source = "../../modules/eks/aws"
 
   cluster_name = var.cluster_name
+  base_domain = "demo.camptocamp.com"
   vpc_id       = module.vpc.vpc_id
 
   cluster_endpoint_public_access_cidrs = flatten([
@@ -77,3 +78,142 @@ resource "aws_security_group_rule" "workers_ingress_public_access_http" {
   to_port           = 80
   cidr_blocks       = ["0.0.0.0/0"]
 }
+
+
+provider "argocd" {
+  server_addr = "127.0.0.1:8080"
+  auth_token  = module.cluster.argocd_auth_token
+  insecure = true
+  plain_text = true
+  port_forward = true
+  port_forward_with_namespace = module.cluster.argocd_namespace
+
+  kubernetes {
+    host                   = module.cluster.kubernetes_host
+    cluster_ca_certificate = module.cluster.kubernetes_cluster_ca_certificate
+    token = module.cluster.kubernetes_token
+
+    /*
+    exec = [
+      {
+        api_version = "client.authentication.k8s.io/v1alpha1"
+        command = "aws"
+        args = [
+          "--region",
+          module.cluster.aws_region,
+          "eks",
+          "get-token",
+          "--cluster-name",
+          module.cluster.name,
+        ]
+      }
+    ]
+    */
+  }
+}
+
+module "ingress" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//modules"
+
+  cluster_name   = var.cluster_name
+  argocd         = {
+    namespace = module.cluster.argocd_namespace
+  }
+  base_domain    = module.cluster.base_domain
+
+  profiles = [ "default", "eks" ]
+}
+
+# module "oidc" {
+#   source = "git::https://github.com/camptocamp/devops-stack-module-keycloak.git//modules"
+
+#   cluster_name   = var.cluster_name
+#   oidc           = module.cluster.oidc
+#   argocd         = {
+#     namespace = module.cluster.argocd_namespace
+#     domain    = module.cluster.argocd_domain
+#   }
+#   base_domain    = module.cluster.base_domain
+#   cluster_issuer = "ca-issuer"
+
+#   depends_on = [ module.ingress ]
+# }
+
+#module "oidc" {
+#  source = "git::https://github.com/camptocamp/devops-stack-module-cognito.git//modules"
+#}
+
+module "monitoring" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//modules"
+
+  cluster_name   = var.cluster_name
+  oidc           = module.cluster.oidc
+  argocd         = {
+    namespace = module.cluster.argocd_namespace
+  }
+  base_domain    = module.cluster.base_domain
+  cluster_issuer = "letsencrypt-prod"
+  metrics_archives = {}
+
+  # depends_on = [ module.oidc ]
+}
+
+# module "loki-stack" {
+#   source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack.git//modules"
+
+#   cluster_name   = var.cluster_name
+#   oidc           = module.cluster.oidc
+#   argocd         = {
+#     namespace = module.cluster.argocd_namespace
+#   }
+#   base_domain    = module.cluster.base_domain
+#   cluster_issuer = "ca-issuer"
+
+#   depends_on = [ module.monitoring ]
+# }
+
+
+module "cert-manager" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//modules/eks"
+
+  cluster_name     = var.cluster_name
+  argocd_namespace = module.cluster.argocd_namespace
+  base_domain      = module.cluster.base_domain
+
+  cluster_oidc_issuer_url = module.cluster.cluster_oidc_issuer_url
+
+  depends_on = [ module.monitoring ]
+}
+
+module "argocd" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//modules/eks"
+
+  cluster_name   = var.cluster_name
+  oidc           = module.cluster.oidc
+  argocd         = {
+    namespace = module.cluster.argocd_namespace
+    server_secretkey = module.cluster.argocd_server_secretkey
+    accounts_pipeline_tokens = module.cluster.argocd_accounts_pipeline_tokens
+    server_admin_password = module.cluster.argocd_server_admin_password
+    domain = module.cluster.argocd_domain
+  }
+  base_domain    = module.cluster.base_domain
+  cluster_issuer = "letsencrypt-prod"
+
+  depends_on = [ module.cert-manager ]
+}
+
+#module "myownapp" {
+#  source = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git//modules"
+#
+#  cluster_name   = module.cluster.cluster_name
+#  oidc           = module.cluster.oidc
+#  argocd         = {
+#    server     = module.cluster.argocd_server
+#    auth_token = module.cluster.argocd_auth_token
+#  }
+#  base_domain    = module.cluster.base_domain
+#  cluster_issuer = module.cluster.cluster_issuer
+#
+#  argocd_url = "https://github.com/camptocamp/myapp.git"
+#}
