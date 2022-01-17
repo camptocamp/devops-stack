@@ -70,18 +70,34 @@ module "monitoring" {
   depends_on = [ module.oidc ]
 }
 
-module "loki-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack.git//modules"
+module "storage" {
+  #source = "git::https://github.com/camptocamp/devops-stack-module-minio.git//modules"
+  source = "/home/raphink/src/github.com/camptocamp/devops-stack-module-minio/modules"
 
-  cluster_name   = var.cluster_name
-  oidc           = module.cluster.oidc
-  argocd         = {
-    namespace = module.cluster.argocd_namespace
-  }
-  base_domain    = module.cluster.base_domain
-  cluster_issuer = "ca-issuer"
+  cluster_name     = var.cluster_name
+  #oidc             = module.cluster.oidc
+  argocd_namespace = module.cluster.argocd_namespace
+  base_domain      = module.cluster.base_domain
+  cluster_issuer   = "ca-issuer"
 
   depends_on = [ module.monitoring ]
+}
+
+module "loki-stack" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack.git//modules/k3s"
+
+  cluster_name     = var.cluster_name
+  #oidc             = module.cluster.oidc
+  argocd_namespace = module.cluster.argocd_namespace
+  base_domain      = module.cluster.base_domain
+  #cluster_issuer   = "ca-issuer"
+
+  minio = {
+    access_key = module.storage.access_key
+    secret_key = module.storage.secret_key
+  }
+
+  depends_on = [ module.monitoring, module.storage ]
 }
 
 
