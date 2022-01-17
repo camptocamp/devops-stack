@@ -16,6 +16,8 @@ locals {
   cluster_issuer          = "letsencrypt-prod"
 }
 
+data "aws_region" "current" {}
+
 data "aws_vpc" "this" {
   id = var.vpc_id
 }
@@ -34,6 +36,12 @@ data "aws_subnet_ids" "public" {
   tags = {
     "kubernetes.io/role/elb" = "1"
   }
+}
+
+data "aws_route53_zone" "this" {
+  count = var.base_domain == null ? 0 : 1
+
+  name = var.base_domain
 }
 
 data "aws_eks_cluster" "cluster" {
@@ -115,17 +123,12 @@ module "argocd" {
   base_domain             = local.base_domain
   argocd_server_secretkey = var.argocd_server_secretkey
   cluster_issuer          = local.cluster_issuer
-  wait_for_app_of_apps    = var.wait_for_app_of_apps
 
   oidc = local.oidc
 
-  loki = {
-    bucket_name = aws_s3_bucket.loki.id,
-  }
-
-  grafana = {
-    admin_password = local.grafana_admin_password
-  }
+  # loki = {
+  #   bucket_name = aws_s3_bucket.loki.id,
+  # }
 
   cluster_autoscaler = {
     enable = var.enable_cluster_autoscaler
@@ -138,9 +141,6 @@ module "argocd" {
       {
         aws_default_region              = data.aws_region.current.name
         base_domain                     = local.base_domain
-        cert_manager_assumable_role_arn = var.base_domain == null ? "" : module.iam_assumable_role_cert_manager.0.iam_role_arn,
-        loki_assumable_role_arn         = module.iam_assumable_role_loki.iam_role_arn,
-        loki_bucket_name                = aws_s3_bucket.loki.id,
         enable_efs                      = var.enable_efs
         efs_filesystem_id               = var.enable_efs ? module.efs.0.this_efs_mount_target_file_system_id : ""
         efs_dns_name                    = var.enable_efs ? module.efs.0.this_efs_mount_target_full_dns_name : ""
