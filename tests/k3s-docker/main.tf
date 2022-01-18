@@ -40,7 +40,7 @@ module "oidc" {
   source = "git::https://github.com/camptocamp/devops-stack-module-keycloak.git//modules"
 
   cluster_name   = var.cluster_name
-  oidc           = module.cluster.oidc
+  #oidc           = module.cluster.oidc
   argocd         = {
     namespace = module.cluster.argocd_namespace
     domain    = module.cluster.argocd_domain
@@ -59,7 +59,7 @@ module "monitoring" {
   source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//modules"
 
   cluster_name   = var.cluster_name
-  oidc           = module.cluster.oidc
+  oidc           = module.oidc.oidc
   argocd         = {
     namespace = module.cluster.argocd_namespace
   }
@@ -108,7 +108,6 @@ module "loki-stack" {
   source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack.git//modules/k3s"
 
   cluster_name     = var.cluster_name
-  #oidc             = module.cluster.oidc
   argocd_namespace = module.cluster.argocd_namespace
   base_domain      = module.cluster.base_domain
   #cluster_issuer   = "ca-issuer"
@@ -136,7 +135,7 @@ module "argocd" {
   source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//modules/k3s"
 
   cluster_name   = var.cluster_name
-  oidc           = module.cluster.oidc
+  oidc           = module.oidc.oidc
   argocd         = {
     namespace = module.cluster.argocd_namespace
     server_secretkey = module.cluster.argocd_server_secretkey
@@ -154,7 +153,7 @@ module "argocd" {
 #  source = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git//modules"
 #
 #  cluster_name   = module.cluster.cluster_name
-#  oidc           = module.cluster.oidc
+#  oidc           = module.oidc.oidc
 #  argocd         = {
 #    server     = module.cluster.argocd_server
 #    auth_token = module.cluster.argocd_auth_token
