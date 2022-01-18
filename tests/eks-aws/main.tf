@@ -92,23 +92,6 @@ provider "argocd" {
     host                   = module.cluster.kubernetes_host
     cluster_ca_certificate = module.cluster.kubernetes_cluster_ca_certificate
     token = module.cluster.kubernetes_token
-
-    /*
-    exec = [
-      {
-        api_version = "client.authentication.k8s.io/v1alpha1"
-        command = "aws"
-        args = [
-          "--region",
-          module.cluster.aws_region,
-          "eks",
-          "get-token",
-          "--cluster-name",
-          module.cluster.name,
-        ]
-      }
-    ]
-    */
   }
 }
 
