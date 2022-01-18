@@ -80,6 +80,13 @@ module "storage" {
   base_domain      = module.cluster.base_domain
   cluster_issuer   = "ca-issuer"
 
+  minio = {
+    buckets = {
+      loki = {}
+      thanos = {}
+    }
+  }
+
   depends_on = [ module.monitoring ]
 }
 
