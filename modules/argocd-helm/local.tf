@@ -4,8 +4,8 @@ locals {
     oauth_url               = ""
     token_url               = ""
     api_url                 = ""
-    client_id               = ""
-    client_secret           = ""
+    client_id               = "CHANGEME"
+    client_secret           = "CHANGEME"
     oauth2_proxy_extra_args = []
   }
   oidc = merge(
