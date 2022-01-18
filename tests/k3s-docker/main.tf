@@ -109,7 +109,6 @@ module "loki-stack" {
   cluster_name     = var.cluster_name
   argocd_namespace = module.cluster.argocd_namespace
   base_domain      = module.cluster.base_domain
-  #cluster_issuer   = "ca-issuer"
 
   minio = {
     access_key = module.storage.access_key
