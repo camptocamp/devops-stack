@@ -10,5 +10,5 @@ variable "target_revision" {
 
 variable "cluster_name" {
   type    = string
-  default = "devops-stack-test"
+  default = "devops-stack-rpn-modules"
 }

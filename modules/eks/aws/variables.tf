@@ -53,16 +53,6 @@ variable "worker_groups" {
   default     = []
 }
 
-variable "cognito_user_pool_id" {
-  description = "ID of the Cognito user pool to use."
-  type        = string
-}
-
-variable "cognito_user_pool_domain" {
-  description = "Domain prefix of the Cognito user pool to use (custom domain currently not supported!)."
-  type        = string
-}
-
 variable "kubeconfig_aws_authenticator_command" {
   description = "Override the kubeconfig authenticator command"
   type        = string
