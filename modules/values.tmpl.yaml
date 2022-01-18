@@ -172,59 +172,6 @@ secrets-store-csi-driver: {}
 
 vault: {}
 
-%{ if can(metrics_archives.bucket_config) }
-thanos:
-  ${ indent(4,yamlencode({"objstoreConfig": metrics_archives.bucket_config})) }
-
-  storegateway:
-    enabled: true
-    createConfigMap: true
-
-  query:
-    dnsDiscovery:
-      sidecarsService: kube-prometheus-stack-thanos-discovery
-      sidecarsNamespace: kube-prometheus-stack
-
-  bucketweb:
-    enabled: true
-    ingress:
-      enabled: true
-      annotations:
-        cert-manager.io/cluster-issuer: "${cluster_issuer}"
-        traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.tls: "true"
-        ingress.kubernetes.io/ssl-redirect: "true"
-        kubernetes.io/ingress.allow-http: "false"
-      hostname: "thanos-bucketweb.apps.${base_domain}"
-      extraHosts:
-        - name: "${metrics_archives.bucketweb_domain}"
-      tls: true
-      extraTls:
-        - secretName: thanos-bucketweb-tls
-          hosts:
-            - "${metrics_archives.bucketweb_domain}"
-            - "thanos-query.apps.${base_domain}"
-
-  queryFrontend:
-    ingress:
-      enabled: true
-      annotations:
-        cert-manager.io/cluster-issuer: "${cluster_issuer}"
-        traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.tls: "true"
-        ingress.kubernetes.io/ssl-redirect: "true"
-        kubernetes.io/ingress.allow-http: "false"
-      hostname: "thanos-query.apps.${base_domain}"
-      extraHosts:
-        - name: "${metrics_archives.query_domain}"
-      tls: true
-      extraTls:
-        - secretName: thanos-query-tls
-          hosts:
-            - "${metrics_archives.query_domain}"
-            - "thanos-query.apps.${base_domain}"
-%{ endif }
-
 %{ if cluster_autoscaler.enable }
 cluster-autoscaler: {}
 %{ endif }

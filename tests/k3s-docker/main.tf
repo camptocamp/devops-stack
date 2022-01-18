@@ -70,11 +70,26 @@ module "monitoring" {
   depends_on = [ module.oidc ]
 }
 
+module "metrics-archives" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//modules/k3s"
+
+  cluster_name     = var.cluster_name
+  argocd_namespace = module.cluster.argocd_namespace
+  base_domain      = module.cluster.base_domain
+  cluster_issuer   = "ca-issuer"
+
+  minio = {
+    access_key = module.storage.access_key
+    secret_key = module.storage.secret_key
+  }
+
+  depends_on = [ module.monitoring, module.loki-stack ]
+}
+
 module "storage" {
   source = "git::https://github.com/camptocamp/devops-stack-module-minio.git//modules"
 
   cluster_name     = var.cluster_name
-  #oidc             = module.cluster.oidc
   argocd_namespace = module.cluster.argocd_namespace
   base_domain      = module.cluster.base_domain
   cluster_issuer   = "ca-issuer"
@@ -132,7 +147,7 @@ module "argocd" {
   base_domain    = module.cluster.base_domain
   cluster_issuer = "ca-issuer"
 
-  depends_on = [ module.cert-manager ]
+  depends_on = [ module.cert-manager, module.metrics-archives ]
 }
 
 #module "myownapp" {
