@@ -136,20 +136,15 @@ module "monitoring" {
   depends_on = [ module.oidc ]
 }
 
-# module "loki-stack" {
-#   source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack.git//modules"
+module "loki-stack" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack.git//modules"
 
-#   cluster_name   = var.cluster_name
-#   oidc           = module.oidc.oidc
-#   argocd         = {
-#     namespace = module.cluster.argocd_namespace
-#   }
-#   base_domain    = module.cluster.base_domain
-#   cluster_issuer = "ca-issuer"
+  cluster_name     = var.cluster_name
+  argocd_namespace = module.cluster.argocd_namespace
+  base_domain      = module.cluster.base_domain
 
-#   depends_on = [ module.monitoring ]
-# }
-
+  depends_on = [ module.monitoring ]
+}
 
 module "cert-manager" {
   source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//modules/eks"
