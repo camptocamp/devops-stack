@@ -71,8 +71,7 @@ module "monitoring" {
 }
 
 module "storage" {
-  #source = "git::https://github.com/camptocamp/devops-stack-module-minio.git//modules"
-  source = "/home/raphink/src/github.com/camptocamp/devops-stack-module-minio/modules"
+  source = "git::https://github.com/camptocamp/devops-stack-module-minio.git//modules"
 
   cluster_name     = var.cluster_name
   #oidc             = module.cluster.oidc
