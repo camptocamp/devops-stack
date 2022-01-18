@@ -40,7 +40,6 @@ module "oidc" {
   source = "git::https://github.com/camptocamp/devops-stack-module-keycloak.git//modules"
 
   cluster_name   = var.cluster_name
-  #oidc           = module.cluster.oidc
   argocd         = {
     namespace = module.cluster.argocd_namespace
     domain    = module.cluster.argocd_domain
