@@ -139,7 +139,7 @@ module "argocd" {
   base_domain    = module.cluster.base_domain
   cluster_issuer = "ca-issuer"
 
-  depends_on = [ module.cert-manager ]
+  depends_on = [ module.cert-manager, module.monitoring ]
 }
 
 #module "myownapp" {
