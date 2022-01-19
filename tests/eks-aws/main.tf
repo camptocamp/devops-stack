@@ -120,11 +120,9 @@ module "oidc" {
 module "monitoring" {
   source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//modules"
 
-  cluster_name   = var.cluster_name
-  oidc           = module.oidc.oidc
-  argocd         = {
-    namespace = module.cluster.argocd_namespace
-  }
+  cluster_name     = var.cluster_name
+  oidc             = module.oidc.oidc
+  argocd_namespace = module.cluster.argocd_namespace
   base_domain    = module.cluster.base_domain
   cluster_issuer = "letsencrypt-prod"
   metrics_archives = {}
@@ -133,11 +131,13 @@ module "monitoring" {
 }
 
 module "loki-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack.git//modules"
+  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack.git//modules/eks"
 
   cluster_name     = var.cluster_name
   argocd_namespace = module.cluster.argocd_namespace
   base_domain      = module.cluster.base_domain
+
+  cluster_oidc_issuer_url = module.cluster.cluster_oidc_issuer_url
 
   depends_on = [ module.monitoring ]
 }
@@ -155,7 +155,8 @@ module "cert-manager" {
 }
 
 module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//modules/eks"
+  #source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//modules/eks"
+  source = "/home/raphink/src/github.com/camptocamp/devops-stack-module-argocd/modules"
 
   cluster_name   = var.cluster_name
   oidc           = module.oidc.oidc

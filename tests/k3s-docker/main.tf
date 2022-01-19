@@ -57,11 +57,9 @@ module "oidc" {
 module "monitoring" {
   source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//modules"
 
-  cluster_name   = var.cluster_name
-  oidc           = module.oidc.oidc
-  argocd         = {
-    namespace = module.cluster.argocd_namespace
-  }
+  cluster_name     = var.cluster_name
+  oidc             = module.oidc.oidc
+  argocd_namespace = module.cluster.argocd_namespace
   base_domain    = module.cluster.base_domain
   cluster_issuer = "ca-issuer"
   metrics_archives = {}
