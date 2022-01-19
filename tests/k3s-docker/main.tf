@@ -124,7 +124,7 @@ module "cert-manager" {
 }
 
 module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//modules/k3s"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//modules"
 
   cluster_name   = var.cluster_name
   oidc           = module.oidc.oidc
@@ -134,6 +134,7 @@ module "argocd" {
     accounts_pipeline_tokens = module.cluster.argocd_accounts_pipeline_tokens
     server_admin_password = module.cluster.argocd_server_admin_password
     domain = module.cluster.argocd_domain
+    admin_enabled = true
   }
   base_domain    = module.cluster.base_domain
   cluster_issuer = "ca-issuer"

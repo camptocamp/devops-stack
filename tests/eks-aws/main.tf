@@ -151,8 +151,7 @@ module "cert-manager" {
 }
 
 module "argocd" {
-  #source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//modules/eks"
-  source = "/home/raphink/src/github.com/camptocamp/devops-stack-module-argocd/modules"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//modules"
 
   cluster_name   = var.cluster_name
   oidc           = module.oidc.oidc
