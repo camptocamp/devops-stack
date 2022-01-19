@@ -27,13 +27,9 @@ provider "argocd" {
 module "ingress" {
   source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//modules"
 
-  cluster_name   = var.cluster_name
-  argocd         = {
-    namespace = module.cluster.argocd_namespace
-  }
-  base_domain    = module.cluster.base_domain
-
-  #profiles = [ "default", "eks" ]
+  cluster_name     = var.cluster_name
+  argocd_namespace = module.cluster.argocd_namespace
+  base_domain      = module.cluster.base_domain
 }
 
 module "oidc" {
