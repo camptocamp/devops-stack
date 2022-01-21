@@ -2,6 +2,10 @@ output "base_domain" {
   value = local.base_domain
 }
 
+output "kubernetes" {
+  value = local.kubernetes
+}
+
 output "keycloak_users" {
   value     = { for username, infos in local.keycloak_user_map : username => lookup(infos, "password") }
   sensitive = true
