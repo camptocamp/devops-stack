@@ -195,6 +195,11 @@ resource "azurerm_role_assignment" "reader" {
   principal_id         = azurerm_user_assigned_identity.cert_manager.principal_id
 }
 
+data "azurerm_dns_zone" "this" {
+  name                = var.base_domain
+  resource_group_name = var.resource_group_name
+}
+
 resource "azurerm_role_assignment" "dns_zone_contributor" {
   scope                = data.azurerm_dns_zone.this.id
   role_definition_name = "DNS Zone Contributor"
