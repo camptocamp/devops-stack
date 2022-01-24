@@ -16,12 +16,12 @@ output "prometheus_user_assigned_identity_principal_id" {
 
 output "kube_admin_config" {
   value = {
-    client_key             = module.cluster.admin_client_key
-    client_certificate     = module.cluster.admin_client_certificate
-    cluster_ca_certificate = module.cluster.admin_cluster_ca_certificate
-    host                   = module.cluster.admin_host
-    username               = module.cluster.admin_username
-    password               = module.cluster.admin_password
+    client_key             = local.kubernetes_client_key
+    client_certificate     = local.kubernetes_client_certificate
+    cluster_ca_certificate = local.kubernetes_cluster_ca_certificate
+    host                   = local.kubernetes_host
+    username               = local.kubernetes_username
+    password               = local.kubernetes_password
   }
 }
 
