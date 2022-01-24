@@ -132,10 +132,6 @@ module "argocd" {
     oauth2_proxy_extra_args = []
   }
 
-  grafana = {
-    admin_password = local.grafana_admin_password
-  }
-
   repositories = var.repositories
 
   app_of_apps_values_overrides = [
