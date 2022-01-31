@@ -3,9 +3,6 @@ module "cluster" {
   source = "../../modules/k3s/docker"
 
   cluster_name = var.cluster_name
-
-  repo_url        = "https://github.com/raphink/devops-stack.git"
-  target_revision = "argo_modules"
 }
 
 provider "argocd" {
