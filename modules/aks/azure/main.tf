@@ -181,13 +181,6 @@ resource "azurerm_user_assigned_identity" "cert_manager" {
   name                = "cert-manager"
 }
 
-resource "random_string" "storage_account" {
-  length  = 24
-  lower   = true
-  upper   = false
-  special = false
-}
-
 # TODO: I'm not sure this is required
 resource "azurerm_role_assignment" "reader" {
   scope                = format("%s/resourcegroups/%s", data.azurerm_subscription.primary.id, module.cluster.node_resource_group)
