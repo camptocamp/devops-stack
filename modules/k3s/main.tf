@@ -25,7 +25,7 @@ provider "kubernetes" {
 }
 
 module "argocd" {
-  source = "../../argocd-helm"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//modules/bootstrap"
 
   kubeconfig              = local.kubeconfig
   repo_url                = var.repo_url
@@ -37,21 +37,8 @@ module "argocd" {
   base_domain             = local.base_domain
   argocd_server_secretkey = var.argocd_server_secretkey
   cluster_issuer          = "ca-issuer"
-  wait_for_app_of_apps    = var.wait_for_app_of_apps
 
   repositories = var.repositories
-
-  app_of_apps_values_overrides = [
-    templatefile("${path.module}/../values.tmpl.yaml",
-      {
-        base_domain      = local.base_domain
-        cluster_name     = var.cluster_name
-        #root_cert        = base64encode(tls_self_signed_cert.root.cert_pem)
-        #root_key         = base64encode(tls_private_key.root.private_key_pem)
-      }
-    ),
-    var.app_of_apps_values_overrides,
-  ]
 
   depends_on = [
     module.cluster,
