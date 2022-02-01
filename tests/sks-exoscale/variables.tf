@@ -1,3 +1,8 @@
+variable "zone" {
+  type    = string
+  default = "de-fra-1"
+}
+
 variable "repo_url" {
   type    = string
   default = "https://github.com/camptocamp/devops-stack.git"

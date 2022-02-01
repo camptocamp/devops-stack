@@ -2,7 +2,7 @@ module "cluster" {
   source = "../../modules/sks/exoscale"
 
   cluster_name = var.cluster_name
-  zone         = "de-fra-1"
+  zone         = var.zone
 
   kubernetes_version = "1.22.5"
 }
@@ -27,4 +27,8 @@ module "ingress" {
   source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//modules/sks"
 
   cluster_info = module.cluster.info
+
+  zone                      = var.zone
+  router_pool_id            = module.cluster.router_pool_id
+  cluster_security_group_id = module.cluster.cluster_security_group_id
 }
