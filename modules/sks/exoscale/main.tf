@@ -50,78 +50,8 @@ module "cluster" {
   nodepools = local.nodepools
 }
 
-resource "exoscale_nlb" "this" {
-  zone = var.zone
-  name = format("ingresses-%s", var.cluster_name)
-}
-
-resource "exoscale_nlb_service" "http" {
-  zone             = exoscale_nlb.this.zone
-  name             = "ingress-contoller-http"
-  nlb_id           = exoscale_nlb.this.id
-  instance_pool_id = module.cluster.nodepools[local.router_nodepool].instance_pool_id
-  protocol         = "tcp"
-  port             = 80
-  target_port      = 80
-  strategy         = "round-robin"
-
-  healthcheck {
-    mode     = "tcp"
-    port     = 80
-    interval = 5
-    timeout  = 3
-    retries  = 1
-  }
-}
-
-resource "exoscale_nlb_service" "https" {
-  zone             = exoscale_nlb.this.zone
-  name             = "ingress-contoller-https"
-  nlb_id           = exoscale_nlb.this.id
-  instance_pool_id = module.cluster.nodepools[local.router_nodepool].instance_pool_id
-  protocol         = "tcp"
-  port             = 443
-  target_port      = 443
-  strategy         = "round-robin"
-
-  healthcheck {
-    mode     = "tcp"
-    port     = 443
-    interval = 5
-    timeout  = 3
-    retries  = 1
-  }
-}
-
-resource "exoscale_security_group_rule" "http" {
-  security_group_id = module.cluster.this_security_group_id
-  type              = "INGRESS"
-  protocol          = "TCP"
-  cidr              = "0.0.0.0/0"
-  start_port        = 80
-  end_port          = 80
-}
-
-resource "exoscale_security_group_rule" "https" {
-  security_group_id = module.cluster.this_security_group_id
-  type              = "INGRESS"
-  protocol          = "TCP"
-  cidr              = "0.0.0.0/0"
-  start_port        = 443
-  end_port          = 443
-}
-
-resource "exoscale_security_group_rule" "all" {
-  security_group_id      = module.cluster.this_security_group_id
-  user_security_group_id = module.cluster.this_security_group_id
-  type                   = "INGRESS"
-  protocol               = "TCP"
-  start_port             = 1
-  end_port               = 65535
-}
-
 module "argocd" {
-  source = "../../argocd-helm"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//modules/bootstrap"
 
   kubeconfig              = local.kubeconfig
   repo_url                = var.repo_url
@@ -135,17 +65,6 @@ module "argocd" {
   cluster_issuer          = local.cluster_issuer
 
   repositories = var.repositories
-
-  app_of_apps_values_overrides = [
-    templatefile("${path.module}/values.tmpl.yaml",
-      {
-        root_cert      = base64encode(tls_self_signed_cert.root.cert_pem)
-        root_key       = base64encode(tls_private_key.root.private_key_pem)
-        router_pool_id = module.cluster.nodepools[local.router_nodepool].id
-      }
-    ),
-    var.app_of_apps_values_overrides,
-  ]
 
   depends_on = [
     module.cluster,
