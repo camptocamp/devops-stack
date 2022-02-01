@@ -48,3 +48,11 @@ output "repo_url" {
 output "target_revision" {
   value = var.target_revision
 }
+
+output "info" {
+  value = {
+    cluster_name     = var.cluster_name
+    base_domain      = local.base_domain
+    argocd_namespace = module.argocd.argo_namespace
+  }
+}
