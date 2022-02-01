@@ -7,7 +7,6 @@ variable "base_domain" {
 variable "kubernetes_version" {
   description = "Specify which Kubernetes release to use."
   type        = string
-  default     = "1.21.6"
 }
 
 variable "zone" {
@@ -25,10 +24,4 @@ variable "router_nodepool" {
   description = "The node to attach the NLB to."
   type        = string
   default     = null
-}
-
-variable "keycloak_users" {
-  description = "List of keycloak users"
-  type        = map(map(string))
-  default = {}
 }

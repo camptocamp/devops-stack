@@ -21,7 +21,6 @@ locals {
   router_nodepool = coalesce(var.router_nodepool, "router-${var.cluster_name}")
   nodepools       = coalesce(var.nodepools, local.default_nodepools)
   cluster_issuer  = (length(local.nodepools) > 1) ? "letsencrypt-prod" : "ca-issuer"
-  keycloak_user_map = { for username, infos in var.keycloak_users : username => merge(infos, tomap({password = random_password.keycloak_passwords[username].result})) }
 }
 
 provider "helm" {
@@ -134,31 +133,6 @@ module "argocd" {
   base_domain             = local.base_domain
   argocd_server_secretkey = var.argocd_server_secretkey
   cluster_issuer          = local.cluster_issuer
-  wait_for_app_of_apps    = var.wait_for_app_of_apps
-
-  oidc = var.oidc != null ? var.oidc : {
-    issuer_url    = format("https://keycloak.apps.%s/auth/realms/devops-stack", local.base_domain)
-    oauth_url     = format("https://keycloak.apps.%s/auth/realms/devops-stack/protocol/openid-connect/auth", local.base_domain)
-    token_url     = format("https://keycloak.apps.%s/auth/realms/devops-stack/protocol/openid-connect/token", local.base_domain)
-    api_url       = format("https://keycloak.apps.%s/auth/realms/devops-stack/protocol/openid-connect/userinfo", local.base_domain)
-    client_id     = "devops-stack-applications"
-    client_secret = random_password.clientsecret.result
-
-    oauth2_proxy_extra_args = []
-  }
-
-  grafana = {
-    admin_password = local.grafana_admin_password
-  }
-
-  keycloak = {
-    enable        = true
-    user_map = local.keycloak_user_map
-  }
-
-  loki = {
-    bucket_name = "loki"
-  }
 
   repositories = var.repositories
 
@@ -176,26 +150,6 @@ module "argocd" {
   depends_on = [
     module.cluster,
   ]
-}
-
-data "kubernetes_secret" "keycloak_admin_password" {
-  metadata {
-    name      = "credential-keycloak"
-    namespace = "keycloak"
-  }
-
-  depends_on = [module.argocd]
-}
-
-resource "random_password" "clientsecret" {
-  length  = 16
-  special = false
-}
-
-resource "random_password" "keycloak_passwords" {
-  for_each = var.keycloak_users
-  length   = 16
-  special  = false
 }
 
 resource "tls_private_key" "root" {
