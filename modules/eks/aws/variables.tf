@@ -98,3 +98,11 @@ variable "enable_cluster_autoscaler" {
   type        = bool
   default     = false
 }
+
+variable "extra_lb_target_groups" {
+  type = list(any)
+}
+
+variable "extra_lb_http_tcp_listeners" {
+  type = list(any)
+}
