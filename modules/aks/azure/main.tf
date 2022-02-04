@@ -24,6 +24,15 @@ locals {
     { for i in distinct(var.azureidentities[*].namespace) : i => null },
     var.app_node_selectors
   )
+  oidc = var.oidc != null ? var.oidc : {
+    issuer_url              = format("https://login.microsoftonline.com/%s/v2.0", data.azurerm_client_config.current.tenant_id)
+    oauth_url               = format("https://login.microsoftonline.com/%s/oauth2/authorize", data.azurerm_client_config.current.tenant_id)
+    token_url               = format("https://login.microsoftonline.com/%s/oauth2/token", data.azurerm_client_config.current.tenant_id)
+    api_url                 = format("https://graph.microsoft.com/oidc/userinfo")
+    client_id               = azuread_application.oauth2_apps.0.application_id
+    client_secret           = azuread_application_password.oauth2_apps.0.value
+    oauth2_proxy_extra_args = []
+  }
 }
 
 provider "helm" {
@@ -124,15 +133,7 @@ module "argocd" {
   argocd_server_secretkey = var.argocd_server_secretkey
   wait_for_app_of_apps    = var.wait_for_app_of_apps
 
-  oidc = var.oidc != null ? var.oidc : {
-    issuer_url              = format("https://login.microsoftonline.com/%s/v2.0", data.azurerm_client_config.current.tenant_id)
-    oauth_url               = format("https://login.microsoftonline.com/%s/oauth2/authorize", data.azurerm_client_config.current.tenant_id)
-    token_url               = format("https://login.microsoftonline.com/%s/oauth2/token", data.azurerm_client_config.current.tenant_id)
-    api_url                 = format("https://graph.microsoft.com/oidc/userinfo")
-    client_id               = azuread_application.oauth2_apps.0.application_id
-    client_secret           = azuread_application_password.oauth2_apps.0.value
-    oauth2_proxy_extra_args = []
-  }
+  oidc = merge(local.oidc, var.prometheus_oauth2_proxy_args)
 
   grafana = {
     admin_password = local.grafana_admin_password

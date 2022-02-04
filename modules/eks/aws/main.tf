@@ -4,6 +4,16 @@ locals {
   kubernetes_cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
   kubernetes_token                  = data.aws_eks_cluster_auth.cluster.token
   kubeconfig                        = module.cluster.kubeconfig
+
+  oidc = var.oidc != null ? var.oidc : {
+    issuer_url              = format("https://cognito-idp.%s.amazonaws.com/%s", data.aws_region.current.name, var.cognito_user_pool_id)
+    oauth_url               = format("https://%s.auth.%s.amazoncognito.com/oauth2/authorize", var.cognito_user_pool_domain, data.aws_region.current.name)
+    token_url               = format("https://%s.auth.%s.amazoncognito.com/oauth2/token", var.cognito_user_pool_domain, data.aws_region.current.name)
+    api_url                 = format("https://%s.auth.%s.amazoncognito.com/oauth2/userInfo", var.cognito_user_pool_domain, data.aws_region.current.name)
+    client_id               = aws_cognito_user_pool_client.client.0.id
+    client_secret           = aws_cognito_user_pool_client.client.0.client_secret
+    oauth2_proxy_extra_args = []
+  }
 }
 
 data "aws_vpc" "this" {
@@ -110,15 +120,8 @@ module "argocd" {
   cluster_issuer          = "letsencrypt-prod"
   wait_for_app_of_apps    = var.wait_for_app_of_apps
 
-  oidc = var.oidc != null ? var.oidc : {
-    issuer_url              = format("https://cognito-idp.%s.amazonaws.com/%s", data.aws_region.current.name, var.cognito_user_pool_id)
-    oauth_url               = format("https://%s.auth.%s.amazoncognito.com/oauth2/authorize", var.cognito_user_pool_domain, data.aws_region.current.name)
-    token_url               = format("https://%s.auth.%s.amazoncognito.com/oauth2/token", var.cognito_user_pool_domain, data.aws_region.current.name)
-    api_url                 = format("https://%s.auth.%s.amazoncognito.com/oauth2/userInfo", var.cognito_user_pool_domain, data.aws_region.current.name)
-    client_id               = aws_cognito_user_pool_client.client.0.id
-    client_secret           = aws_cognito_user_pool_client.client.0.client_secret
-    oauth2_proxy_extra_args = []
-  }
+  oidc = merge(local.oidc, var.prometheus_oauth2_proxy_args)
+
   loki = {
     bucket_name = aws_s3_bucket.loki.id,
   }

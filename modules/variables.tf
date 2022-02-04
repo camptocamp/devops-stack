@@ -53,6 +53,17 @@ variable "oidc" {
   default = null
 }
 
+variable "prometheus_oauth2_proxy_args" {
+  type = object({
+    prometheus_oauth2_proxy_extra_args = list(string)
+    prometheus_oauth2_proxy_image = string
+  })
+  default = {
+    prometheus_oauth2_proxy_extra_args = []
+    prometheus_oauth2_proxy_image = "quay.io/oauth2-proxy/oauth2-proxy:v7.1.3"
+  }
+}
+
 variable "argocd_server_secretkey" {
   description = "ArgoCD Server Secert Key to avoid regenerate token on redeploy."
   type        = string

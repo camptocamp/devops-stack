@@ -11,6 +11,19 @@ locals {
     access_key = var.enable_minio ? random_password.minio_accesskey.0.result : ""
     secret_key = var.enable_minio ? random_password.minio_secretkey.0.result : ""
   }
+
+  oidc = var.oidc != null ? var.oidc : {
+    issuer_url    = format("https://keycloak.apps.%s.%s/auth/realms/devops-stack", var.cluster_name, local.base_domain)
+    oauth_url     = format("https://keycloak.apps.%s.%s/auth/realms/devops-stack/protocol/openid-connect/auth", var.cluster_name, local.base_domain)
+    token_url     = format("https://keycloak.apps.%s.%s/auth/realms/devops-stack/protocol/openid-connect/token", var.cluster_name, local.base_domain)
+    api_url       = format("https://keycloak.apps.%s.%s/auth/realms/devops-stack/protocol/openid-connect/userinfo", var.cluster_name, local.base_domain)
+    client_id     = "devops-stack-applications"
+    client_secret = random_password.clientsecret.result
+    oauth2_proxy_extra_args = [
+      "--insecure-oidc-skip-issuer-verification=true",
+      "--ssl-insecure-skip-verify=true",
+    ]
+  }
 }
 
 data "docker_network" "kind" {
@@ -74,18 +87,7 @@ module "argocd" {
   cluster_issuer          = "ca-issuer"
   wait_for_app_of_apps    = var.wait_for_app_of_apps
 
-  oidc = var.oidc != null ? var.oidc : {
-    issuer_url    = format("https://keycloak.apps.%s.%s/auth/realms/devops-stack", var.cluster_name, local.base_domain)
-    oauth_url     = format("https://keycloak.apps.%s.%s/auth/realms/devops-stack/protocol/openid-connect/auth", var.cluster_name, local.base_domain)
-    token_url     = format("https://keycloak.apps.%s.%s/auth/realms/devops-stack/protocol/openid-connect/token", var.cluster_name, local.base_domain)
-    api_url       = format("https://keycloak.apps.%s.%s/auth/realms/devops-stack/protocol/openid-connect/userinfo", var.cluster_name, local.base_domain)
-    client_id     = "devops-stack-applications"
-    client_secret = random_password.clientsecret.result
-    oauth2_proxy_extra_args = [
-      "--insecure-oidc-skip-issuer-verification=true",
-      "--ssl-insecure-skip-verify=true",
-    ]
-  }
+  oidc = merge(local.oidc, var.prometheus_oauth2_proxy_args)
 
   minio = {
     enable     = var.enable_minio

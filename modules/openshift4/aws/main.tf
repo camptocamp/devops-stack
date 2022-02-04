@@ -10,6 +10,10 @@ locals {
   kubeconfig = module.cluster.kubeconfig
 
   grafana_admin_password = var.grafana_admin_password == null ? random_password.grafana_admin_password.0.result : var.grafana_admin_password
+
+  oidc = {
+    client_secret = random_password.clientsecret.result
+  }
 }
 
 module "cluster" {
@@ -53,9 +57,7 @@ module "argocd" {
   cluster_issuer         = "letsencrypt-prod"
   wait_for_app_of_apps   = var.wait_for_app_of_apps
 
-  oidc = {
-    client_secret = random_password.clientsecret.result
-  }
+  oidc = merge(local.oidc, var.prometheus_oauth2_proxy_args)
 
   loki = {
     enable = false
