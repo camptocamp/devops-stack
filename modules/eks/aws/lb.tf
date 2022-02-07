@@ -1,5 +1,36 @@
 locals {
   nlb_name_prefix = substr(var.cluster_name, 0, 5)
+
+  lb_target_groups_default = [
+    {
+      name_prefix      = local.nlb_name_prefix
+      backend_protocol = "TCP"
+      backend_port     = 443
+      target_type      = "instance"
+    },
+    {
+      name_prefix      = local.nlb_name_prefix
+      backend_protocol = "TCP"
+      backend_port     = 80
+      target_type      = "instance"
+    },
+  ]
+
+  lb_target_groups = concat(local.lb_target_groups_default, var.extra_lb_target_groups)
+
+  lb_http_tcp_listeners_default = [
+    {
+      port               = 443
+      protocol           = "TCP"
+      target_group_index = 0
+    },
+    {
+      port               = 80
+      protocol           = "TCP"
+      target_group_index = 1
+    },
+  ]
+  lb_http_tcp_listeners = concat(local.lb_http_tcp_listeners_default, var.extra_lb_http_tcp_listeners)
 }
 
 module "nlb" {
@@ -16,33 +47,8 @@ module "nlb" {
   subnets                          = data.aws_subnet_ids.public.ids
   enable_cross_zone_load_balancing = true
 
-  target_groups = [
-    {
-      name_prefix      = local.nlb_name_prefix
-      backend_protocol = "TCP"
-      backend_port     = 443
-      target_type      = "instance"
-    },
-    {
-      name_prefix      = local.nlb_name_prefix
-      backend_protocol = "TCP"
-      backend_port     = 80
-      target_type      = "instance"
-    },
-  ]
-
-  http_tcp_listeners = [
-    {
-      port               = 443
-      protocol           = "TCP"
-      target_group_index = 0
-    },
-    {
-      port               = 80
-      protocol           = "TCP"
-      target_group_index = 1
-    },
-  ]
+  target_groups      = local.lb_target_groups
+  http_tcp_listeners = local.lb_http_tcp_listeners
 }
 
 module "nlb_private" {
