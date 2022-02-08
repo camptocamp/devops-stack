@@ -24,24 +24,37 @@ provider "argocd" {
 module "ingress" {
   source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//modules"
 
-  cluster_info = module.cluster.info
+  cluster_name     = var.cluster_name
+  argocd_namespace = module.cluster.argocd_namespace
+  base_domain      = module.cluster.base_domain
 }
 
 module "oidc" {
   source = "git::https://github.com/camptocamp/devops-stack-module-keycloak.git//modules"
 
-  cluster_info   = module.cluster.info
+  cluster_name   = var.cluster_name
+  argocd         = {
+    namespace = module.cluster.argocd_namespace
+    domain    = module.cluster.argocd_domain
+  }
+  base_domain    = module.cluster.base_domain
   cluster_issuer = "ca-issuer"
 
   depends_on = [ module.ingress ]
 }
 
+#module "oidc" {
+#  source = "git::https://github.com/camptocamp/devops-stack-module-cognito.git//modules"
+#}
+
 module "monitoring" {
   source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//modules"
 
-  cluster_info     = module.cluster.info
+  cluster_name     = var.cluster_name
   oidc             = module.oidc.oidc
-  cluster_issuer   = "ca-issuer"
+  argocd_namespace = module.cluster.argocd_namespace
+  base_domain    = module.cluster.base_domain
+  cluster_issuer = "ca-issuer"
   metrics_archives = {}
 
   depends_on = [ module.oidc ]
@@ -66,7 +79,9 @@ module "monitoring" {
 module "storage" {
   source = "git::https://github.com/camptocamp/devops-stack-module-minio.git//modules"
 
-  cluster_info     = module.cluster.info
+  cluster_name     = var.cluster_name
+  argocd_namespace = module.cluster.argocd_namespace
+  base_domain      = module.cluster.base_domain
   cluster_issuer   = "ca-issuer"
 
   minio = {
@@ -82,7 +97,9 @@ module "storage" {
 module "loki-stack" {
   source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack.git//modules/k3s"
 
-  cluster_info = module.cluster.info
+  cluster_name     = var.cluster_name
+  argocd_namespace = module.cluster.argocd_namespace
+  base_domain      = module.cluster.base_domain
 
   minio = {
     access_key = module.storage.access_key
@@ -96,7 +113,9 @@ module "loki-stack" {
 module "cert-manager" {
   source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//modules/self-signed"
 
-  cluster_info = module.cluster.info
+  cluster_name     = var.cluster_name
+  argocd_namespace = module.cluster.argocd_namespace
+  base_domain      = module.cluster.base_domain
 
   depends_on = [ module.monitoring ]
 }
@@ -104,16 +123,17 @@ module "cert-manager" {
 module "argocd" {
   source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//modules"
 
-  cluster_info = module.cluster.info
-
+  cluster_name   = var.cluster_name
   oidc           = module.oidc.oidc
   argocd         = {
+    namespace = module.cluster.argocd_namespace
     server_secretkey = module.cluster.argocd_server_secretkey
     accounts_pipeline_tokens = module.cluster.argocd_accounts_pipeline_tokens
     server_admin_password = module.cluster.argocd_server_admin_password
     domain = module.cluster.argocd_domain
     admin_enabled = true
   }
+  base_domain    = module.cluster.base_domain
   cluster_issuer = "ca-issuer"
 
   depends_on = [ module.cert-manager, module.monitoring ]
