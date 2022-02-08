@@ -45,12 +45,8 @@ data "azurerm_resource_group" "this" {
 }
 
 data "azurerm_kubernetes_cluster" "cluster" {
-  name                = format("%s-aks", var.cluster_name)
+  name                = element(reverse(split("/", module.cluster.aks_id)), 0)
   resource_group_name = data.azurerm_resource_group.this.name
-
-  depends_on = [
-    module.cluster,
-  ]
 }
 
 module "cluster" {
