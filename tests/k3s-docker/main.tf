@@ -139,17 +139,55 @@ module "argocd" {
   depends_on = [ module.cert-manager, module.monitoring ]
 }
 
-#module "myownapp" {
-#  source = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git//modules"
-#
-#  cluster_name   = module.cluster.cluster_name
-#  oidc           = module.oidc.oidc
-#  argocd         = {
-#    server     = module.cluster.argocd_server
-#    auth_token = module.cluster.argocd_auth_token
-#  }
-#  base_domain    = module.cluster.base_domain
-#  cluster_issuer = module.cluster.cluster_issuer
-#
-#  argocd_url = "https://github.com/camptocamp/myapp.git"
-#}
+module "my-apps" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git//modules"
+
+  argocd_namespace = module.cluster.argocd_namespace
+
+  name = "my-apps"
+  namespace = "my-apps"
+
+  project_source_repos = [ "https://github.com/raphink/applicationsets-demo" ]
+
+  generators = [
+    {
+      git = {
+        repoURL     = "https://github.com/raphink/applicationsets-demo"
+        revision    = "HEAD"
+        directories = [
+          { path = "*" }
+        ]
+      }
+    }
+  ]
+
+  template = {
+    metadata = {
+      name = "{{path.basename}}"
+    }
+    spec = {
+      project = "my-apps"
+      source = {
+        repoURL        = "https://github.com/raphink/applicationsets-demo"
+        targetRevision = "HEAD"
+        path           = "{{path}}"
+      }
+      destination = {
+        server    = "https://kubernetes.default.svc"
+        namespace = "my-apps"
+      }
+      syncPolicy = {
+        automated = {
+          prune     = true
+          selfHeal = true
+        }
+
+        syncOptions = [
+          "CreateNamespace=true"
+        ]
+      }
+    }
+  }
+
+  depends_on = [ module.argocd ]
+}
