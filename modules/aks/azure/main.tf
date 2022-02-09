@@ -271,11 +271,6 @@ resource "azuread_application" "oauth2_apps" {
       format("https://prometheus.apps.%s.%s/oauth2/callback", var.cluster_name, local.base_domain),
       format("https://alertmanager.apps.%s.%s/oauth2/callback", var.cluster_name, local.base_domain),
     ]
-
-    implicit_grant {
-      access_token_issuance_enabled = true
-      id_token_issuance_enabled     = true
-    }
   }
 
   app_role {
