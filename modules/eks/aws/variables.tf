@@ -100,9 +100,13 @@ variable "enable_cluster_autoscaler" {
 }
 
 variable "extra_lb_target_groups" {
-  type = list(any)
+  description = "Additional load-balancer target groups"
+  type        = list(any)
+  default     = []
 }
 
 variable "extra_lb_http_tcp_listeners" {
-  type = list(any)
+  description = "Additional load-balancer listeners"
+  type        = list(any)
+  default     = []
 }
