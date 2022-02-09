@@ -1,5 +1,13 @@
 # Changelog
 
+### [0.53.1](https://www.github.com/camptocamp/devops-stack/compare/v0.53.0...v0.53.1) (2022-02-09)
+
+
+### Bug Fixes
+
+* **aks:** use soft dependency between cluster and data source ([#855](https://www.github.com/camptocamp/devops-stack/issues/855)) ([7ee918a](https://www.github.com/camptocamp/devops-stack/commit/7ee918a12f99eb5ee4a17ab70311ad43dda4ea4f))
+* **eks:** make extra_lb_target_groups and extra_lb_http_tcp_listeners optional ([#858](https://www.github.com/camptocamp/devops-stack/issues/858)) ([dd1c58c](https://www.github.com/camptocamp/devops-stack/commit/dd1c58cb948449552ed2492ed3e2ea8d4d218d6c))
+
 ## [0.53.0](https://www.github.com/camptocamp/devops-stack/compare/v0.52.0...v0.53.0) (2022-02-07)
 
 
