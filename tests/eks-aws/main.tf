@@ -39,6 +39,9 @@ module "cluster" {
   base_domain = "demo.camptocamp.com"
   vpc_id       = module.vpc.vpc_id
 
+  cluster_endpoint_private_access = true
+  cluster_endpoint_public_access  = true
+
   cluster_endpoint_public_access_cidrs = flatten([
     formatlist("%s/32", module.vpc.nat_public_ips),
     "0.0.0.0/0",
