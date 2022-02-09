@@ -105,7 +105,7 @@ resource "aws_security_group_rule" "workers_ingress_healthcheck_http" {
 }
 
 module "argocd" {
-  source = "../../argocd-helm"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//modules/bootstrap"
 
   kubeconfig              = local.kubeconfig
   repo_url                = var.repo_url
@@ -118,30 +118,11 @@ module "argocd" {
   argocd_server_secretkey = var.argocd_server_secretkey
   cluster_issuer          = local.cluster_issuer
 
-  # loki = {
-  #   bucket_name = aws_s3_bucket.loki.id,
-  # }
-
   cluster_autoscaler = {
     enable = var.enable_cluster_autoscaler
   }
 
   repositories = var.repositories
-
-  app_of_apps_values_overrides = [
-    templatefile("${path.module}/values.tmpl.yaml",
-      {
-        aws_default_region              = data.aws_region.current.name
-        base_domain                     = local.base_domain
-        enable_efs                      = var.enable_efs
-        efs_filesystem_id               = var.enable_efs ? module.efs.0.this_efs_mount_target_file_system_id : ""
-        efs_dns_name                    = var.enable_efs ? module.efs.0.this_efs_mount_target_full_dns_name : ""
-        cluster_name                    = var.cluster_name
-        cluster_autoscaler_role_arn     = var.enable_cluster_autoscaler ? module.iam_assumable_role_cluster_autoscaler[0].iam_role_arn : ""
-      }
-    ),
-    var.app_of_apps_values_overrides,
-  ]
 
   depends_on = [
     module.cluster,
