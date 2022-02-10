@@ -13,7 +13,7 @@ And the following components deployed in the cluster:
 |===
 | Component | K3s | Azure AKS | AWS EKS | AWS OpenShift (IPI)
 
-| 
+|
 `Cert-Manager`
 
 image::logo/cert-manager.png[Cert-Manager, 50,50, float="left"]
@@ -22,7 +22,7 @@ image::logo/cert-manager.png[Cert-Manager, 50,50, float="left"]
 | `yes`
 | `no`
 
-| 
+|
 `OpenID Connect`
 
 image::logo/oidc.png[OpenID Connect, 50,50, float="left"]
@@ -31,7 +31,7 @@ image::logo/oidc.png[OpenID Connect, 50,50, float="left"]
 | `AWS Cognito`
 | `AWS Cognito`
 
-| 
+|
 `Ingress`
 
 image::logo/ingress.png[Ingress, 50,50, float="left"]
@@ -90,4 +90,5 @@ image::logo/thanos.png[Thanos, 50,50, float="left"]
 | `no`
 | `no`
 | `no`
-|
+
+|===
