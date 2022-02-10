@@ -1,6 +1,6 @@
 === Identity Management Dashboard (Keycloak)
 Whether you use AKS, EKS, or your local workstation using k3s, the DevOps Stack provisions the cluster with an Identity and Access Manager.
-For the case of a local k3s cluster, the DevOps Stack spawns a Keyclaok instance (for more plase see xref:ROOT:references/athentication.adoc[authentication references]).
+For the case of a local k3s cluster, the DevOps Stack spawns a Keyclaok instance (for more plase see xref:ROOT:references/authentication.adoc[authentication references]).
 
 ==== User management with Keycloak
 image::keycloak_users.png[dashboard for users management]

@@ -30,6 +30,5 @@ with their target state.
 The cluster applications deployed by Argo CD can easily be
 xref:ROOT:howtos/tune_cluter_apps.adoc[tuned to fit your needs].
 
-You can also take advantage of Argo CD to 
+You can also take advantage of Argo CD to
 xref:ROOT:howtos/deploy_own_app.adoc[deploy your own applications].
-
