@@ -5,9 +5,13 @@ site:
   keys:
     google_analytics: "G-GDBX9466LL"
   start_page: devops-stack::index.adoc
+antora:
+  extensions:
+    - require: "@antora/lunr-extension"
+      index_latest_only: true
 content:
   branches: HEAD
-  tags: 
+  tags:
   - "v0.3*"
   - "!v0.3.0"
   sources:
@@ -17,8 +21,4 @@ ui:
   bundle:
     url: https://github.com/camptocamp/devops-stack-antora-ui/releases/download/master-LATEST/ui-bundle.zip
     snapshot: true
-  supplemental_files:
-  - path: ui.yml
-    contents: |
-      static_files: [ .nojekyll ]
-  - path: .nojekyll
+  supplemental_files: ./supplemental_ui
