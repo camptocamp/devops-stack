@@ -19,6 +19,7 @@ locals {
   }
 
   router_nodepool = coalesce(var.router_nodepool, "router-${var.cluster_name}")
+  router_pool_id  = module.cluster.nodepools[local.router_nodepool].instance_pool_id
   nodepools       = coalesce(var.nodepools, local.default_nodepools)
   cluster_issuer  = (length(local.nodepools) > 1) ? "letsencrypt-prod" : "ca-issuer"
 }
@@ -121,7 +122,7 @@ resource "exoscale_security_group_rule" "all" {
 }
 
 module "argocd" {
-  source = "../../argocd-helm"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//modules/bootstrap"
 
   kubeconfig              = local.kubeconfig
   repo_url                = var.repo_url
@@ -135,17 +136,6 @@ module "argocd" {
   cluster_issuer          = local.cluster_issuer
 
   repositories = var.repositories
-
-  app_of_apps_values_overrides = [
-    templatefile("${path.module}/values.tmpl.yaml",
-      {
-        root_cert      = base64encode(tls_self_signed_cert.root.cert_pem)
-        root_key       = base64encode(tls_private_key.root.private_key_pem)
-        router_pool_id = module.cluster.nodepools[local.router_nodepool].id
-      }
-    ),
-    var.app_of_apps_values_overrides,
-  ]
 
   depends_on = [
     module.cluster,

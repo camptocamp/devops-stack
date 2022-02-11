@@ -12,3 +12,8 @@ variable "cluster_name" {
   type    = string
   default = "devops-stack-example"
 }
+
+variable "zone" {
+  type    = string
+  default = "de-fra-1"
+}

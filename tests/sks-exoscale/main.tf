@@ -2,9 +2,21 @@ module "cluster" {
   source = "../../modules/sks/exoscale"
 
   cluster_name = var.cluster_name
-  zone         = "de-fra-1"
+  zone         = var.zone
 
   kubernetes_version = "1.22.5"
+
+  nodepools = {
+    "router-${var.cluster_name}" = {
+      size          = 2
+      instance_type = "standard.large"
+    }
+
+    "compute-${var.cluster_name}" = {
+      size          = 2
+      instance_type = "standard.large"
+    }
+  }
 }
 
 provider "argocd" {
@@ -26,5 +38,11 @@ provider "argocd" {
 module "ingress" {
   source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//modules/sks"
 
-  cluster_info = module.cluster.info
+  cluster_name     = var.cluster_name
+  argocd_namespace = module.cluster.argocd_namespace
+  base_domain      = module.cluster.base_domain
+
+  zone                      = var.zone
+  router_pool_id            = module.cluster.router_pool_id
+  cluster_security_group_id = module.cluster.cluster_security_group_id
 }
