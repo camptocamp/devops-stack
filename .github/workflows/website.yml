@@ -39,8 +39,8 @@ jobs:
           fetch-depth: 0   # Fetch all history for .gitinfo and .lastmod
       - name: "Generate site using antora site action"
         uses: docker://ghcr.io/camptocamp/antora:v3
-        run: |
-          ./generate-documentation.sh
+        with:
+          args: ./generate-documentation.sh
       - name: "List folder"
         run: |
           ls -ltr $GITHUB_WORKSPACE/build/
