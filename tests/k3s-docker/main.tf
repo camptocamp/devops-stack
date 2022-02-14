@@ -43,10 +43,6 @@ module "oidc" {
   depends_on = [ module.ingress ]
 }
 
-#module "oidc" {
-#  source = "git::https://github.com/camptocamp/devops-stack-module-cognito.git//modules"
-#}
-
 module "monitoring" {
   source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//modules"
 
