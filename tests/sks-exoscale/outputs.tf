@@ -7,6 +7,11 @@ output "argocd_auth_token" {
   value     = module.cluster.argocd_auth_token
 }
 
+output "argocd_server_admin_password" {
+  sensitive = true
+  value     = module.cluster.argocd_server_admin_password
+}
+
 output "kubeconfig" {
   sensitive = true
   value     = module.cluster.kubeconfig
