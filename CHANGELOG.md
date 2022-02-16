@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.54.0](https://www.github.com/camptocamp/devops-stack/compare/v0.53.0...v0.54.0) (2022-02-16)
+
+
+### Features
+
+* app to node pool selection ([e22aa99](https://www.github.com/camptocamp/devops-stack/commit/e22aa9926495abb98a92b6ee7641d18d8d4c30ca))
+* **eks:** enable cluster private access ([#860](https://www.github.com/camptocamp/devops-stack/issues/860)) ([a1aa4b5](https://www.github.com/camptocamp/devops-stack/commit/a1aa4b5b888062fe71bcb25565d7c43206850cd0))
+
+
+### Bug Fixes
+
+* **aks:** use soft dependency between cluster and data source ([#855](https://www.github.com/camptocamp/devops-stack/issues/855)) ([7ee918a](https://www.github.com/camptocamp/devops-stack/commit/7ee918a12f99eb5ee4a17ab70311ad43dda4ea4f))
+* **argocd:** allow passing heterogeneous extra elements ([1552361](https://www.github.com/camptocamp/devops-stack/commit/15523613b330975019d30a2dcad89eb2af8226ef))
+* **azure:** disable implicit grant for OAuth2 clients ([#857](https://www.github.com/camptocamp/devops-stack/issues/857)) ([d448afa](https://www.github.com/camptocamp/devops-stack/commit/d448afa8e99635b4fac51611f2573eeeb6a3d4ec))
+* **eks:** make extra_lb_target_groups and extra_lb_http_tcp_listeners optional ([#858](https://www.github.com/camptocamp/devops-stack/issues/858)) ([dd1c58c](https://www.github.com/camptocamp/devops-stack/commit/dd1c58cb948449552ed2492ed3e2ea8d4d218d6c))
+
 ## [0.53.0](https://www.github.com/camptocamp/devops-stack/compare/v0.52.0...v0.53.0) (2022-02-07)
 
 
