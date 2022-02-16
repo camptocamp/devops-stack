@@ -19,6 +19,11 @@ locals {
       principal_id = azurerm_user_assigned_identity.this[format("%s.%s", v.namespace, v.name)].principal_id
     }
   }
+
+  namespaces = merge(
+    { for i in local.azureidentities : i.namespace => null },
+    var.app_node_selectors
+  )
 }
 
 provider "helm" {
@@ -65,7 +70,7 @@ module "cluster" {
   network_policy      = var.network_policy
   vnet_subnet_id      = var.vnet_subnet_id
   agents_pool_name    = var.agents_pool_name
-  agents_labels       = var.agents_labels
+  agents_labels       = merge({ "devops-stack.io/nodepool" = var.agents_pool_name }, var.agents_labels)
   agents_count        = var.agents_count
   agents_size         = var.agents_size
   agents_max_pods     = var.agents_max_pods
@@ -100,7 +105,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
   os_disk_size_gb     = lookup(each.value, "os_disk_size_gb", null)
   os_type             = lookup(each.value, "os_type", "Linux")
   vnet_subnet_id      = lookup(each.value, "vnet_subnet_id", var.vnet_subnet_id)
-  node_labels         = lookup(each.value, "node_labels", null)
+  node_labels         = merge({ "devops-stack.io/nodepool" = each.key }, lookup(each.value, "node_labels", null))
   mode                = lookup(each.value, "mode", null)
 }
 
@@ -150,13 +155,14 @@ module "argocd" {
         loki_account_name                            = azurerm_storage_account.this.name
         loki_account_key                             = azurerm_storage_account.this.primary_access_key
         azureidentities                              = local.azureidentities
+        namespaces                                   = local.namespaces
       }
     ),
     var.app_of_apps_values_overrides,
   ]
 
   depends_on = [
-    module.cluster,
+    azurerm_kubernetes_cluster_node_pool.this, # node pools creation must precede apps creation for the pod to node assignation
   ]
 }
 

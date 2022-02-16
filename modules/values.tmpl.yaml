@@ -37,8 +37,6 @@ apps:
     enabled: ${metrics_server.enable}
   minio:
     enabled: ${minio.enable}
-  namespaces:
-    enabled: true
   secrets-store-csi-driver:
     enabled: false
   traefik:
