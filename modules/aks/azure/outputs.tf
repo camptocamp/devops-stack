@@ -30,6 +30,10 @@ output "azureidentities" {
   value       = local.azureidentities
 }
 
+output "namespaces" {
+  value = local.namespaces
+}
+
 output "kubelet_identity" {
   value = module.cluster.kubelet_identity
 }

@@ -85,7 +85,7 @@ variable "network_policy" {
 
 variable "node_pools" {
   default     = {}
-  description = "List of node pools with minimal configuration"
+  description = "Map of node pools"
   type        = map(any)
 }
 
@@ -105,4 +105,30 @@ variable "sku_tier" {
   description = "The SKU Tier that should be used for this Kubernetes Cluster. Possible values are Free and Paid"
   default     = "Free"
   type        = string
+}
+
+variable "app_node_selectors" {
+  /* Example:
+  app_node_selectors = {
+    aad-pod-identity = {
+      "kubernetes.azure.com/agentpool" = "default"
+    }
+    argocd = {
+      "odoo.camptocamp.io/nodepool"    = "mutualized"
+      "odoo.camptocamp.io/environment" = "prod"
+    }
+    non-existing-app = {
+      "odoo.camptocamp.io/nodepool"    = "mutualized"
+      "odoo.camptocamp.io/environment" = "misc-apps"
+    }
+    kube-prometheus-stack = {
+      "kubernetes.azure.com/agentpool" = "default"
+    }
+    loki-stack = {}
+    #cert-manager = {}
+  }
+*/
+  description = "Map of argoCD apps to node selector"
+  default     = {}
+  type        = map(map(string))
 }

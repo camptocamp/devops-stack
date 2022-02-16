@@ -7,9 +7,11 @@ apps:
   metrics-server:
     enabled: false
 
+${yamlencode({"namespaces": namespaces})}
+
 aad-pod-identity:
   azureIdentities:
-%{for k, v in azureidentities~}
+%{ for k, v in azureidentities ~}
     ${k}:
       namespace: "${v.namespace}"
       name: "${v.name}"
@@ -19,7 +21,21 @@ aad-pod-identity:
       binding:
         name: "${v.name}"
         selector: "${v.name}"
-%{endfor~}
+%{ endfor ~}
+%{ if length(lookup(namespaces, "aad-pod-identity", {})) > 0 ~}
+  mic:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+%{ for k, v in lookup(namespaces, "aad-pod-identity") ~}
+            - key: ${k}
+              operator: In
+              values:
+              - ${v}
+%{ endfor ~}
+%{ endif ~}
 
 argo-cd:
   controller:
@@ -125,6 +141,19 @@ kube-prometheus-stack:
       requests:
         cpu: 100m
         memory: 32Mi
+%{ if length(lookup(namespaces, "kube-prometheus-stack", {})) > 0 ~}
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+%{ for k, v in lookup(namespaces, "kube-prometheus-stack") ~}
+            - key: ${k}
+              operator: In
+              values:
+              - ${v}
+%{ endfor ~}
+%{ endif ~}
 
   alertmanager:
     alertmanagerSpec:
@@ -134,6 +163,19 @@ kube-prometheus-stack:
         requests:
           cpu: 10m
           memory: 16Mi
+%{ if length(lookup(namespaces, "kube-prometheus-stack", {})) > 0 ~}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+%{ for k, v in lookup(namespaces, "kube-prometheus-stack") ~}
+              - key: ${k}
+                operator: In
+                values:
+                - ${v}
+%{ endfor ~}
+%{ endif ~}
 
   prometheus:
     azureIdentity:
@@ -157,6 +199,19 @@ kube-prometheus-stack:
           requests:
             memory: 32Mi
             cpu: 10m
+%{ if length(lookup(namespaces, "kube-prometheus-stack",{})) > 0 ~}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+%{ for k, v in lookup(namespaces, "kube-prometheus-stack") ~}
+              - key: ${k}
+                operator: In
+                values:
+                - ${v}
+%{ endfor ~}
+%{ endif ~}
 
   kube-state-metrics:
     resources:
@@ -167,6 +222,19 @@ kube-prometheus-stack:
         memory: 16Mi
     podSecurityPolicy:
       enabled: false
+%{ if length(lookup(namespaces, "kube-prometheus-stack", {})) > 0 ~}
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+%{ for k, v in lookup(namespaces, "kube-prometheus-stack") ~}
+              - key: ${k}
+                operator: In
+                values:
+                - ${v}
+%{ endfor ~}
+%{ endif ~}
 
   prometheus-node-exporter:
     resources:
@@ -194,6 +262,19 @@ kube-prometheus-stack:
         requests:
           cpu: 10m
           memory: 96Mi
+%{ if length(lookup(namespaces, "kube-prometheus-stack", {})) > 0 ~}
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+%{ for k, v in lookup(namespaces, "kube-prometheus-stack") ~}
+            - key: ${k}
+              operator: In
+              values:
+              - ${v}
+%{ endfor ~}
+%{ endif ~}
 
 loki-stack:
   loki:
@@ -207,7 +288,6 @@ loki-stack:
             index:
               prefix: index_
               period: 24h
-
       storage_config:
         azure:
           container_name: ${loki_container_name}
@@ -218,6 +298,19 @@ loki-stack:
           active_index_directory: /data/loki/index
           shared_store: azure
           cache_location: /data/loki/boltdb-cache
+%{ if length(lookup(namespaces, "loki-stack", {})) > 0 ~}
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+%{ for k, v in lookup(namespaces, "loki-stack") ~}
+          - matchExpressions:
+            - key: ${k}
+              operator: In
+              values:
+              - ${v}
+%{ endfor ~}
+%{ endif ~}
 
 traefik:
   resources:
