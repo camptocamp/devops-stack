@@ -6,7 +6,7 @@ variable "base_domain" {
 variable "kubernetes_version" {
   description = "Specify which Kubernetes release to use."
   type        = string
-  default     = "1.21.2"
+  default     = "1.21.9"
 }
 
 variable "resource_group_name" {
