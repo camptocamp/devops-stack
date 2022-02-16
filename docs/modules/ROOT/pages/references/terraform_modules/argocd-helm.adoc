@@ -116,19 +116,19 @@ No modules.
 
 |[[input_extra_app_projects]] <<input_extra_app_projects,extra_app_projects>>
 |Extra AppProjects objects to deploy.
-|`list(any)`
+|`any`
 |`[]`
 |no
 
 |[[input_extra_application_sets]] <<input_extra_application_sets,extra_application_sets>>
 |Extra ApplicationSets objects to deploy.
-|`list(any)`
+|`any`
 |`[]`
 |no
 
 |[[input_extra_apps]] <<input_extra_apps,extra_apps>>
 |Extra Applications objects to deploy.
-|`list(any)`
+|`any`
 |`[]`
 |no
 

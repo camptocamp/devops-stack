@@ -6,18 +6,18 @@ dashboards for monitoring Kubernetes cluster with Prometheus.
 == Requirements
 
 [width="100%",cols="45%,22%,33%",options="header",]
-|===
+|=======================================================================
 |Repository |Name |Version
 |https://prometheus-community.github.io/helm-charts
 |kube-prometheus-stack |18.0.1
-|===
+|=======================================================================
 
 == Values
 
 [width="100%",cols="16%,18%,27%,39%",options="header",]
-|===
+|=======================================================================
 |Key |Type |Default |Description
 |kube-prometheus-stack |object
 |`{"grafana":{"plugins":["grafana-piechart-panel"],"sidecar":{"dashboards":{"searchNamespace":"ALL"},"datasources":{"searchNamespace":"ALL"}}},"kubeControllerManager":{"enabled":false},"kubeEtcd":{"enabled":false},"kubeProxy":{"enabled":false},"kubeScheduler":{"enabled":false},"prometheus":{"additionalPodMonitors":[{"jobLabel":"traefik","name":"traefik","namespaceSelector":{"any":true},"podMetricsEndpoints":[{"path":"/metrics","port":"traefik","scheme":"http"}],"selector":{"matchLabels":{"app.kubernetes.io/instance":"traefik","app.kubernetes.io/name":"traefik"}}}],"prometheusSpec":{"podMonitorSelectorNilUsesHelmValues":false,"ruleSelectorNilUsesHelmValues":false,"serviceMonitorSelectorNilUsesHelmValues":false,"thanos":{"image":"quay.io/thanos/thanos:v0.15.0","version":"v0.15.0"}}},"prometheusOperator":{"admissionWebhooks":{"enabled":false},"manageCrds":false,"tls":{"enabled":false},"tlsProxy":{"enabled":false}},"thanosObjectStorageConfig":null}`
 |Values passed to the kube-prometheus-stack chart
-|===
+|=======================================================================

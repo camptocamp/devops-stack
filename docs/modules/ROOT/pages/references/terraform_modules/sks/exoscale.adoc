@@ -85,19 +85,19 @@ The `sks/exoscale` Terraform module provides a way to install and configure:
 
 |[[input_extra_app_projects]] <<input_extra_app_projects,extra_app_projects>>
 |Extra AppProjects objects to deploy.
-|`list(any)`
+|`any`
 |`[]`
 |no
 
 |[[input_extra_application_sets]] <<input_extra_application_sets,extra_application_sets>>
 |Extra ApplicationSets objects to deploy.
-|`list(any)`
+|`any`
 |`[]`
 |no
 
 |[[input_extra_apps]] <<input_extra_apps,extra_apps>>
 |Extra Applications objects to deploy.
-|`list(any)`
+|`any`
 |`[]`
 |no
 
@@ -166,7 +166,7 @@ object({
 |[[input_target_revision]] <<input_target_revision,target_revision>>
 |The source target revision of ArgoCD's app of apps.
 |`string`
-|`"v0.51.1"`
+|`"v0.54.0"`
 |no
 
 |[[input_wait_for_app_of_apps]] <<input_wait_for_app_of_apps,wait_for_app_of_apps>>
@@ -198,6 +198,7 @@ object({
 |[[output_keycloak_admin_password]] <<output_keycloak_admin_password,keycloak_admin_password>> |The password of Keycloak's admin user.
 |[[output_keycloak_users]] <<output_keycloak_users,keycloak_users>> |n/a
 |[[output_kubeconfig]] <<output_kubeconfig,kubeconfig>> |The content of the KUBECONFIG file.
+|[[output_kubernetes]] <<output_kubernetes,kubernetes>> |n/a
 |[[output_nlb_ip_address]] <<output_nlb_ip_address,nlb_ip_address>> |n/a
 |[[output_repo_url]] <<output_repo_url,repo_url>> |n/a
 |[[output_target_revision]] <<output_target_revision,target_revision>> |n/a

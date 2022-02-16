@@ -111,6 +111,12 @@ The `aks/azure` Terraform module provides a way to install and configure:
 |`"Standard_D4s_v3"`
 |no
 
+|[[input_app_node_selectors]] <<input_app_node_selectors,app_node_selectors>>
+|Map of argoCD apps to node selector
+|`map(map(string))`
+|`{}`
+|no
+
 |[[input_app_of_apps_values_overrides]] <<input_app_of_apps_values_overrides,app_of_apps_values_overrides>>
 |App of apps values overrides.
 |`string`
@@ -152,19 +158,19 @@ list(object({
 
 |[[input_extra_app_projects]] <<input_extra_app_projects,extra_app_projects>>
 |Extra AppProjects objects to deploy.
-|`list(any)`
+|`any`
 |`[]`
 |no
 
 |[[input_extra_application_sets]] <<input_extra_application_sets,extra_application_sets>>
 |Extra ApplicationSets objects to deploy.
-|`list(any)`
+|`any`
 |`[]`
 |no
 
 |[[input_extra_apps]] <<input_extra_apps,extra_apps>>
 |Extra Applications objects to deploy.
-|`list(any)`
+|`any`
 |`[]`
 |no
 
@@ -187,7 +193,7 @@ list(object({
 |no
 
 |[[input_node_pools]] <<input_node_pools,node_pools>>
-|List of node pools with minimal configuration
+|Map of node pools
 |`map(any)`
 |`{}`
 |no
@@ -263,7 +269,7 @@ object({
 |[[input_target_revision]] <<input_target_revision,target_revision>>
 |The source target revision of ArgoCD's app of apps.
 |`string`
-|`"v0.51.1"`
+|`"v0.54.0"`
 |no
 
 |[[input_vnet_subnet_id]] <<input_vnet_subnet_id,vnet_subnet_id>>
@@ -296,6 +302,7 @@ object({
 |[[output_kube_admin_config]] <<output_kube_admin_config,kube_admin_config>> |n/a
 |[[output_kubeconfig]] <<output_kubeconfig,kubeconfig>> |The content of the KUBECONFIG file.
 |[[output_kubelet_identity]] <<output_kubelet_identity,kubelet_identity>> |n/a
+|[[output_namespaces]] <<output_namespaces,namespaces>> |n/a
 |[[output_node_resource_group]] <<output_node_resource_group,node_resource_group>> |n/a
 |[[output_prometheus_user_assigned_identity_principal_id]] <<output_prometheus_user_assigned_identity_principal_id,prometheus_user_assigned_identity_principal_id>> |n/a
 |[[output_repo_url]] <<output_repo_url,repo_url>> |n/a

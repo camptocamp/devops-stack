@@ -6,17 +6,17 @@ cluster Ingress Controller.
 == Requirements
 
 [cols=",,",options="header",]
-|===
+|================================================
 |Repository |Name |Version
 |https://helm.traefik.io/traefik |traefik |10.1.2
-|===
+|================================================
 
 == Values
 
 [width="100%",cols="16%,18%,27%,39%",options="header",]
-|===
+|=======================================================================
 |Key |Type |Default |Description
 |traefik |object
 |`{"additionalArguments":["--metrics.prometheus=true","--serversTransport.insecureSkipVerify=true"],"deployment":{"replicas":2},"logs":{"access":{"enabled":true}},"tlsOptions":{"default":{"minVersion":"VersionTLS12"}}}`
 |Values passed to the traefik chart
-|===
+|=======================================================================

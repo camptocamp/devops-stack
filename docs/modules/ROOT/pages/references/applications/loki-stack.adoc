@@ -6,17 +6,17 @@ Grafana Labs, and inspired by Prometheus.
 == Requirements
 
 [cols=",,",options="header",]
-|===
+|========================================================
 |Repository |Name |Version
 |https://grafana.github.io/helm-charts |loki-stack |2.4.1
-|===
+|========================================================
 
 == Values
 
 [width="100%",cols="16%,18%,27%,39%",options="header",]
-|===
+|=======================================================================
 |Key |Type |Default |Description
 |loki-stack |object
 |`{"filebeat":{"extraContainers":"- name: filebeat-prometheus-exporter\n  image: \"trustpilot/beat-exporter:0.4.0\"\n  ports:\n    - containerPort: 9479\n      protocol: TCP\n      name: metrics\n"},"loki":{"serviceMonitor":{"enabled":true},"serviceName":"loki-stack.loki-stack"},"promtail":{"serviceMonitor":{"enabled":true}}}`
 |Values passed to the loki-stack chart
-|===
+|=======================================================================
