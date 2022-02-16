@@ -8,17 +8,17 @@ This chart installs MinIO, a High Performance Object Storage.
 == Requirements
 
 [cols=",,",options="header",]
-|===
+|==================================
 |Repository |Name |Version
 |https://helm.min.io/ |minio |8.0.3
-|===
+|==================================
 
 == Values
 
 [width="100%",cols="16%,18%,27%,39%",options="header",]
-|===
+|=======================================================================
 |Key |Type |Default |Description
 |minio |object
 |`{"metrics":{"serviceMonitor":{"enabled":true}},"resources":{"requests":{"memory":"24Mi"}}}`
 |Values passed to the minio chart
-|===
+|=======================================================================

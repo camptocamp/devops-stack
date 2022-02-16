@@ -8,18 +8,18 @@ Kubernetes applications.
 == Requirements
 
 [width="100%",cols="45%,22%,33%",options="header",]
-|===
+|=======================================================================
 |Repository |Name |Version
 |https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts
 |aad-pod-identity |4.1.1
-|===
+|=======================================================================
 
 == Values
 
 [width="100%",cols="16%,18%,27%,39%",options="header",]
-|===
+|=======================================================================
 |Key |Type |Default |Description
 |aad-pod-identity |object
 |`{"forceNamespaced":true,"mic":{"prometheusPort":8888,"resources":{"limits":{"memory":"32Mi"},"requests":{"memory":"16Mi"}}},"nmi":{"prometheusPort":9090,"resources":{"limits":{"memory":"32Mi"},"requests":{"memory":"16Mi"}}}}`
 |Values passed to the add-pod-identity chart
-|===
+|=======================================================================

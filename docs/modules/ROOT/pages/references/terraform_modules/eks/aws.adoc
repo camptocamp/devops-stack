@@ -158,18 +158,30 @@ The `eks/aws` Terraform module provides a way to install and configure:
 
 |[[input_extra_app_projects]] <<input_extra_app_projects,extra_app_projects>>
 |Extra AppProjects objects to deploy.
-|`list(any)`
+|`any`
 |`[]`
 |no
 
 |[[input_extra_application_sets]] <<input_extra_application_sets,extra_application_sets>>
 |Extra ApplicationSets objects to deploy.
-|`list(any)`
+|`any`
 |`[]`
 |no
 
 |[[input_extra_apps]] <<input_extra_apps,extra_apps>>
 |Extra Applications objects to deploy.
+|`any`
+|`[]`
+|no
+
+|[[input_extra_lb_http_tcp_listeners]] <<input_extra_lb_http_tcp_listeners,extra_lb_http_tcp_listeners>>
+|Additional load-balancer listeners
+|`list(any)`
+|`[]`
+|no
+
+|[[input_extra_lb_target_groups]] <<input_extra_lb_target_groups,extra_lb_target_groups>>
+|Additional load-balancer target groups
 |`list(any)`
 |`[]`
 |no
@@ -265,7 +277,7 @@ object({
 |[[input_target_revision]] <<input_target_revision,target_revision>>
 |The source target revision of ArgoCD's app of apps.
 |`string`
-|`"v0.51.1"`
+|`"v0.54.0"`
 |no
 
 |[[input_vpc_id]] <<input_vpc_id,vpc_id>>
