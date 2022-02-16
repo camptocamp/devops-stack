@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.54.1](https://www.github.com/camptocamp/devops-stack/compare/v0.54.0...v0.54.1) (2022-02-16)
+
+
+### Bug Fixes
+
+* add missing namespaces template ([0331a82](https://www.github.com/camptocamp/devops-stack/commit/0331a827d3384aa6dd91f1a9d887c22931ae83ea))
+
 ## [0.54.0](https://www.github.com/camptocamp/devops-stack/compare/v0.53.0...v0.54.0) (2022-02-16)
 
 
