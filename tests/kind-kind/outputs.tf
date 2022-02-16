@@ -2,6 +2,11 @@ output "base_domain" {
   value = module.cluster.base_domain
 }
 
+output "oidc" {
+  value = module.oidc.oidc
+  sensitive = true
+}
+
 output "argocd_auth_token" {
   sensitive = true
   value     = module.cluster.argocd_auth_token
@@ -29,11 +34,6 @@ output "target_revision" {
   value = module.cluster.target_revision
 }
 
-output "app_of_apps_values" {
-  sensitive = true
-  value     = module.cluster.app_of_apps_values
-}
-
 output "argocd_url" {
   value = format("https://argocd.apps.%s.%s", var.cluster_name, module.cluster.base_domain)
 }
@@ -54,17 +54,27 @@ output "keycloak_url" {
   value = format("https://keycloak.apps.%s.%s/auth/realms/devops-stack/account", var.cluster_name, module.cluster.base_domain)
 }
 
-output "keycloak_admin_password" {
+#output "keycloak_admin_password" {
+#  sensitive = true
+#  value     = module.oidc.keycloak_admin_password
+#}
+
+output "keycloak_users" {
   sensitive = true
-  value     = module.cluster.keycloak_admin_password
+  value     = module.oidc.keycloak_users
 }
 
-output "jdoe_password" {
+output "minio_access_key" {
   sensitive = true
-  value     = module.cluster.jdoe_password
+  value     = module.storage.access_key
+}
+
+output "minio_secret_key" {
+  sensitive = true
+  value     = module.storage.secret_key
 }
 
 output "grafana_admin_password" {
   sensitive = true
-  value     = module.cluster.grafana_admin_password
+  value     = module.monitoring.grafana_admin_password
 }
