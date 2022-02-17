@@ -183,7 +183,7 @@ list(object({
 |[[input_kubernetes_version]] <<input_kubernetes_version,kubernetes_version>>
 |Specify which Kubernetes release to use.
 |`string`
-|`"1.21.2"`
+|`"1.21.9"`
 |no
 
 |[[input_network_policy]] <<input_network_policy,network_policy>>
@@ -269,7 +269,7 @@ object({
 |[[input_target_revision]] <<input_target_revision,target_revision>>
 |The source target revision of ArgoCD's app of apps.
 |`string`
-|`"v0.54.0"`
+|`"v0.54.2"`
 |no
 
 |[[input_vnet_subnet_id]] <<input_vnet_subnet_id,vnet_subnet_id>>

@@ -1,5 +1,13 @@
 # Changelog
 
+### [0.54.2](https://www.github.com/camptocamp/devops-stack/compare/v0.54.1...v0.54.2) (2022-02-17)
+
+
+### Bug Fixes
+
+* **aks:** allow multiple az identities in same namespace ([3da2163](https://www.github.com/camptocamp/devops-stack/commit/3da216361cbede7361c7233e3ad45ce654b635e6))
+* **aks:** bump default ochestration version for nodes to v1.21.9, v1.21.2 was dropped by Azure ([c6f6d72](https://www.github.com/camptocamp/devops-stack/commit/c6f6d72a2525c12d8d2b206c54f21977e1f51a29))
+
 ### [0.54.1](https://www.github.com/camptocamp/devops-stack/compare/v0.54.0...v0.54.1) (2022-02-16)
 
 
