@@ -21,7 +21,7 @@ locals {
   }
 
   namespaces = merge(
-    { for i in local.azureidentities : i.namespace => null },
+    { for i in distinct(var.azureidentities[*].namespace) : i => null },
     var.app_node_selectors
   )
 }
