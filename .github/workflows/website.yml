@@ -1,9 +1,7 @@
 name: Website
 
 on:
-  release:
-    types:
-      - released
+  workflow_call:
 
 env:
   SITE_DIR: 'site'
@@ -71,10 +69,10 @@ jobs:
          name: antora
          path: "${{ github.workspace }}/${{ env.SITE_DIR }}/docs"
      - name: Deploy to GitHub Pages
-       uses: JamesIves/github-pages-deploy-action@3.2.1
+       uses: JamesIves/github-pages-deploy-action@v4.2.5
        with:
-        # ACCESS_TOKEN: # optional
-        GITHUB_TOKEN: "${{ github.token}}"
-        FOLDER: "${{ env.SITE_DIR }}"
-        BRANCH: 'gh-pages'
-        COMMIT_MESSAGE: "[CI] Publish Documentation for ${{ github.sha }}"
+        folder: "${{ env.SITE_DIR }}"
+        branch: 'gh-pages'
+        commit-message: "[CI] Publish Documentation for ${{ github.sha }}"
+        clean-exclude: |
+          CNAME

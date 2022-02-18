@@ -2,9 +2,7 @@
 
 * Update and merge the Pull Request with label `autorelease:pending` managed by https://github.com/googleapis/release-please[Release Please]:
 ** checkout `release-vX.Y.Z` branch
-** set `version` to `X.Y.Z` in https://github.com/camptocamp/devops-stack/blob/master/docs/antora.yml#L4[docs/antora.yml]
 ** set `target_revision` 's default to `vX.Y.Z` in https://github.com/camptocamp/devops-stack/blob/master/modules/variables.tf[modules/variables.tf]
-** set `version` in `[params]` section to `X.Y.Z` in https://github.com/camptocamp/devops-stack/blob/master/site/config.toml#L18[site/config.toml]
 ** amend the commit
 ** push force the branch
 ** merge the PR
