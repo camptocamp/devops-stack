@@ -2,6 +2,7 @@ name: Website
 
 on:
   workflow_call:
+  workflow_dispatch:
 
 env:
   SITE_DIR: 'site'
