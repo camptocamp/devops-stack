@@ -1,0 +1,25 @@
+---
+on:
+  push:
+    branches:
+      - "master"
+
+name: "release"
+
+jobs:
+  release-please:
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: "GoogleCloudPlatform/release-please-action@v3"
+        id: "release-please"
+        with:
+          release-type: "simple"
+          bump-minor-pre-major: true
+          extra-files: |
+            docs/antora.yml
+    outputs:
+      release_created: "${{ steps.release-please.outputs.release_created }}"
+  website:
+    needs: "release-please"
+    uses: "./.github/workflows/website.yml"
+    if: "needs.release-please.outputs.release_created"

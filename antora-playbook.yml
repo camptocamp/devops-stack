@@ -10,10 +10,28 @@ antora:
     - require: "@antora/lunr-extension"
       index_latest_only: true
 content:
-  branches: HEAD
+  branches: []
   tags:
-  - "v0.3*"
-  - "!v0.3.0"
+    # Build all version tags
+    - "v*"
+
+    # Exclude old versions
+    - "!v0.1*"
+    - "!v0.2*"
+    - "!v0.3.*"
+    - "!v0.4.*"
+    - "!v0.5.*"
+    - "!v0.6.*"
+    - "!v0.7.*"
+    - "!v0.8.*"
+    - "!v0.9.*"
+
+    # Exclude specific versions where the version in antora.yml
+    # wasn’t updated during release process
+    - "!v0.49.1"
+    - "!v0.50.4"
+    - "!v0.51.0"
+    - "!v0.53.0"
   sources:
   - url: ./
     start_path: docs
