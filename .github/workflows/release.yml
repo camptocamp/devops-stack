@@ -16,6 +16,7 @@ jobs:
           release-type: "simple"
           bump-minor-pre-major: true
           extra-files: |
+            modules/variables.tf
             docs/antora.yml
     outputs:
       release_created: "${{ steps.release-please.outputs.release_created }}"
