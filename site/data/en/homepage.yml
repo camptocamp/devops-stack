@@ -85,6 +85,10 @@ components:
       link: "https://traefik.io/"
       content: "The Traefik Ingress controller is used to route web access to all Components, on your domain of choice."
 
+    - name: "Test"
+      icon: "traefik.jpeg"
+      link: "https://traefik.io/"
+      content: "The Traefik Ingress controller is used to route web access to all Components, on your domain of choice."
 
 
 
