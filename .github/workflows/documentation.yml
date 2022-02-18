@@ -1,0 +1,50 @@
+---
+name: "Documentation"
+
+on:
+  pull_request:
+    paths:
+      - "docs/**"
+
+  workflow_call:
+
+jobs:
+  build:
+    name: "Build documentation with Antora"
+
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - name: "Check out repository"
+        uses: "actions/checkout@v2"
+
+      - name: "Build"
+        uses: "docker://ghcr.io/camptocamp/antora:v3"
+        with:
+          args: "./generate-documentation.sh"
+
+      - name: "Upload generated artifact"
+        uses: "actions/upload-artifact@v2"
+        with:
+          name: "documentation"
+          path: "${{ github.workspace }}/build/docs"
+
+  deploy:
+    name: "Deploy documentation to GitHub Pages"
+    if: "github.event_name == 'workflow_call'"
+
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - name: "Download generated artifact"
+        uses: "actions/download-artifact@v2"
+        with:
+          name: "documentation"
+
+      - name: "Deploy to GitHub Pages"
+        uses: "JamesIves/github-pages-deploy-action@v4.2.5"
+        with:
+          branch: "gh-pages"
+          folder: "."
+          target-folder: "docs"
+          commit-message: "ci: publish documentation for ${{ github.sha }}"
