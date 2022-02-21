@@ -4,14 +4,14 @@ name: "Website"
 on:
   pull_request:
     paths:
-      - "site/**"
+      - "website/**"
 
   push:
     branches:
       - "master"
 
     paths:
-      - "site/**"
+      - "website/**"
 
 jobs:
   publish:
@@ -33,7 +33,7 @@ jobs:
           extended: true
 
       - name: "Build website with Hugo"
-        run: "hugo --minify --source 'site' --destination '../public'"
+        run: "hugo --minify --source 'website' --destination '../public'"
 
       - name: "Upload generated artifact"
         if: "github.event_name == 'pull_request'"
