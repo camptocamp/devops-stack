@@ -6,11 +6,11 @@ on:
       - master
     paths-ignore:
       - 'docs/**'
-      - 'site/**'
+      - 'website/**'
   pull_request:
     paths-ignore:
       - 'docs/**'
-      - 'site/**'
+      - 'website/**'
 jobs:
   from-scratch:
     name: From Scratch
