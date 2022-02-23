@@ -7,7 +7,7 @@ locals {
   kubernetes_client_key             = base64decode(data.azurerm_kubernetes_cluster.cluster.kube_admin_config.0.client_key)
   kubernetes_cluster_ca_certificate = base64decode(data.azurerm_kubernetes_cluster.cluster.kube_admin_config.0.cluster_ca_certificate)
 
-  kubeconfig           = data.azurerm_kubernetes_cluster.cluster.kube_admin_config_raw
+  kubeconfig = data.azurerm_kubernetes_cluster.cluster.kube_admin_config_raw
 
   azureidentities = { for v in var.azureidentities :
     format("%s.%s", v.namespace, v.name) => {
@@ -104,7 +104,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
 }
 
 module "argocd" {
-  source = "../../argocd-helm"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap"
 
   kubeconfig              = local.kubeconfig
   repo_url                = var.repo_url
@@ -116,35 +116,8 @@ module "argocd" {
   base_domain             = local.base_domain
   cluster_issuer          = "letsencrypt-prod"
   argocd_server_secretkey = var.argocd_server_secretkey
-  wait_for_app_of_apps    = var.wait_for_app_of_apps
-
-  oidc = var.oidc != null ? var.oidc : {
-    issuer_url              = format("https://login.microsoftonline.com/%s/v2.0", data.azurerm_client_config.current.tenant_id)
-    oauth_url               = format("https://login.microsoftonline.com/%s/oauth2/authorize", data.azurerm_client_config.current.tenant_id)
-    token_url               = format("https://login.microsoftonline.com/%s/oauth2/token", data.azurerm_client_config.current.tenant_id)
-    api_url                 = format("https://graph.microsoft.com/oidc/userinfo")
-    client_id               = azuread_application.oauth2_apps.0.application_id
-    client_secret           = azuread_application_password.oauth2_apps.0.value
-    oauth2_proxy_extra_args = []
-  }
 
   repositories = var.repositories
-
-  app_of_apps_values_overrides = [
-    templatefile("${path.module}/values.tmpl.yaml",
-      {
-        subscription_id                              = split("/", data.azurerm_subscription.primary.id)[2]
-        resource_group_name                          = var.resource_group_name
-        base_domain                                  = local.base_domain
-        cert_manager_resource_id                     = azurerm_user_assigned_identity.cert_manager.id
-        cert_manager_client_id                       = azurerm_user_assigned_identity.cert_manager.client_id
-        kube_prometheus_stack_prometheus_resource_id = azurerm_user_assigned_identity.kube_prometheus_stack_prometheus.id
-        kube_prometheus_stack_prometheus_client_id   = azurerm_user_assigned_identity.kube_prometheus_stack_prometheus.client_id
-        azureidentities                              = local.azureidentities
-      }
-    ),
-    var.app_of_apps_values_overrides,
-  ]
 
   depends_on = [
     module.cluster,

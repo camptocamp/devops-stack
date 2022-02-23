@@ -4,7 +4,7 @@ locals {
   kubernetes_cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
   kubernetes_token                  = data.aws_eks_cluster_auth.cluster.token
   kubeconfig                        = module.cluster.kubeconfig
-  cluster_issuer          = "letsencrypt-prod"
+  cluster_issuer                    = "letsencrypt-prod"
 }
 
 data "aws_region" "current" {}
@@ -105,7 +105,7 @@ resource "aws_security_group_rule" "workers_ingress_healthcheck_http" {
 }
 
 module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//modules/bootstrap"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap"
 
   kubeconfig              = local.kubeconfig
   repo_url                = var.repo_url

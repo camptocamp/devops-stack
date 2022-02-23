@@ -122,7 +122,7 @@ resource "exoscale_security_group_rule" "all" {
 }
 
 module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//modules/bootstrap"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap"
 
   kubeconfig              = local.kubeconfig
   repo_url                = var.repo_url

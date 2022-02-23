@@ -40,7 +40,7 @@ provider "kubernetes" {
 }
 
 module "argocd" {
-  source = "../../argocd-helm"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap"
 
   kubeconfig             = local.kubeconfig
   repo_url               = var.repo_url
@@ -51,51 +51,8 @@ module "argocd" {
   cluster_name           = var.cluster_name
   base_domain            = var.base_domain
   cluster_issuer         = "letsencrypt-prod"
-  wait_for_app_of_apps   = var.wait_for_app_of_apps
-
-  oidc = {
-    client_secret = random_password.clientsecret.result
-  }
-
-  loki = {
-    enable = false
-  }
-
-  cert_manager = {
-    enable = false
-  }
-
-  keycloak = {
-    enable = false
-  }
-
-  kube_prometheus_stack = {
-    enable = false
-  }
-
-  metrics_server = {
-    enable = false
-  }
-
-  minio = {
-    enable = false
-  }
-
-  traefik = {
-    enable = false
-  }
 
   repositories = var.repositories
-
-  app_of_apps_values_overrides = [
-    templatefile("${path.module}/values.tmpl.yaml",
-      {
-        openshift_oauthclient_secret = random_password.clientsecret.result
-        cluster_name                 = var.cluster_name
-        base_domain                  = var.base_domain
-    }),
-    var.app_of_apps_values_overrides,
-  ]
 
   depends_on = [
     module.cluster,
