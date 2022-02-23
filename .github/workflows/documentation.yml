@@ -25,7 +25,7 @@ jobs:
       - name: "Build documentation with Antora"
         uses: "docker://ghcr.io/camptocamp/antora:v3"
         with:
-          args: "./generate-documentation.sh"
+          args: "make docs"
 
       - name: "Upload generated artifact"
         if: "github.event_name == 'pull_request'"
