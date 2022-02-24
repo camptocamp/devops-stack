@@ -48,7 +48,6 @@
 *** xref:ROOT:references/applications/minio.adoc[Minio]
 *** xref:ROOT:references/applications/secrets-store-csi-driver.adoc[Secrets Store CSI Driver]
 *** xref:ROOT:references/applications/traefik.adoc[Traefik]
-*** xref:ROOT:references/applications/vault.adoc[Vault]
 * Explanations
 ** xref:ROOT:explanations/purpose.adoc[Purpose]
 ** xref:ROOT:explanations/cloud_agnostic.adoc[Cloud Agnostic]
