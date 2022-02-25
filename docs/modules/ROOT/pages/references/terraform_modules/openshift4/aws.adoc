@@ -1,0 +1,164 @@
+= OpenShift 4 on AWS Terraform Module
+
+The `openshift4/aws` Terraform module provides a way to install and configure:
+
+* An OpenShift 4 cluster based using AWS
+* The xref:ROOT:references/terraform_modules/argocd-helm.adoc[ArgoCD Helm] module
+
+== Requirements
+
+No requirements.
+
+== Providers
+
+[cols="a,a",options="header,autowidth"]
+|===
+|Name |Version
+|[[provider_random]] <<provider_random,random>> |n/a
+|===
+
+== Modules
+
+[cols="a,a,a",options="header,autowidth"]
+|===
+|Name |Source |Version
+|[[module_argocd]] <<module_argocd,argocd>> |../../argocd-helm |
+|[[module_cluster]] <<module_cluster,cluster>> |camptocamp/openshift4/aws |0.1.0
+|===
+
+== Resources
+
+[cols="a,a",options="header,autowidth"]
+|===
+|Name |Type
+|https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password[random_password.clientsecret] |resource
+|https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password[random_password.grafana_admin_password] |resource
+|===
+
+== Inputs
+
+[cols="a,a,a,a,a",options="header,autowidth"]
+|===
+|Name |Description |Type |Default |Required
+|[[input_app_of_apps_values_overrides]] <<input_app_of_apps_values_overrides,app_of_apps_values_overrides>>
+|App of apps values overrides.
+|`string`
+|`""`
+|no
+
+|[[input_argocd_server_secretkey]] <<input_argocd_server_secretkey,argocd_server_secretkey>>
+|ArgoCD Server Secert Key to avoid regenerate token on redeploy.
+|`string`
+|`null`
+|no
+
+|[[input_base_domain]] <<input_base_domain,base_domain>>
+|The base domain used for Ingresses.
+|`string`
+|n/a
+|yes
+
+|[[input_cluster_name]] <<input_cluster_name,cluster_name>>
+|The name of the Kubernetes cluster to create.
+|`string`
+|n/a
+|yes
+
+|[[input_extra_app_projects]] <<input_extra_app_projects,extra_app_projects>>
+|Extra AppProjects objects to deploy.
+|`any`
+|`[]`
+|no
+
+|[[input_extra_application_sets]] <<input_extra_application_sets,extra_application_sets>>
+|Extra ApplicationSets objects to deploy.
+|`any`
+|`[]`
+|no
+
+|[[input_extra_apps]] <<input_extra_apps,extra_apps>>
+|Extra Applications objects to deploy.
+|`any`
+|`[]`
+|no
+
+|[[input_grafana_admin_password]] <<input_grafana_admin_password,grafana_admin_password>>
+|The admin password for Grafana.
+|`string`
+|`null`
+|no
+
+|[[input_install_config_path]] <<input_install_config_path,install_config_path>>
+|Path of the install-config.yaml
+|`string`
+|n/a
+|yes
+
+|[[input_oidc]] <<input_oidc,oidc>>
+|OIDC configuration for core applications.
+|
+
+[source]
+----
+object({
+    issuer_url              = string
+    oauth_url               = string
+    token_url               = string
+    api_url                 = string
+    client_id               = string
+    client_secret           = string
+    oauth2_proxy_extra_args = list(string)
+  })
+----
+
+|`null`
+|no
+
+|[[input_region]] <<input_region,region>>
+|The AWS region.
+|`string`
+|n/a
+|yes
+
+|[[input_repo_url]] <<input_repo_url,repo_url>>
+|The source repo URL of ArgoCD's app of apps.
+|`string`
+|`"https://github.com/camptocamp/devops-stack.git"`
+|no
+
+|[[input_repositories]] <<input_repositories,repositories>>
+|A list of repositories to add to ArgoCD.
+|`map(map(string))`
+|`{}`
+|no
+
+|[[input_target_revision]] <<input_target_revision,target_revision>>
+|The source target revision of ArgoCD's app of apps.
+|`string`
+|`"v0.54.2"`
+|no
+
+|[[input_wait_for_app_of_apps]] <<input_wait_for_app_of_apps,wait_for_app_of_apps>>
+|Allow to disable wait for app of apps
+|`bool`
+|`true`
+|no
+
+|===
+
+== Outputs
+
+[cols="a,a",options="header,autowidth"]
+|===
+|Name |Description
+|[[output_app_of_apps_values]] <<output_app_of_apps_values,app_of_apps_values>> |App of Apps values
+|[[output_argocd_auth_token]] <<output_argocd_auth_token,argocd_auth_token>> |The token to set in ARGOCD_AUTH_TOKEN environment variable.
+|[[output_argocd_server]] <<output_argocd_server,argocd_server>> |The URL of the ArgoCD server.
+|[[output_argocd_server_admin_password]] <<output_argocd_server_admin_password,argocd_server_admin_password>> |The ArgoCD admin password.
+|[[output_console_url]] <<output_console_url,console_url>> |n/a
+|[[output_grafana_admin_password]] <<output_grafana_admin_password,grafana_admin_password>> |The admin password for Grafana.
+|[[output_kubeadmin_password]] <<output_kubeadmin_password,kubeadmin_password>> |n/a
+|[[output_kubeconfig]] <<output_kubeconfig,kubeconfig>> |The content of the KUBECONFIG file.
+|[[output_repo_url]] <<output_repo_url,repo_url>> |n/a
+|[[output_target_revision]] <<output_target_revision,target_revision>> |n/a
+|===

@@ -1,0 +1,5 @@
+= app-of-apps
+
+This chart installs the
+https://argoproj.github.io/argo-cd/operator-manual/cluster-bootstrapping/#app-of-apps-pattern[app-of-apps]
+declared in `argocd/apps` directory.

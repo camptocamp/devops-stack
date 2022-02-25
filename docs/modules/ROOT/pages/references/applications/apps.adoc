@@ -1,0 +1,17 @@
+= apps
+
+This chart is a composition of subcharts. Each of the subcharts installs
+one app of the `argocd/app-of-apps` (if parameterized as `enabled`).
+
+The following is a non-comprehensive list of the apps included:
+
+* argocd
+* cert-manager
+* loki-stack
+* kube-prometheus-stack
+* minio
+* keycloak
+
+Some of the apps are automatically disabled based on the type of cloud
+platform used. To enable/disable apps please see
+xref:ROOT:howtos/user_parameters.adoc[User Parameters]
