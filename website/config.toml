@@ -89,7 +89,7 @@ link = "https://kwes.io/v2/kwes-script.js"
 [[menu.main]]
 name = "Docs"
 pre = "<i class='fas fa-book'></i> "
-url = "docs/devops-stack/latest"
+url = "docs/latest"
 weight = 1
 
 [[menu.main]]
@@ -136,7 +136,7 @@ url = "https://bivac.io"
 # footer menu right
 [[menu.footer_right]]
 name = "Documentation"
-url = "docs/devops-stack/latest"
+url = "docs/latest"
 
 [[menu.footer_right]]
 name = "Sources"
