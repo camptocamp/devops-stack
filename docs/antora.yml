@@ -1,5 +1,5 @@
 ---
-name: "devops-stack"
+name: "ROOT"
 title: "DevOps Stack"
 version: "0.54.2" # x-release-please-version
 prerelease: true

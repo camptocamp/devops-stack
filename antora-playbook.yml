@@ -2,7 +2,6 @@ site:
   title: DevOps Stack
   keys:
     google_analytics: "G-GDBX9466LL"
-  start_page: devops-stack::index.adoc
 antora:
   extensions:
     - require: "@antora/lunr-extension"
