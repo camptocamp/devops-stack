@@ -1,0 +1,235 @@
+= ArgoCD Helm Terraform Module
+
+The `argocd-helm` Terraform module provides a way to install and configure:
+
+* ArgoCD
+* A base umbrella app for the DevOps Stack
+* Optional additional umbrella apps
+
+== Requirements
+
+[cols="a,a",options="header,autowidth"]
+|===
+|Name |Version
+|[[requirement_terraform]] <<requirement_terraform,terraform>> |>= 0.13
+|[[requirement_helm]] <<requirement_helm,helm>> |~> 2.0
+|[[requirement_htpasswd]] <<requirement_htpasswd,htpasswd>> |~> 0.9
+|[[requirement_jwt]] <<requirement_jwt,jwt>> |>= 0.0.3
+|[[requirement_kubernetes]] <<requirement_kubernetes,kubernetes>> |~> 2.0
+|[[requirement_null]] <<requirement_null,null>> |~> 3.0
+|[[requirement_random]] <<requirement_random,random>> |~> 3.0
+|[[requirement_time]] <<requirement_time,time>> |~> 0.6
+|===
+
+== Providers
+
+[cols="a,a",options="header,autowidth"]
+|===
+|Name |Version
+|[[provider_helm]] <<provider_helm,helm>> |~> 2.0
+|[[provider_htpasswd]] <<provider_htpasswd,htpasswd>> |~> 0.9
+|[[provider_jwt]] <<provider_jwt,jwt>> |>= 0.0.3
+|[[provider_null]] <<provider_null,null>> |~> 3.0
+|[[provider_random]] <<provider_random,random>> |~> 3.0
+|[[provider_time]] <<provider_time,time>> |~> 0.6
+|===
+
+== Modules
+
+No modules.
+
+== Resources
+
+[cols="a,a",options="header,autowidth"]
+|===
+|Name |Type
+|https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release[helm_release.app_of_apps] |resource
+|https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release[helm_release.argocd] |resource
+|https://registry.terraform.io/providers/loafoe/htpasswd/latest/docs/resources/password[htpasswd_password.argocd_server_admin] |resource
+|https://registry.terraform.io/providers/camptocamp/jwt/latest/docs/resources/hashed_token[jwt_hashed_token.argocd] |resource
+|https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource[null_resource.wait_for_app_of_apps] |resource
+|https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password[random_password.argocd_server_admin] |resource
+|https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password[random_password.argocd_server_secretkey] |resource
+|https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password[random_password.oauth2_cookie_secret] |resource
+|https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/uuid[random_uuid.jti] |resource
+|https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/static[time_static.iat] |resource
+|===
+
+== Inputs
+
+[cols="a,a,a,a,a",options="header,autowidth"]
+|===
+|Name |Description |Type |Default |Required
+|[[input_alertmanager]] <<input_alertmanager,alertmanager>>
+|Alertmanager settings
+|`any`
+|`{}`
+|no
+
+|[[input_app_of_apps_values_overrides]] <<input_app_of_apps_values_overrides,app_of_apps_values_overrides>>
+|Extra value files content for the App of Apps
+|`list(string)`
+|`[]`
+|no
+
+|[[input_argocd]] <<input_argocd,argocd>>
+|ArgoCD settings
+|`any`
+|`{}`
+|no
+
+|[[input_argocd_server_secretkey]] <<input_argocd_server_secretkey,argocd_server_secretkey>>
+|ArgoCD Server Secert Key to avoid regenerate token on redeploy.
+|`string`
+|`null`
+|no
+
+|[[input_base_domain]] <<input_base_domain,base_domain>>
+|The base domain used for Ingresses.
+|`string`
+|n/a
+|yes
+
+|[[input_cert_manager]] <<input_cert_manager,cert_manager>>
+|Cert Manager settings
+|`any`
+|`{}`
+|no
+
+|[[input_cluster_autoscaler]] <<input_cluster_autoscaler,cluster_autoscaler>>
+|Cluster Autoscaler settings
+|`any`
+|`{}`
+|no
+
+|[[input_cluster_issuer]] <<input_cluster_issuer,cluster_issuer>>
+|Cluster Issuer
+|`string`
+|n/a
+|yes
+
+|[[input_cluster_name]] <<input_cluster_name,cluster_name>>
+|The name of the cluster to create.
+|`string`
+|n/a
+|yes
+
+|[[input_extra_app_projects]] <<input_extra_app_projects,extra_app_projects>>
+|Extra AppProjects objects to deploy.
+|`any`
+|`[]`
+|no
+
+|[[input_extra_application_sets]] <<input_extra_application_sets,extra_application_sets>>
+|Extra ApplicationSets objects to deploy.
+|`any`
+|`[]`
+|no
+
+|[[input_extra_apps]] <<input_extra_apps,extra_apps>>
+|Extra Applications objects to deploy.
+|`any`
+|`[]`
+|no
+
+|[[input_grafana]] <<input_grafana,grafana>>
+|Grafana settings
+|`any`
+|`{}`
+|no
+
+|[[input_keycloak]] <<input_keycloak,keycloak>>
+|Keycloak settings
+|`any`
+|`{}`
+|no
+
+|[[input_kube_prometheus_stack]] <<input_kube_prometheus_stack,kube_prometheus_stack>>
+|Kube-prometheus-stack settings
+|`any`
+|`{}`
+|no
+
+|[[input_kubeconfig]] <<input_kubeconfig,kubeconfig>>
+|The content of the KUBECONFIG file.
+|`string`
+|n/a
+|yes
+
+|[[input_loki]] <<input_loki,loki>>
+|Loki settings
+|`any`
+|`{}`
+|no
+
+|[[input_metrics_archives]] <<input_metrics_archives,metrics_archives>>
+|Metrics archives settings
+|`any`
+|`{}`
+|no
+
+|[[input_metrics_server]] <<input_metrics_server,metrics_server>>
+|Metrics server settings
+|`any`
+|`{}`
+|no
+
+|[[input_minio]] <<input_minio,minio>>
+|Minio settings
+|`any`
+|`{}`
+|no
+
+|[[input_oidc]] <<input_oidc,oidc>>
+|OIDC Settings
+|`any`
+|`{}`
+|no
+
+|[[input_prometheus]] <<input_prometheus,prometheus>>
+|Prometheus settings
+|`any`
+|`{}`
+|no
+
+|[[input_repo_url]] <<input_repo_url,repo_url>>
+|The source repo URL of ArgoCD's app of apps.
+|`string`
+|n/a
+|yes
+
+|[[input_repositories]] <<input_repositories,repositories>>
+|A list of repositories to add to ArgoCD.
+|`map(map(string))`
+|`{}`
+|no
+
+|[[input_target_revision]] <<input_target_revision,target_revision>>
+|The source target revision of ArgoCD's app of apps.
+|`string`
+|n/a
+|yes
+
+|[[input_traefik]] <<input_traefik,traefik>>
+|Trafik settings
+|`any`
+|`{}`
+|no
+
+|[[input_wait_for_app_of_apps]] <<input_wait_for_app_of_apps,wait_for_app_of_apps>>
+|Allow to disable wait for app of apps
+|`bool`
+|`true`
+|no
+
+|===
+
+== Outputs
+
+[cols="a,a",options="header,autowidth"]
+|===
+|Name |Description
+|[[output_app_of_apps_values]] <<output_app_of_apps_values,app_of_apps_values>> |App of Apps values
+|[[output_argocd_auth_token]] <<output_argocd_auth_token,argocd_auth_token>> |The token to set in ARGOCD_AUTH_TOKEN environment variable.
+|[[output_argocd_server_admin_password]] <<output_argocd_server_admin_password,argocd_server_admin_password>> |The ArgoCD admin password.
+|===

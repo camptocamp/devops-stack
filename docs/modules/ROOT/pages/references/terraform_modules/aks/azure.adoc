@@ -1,0 +1,310 @@
+= Azure AKS Terraform Module
+
+The `aks/azure` Terraform module provides a way to install and configure:
+
+* An AKS cluster
+* The xref:ROOT:references/terraform_modules/argocd-helm.adoc[ArgoCD Helm] module
+
+== Requirements
+
+[cols="a,a",options="header,autowidth"]
+|===
+|Name |Version
+|[[requirement_terraform]] <<requirement_terraform,terraform>> |>= 0.13
+|[[requirement_azuread]] <<requirement_azuread,azuread>> |~> 2.0
+|[[requirement_azurerm]] <<requirement_azurerm,azurerm>> |~> 2.62
+|[[requirement_helm]] <<requirement_helm,helm>> |~> 2.0
+|[[requirement_kubernetes]] <<requirement_kubernetes,kubernetes>> |~> 2.0
+|[[requirement_local]] <<requirement_local,local>> |~> 2.0
+|[[requirement_random]] <<requirement_random,random>> |~> 3.0
+|[[requirement_tls]] <<requirement_tls,tls>> |~> 3.0
+|===
+
+== Providers
+
+[cols="a,a",options="header,autowidth"]
+|===
+|Name |Version
+|[[provider_azuread]] <<provider_azuread,azuread>> |~> 2.0
+|[[provider_azurerm]] <<provider_azurerm,azurerm>> |~> 2.62
+|[[provider_random]] <<provider_random,random>> |~> 3.0
+|===
+
+== Modules
+
+[cols="a,a,a",options="header,autowidth"]
+|===
+|Name |Source |Version
+|[[module_argocd]] <<module_argocd,argocd>> |../../argocd-helm |
+|[[module_cluster]] <<module_cluster,cluster>> |Azure/aks/azurerm |4.13.0
+|===
+
+== Resources
+
+[cols="a,a",options="header,autowidth"]
+|===
+|Name |Type
+|https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/application[azuread_application.oauth2_apps] |resource
+|https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/application_password[azuread_application_password.oauth2_apps] |resource
+|https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/dns_cname_record[azurerm_dns_cname_record.wildcard] |resource
+|https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster_node_pool[azurerm_kubernetes_cluster_node_pool.this] |resource
+|https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/policy_assignment[azurerm_policy_assignment.baseline] |resource
+|https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment[azurerm_role_assignment.dns_zone_contributor] |resource
+|https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment[azurerm_role_assignment.managed_identity_operator] |resource
+|https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment[azurerm_role_assignment.reader] |resource
+|https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment[azurerm_role_assignment.virtual_machine_contributor] |resource
+|https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account[azurerm_storage_account.this] |resource
+|https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_container[azurerm_storage_container.loki] |resource
+|https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/user_assigned_identity[azurerm_user_assigned_identity.cert_manager] |resource
+|https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/user_assigned_identity[azurerm_user_assigned_identity.kube_prometheus_stack_prometheus] |resource
+|https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/user_assigned_identity[azurerm_user_assigned_identity.this] |resource
+|https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password[random_password.grafana_admin_password] |resource
+|https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string[random_string.storage_account] |resource
+|https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/uuid[random_uuid.argocd_app_role] |resource
+|https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config[azurerm_client_config.current] |data source
+|https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/dns_zone[azurerm_dns_zone.this] |data source
+|https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/kubernetes_cluster[azurerm_kubernetes_cluster.cluster] |data source
+|https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/policy_set_definition[azurerm_policy_set_definition.baseline] |data source
+|https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/policy_set_definition[azurerm_policy_set_definition.restricted] |data source
+|https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/resource_group[azurerm_resource_group.this] |data source
+|https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/subscription[azurerm_subscription.primary] |data source
+|===
+
+== Inputs
+
+[cols="a,a,a,a,a",options="header,autowidth"]
+|===
+|Name |Description |Type |Default |Required
+|[[input_admin_group_object_ids]] <<input_admin_group_object_ids,admin_group_object_ids>>
+|A list of Object IDs of Azure Active Directory Groups which should have Admin Role on the Cluster.
+|`list(string)`
+|`[]`
+|no
+
+|[[input_agents_count]] <<input_agents_count,agents_count>>
+|The number of Agents that should exist in the Agent Pool. Please set `agents_count` `null` while `enable_auto_scaling` is `true` to avoid possible `agents_count` changes.
+|`number`
+|`2`
+|no
+
+|[[input_agents_labels]] <<input_agents_labels,agents_labels>>
+|A map of Kubernetes labels which should be applied to nodes in the Default Node Pool. Changing this forces a new resource to be created.
+|`map(string)`
+|`{}`
+|no
+
+|[[input_agents_max_pods]] <<input_agents_max_pods,agents_max_pods>>
+|(Optional) The maximum number of pods that can run on each agent. Changing this forces a new resource to be created.
+|`number`
+|`null`
+|no
+
+|[[input_agents_pool_name]] <<input_agents_pool_name,agents_pool_name>>
+|The default Azure AKS agentpool (nodepool) name.
+|`string`
+|`"nodepool"`
+|no
+
+|[[input_agents_size]] <<input_agents_size,agents_size>>
+|The default virtual machine size for the Kubernetes agents
+|`string`
+|`"Standard_D4s_v3"`
+|no
+
+|[[input_app_node_selectors]] <<input_app_node_selectors,app_node_selectors>>
+|Map of argoCD apps to node selector
+|`map(map(string))`
+|`{}`
+|no
+
+|[[input_app_of_apps_values_overrides]] <<input_app_of_apps_values_overrides,app_of_apps_values_overrides>>
+|App of apps values overrides.
+|`string`
+|`""`
+|no
+
+|[[input_argocd_server_secretkey]] <<input_argocd_server_secretkey,argocd_server_secretkey>>
+|ArgoCD Server Secert Key to avoid regenerate token on redeploy.
+|`string`
+|`null`
+|no
+
+|[[input_azureidentities]] <<input_azureidentities,azureidentities>>
+|Azure User Assigned Identities to create
+|
+
+[source]
+----
+list(object({
+    namespace = string
+    name      = string
+  }))
+----
+
+|`[]`
+|no
+
+|[[input_base_domain]] <<input_base_domain,base_domain>>
+|The base domain used for Ingresses.
+|`string`
+|n/a
+|yes
+
+|[[input_cluster_name]] <<input_cluster_name,cluster_name>>
+|The name of the Kubernetes cluster to create.
+|`string`
+|n/a
+|yes
+
+|[[input_extra_app_projects]] <<input_extra_app_projects,extra_app_projects>>
+|Extra AppProjects objects to deploy.
+|`any`
+|`[]`
+|no
+
+|[[input_extra_application_sets]] <<input_extra_application_sets,extra_application_sets>>
+|Extra ApplicationSets objects to deploy.
+|`any`
+|`[]`
+|no
+
+|[[input_extra_apps]] <<input_extra_apps,extra_apps>>
+|Extra Applications objects to deploy.
+|`any`
+|`[]`
+|no
+
+|[[input_grafana_admin_password]] <<input_grafana_admin_password,grafana_admin_password>>
+|The admin password for Grafana.
+|`string`
+|`null`
+|no
+
+|[[input_kubernetes_version]] <<input_kubernetes_version,kubernetes_version>>
+|Specify which Kubernetes release to use.
+|`string`
+|`"1.21.9"`
+|no
+
+|[[input_network_policy]] <<input_network_policy,network_policy>>
+|Enable network policy for the azure CNI
+|`string`
+|`null`
+|no
+
+|[[input_node_pools]] <<input_node_pools,node_pools>>
+|Map of node pools
+|`map(any)`
+|`{}`
+|no
+
+|[[input_oidc]] <<input_oidc,oidc>>
+|OIDC configuration for core applications.
+|
+
+[source]
+----
+object({
+    issuer_url              = string
+    oauth_url               = string
+    token_url               = string
+    api_url                 = string
+    client_id               = string
+    client_secret           = string
+    oauth2_proxy_extra_args = list(string)
+  })
+----
+
+|`null`
+|no
+
+|[[input_os_disk_size_gb]] <<input_os_disk_size_gb,os_disk_size_gb>>
+|Disk size of nodes in GBs.
+|`number`
+|`128`
+|no
+
+|[[input_public_ssh_key]] <<input_public_ssh_key,public_ssh_key>>
+|A custom ssh key to control access to the AKS cluster
+|`string`
+|`""`
+|no
+
+|[[input_repo_url]] <<input_repo_url,repo_url>>
+|The source repo URL of ArgoCD's app of apps.
+|`string`
+|`"https://github.com/camptocamp/devops-stack.git"`
+|no
+
+|[[input_repositories]] <<input_repositories,repositories>>
+|A list of repositories to add to ArgoCD.
+|`map(map(string))`
+|`{}`
+|no
+
+|[[input_resource_group_name]] <<input_resource_group_name,resource_group_name>>
+|The Resource Group where the Managed Kubernetes Cluster should exist.
+|`string`
+|n/a
+|yes
+
+|[[input_sku_tier]] <<input_sku_tier,sku_tier>>
+|The SKU Tier that should be used for this Kubernetes Cluster. Possible values are Free and Paid
+|`string`
+|`"Free"`
+|no
+
+|[[input_storage_account_replication_type]] <<input_storage_account_replication_type,storage_account_replication_type>>
+|Storage account replication type for storing loki logs
+|`string`
+|`"GRS"`
+|no
+
+|[[input_storage_account_tier]] <<input_storage_account_tier,storage_account_tier>>
+|Storage account tier used for storing loki logs
+|`string`
+|`"Standard"`
+|no
+
+|[[input_target_revision]] <<input_target_revision,target_revision>>
+|The source target revision of ArgoCD's app of apps.
+|`string`
+|`"v0.54.2"`
+|no
+
+|[[input_vnet_subnet_id]] <<input_vnet_subnet_id,vnet_subnet_id>>
+|The ID of a Subnet where the Kubernetes Node Pool should exist. Changing this forces a new resource to be created.
+|`string`
+|n/a
+|yes
+
+|[[input_wait_for_app_of_apps]] <<input_wait_for_app_of_apps,wait_for_app_of_apps>>
+|Allow to disable wait for app of apps
+|`bool`
+|`true`
+|no
+
+|===
+
+== Outputs
+
+[cols="a,a",options="header,autowidth"]
+|===
+|Name |Description
+|[[output_app_of_apps_values]] <<output_app_of_apps_values,app_of_apps_values>> |App of Apps values
+|[[output_argocd_auth_token]] <<output_argocd_auth_token,argocd_auth_token>> |The token to set in ARGOCD_AUTH_TOKEN environment variable.
+|[[output_argocd_server]] <<output_argocd_server,argocd_server>> |The URL of the ArgoCD server.
+|[[output_argocd_server_admin_password]] <<output_argocd_server_admin_password,argocd_server_admin_password>> |The ArgoCD admin password.
+|[[output_azureidentities]] <<output_azureidentities,azureidentities>> |Azure User Assigned Identities created
+|[[output_base_domain]] <<output_base_domain,base_domain>> |n/a
+|[[output_cluster_id]] <<output_cluster_id,cluster_id>> |n/a
+|[[output_grafana_admin_password]] <<output_grafana_admin_password,grafana_admin_password>> |The admin password for Grafana.
+|[[output_kube_admin_config]] <<output_kube_admin_config,kube_admin_config>> |n/a
+|[[output_kubeconfig]] <<output_kubeconfig,kubeconfig>> |The content of the KUBECONFIG file.
+|[[output_kubelet_identity]] <<output_kubelet_identity,kubelet_identity>> |n/a
+|[[output_namespaces]] <<output_namespaces,namespaces>> |n/a
+|[[output_node_resource_group]] <<output_node_resource_group,node_resource_group>> |n/a
+|[[output_prometheus_user_assigned_identity_principal_id]] <<output_prometheus_user_assigned_identity_principal_id,prometheus_user_assigned_identity_principal_id>> |n/a
+|[[output_repo_url]] <<output_repo_url,repo_url>> |n/a
+|[[output_target_revision]] <<output_target_revision,target_revision>> |n/a
+|===
