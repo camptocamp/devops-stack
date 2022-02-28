@@ -52,6 +52,4 @@ jobs:
           folder: "public"
           commit-message: "ci: publish website for ${{ github.sha }}"
           clean-exclude: |
-            CNAME
-            .nojekyll
             docs
