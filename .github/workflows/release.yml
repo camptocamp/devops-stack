@@ -28,9 +28,9 @@ jobs:
 
   documentation:
     name: "Publish documentation"
-    if: "needs.release-please.outputs.release_created"
 
     needs:
       - "release-please"
 
+    if: "needs.release-please.outputs.release_created"
     uses: "./.github/workflows/documentation.yml"
