@@ -8,16 +8,6 @@ locals {
   kubernetes_cluster_ca_certificate = base64decode(data.azurerm_kubernetes_cluster.cluster.kube_admin_config.0.cluster_ca_certificate)
 
   kubeconfig = data.azurerm_kubernetes_cluster.cluster.kube_admin_config_raw
-
-  azureidentities = { for v in var.azureidentities :
-    format("%s.%s", v.namespace, v.name) => {
-      name         = v.name
-      namespace    = v.namespace
-      resource_id  = azurerm_user_assigned_identity.this[format("%s.%s", v.namespace, v.name)].id
-      client_id    = azurerm_user_assigned_identity.this[format("%s.%s", v.namespace, v.name)].client_id
-      principal_id = azurerm_user_assigned_identity.this[format("%s.%s", v.namespace, v.name)].principal_id
-    }
-  }
 }
 
 provider "helm" {
@@ -266,14 +256,4 @@ resource "azurerm_policy_assignment" "baseline" {
 }
 PARAMETERS
 
-}
-
-resource "azurerm_user_assigned_identity" "this" {
-  for_each = {
-    for k, v in var.azureidentities :
-    format("%s.%s", v.namespace, v.name) => v
-  }
-  resource_group_name = module.cluster.node_resource_group
-  location            = data.azurerm_resource_group.this.location
-  name                = format("%s-%s-%s", each.value.namespace, each.value.name, var.cluster_name)
 }
