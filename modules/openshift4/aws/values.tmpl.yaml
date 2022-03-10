@@ -48,5 +48,7 @@ argo-cd:
     route:
       enabled: true
       hostname: argocd.apps.${cluster_name}.${base_domain}
+      termination_type: edge
+      termination_policy: Redirect
     metrics:
       enabled: true
