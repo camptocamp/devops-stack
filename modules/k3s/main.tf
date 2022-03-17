@@ -25,7 +25,7 @@ provider "kubernetes" {
 }
 
 module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//modules/bootstrap"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap"
 
   kubeconfig              = local.kubeconfig
   repo_url                = var.repo_url

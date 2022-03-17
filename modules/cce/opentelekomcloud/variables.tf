@@ -38,5 +38,5 @@ variable "node_pools" {
 variable "keycloak_users" {
   description = "List of keycloak users"
   type        = map(map(string))
-  default = {}
+  default     = {}
 }

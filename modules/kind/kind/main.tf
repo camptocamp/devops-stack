@@ -9,8 +9,8 @@ locals {
 }
 
 data "docker_network" "kind" {
-  name = "kind"
-  depends_on = [ kind_cluster.cluster ]
+  name       = "kind"
+  depends_on = [kind_cluster.cluster]
 }
 
 resource "kind_cluster" "cluster" {
@@ -55,7 +55,7 @@ provider "kubernetes" {
 }
 
 module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//modules/bootstrap"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap"
 
   kubeconfig              = local.kubeconfig
   repo_url                = var.repo_url
@@ -69,8 +69,4 @@ module "argocd" {
   cluster_issuer          = "ca-issuer"
 
   repositories = var.repositories
-  
-  depends_on = [
-    kind_cluster.cluster,
-  ]
 }
