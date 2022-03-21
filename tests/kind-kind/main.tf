@@ -8,11 +8,11 @@ module "cluster" {
 }
 
 provider "argocd" {
-  server_addr = "127.0.0.1:8080"
-  auth_token  = module.cluster.argocd_auth_token
-  insecure = true
-  plain_text = true
-  port_forward = true
+  server_addr                 = "127.0.0.1:8080"
+  auth_token                  = module.cluster.argocd_auth_token
+  insecure                    = true
+  plain_text                  = true
+  port_forward                = true
   port_forward_with_namespace = module.cluster.argocd_namespace
 
   kubernetes {
@@ -29,7 +29,7 @@ module "ingress" {
   cluster_name     = var.cluster_name
   argocd_namespace = module.cluster.argocd_namespace
   base_domain      = module.cluster.base_domain
-  extra_yaml       = [yamlencode({ 
+  extra_yaml = [yamlencode({
     traefik = {
       deployment = {
         replicas = 1
@@ -41,15 +41,15 @@ module "ingress" {
 module "oidc" {
   source = "git::https://github.com/camptocamp/devops-stack-module-keycloak.git"
 
-  cluster_name   = var.cluster_name
-  argocd         = {
+  cluster_name = var.cluster_name
+  argocd = {
     namespace = module.cluster.argocd_namespace
     domain    = module.cluster.argocd_domain
   }
   base_domain    = module.cluster.base_domain
   cluster_issuer = "ca-issuer"
 
-  depends_on = [ module.ingress ]
+  depends_on = [module.ingress]
 }
 
 module "monitoring" {
@@ -58,11 +58,11 @@ module "monitoring" {
   cluster_name     = var.cluster_name
   oidc             = module.oidc.oidc
   argocd_namespace = module.cluster.argocd_namespace
-  base_domain    = module.cluster.base_domain
-  cluster_issuer = "ca-issuer"
+  base_domain      = module.cluster.base_domain
+  cluster_issuer   = "ca-issuer"
   metrics_archives = {}
 
-  depends_on = [ module.oidc ]
+  depends_on = [module.oidc]
 }
 
 
@@ -76,12 +76,12 @@ module "storage" {
 
   minio = {
     buckets = {
-      loki = {}
+      loki   = {}
       thanos = {}
     }
   }
 
-  depends_on = [ module.monitoring ]
+  depends_on = [module.monitoring]
 }
 
 module "loki-stack" {
@@ -96,7 +96,7 @@ module "loki-stack" {
     secret_key = module.storage.secret_key
   }
 
-  depends_on = [ module.monitoring, module.storage ]
+  depends_on = [module.monitoring, module.storage]
 }
 
 
@@ -107,26 +107,26 @@ module "cert-manager" {
   argocd_namespace = module.cluster.argocd_namespace
   base_domain      = module.cluster.base_domain
 
-  depends_on = [ module.monitoring ]
+  depends_on = [module.monitoring]
 }
 
 module "argocd" {
   source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git"
 
-  cluster_name   = var.cluster_name
-  oidc           = module.oidc.oidc
-  argocd         = {
-    namespace = module.cluster.argocd_namespace
-    server_secretkey = module.cluster.argocd_server_secretkey
+  cluster_name = var.cluster_name
+  oidc         = module.oidc.oidc
+  argocd = {
+    namespace                = module.cluster.argocd_namespace
+    server_secretkey         = module.cluster.argocd_server_secretkey
     accounts_pipeline_tokens = module.cluster.argocd_accounts_pipeline_tokens
-    server_admin_password = module.cluster.argocd_server_admin_password
-    domain = module.cluster.argocd_domain
-    admin_enabled = true
+    server_admin_password    = module.cluster.argocd_server_admin_password
+    domain                   = module.cluster.argocd_domain
+    admin_enabled            = true
   }
   base_domain    = module.cluster.base_domain
   cluster_issuer = "ca-issuer"
 
-  depends_on = [ module.cert-manager, module.monitoring ]
+  depends_on = [module.cert-manager, module.monitoring]
 }
 
 
@@ -135,16 +135,16 @@ module "my-apps" {
 
   argocd_namespace = module.cluster.argocd_namespace
 
-  name = "my-apps"
+  name      = "my-apps"
   namespace = "my-apps"
 
-  project_source_repos = [ "https://github.com/raphink/applicationsets-demo" ]
+  project_source_repos = ["https://github.com/raphink/applicationsets-demo"]
 
   generators = [
     {
       git = {
-        repoURL     = "https://github.com/raphink/applicationsets-demo"
-        revision    = "HEAD"
+        repoURL  = "https://github.com/raphink/applicationsets-demo"
+        revision = "HEAD"
         directories = [
           { path = "*" }
         ]
@@ -169,7 +169,7 @@ module "my-apps" {
       }
       syncPolicy = {
         automated = {
-          prune     = true
+          prune    = true
           selfHeal = true
         }
 
@@ -180,5 +180,5 @@ module "my-apps" {
     }
   }
 
-  depends_on = [ module.argocd ]
+  depends_on = [module.argocd]
 }

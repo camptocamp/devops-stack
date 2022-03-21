@@ -3,7 +3,7 @@ output "base_domain" {
 }
 
 output "oidc" {
-  value = module.oidc.oidc
+  value     = module.oidc.oidc
   sensitive = true
 }
 
