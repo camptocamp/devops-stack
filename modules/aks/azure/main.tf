@@ -136,11 +136,11 @@ resource "azurerm_user_assigned_identity" "kube_prometheus_stack_prometheus" {
 }
 
 # TODO: I'm not sure this is required
-resource "azurerm_role_assignment" "reader" {
-  scope                = format("%s/resourcegroups/%s", data.azurerm_subscription.primary.id, module.cluster.node_resource_group)
-  role_definition_name = "Reader"
-  principal_id         = azurerm_user_assigned_identity.cert_manager.principal_id
-}
+# resource "azurerm_role_assignment" "reader" {
+#   scope                = format("%s/resourcegroups/%s", data.azurerm_subscription.primary.id, module.cluster.node_resource_group)
+#   role_definition_name = "Reader"
+#   principal_id         = azurerm_user_assigned_identity.cert_manager.principal_id
+# }
 
 data "azurerm_dns_zone" "this" {
   name                = var.base_domain
