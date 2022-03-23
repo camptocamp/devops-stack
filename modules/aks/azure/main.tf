@@ -135,12 +135,6 @@ resource "azurerm_user_assigned_identity" "kube_prometheus_stack_prometheus" {
   name                = "kube-prometheus-stack-prometheus"
 }
 
-resource "azurerm_user_assigned_identity" "cert_manager" {
-  resource_group_name = module.cluster.node_resource_group
-  location            = data.azurerm_resource_group.this.location
-  name                = "cert-manager"
-}
-
 # TODO: I'm not sure this is required
 resource "azurerm_role_assignment" "reader" {
   scope                = format("%s/resourcegroups/%s", data.azurerm_subscription.primary.id, module.cluster.node_resource_group)
@@ -151,12 +145,6 @@ resource "azurerm_role_assignment" "reader" {
 data "azurerm_dns_zone" "this" {
   name                = var.base_domain
   resource_group_name = var.resource_group_name
-}
-
-resource "azurerm_role_assignment" "dns_zone_contributor" {
-  scope                = data.azurerm_dns_zone.this.id
-  role_definition_name = "DNS Zone Contributor"
-  principal_id         = azurerm_user_assigned_identity.cert_manager.principal_id
 }
 
 data "azurerm_client_config" "current" {}
