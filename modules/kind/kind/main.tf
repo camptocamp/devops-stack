@@ -6,11 +6,6 @@ locals {
   kubernetes_client_key             = kind_cluster.cluster.client_key
   kubernetes_cluster_ca_certificate = kind_cluster.cluster.cluster_ca_certificate
   kubeconfig                        = kind_cluster.cluster.kubeconfig
-
-  minio = {
-    access_key = var.enable_minio ? random_password.minio_accesskey.0.result : ""
-    secret_key = var.enable_minio ? random_password.minio_secretkey.0.result : ""
-  }
 }
 
 data "docker_network" "kind" {
@@ -74,57 +69,4 @@ module "argocd" {
   cluster_issuer          = "ca-issuer"
 
   repositories = var.repositories
-}
-
-data "kubernetes_secret" "keycloak_admin_password" {
-  metadata {
-    name      = "credential-keycloak"
-    namespace = "keycloak"
-  }
-
-  depends_on = [module.argocd]
-}
-
-resource "random_password" "clientsecret" {
-  length  = 16
-  special = false
-}
-
-resource "random_password" "jdoe_password" {
-  length  = 16
-  special = false
-}
-
-resource "random_password" "minio_accesskey" {
-  count   = var.enable_minio ? 1 : 0
-  length  = 16
-  special = false
-}
-
-resource "random_password" "minio_secretkey" {
-  count   = var.enable_minio ? 1 : 0
-  length  = 16
-  special = false
-}
-
-resource "tls_private_key" "root" {
-  algorithm = "ECDSA"
-}
-
-resource "tls_self_signed_cert" "root" {
-  key_algorithm   = "ECDSA"
-  private_key_pem = tls_private_key.root.private_key_pem
-
-  subject {
-    common_name  = "devops-stack.camptocamp.com"
-    organization = "Camptocamp, SA"
-  }
-
-  validity_period_hours = 8760
-
-  allowed_uses = [
-    "cert_signing",
-  ]
-
-  is_ca_certificate = true
 }
