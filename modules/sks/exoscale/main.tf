@@ -18,10 +18,10 @@ locals {
     },
   }
 
-  router_nodepool = coalesce(var.router_nodepool, "router-${var.cluster_name}")
-  nodepools       = coalesce(var.nodepools, local.default_nodepools)
-  cluster_issuer  = (length(local.nodepools) > 1) ? "letsencrypt-prod" : "ca-issuer"
-  keycloak_user_map = { for username, infos in var.keycloak_users : username => merge(infos, tomap({password = random_password.keycloak_passwords[username].result})) }
+  router_nodepool   = coalesce(var.router_nodepool, "router-${var.cluster_name}")
+  nodepools         = coalesce(var.nodepools, local.default_nodepools)
+  cluster_issuer    = (length(local.nodepools) > 1) ? "letsencrypt-prod" : "ca-issuer"
+  keycloak_user_map = { for username, infos in var.keycloak_users : username => merge(infos, tomap({ password = random_password.keycloak_passwords[username].result })) }
 }
 
 provider "helm" {
@@ -42,7 +42,7 @@ provider "kubernetes" {
 
 module "cluster" {
   source  = "camptocamp/sks/exoscale"
-  version = "0.3.0"
+  version = "0.4.0"
 
   kubernetes_version = var.kubernetes_version
   name               = var.cluster_name
@@ -152,7 +152,7 @@ module "argocd" {
   }
 
   keycloak = {
-    enable        = true
+    enable   = true
     user_map = local.keycloak_user_map
   }
 
