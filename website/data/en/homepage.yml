@@ -12,7 +12,7 @@ banner:
   button:
     enable: false
     label: "Learn more"
-    link: "docs"
+    link: "docs/devops-stack/latest"
 
   quickstart:
     item:
@@ -153,7 +153,7 @@ call_to_action:
   content: "Wherever you are in your Cloud Native journey, you can either dive straight into the technical documentation, or contact us for a demo or a consulting session."
   buttons:
     - label: "Technical documentation"
-      link: "docs"
+      link: "docs/devops-stack/latest"
       icon: "fa fa-book"
     - label: "Request a demo"
       link: "/contact"
