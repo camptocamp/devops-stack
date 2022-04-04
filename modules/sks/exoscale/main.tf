@@ -22,6 +22,17 @@ locals {
   nodepools         = coalesce(var.nodepools, local.default_nodepools)
   cluster_issuer    = (length(local.nodepools) > 1) ? "letsencrypt-prod" : "ca-issuer"
   keycloak_user_map = { for username, infos in var.keycloak_users : username => merge(infos, tomap({ password = random_password.keycloak_passwords[username].result })) }
+
+  oidc = var.oidc != null ? var.oidc : {
+    issuer_url    = format("https://keycloak.apps.%s/auth/realms/devops-stack", local.base_domain)
+    oauth_url     = format("https://keycloak.apps.%s/auth/realms/devops-stack/protocol/openid-connect/auth", local.base_domain)
+    token_url     = format("https://keycloak.apps.%s/auth/realms/devops-stack/protocol/openid-connect/token", local.base_domain)
+    api_url       = format("https://keycloak.apps.%s/auth/realms/devops-stack/protocol/openid-connect/userinfo", local.base_domain)
+    client_id     = "devops-stack-applications"
+    client_secret = random_password.clientsecret.result
+
+    oauth2_proxy_extra_args = []
+  }
 }
 
 provider "helm" {
@@ -148,16 +159,7 @@ module "argocd" {
   cluster_issuer          = local.cluster_issuer
   wait_for_app_of_apps    = var.wait_for_app_of_apps
 
-  oidc = var.oidc != null ? var.oidc : {
-    issuer_url    = format("https://keycloak.apps.%s/auth/realms/devops-stack", local.base_domain)
-    oauth_url     = format("https://keycloak.apps.%s/auth/realms/devops-stack/protocol/openid-connect/auth", local.base_domain)
-    token_url     = format("https://keycloak.apps.%s/auth/realms/devops-stack/protocol/openid-connect/token", local.base_domain)
-    api_url       = format("https://keycloak.apps.%s/auth/realms/devops-stack/protocol/openid-connect/userinfo", local.base_domain)
-    client_id     = "devops-stack-applications"
-    client_secret = random_password.clientsecret.result
-
-    oauth2_proxy_extra_args = []
-  }
+  oidc = merge(local.oidc, var.prometheus_oauth2_proxy_args)
 
   grafana = {
     admin_password = local.grafana_admin_password
