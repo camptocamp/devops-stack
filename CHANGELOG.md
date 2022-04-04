@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.55.0](https://github.com/camptocamp/devops-stack/compare/v0.54.2...v0.55.0) (2022-04-04)
+
+
+### Features
+
+* add extra_volume_mount variable for prometheus oauth sidecar ([#889](https://github.com/camptocamp/devops-stack/issues/889)) ([6342db9](https://github.com/camptocamp/devops-stack/commit/6342db9493a0f0474854aaf8e7732524b20b58e3))
+* allow changing prometheus oauth2 proxy args ([#852](https://github.com/camptocamp/devops-stack/issues/852)) ([67c5d55](https://github.com/camptocamp/devops-stack/commit/67c5d550db723b7e91c70999e9437c5d9f6a8402))
+* **sks:** add default dns domain and record ([#838](https://github.com/camptocamp/devops-stack/issues/838)) ([8117ec8](https://github.com/camptocamp/devops-stack/commit/8117ec8ee4eb5006b861aa734fd4457704fea86f))
+* **sks:** update camptocamp's exoscale sks module to 0.4.0 ([#884](https://github.com/camptocamp/devops-stack/issues/884)) ([7376b82](https://github.com/camptocamp/devops-stack/commit/7376b825701bfa25bc379e3ccfa74bfb7c302cbc))
+
+
+### Bug Fixes
+
+* **sks:** invalid ressource exoscale_domain.this on domain record wildcard ([#887](https://github.com/camptocamp/devops-stack/issues/887)) ([b82b3fd](https://github.com/camptocamp/devops-stack/commit/b82b3fd6b1e6507299ccad191d487adeff26caec))
+
 ### [0.54.2](https://www.github.com/camptocamp/devops-stack/compare/v0.54.1...v0.54.2) (2022-02-17)
 
 
