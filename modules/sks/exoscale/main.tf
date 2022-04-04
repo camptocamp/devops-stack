@@ -42,7 +42,7 @@ provider "kubernetes" {
 
 module "cluster" {
   source  = "camptocamp/sks/exoscale"
-  version = "0.4.0"
+  version = "0.4.1"
 
   kubernetes_version = var.kubernetes_version
   name               = var.cluster_name
