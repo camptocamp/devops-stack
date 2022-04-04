@@ -126,7 +126,7 @@ resource "exoscale_domain" "this" {
 }
 
 resource "exoscale_domain_record" "wildcard" {
-  domain      = data.exoscale_domain.this.id
+  domain      = exoscale_domain.this.id
   name        = format("*.apps.%s", var.cluster_name)
   record_type = "A"
   ttl         = 300
