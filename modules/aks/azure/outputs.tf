@@ -10,10 +10,6 @@ output "cluster_id" {
   value = module.cluster.aks_id
 }
 
-output "prometheus_user_assigned_identity_principal_id" {
-  value = azurerm_user_assigned_identity.kube_prometheus_stack_prometheus.principal_id
-}
-
 output "kube_admin_config" {
   value = {
     client_key             = local.kubernetes_client_key
