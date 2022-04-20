@@ -390,7 +390,7 @@ kube-prometheus-stack:
           ports:
             - containerPort: 9091
               name: proxy
-          %{ if can(oidc.prometheus_oauth2_proxy_extra_volume_mounts) }
+          %{ if length(oidc.prometheus_oauth2_proxy_extra_volume_mounts) != 0 }
           volumeMounts:
           %{ for arg in oidc.prometheus_oauth2_proxy_extra_volume_mounts }
           - name: ${arg.name}
