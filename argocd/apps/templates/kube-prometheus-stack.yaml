@@ -13,10 +13,13 @@ spec:
     path: argocd/kube-prometheus-stack
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
-    helm:
-      values: |
-        kube-prometheus-stack:
-          {{- index .Values "kube-prometheus-stack" | toYaml | nindent 10 }}
+    plugin:
+      name: kustomized-helm
+      env:
+        - name: HELM_VALUES
+          value: |
+            kube-prometheus-stack:
+              {{- index .Values "kube-prometheus-stack" | toYaml | nindent 14 }}
   destination:
     namespace: kube-prometheus-stack
     server: {{ .Values.spec.destination.server }}
