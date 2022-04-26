@@ -74,7 +74,7 @@ module "cluster" {
 }
 
 module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=before-refactor"
 
   kubeconfig              = local.kubeconfig
   repo_url                = var.repo_url
