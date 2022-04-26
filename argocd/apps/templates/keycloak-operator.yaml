@@ -12,7 +12,7 @@ spec:
   source:
     path: deploy
     repoURL: https://github.com/keycloak/keycloak-operator.git
-    targetRevision: 15.0.1
+    targetRevision: 18.0.0
   destination:
     namespace: keycloak
     server: {{ .Values.spec.destination.server }}
