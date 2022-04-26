@@ -13,5 +13,5 @@ description: |
   NOTE: This chart must be instantiated in a sync-wave after the kube-prometheus-stack chart because it uses Prometheus Custom Resources.
 dependencies:
   - name: "cert-manager"
-    version: "1.4.3"
+    version: "1.8.0"
     repository: "https://charts.jetstack.io"
