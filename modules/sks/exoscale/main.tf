@@ -11,12 +11,19 @@ locals {
     cluster_ca_certificate = base64decode(local.context.clusters.0.cluster.certificate-authority-data)
   }
 
-  default_nodepools = {
+  default_nodepools = tomap({
     "router-${var.cluster_name}" = {
-      size          = 2
-      instance_type = "standard.large"
+      size            = 2
+      instance_type   = "standard.large"
+      description     = null
+      instance_prefix = null
+      disk_size       = null
+
+      labels              = null
+      taints              = null
+      private_network_ids = null
     },
-  }
+  })
 
   router_nodepool   = coalesce(var.router_nodepool, "router-${var.cluster_name}")
   nodepools         = coalesce(var.nodepools, local.default_nodepools)
