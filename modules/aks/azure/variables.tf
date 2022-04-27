@@ -1,3 +1,7 @@
+variable "cluster_name" {
+  type        = string
+}
+
 variable "base_domain" {
   description = "The base domain used for Ingresses."
   type        = string
@@ -66,15 +70,6 @@ variable "public_ssh_key" {
   description = "A custom ssh key to control access to the AKS cluster"
   type        = string
   default     = ""
-}
-
-variable "azureidentities" {
-  description = "Azure User Assigned Identities to create"
-  type = list(object({
-    namespace = string
-    name      = string
-  }))
-  default = []
 }
 
 variable "network_policy" {
