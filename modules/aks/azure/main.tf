@@ -8,6 +8,7 @@ locals {
   kubernetes_cluster_ca_certificate = base64decode(data.azurerm_kubernetes_cluster.cluster.kube_admin_config.0.cluster_ca_certificate)
 
   kubeconfig           = data.azurerm_kubernetes_cluster.cluster.kube_admin_config_raw
+
 }
 
 data "azurerm_resource_group" "this" {
