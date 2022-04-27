@@ -139,18 +139,6 @@ resource "exoscale_security_group_rule" "all" {
   end_port               = 65535
 }
 
-resource "exoscale_domain" "this" {
-  name = local.base_domain
-}
-
-resource "exoscale_domain_record" "wildcard" {
-  domain      = exoscale_domain.this.id
-  name        = format("*.apps.%s", var.cluster_name)
-  record_type = "A"
-  ttl         = 300
-  content     = exoscale_nlb.this.ip_address
-}
-
 module "argocd" {
   source = "../../argocd-helm"
 
