@@ -10,7 +10,7 @@ variable "base_domain" {
 variable "kubernetes_version" {
   description = "Specify which Kubernetes release to use."
   type        = string
-  default     = "1.21.2"
+  default     = "1.21.9"
 }
 
 variable "resource_group_name" {
@@ -82,18 +82,6 @@ variable "node_pools" {
   default     = {}
   description = "List of node pools with minimal configuration"
   type        = map(any)
-}
-
-variable "storage_account_tier" {
-  description = "Storage account tier used for storing loki logs"
-  default     = "Standard"
-  type        = string
-}
-
-variable "storage_account_replication_type" {
-  description = "Storage account replication type for storing loki logs"
-  default     = "GRS"
-  type        = string
 }
 
 variable "sku_tier" {
