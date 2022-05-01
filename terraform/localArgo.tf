@@ -1,17 +1,17 @@
 locals {
-  oidc_defaults = {
-    issuer_url              = ""
-    oauth_url               = ""
-    token_url               = ""
-    api_url                 = ""
-    client_id               = ""
-    client_secret           = ""
-    oauth2_proxy_extra_args = []
-  }
-  oidc = merge(
-    local.oidc_defaults,
-    var.oidc,
-  )
+  # oidc_defaults = {
+  #   issuer_url              = ""
+  #   oauth_url               = ""
+  #   token_url               = ""
+  #   api_url                 = ""
+  #   client_id               = ""
+  #   client_secret           = ""
+  #   oauth2_proxy_extra_args = []
+  # }
+  # oidc = merge(
+  #   local.oidc_defaults,
+  #   var.oidc,
+  # )
 
   argocd_defaults = {
     domain = "argocd.apps.${var.cluster_name}.${var.base_domain}"

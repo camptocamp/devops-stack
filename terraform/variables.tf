@@ -177,10 +177,10 @@ variable "cluster_name" {
   type        = string
 }
 
-variable "base_domain" {
-  description = "The base domain used for Ingresses."
-  type        = string
-}
+# variable "base_domain" {
+#   description = "The base domain used for Ingresses."
+#   type        = string
+# }
 
 variable "cluster_issuer" {
   description = "Cluster Issuer"
