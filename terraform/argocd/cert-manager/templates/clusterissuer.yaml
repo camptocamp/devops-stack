@@ -1,0 +1,45 @@
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: selfsigned-issuer
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
+spec:
+  selfSigned: {}
+{{- if index $.Values "cert-manager" }}
+{{- if index $.Values "cert-manager" "tlsCrt" }}
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: ca-issuer
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
+spec:
+  ca:
+    secretName: ca-key-pair
+{{- end }}
+{{- if index $.Values "cert-manager" "clusterIssuers" }}
+{{- if index $.Values "cert-manager" "clusterIssuers" "letsencrypt" }}
+{{- if index $.Values "cert-manager" "clusterIssuers" "letsencrypt" "enabled" }}
+{{- range $name, $issuer := index $.Values "letsencrypt" "issuers" }}
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: {{ $name }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
+spec:
+  acme:
+    email: {{ $issuer.email }}
+    server: {{ $issuer.server }}
+    privateKeySecretRef:
+      name: {{ $name }}
+    {{ index $.Values "cert-manager" "clusterIssuers" "acme" | toYaml | nindent 4 }}
+{{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
+{{- end }}

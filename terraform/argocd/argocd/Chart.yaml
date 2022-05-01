@@ -1,0 +1,22 @@
+---
+apiVersion: "v2"
+name: "ArgoCD"
+version: "0"
+description: |
+  This chart installs and configures:
+
+  * ArgoCD itself
+  * A Grafana dashboard for ArgoCD
+  * An `OAuthClient` Kubernetes object if the OpenShift 4 option is enabled
+  * ArgoCD ApplicationSet
+  * ArgoCD Notifications
+dependencies:
+  - name: "argo-cd"
+    version: "3.26.9"
+    repository: "https://argoproj.github.io/argo-helm"
+  - name: "argocd-applicationset"
+    version: "1.3.1"
+    repository: "https://argoproj.github.io/argo-helm"
+  - name: "argocd-notifications"
+    version: "1.4.4"
+    repository: "https://argoproj.github.io/argo-helm"
