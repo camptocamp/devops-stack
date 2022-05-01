@@ -1,0 +1,18 @@
+---
+# -- Values passed to the add-pod-identity chart
+aad-pod-identity:
+  forceNamespaced: true
+  mic:
+    prometheusPort: 8888
+    resources:
+      limits:
+        memory: "32Mi"
+      requests:
+        memory: "16Mi"
+  nmi:
+    prometheusPort: 9090
+    resources:
+      limits:
+        memory: "32Mi"
+      requests:
+        memory: "16Mi"

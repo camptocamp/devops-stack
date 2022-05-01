@@ -1,0 +1,33 @@
+{{- if index $.Values "apps" "cert-manager" "enabled" }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
+  name: cert-manager
+  namespace: argocd
+spec:
+  project: "devops-stack"
+  source:
+    path: argocd/cert-manager
+    repoURL: {{ .Values.spec.source.repoURL }}
+    targetRevision: {{ .Values.spec.source.targetRevision }}
+    helm:
+      values: |
+        cert-manager:
+          {{- index .Values "cert-manager" | toYaml | nindent 10 }}
+  destination:
+    namespace: cert-manager
+    server: {{ .Values.spec.destination.server }}
+  ignoreDifferences:
+    - group: admissionregistration.k8s.io
+      kind: ValidatingWebhookConfiguration
+      name: cert-manager-webhook
+      jsonPointers:
+        - /webhooks/0/namespaceSelector/matchExpressions/2
+  {{- if .Values.spec.syncPolicy }}
+  syncPolicy:
+    {{ toYaml .Values.spec.syncPolicy | nindent 4 }}
+  {{- end }}
+{{- end }}

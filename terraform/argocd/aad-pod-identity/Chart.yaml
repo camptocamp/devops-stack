@@ -1,0 +1,12 @@
+---
+apiVersion: "v2"
+name: "aad-pod-identity"
+version: "0"
+description: |
+  NOTE: This chart is enabled only when deploying DevOps Stack to AKS.
+
+  This chart enables assigning Azure Active Directory Identities to Kubernetes applications.
+dependencies:
+  - name: "aad-pod-identity"
+    version: "4.1.1"
+    repository: "https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts"

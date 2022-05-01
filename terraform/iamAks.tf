@@ -1,15 +1,15 @@
 # TODO: I'm not sure this is required
-resource "azurerm_role_assignment" "reader" {
-  scope                = format("%s/resourcegroups/%s", data.azurerm_subscription.primary.id, module.cluster.node_resource_group)
-  role_definition_name = "Reader"
-  principal_id         = azurerm_user_assigned_identity.cert_manager.principal_id
-}
+#resource "azurerm_role_assignment" "reader" {
+#  scope                = format("%s/resourcegroups/%s", data.azurerm_subscription.primary.id, module.cluster.node_resource_group)
+#  role_definition_name = "Reader"
+#  principal_id         = azurerm_user_assigned_identity.cert_manager.principal_id
+#}
 
-resource "azurerm_role_assignment" "dns_zone_contributor" {
-  scope                = data.azurerm_dns_zone.this.id
-  role_definition_name = "DNS Zone Contributor"
-  principal_id         = azurerm_user_assigned_identity.cert_manager.principal_id
-}
+#resource "azurerm_role_assignment" "dns_zone_contributor" {
+#  scope                = data.azurerm_dns_zone.this.id
+#  role_definition_name = "DNS Zone Contributor"
+#  principal_id         = azurerm_user_assigned_identity.cert_manager.principal_id
+#}
 
 
 resource "azuread_application" "oauth2_apps" {
@@ -78,36 +78,36 @@ data "azurerm_policy_set_definition" "baseline" {
   display_name = "Kubernetes cluster pod security baseline standards for Linux-based workloads"
 }
 
-resource "azurerm_policy_assignment" "baseline" {
-  name                 = "${var.cluster_name}-baseline"
-  scope                = format("%s/resourcegroups/%s", data.azurerm_subscription.primary.id, data.azurerm_resource_group.this.name)
-  policy_definition_id = data.azurerm_policy_set_definition.baseline.id
-  parameters           = <<PARAMETERS
-{
-  "effect": {
-    "value": "deny"
-  },
-  "excludedNamespaces": {
-    "value": [
-      "aad-pod-identity",
-      "kube-prometheus-stack",
-      "loki-stack",
-      "csi-secrets-store-provider-azure",
-      "kube-system",
-      "gatekeeper-system",
-      "azure-arc,aad-pod-identity"
-    ]
-  }
-}
-PARAMETERS
+# resource "azurerm_policy_assignment" "baseline" {
+#   name                 = "${var.cluster_name}-baseline"
+#   scope                = format("%s/resourcegroups/%s", data.azurerm_subscription.primary.id, data.azurerm_resource_group.this.name)
+#   policy_definition_id = data.azurerm_policy_set_definition.baseline.id
+#   parameters           = <<PARAMETERS
+# {
+#   "effect": {
+#     "value": "deny"
+#   },
+#   "excludedNamespaces": {
+#     "value": [
+#       "aad-pod-identity",
+#       "kube-prometheus-stack",
+#       "loki-stack",
+#       "csi-secrets-store-provider-azure",
+#       "kube-system",
+#       "gatekeeper-system",
+#       "azure-arc,aad-pod-identity"
+#     ]
+#   }
+# }
+# PARAMETERS
 
-}
+# }
 resource "azurerm_user_assigned_identity" "this" {
   for_each = {
     for k, v in var.azureidentities :
     format("%s.%s", v.namespace, v.name) => v
   }
-  resource_group_name = module.cluster.node_resource_group
-  location            = data.azurerm_resource_group.this.location
+  resource_group_name = azurerm_kubernetes_cluster.mgmt-bootstrap-resources.node_resource_group
+  location            = azurerm_kubernetes_cluster.mgmt-bootstrap-resources.location
   name                = format("%s-%s-%s", each.value.namespace, each.value.name, var.cluster_name)
 }

@@ -17,8 +17,8 @@ resource "azurerm_resource_group" "pts-appsre-gnxtgen-mgmt-poc-rg" {
 }
 resource "azurerm_kubernetes_cluster" "mgmt-bootstrap-resources" {
   name                = "pts-appsre-gnxtgen-mgmt-akswestus"
-  location            = azurerm_resource_group.mgmt-bootstrap-resources.location
-  resource_group_name = azurerm_resource_group.mgmt-bootstrap-resources.name
+  location            = azurerm_resource_group.pts-appsre-gnxtgen-mgmt-poc-rg.location
+  resource_group_name = azurerm_resource_group.pts-appsre-gnxtgen-mgmt-poc-rg.name
   dns_prefix          = "mgmtaks"
 
   default_node_pool {
@@ -38,11 +38,11 @@ resource "azurerm_kubernetes_cluster" "mgmt-bootstrap-resources" {
 resource "azurerm_kubernetes_cluster_node_pool" "this" {
   for_each              = var.node_pools
   name                  = each.key
-  kubernetes_cluster_id = module.cluster.aks_id
+  kubernetes_cluster_id = azurerm_kubernetes_cluster.mgmt-bootstrap-resources.id
   vm_size               = each.value.vm_size
   node_count            = each.value.node_count
 
-  availability_zones  = lookup(each.value, "availability_zones", null)
+#  availability_zones  = lookup(each.value, "availability_zones", null)
   enable_auto_scaling = lookup(each.value, "enable_auto_scaling", null)
   max_count           = lookup(each.value, "max_count", null)
   min_count           = lookup(each.value, "min_count", null)

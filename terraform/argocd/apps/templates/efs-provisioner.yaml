@@ -1,0 +1,26 @@
+{{- if index $.Values "apps" "efs-provisioner" "enabled" }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: efs-provisioner
+  namespace: argocd
+spec:
+  project: "devops-stack"
+  source:
+    path: argocd/efs-provisioner
+    repoURL: {{ .Values.spec.source.repoURL }}
+    targetRevision: {{ .Values.spec.source.targetRevision }}
+    helm:
+      values: |
+        efs-provisioner:
+          {{- index .Values "efs-provisioner" | toYaml | nindent 10 }}
+  destination:
+    namespace: efs-provisioner
+    server: {{ .Values.spec.destination.server }}
+  {{- if .Values.spec.syncPolicy }}
+  syncPolicy:
+    {{ toYaml .Values.spec.syncPolicy | nindent 4 }}
+  {{- end }}
+{{- end }}
+

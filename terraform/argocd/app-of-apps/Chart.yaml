@@ -1,0 +1,6 @@
+---
+apiVersion: "v2"
+name: "app-of-apps"
+version: "0"
+description: |
+  This chart installs the [app-of-apps](https://argoproj.github.io/argo-cd/operator-manual/cluster-bootstrapping/#app-of-apps-pattern) declared in `argocd/apps` directory.

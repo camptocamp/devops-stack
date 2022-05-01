@@ -10,9 +10,9 @@ output "cluster_id" {
   value = azurerm_kubernetes_cluster.mgmt-bootstrap-resources.id
 }
 
-output "prometheus_user_assigned_identity_principal_id" {
-  value = azurerm_user_assigned_identity.kube_prometheus_stack_prometheus.principal_id
-}
+# output "prometheus_user_assigned_identity_principal_id" {
+#   value = azurerm_user_assigned_identity.kube_prometheus_stack_prometheus.principal_id
+# }
 
 # output "kube_admin_config" {
 #   value = {
@@ -45,4 +45,5 @@ output "namespaces" {
 
 output "kubelet_admin_identity" {
   value = azurerm_kubernetes_cluster.mgmt-bootstrap-resources.kube_admin_config_raw
+  sensitive = true
 }

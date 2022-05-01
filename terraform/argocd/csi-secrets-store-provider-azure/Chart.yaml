@@ -1,0 +1,16 @@
+---
+apiVersion: "v2"
+name: "csi-secrets-store-provider-azure"
+version: "0"
+description: |
+  NOTE: This chart is enabled only when deploying DevOps Stack to AKS.
+
+  This chart installs a driver to interface with Azure Key Vault provider.
+  This driver enables:
+
+  * getting secrets from Azure Key Vault
+  * mounting secrets into Kubernetes pods
+dependencies:
+  - name: "csi-secrets-store-provider-azure"
+    version: "0.2.0"
+    repository: "https://raw.githubusercontent.com/Azure/secrets-store-csi-driver-provider-azure/master/charts"
