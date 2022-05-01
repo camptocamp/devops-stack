@@ -16,7 +16,7 @@ resource "azurerm_resource_group" "pts-appsre-gnxtgen-mgmt-poc-rg" {
   location = "WestUS"
 }
 resource "azurerm_kubernetes_cluster" "mgmt-bootstrap-resources" {
-  name                = "example-aks1"
+  name                = "pts-appsre-gnxtgen-mgmt-akswestus"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   dns_prefix          = "mgmtaks"
