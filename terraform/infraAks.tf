@@ -17,8 +17,8 @@ resource "azurerm_resource_group" "pts-appsre-gnxtgen-mgmt-poc-rg" {
 }
 resource "azurerm_kubernetes_cluster" "mgmt-bootstrap-resources" {
   name                = "pts-appsre-gnxtgen-mgmt-akswestus"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_resource_group.mgmt-bootstrap-resources.location
+  resource_group_name = azurerm_resource_group.mgmt-bootstrap-resources.name
   dns_prefix          = "mgmtaks"
 
   default_node_pool {
