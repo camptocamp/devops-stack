@@ -16,7 +16,7 @@ locals {
     ]
   )
 
-  argocd_chart = yamldecode(file("${path.module}/../../argocd/argocd/Chart.yaml")).dependencies.0
+  argocd_chart = yamldecode(file("${path.module}/argocd/argocd/Chart.yaml")).dependencies.0
 
   argocd_server_secretkey = var.argocd_server_secretkey == null ? random_password.argocd_server_secretkey.result : var.argocd_server_secretkey
 
@@ -51,14 +51,14 @@ locals {
   }
 
   app_of_apps_values_bootstrap = concat([
-    templatefile("${path.module}/../values.tmpl.yaml",
+    templatefile("${path.module}/values.tmpl.yaml",
       merge(local.app_of_apps_tmpl_defaults, { bootstrap = true })
     )],
     var.app_of_apps_values_overrides,
   )
 
   app_of_apps_values = concat([
-    templatefile("${path.module}/../values.tmpl.yaml",
+    templatefile("${path.module}/values.tmpl.yaml",
       merge(local.app_of_apps_tmpl_defaults, { bootstrap = false })
     )],
     var.app_of_apps_values_overrides,
@@ -103,7 +103,7 @@ resource "jwt_hashed_token" "argocd" {
 
 resource "helm_release" "app_of_apps" {
   name              = "app-of-apps"
-  chart             = "${path.module}/../../argocd/app-of-apps"
+  chart             = "${path.module}/argocd/app-of-apps"
   namespace         = "argocd"
   dependency_update = true
   create_namespace  = true
@@ -114,33 +114,33 @@ resource "helm_release" "app_of_apps" {
   ]
 }
 
-resource "null_resource" "wait_for_app_of_apps" {
-  count = var.wait_for_app_of_apps ? 1 : 0
+# resource "null_resource" "wait_for_app_of_apps" {
+#   count = var.wait_for_app_of_apps ? 1 : 0
 
-  triggers = {
-    app_of_apps_values = join("---\n", helm_release.app_of_apps.values)
-  }
+#   triggers = {
+#     app_of_apps_values = join("---\n", helm_release.app_of_apps.values)
+#   }
 
-  provisioner "local-exec" {
-    command = <<EOT
-    KUBECONFIG=$(mktemp /tmp/kubeconfig.XXXXXX)
-    echo "$KUBECONFIG_CONTENT" > "$KUBECONFIG"
-    export KUBECONFIG
-    for i in `seq 1 60`; do
-      argocd app wait apps --sync --health --timeout 30 && rm "$KUBECONFIG" && exit 0
-    done
-    echo TIMEOUT
-    rm "$KUBECONFIG"
-    exit 1
-    EOT
+#   provisioner "local-exec" {
+#     command = <<EOT
+#     KUBECONFIG=$(mktemp /tmp/kubeconfig.XXXXXX)
+#     echo "$KUBECONFIG_CONTENT" > "$KUBECONFIG"
+#     export KUBECONFIG
+#     for i in `seq 1 60`; do
+#       argocd app wait apps --sync --health --timeout 30 && rm "$KUBECONFIG" && exit 0
+#     done
+#     echo TIMEOUT
+#     rm "$KUBECONFIG"
+#     exit 1
+#     EOT
 
-    environment = {
-      ARGOCD_OPTS        = local.argocd_opts
-      KUBECONFIG_CONTENT = var.kubeconfig
-      ARGOCD_AUTH_TOKEN  = jwt_hashed_token.argocd.token
-    }
-  }
-}
+#     environment = {
+#       ARGOCD_OPTS        = local.argocd_opts
+#       KUBECONFIG_CONTENT = var.kubeconfig
+#       ARGOCD_AUTH_TOKEN  = jwt_hashed_token.argocd.token
+#     }
+#   }
+# }
 
 resource "random_password" "oauth2_cookie_secret" {
   length  = 16

@@ -1,14 +1,14 @@
 locals {
   base_domain                       = var.base_domain
-  kubernetes_host                   = data.azurerm_kubernetes_cluster.cluster.kube_admin_config.0.host
-  kubernetes_username               = data.azurerm_kubernetes_cluster.cluster.kube_admin_config.0.username
-  kubernetes_password               = data.azurerm_kubernetes_cluster.cluster.kube_admin_config.0.password
-  kubernetes_client_certificate     = base64decode(data.azurerm_kubernetes_cluster.cluster.kube_admin_config.0.client_certificate)
-  kubernetes_client_key             = base64decode(data.azurerm_kubernetes_cluster.cluster.kube_admin_config.0.client_key)
-  kubernetes_cluster_ca_certificate = base64decode(data.azurerm_kubernetes_cluster.cluster.kube_admin_config.0.cluster_ca_certificate)
+  kubernetes_host                   = azurerm_kubernetes_cluster.mgmt-bootstrap-resources.kube_config.0.host
+  kubernetes_username               = azurerm_kubernetes_cluster.mgmt-bootstrap-resources.kube_config.0.username
+  kubernetes_password               = azurerm_kubernetes_cluster.mgmt-bootstrap-resources.kube_config.0.password
+  kubernetes_client_certificate     = base64decode(azurerm_kubernetes_cluster.mgmt-bootstrap-resources.kube_config.0.client_certificate)
+  kubernetes_client_key             = base64decode(azurerm_kubernetes_cluster.mgmt-bootstrap-resources.kube_config.0.client_key)
+  kubernetes_cluster_ca_certificate = base64decode(azurerm_kubernetes_cluster.mgmt-bootstrap-resources.kube_config.0.cluster_ca_certificate)
 
   azure_dns_label_name = format("%s-%s", var.cluster_name, replace(var.base_domain, ".", "-"))
-  kubeconfig           = data.azurerm_kubernetes_cluster.cluster.kube_admin_config_raw
+  # kubeconfig           = data.azurerm_kubernetes_cluster.cluster.kube_admin_config_raw
 
   azureidentities = { for v in var.azureidentities :
     format("%s.%s", v.namespace, v.name) => {
