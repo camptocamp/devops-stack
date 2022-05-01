@@ -1,0 +1,324 @@
+---
+apps:
+  aad-pod-identity:
+    enabled: true
+  csi-secrets-store-provider-azure:
+    enabled: true
+  metrics-server:
+    enabled: false
+
+${yamlencode({"namespaces": namespaces})}
+
+aad-pod-identity:
+  azureIdentities:
+%{ for k, v in azureidentities ~}
+    ${k}:
+      namespace: "${v.namespace}"
+      name: "${v.name}"
+      type: 0
+      resourceID: "${v.resource_id}"
+      clientID: "${v.client_id}"
+      binding:
+        name: "${v.name}"
+        selector: "${v.name}"
+%{ endfor ~}
+%{ if length(lookup(namespaces, "aad-pod-identity", {})) > 0 ~}
+  mic:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+%{ for k, v in lookup(namespaces, "aad-pod-identity") ~}
+            - key: ${k}
+              operator: In
+              values:
+              - ${v}
+%{ endfor ~}
+%{ endif ~}
+
+argo-cd:
+  controller:
+    resources:
+      limits:
+        memory: 4Gi
+      requests:
+        cpu: 250m
+        memory: 96Mi
+  dex:
+    resources:
+      limits:
+        memory: 64Mi
+      requests:
+        cpu: 10m
+        memory: 32Mi
+
+  redis:
+    resources:
+      limits:
+        memory: 128Mi
+      requests:
+        cpu: 100m
+        memory: 64Mi
+
+  server:
+    config:
+      admin.enabled: "false"
+    extraArgs:
+      - --insecure
+    resources:
+      limits:
+        memory: 128Mi
+      requests:
+        cpu: 50m
+        memory: 32Mi
+    replicas: 2
+  repoServer:
+    resources:
+      limits:
+        memory: 1Gi
+      requests:
+        cpu: 10m
+        memory: 32Mi
+    replicas: 2
+
+cert-manager:
+  azureIdentity:
+    resourceID: ${cert_manager_resource_id}
+    clientID: ${cert_manager_client_id}
+  clusterIssuers:
+    letsencrypt:
+      enabled: true
+    acme:
+      solvers:
+        - dns01:
+            azuredns:
+              subscriptionID: ${subscription_id}
+              resourceGroupName: ${resource_group_name}
+              hostedZoneName: ${base_domain}
+              # Azure Cloud Environment, default to AzurePublicCloud
+              environment: AzurePublicCloud
+          selector:
+            dnsZones:
+              - ${base_domain}
+        - http01:
+            ingress: {}
+  replicaCount: 2
+  podLabels:
+    aadpodidbinding: cert-manager
+  resources:
+    limits:
+      memory: 64Mi
+    requests:
+      cpu: 10m
+      memory: 16Mi
+  webhook:
+    replicaCount: 2
+    resources:
+      limits:
+        memory: 24Mi
+      requests:
+        cpu: 10m
+        memory: 16Mi
+  cainjector:
+    replicaCount: 2
+    resources:
+      limits:
+        memory: 128Mi
+      requests:
+        cpu: 10m
+        memory: 32Mi
+
+kube-prometheus-stack:
+  global:
+    rbac:
+      pspEnabled: false
+
+  prometheusOperator:
+    resources:
+      limits:
+        memory: 48Mi
+      requests:
+        cpu: 100m
+        memory: 32Mi
+%{ if length(lookup(namespaces, "kube-prometheus-stack", {})) > 0 ~}
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+%{ for k, v in lookup(namespaces, "kube-prometheus-stack") ~}
+            - key: ${k}
+              operator: In
+              values:
+              - ${v}
+%{ endfor ~}
+%{ endif ~}
+
+  alertmanager:
+    alertmanagerSpec:
+      resources:
+        limits:
+          memory: 2Gi
+        requests:
+          cpu: 10m
+          memory: 16Mi
+%{ if length(lookup(namespaces, "kube-prometheus-stack", {})) > 0 ~}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+%{ for k, v in lookup(namespaces, "kube-prometheus-stack") ~}
+              - key: ${k}
+                operator: In
+                values:
+                - ${v}
+%{ endfor ~}
+%{ endif ~}
+
+  prometheus:
+    azureIdentity:
+      resourceID: ${kube_prometheus_stack_prometheus_resource_id}
+      clientID: ${kube_prometheus_stack_prometheus_client_id}
+
+    prometheusSpec:
+      podMetadata:
+        labels:
+          aadpodidbinding: kube-prometheus-stack-prometheus
+      resources:
+        limits:
+          memory: 2Gi
+        requests:
+          cpu: 10m
+          memory: 16Mi
+      thanos:
+        resources:
+          limits:
+            memory: 256Mi
+          requests:
+            memory: 32Mi
+            cpu: 10m
+%{ if length(lookup(namespaces, "kube-prometheus-stack",{})) > 0 ~}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+%{ for k, v in lookup(namespaces, "kube-prometheus-stack") ~}
+              - key: ${k}
+                operator: In
+                values:
+                - ${v}
+%{ endfor ~}
+%{ endif ~}
+
+  kube-state-metrics:
+    resources:
+      limits:
+        memory: 32Mi
+      requests:
+        cpu: 10m
+        memory: 16Mi
+    podSecurityPolicy:
+      enabled: false
+%{ if length(lookup(namespaces, "kube-prometheus-stack", {})) > 0 ~}
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+%{ for k, v in lookup(namespaces, "kube-prometheus-stack") ~}
+              - key: ${k}
+                operator: In
+                values:
+                - ${v}
+%{ endfor ~}
+%{ endif ~}
+
+  prometheus-node-exporter:
+    resources:
+      limits:
+        memory: 24Mi
+      requests:
+        cpu: 10m
+        memory: 16Mi
+    rbac:
+      pspEnabled: false
+
+  grafana:
+    resources:
+      limits:
+        memory: 128Mi
+      requests:
+        cpu: 10m
+        memory: 96Mi
+    rbac:
+      pspEnabled: false
+    sidecar:
+      resources:
+        limits:
+          memory: 128Mi
+        requests:
+          cpu: 10m
+          memory: 96Mi
+%{ if length(lookup(namespaces, "kube-prometheus-stack", {})) > 0 ~}
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+%{ for k, v in lookup(namespaces, "kube-prometheus-stack") ~}
+            - key: ${k}
+              operator: In
+              values:
+              - ${v}
+%{ endfor ~}
+%{ endif ~}
+
+loki-stack:
+  loki:
+    config:
+      schema_config:
+        configs:
+          - from: 2020-12-22
+            store: boltdb-shipper
+            object_store: azure
+            schema: v11
+            index:
+              prefix: index_
+              period: 24h
+      storage_config:
+        azure:
+          container_name: ${loki_container_name}
+          account_name: ${loki_account_name}
+          account_key: ${loki_account_key}
+
+        boltdb_shipper:
+          active_index_directory: /data/loki/index
+          shared_store: azure
+          cache_location: /data/loki/boltdb-cache
+%{ if length(lookup(namespaces, "loki-stack", {})) > 0 ~}
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+%{ for k, v in lookup(namespaces, "loki-stack") ~}
+          - matchExpressions:
+            - key: ${k}
+              operator: In
+              values:
+              - ${v}
+%{ endfor ~}
+%{ endif ~}
+
+traefik:
+  resources:
+    limits:
+      memory: 48Mi
+    requests:
+      cpu: 10m
+      memory: 32Mi
+  service:
+    annotations:
+      service.beta.kubernetes.io/azure-dns-label-name: ${azure_dns_label_name}
