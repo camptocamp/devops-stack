@@ -11,8 +11,6 @@ resource "azurerm_role_assignment" "dns_zone_contributor" {
   principal_id         = azurerm_user_assigned_identity.cert_manager.principal_id
 }
 
-data "azurerm_client_config" "current" {}
-
 
 resource "azuread_application" "oauth2_apps" {
   count = var.oidc == null ? 1 : 0
