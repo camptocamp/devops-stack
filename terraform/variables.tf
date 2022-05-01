@@ -132,11 +132,11 @@ variable "app_node_selectors" {
   default     = {}
   type        = map(map(string))
 }
-
-variable "kubeconfig" {
-  description = "The content of the KUBECONFIG file."
-  type        = string
-}
+# commenting for compat
+#variable "kubeconfig" {
+#  description = "The content of the KUBECONFIG file."
+#  type        = string
+#}
 
 variable "repo_url" {
   description = "The source repo URL of ArgoCD's app of apps."
