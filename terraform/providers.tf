@@ -24,7 +24,7 @@ locals {
     { for i in distinct(var.azureidentities[*].namespace) : i => null },
     var.app_node_selectors
   )
-  oidc = var.oidc != null ? var.oidc : {
+  oidc_defaults = var.oidc != null ? var.oidc : {
     issuer_url              = format("https://login.microsoftonline.com/%s/v2.0", data.azurerm_client_config.current.tenant_id)
     oauth_url               = format("https://login.microsoftonline.com/%s/oauth2/authorize", data.azurerm_client_config.current.tenant_id)
     token_url               = format("https://login.microsoftonline.com/%s/oauth2/token", data.azurerm_client_config.current.tenant_id)

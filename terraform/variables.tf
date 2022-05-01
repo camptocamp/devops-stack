@@ -288,3 +288,19 @@ variable "repositories" {
   type        = map(map(string))
   default     = {}
 }
+
+variable "prometheus_oauth2_proxy_args" {
+  type = object({
+    prometheus_oauth2_proxy_extra_args = list(string)
+    prometheus_oauth2_proxy_image      = string
+    prometheus_oauth2_proxy_extra_volume_mounts = list(object({
+      name       = string
+      mount_path = string
+    }))
+  })
+  default = {
+    prometheus_oauth2_proxy_extra_args          = []
+    prometheus_oauth2_proxy_image               = "quay.io/oauth2-proxy/oauth2-proxy:v7.1.3"
+    prometheus_oauth2_proxy_extra_volume_mounts = []
+  }
+}

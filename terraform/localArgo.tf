@@ -8,10 +8,10 @@ locals {
   #   client_secret           = ""
   #   oauth2_proxy_extra_args = []
   # }
-  # oidc = merge(
-  #   local.oidc_defaults,
-  #   var.oidc,
-  # )
+  oidc = merge(
+    local.oidc_defaults,
+    var.oidc,
+  )
 
   argocd_defaults = {
     domain = "argocd.apps.${var.cluster_name}.${var.base_domain}"
