@@ -30,7 +30,7 @@ output "prometheus_user_assigned_identity_principal_id" {
 # }
 
 output "kube_config" {
-  value = azurerm_kubernetes_cluster.mgmt-bootstrap-resources.kube_config_raw
+  value     = azurerm_kubernetes_cluster.mgmt-bootstrap-resources.kube_config_raw
   sensitive = true
 }
 
