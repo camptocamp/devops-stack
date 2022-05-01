@@ -288,7 +288,10 @@ variable "repositories" {
   type        = map(map(string))
   default     = {}
 }
-
+variable "grafana_admin_password" {
+  description = "Grafana Admin Pass"
+  type = string  
+}
 variable "prometheus_oauth2_proxy_args" {
   type = object({
     prometheus_oauth2_proxy_extra_args = list(string)

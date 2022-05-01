@@ -62,10 +62,10 @@ argo-cd:
     secret:
       argocdServerAdminPassword: "${argocd_server_admin_password}"
       argocdServerAdminPasswordMtime: '2020-07-23T11:31:23Z'
-      extra:
-        oidc.default.clientSecret: "${replace(oidc.client_secret, "\"", "\\\"")}"
-        accounts.pipeline.tokens: "${replace(argocd_accounts_pipeline_tokens, "\"", "\\\"")}"
-        server.secretkey: "${replace(argocd_server_secretkey, "\"", "\\\"")}"
+      # extra:
+      #   oidc.default.clientSecret: "${replace(oidc.client_secret, "\"", "\\\"")}"
+      #   accounts.pipeline.tokens: "${replace(argocd_accounts_pipeline_tokens, "\"", "\\\"")}"
+      #   server.secretkey: "${replace(argocd_server_secretkey, "\"", "\\\"")}"
   controller:
     metrics:
       enabled: true

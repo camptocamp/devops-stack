@@ -1,4 +1,7 @@
 locals {
+    grafana_admin_password = var.grafana_admin_password == null ? random_password.grafana_admin_password.result : var.grafana_admin_password
+
+ 
   jwt_token_payload = {
     jti = random_uuid.jti.result
     iat = time_static.iat.unix
@@ -57,6 +60,21 @@ locals {
     var.app_of_apps_values_overrides,
   )
 
+# │ Error: Error in function call
+# │
+# │   on infraArgo.tf line 57, in locals:
+# │   57:     templatefile("${path.module}/values.tmpl.yaml",      
+# │   58:       merge(local.app_of_apps_tmpl_defaults, { bootstrap 
+# = true })
+# │   59:     )],
+# │     ├────────────────
+# │     │ local.app_of_apps_tmpl_defaults is object with 27 attributes
+# │     │ path.module is "."
+# │
+# │ Call to function "templatefile" failed:
+# │ ./values.tmpl.yaml:66,53-67: Unsupported attribute; This       
+# │ object does not have an attribute named "client_secret"., and  
+#│ 22 other diagnostic(s).
   app_of_apps_values = concat([
     templatefile("${path.module}/values.tmpl.yaml",
       merge(local.app_of_apps_tmpl_defaults, { bootstrap = false })
@@ -154,4 +172,9 @@ resource "random_password" "argocd_server_admin" {
 
 resource "htpasswd_password" "argocd_server_admin" {
   password = random_password.argocd_server_admin.result
+}
+
+resource "random_password" "grafana_admin_password" {
+  length  = 16
+  special = false
 }

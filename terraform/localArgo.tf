@@ -1,15 +1,17 @@
 locals {
-  # oidc_defaults = {
-  #   issuer_url              = ""
-  #   oauth_url               = ""
-  #   token_url               = ""
-  #   api_url                 = ""
-  #   client_id               = ""
-  #   client_secret           = ""
-  #   oauth2_proxy_extra_args = []
-  # }
+  oidc_argo = {
+    issuer_url              = ""
+    oauth_url               = ""
+    token_url               = ""
+    api_url                 = ""
+    client_id               = ""
+    client_secret           = ""
+    oauth2_proxy_extra_args = []
+  }
+
   oidc = merge(
     local.oidc_defaults,
+#    local.oidc_argo,
     var.oidc,
   )
 
