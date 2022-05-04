@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.56.0](https://github.com/camptocamp/devops-stack/compare/v0.55.0...v0.56.0) (2022-05-04)
+
+
+### Features
+
+* **sks:** dynamic gateway & wildcard dns records creation ([#897](https://github.com/camptocamp/devops-stack/issues/897)) ([0327df9](https://github.com/camptocamp/devops-stack/commit/0327df9fef2a4033146c758d471553c471ca9ec7))
+
+
+### Bug Fixes
+
+* **cert-manager:** incompatibility with k8s >= 1.22 ([#892](https://github.com/camptocamp/devops-stack/issues/892)) ([1344cc0](https://github.com/camptocamp/devops-stack/commit/1344cc04c63750ef0cd23e7e2136e2ae387289dc))
+* **keycloak:** invalid ingress ressource on v1beta1 api on k8s >= 1.22 ([#890](https://github.com/camptocamp/devops-stack/issues/890)) ([581d40d](https://github.com/camptocamp/devops-stack/commit/581d40d4c1d035a03cba78b9c37ce712e6ac11af))
+* **sks:** type mismatch into coalesce call for nodepools definitions ([#891](https://github.com/camptocamp/devops-stack/issues/891)) ([7dc6c32](https://github.com/camptocamp/devops-stack/commit/7dc6c3221b41fe1ebe7baae39c6053625518969b))
+
 ## [0.55.0](https://github.com/camptocamp/devops-stack/compare/v0.54.2...v0.55.0) (2022-04-04)
 
 
