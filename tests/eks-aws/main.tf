@@ -93,7 +93,7 @@ provider "argocd" {
 }
 
 module "ingress" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//modules/eks"
+  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//eks"
 
   cluster_name     = var.cluster_name
   argocd_namespace = module.cluster.argocd_namespace
@@ -101,7 +101,7 @@ module "ingress" {
 }
 
 module "oidc" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-oidc-aws-cognito.git//modules"
+  source = "git::https://github.com/camptocamp/devops-stack-module-oidc-aws-cognito.git/"
 
   cluster_name     = var.cluster_name
   argocd_namespace = module.cluster.argocd_namespace
@@ -112,7 +112,7 @@ module "oidc" {
 }
 
 module "monitoring" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//modules"
+  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git/"
 
   cluster_name     = var.cluster_name
   oidc             = module.oidc.oidc
@@ -125,7 +125,7 @@ module "monitoring" {
 }
 
 module "loki-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack.git//modules/eks"
+  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack.git//eks"
 
   cluster_name     = var.cluster_name
   argocd_namespace = module.cluster.argocd_namespace
@@ -137,7 +137,7 @@ module "loki-stack" {
 }
 
 module "cert-manager" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//modules/eks"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//eks"
 
   cluster_name     = var.cluster_name
   argocd_namespace = module.cluster.argocd_namespace
@@ -149,7 +149,7 @@ module "cert-manager" {
 }
 
 module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//modules"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git/"
 
   cluster_name   = var.cluster_name
   oidc           = module.oidc.oidc
@@ -167,7 +167,7 @@ module "argocd" {
 }
 
 #module "myownapp" {
-#  source = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git//modules"
+#  source = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git/"
 #
 #  cluster_name   = module.cluster.cluster_name
 #  oidc           = module.oidc.oidc
