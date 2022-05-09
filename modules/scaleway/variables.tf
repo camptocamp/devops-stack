@@ -38,3 +38,7 @@ variable "nodepools" {
   type        = any
   default     = null
 }
+
+variable "open_id_connect_config" {
+  type = any
+}
