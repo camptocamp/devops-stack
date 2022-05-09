@@ -50,5 +50,7 @@ module "cluster" {
     "PodNodeSelector",
   ]
 
+  open_id_connect_config = var.open_id_connect_config
+
   node_pools = local.nodepools
 }
