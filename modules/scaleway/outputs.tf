@@ -10,9 +10,12 @@ output "lb_id" {
   value = scaleway_lb.this.id
 }
 
-output "kubernetes" {
-  value     = local.kubernetes
-  sensitive = true
+output "kube_admin_config" {
+  value = {
+    host                   = module.cluster.kubeconfig.0.host
+    token                  = module.cluster.kubeconfig.0.token
+    cluster_ca_certificate = base64decode(module.cluster.kubeconfig.0.cluster_ca_certificate)
+  }
 }
 
 output "kubeconfig_file" {

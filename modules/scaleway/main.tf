@@ -3,12 +3,6 @@ locals {
 
   kubeconfig = module.cluster.kubeconfig_file
 
-  kubernetes = {
-    host                   = module.cluster.kubeconfig.0.host
-    token                  = module.cluster.kubeconfig.0.token
-    cluster_ca_certificate = base64decode(module.cluster.kubeconfig.0.cluster_ca_certificate)
-  }
-
   default_nodepools = {
     "router" = {
       node_type           = "DEV1-M"
@@ -41,20 +35,6 @@ resource "scaleway_lb" "this" {
   release_ip = false
 }
 
-provider "helm" {
-  kubernetes {
-    host                   = local.kubernetes.host
-    token                  = local.kubernetes.token
-    cluster_ca_certificate = local.kubernetes.cluster_ca_certificate
-  }
-}
-
-provider "kubernetes" {
-  host                   = local.kubernetes.host
-  token                  = local.kubernetes.token
-  cluster_ca_certificate = local.kubernetes.cluster_ca_certificate
-}
-
 module "cluster" {
   source  = "particuleio/kapsule/scaleway"
   version = "5.0.0"
@@ -71,47 +51,4 @@ module "cluster" {
   ]
 
   node_pools = local.nodepools
-}
-
-module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=without-refactor"
-
-  kubeconfig              = local.kubeconfig
-  repo_url                = var.repo_url
-  target_revision         = var.target_revision
-  extra_apps              = var.extra_apps
-  extra_app_projects      = var.extra_app_projects
-  extra_application_sets  = var.extra_application_sets
-  cluster_name            = var.cluster_name
-  base_domain             = local.base_domain
-  argocd_server_secretkey = var.argocd_server_secretkey
-  cluster_issuer          = "letsencrypt-prod"
-
-  repositories = var.repositories
-
-  depends_on = [
-    module.cluster,
-  ]
-}
-
-resource "tls_private_key" "root" {
-  algorithm = "ECDSA"
-}
-
-resource "tls_self_signed_cert" "root" {
-  key_algorithm   = "ECDSA"
-  private_key_pem = tls_private_key.root.private_key_pem
-
-  subject {
-    common_name  = "devops-stack.camptocamp.com"
-    organization = "Camptocamp, SA"
-  }
-
-  validity_period_hours = 8760
-
-  allowed_uses = [
-    "cert_signing",
-  ]
-
-  is_ca_certificate = true
 }

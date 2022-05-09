@@ -1,3 +1,7 @@
+variable "cluster_name" {
+  type        = string
+}
+
 variable "base_domain" {
   description = "The base domain used for Ingresses."
   type        = string
