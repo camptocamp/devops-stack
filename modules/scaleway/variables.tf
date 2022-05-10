@@ -1,5 +1,5 @@
 variable "cluster_name" {
-  type        = string
+  type = string
 }
 
 variable "base_domain" {
@@ -40,5 +40,6 @@ variable "nodepools" {
 }
 
 variable "open_id_connect_config" {
-  type = any
+  type    = any
+  default = []
 }
