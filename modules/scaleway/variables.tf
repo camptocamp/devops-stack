@@ -43,3 +43,8 @@ variable "open_id_connect_config" {
   type    = any
   default = []
 }
+
+variable "apiserver_cert_sans" {
+  type    = list(any)
+  default = []
+}
