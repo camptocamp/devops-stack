@@ -43,6 +43,8 @@ module "cluster" {
   cluster_name       = var.cluster_name
   region             = var.region
 
+  apiserver_cert_sans = var.apiserver_cert_sans
+
   cluster_type = var.cluster_type
   cni_plugin   = var.cluster_type == "kosmos" ? "kilo" : "cilium"
 
