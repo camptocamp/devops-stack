@@ -33,6 +33,7 @@ resource "scaleway_lb" "this" {
   ip_id      = scaleway_lb_ip.this.id
   type       = var.lb_type
   release_ip = false
+  tags       = var.cluster_tags
 }
 
 module "cluster" {

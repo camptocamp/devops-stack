@@ -45,6 +45,14 @@ variable "open_id_connect_config" {
 }
 
 variable "apiserver_cert_sans" {
+  description = "Additional Subject Alternative Names for the Kubernetes API server certificate"
   type    = list(any)
   default = []
 }
+
+variable "cluster_tags" {
+  description = "String to set tag on several object"
+  type        = list(string)
+  default     = []
+}
+
