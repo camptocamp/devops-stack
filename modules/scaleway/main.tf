@@ -49,6 +49,8 @@ module "cluster" {
   cluster_type = var.cluster_type
   cni_plugin   = var.cluster_type == "kosmos" ? "kilo" : "cilium"
 
+  cluster_tags = var.cluster_tags
+  tags = var.cluster_tags
   admission_plugins = [
     "PodNodeSelector",
   ]
