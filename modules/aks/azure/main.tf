@@ -302,19 +302,16 @@ resource "azuread_application_password" "oauth2_apps" {
   application_object_id = azuread_application.oauth2_apps.0.object_id
 }
 
-data "azurerm_policy_set_definition" "restricted" {
-  display_name = "Kubernetes cluster pod security restricted standards for Linux-based workloads"
-}
-
 data "azurerm_policy_set_definition" "baseline" {
   display_name = "Kubernetes cluster pod security baseline standards for Linux-based workloads"
 }
 
-resource "azurerm_policy_assignment" "baseline" {
+resource "azurerm_resource_group_policy_assignment" "example" {
   name                 = "${var.cluster_name}-baseline"
-  scope                = format("%s/resourcegroups/%s", data.azurerm_subscription.primary.id, data.azurerm_resource_group.this.name)
+  resource_group_id    = data.azure_rm.resource_group.this.id
   policy_definition_id = data.azurerm_policy_set_definition.baseline.id
-  parameters           = <<PARAMETERS
+
+  parameters = <<PARAMS
 {
   "effect": {
     "value": "deny"
@@ -331,8 +328,7 @@ resource "azurerm_policy_assignment" "baseline" {
     ]
   }
 }
-PARAMETERS
-
+PARAMS
 }
 
 resource "azurerm_user_assigned_identity" "this" {
