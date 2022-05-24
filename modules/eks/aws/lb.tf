@@ -98,7 +98,7 @@ module "nlb_private" {
 resource "aws_route53_record" "wildcard" {
   count = var.base_domain != null && (var.create_public_nlb || var.create_private_nlb) ? 1 : 0
 
-  zone_id = data.aws_route53_zone.this.0.id
+  zone_id = data.aws_route53_zone.this[var.base_domain].id
   name    = format("*.apps.%s", var.cluster_name)
   type    = "CNAME"
   ttl     = "300"

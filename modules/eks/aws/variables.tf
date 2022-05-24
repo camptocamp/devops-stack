@@ -10,6 +10,12 @@ variable "base_domain" {
   default     = null
 }
 
+variable "other_domains" {
+  description = "Other domains used for Ingresses requiring a DNS-01 challenge for Let's Encrypt validation with cert-manager (e.g. wildcard certificates)."
+  type        = list(string)
+  default     = []
+}
+
 variable "cluster_endpoint_public_access_cidrs" {
   description = "List of CIDR blocks which can access the Amazon EKS public API server endpoint."
   type        = list(string)

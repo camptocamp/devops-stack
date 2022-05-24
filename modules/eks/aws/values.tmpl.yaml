@@ -24,7 +24,9 @@ cert-manager:
               region: ${aws_default_region}
           selector:
             dnsZones:
-              - ${base_domain}
+            %{ for domain in all_domains }
+              - ${domain}
+            %{ endfor }
         - http01:
             ingress: {}
 
