@@ -92,7 +92,7 @@ cert-manager:
     acme:
       solvers:
         - dns01:
-            azuredns:
+            azureDNS:
               subscriptionID: ${subscription_id}
               resourceGroupName: ${resource_group_name}
               hostedZoneName: ${base_domain}
