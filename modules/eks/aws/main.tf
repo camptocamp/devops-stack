@@ -1,33 +1,8 @@
 locals {
-  base_domain                       = coalesce(var.base_domain, format("%s.nip.io", replace(data.dns_a_record_set.nlb.addrs[0], ".", "-")))
-  kubernetes_host                   = data.aws_eks_cluster.cluster.endpoint
-  kubernetes_cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
-  kubernetes_token                  = data.aws_eks_cluster_auth.cluster.token
-  kubeconfig                        = module.cluster.kubeconfig
-  cluster_issuer                    = "letsencrypt-prod"
+  base_domain = coalesce(var.base_domain, format("%s.nip.io", replace(data.dns_a_record_set.nlb.addrs[0], ".", "-")))
 }
 
 data "aws_region" "current" {}
-
-data "aws_vpc" "this" {
-  id = var.vpc_id
-}
-
-data "aws_subnet_ids" "private" {
-  vpc_id = data.aws_vpc.this.id
-
-  tags = {
-    "kubernetes.io/role/internal-elb" = "1"
-  }
-}
-
-data "aws_subnet_ids" "public" {
-  vpc_id = data.aws_vpc.this.id
-
-  tags = {
-    "kubernetes.io/role/elb" = "1"
-  }
-}
 
 data "aws_route53_zone" "this" {
   count = var.base_domain == null ? 0 : 1
@@ -35,96 +10,108 @@ data "aws_route53_zone" "this" {
   name = var.base_domain
 }
 
-data "aws_eks_cluster" "cluster" {
-  name = module.cluster.cluster_id
-}
-
 data "aws_eks_cluster_auth" "cluster" {
   name = module.cluster.cluster_id
 }
 
-provider "helm" {
-  kubernetes {
-    host                   = local.kubernetes_host
-    cluster_ca_certificate = local.kubernetes_cluster_ca_certificate
-    token                  = local.kubernetes_token
-  }
-}
-
-provider "kubernetes" {
-  host                   = local.kubernetes_host
-  cluster_ca_certificate = local.kubernetes_cluster_ca_certificate
-  token                  = local.kubernetes_token
-}
-
 locals {
-  ingress_worker_group = merge(var.worker_groups.0, { target_group_arns = concat(module.nlb.target_group_arns, module.nlb_private.target_group_arns) })
+#  target_group_arns = concat(module.nlb.target_group_arns, module.nlb_private.target_group_arns)
+#  target_groups_node_groups = { for group in var.nlb_attached_node_groups : group => { target_group_arns = local.target_group_arns } }
 }
+
 
 module "cluster" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "15.1.0"
+  version = "18.20.5"
 
   cluster_name    = var.cluster_name
-  cluster_version = var.cluster_version
+  cluster_version = var.kubernetes_version
 
   cluster_endpoint_private_access = true
   cluster_endpoint_public_access  = true
 
   cluster_endpoint_public_access_cidrs = var.cluster_endpoint_public_access_cidrs
 
-  subnets          = data.aws_subnet_ids.private.ids
+  subnet_ids       = var.private_subnet_ids
   vpc_id           = var.vpc_id
   enable_irsa      = true
-  write_kubeconfig = false
-  map_accounts     = var.map_accounts
-  map_roles        = var.map_roles
-  map_users        = var.map_users
 
-  worker_groups = concat([local.ingress_worker_group], try(slice(var.worker_groups, 1, length(var.worker_groups)), []))
+  create_aws_auth_configmap = true
+  manage_aws_auth_configmap = true
 
-  kubeconfig_aws_authenticator_command      = var.kubeconfig_aws_authenticator_command
-  kubeconfig_aws_authenticator_command_args = var.kubeconfig_aws_authenticator_command_args
-}
+  aws_auth_accounts = var.aws_auth_accounts
+  aws_auth_roles    = var.aws_auth_roles
+  aws_auth_users    = var.aws_auth_users
 
-resource "aws_security_group_rule" "workers_ingress_healthcheck_https" {
-  security_group_id = module.cluster.worker_security_group_id
-  type              = "ingress"
-  protocol          = "TCP"
-  from_port         = 443
-  to_port           = 443
-  cidr_blocks       = [data.aws_vpc.this.cidr_block]
-}
-resource "aws_security_group_rule" "workers_ingress_healthcheck_http" {
-  security_group_id = module.cluster.worker_security_group_id
-  type              = "ingress"
-  protocol          = "TCP"
-  from_port         = 80
-  to_port           = 80
-  cidr_blocks       = [data.aws_vpc.this.cidr_block]
-}
+  self_managed_node_groups = var.node_groups
 
-module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap"
-
-  kubeconfig              = local.kubeconfig
-  repo_url                = var.repo_url
-  target_revision         = var.target_revision
-  extra_apps              = var.extra_apps
-  extra_app_projects      = var.extra_app_projects
-  extra_application_sets  = var.extra_application_sets
-  cluster_name            = var.cluster_name
-  base_domain             = local.base_domain
-  argocd_server_secretkey = var.argocd_server_secretkey
-  cluster_issuer          = local.cluster_issuer
-
-  cluster_autoscaler = {
-    enable = var.enable_cluster_autoscaler
+  self_managed_node_group_defaults = {
+    create_security_group = false
   }
 
-  repositories = var.repositories
+  cluster_security_group_additional_rules = {
+    egress_nodes_ephemeral_ports_tcp = {
+      description                = "To node 1025-65535"
+      protocol                   = "tcp"
+      from_port                  = 1025
+      to_port                    = 65535
+      type                       = "egress"
+      source_node_security_group = true
+    }
+  }
 
-  depends_on = [
-    module.cluster,
-  ]
+  node_security_group_additional_rules = {
+    ingress_self_all = {
+      description = "Node to node all ports/protocols"
+      protocol    = "-1"
+      from_port   = 0
+      to_port     = 0
+      type        = "ingress"
+      self        = true
+    }
+    ingress_all_http = {
+      description      = "Node http ingress"
+      protocol         = "tcp"
+      from_port        = 80
+      to_port          = 80
+      type             = "ingress"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = ["::/0"]
+    }
+    ingress_all_https = {
+      description      = "Node https ingress"
+      protocol         = "tcp"
+      from_port        = 443
+      to_port          = 443
+      type             = "ingress"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = ["::/0"]
+    }
+    egress_all = {
+      description      = "Node all egress"
+      protocol         = "-1"
+      from_port        = 0
+      to_port          = 0
+      type             = "egress"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = ["::/0"]
+    }
+  }
 }
+
+#resource "aws_security_group_rule" "workers_ingress_healthcheck_https" {
+#  security_group_id = module.cluster.node_security_group_id
+#  type              = "ingress"
+#  protocol          = "TCP"
+#  from_port         = 443
+#  to_port           = 443
+#  cidr_blocks       = [var.vpc_cidr_block]
+#}
+#resource "aws_security_group_rule" "workers_ingress_healthcheck_http" {
+#  security_group_id = module.cluster.node_security_group_id
+#  type              = "ingress"
+#  protocol          = "TCP"
+#  from_port         = 80
+#  to_port           = 80
+#  cidr_blocks       = [var.vpc_cidr_block]
+#}

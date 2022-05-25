@@ -43,8 +43,8 @@ module "nlb" {
 
   load_balancer_type = "network"
 
-  vpc_id                           = data.aws_vpc.this.id
-  subnets                          = data.aws_subnet_ids.public.ids
+  vpc_id                           = var.vpc_id
+  subnets                          = var.public_subnet_ids
   enable_cross_zone_load_balancing = true
 
   target_groups      = local.lb_target_groups
@@ -61,8 +61,8 @@ module "nlb_private" {
 
   load_balancer_type = "network"
 
-  vpc_id                           = data.aws_vpc.this.id
-  subnets                          = data.aws_subnet_ids.private.ids
+  vpc_id                           = var.vpc_id
+  subnets                          = var.private_subnet_ids
   enable_cross_zone_load_balancing = true
   internal                         = true
 

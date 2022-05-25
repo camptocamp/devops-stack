@@ -1,13 +1,17 @@
-variable "cluster_version" {
-  description = "Kubernetes version to use for the EKS cluster."
+variable "cluster_name" {
   type        = string
-  default     = "1.21"
 }
 
 variable "base_domain" {
   description = "The base domain used for Ingresses."
   type        = string
   default     = null
+}
+
+variable "kubernetes_version" {
+  description = "Kubernetes version to use for the EKS cluster."
+  type        = string
+  default     = "1.21"
 }
 
 variable "cluster_endpoint_public_access_cidrs" {
@@ -17,17 +21,33 @@ variable "cluster_endpoint_public_access_cidrs" {
 }
 
 variable "vpc_id" {
-  description = "VPC where the cluster and workers will be deployed."
+  description = "VPC where the cluster and nodes will be deployed."
   type        = string
 }
 
-variable "map_accounts" {
+variable "vpc_cidr_block" {
+  description = ""
+  type        = string
+}
+
+variable "private_subnet_ids" {
+  description = "List of IDs of private subnets that the EKS instances will be attached to."
+  type        = list(string)
+}
+
+variable "public_subnet_ids" {
+  description = "List of IDs of public subnets the public NLB will be attached to if enabled with 'create_public_nlb'."
+  type        = list(string)
+  default     = []
+}
+
+variable "aws_auth_accounts" {
   description = "Additional AWS account numbers to add to the aws-auth configmap. See examples/basic/variables.tf in the terraform-aws-eks module's code for example format."
   type        = list(string)
   default     = []
 }
 
-variable "map_roles" {
+variable "aws_auth_roles" {
   description = "Additional IAM roles to add to the aws-auth configmap. See examples/basic/variables.tf in the terraform-aws-eks module's code for example format."
   type = list(object({
     rolearn  = string
@@ -37,7 +57,7 @@ variable "map_roles" {
   default = []
 }
 
-variable "map_users" {
+variable "aws_auth_users" {
   description = "Additional IAM users to add to the aws-auth configmap. See examples/basic/variables.tf in the terraform-aws-eks module's code for example format."
   type = list(object({
     userarn  = string
@@ -47,28 +67,10 @@ variable "map_users" {
   default = []
 }
 
-variable "worker_groups" {
-  description = "A list of maps defining worker group configurations to be defined using AWS Launch Configurations. See workers_group_defaults for valid keys."
+variable "node_groups" {
+  description = "A map of node group configurations to be created."
   type        = any
-  default     = []
-}
-
-variable "kubeconfig_aws_authenticator_command" {
-  description = "Override the kubeconfig authenticator command"
-  type        = string
-  default     = "aws-iam-authenticator"
-}
-
-variable "kubeconfig_aws_authenticator_command_args" {
-  description = "Override the kubeconfig authenticator arguments"
-  type        = list(string)
-  default     = []
-}
-
-variable "enable_efs" {
-  description = "Whether to provision an EFS filesystem, along with a provisioner"
-  type        = bool
-  default     = false
+  default     = {} 
 }
 
 variable "create_public_nlb" {
@@ -83,10 +85,22 @@ variable "create_private_nlb" {
   default     = false
 }
 
+variable "nlb_attached_node_groups" {
+  description = "List of node_groups indexes that the NLB(s) should be attached to"
+  type        = list
+  default     = []
+}
+
 variable "enable_cluster_autoscaler" {
   description = "Whether to setup a cluster autoscaler"
   type        = bool
   default     = false
+}
+
+variable "cluster_autoscaler_role_arn" {
+  description = "Role ARN linked to the cluster autoscaler ServiceAccount"
+  type        = string
+  default     = ""
 }
 
 variable "extra_lb_target_groups" {
