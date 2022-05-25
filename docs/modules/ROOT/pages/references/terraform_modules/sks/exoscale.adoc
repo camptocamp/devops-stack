@@ -32,7 +32,7 @@ The `sks/exoscale` Terraform module provides a way to install and configure:
 |===
 |Name |Source |Version
 |[[module_argocd]] <<module_argocd,argocd>> |../../argocd-helm |
-|[[module_cluster]] <<module_cluster,cluster>> |camptocamp/sks/exoscale |0.3.0
+|[[module_cluster]] <<module_cluster,cluster>> |camptocamp/sks/exoscale |0.4.1
 |===
 
 == Resources
@@ -40,6 +40,7 @@ The `sks/exoscale` Terraform module provides a way to install and configure:
 [cols="a,a",options="header,autowidth"]
 |===
 |Name |Type
+|https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/domain_record[exoscale_domain_record.wildcard] |resource
 |https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/nlb[exoscale_nlb.this] |resource
 |https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/nlb_service[exoscale_nlb_service.http] |resource
 |https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/nlb_service[exoscale_nlb_service.https] |resource
@@ -51,6 +52,7 @@ The `sks/exoscale` Terraform module provides a way to install and configure:
 |https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password[random_password.keycloak_passwords] |resource
 |https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key[tls_private_key.root] |resource
 |https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/self_signed_cert[tls_self_signed_cert.root] |resource
+|https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/data-sources/domain[exoscale_domain.this] |data source
 |https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/data-sources/secret[kubernetes_secret.keycloak_admin_password] |data source
 |===
 
@@ -145,6 +147,35 @@ object({
 |`null`
 |no
 
+|[[input_prometheus_oauth2_proxy_args]] <<input_prometheus_oauth2_proxy_args,prometheus_oauth2_proxy_args>>
+|n/a
+|
+
+[source]
+----
+object({
+    prometheus_oauth2_proxy_extra_args = list(string)
+    prometheus_oauth2_proxy_image      = string
+    prometheus_oauth2_proxy_extra_volume_mounts = list(object({
+      name       = string
+      mount_path = string
+    }))
+  })
+----
+
+|
+
+[source]
+----
+{
+  "prometheus_oauth2_proxy_extra_args": [],
+  "prometheus_oauth2_proxy_extra_volume_mounts": [],
+  "prometheus_oauth2_proxy_image": "quay.io/oauth2-proxy/oauth2-proxy:v7.1.3"
+}
+----
+
+|no
+
 |[[input_repo_url]] <<input_repo_url,repo_url>>
 |The source repo URL of ArgoCD's app of apps.
 |`string`
@@ -166,7 +197,7 @@ object({
 |[[input_target_revision]] <<input_target_revision,target_revision>>
 |The source target revision of ArgoCD's app of apps.
 |`string`
-|`"v0.54.2"`
+|`"v0.56.0"`
 |no
 
 |[[input_wait_for_app_of_apps]] <<input_wait_for_app_of_apps,wait_for_app_of_apps>>

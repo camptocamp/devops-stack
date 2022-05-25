@@ -130,6 +130,35 @@ object({
 |`null`
 |no
 
+|[[input_prometheus_oauth2_proxy_args]] <<input_prometheus_oauth2_proxy_args,prometheus_oauth2_proxy_args>>
+|n/a
+|
+
+[source]
+----
+object({
+    prometheus_oauth2_proxy_extra_args = list(string)
+    prometheus_oauth2_proxy_image      = string
+    prometheus_oauth2_proxy_extra_volume_mounts = list(object({
+      name       = string
+      mount_path = string
+    }))
+  })
+----
+
+|
+
+[source]
+----
+{
+  "prometheus_oauth2_proxy_extra_args": [],
+  "prometheus_oauth2_proxy_extra_volume_mounts": [],
+  "prometheus_oauth2_proxy_image": "quay.io/oauth2-proxy/oauth2-proxy:v7.1.3"
+}
+----
+
+|no
+
 |[[input_repo_url]] <<input_repo_url,repo_url>>
 |The source repo URL of ArgoCD's app of apps.
 |`string`
@@ -145,7 +174,7 @@ object({
 |[[input_target_revision]] <<input_target_revision,target_revision>>
 |The source target revision of ArgoCD's app of apps.
 |`string`
-|`"v0.54.2"`
+|`"v0.56.0"`
 |no
 
 |[[input_wait_for_app_of_apps]] <<input_wait_for_app_of_apps,wait_for_app_of_apps>>

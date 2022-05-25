@@ -262,6 +262,41 @@ object({
 |`null`
 |no
 
+|[[input_other_domains]] <<input_other_domains,other_domains>>
+|Other domains used for Ingresses requiring a DNS-01 challenge for Let's Encrypt validation with cert-manager (e.g. wildcard certificates).
+|`list(string)`
+|`[]`
+|no
+
+|[[input_prometheus_oauth2_proxy_args]] <<input_prometheus_oauth2_proxy_args,prometheus_oauth2_proxy_args>>
+|n/a
+|
+
+[source]
+----
+object({
+    prometheus_oauth2_proxy_extra_args = list(string)
+    prometheus_oauth2_proxy_image      = string
+    prometheus_oauth2_proxy_extra_volume_mounts = list(object({
+      name       = string
+      mount_path = string
+    }))
+  })
+----
+
+|
+
+[source]
+----
+{
+  "prometheus_oauth2_proxy_extra_args": [],
+  "prometheus_oauth2_proxy_extra_volume_mounts": [],
+  "prometheus_oauth2_proxy_image": "quay.io/oauth2-proxy/oauth2-proxy:v7.1.3"
+}
+----
+
+|no
+
 |[[input_repo_url]] <<input_repo_url,repo_url>>
 |The source repo URL of ArgoCD's app of apps.
 |`string`
@@ -277,7 +312,7 @@ object({
 |[[input_target_revision]] <<input_target_revision,target_revision>>
 |The source target revision of ArgoCD's app of apps.
 |`string`
-|`"v0.54.2"`
+|`"v0.56.0"`
 |no
 
 |[[input_vpc_id]] <<input_vpc_id,vpc_id>>

@@ -15,7 +15,7 @@ kube-prometheus-stack chart because it uses Prometheus Custom Resources.
 [cols=",,",options="header",]
 |===
 |Repository |Name |Version
-|https://charts.jetstack.io |cert-manager |1.4.3
+|https://charts.jetstack.io |cert-manager |1.8.0
 |===
 
 == Values
