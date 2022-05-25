@@ -8,7 +8,7 @@ cluster Ingress Controller.
 [cols=",,",options="header",]
 |===
 |Repository |Name |Version
-|https://helm.traefik.io/traefik |traefik |10.1.2
+|https://helm.traefik.io/traefik |traefik |10.19.4
 |===
 
 == Values

@@ -9,7 +9,7 @@ dashboards for monitoring Kubernetes cluster with Prometheus.
 |===
 |Repository |Name |Version
 |https://prometheus-community.github.io/helm-charts
-|kube-prometheus-stack |18.0.1
+|kube-prometheus-stack |34.10.0
 |===
 
 == Values
