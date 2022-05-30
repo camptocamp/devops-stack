@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.57.0](https://github.com/camptocamp/devops-stack/compare/v0.56.0...v0.57.0) (2022-05-30)
+
+
+### Features
+
+* **cert-manager:** allow multiple domains ([#904](https://github.com/camptocamp/devops-stack/issues/904)) ([8635c3f](https://github.com/camptocamp/devops-stack/commit/8635c3f14b463814bd96e22aa7b7be82ce446fb1))
+
+
+### Bug Fixes
+
+* **aks:** cert-manager dns solver ([a9f3782](https://github.com/camptocamp/devops-stack/commit/a9f3782dd1f05cc80462f345edf665b96b9ef227))
+* can(oidc.prometheus_oauth2_proxy_extra_volume_mounts) returns true when empty list ([#894](https://github.com/camptocamp/devops-stack/issues/894)) ([0be6b03](https://github.com/camptocamp/devops-stack/commit/0be6b031fb0752720c5478cb75183e79ce635fe9))
+
 ## [0.56.0](https://github.com/camptocamp/devops-stack/compare/v0.55.0...v0.56.0) (2022-05-04)
 
 
