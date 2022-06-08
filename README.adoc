@@ -11,3 +11,4 @@ The documentation is published here: https://devops-stack.io
 == Community
 
 You can join us on the `#camptocamp-devops-stack` channel on the https://slack.k8s.io/[Kubernetes Slack Server].
+
