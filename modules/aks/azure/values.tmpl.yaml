@@ -95,12 +95,11 @@ cert-manager:
             azureDNS:
               subscriptionID: ${subscription_id}
               resourceGroupName: ${resource_group_name}
-              hostedZoneName: ${base_domain}
-              # Azure Cloud Environment, default to AzurePublicCloud
-              environment: AzurePublicCloud
           selector:
             dnsZones:
-              - ${base_domain}
+            %{ for domain in all_domains }
+              - ${domain}
+            %{ endfor }
         - http01:
             ingress: {}
   replicaCount: 2

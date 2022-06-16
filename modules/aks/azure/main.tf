@@ -1,5 +1,6 @@
 locals {
   base_domain                       = var.base_domain
+  all_domains                       = toset(compact(distinct(concat([var.base_domain], var.other_domains))))
   kubernetes_host                   = data.azurerm_kubernetes_cluster.cluster.kube_admin_config.0.host
   kubernetes_username               = data.azurerm_kubernetes_cluster.cluster.kube_admin_config.0.username
   kubernetes_password               = data.azurerm_kubernetes_cluster.cluster.kube_admin_config.0.password
@@ -146,7 +147,7 @@ module "argocd" {
       {
         subscription_id                              = split("/", data.azurerm_subscription.primary.id)[2]
         resource_group_name                          = var.resource_group_name
-        base_domain                                  = local.base_domain
+        all_domains                                  = local.all_domains
         cert_manager_resource_id                     = azurerm_user_assigned_identity.cert_manager.id
         cert_manager_client_id                       = azurerm_user_assigned_identity.cert_manager.client_id
         azure_dns_label_name                         = local.azure_dns_label_name
@@ -223,20 +224,24 @@ resource "azurerm_role_assignment" "reader" {
 }
 
 data "azurerm_dns_zone" "this" {
-  name                = var.base_domain
+  for_each = local.all_domains
+
+  name                = each.key
   resource_group_name = var.resource_group_name
 }
 
-resource "azurerm_dns_cname_record" "wildcard" {
+resource "azurerm_dns_cname_record" "base_domain_wildcard" {
   name                = "*.apps.${var.cluster_name}"
-  zone_name           = data.azurerm_dns_zone.this.name
-  resource_group_name = data.azurerm_dns_zone.this.resource_group_name
+  zone_name           = data.azurerm_dns_zone.this[local.base_domain].name
+  resource_group_name = data.azurerm_dns_zone.this[local.base_domain].resource_group_name
   ttl                 = 300
   record              = "${local.azure_dns_label_name}.${data.azurerm_resource_group.this.location}.cloudapp.azure.com."
 }
 
 resource "azurerm_role_assignment" "dns_zone_contributor" {
-  scope                = data.azurerm_dns_zone.this.id
+  for_each = local.all_domains
+
+  scope                = data.azurerm_dns_zone.this[each.key].id
   role_definition_name = "DNS Zone Contributor"
   principal_id         = azurerm_user_assigned_identity.cert_manager.principal_id
 }
