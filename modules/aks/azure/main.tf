@@ -152,6 +152,7 @@ module "argocd" {
         all_domains                                  = local.all_domains
         cert_manager_resource_id                     = azurerm_user_assigned_identity.cert_manager.id
         cert_manager_client_id                       = azurerm_user_assigned_identity.cert_manager.client_id
+        cert_manager_http01_ingress                  = var.cert_manager_http01_ingress
         azure_dns_label_name                         = local.azure_dns_label_name
         kube_prometheus_stack_prometheus_resource_id = azurerm_user_assigned_identity.kube_prometheus_stack_prometheus.id
         kube_prometheus_stack_prometheus_client_id   = azurerm_user_assigned_identity.kube_prometheus_stack_prometheus.client_id

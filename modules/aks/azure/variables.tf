@@ -9,6 +9,12 @@ variable "other_domains" {
   default     = []
 }
 
+variable "cert_manager_http01_ingress" {
+  description = "Ingress block for the htt01 chalenge of cert-manager"
+  type        = any
+  default     = {}
+}
+
 variable "kubernetes_version" {
   description = "Specify which Kubernetes release to use."
   type        = string
