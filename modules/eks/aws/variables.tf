@@ -62,11 +62,13 @@ variable "worker_groups" {
 variable "cognito_user_pool_id" {
   description = "ID of the Cognito user pool to use."
   type        = string
+  default     = null
 }
 
 variable "cognito_user_pool_domain" {
   description = "Domain prefix of the Cognito user pool to use (custom domain currently not supported!)."
   type        = string
+  default     = null
 }
 
 variable "kubeconfig_aws_authenticator_command" {
