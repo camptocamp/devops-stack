@@ -152,9 +152,9 @@ module "argocd" {
         azure_dns_label_name                         = local.azure_dns_label_name
         kube_prometheus_stack_prometheus_resource_id = azurerm_user_assigned_identity.kube_prometheus_stack_prometheus.id
         kube_prometheus_stack_prometheus_client_id   = azurerm_user_assigned_identity.kube_prometheus_stack_prometheus.client_id
-        loki_container_name                          = azurerm_storage_container.loki.name
-        loki_account_name                            = azurerm_storage_account.this.name
-        loki_account_key                             = azurerm_storage_account.this.primary_access_key
+        loki_container_name                          = var.loki_storage.create ? azurerm_storage_container.loki[0].name : var.loki_storage.args_atrs.container_name
+        loki_account_name                            = var.loki_storage.create ? azurerm_storage_account.this[0].name : var.loki_storage.args_atrs.account_name
+        loki_account_key                             = var.loki_storage.create ? azurerm_storage_account.this[0].primary_access_key : var.loki_storage.args_atrs.account_key
         azureidentities                              = local.azureidentities
         namespaces                                   = local.namespaces
       }
@@ -202,16 +202,18 @@ resource "random_string" "storage_account" {
 }
 
 resource "azurerm_storage_account" "this" {
+  count                    = var.loki_storage.create ? 1 : 0
   name                     = random_string.storage_account.result
   resource_group_name      = module.cluster.node_resource_group
   location                 = data.azurerm_resource_group.this.location
-  account_tier             = var.storage_account_tier
-  account_replication_type = var.storage_account_replication_type
+  account_tier             = var.loki_storage.args_atrs.storage_account_tier
+  account_replication_type = var.loki_storage.args_atrs.storage_account_replication_type
 }
 
 resource "azurerm_storage_container" "loki" {
+  count                 = var.loki_storage.create ? 1 : 0
   name                  = "loki"
-  storage_account_name  = azurerm_storage_account.this.name
+  storage_account_name  = azurerm_storage_account.this[0].name
   container_access_type = "private"
 }
 
