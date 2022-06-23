@@ -153,14 +153,14 @@ module "cert-manager" {
 
   cluster_oidc_issuer_url = module.eks.cluster_oidc_issuer_url
 
-  #depends_on = [ module.monitoring ]
+  depends_on = [ module.monitoring ]
 }
 
 module "argocd" {
   source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git/"
 
   cluster_name   = module.eks.cluster_name
-  oidc           = module.oidc.oidc
+  oidc           = merge(module.oidc.oidc, {cli_client_id="test"})
   argocd         = {
     namespace = local.argocd_namespace
     server_secretkey = module.argocd_bootstrap.argocd_server_secretkey
@@ -170,7 +170,30 @@ module "argocd" {
   }
   base_domain    = module.eks.base_domain
   cluster_issuer = "letsencrypt-prod"
-
+  bootstrap_values = module.argocd_bootstrap.bootstrap_values
+  helm_values = [{
+      argo-cd = {
+        server = {
+          config = {
+            # TODO check and potentially change the following var references
+            "oidc.config" = <<-EOT
+                name: OIDC
+                issuer: "${replace(module.oidc.oidc.issuer_url, "\"", "\\\"")}"
+                clientID: "${replace(module.oidc.oidc.client_id, "\"", "\\\"")}"
+                clientSecret: "${module.oidc.oidc.client_secret}"
+                cliClientID: "${replace("test", "\"", "\\\"")}"
+                requestedIDTokenClaims:
+                  groups:
+                    essential: true
+                requestedScopes:
+                  - openid
+                  - profile
+                  - email
+                EOT
+          }
+        }
+      }
+    }]
 #  repositories = {
 #    "argocd" = {
 #    url      = local.repo_url
