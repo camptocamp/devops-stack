@@ -9,8 +9,8 @@ spec:
   project: "devops-stack"
   source:
     repoURL: https://github.com/kubernetes-sigs/metrics-server.git
-    path: deploy/1.8+
-    targetRevision: v0.3.7
+    path: charts/metrics-server
+    targetRevision: release-0.6
   destination:
     namespace: kube-system
     server: {{ .Values.spec.destination.server }}
