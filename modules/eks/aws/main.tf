@@ -87,6 +87,14 @@ module "cluster" {
       cidr_blocks      = ["0.0.0.0/0"]
       ipv6_cidr_blocks = ["::/0"]
     }
+    ingress_cluster_to_nodes_metrics_server = {
+      description      = "Cluster to node Metrics Server"
+      protocol         = "tcp"
+      from_port        = 4443
+      to_port          = 4443
+      type             = "ingress"
+      source_cluster_security_group = true 
+    }
     egress_all = {
       description      = "Node all egress"
       protocol         = "-1"
