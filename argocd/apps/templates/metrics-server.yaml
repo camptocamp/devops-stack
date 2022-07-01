@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/kubernetes-sigs/metrics-server.git
     path: charts/metrics-server
-    targetRevision: release-0.6
+    targetRevision: v0.6.1
   destination:
     namespace: kube-system
     server: {{ .Values.spec.destination.server }}
