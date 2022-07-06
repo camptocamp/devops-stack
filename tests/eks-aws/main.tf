@@ -14,12 +14,12 @@ module "vpc" {
 
   private_subnet_tags = {
     "kubernetes.io/cluster/${module.eks.cluster_name}" = "shared"
-    "kubernetes.io/role/internal-elb"           = "1"
+    "kubernetes.io/role/internal-elb"                  = "1"
   }
 
   public_subnet_tags = {
     "kubernetes.io/cluster/${module.eks.cluster_name}" = "shared"
-    "kubernetes.io/role/elb"                    = "1"
+    "kubernetes.io/role/elb"                           = "1"
   }
 }
 
@@ -32,17 +32,20 @@ resource "aws_cognito_user_pool_domain" "pool_domain" {
   user_pool_id = aws_cognito_user_pool.pool.id
 }
 
+
+
 module "eks" {
   source = "../../modules/eks/aws"
 
-  cluster_name = "ckg-v1test"
+  cluster_name = "jbt-v1test"
   base_domain  = "is-sandbox.camptocamp.com"
+  #cluster_version = "1.22"
 
-  vpc_id = module.vpc.vpc_id
+  vpc_id         = module.vpc.vpc_id
   vpc_cidr_block = module.vpc.vpc_cidr_block
 
   private_subnet_ids = module.vpc.private_subnets
-  public_subnet_ids = module.vpc.public_subnets
+  public_subnet_ids  = module.vpc.public_subnets
 
   cluster_endpoint_public_access_cidrs = ["0.0.0.0/0"]
 
@@ -86,11 +89,11 @@ module "argocd_bootstrap" {
 }
 
 provider "argocd" {
-  server_addr = "some.stupid.name.that.doesnt.exist"
-  auth_token  = module.argocd_bootstrap.argocd_auth_token
-  insecure = true
-  plain_text = true
-  port_forward = true
+  server_addr                 = "some.stupid.name.that.doesnt.exist"
+  auth_token                  = module.argocd_bootstrap.argocd_auth_token
+  insecure                    = true
+  plain_text                  = true
+  port_forward                = true
   port_forward_with_namespace = local.argocd_namespace
 
   kubernetes {
@@ -129,20 +132,20 @@ module "monitoring" {
   cluster_issuer   = "letsencrypt-prod"
   metrics_archives = {}
 
-  depends_on = [ module.oidc ]
+  depends_on = [module.oidc]
 }
 
-#module "loki-stack" {
-#  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack.git//eks"
-#
-#  cluster_name     = module.eks.cluster_name
-#  argocd_namespace = local.argocd_namespace
-#  base_domain      = module.cluster.base_domain
-#
-#  cluster_oidc_issuer_url = module.cluster.cluster_oidc_issuer_url
-#
-#  depends_on = [ module.monitoring ]
-#}
+module "loki-stack" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack.git//eks"
+
+  cluster_name     = module.eks.cluster_name
+  argocd_namespace = local.argocd_namespace
+  base_domain      = module.eks.base_domain
+
+  cluster_oidc_issuer_url = module.oidc.oidc.issuer_url
+
+  depends_on = [module.monitoring]
+}
 
 module "cert-manager" {
   source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//eks"
@@ -153,67 +156,83 @@ module "cert-manager" {
 
   cluster_oidc_issuer_url = module.eks.cluster_oidc_issuer_url
 
-  depends_on = [ module.monitoring ]
+  depends_on = [module.monitoring]
 }
 
 module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git/"
+  source = "../../../devops-stack-module-argocd"
 
-  cluster_name   = module.eks.cluster_name
-  oidc           = merge(module.oidc.oidc, {cli_client_id="test"})
-  argocd         = {
-    namespace = local.argocd_namespace
-    server_secretkey = module.argocd_bootstrap.argocd_server_secretkey
-    accounts_pipeline_tokens = module.argocd_bootstrap.argocd_accounts_pipeline_tokens
-    server_admin_password = module.argocd_bootstrap.argocd_server_admin_password
-    domain = module.argocd_bootstrap.argocd_domain
-  }
-  base_domain    = module.eks.base_domain
-  cluster_issuer = "letsencrypt-prod"
-  bootstrap_values = module.argocd_bootstrap.bootstrap_values
-  helm_values = [{
-      argo-cd = {
-        server = {
-          config = {
-            # TODO check and potentially change the following var references
-            "oidc.config" = <<-EOT
-                name: OIDC
-                issuer: "${replace(module.oidc.oidc.issuer_url, "\"", "\\\"")}"
-                clientID: "${replace(module.oidc.oidc.client_id, "\"", "\\\"")}"
-                clientSecret: "${module.oidc.oidc.client_secret}"
-                cliClientID: "${replace("test", "\"", "\\\"")}"
-                requestedIDTokenClaims:
-                  groups:
-                    essential: true
-                requestedScopes:
-                  - openid
-                  - profile
-                  - email
-                EOT
-          }
-        }
+  cluster_name = module.eks.cluster_name
+  oidc = {
+    name         = "OIDC"
+    issuer       = module.oidc.oidc.issuer_url
+    clientID     = module.oidc.oidc.client_id
+    clientSecret = module.oidc.oidc.client_secret
+    requestedIDTokenClaims = {
+      groups = {
+        essential = true
       }
-    }]
-#  repositories = {
-#    "argocd" = {
-#    url      = local.repo_url
-#    revision = local.target_revision
-#  }}
+    }
+    requestedScopes = [
+      "openid", "profile", "email"
+    ]
+  }
+  argocd = {
+    namespace                = local.argocd_namespace
+    server_secretkey         = module.argocd_bootstrap.argocd_server_secretkey
+    accounts_pipeline_tokens = module.argocd_bootstrap.argocd_accounts_pipeline_tokens
+    server_admin_password    = module.argocd_bootstrap.argocd_server_admin_password
+    domain                   = module.argocd_bootstrap.argocd_domain
+  }
+  base_domain      = module.eks.base_domain
+  cluster_issuer   = "letsencrypt-prod"
+  bootstrap_values = module.argocd_bootstrap.bootstrap_values
+  #  repositories = {
+  #    "argocd" = {
+  #    url      = local.repo_url
+  #    revision = local.target_revision
+  #  }}
 
-  depends_on = [ module.cert-manager, module.monitoring ]
+  depends_on = [module.cert-manager, module.monitoring]
 }
 
-##module "myownapp" {
-##  source = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git/"
-##
-##  cluster_name   = module.eks.cluster_name
-##  oidc           = module.oidc.oidc
-##  argocd         = {
-##    server     = module.cluster.argocd_server
-##    auth_token = module.cluster.argocd_auth_token
-##  }
-##  base_domain    = module.cluster.base_domain
-##  cluster_issuer = module.cluster.cluster_issuer
-##
-##  argocd_url = "https://github.com/camptocamp/myapp.git"
-##}
+module "myownapp" {
+  source           = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git/"
+  name             = "apps"
+  argocd_namespace = "argocd"
+  namespace        = "{{path.basename}}"
+  generators = [
+    {
+      clusters = {}
+    }
+  ]
+  template = {
+    metadata = {
+      name = "{{name}}-guestbook"
+    }
+
+    spec = {
+      project = "default"
+
+      source = {
+        repoURL        = "https://github.com/argoproj/argocd-example-apps/"
+        targetRevision = "HEAD"
+        path           = "guestbook"
+      }
+
+      destination = {
+        server    = "https://kubernetes.default.svc"
+        namespace = "guestbook"
+      }
+      syncPolicy = {
+        automated = {
+          selfHeal = true
+          prune    = true
+        }
+        syncOptions = [
+          "CreateNamespace=true"
+        ]
+      }
+    }
+  }
+}
