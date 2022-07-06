@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.58.0](https://github.com/camptocamp/devops-stack/compare/v0.57.0...v0.58.0) (2022-07-06)
+
+
+### Features
+
+* add codeowners, contributing and security instructions ([dee2d3b](https://github.com/camptocamp/devops-stack/commit/dee2d3b4945e587e68d94561afb6d8c5f9f68566))
+* **gitlab ci:** upgrade argocd and terraform versions ([5ffd5be](https://github.com/camptocamp/devops-stack/commit/5ffd5be2db725f26fd29bb4ce74c814d143cfb68))
+* **metrics-server:** update to v0.6.1 ([ed9eb96](https://github.com/camptocamp/devops-stack/commit/ed9eb9612db106283e59ae45d86cded8eafe8edb))
+
+
+### Bug Fixes
+
+* **cognito:** set default null values to cognito_user_pool_id and cognito_user_pool_domain variables ([b218e77](https://github.com/camptocamp/devops-stack/commit/b218e779d7cada190a012291da4ccf41df94c7be))
+* **eks:** NLB dns query when public NLB is not created ([b8f4647](https://github.com/camptocamp/devops-stack/commit/b8f4647cd8af934c07d5abc1e58db863e2b415b8))
+* **eks:** private nlb terraform module version ([802b6f1](https://github.com/camptocamp/devops-stack/commit/802b6f1eff5e6e5f2dfee7d7e5dbd64232ddad55))
+* **metrics-server:** use release tag ([5cc33cf](https://github.com/camptocamp/devops-stack/commit/5cc33cff3f803b04246b9bf1fd84b2147d308f3c))
+* team owns code instead of individuals ([2ba2971](https://github.com/camptocamp/devops-stack/commit/2ba2971a32dc4b9ec27caa6e6651e2009e6a4af9))
+
 ## [0.57.0](https://github.com/camptocamp/devops-stack/compare/v0.56.0...v0.57.0) (2022-05-30)
 
 

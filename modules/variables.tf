@@ -12,7 +12,7 @@ variable "repo_url" {
 variable "target_revision" {
   description = "The source target revision of ArgoCD's app of apps."
   type        = string
-  default     = "v0.57.0" # x-release-please-version
+  default     = "v0.58.0" # x-release-please-version
 }
 
 variable "app_of_apps_values_overrides" {
