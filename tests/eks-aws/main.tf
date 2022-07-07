@@ -78,6 +78,20 @@ provider "helm" {
 
 locals {
   argocd_namespace = "argocd"
+  argocd_oidc = {
+    name         = "OIDC"
+    issuer       = module.oidc.oidc.issuer_url
+    clientID     = module.oidc.oidc.client_id
+    clientSecret = module.oidc.oidc.client_secret
+    requestedIDTokenClaims = {
+      groups = {
+        essential = true
+      }
+    }
+    requestedScopes = [
+      "openid", "profile", "email"
+    ]
+  }
 }
 
 module "argocd_bootstrap" {
@@ -86,6 +100,8 @@ module "argocd_bootstrap" {
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
   base_domain      = module.eks.base_domain
+
+  oidc = local.argocd_oidc
 }
 
 provider "argocd" {
@@ -126,11 +142,20 @@ module "monitoring" {
   source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git/"
 
   cluster_name     = module.eks.cluster_name
-  oidc             = module.oidc.oidc
   argocd_namespace = local.argocd_namespace
   base_domain      = module.eks.base_domain
   cluster_issuer   = "letsencrypt-prod"
   metrics_archives = {}
+
+  prometheus = {
+    oidc = module.oidc.oidc
+  }
+  alertmanager = {
+    oidc = module.oidc.oidc
+  }
+  grafana = {
+    oidc = module.oidc.oidc
+  }
 
   depends_on = [module.oidc]
 }
@@ -163,20 +188,7 @@ module "argocd" {
   source = "../../../devops-stack-module-argocd"
 
   cluster_name = module.eks.cluster_name
-  oidc = {
-    name         = "OIDC"
-    issuer       = module.oidc.oidc.issuer_url
-    clientID     = module.oidc.oidc.client_id
-    clientSecret = module.oidc.oidc.client_secret
-    requestedIDTokenClaims = {
-      groups = {
-        essential = true
-      }
-    }
-    requestedScopes = [
-      "openid", "profile", "email"
-    ]
-  }
+  oidc = local.argocd_oidc
   argocd = {
     namespace                = local.argocd_namespace
     server_secretkey         = module.argocd_bootstrap.argocd_server_secretkey
