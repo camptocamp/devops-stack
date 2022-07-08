@@ -100,6 +100,7 @@ module "argocd_bootstrap" {
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
   base_domain      = module.eks.base_domain
+  cluster_issuer   = "letsencrypt-prod"
 
   oidc = local.argocd_oidc
 }
