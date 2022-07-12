@@ -16,14 +16,13 @@ output "cluster_oidc_issuer_url" {
   value       = module.cluster.cluster_oidc_issuer_url
 }
 
-output "node_groups_security_group_ids" {
-  description = "Security group ID attached to the EKS nodes."
-  value       = { for k,v in module.cluster.self_managed_node_groups : k => v.security_group_id }
+output "node_security_group_id" {
+  value = module.cluster.node_security_group_id
 }
 
-output "node_groups_iam_role_names" {
-  description = "default IAM role name for EKS node groups"
-  value       = { for k,v in module.cluster.self_managed_node_groups : k => v.iam_role_name }
+output "node_groups" {
+  description = "Security group ID attached to the EKS nodes."
+  value       = module.cluster.self_managed_node_groups
 }
 
 output "kubernetes_host" {
