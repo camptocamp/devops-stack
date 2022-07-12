@@ -1,5 +1,5 @@
 resource "aws_efs_file_system" "eks" {
-  creation_token = "devops-stack"
+  creation_token = module.eks.cluster_name
 
   tags = {
     Name = module.eks.cluster_name
