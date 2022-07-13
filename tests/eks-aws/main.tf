@@ -32,7 +32,33 @@ resource "aws_cognito_user_pool_domain" "pool_domain" {
   user_pool_id = aws_cognito_user_pool.pool.id
 }
 
+resource "aws_cognito_user_group" "argocd_admin_group" {
+  name         = "argocd-admin"
+  user_pool_id = aws_cognito_user_pool.pool.id
+  description  = "Users with admin access to Argo CD"
+}
 
+/* Available only in provider hashicorp/aws >= v4.0.0
+resource "aws_cognito_user" "admin" {
+  user_pool_id = aws_cognito_user_pool.admin.id
+  username = admin
+  password = test # TODO add variable here
+
+  message_action = SUPRESS # Do not send welcome message since password is hardcoded and email is non-existant
+
+  attributes = {
+    email = "admin@example.org"
+    email_verified = true
+    terraform = true
+  }
+}
+
+resource "aws_cognito_user_in_group" "add_admin_argocd_admin" {
+  user_pool_id = aws_cognito_user_pool.admin.id
+  group_name   = aws_cognito_user_group.argocd_admin_group.name
+  username     = aws_cognito_user.admin.username
+}
+*/
 
 module "eks" {
   source = "../../modules/eks/aws"
@@ -186,10 +212,10 @@ module "cert-manager" {
 }
 
 module "argocd" {
-  source = "../../../devops-stack-module-argocd"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git/"
 
   cluster_name = module.eks.cluster_name
-  oidc = local.argocd_oidc
+  oidc         = local.argocd_oidc
   argocd = {
     namespace                = local.argocd_namespace
     server_secretkey         = module.argocd_bootstrap.argocd_server_secretkey
@@ -209,7 +235,7 @@ module "argocd" {
   depends_on = [module.cert-manager, module.monitoring]
 }
 
-module "myownapp" {
+module "helloworld" {
   source           = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git/"
   name             = "apps"
   argocd_namespace = "argocd"
@@ -221,21 +247,21 @@ module "myownapp" {
   ]
   template = {
     metadata = {
-      name = "{{name}}-guestbook"
+      name = "{{name}}-helloworld"
     }
 
     spec = {
       project = "default"
 
       source = {
-        repoURL        = "https://github.com/argoproj/argocd-example-apps/"
+        repoURL        = "https://github.com/lentidas/helloworld-devops-stack-templates"
         targetRevision = "HEAD"
-        path           = "guestbook"
+        path           = "helloworld"
       }
 
       destination = {
         server    = "https://kubernetes.default.svc"
-        namespace = "guestbook"
+        namespace = "helloworld"
       }
       syncPolicy = {
         automated = {
