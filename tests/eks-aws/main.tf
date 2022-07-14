@@ -39,10 +39,15 @@ resource "aws_cognito_user_group" "argocd_admin_group" {
 }
 
 /* Available only in provider hashicorp/aws >= v4.0.0
+resource "random_string" "admin_password" {
+  length  = 25
+  special = false
+} # TODO create an output for this password
+
 resource "aws_cognito_user" "admin" {
   user_pool_id = aws_cognito_user_pool.admin.id
   username = admin
-  password = test # TODO add variable here
+  password = random_string.admin_password.result
 
   message_action = SUPRESS # Do not send welcome message since password is hardcoded and email is non-existant
 
