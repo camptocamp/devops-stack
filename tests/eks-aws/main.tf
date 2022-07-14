@@ -134,6 +134,8 @@ module "argocd_bootstrap" {
   cluster_issuer   = "letsencrypt-prod"
 
   oidc = local.argocd_oidc
+
+  depends_on = [module.eks]
 }
 
 provider "argocd" {
@@ -157,6 +159,8 @@ module "ingress" {
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
   base_domain      = module.eks.base_domain
+
+  depends_on = [module.argocd_bootstrap]
 }
 
 module "oidc" {
@@ -168,6 +172,8 @@ module "oidc" {
 
   cognito_user_pool_id     = aws_cognito_user_pool.pool.id
   cognito_user_pool_domain = aws_cognito_user_pool_domain.pool_domain.domain
+
+  depends_on = [module.eks]
 }
 
 module "monitoring" {
@@ -189,7 +195,7 @@ module "monitoring" {
     oidc = module.oidc.oidc
   }
 
-  depends_on = [module.oidc]
+  depends_on = [module.argocd_bootstrap]
 }
 
 module "loki-stack" {
@@ -245,6 +251,9 @@ module "helloworld" {
   name             = "apps"
   argocd_namespace = "argocd"
   namespace        = "helloworld"
+
+  depends_on = [module.argocd]
+
   generators = [
     {
       git = {

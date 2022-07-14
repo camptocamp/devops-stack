@@ -40,5 +40,7 @@ module "efs" {
 
   argocd_namespace   = local.argocd_namespace
   efs_file_system_id = aws_efs_file_system.eks.id
+
+  depends_on = [module.argocd_bootstrap]
 }
 
