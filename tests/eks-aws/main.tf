@@ -244,30 +244,51 @@ module "helloworld" {
   source           = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git/"
   name             = "apps"
   argocd_namespace = "argocd"
-  namespace        = "{{path.basename}}"
+  namespace        = "helloworld"
   generators = [
     {
-      clusters = {}
+      git = {
+        repoURL  = "https://github.com/lentidas/devops-stack-helloworld-templates"
+        revision = "main"
+
+        directories = [
+          {
+            path = "apps/*"
+          }
+        ]
+      }
     }
   ]
   template = {
     metadata = {
-      name = "{{name}}-helloworld"
+      name = "{{path.basename}}"
     }
 
     spec = {
       project = "default"
 
       source = {
-        repoURL        = "https://github.com/lentidas/helloworld-devops-stack-templates"
-        targetRevision = "HEAD"
-        path           = "helloworld"
+        repoURL        = "https://github.com/lentidas/devops-stack-helloworld-templates"
+        targetRevision = "main"
+        path           = "{{path}}"
+
+        helm = {
+          valueFiles = []
+          # The following value defines this global variables that will be available to all apps in apps/*
+          # This apps needs these to generate the ingresses containing the name and base domain of the cluster. 
+          values     = <<-EOT
+            cluster:
+              name: "${module.eks.cluster_name}"
+              domain: "${module.eks.base_domain}"
+          EOT
+        }
       }
 
       destination = {
         server    = "https://kubernetes.default.svc"
-        namespace = "helloworld"
+        namespace = "{{path.basename}}"
       }
+      
       syncPolicy = {
         automated = {
           selfHeal = true
