@@ -1,9 +1,0 @@
----
-#apps:
-#  local-path-provisioner:
-#    enabled: true
-#
-argo-cd:
-  server:
-    extraArgs:
-      - "--insecure"
