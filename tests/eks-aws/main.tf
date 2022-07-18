@@ -257,7 +257,7 @@ module "helloworld" {
   generators = [
     {
       git = {
-        repoURL  = "https://github.com/lentidas/devops-stack-helloworld-templates"
+        repoURL  = "https://github.com/camptocamp/devops-stack-helloworld-templates.git/"
         revision = "main"
 
         directories = [
@@ -277,7 +277,7 @@ module "helloworld" {
       project = "default"
 
       source = {
-        repoURL        = "https://github.com/lentidas/devops-stack-helloworld-templates"
+        repoURL        = "https://github.com/camptocamp/devops-stack-helloworld-templates.git/"
         targetRevision = "main"
         path           = "{{path}}"
 
