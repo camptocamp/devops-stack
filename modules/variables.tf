@@ -92,3 +92,9 @@ variable "wait_for_app_of_apps" {
   type        = bool
   default     = true
 }
+
+variable "metrics_archives" {
+  description = "Metrics archives settings"
+  type        = any
+  default     = {}
+}

@@ -94,8 +94,8 @@ locals {
   )
   metrics_archives_defaults = {
     bucket_name      = "thanos"
-    query_domain     = "thanos-query.${var.cluster_name}.${var.base_domain}"
-    bucketweb_domain = "thanos-bucketweb.${var.cluster_name}.${var.base_domain}"
+    query_domain     = "thanos-query.apps.${var.cluster_name}.${var.base_domain}"
+    bucketweb_domain = "thanos-bucketweb.apps.${var.cluster_name}.${var.base_domain}"
   }
   metrics_archives = merge(
     local.metrics_archives_defaults,
