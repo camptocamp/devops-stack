@@ -302,13 +302,24 @@ kube-prometheus-stack:
         type: prometheus
         # TODO: fix this 9091 with oauthPassThru
         #url: http://kube-prometheus-stack-prometheus:9091/
-        url: ${ can(metrics_archives.bucket_config) ? "http://thanos-query.thanos:9090" : "http://kube-prometheus-stack-prometheus:9090"}
+        url: "http://kube-prometheus-stack-prometheus:9090"
         access: proxy
         isDefault: true
         jsonData:
           tlsAuth: false
           tlsAuthWithCACert: false
           oauthPassThru: true
+%{ if can(metrics_archives.bucket_config) }
+      - name: "Thanos-${cluster_name}"
+        type: prometheus
+        url: "http://thanos-query.thanos:9090"
+        access: proxy
+        isDefault: false
+        jsonData:
+          tlsAuth: false
+          tlsAuthWithCACert: false
+          oauthPassThru: true
+%{ endif }
     ingress:
       enabled: true
       annotations:
@@ -500,46 +511,167 @@ thanos:
 
   storegateway:
     enabled: true
-    createConfigMap: true
+    persistence:
+      enabled: false
+    resources:
+      limits:
+        memory: 2Gi
+      requests:
+        cpu: 0.5
+        memory: 1Gi
 
   query:
     dnsDiscovery:
-      sidecarsService: kube-prometheus-stack-thanos-discovery
-      sidecarsNamespace: kube-prometheus-stack
+      enabled: false
+    stores:
+      - "thanos-storegateway:10901"
+    resources:
+      limits:
+        memory: 1Gi
+      requests:
+        cpu: 0.5
+        memory: 512Mi
+  
+  compactor:
+    enabled: true
+    retentionResolutionRaw: 60d
+    retentionResolution5m: 120d
+    retentionResolution1h: 240d
+    resources:
+      limits:
+        memory: 1Gi
+      requests:
+        cpu: 0.5
+        memory: 512Mi
+    persistence:
+      accessModes:
+        - ReadWriteMany
 
   bucketweb:
     enabled: true
+    sidecars:
+      - args:
+          - "--http-address=0.0.0.0:9075"
+          - "--upstream=http://localhost:8080"
+          - "--provider=oidc"
+          - "--oidc-issuer-url=${replace(oidc.issuer_url, "\"", "\\\"")}"
+          - "--client-id=${replace(oidc.client_id, "\"", "\\\"")}"
+          - "--client-secret=${replace(oidc.client_secret, "\"", "\\\"")}"
+          - "--cookie-secure=false"
+          - "--cookie-secret=${replace(cookie_secret, "\"", "\\\"")}"
+          - "--email-domain=*"
+          - "--redirect-url=https://${metrics_archives.bucketweb_domain}/oauth2/callback"
+          %{ for arg in oidc.oauth2_proxy_extra_args }
+          - ${arg}
+          %{ endfor }
+        image: quay.io/oauth2-proxy/oauth2-proxy:v7.1.3
+        name: thanos-proxy
+        ports:
+          - containerPort: 9075
+            name: proxy
+    service:
+      extraPorts:
+        - name: proxy
+          port: 9075
+          protocol: TCP
+          targetPort: proxy
     ingress:
       enabled: true
       annotations:
         cert-manager.io/cluster-issuer: "${cluster_issuer}"
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-withclustername@kubernetescrd
         traefik.ingress.kubernetes.io/router.tls: "true"
         ingress.kubernetes.io/ssl-redirect: "true"
         kubernetes.io/ingress.allow-http: "false"
-      hostname: "thanos-bucketweb.apps.${base_domain}"
-      extraHosts:
-        - name: "${metrics_archives.bucketweb_domain}"
-      tls: true
+      tls: false
+      hostname: ""
+      extraRules:
+        - host: "${metrics_archives.bucketweb_domain}"
+          http:
+            paths:
+            - backend:
+                service:
+                  name: thanos-bucketweb
+                  port:
+                    name: proxy
+              path: /
+              pathType: ImplementationSpecific
+        - host: "thanos-bucketweb.apps.${base_domain}"
+          http:
+            paths:
+            - backend:
+                service:
+                  name: thanos-bucketweb
+                  port:
+                    name: proxy
+              path: /
+              pathType: ImplementationSpecific
       extraTls:
         - secretName: thanos-bucketweb-tls
           hosts:
             - "${metrics_archives.bucketweb_domain}"
-            - "thanos-query.apps.${base_domain}"
+            - "thanos-bucketweb.apps.${base_domain}"
 
   queryFrontend:
+    sidecars:
+      - args:
+          - "--http-address=0.0.0.0:9075"
+          - "--upstream=http://localhost:10902"
+          - "--provider=oidc"
+          - "--oidc-issuer-url=${replace(oidc.issuer_url, "\"", "\\\"")}"
+          - "--client-id=${replace(oidc.client_id, "\"", "\\\"")}"
+          - "--client-secret=${replace(oidc.client_secret, "\"", "\\\"")}"
+          - "--cookie-secure=false"
+          - "--cookie-secret=${replace(cookie_secret, "\"", "\\\"")}"
+          - "--email-domain=*"
+          - "--redirect-url=https://${metrics_archives.query_domain}/oauth2/callback"
+          %{ for arg in oidc.oauth2_proxy_extra_args }
+          - ${arg}
+          %{ endfor }
+        image: quay.io/oauth2-proxy/oauth2-proxy:v7.1.3
+        name: thanos-proxy
+        ports:
+          - containerPort: 9075
+            name: proxy
+    service:
+      extraPorts:
+        - name: proxy
+          port: 9075
+          protocol: TCP
+          targetPort: proxy
     ingress:
       enabled: true
       annotations:
         cert-manager.io/cluster-issuer: "${cluster_issuer}"
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-withclustername@kubernetescrd
         traefik.ingress.kubernetes.io/router.tls: "true"
         ingress.kubernetes.io/ssl-redirect: "true"
         kubernetes.io/ingress.allow-http: "false"
-      hostname: "thanos-query.apps.${base_domain}"
-      extraHosts:
-        - name: "${metrics_archives.query_domain}"
-      tls: true
+      tls: false
+      hostname: ""
+      extraRules:
+        - host: "${metrics_archives.query_domain}"
+          http:
+            paths:
+            - backend:
+                service:
+                  name: thanos-query-frontend
+                  port:
+                    name: proxy
+              path: /
+              pathType: ImplementationSpecific
+        - host: "thanos-query.apps.${base_domain}"
+          http:
+            paths:
+            - backend:
+                service:
+                  name: thanos-query-frontend
+                  port:
+                    name: proxy
+              path: /
+              pathType: ImplementationSpecific
       extraTls:
         - secretName: thanos-query-tls
           hosts:

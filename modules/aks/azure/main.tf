@@ -132,6 +132,7 @@ module "argocd" {
   cluster_issuer          = "letsencrypt-prod"
   argocd_server_secretkey = var.argocd_server_secretkey
   wait_for_app_of_apps    = var.wait_for_app_of_apps
+  metrics_archives        = var.metrics_archives
 
   oidc = merge(local.oidc, var.prometheus_oauth2_proxy_args)
 
@@ -277,6 +278,8 @@ resource "azuread_application" "oauth2_apps" {
       format("https://grafana.apps.%s.%s/login/generic_oauth", var.cluster_name, local.base_domain),
       format("https://prometheus.apps.%s.%s/oauth2/callback", var.cluster_name, local.base_domain),
       format("https://alertmanager.apps.%s.%s/oauth2/callback", var.cluster_name, local.base_domain),
+      format("https://thanos-query.apps.%s.%s/oauth2/callback", var.cluster_name, local.base_domain),
+      format("https://thanos-bucketweb.apps.%s.%s/oauth2/callback", var.cluster_name, local.base_domain),
     ]
   }
 
