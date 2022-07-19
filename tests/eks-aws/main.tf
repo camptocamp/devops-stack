@@ -68,7 +68,7 @@ resource "aws_cognito_user_in_group" "add_admin_argocd_admin" {
 module "eks" {
   source = "../../modules/eks/aws"
 
-  cluster_name = "jbt-v1test"
+  cluster_name = "ckg-v1test"
   base_domain  = "is-sandbox.camptocamp.com"
   #cluster_version = "1.22"
 
@@ -109,31 +109,14 @@ provider "helm" {
 
 locals {
   argocd_namespace = "argocd"
-  argocd_oidc = {
-    name         = "OIDC"
-    issuer       = module.oidc.oidc.issuer_url
-    clientID     = module.oidc.oidc.client_id
-    clientSecret = module.oidc.oidc.client_secret
-    requestedIDTokenClaims = {
-      groups = {
-        essential = true
-      }
-    }
-    requestedScopes = [
-      "openid", "profile", "email"
-    ]
-  }
 }
 
 module "argocd_bootstrap" {
   source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap"
 
   cluster_name     = module.eks.cluster_name
-  argocd_namespace = local.argocd_namespace
   base_domain      = module.eks.base_domain
   cluster_issuer   = "letsencrypt-prod"
-
-  oidc = local.argocd_oidc
 
   depends_on = [module.eks]
 }
@@ -226,7 +209,20 @@ module "argocd" {
   source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git/"
 
   cluster_name = module.eks.cluster_name
-  oidc         = local.argocd_oidc
+  oidc         = {
+    name         = "OIDC"
+    issuer       = module.oidc.oidc.issuer_url
+    clientID     = module.oidc.oidc.client_id
+    clientSecret = module.oidc.oidc.client_secret
+    requestedIDTokenClaims = {
+      groups = {
+        essential = true
+      }
+    }
+    requestedScopes = [
+      "openid", "profile", "email"
+    ]
+  }
   argocd = {
     namespace                = local.argocd_namespace
     server_secretkey         = module.argocd_bootstrap.argocd_server_secretkey
