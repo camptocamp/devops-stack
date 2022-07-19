@@ -204,6 +204,7 @@ keycloak:
         - "https://${prometheus.domain}/oauth2/callback"
         - "https://alertmanager.apps.${base_domain}/oauth2/callback"
         - "https://${alertmanager.domain}/oauth2/callback"
+        - "https://traefik.apps.${cluster_name}.${base_domain}/_oauth"
   keycloakUsers:
     %{ for username, infos in keycloak.user_map }
     ${username}:
@@ -501,6 +502,15 @@ traefik:
         permanent: false
         regex: apps.${base_domain}
         replacement: apps.${cluster_name}.${base_domain}
+  dashboard:
+    hosts:
+      - traefik.apps.${base_domain}
+      - traefik.apps.${cluster_name}.${base_domain}
+    oidc:
+      issuerurl: "${base64encode(oidc.issuer_url)}"
+      clientid: "${base64encode(oidc.client_id)}"
+      clientsecret: "${base64encode(oidc.client_secret)}"
+      jwtsecret: "${base64encode(traefik_oidc_jwt_secret)}"
 %{ endif }
 
 vault: {}

@@ -280,6 +280,7 @@ resource "azuread_application" "oauth2_apps" {
       format("https://alertmanager.apps.%s.%s/oauth2/callback", var.cluster_name, local.base_domain),
       format("https://thanos-query.apps.%s.%s/oauth2/callback", var.cluster_name, local.base_domain),
       format("https://thanos-bucketweb.apps.%s.%s/oauth2/callback", var.cluster_name, local.base_domain),
+      format("https://traefik.apps.%s.%s/_oauth", var.cluster_name, local.base_domain),
     ]
   }
 

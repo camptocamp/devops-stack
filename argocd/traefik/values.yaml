@@ -12,3 +12,6 @@ traefik:
   tlsOptions:
     default:
       minVersion: VersionTLS12
+  ingressRoute:
+    dashboard:
+      enabled: false

@@ -28,5 +28,6 @@ resource "aws_cognito_user_pool_client" "client" {
     format("https://grafana.apps.%s.%s/login/generic_oauth", var.cluster_name, local.base_domain),
     format("https://prometheus.apps.%s.%s/oauth2/callback", var.cluster_name, local.base_domain),
     format("https://alertmanager.apps.%s.%s/oauth2/callback", var.cluster_name, local.base_domain),
+    format("https://traefik.apps.%s.%s/_oauth", var.cluster_name, local.base_domain),
   ]
 }

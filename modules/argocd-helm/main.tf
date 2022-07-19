@@ -34,6 +34,7 @@ locals {
     cluster_issuer                  = var.cluster_issuer
     oidc                            = local.oidc
     cookie_secret                   = random_password.oauth2_cookie_secret.result
+    traefik_oidc_jwt_secret         = random_password.traefik_oidc_jwt_secret.result
     minio                           = local.minio
     loki                            = local.loki
     traefik                         = local.traefik
@@ -79,6 +80,11 @@ resource "random_uuid" "jti" {}
 
 resource "random_password" "argocd_server_secretkey" {
   length  = 32
+  special = false
+}
+
+resource "random_password" "traefik_oidc_jwt_secret" {
+  length  = 16
   special = false
 }
 
