@@ -1,0 +1,104 @@
+{{- $match := printf "Host(`%s`)" ( join "`) || Host(`" .Values.traefik.dashboard.hosts ) }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: traefik-auth
+  labels:
+    app: traefik-auth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: traefik-auth
+  template:
+    metadata:
+      labels:
+        app: traefik-auth
+    spec:
+      containers:
+      - name: traefik-auth
+        image: thomseddon/traefik-forward-auth:2
+        imagePullPolicy: Always
+        env:
+          - name: DEFAULT_PROVIDER
+            value: "oidc"
+          - name: INSECURE_COOKIE
+            value: "false"
+          - name: DOMAIN
+            value: "camptocamp.com"
+          - name: PROVIDERS_OIDC_ISSUER_URL
+            valueFrom:
+              secretKeyRef:
+                name: oidc
+                key: issuerurl
+          - name: PROVIDERS_OIDC_CLIENT_ID
+            valueFrom:
+              secretKeyRef:
+                name: oidc
+                key: clientid
+          - name: PROVIDERS_OIDC_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: oidc
+                key: clientsecret
+          - name: SECRET
+            valueFrom:
+              secretKeyRef:
+                name: oidc
+                key: jwtsecret
+          - name: LOG_LEVEL
+            value: debug
+        ports:
+        - containerPort: 4181
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: traefik-auth
+spec:
+  selector:
+    app: traefik-auth
+  ports:
+  - protocol: TCP
+    port: 4181
+    targetPort: 4181
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: auth
+spec:
+  forwardAuth:
+    address: http://traefik-auth:4181
+    authResponseHeaders: 
+      - "X-Forwarded-User"
+    trustForwardHeader: true
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: chain
+spec:
+  chain:
+    middlewares:
+    - name: withclustername
+    - name: auth
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-dashboard
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - match: {{ printf "(%s)" $match | quote }}
+    kind: Rule
+    services:
+    - kind: TraefikService
+      name: api@internal
+    middlewares:
+    - name: chain
+  tls:
+    secretName: traefik-dashboard-tls
