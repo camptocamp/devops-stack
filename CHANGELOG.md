@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.59.0](https://github.com/camptocamp/devops-stack/compare/v0.58.0...v0.59.0) (2022-07-19)
+
+
+### Features
+
+* activate traefik dashboard with oidc support ([ed291d7](https://github.com/camptocamp/devops-stack/commit/ed291d7eb3ce432ee580910ba08702cd5fc1760a))
+
 ## [0.58.0](https://github.com/camptocamp/devops-stack/compare/v0.57.0...v0.58.0) (2022-07-06)
 
 
