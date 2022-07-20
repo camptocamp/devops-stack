@@ -188,7 +188,7 @@ module "loki-stack" {
   argocd_namespace = local.argocd_namespace
   base_domain      = module.eks.base_domain
 
-  cluster_oidc_issuer_url = module.oidc.oidc.issuer_url
+  cluster_oidc_issuer_url = module.eks.cluster_oidc_issuer_url
 
   depends_on = [module.monitoring]
 }
