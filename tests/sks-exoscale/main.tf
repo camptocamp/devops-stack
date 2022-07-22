@@ -211,55 +211,67 @@ module "argocd" {
   depends_on = [ module.cert-manager, module.monitoring ]
 }
 
-module "my-apps" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git/"
+module "helloworld" {
+  source           = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git/"
+  name             = "apps"
+  argocd_namespace = "argocd"
+  namespace        = "helloworld"
 
-  argocd_namespace = local.argocd_namespace
-
-  name = "my-apps"
-  namespace = "my-apps"
-
-  project_source_repos = [ "https://github.com/raphink/applicationsets-demo" ]
+  depends_on = [module.argocd]
 
   generators = [
     {
       git = {
-        repoURL     = "https://github.com/raphink/applicationsets-demo"
-        revision    = "HEAD"
+        repoURL  = "https://github.com/camptocamp/devops-stack-helloworld-templates.git/"
+        revision = "main"
+
         directories = [
-          { path = "*" }
+          {
+            path = "apps/*"
+          }
         ]
       }
     }
   ]
-
   template = {
     metadata = {
       name = "{{path.basename}}"
     }
+
     spec = {
-      project = "my-apps"
+      project = "default"
+
       source = {
-        repoURL        = "https://github.com/raphink/applicationsets-demo"
-        targetRevision = "HEAD"
+        repoURL        = "https://github.com/camptocamp/devops-stack-helloworld-templates.git/"
+        targetRevision = "main"
         path           = "{{path}}"
+
+        helm = {
+          valueFiles = []
+          # The following value defines this global variables that will be available to all apps in apps/*
+          # This apps needs these to generate the ingresses containing the name and base domain of the cluster. 
+          values     = <<-EOT
+            cluster:
+              name: "${module.eks.cluster_name}"
+              domain: "${module.eks.base_domain}"
+          EOT
+        }
       }
+
       destination = {
         server    = "https://kubernetes.default.svc"
-        namespace = "my-apps"
+        namespace = "{{path.basename}}"
       }
+      
       syncPolicy = {
         automated = {
-          prune     = true
           selfHeal = true
+          prune    = true
         }
-
         syncOptions = [
           "CreateNamespace=true"
         ]
       }
     }
   }
-
-  depends_on = [ module.argocd ]
 }
