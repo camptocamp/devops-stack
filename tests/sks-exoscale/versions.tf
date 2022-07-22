@@ -3,5 +3,8 @@ terraform {
     argocd = {
       source = "oboukili/argocd"
     }
+    exoscale = {
+      source = "exoscale/exoscale"
+    }
   }
 }

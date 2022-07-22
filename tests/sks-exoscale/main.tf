@@ -1,23 +1,38 @@
+locals {
+  # Attention: argo CD oidc authentication on Keycloak doesn't work with non valid certificates.
+  cluster_issuer = "letsencrypt-staging"
+}
+
 module "sks" {
   source = "../../modules/sks/exoscale"
 
   cluster_name = "ckg-test"
+  base_domain  = "rd-infrastructure-exo.camptocamp.com"
   zone         = var.zone
 
   kubernetes_version = "1.23.8"
-  #kubernetes_version = "1.24.2"
 
   nodepools = {
     "router-${module.sks.cluster_name}" = {
       size          = 2
-      instance_type = "standard.large"
+      instance_type = "standard.small"
+      labels        = {
+        role = "router"
+      }
+      taints        = {
+        router = "router:NoSchedule"
+      }
     }
 
     "compute-${module.sks.cluster_name}" = {
       size          = 2
       instance_type = "standard.large"
+      labels        = {}
+      taints        = {}
     }
   }
+
+  router_nodepool = "router-${module.sks.cluster_name}"
 }
 
 provider "kubernetes" {
@@ -38,20 +53,6 @@ provider "helm" {
 
 locals {
   argocd_namespace = "argocd"
-  argocd_oidc = {
-    name         = "OIDC"
-    issuer       = module.oidc.oidc.issuer_url
-    clientID     = module.oidc.oidc.client_id
-    clientSecret = module.oidc.oidc.client_secret
-    requestedIDTokenClaims = {
-      groups = {
-        essential = true
-      }
-    }
-    requestedScopes = [
-      "openid", "profile", "email"
-    ]
-  }
 }
 
 module "argocd_bootstrap" {
@@ -59,7 +60,7 @@ module "argocd_bootstrap" {
 
   cluster_name     = module.sks.cluster_name
   base_domain      = module.sks.base_domain
-  cluster_issuer   = "letsencrypt-prod"
+  cluster_issuer   = local.cluster_issuer
 
   depends_on = [module.sks]
 }
@@ -87,6 +88,20 @@ module "ingress" {
   argocd_namespace = local.argocd_namespace
   base_domain      = module.sks.base_domain
 
+  helm_values = [{
+    traefik = {
+      nodeSelector = {
+        "role" = "router"
+      }
+      tolerations = [{
+        key      = "router"
+        operator = "Equal"
+        value    = "router"
+        effect   = "NoSchedule"
+      }]
+    }
+  }]
+
   depends_on = [module.argocd_bootstrap]
 }
 
@@ -99,7 +114,7 @@ module "oidc" {
     domain    = module.argocd_bootstrap.argocd_domain
   }
   base_domain    = module.sks.base_domain
-  cluster_issuer = "ca-issuer"
+  cluster_issuer = local.cluster_issuer
 
   depends_on = [ module.sks, module.argocd_bootstrap ]
 }
@@ -110,7 +125,7 @@ module "monitoring" {
   cluster_name     = module.sks.cluster_name
   argocd_namespace = local.argocd_namespace
   base_domain      = module.sks.base_domain
-  cluster_issuer   = "ca-issuer"
+  cluster_issuer   = local.cluster_issuer
   metrics_archives = {}
 
   prometheus = {
@@ -143,11 +158,12 @@ module "loki-stack" {
 
 
 module "cert-manager" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//self-signed"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//sks"
 
   cluster_name     = module.sks.cluster_name
   argocd_namespace = local.argocd_namespace
   base_domain      = module.sks.base_domain
+  router_pool_id   = module.sks.router_pool_id
 
   depends_on = [ module.monitoring ]
 }
@@ -155,9 +171,22 @@ module "cert-manager" {
 module "argocd" {
   source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git/"
 
-  cluster_name   = module.sks.cluster_name
-  oidc           = local.argocd_oidc
-  argocd         = {
+  cluster_name     = module.sks.cluster_name
+  oidc             = {
+    name         = "OIDC"
+    issuer       = module.oidc.oidc.issuer_url
+    clientID     = module.oidc.oidc.client_id
+    clientSecret = module.oidc.oidc.client_secret
+    requestedIDTokenClaims = {
+      groups = {
+        essential = true
+      }
+    }
+    requestedScopes = [
+      "openid", "profile", "email"
+    ]
+  }
+  argocd           = {
     namespace                = local.argocd_namespace
     server_secretkey         = module.argocd_bootstrap.argocd_server_secretkey
     accounts_pipeline_tokens = module.argocd_bootstrap.argocd_accounts_pipeline_tokens
@@ -165,9 +194,19 @@ module "argocd" {
     domain                   = module.argocd_bootstrap.argocd_domain
     admin_enabled            = true
   }
-  base_domain    = module.sks.base_domain
-  cluster_issuer = "ca-issuer"
+  base_domain      = module.sks.base_domain
+  cluster_issuer   = local.cluster_issuer
   bootstrap_values = module.argocd_bootstrap.bootstrap_values
+
+  helm_values = [{
+    argo-cd = {
+      server = {
+        config = {
+          "oidc.tls.insecure.skip.verify" = local.cluster_issuer == "letsencrypt-prod" ? "false" : "true"
+        }
+      }
+    }
+  }]
 
   depends_on = [ module.cert-manager, module.monitoring ]
 }
