@@ -1,3 +1,7 @@
+locals {
+  cluster_issuer = "letsencrypt-staging"
+}
+
 data "aws_availability_zones" "available" {}
 
 module "vpc" {
@@ -114,9 +118,9 @@ locals {
 module "argocd_bootstrap" {
   source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap"
 
-  cluster_name     = module.eks.cluster_name
-  base_domain      = module.eks.base_domain
-  cluster_issuer   = "letsencrypt-prod"
+  cluster_name   = module.eks.cluster_name
+  base_domain    = module.eks.base_domain
+  cluster_issuer = local.cluster_issuer
 
   depends_on = [module.eks]
 }
@@ -165,7 +169,7 @@ module "monitoring" {
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
   base_domain      = module.eks.base_domain
-  cluster_issuer   = "letsencrypt-prod"
+  cluster_issuer   = local.cluster_issuer
   metrics_archives = {}
 
   prometheus = {
@@ -231,7 +235,7 @@ module "argocd" {
     domain                   = module.argocd_bootstrap.argocd_domain
   }
   base_domain      = module.eks.base_domain
-  cluster_issuer   = "letsencrypt-prod"
+  cluster_issuer   = local.cluster_issuer
   bootstrap_values = module.argocd_bootstrap.bootstrap_values
   #  repositories = {
   #    "argocd" = {
