@@ -22,11 +22,9 @@ variable "zone" {
 variable "nodepools" {
   description = "The SKS node pools to create."
   type        = map(any)
-  default     = null
 }
 
 variable "router_nodepool" {
   description = "The node to attach the NLB to."
   type        = string
-  default     = null
 }

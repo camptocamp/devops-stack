@@ -1,28 +1,16 @@
 locals {
   base_domain = coalesce(var.base_domain, format("%s.nip.io", replace(exoscale_nlb.this.ip_address, ".", "-")))
-
-  default_nodepools = {
-    "router-${var.cluster_name}" = {
-      size          = 2
-      instance_type = "standard.large"
-    },
-  }
-
-  router_nodepool = coalesce(var.router_nodepool, "router-${var.cluster_name}")
-  router_pool_id  = module.cluster.nodepools[local.router_nodepool].instance_pool_id
-  nodepools       = coalesce(var.nodepools, local.default_nodepools)
-  cluster_issuer  = (length(local.nodepools) > 1) ? "letsencrypt-prod" : "ca-issuer"
 }
 
 module "cluster" {
   source  = "camptocamp/sks/exoscale"
-  version = "0.3.0"
+  version = "0.4.1"
 
   kubernetes_version = var.kubernetes_version
   name               = var.cluster_name
   zone               = var.zone
 
-  nodepools = local.nodepools
+  nodepools = var.nodepools
 }
 
 resource "exoscale_nlb" "this" {

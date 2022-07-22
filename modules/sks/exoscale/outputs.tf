@@ -36,5 +36,5 @@ output "kubernetes_client_certificate" {
 }
 
 output "router_pool_id" {
-  value = local.router_pool_id
+  value = module.cluster.nodepools[var.router_nodepool].instance_pool_id
 }
