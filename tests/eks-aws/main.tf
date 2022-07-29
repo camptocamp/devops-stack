@@ -179,9 +179,35 @@ module "monitoring" {
     oidc = module.oidc.oidc
   }
   grafana = {
-    oidc = module.oidc.oidc
+    enable = false
   }
-
+  helm_values = [{
+    kube-prometheus-stack = {
+      grafana = {
+        forceDeployDashboards = true
+        forceDeployDatasources = true
+        sidecar = {
+          datasources = {
+            defaultDatasourceEnabled = false
+          }
+        }
+        additionalDataSources = [
+          {
+            name = "Prometheus"
+            type = "prometheus"
+            url       = "http://kube-prometheus-stack-prometheus.kube-prometheus-stack:9090"
+            access    = "proxy"
+            isDefault = true
+            jsonData = {
+              tlsAuth           = false
+              tlsAuthWithCACert = false
+              oauthPassThru     = true
+            }
+          },
+        ]
+      }
+    }
+  }]
   depends_on = [module.argocd_bootstrap]
 }
 
@@ -195,6 +221,19 @@ module "loki-stack" {
   cluster_oidc_issuer_url = module.eks.cluster_oidc_issuer_url
 
   depends_on = [module.monitoring]
+}
+
+module "grafana" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-grafana.git"
+
+  cluster_name     = module.eks.cluster_name
+  argocd_namespace = local.argocd_namespace
+  base_domain      = module.eks.base_domain
+  grafana = {
+    oidc = module.oidc.oidc
+  }
+  
+  depends_on = [module.monitoring, module.loki-stack]
 }
 
 module "cert-manager" {
