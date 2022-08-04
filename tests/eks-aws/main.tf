@@ -246,6 +246,70 @@ module "argocd" {
   depends_on = [module.cert-manager, module.monitoring]
 }
 
+module "metrics-server" {
+  source           = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git/"
+  name             = "infra"
+  argocd_namespace = "argocd"
+  namespace        = "kube-system"
+
+  depends_on = [module.argocd]
+
+  generators = [
+    {
+      git = {
+        repoURL  = "https://github.com/kubernetes-sigs/metrics-server.git/"
+        revision = "master"
+
+        directories = [
+          {
+            path = "charts/metrics-server"
+          }
+        ]
+      }
+    }
+  ]
+  template = {
+    metadata = {
+      name = "{{path.basename}}"
+    }
+
+    spec = {
+      project = "default"
+
+      source = {
+        repoURL        = "https://github.com/kubernetes-sigs/metrics-server.git/"
+        targetRevision = "master"
+        path           = "{{path}}"
+
+        helm = {
+          valueFiles = []
+          values     = <<-EOT
+            cluster:
+              name: "${module.eks.cluster_name}"
+              domain: "${module.eks.base_domain}"
+          EOT
+        }
+      }
+
+      destination = {
+        server    = "https://kubernetes.default.svc"
+        namespace = "{{path.basename}}"
+      }
+
+      syncPolicy = {
+        automated = {
+          selfHeal = true
+          prune    = true
+        }
+        syncOptions = [
+          "CreateNamespace=true"
+        ]
+      }
+    }
+  }
+}
+
+
 module "helloworld" {
   source           = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git/"
   name             = "apps"
