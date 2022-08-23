@@ -70,9 +70,9 @@ resource "aws_cognito_user_in_group" "add_admin_argocd_admin" {
 */
 
 module "eks" {
-  source = "../../modules/eks/aws"
+  source = "git::https://github.com/camptocamp/devops-stack//modules/eks/aws?ref=v1"
 
-  cluster_name = "ckg-v1test"
+  cluster_name = "gh-v1-cluster"
   base_domain  = "is-sandbox.camptocamp.com"
   #cluster_version = "1.22"
 
@@ -151,7 +151,7 @@ module "ingress" {
 }
 
 module "oidc" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-oidc-aws-cognito.git/"
+  source = "git::https://github.com/camptocamp/devops-stack-module-oidc-aws-cognito?ref=thanos_callback"
 
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
@@ -163,14 +163,38 @@ module "oidc" {
   depends_on = [module.eks]
 }
 
-module "monitoring" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git/"
+module "thanos" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-thanos//eks?ref=thanos_redesign"
 
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
   base_domain      = module.eks.base_domain
   cluster_issuer   = local.cluster_issuer
-  metrics_archives = {}
+
+  cluster_oidc_issuer_url = module.eks.cluster_oidc_issuer_url
+
+  thanos = {
+    oidc = module.oidc.oidc
+    compactor_retention = {
+      raw      = "60d"
+      five_min = "120d"
+      one_hour = "240d"
+    }
+  }
+}
+
+module "monitoring" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack//eks?ref=thanos_config"
+
+  cluster_name     = module.eks.cluster_name
+  argocd_namespace = local.argocd_namespace
+  base_domain      = module.eks.base_domain
+  cluster_issuer   = local.cluster_issuer
+
+  metrics_archives = {
+    bucket_config = module.thanos.bucket_config
+    iam_role_arn  = module.thanos.iam_role_arn
+  }
 
   prometheus = {
     oidc = module.oidc.oidc
@@ -208,7 +232,7 @@ module "monitoring" {
       }
     }
   }]
-  depends_on = [module.argocd_bootstrap]
+  depends_on = [module.argocd_bootstrap, module.thanos]
 }
 
 module "loki-stack" {
@@ -252,7 +276,7 @@ module "argocd" {
   source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git/"
 
   cluster_name = module.eks.cluster_name
-  oidc         = {
+  oidc = {
     name         = "OIDC"
     issuer       = module.oidc.oidc.issuer_url
     clientID     = module.oidc.oidc.client_id
@@ -324,7 +348,7 @@ module "helloworld" {
           valueFiles = []
           # The following value defines this global variables that will be available to all apps in apps/*
           # This apps needs these to generate the ingresses containing the name and base domain of the cluster. 
-          values     = <<-EOT
+          values = <<-EOT
             cluster:
               name: "${module.eks.cluster_name}"
               domain: "${module.eks.base_domain}"
@@ -336,11 +360,12 @@ module "helloworld" {
         server    = "https://kubernetes.default.svc"
         namespace = "{{path.basename}}"
       }
-      
+
       syncPolicy = {
         automated = {
-          selfHeal = true
-          prune    = true
+          allowEmpty = false
+          selfHeal   = true
+          prune      = true
         }
         syncOptions = [
           "CreateNamespace=true"
