@@ -151,7 +151,7 @@ module "ingress" {
 }
 
 module "oidc" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-oidc-aws-cognito?ref=thanos_callback"
+  source = "git::https://github.com/camptocamp/devops-stack-module-oidc-aws-cognito"
 
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
@@ -164,7 +164,7 @@ module "oidc" {
 }
 
 module "thanos" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-thanos//eks?ref=thanos_redesign"
+  source = "git::https://github.com/camptocamp/devops-stack-module-thanos//eks"
 
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
@@ -175,26 +175,20 @@ module "thanos" {
 
   thanos = {
     oidc = module.oidc.oidc
-    compactor_retention = {
-      raw      = "60d"
-      five_min = "120d"
-      one_hour = "240d"
-    }
   }
+
+  depends_on = [module.argocd_bootstrap]
 }
 
 module "monitoring" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack//eks?ref=thanos_config"
+  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack//eks"
 
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
   base_domain      = module.eks.base_domain
   cluster_issuer   = local.cluster_issuer
 
-  metrics_archives = {
-    bucket_config = module.thanos.bucket_config
-    iam_role_arn  = module.thanos.iam_role_arn
-  }
+  metrics_archives = module.thanos.metrics_archives
 
   prometheus = {
     oidc = module.oidc.oidc
@@ -204,34 +198,9 @@ module "monitoring" {
   }
   grafana = {
     enable = false
+    additional_data_sources = true
   }
-  helm_values = [{
-    kube-prometheus-stack = {
-      grafana = {
-        forceDeployDashboards = true
-        forceDeployDatasources = true
-        sidecar = {
-          datasources = {
-            defaultDatasourceEnabled = false
-          }
-        }
-        additionalDataSources = [
-          {
-            name = "Prometheus"
-            type = "prometheus"
-            url       = "http://kube-prometheus-stack-prometheus.kube-prometheus-stack:9090"
-            access    = "proxy"
-            isDefault = true
-            jsonData = {
-              tlsAuth           = false
-              tlsAuthWithCACert = false
-              oauthPassThru     = true
-            }
-          },
-        ]
-      }
-    }
-  }]
+
   depends_on = [module.argocd_bootstrap, module.thanos]
 }
 
@@ -253,6 +222,7 @@ module "grafana" {
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
   base_domain      = module.eks.base_domain
+
   grafana = {
     oidc = module.oidc.oidc
   }
