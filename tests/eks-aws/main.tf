@@ -322,6 +322,12 @@ module "helloworld" {
             cluster:
               name: "${module.eks.cluster_name}"
               domain: "${module.eks.base_domain}"
+            apps:
+              traefik_dashboard: false # TODO Add variable when we configure the Thanos Dashboard
+              grafana: ${module.grafana.grafana_enabled || module.monitoring.grafana_enabled}
+              prometheus: ${module.monitoring.prometheus_enabled}
+              thanos: ${module.thanos.thanos_enabled}
+              alertmanager: ${module.monitoring.alertmanager_enabled}
           EOT
         }
       }
