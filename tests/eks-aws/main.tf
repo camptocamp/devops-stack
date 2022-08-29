@@ -279,6 +279,50 @@ module "argocd" {
   depends_on = [module.cert-manager, module.monitoring]
 }
 
+resource "argocd_application" "metrics-server" {
+  metadata {
+    name      = "metrics-server"
+    namespace = local.argocd_namespace
+  }
+
+  wait = true
+
+  spec {
+    # TODO Discuss on the next weekly if we shouldn't put this on its own 
+    # Argo CD project like all the other intrinsic cluster applications 
+    # we deploy. To do that we either add an argocd_project resource or 
+    # I propose we create a module not for metrics-server itself but to deploy 
+    # applications that do not need an application set like the other module 
+    # below.
+    project = "default"
+
+    source {
+      repo_url        = "https://github.com/kubernetes-sigs/metrics-server.git/"
+      path            = "charts/metrics-server"
+      target_revision = "master"
+    }
+
+    destination {
+      server    = "https://kubernetes.default.svc"
+      namespace = "kube-system"
+    }
+
+    sync_policy {
+      automated = {
+        allow_empty = false
+        self_heal   = true
+        prune       = true
+      }
+      sync_options = [
+        "CreateNamespace=true"
+      ]
+    }
+  }
+
+  depends_on = [module.argocd]
+
+}
+
 module "helloworld" {
   source           = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git/"
   name             = "apps"
