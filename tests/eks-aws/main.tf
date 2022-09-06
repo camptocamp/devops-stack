@@ -281,7 +281,7 @@ module "argocd" {
   #    revision = local.target_revision
   #  }}
 
-  depends_on = [module.cert-manager, module.monitoring]
+  depends_on = [module.cert-manager, module.monitoring, module.grafana]
 }
 
 module "metrics_server" {
