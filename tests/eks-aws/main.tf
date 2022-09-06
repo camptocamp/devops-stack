@@ -70,7 +70,7 @@ resource "aws_cognito_user_in_group" "add_admin_argocd_admin" {
 */
 
 module "eks" {
-  source = "git::https://github.com/camptocamp/devops-stack//modules/eks/aws?ref=v1"
+  source = "git::https://github.com/camptocamp/devops-stack.git//modules/eks/aws?ref=v1"
 
   cluster_name = "gh-v1-cluster"
   base_domain  = "is-sandbox.camptocamp.com"
@@ -151,7 +151,7 @@ module "ingress" {
 }
 
 module "oidc" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-oidc-aws-cognito"
+  source = "git::https://github.com/camptocamp/devops-stack-module-oidc-aws-cognito.git"
 
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
@@ -164,7 +164,8 @@ module "oidc" {
 }
 
 module "thanos" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-thanos//eks"
+  source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//eks"
+  # source = "../../../devops-stack-module-thanos/eks"
 
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
@@ -181,7 +182,9 @@ module "thanos" {
 }
 
 module "monitoring" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack//eks"
+  # source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//eks"
+  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//eks?ref=chart_upgrade"
+  # TODO Remove the ref chart_upgrade
 
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
@@ -217,7 +220,9 @@ module "loki-stack" {
 }
 
 module "grafana" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-grafana.git"
+  # source = "git::https://github.com/camptocamp/devops-stack-module-grafana.git"
+  source = "git::https://github.com/camptocamp/devops-stack-module-grafana.git?ref=troubleshoot_deployment"
+  # TODO Remove the ref troubleshoot_deployment
 
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
@@ -226,7 +231,7 @@ module "grafana" {
   grafana = {
     oidc = module.oidc.oidc
   }
-  
+
   depends_on = [module.monitoring, module.loki-stack]
 }
 
@@ -243,7 +248,7 @@ module "cert-manager" {
 }
 
 module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git/"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git"
 
   cluster_name = module.eks.cluster_name
   oidc = {
