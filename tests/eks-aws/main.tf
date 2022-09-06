@@ -285,62 +285,40 @@ module "argocd" {
   depends_on = [module.cert-manager, module.monitoring]
 }
 
-resource "argocd_application" "metrics-server" {
-  metadata {
-    name      = "metrics-server"
-    namespace = local.argocd_namespace
-  }
+module "metrics_server" {
+  # source = "git::https://github.com/camptocamp/devops-stack-module-application.git"
+  source = "git::https://github.com/camptocamp/devops-stack-module-application.git?ref=initial_development"
+  # TODO Remove ref to initial_deployment
 
-  wait = true
+  name             = "metrics-server"
+  argocd_namespace = local.argocd_namespace
 
-  spec {
-    # TODO Discuss on the next weekly if we shouldn't put this on its own 
-    # Argo CD project like all the other intrinsic cluster applications 
-    # we deploy. To do that we either add an argocd_project resource or 
-    # I propose we create a module not for metrics-server itself but to deploy 
-    # applications that do not need an application set like the other module 
-    # below.
-    project = "default"
-
-    source {
-      repo_url        = "https://github.com/kubernetes-sigs/metrics-server.git/"
-      path            = "charts/metrics-server"
-      target_revision = "master"
-    }
-
-    destination {
-      server    = "https://kubernetes.default.svc"
-      namespace = "kube-system"
-    }
-
-    sync_policy {
-      automated = {
-        allow_empty = false
-        self_heal   = true
-        prune       = true
-      }
-      sync_options = [
-        "CreateNamespace=true"
-      ]
-    }
-  }
+  source_repo            = "https://github.com/kubernetes-sigs/metrics-server.git"
+  source_repo_path       = "charts/metrics-server"
+  source_target_revision = "master"
+  destination_namespace  = "kube-system"
 
   depends_on = [module.argocd]
-
 }
 
-module "helloworld" {
-  source           = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git/"
-  name             = "apps"
-  argocd_namespace = "argocd"
-  namespace        = "helloworld"
+module "helloworld_apps" {
+  # source = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git"
+  source = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git?ref=applicationset_modifs"
+  # TODO Remove ref to applicationset_modifs
 
   depends_on = [module.argocd]
+
+  name                   = "helloworld-apps"
+  argocd_namespace       = local.argocd_namespace
+  project_dest_namespace = "*"
+  project_source_repos = [
+    "https://github.com/camptocamp/devops-stack-helloworld-templates.git",
+  ]
 
   generators = [
     {
       git = {
-        repoURL  = "https://github.com/camptocamp/devops-stack-helloworld-templates.git/"
+        repoURL  = "https://github.com/camptocamp/devops-stack-helloworld-templates.git"
         revision = "main"
 
         directories = [
@@ -357,23 +335,23 @@ module "helloworld" {
     }
 
     spec = {
-      project = "default"
+      project = "helloworld-apps"
 
       source = {
-        repoURL        = "https://github.com/camptocamp/devops-stack-helloworld-templates.git/"
+        repoURL        = "https://github.com/camptocamp/devops-stack-helloworld-templates.git"
         targetRevision = "main"
         path           = "{{path}}"
 
         helm = {
           valueFiles = []
           # The following value defines this global variables that will be available to all apps in apps/*
-          # This apps needs these to generate the ingresses containing the name and base domain of the cluster. 
+          # These are needed to generate the ingresses containing the name and base domain of the cluster.
           values = <<-EOT
             cluster:
               name: "${module.eks.cluster_name}"
               domain: "${module.eks.base_domain}"
             apps:
-              traefik_dashboard: false # TODO Add variable when we configure the Thanos Dashboard
+              traefik_dashboard: false # TODO Add variable when we configure the Traefik Dashboard
               grafana: ${module.grafana.grafana_enabled || module.monitoring.grafana_enabled}
               prometheus: ${module.monitoring.prometheus_enabled}
               thanos: ${module.thanos.thanos_enabled}
@@ -383,7 +361,7 @@ module "helloworld" {
       }
 
       destination = {
-        server    = "https://kubernetes.default.svc"
+        name      = "in-cluster"
         namespace = "{{path.basename}}"
       }
 
