@@ -165,7 +165,6 @@ module "oidc" {
 
 module "thanos" {
   source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//eks"
-  # source = "../../../devops-stack-module-thanos/eks"
 
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
