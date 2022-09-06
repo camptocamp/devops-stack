@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.59.1](https://github.com/camptocamp/devops-stack/compare/v0.59.0...v0.59.1) (2022-09-06)
+
+
+### Bug Fixes
+
+* **csi-secrets-store-azure:** repo url ([6142426](https://github.com/camptocamp/devops-stack/commit/6142426474b9d0755f255a5f0b1a896288469474))
+* Force HTTPS and use a Let's encrypt certificate ([f8c3cb3](https://github.com/camptocamp/devops-stack/commit/f8c3cb36abbb53f98a7e29faa8842e4e90c98aa2))
+* removed static argocd password ([3b99414](https://github.com/camptocamp/devops-stack/commit/3b99414985c290c3cde499ef8b5361dfdcdac147))
+
 ## [0.59.0](https://github.com/camptocamp/devops-stack/compare/v0.58.0...v0.59.0) (2022-07-19)
 
 
