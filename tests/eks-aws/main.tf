@@ -181,6 +181,7 @@ module "thanos" {
   depends_on = [module.argocd_bootstrap]
 }
 
+# TODO Discuss renaming the module because we have the monitoring stack mostly separated through multiple modules
 module "monitoring" {
   # source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//eks"
   source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//eks?ref=chart_upgrade"
@@ -200,7 +201,7 @@ module "monitoring" {
     oidc = module.oidc.oidc
   }
   grafana = {
-    enable = false
+    # enable = false # Optional
     additional_data_sources = true
   }
 
