@@ -15,4 +15,4 @@ tests/*/.terraform.lock.hcl
 tests/*/kubeconfig.yaml
 tests/*/terraform.tfstate
 tests/*/terraform.tfstate.backup
-
+tests/*/secrets.yml
