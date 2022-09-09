@@ -57,5 +57,8 @@ module "cluster" {
 
   open_id_connect_config = var.open_id_connect_config
 
+  node_pools_defaults = {
+    tags = var.cluster_tags
+  }
   node_pools = local.nodepools
 }
