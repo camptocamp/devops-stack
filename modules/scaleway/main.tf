@@ -32,7 +32,6 @@ resource "scaleway_lb" "this" {
   zone       = var.zone
   ip_id      = scaleway_lb_ip.this.id
   type       = var.lb_type
-  release_ip = false
   tags       = var.cluster_tags
 }
 
