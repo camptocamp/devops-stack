@@ -57,3 +57,6 @@
 ** xref:ROOT:explanations/data_persistence.adoc[Data Persistence]
 ** xref:ROOT:explanations/upgrade_strategy.adoc[Kubernetes Upgrade Strategy]
 ** xref:ROOT:explanations/documentation.adoc[Docs as Code]
+* Modules' Technical Reference
+** xref:application:README.adoc[application]
+** xref:thanos:README.adoc[thanos]
