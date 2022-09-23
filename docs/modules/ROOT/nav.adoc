@@ -58,5 +58,5 @@
 ** xref:ROOT:explanations/upgrade_strategy.adoc[Kubernetes Upgrade Strategy]
 ** xref:ROOT:explanations/documentation.adoc[Docs as Code]
 * Modules' Technical Reference
-** xref:latest:application:ROOT:README.adoc[application]
-** xref:latest:thanos:README.adoc[thanos]
+** xref:latest@application:ROOT:README.adoc[application]
+** xref:latest@thanos:ROOT:README.adoc[thanos]

@@ -15,3 +15,5 @@ tests/*/kubeconfig.yaml
 tests/*/terraform.tfstate
 tests/*/terraform.tfstate.backup
 
+docs_old
+docs_test

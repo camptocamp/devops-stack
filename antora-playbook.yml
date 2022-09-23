@@ -4,8 +4,10 @@ site:
     google_analytics: "G-GDBX9466LL"
 antora:
   extensions:
-    - require: "@antora/lunr-extension"
-      index_latest_only: true
+  - require: "@antora/lunr-extension"
+    index_latest_only: true
+urls:
+  latest_version_segment: latest # Define each component's latest version as the latest in the URL 
 content:
   sources:
   - url: ./
@@ -40,14 +42,16 @@ content:
       - "!v0.50.4"
       - "!v0.51.0"
       - "!v0.53.0"
+  - url: https://github.com/camptocamp/devops-stack-module-thanos.git
+    start_path: docs
+    branches: [documentation]
+    tags: []
   - url: https://github.com/camptocamp/devops-stack-module-application.git
     start_path: docs
     branches: [initial_development]
-  - url: https://github.com/camptocamp/devops-stack-module-thanos.git
-    start_path: docs
-    branches: [docs_and_sidecar]
+    tags: []
 ui:
   bundle:
-    url: https://github.com/camptocamp/devops-stack-antora-ui/releases/download/master-LATEST/ui-bundle.zip
+    url: https://github.com/camptocamp/devops-stack-antora-ui/releases/download/master-latest/ui-bundle.zip
     snapshot: true
   supplemental_files: ./docs/supplemental_ui
