@@ -1,4 +1,4 @@
-.DevOps Stack
+.*Main Documentation*
 * xref:ROOT:index.adoc[Home]
 * Tutorials
 ** xref:ROOT:getting_started.adoc[Getting Started]
@@ -59,6 +59,6 @@
 ** xref:ROOT:explanations/upgrade_strategy.adoc[Kubernetes Upgrade Strategy]
 ** xref:ROOT:explanations/documentation.adoc[Docs as Code]
 
-.Modules
+.*Modules*
 * xref:application:ROOT:README.adoc[Application]
 * xref:thanos:ROOT:README.adoc[Thanos]
