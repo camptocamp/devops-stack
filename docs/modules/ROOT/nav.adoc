@@ -59,4 +59,4 @@
 ** xref:ROOT:explanations/documentation.adoc[Docs as Code]
 * Modules' Technical Reference
 ** xref:latest@application:ROOT:README.adoc[application]
-** xref:latest@thanos:ROOT:README.adoc[thanos]
+** xref:documentation@thanos:ROOT:README.adoc[thanos]
