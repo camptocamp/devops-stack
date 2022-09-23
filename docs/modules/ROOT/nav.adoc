@@ -58,5 +58,7 @@
 ** xref:ROOT:explanations/upgrade_strategy.adoc[Kubernetes Upgrade Strategy]
 ** xref:ROOT:explanations/documentation.adoc[Docs as Code]
 * Modules' Technical Reference
-** xref:_@application:ROOT:README.adoc[application]
-** xref:documentation@thanos:ROOT:README.adoc[thanos]
+// :base-url: https://devops-stack.io/docs/
+:base-url: file:///home/goncaloheleno/Documents/Camptocamp_Repos/devops-stack/docs_test/
+** {base-url}application/latest/README.html[application]
+** {base-url}thanos/latest/README.html[thanos]
