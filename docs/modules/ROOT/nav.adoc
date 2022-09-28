@@ -61,4 +61,5 @@
 
 .*Modules*
 * xref:application:ROOT:README.adoc[Application]
+* xref:applicationset:ROOT:README.adoc[ApplicationSet]
 * xref:thanos:ROOT:README.adoc[Thanos]
