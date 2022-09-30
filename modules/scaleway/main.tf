@@ -36,8 +36,7 @@ resource "scaleway_lb" "this" {
 }
 
 module "cluster" {
-  source  = "particuleio/kapsule/scaleway"
-  version = "5.0.0"
+  source  = "git@github.com:Xaving/terraform-scaleway-kapsule.git?ref=remove-experiments-attribut"
 
   kubernetes_version = var.kubernetes_version
   cluster_name       = var.cluster_name
