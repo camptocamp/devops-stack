@@ -182,9 +182,7 @@ module "thanos" {
 
 # TODO Discuss renaming the module because we have the monitoring stack mostly separated through multiple modules
 module "monitoring" {
-  # source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//eks"
-  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//eks?ref=chart_upgrade"
-  # TODO Remove the ref chart_upgrade
+  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//eks"
 
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
