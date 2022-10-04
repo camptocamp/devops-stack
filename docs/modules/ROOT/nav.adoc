@@ -1,3 +1,4 @@
+.*Main Documentation*
 * xref:ROOT:index.adoc[Home]
 * Tutorials
 ** xref:ROOT:getting_started.adoc[Getting Started]
@@ -48,7 +49,6 @@
 *** xref:ROOT:references/applications/minio.adoc[Minio]
 *** xref:ROOT:references/applications/secrets-store-csi-driver.adoc[Secrets Store CSI Driver]
 *** xref:ROOT:references/applications/traefik.adoc[Traefik]
-*** xref:ROOT:references/applications/vault.adoc[Vault]
 * Explanations
 ** xref:ROOT:explanations/purpose.adoc[Purpose]
 ** xref:ROOT:explanations/cloud_agnostic.adoc[Cloud Agnostic]
@@ -58,3 +58,8 @@
 ** xref:ROOT:explanations/data_persistence.adoc[Data Persistence]
 ** xref:ROOT:explanations/upgrade_strategy.adoc[Kubernetes Upgrade Strategy]
 ** xref:ROOT:explanations/documentation.adoc[Docs as Code]
+
+.*Modules*
+* xref:application:ROOT:README.adoc[Application]
+* xref:applicationset:ROOT:README.adoc[ApplicationSet]
+* xref:thanos:ROOT:README.adoc[Thanos]
