@@ -45,11 +45,11 @@ content:
       - "!v0.53.0"
   - url: https://github.com/camptocamp/devops-stack-module-thanos.git
     start_path: docs
-    branches: [documentation]
+    branches: [main]
     tags: []
   - url: https://github.com/camptocamp/devops-stack-module-application.git
     start_path: docs
-    branches: [initial_development]
+    branches: [main]
     tags: []
   - url: https://github.com/camptocamp/devops-stack-module-applicationset.git
     start_path: docs
