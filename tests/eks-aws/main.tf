@@ -180,8 +180,7 @@ module "thanos" {
   depends_on = [module.argocd_bootstrap]
 }
 
-# TODO Discuss renaming the module because we have the monitoring stack mostly separated through multiple modules
-module "monitoring" {
+module "prometheus-stack" {
   source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//eks"
 
   cluster_name     = module.eks.cluster_name
@@ -214,7 +213,7 @@ module "loki-stack" {
 
   cluster_oidc_issuer_url = module.eks.cluster_oidc_issuer_url
 
-  depends_on = [module.monitoring]
+  depends_on = [module.prometheus-stack]
 }
 
 module "grafana" {
@@ -228,7 +227,7 @@ module "grafana" {
     oidc = module.oidc.oidc
   }
 
-  depends_on = [module.monitoring, module.loki-stack]
+  depends_on = [module.prometheus-stack, module.loki-stack]
 }
 
 module "cert-manager" {
@@ -240,7 +239,7 @@ module "cert-manager" {
 
   cluster_oidc_issuer_url = module.eks.cluster_oidc_issuer_url
 
-  depends_on = [module.monitoring]
+  depends_on = [module.prometheus-stack]
 }
 
 module "argocd" {
@@ -277,7 +276,7 @@ module "argocd" {
   #    revision = local.target_revision
   #  }}
 
-  depends_on = [module.cert-manager, module.monitoring, module.grafana]
+  depends_on = [module.cert-manager, module.prometheus-stack, module.grafana]
 }
 
 module "metrics_server" {
@@ -343,10 +342,10 @@ module "helloworld_apps" {
               domain: "${module.eks.base_domain}"
             apps:
               traefik_dashboard: false # TODO Add variable when we configure the Traefik Dashboard
-              grafana: ${module.grafana.grafana_enabled || module.monitoring.grafana_enabled}
-              prometheus: ${module.monitoring.prometheus_enabled}
+              grafana: ${module.grafana.grafana_enabled || module.prometheus-stack.grafana_enabled}
+              prometheus: ${module.prometheus-stack.prometheus_enabled}
               thanos: ${module.thanos.thanos_enabled}
-              alertmanager: ${module.monitoring.alertmanager_enabled}
+              alertmanager: ${module.prometheus-stack.alertmanager_enabled}
           EOT
         }
       }
