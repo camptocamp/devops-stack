@@ -218,9 +218,7 @@ module "loki-stack" {
 }
 
 module "grafana" {
-  # source = "git::https://github.com/camptocamp/devops-stack-module-grafana.git"
-  source = "git::https://github.com/camptocamp/devops-stack-module-grafana.git?ref=troubleshoot_deployment"
-  # TODO Remove the ref troubleshoot_deployment
+  source = "git::https://github.com/camptocamp/devops-stack-module-grafana.git"
 
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
@@ -283,9 +281,7 @@ module "argocd" {
 }
 
 module "metrics_server" {
-  # source = "git::https://github.com/camptocamp/devops-stack-module-application.git"
-  source = "git::https://github.com/camptocamp/devops-stack-module-application.git?ref=initial_development"
-  # TODO Remove ref to initial_deployment
+  source = "git::https://github.com/camptocamp/devops-stack-module-application.git"
 
   name             = "metrics-server"
   argocd_namespace = local.argocd_namespace
@@ -299,9 +295,7 @@ module "metrics_server" {
 }
 
 module "helloworld_apps" {
-  # source = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git"
-  source = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git?ref=applicationset_modifs"
-  # TODO Remove ref to applicationset_modifs
+  source = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git"
 
   depends_on = [module.argocd]
 
