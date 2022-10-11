@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.59.2](https://github.com/camptocamp/devops-stack/compare/v0.59.1...v0.59.2) (2022-10-11)
+
+
+### Bug Fixes
+
+* **aks:** do not ignore orchestrator_version ([c3a2196](https://github.com/camptocamp/devops-stack/commit/c3a21963003f7251b5582ee7da797e9f6b455bf8))
+
 ## [0.59.1](https://github.com/camptocamp/devops-stack/compare/v0.59.0...v0.59.1) (2022-09-06)
 
 
