@@ -105,17 +105,18 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
   vm_size               = each.value.vm_size
   node_count            = each.value.node_count
 
-  availability_zones  = lookup(each.value, "availability_zones", null)
-  enable_auto_scaling = lookup(each.value, "enable_auto_scaling", null)
-  max_count           = lookup(each.value, "max_count", null)
-  min_count           = lookup(each.value, "min_count", null)
-  max_pods            = lookup(each.value, "max_pods", null)
-  node_taints         = lookup(each.value, "node_taints", null)
-  os_disk_size_gb     = lookup(each.value, "os_disk_size_gb", null)
-  os_type             = lookup(each.value, "os_type", "Linux")
-  vnet_subnet_id      = lookup(each.value, "vnet_subnet_id", var.vnet_subnet_id)
-  node_labels         = merge({ "devops-stack.io/nodepool" = each.key }, lookup(each.value, "node_labels", null))
-  mode                = lookup(each.value, "mode", null)
+  availability_zones   = lookup(each.value, "availability_zones", null)
+  enable_auto_scaling  = lookup(each.value, "enable_auto_scaling", null)
+  orchestrator_version = lookup(each.value, "orchestrator_version", null)
+  max_count            = lookup(each.value, "max_count", null)
+  min_count            = lookup(each.value, "min_count", null)
+  max_pods             = lookup(each.value, "max_pods", null)
+  node_taints          = lookup(each.value, "node_taints", null)
+  os_disk_size_gb      = lookup(each.value, "os_disk_size_gb", null)
+  os_type              = lookup(each.value, "os_type", "Linux")
+  vnet_subnet_id       = lookup(each.value, "vnet_subnet_id", var.vnet_subnet_id)
+  node_labels          = merge({ "devops-stack.io/nodepool" = each.key }, lookup(each.value, "node_labels", null))
+  mode                 = lookup(each.value, "mode", null)
 }
 
 module "argocd" {
