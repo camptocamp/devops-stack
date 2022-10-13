@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.59.3](https://github.com/camptocamp/devops-stack/compare/v0.59.2...v0.59.3) (2022-10-13)
+
+
+### Bug Fixes
+
+* **traefik:** update image version which corrects a security issue ([91aa10c](https://github.com/camptocamp/devops-stack/commit/91aa10c605d25797242fe21f2e954d88f1207c56))
+
 ## [0.59.2](https://github.com/camptocamp/devops-stack/compare/v0.59.1...v0.59.2) (2022-10-11)
 
 
