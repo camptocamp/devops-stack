@@ -15,3 +15,7 @@ traefik:
   ingressRoute:
     dashboard:
       enabled: false
+  image:
+    name: traefik
+    tag: 2.8.8
+    pullPolicy: IfNotPresent
