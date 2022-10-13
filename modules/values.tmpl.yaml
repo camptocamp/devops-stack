@@ -503,6 +503,7 @@ traefik:
         regex: apps.${base_domain}
         replacement: apps.${cluster_name}.${base_domain}
   dashboard:
+    enabled: false
     hosts:
       - traefik.apps.${base_domain}
       - traefik.apps.${cluster_name}.${base_domain}
