@@ -507,10 +507,13 @@ traefik:
     hosts:
       - traefik.apps.${base_domain}
       - traefik.apps.${cluster_name}.${base_domain}
+    oauth_host: oauth.traefik.apps.${cluster_name}.${base_domain}
+    redirecturl: "https://traefik.apps.${cluster_name}.${base_domain}/_oauth"
     oidc:
       issuerurl: "${base64encode(oidc.issuer_url)}"
       clientid: "${base64encode(oidc.client_id)}"
       clientsecret: "${base64encode(oidc.client_secret)}"
+      cookiesecret: "${base64encode(cookie_secret)}"
       jwtsecret: "${base64encode(traefik_oidc_jwt_secret)}"
 %{ endif }
 

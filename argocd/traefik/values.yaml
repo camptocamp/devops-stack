@@ -4,6 +4,8 @@ traefik:
   deployment:
     replicas: 2
   additionalArguments:
+    - --api.insecure=true
+    - --api.dashboard=true
     - --metrics.prometheus=true
     - --serversTransport.insecureSkipVerify=true
   logs:

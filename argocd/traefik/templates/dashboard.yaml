@@ -1,81 +1,71 @@
 {{- if $.Values.traefik.dashboard.enabled -}}
 
-{{- $match := printf "Host(`%s`)" ( join "`) || Host(`" .Values.traefik.dashboard.hosts ) }}
+{{- $match := printf "Host(`%s`)" ( join "`) || Host(`" $.Values.traefik.dashboard.hosts ) }}
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: traefik-auth
+  name: traefik-oauth
   labels:
-    app: traefik-auth
+    app: traefik-oauth
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: traefik-auth
+      app: traefik-oauth
   template:
     metadata:
       labels:
-        app: traefik-auth
+        app: traefik-oauth
     spec:
       containers:
-      - name: traefik-auth
-        image: thomseddon/traefik-forward-auth:2
+      - args:
+          - "--http-address=0.0.0.0:4181"
+          - "--upstream=static://202"
+          - "--reverse-proxy=true"
+          - "--provider=oidc"
+          - "--cookie-secure=false"
+          - "--email-domain=*"
+          - {{ printf "--redirect-url=%s" $.Values.traefik.dashboard.redirecturl }}
+        image: quay.io/oauth2-proxy/oauth2-proxy:v7.3.0
         imagePullPolicy: Always
         env:
-          - name: DEFAULT_PROVIDER
-            value: "oidc"
-          - name: INSECURE_COOKIE
-            value: "false"
-          - name: DOMAIN
-            value: "camptocamp.com"
-          - name: PROVIDERS_OIDC_ISSUER_URL
+          - name: OAUTH2_PROXY_OIDC_ISSUER_URL
             valueFrom:
               secretKeyRef:
                 name: oidc
                 key: issuerurl
-          - name: PROVIDERS_OIDC_CLIENT_ID
+          - name: OAUTH2_PROXY_CLIENT_ID
             valueFrom:
               secretKeyRef:
                 name: oidc
                 key: clientid
-          - name: PROVIDERS_OIDC_CLIENT_SECRET
+          - name: OAUTH2_PROXY_CLIENT_SECRET
             valueFrom:
               secretKeyRef:
                 name: oidc
                 key: clientsecret
-          - name: SECRET
+          - name: OAUTH2_PROXY_COOKIE_SECRET
             valueFrom:
               secretKeyRef:
                 name: oidc
-                key: jwtsecret
-          - name: LOG_LEVEL
-            value: debug
+                key: cookiesecret
+        name: traefik-oauth
         ports:
-        - containerPort: 4181
+          - containerPort: 4181
+            name: proxy
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: traefik-auth
+  name: traefik-oauth
 spec:
   selector:
-    app: traefik-auth
+    app: traefik-oauth
   ports:
   - protocol: TCP
     port: 4181
     targetPort: 4181
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: auth
-spec:
-  forwardAuth:
-    address: http://traefik-auth:4181
-    authResponseHeaders: 
-      - "X-Forwarded-User"
-    trustForwardHeader: true
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
@@ -85,7 +75,33 @@ spec:
   chain:
     middlewares:
     - name: withclustername
-    - name: auth
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: auth-headers
+spec:
+  headers:
+    sslRedirect: true
+    stsSeconds: 315360000
+    browserXssFilter: true
+    contentTypeNosniff: true
+    forceSTSHeader: true
+    stsIncludeSubdomains: true
+    stsPreload: true
+    frameDeny: true
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: oauth-auth-redirect
+spec:
+  forwardAuth:
+    address: {{ printf "https://%s/" $.Values.traefik.dashboard.redirecturl | quote }}
+    trustForwardHeader: true
+    authResponseHeaders:
+      - X-Auth-Request-Access-Token
+      - Authorization
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -93,16 +109,95 @@ metadata:
   name: traefik-dashboard
 spec:
   entryPoints:
-  - websecure
+    - websecure
   routes:
-  - match: {{ printf "(%s)" $match | quote }}
+  - match: {{ printf "(%s) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`))" $match | quote }} 
     kind: Rule
     services:
-    - kind: TraefikService
-      name: api@internal
+    - name: TraefikService
+      name: "api@internal"
     middlewares:
-    - name: chain
+    - name: oauth-auth-redirect
   tls:
     secretName: traefik-dashboard-tls
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-oauth
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - match: {{ printf "(%s) && PathPrefix(`/oauth/`)" $match | quote }} 
+    kind: Rule
+    services:
+    - kind: Service
+      name: traefik-oauth
+      namespace: traefik
+      port: 4181
+    middlewares:
+    - name: auth-headers
+  tls:
+    secretName: traefik-dashboard-tls
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-oauth-proxy
+spec:
+  entryPoints:
+    - websecure
+    - traefik
+  routes:
+  - match: {{ printf "Host(`%s`) && PathPrefix(`/`)" $.Values.traefik.dashboard.redirecturl | quote }} 
+    kind: Rule
+    services:
+    - kind: Service
+      name: traefik-oauth
+      namespace: traefik
+      port: 4181
+    middlewares:
+    - name: oauth-auth-redirect
+  tls:
+    secretName: traefik-dashboard-tls
+# ---
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: IngressRoute
+# metadata:
+#   name: traefik-dashboard
+#   annotations:
+#     kubernetes.io/ingress.class: ''
+# spec:
+#   entryPoints:
+#   - websecure
+#   routes:
+#   - match: {{ printf "(%s)" $match | quote }}
+#     kind: Rule
+#     services:
+#     - kind: Service
+#       name: traefik-auth
+#       namespace: traefik
+#       port: 4181
+#     middlewares:
+#     - name: chain
+#   tls:
+#     secretName: traefik-dashboard-tls
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: traefik-dashboard-tls
+spec:
+  dnsNames:
+  {{- range $.Values.traefik.dashboard.hosts }}
+    - {{ . | quote }}
+  {{- end }}
+    - {{ $.Values.traefik.dashboard.oauth_host | quote }}
+  issuerRef:
+    group: cert-manager.io
+    kind: ClusterIssuer
+    name: letsencrypt-prod
+  secretName: traefik-dashboard-tls
 
 {{- end -}}
