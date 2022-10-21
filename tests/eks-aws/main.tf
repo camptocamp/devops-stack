@@ -1,7 +1,3 @@
-locals {
-  cluster_issuer = "letsencrypt-staging"
-}
-
 data "aws_availability_zones" "available" {}
 
 module "vpc" {
@@ -74,7 +70,7 @@ module "eks" {
 
   cluster_name = "gh-v1-cluster"
   base_domain  = "is-sandbox.camptocamp.com"
-  #cluster_version = "1.22"
+  # cluster_version = "1.22"
 
   vpc_id         = module.vpc.vpc_id
   vpc_cidr_block = module.vpc.vpc_cidr_block
@@ -109,10 +105,6 @@ provider "helm" {
     cluster_ca_certificate = module.eks.kubernetes_cluster_ca_certificate
     token                  = module.eks.kubernetes_token
   }
-}
-
-locals {
-  argocd_namespace = "argocd"
 }
 
 module "argocd_bootstrap" {
