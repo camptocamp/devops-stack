@@ -1,0 +1,20 @@
+---
+# GitHub Actions workflow to automatically create releases and changelogs in our DevOps Stack repositories.
+#
+# IMPORTANT: This workflow is called by other workflows in our DevOps Stack repositories and it is centralized here in 
+# order to be easily maintained across modules. Because of this, please make sure you're not introducing any breaking 
+# changes when modifying this workflow.
+
+name: "Release Modules"
+
+on:
+  workflow_call:
+
+jobs:
+  release-please:
+    runs-on: "ubuntu-latest"
+    steps:
+    - uses: "google-github-actions/release-please-action@v3"
+      with:
+        release-type: "simple"
+        bump-minor-pre-major: true
