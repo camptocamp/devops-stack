@@ -67,7 +67,7 @@ jobs:
       uses: terraform-docs/gh-actions@v1.0.0
       with:
         working-dir: ${{ inputs.variants }}
-        indention: 1 # Since the headings are not read inside the collapsible block we can indent as 1 instead of aligning with the rest of the text
+        indention: 1 # Since the headings are not read inside the collapsible block we can indent as 1
         output-format: asciidoc table
         output-file: README.adoc
         output-method: inject
