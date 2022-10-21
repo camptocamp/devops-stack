@@ -1,0 +1,82 @@
+---
+# GitHub Actions workflow to automatically generate documentation from the .tf files of the module.
+# The generated documentation will be injected between AsciiDoc comments on the README.adoc.
+#
+# IMPORTANT: This workflow is called by other workflows in our DevOps Stack repositories and it is centralized here in 
+# order to be easily maintained across modules. Because of this, please make sure you're not introducing any breaking 
+# changes when modifying this workflow.
+
+name: "Terraform Docs"
+
+on:
+  workflow_call:
+    inputs:
+      variants:
+        # List of the variants folders as a comma-separated list inside a string (i.e. "eks,aks,sks").
+        type: string
+        required: false
+        default: ""
+
+jobs:
+  terraform-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: "Check out the repository"
+      uses: actions/checkout@v3
+      with:
+        ref: ${{ github.event.pull_request.head.ref }}
+
+    - name: "Generate Terraform docs"
+      uses: terraform-docs/gh-actions@v1.0.0
+      with:
+        working-dir: .
+        indention: 3
+        output-format: asciidoc document
+        output-file: README.adoc
+        output-method: inject
+        template: "// BEGIN_TF_DOCS\n{{ .Content }}\n// END_TF_DOCS" # Define template compatible with AsciiDoc
+        git-push: false
+
+    - name: "Generate Terraform tables"
+      uses: terraform-docs/gh-actions@v1.0.0
+      with:
+        working-dir: .
+        indention: 1 # Since the headings are not read inside the collapsible block we can indent as 1
+        output-format: asciidoc table
+        output-file: README.adoc
+        output-method: inject
+        template: "// BEGIN_TF_TABLES\n{{ .Content }}\n// END_TF_TABLES" # Define template compatible with AsciiDoc
+        args: "--hide-empty=true" # Do not show empty sections
+        git-push: false
+
+    - name: "Generate Terraform docs for the variants"
+      if: ${{ inputs.variants != '' }}
+      uses: terraform-docs/gh-actions@v1.0.0
+      with:
+        working-dir: ${{ inputs.variants }}
+        indention: 3
+        output-format: asciidoc document
+        output-file: README.adoc
+        output-method: inject
+        template: "// BEGIN_TF_DOCS\n{{ .Content }}\n// END_TF_DOCS" # Define template compatible with AsciiDoc
+        git-push: false
+
+    - name: "Generate Terraform tables for the variants"
+      if: ${{ inputs.variants != '' }}
+      uses: terraform-docs/gh-actions@v1.0.0
+      with:
+        working-dir: ${{ inputs.variants }}
+        indention: 1 # Since the headings are not read inside the collapsible block we can indent as 1
+        output-format: asciidoc table
+        output-file: README.adoc
+        output-method: inject
+        template: "// BEGIN_TF_TABLES\n{{ .Content }}\n// END_TF_TABLES" # Define template compatible with AsciiDoc
+        args: "--hide-empty=true" # Do not show empty sections
+        git-push: false
+
+    # This step avoids a commit for each previous step and instead commits everything on a single commit
+    - name: "Commit changes done in the previous steps"
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: "docs(terraform-docs): generate docs and write to README.adoc"
