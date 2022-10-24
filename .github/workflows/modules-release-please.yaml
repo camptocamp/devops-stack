@@ -18,3 +18,5 @@ jobs:
       with:
         release-type: "simple"
         bump-minor-pre-major: true
+        extra-files: |
+          variables.tf
