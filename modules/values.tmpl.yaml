@@ -452,7 +452,9 @@ kube-prometheus-stack:
 %{ endif } # kube-prometheus-stack config
 
 %{ if loki.enable }
-loki-stack: {}
+loki-stack:
+  loki:
+    isDefault: false
 %{ endif }
 
 %{ if metrics_server.enable}
@@ -542,7 +544,7 @@ thanos:
       requests:
         cpu: 0.5
         memory: 512Mi
-  
+
   compactor:
     enabled: true
     retentionResolutionRaw: 60d
