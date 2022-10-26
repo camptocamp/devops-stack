@@ -17,6 +17,9 @@ on:
         required: false
         default: ""
 
+permissions:
+  contents: write
+
 jobs:
   terraform-docs:
     runs-on: ubuntu-latest
