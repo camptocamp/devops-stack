@@ -26,6 +26,7 @@ jobs:
       uses: actions/checkout@v3
       with:
         ref: ${{ github.event.pull_request.head.ref }}
+        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: "Generate Terraform docs"
       uses: terraform-docs/gh-actions@v1.0.0
