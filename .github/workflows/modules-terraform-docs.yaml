@@ -17,9 +17,6 @@ on:
         required: false
         default: ""
 
-permissions:
-  contents: write
-
 jobs:
   terraform-docs:
     runs-on: ubuntu-latest
@@ -77,6 +74,12 @@ jobs:
         template: "// BEGIN_TF_TABLES\n{{ .Content }}\n// END_TF_TABLES" # Define template compatible with AsciiDoc
         args: "--hide-empty=true" # Do not show empty sections
         git-push: false
+
+    # This step comes after long hours of debugging permission errors on the workflow when trying to do a commit after
+    # executing the terraform-docs actions. See https://github.com/terraform-docs/gh-actions/issues/90
+    - name: "Correct ownership of files in preparation for the next step"
+      run: |
+        sudo chown runner:docker -Rv .git
 
     # This step avoids a commit for each previous step and instead commits everything on a single commit
     - name: "Commit changes done in the previous steps"
