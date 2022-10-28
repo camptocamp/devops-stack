@@ -205,6 +205,8 @@ keycloak:
         - "https://alertmanager.apps.${base_domain}/oauth2/callback"
         - "https://${alertmanager.domain}/oauth2/callback"
         - "https://traefik.apps.${cluster_name}.${base_domain}/_oauth"
+        - "https://thanos-bucketweb.apps.${cluster_name}.${base_domain}/oauth2/callback"
+        - "https://thanos-query.apps.${cluster_name}.${base_domain}/oauth2/callback"
   keycloakUsers:
     %{ for username, infos in keycloak.user_map }
     ${username}:
@@ -303,24 +305,13 @@ kube-prometheus-stack:
         type: prometheus
         # TODO: fix this 9091 with oauthPassThru
         #url: http://kube-prometheus-stack-prometheus:9091/
-        url: "http://kube-prometheus-stack-prometheus:9090"
+        url: ${ can(metrics_archives.bucket_config) ? "http://thanos-query.thanos:9090" : "http://kube-prometheus-stack-prometheus:9090"}
         access: proxy
         isDefault: true
         jsonData:
           tlsAuth: false
           tlsAuthWithCACert: false
           oauthPassThru: true
-%{ if can(metrics_archives.bucket_config) }
-      - name: "Thanos-${cluster_name}"
-        type: prometheus
-        url: "http://thanos-query.thanos:9090"
-        access: proxy
-        isDefault: false
-        jsonData:
-          tlsAuth: false
-          tlsAuthWithCACert: false
-          oauthPassThru: true
-%{ endif }
     ingress:
       enabled: true
       annotations:
@@ -524,41 +515,20 @@ thanos:
 
   storegateway:
     enabled: true
-    persistence:
-      enabled: false
-    resources:
-      limits:
-        memory: 2Gi
-      requests:
-        cpu: 0.5
-        memory: 1Gi
+    createConfigMap: true
 
   query:
     dnsDiscovery:
-      enabled: false
+      sidecarsService: kube-prometheus-stack-thanos-discovery
+      sidecarsNamespace: kube-prometheus-stack
     stores:
       - "thanos-storegateway:10901"
-    resources:
-      limits:
-        memory: 1Gi
-      requests:
-        cpu: 0.5
-        memory: 512Mi
 
   compactor:
     enabled: true
     retentionResolutionRaw: 60d
     retentionResolution5m: 120d
     retentionResolution1h: 240d
-    resources:
-      limits:
-        memory: 1Gi
-      requests:
-        cpu: 0.5
-        memory: 512Mi
-    persistence:
-      accessModes:
-        - ReadWriteMany
 
   bucketweb:
     enabled: true

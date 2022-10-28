@@ -330,8 +330,3 @@ traefik:
   service:
     annotations:
       service.beta.kubernetes.io/azure-dns-label-name: ${azure_dns_label_name}
-
-thanos:
-  compactor:
-    persistence:
-      size: 50Gi
