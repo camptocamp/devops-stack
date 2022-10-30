@@ -65,6 +65,7 @@ locals {
   loki_defaults = {
     bucket_name = ""
     enable      = true
+    basic_auth_creds = "loki:${htpasswd_password.loki_basic_auth_password_hash.bcrypt}"
   }
   loki = merge(
     local.loki_defaults,

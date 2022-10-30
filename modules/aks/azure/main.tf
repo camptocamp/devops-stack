@@ -131,7 +131,7 @@ module "argocd" {
   extra_application_sets  = var.extra_application_sets
   cluster_name            = var.cluster_name
   base_domain             = local.base_domain
-  cluster_issuer          = "letsencrypt-prod"
+  cluster_issuer          = "letsencrypt-staging"
   argocd_server_secretkey = var.argocd_server_secretkey
   wait_for_app_of_apps    = var.wait_for_app_of_apps
   metrics_archives        = var.metrics_archives
@@ -156,9 +156,7 @@ module "argocd" {
         azure_dns_label_name                         = local.azure_dns_label_name
         kube_prometheus_stack_prometheus_resource_id = azurerm_user_assigned_identity.kube_prometheus_stack_prometheus.id
         kube_prometheus_stack_prometheus_client_id   = azurerm_user_assigned_identity.kube_prometheus_stack_prometheus.client_id
-        loki_container_name                          = azurerm_storage_container.loki.name
-        loki_account_name                            = azurerm_storage_account.this.name
-        loki_account_key                             = azurerm_storage_account.this.primary_access_key
+        loki                                         = var.loki
         azureidentities                              = local.azureidentities
         namespaces                                   = local.namespaces
       }
@@ -203,20 +201,6 @@ resource "random_string" "storage_account" {
   lower   = true
   upper   = false
   special = false
-}
-
-resource "azurerm_storage_account" "this" {
-  name                     = random_string.storage_account.result
-  resource_group_name      = module.cluster.node_resource_group
-  location                 = data.azurerm_resource_group.this.location
-  account_tier             = var.storage_account_tier
-  account_replication_type = var.storage_account_replication_type
-}
-
-resource "azurerm_storage_container" "loki" {
-  name                  = "loki"
-  storage_account_name  = azurerm_storage_account.this.name
-  container_access_type = "private"
 }
 
 # TODO: I'm not sure this is required
@@ -335,6 +319,7 @@ resource "azurerm_policy_assignment" "baseline" {
       "aad-pod-identity",
       "kube-prometheus-stack",
       "loki-stack",
+      "loki-distributed",
       "csi-secrets-store-provider-azure",
       "kube-system",
       "gatekeeper-system",

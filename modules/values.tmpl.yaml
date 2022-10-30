@@ -33,6 +33,8 @@ apps:
     enabled: false
   loki-stack:
     enabled: ${loki.enable}
+  loki-distributed:
+    enabled: false
   metrics-server:
     enabled: ${metrics_server.enable}
   minio:
@@ -268,7 +270,13 @@ kube-prometheus-stack:
             - "${alertmanager.domain}"
             - "alertmanager.apps.${base_domain}"
     service:
+      port: 9095
       targetPort: 9095
+      additionalPorts:
+        - name: http-internal
+          port: 9093
+          protocol: TCP
+          targetPort: http-web
     serviceMonitor:
       selfMonitor: false
 %{ endif }  # alertmanager config
@@ -297,6 +305,9 @@ kube-prometheus-stack:
         root_url: "https://%(domain)s"
     sidecar:
       datasources:
+        enabled: true
+        label: "grafana-datasource"
+        labelValue: "1"
         defaultDatasourceEnabled: false
     additionalDataSources:
       - name: Prometheus
@@ -456,6 +467,21 @@ loki-stack:
   loki:
     isDefault: false
 %{ endif }
+
+loki-distributed:
+  loki-distributed:
+    frontendIngress:
+      hosts:
+        - "loki.apps.${cluster_name}.${base_domain}"
+        - "loki.apps.${base_domain}"
+      extraMiddlewares:
+        - name: withclustername
+          namespace: traefik
+      basicAuthCreds: "${base64encode(loki.basic_auth_creds)}"
+      issuer: "${cluster_issuer}"
+  promtail: {}
+  filebeat:
+    enabled: false
 
 %{ if metrics_server.enable}
 metrics-server: {}

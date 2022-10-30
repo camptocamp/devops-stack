@@ -6,6 +6,10 @@ apps:
     enabled: true
   metrics-server:
     enabled: false
+  loki-stack:
+    enabled: ${!loki.distributed_mode}
+  loki-distributed:
+    enabled: ${loki.distributed_mode}
 
 ${yamlencode({"namespaces": namespaces})}
 
@@ -298,9 +302,9 @@ loki-stack:
               period: 24h
       storage_config:
         azure:
-          container_name: ${loki_container_name}
-          account_name: ${loki_account_name}
-          account_key: ${loki_account_key}
+          container_name: ${loki.external_storage.container_name}
+          account_name: ${loki.external_storage.account_name}
+          account_key: ${loki.external_storage.account_key}
 
         boltdb_shipper:
           active_index_directory: /data/loki/index
@@ -319,6 +323,34 @@ loki-stack:
               - ${v}
 %{ endfor ~}
 %{ endif ~}
+
+loki-distributed:
+  loki-distributed:
+    loki:
+      schemaConfig:
+        configs:
+          - from: 2020-12-22
+            store: boltdb-shipper
+            object_store: azure
+            schema: v11
+            index:
+              prefix: index_
+              period: 24h
+      storageConfig:
+        boltdb_shipper:
+          shared_store: azure
+        azure:
+          container_name: ${loki.external_storage.container_name}
+          account_name: ${loki.external_storage.account_name}
+          account_key: ${loki.external_storage.account_key}
+          request_timeout: 180s
+          max_retries: 50
+          min_retry_delay: 1s
+          max_retry_delay: 5s
+      structuredConfig:        
+        compactor:
+          shared_store: azure
+          working_directory: /var/loki
 
 traefik:
   resources:

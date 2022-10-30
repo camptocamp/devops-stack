@@ -1,0 +1,61 @@
+{{- with index .Values "loki-distributed" "frontendIngress" }}
+{{- $match := printf "Host(`%s`)" ( join "`) || Host(`" .hosts ) }}
+---
+apiVersion: v1
+data:
+  users: {{ .basicAuthCreds }}
+kind: Secret
+metadata:
+  name: basic-auth-creds
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: loki-frontend-basic-auth
+spec:
+  basicAuth:
+    secret: basic-auth-creds
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: loki-frontend
+spec:
+  secretName: loki-frontend-tls
+  dnsNames:
+    {{- toYaml .hosts | nindent 4 }}
+  issuerRef:
+    group: cert-manager.io
+    kind: ClusterIssuer
+    name: {{ .issuer }}
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: chain
+spec:
+  chain:
+    middlewares:
+    - name: loki-frontend-basic-auth
+    {{- with .extraMiddlewares }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: loki-frontend
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - match: {{ printf "(%s)" $match | quote }}
+    kind: Rule
+    services:
+    - name: loki-distributed-query-frontend
+      port: 3100
+    middlewares:
+    - name: chain
+  tls:
+    secretName: loki-frontend-tls
+{{- end }}

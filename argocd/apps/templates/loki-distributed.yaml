@@ -1,0 +1,29 @@
+{{- if index $.Values "apps" "loki-distributed" "enabled" }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: loki-distributed
+  namespace: argocd
+spec:
+  project: "devops-stack"
+  source:
+    path: argocd/loki-distributed
+    repoURL: {{ .Values.spec.source.repoURL }}
+    targetRevision: {{ .Values.spec.source.targetRevision }}
+    helm:
+      values: |
+        loki-distributed:
+          {{- index .Values "loki-distributed" "loki-distributed" | toYaml | nindent 10 }}
+        promtail:
+          {{- index .Values "loki-distributed" "promtail" | toYaml | nindent 10 }}
+        filebeat:
+          {{- index .Values "loki-distributed" "filebeat" | toYaml | nindent 10 }}
+  destination:
+    namespace: loki-distributed
+    server: {{ .Values.spec.destination.server }}
+  {{- if .Values.spec.syncPolicy }}
+  syncPolicy:
+    {{ toYaml .Values.spec.syncPolicy | nindent 4 }}
+  {{- end }}
+{{- end }}

@@ -14,3 +14,12 @@ output "argocd_server_admin_password" {
   sensitive   = true
   value       = random_password.argocd_server_admin.result
 }
+
+output "loki_creds" {
+  description = "LogCLI basic auth password."
+  sensitive = true
+  value = {
+    username = "loki"
+    password = random_password.loki_basic_auth_password.result
+  }
+}

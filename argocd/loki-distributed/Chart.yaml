@@ -1,0 +1,18 @@
+---
+apiVersion: "v2"
+name: "loki-distributed"
+version: "0"
+description: |
+  This chart installs loki-distributed.
+  Loki is a log aggregation system made by Grafana Labs, and inspired by Prometheus.
+dependencies:
+  - name: "loki-distributed"
+    version: "0.52.0"
+    repository: "https://grafana.github.io/helm-charts"
+  - name: "promtail"
+    version: "6.2.1"
+    repository: "https://grafana.github.io/helm-charts"
+  - name: "filebeat"
+    condition: filebeat.enabled
+    version: "~7.17.1"
+    repository:  "https://helm.elastic.co"

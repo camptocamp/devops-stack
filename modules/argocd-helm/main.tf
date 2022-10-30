@@ -101,6 +101,14 @@ resource "helm_release" "argocd" {
   values            = local.argocd_values
 }
 
+resource "random_password" "loki_basic_auth_password" {
+  length = 30
+}
+
+resource "htpasswd_password" "loki_basic_auth_password_hash" {
+  password = random_password.loki_basic_auth_password.result
+}
+
 resource "jwt_hashed_token" "argocd" {
   algorithm   = "HS256"
   secret      = local.argocd_server_secretkey

@@ -37,3 +37,8 @@ output "namespaces" {
 output "kubelet_identity" {
   value = module.cluster.kubelet_identity
 }
+
+output "loki_creds" {
+  sensitive = true
+  value = module.argocd.loki_creds
+}

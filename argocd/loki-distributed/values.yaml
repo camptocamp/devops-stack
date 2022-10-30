@@ -1,0 +1,149 @@
+---
+loki-distributed:
+  loki:
+    structuredConfig:
+      chunk_store_config:
+        chunk_cache_config:
+          enable_fifocache: false
+          memcached:
+            expiration: 24h
+          memcached_client:
+            host: loki-distributed-memcached-chunks.loki-distributed.svc.cluster.local
+            service: http
+            timeout: 500ms          
+      storage_config:
+        boltdb_shipper:
+          index_gateway_client:
+            log_gateway_requests: true
+        index_queries_cache_config:
+          enable_fifocache: false
+          memcached:
+            expiration: 24h
+          memcached_client:
+            host: loki-distributed-memcached-index-queries.loki-distributed.svc.cluster.local
+            service: http
+            timeout: 500ms           
+      compactor:
+        retention_enabled: false
+        retention_delete_delay: 1h
+      ingester:
+        wal:
+          replay_memory_ceiling: 500MB
+      server:
+        grpc_server_max_recv_msg_size: 33554432 
+        grpc_server_max_send_msg_size: 33554432
+        http_server_read_timeout: 180s
+        http_server_write_timeout: 180s
+      querier:
+        query_timeout: 5m
+        max_concurrent: 2
+      query_range:
+        parallelise_shardable_queries: false
+        max_retries: 50
+        cache_results: true
+        results_cache:
+          cache:
+            enable_fifocache: false
+            memcached:
+              expiration: 24h
+            memcached_client:
+              host: loki-distributed-memcached-frontend.loki-distributed.svc.cluster.local
+              service: http
+              timeout: 500ms
+      limits_config:
+        max_entries_limit_per_query: 0
+        max_chunks_per_query: 0
+        max_query_length: 9000h
+        max_query_parallelism: 6
+        per_stream_rate_limit: 10MB
+        ingestion_rate_mb: 10
+        retention_period: 9000h
+      ruler:
+        alertmanager_url: http://kube-prometheus-stack-alertmanager.kube-prometheus-stack:9093
+  memcachedIndexQueries:
+    enabled: true
+    # resources:
+    #   limits:
+    #     memory: 1024Mi
+    #   requests:
+    #     cpu: 0.1
+    #     memory: 512Mi
+  memcachedFrontend:
+    enabled: true
+    # resources:
+    #   limits:
+    #     memory: 1024Mi
+    #   requests:
+    #     cpu: 0.1
+    #     memory: 512Mi
+  memcachedChunks:
+    enabled: true
+    # resources:
+    #   limits:
+    #     memory: 1024Mi
+    #   requests:
+    #     cpu: 0.1
+    #     memory: 512Mi
+  gateway:
+    enabled: false  
+  compactor:
+    enabled: true
+    persistence:
+      enabled: true
+      # size: 50Gi
+    resources:
+      # limits:
+      #   memory: 1024Mi
+      # requests:
+      #   cpu: 0.2
+      #   memory: 512Mi
+  ingester:
+    persistence:
+      enabled: true
+      size: 50Gi
+    replicas: 1
+    # resources:
+    #   limits:
+    #     memory: 1024Mi
+    #   requests:
+    #     cpu: 0.2
+    #     memory: 512Mi
+  querier:
+    replicas: 4
+    affinity: ""
+    # resources:
+    #   limits:
+    #     memory: 1024Mi
+    #   requests:
+    #     cpu: 0.2
+    #     memory: 512Mi
+  indexGateway:
+    enabled: true
+    persistence:
+      enabled: true
+  ruler:
+    enabled: true
+    # resources:
+    #   limits:
+    #     memory: 256Mi
+    #   requests:
+    #     cpu: 0.1
+    #     memory: 128Mi
+    # directories:
+    #   tenantIs:
+    #     rules.txt: |
+    #       groups:
+    #         - name: infoAlerts
+    #           rules:
+    #             - alert: testAlert
+    #               expr: |
+    #                 sum(rate({namespace="argocd"} |= "info" [5m])) > 0
+    #               for: 0m
+    #               labels:
+    #                   severity: info
+    #               annotations:
+    #                   summary: Test Alert
+promtail:
+  config:
+    clients:
+      - url: "http://loki-distributed-distributor.loki-distributed:3100/loki/api/v1/push"

@@ -101,16 +101,15 @@ variable "node_pools" {
   type        = map(any)
 }
 
-variable "storage_account_tier" {
-  description = "Storage account tier used for storing loki logs"
-  default     = "Standard"
-  type        = string
-}
-
-variable "storage_account_replication_type" {
-  description = "Storage account replication type for storing loki logs"
-  default     = "GRS"
-  type        = string
+variable "loki" {
+  type = object({
+    distributed_mode    = bool
+    external_storage    = object({
+      account_name   = string
+      account_key    = string
+      container_name = string
+    })
+  })
 }
 
 variable "sku_tier" {
