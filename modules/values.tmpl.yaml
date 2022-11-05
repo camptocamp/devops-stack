@@ -306,7 +306,7 @@ kube-prometheus-stack:
     sidecar:
       datasources:
         enabled: true
-        label: "grafana-datasource"
+        label: "grafana_datasource"
         labelValue: "1"
         defaultDatasourceEnabled: false
     additionalDataSources:
