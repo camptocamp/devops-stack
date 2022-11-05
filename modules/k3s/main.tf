@@ -101,6 +101,7 @@ module "argocd" {
     templatefile("${path.module}/../values.tmpl.yaml",
       {
         base_domain      = local.base_domain
+        loki             = var.loki
         cluster_name     = var.cluster_name
         minio_access_key = local.minio.access_key
         minio_secret_key = local.minio.secret_key

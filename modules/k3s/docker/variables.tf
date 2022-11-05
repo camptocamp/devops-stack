@@ -39,3 +39,9 @@ variable "worker_groups" {
     }
   }
 }
+
+variable "loki" {
+  type = object({
+    distributed_mode    = bool
+  })
+}
