@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.60.1](https://github.com/camptocamp/devops-stack/compare/v0.60.0...v0.60.1) (2022-11-14)
+
+
+### Bug Fixes
+
+* **prometheus:** drop thanos hard ref to version ([bac8993](https://github.com/camptocamp/devops-stack/commit/bac89936c85ee02d059a531ddd441dd812e6861b))
+
 ## [0.60.0](https://github.com/camptocamp/devops-stack/compare/v0.59.3...v0.60.0) (2022-11-14)
 
 
