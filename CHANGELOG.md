@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.60.0](https://github.com/camptocamp/devops-stack/compare/v0.59.3...v0.60.0) (2022-11-14)
+
+
+### Features
+
+* **cert-manager:** allow modify http01 ingress section ([fa4558e](https://github.com/camptocamp/devops-stack/commit/fa4558e896c8da4b0103023717df5d74f8f14541))
+* **cert-manager:** allow multiple domains ([6cd1454](https://github.com/camptocamp/devops-stack/commit/6cd145403f7cdb02379dc016ce5ac5af5575355c))
+* change version on the variable file ([71d37dd](https://github.com/camptocamp/devops-stack/commit/71d37dd8422d9e74028237caf9e393d88ff41a0b))
+* Loki is not the default datasource ([e0b17b8](https://github.com/camptocamp/devops-stack/commit/e0b17b80e07d56ca606d7ec17ecc83166dc72b0e))
+* **traefik:** allow disabling of dashboard's ingress and auth ([f310e28](https://github.com/camptocamp/devops-stack/commit/f310e28b7da6256e25969f1eba63321400c16d37))
+
 ## [0.59.3](https://github.com/camptocamp/devops-stack/compare/v0.59.2...v0.59.3) (2022-10-13)
 
 
