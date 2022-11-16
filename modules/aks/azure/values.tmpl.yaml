@@ -181,8 +181,16 @@ kube-prometheus-stack:
     azureIdentity:
       resourceID: ${kube_prometheus_stack_prometheus_resource_id}
       clientID: ${kube_prometheus_stack_prometheus_client_id}
-
     prometheusSpec:
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            accessModes:
+            - ReadWriteOnce
+            resources:
+              requests:
+                storage: 75Gi
+            storageClassName: managed # azure disk
       podMetadata:
         labels:
           aadpodidbinding: kube-prometheus-stack-prometheus
