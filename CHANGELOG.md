@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.60.2](https://github.com/camptocamp/devops-stack/compare/v0.60.1...v0.60.2) (2022-11-16)
+
+
+### Bug Fixes
+
+* **aks:** prometheus use by default disk storage pvc ([fd71d9e](https://github.com/camptocamp/devops-stack/commit/fd71d9e45b0072643f7c3a478ab6bc0ee0b67eee))
+
 ## [0.60.1](https://github.com/camptocamp/devops-stack/compare/v0.60.0...v0.60.1) (2022-11-14)
 
 
