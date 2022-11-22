@@ -4,6 +4,29 @@ argocd:
     oauthclient:
       secret: ${openshift_oauthclient_secret}
 argo-cd:
+  configs:
+    cm:
+      accounts.pipeline: apiKey
+      oidc.config: ""
+      url: https://argocd.apps.${cluster_name}.${base_domain}
+      dex.config: |
+        connectors:
+          - id: "openshift"
+            type: "openshift"
+            name: "OpenShift"
+            config:
+              issuer: https://api.${cluster_name}.${base_domain}:6443
+              clientID: "argocd"
+              clientSecret: "${openshift_oauthclient_secret}"
+              insecureCA: true
+              redirectURI: https://argocd.apps.${cluster_name}.${base_domain}/api/dex/callback"
+              groups:
+                - "cluster-admins"
+    rbac:
+      policy.default: role:readonly
+      policy.csv: |
+        g, pipeline, role:readonly
+
   openshift:
     enabled: true
     oauthclient:
@@ -22,27 +45,6 @@ argo-cd:
       enabled: true
   server:
     extraArgs: []
-    config:
-      accounts.pipeline: apiKey
-      oidc.config: ""
-      url: https://argocd.apps.${cluster_name}.${base_domain}
-      dex.config: |
-        connectors:
-          - id: "openshift"
-            type: "openshift"
-            name: "OpenShift"
-            config:
-              issuer: https://api.${cluster_name}.${base_domain}:6443
-              clientID: "argocd"
-              clientSecret: "${openshift_oauthclient_secret}"
-              insecureCA: true
-              redirectURI: https://argocd.apps.${cluster_name}.${base_domain}/api/dex/callback"
-              groups:
-                - "cluster-admins"
-    rbacConfig:
-      policy.default: role:readonly
-      policy.csv: |
-        g, pipeline, role:readonly
     ingress:
       enabled: false
     route:
