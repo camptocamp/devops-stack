@@ -91,12 +91,12 @@ loki-distributed:
     persistence:
       enabled: true
       # size: 50Gi
-    resources:
-      # limits:
-      #   memory: 1024Mi
-      # requests:
-      #   cpu: 0.2
-      #   memory: 512Mi
+    # resources:
+    #   limits:
+    #     memory: 1024Mi
+    #   requests:
+    #     cpu: 0.2
+    #     memory: 512Mi
   ingester:
     persistence:
       enabled: true
@@ -123,26 +123,26 @@ loki-distributed:
       enabled: true
   ruler:
     enabled: true
-    # resources:
-    #   limits:
-    #     memory: 256Mi
-    #   requests:
-    #     cpu: 0.1
-    #     memory: 128Mi
-    # directories:
-    #   tenantIs:
-    #     rules.txt: |
-    #       groups:
-    #         - name: infoAlerts
-    #           rules:
-    #             - alert: testAlert
-    #               expr: |
-    #                 sum(rate({namespace="argocd"} |= "info" [5m])) > 0
-    #               for: 0m
-    #               labels:
-    #                   severity: info
-    #               annotations:
-    #                   summary: Test Alert
+    resources:
+      limits:
+        memory: 256Mi
+      requests:
+        cpu: 0.1
+        memory: 128Mi
+    directories:
+      tenantIs:
+        rules.txt: |
+          groups:
+            - name: Watchdog
+              rules:
+                - alert: Watchdog
+                  expr: |
+                    sum(rate({namespace="loki-distributed"} [5m])) > 0
+                  for: 0m
+                  labels:
+                      severity: none
+                  annotations:
+                      summary: loki-distrubuted ruler watchdog for alerts
 promtail:
   config:
     clients:
