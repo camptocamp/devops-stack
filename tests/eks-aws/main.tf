@@ -108,7 +108,7 @@ provider "helm" {
 }
 
 module "argocd_bootstrap" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v1.0.0-alpha.1"
 
   cluster_name   = module.eks.cluster_name
   base_domain    = module.eks.base_domain
@@ -133,7 +133,7 @@ provider "argocd" {
 }
 
 module "ingress" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//eks"
+  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//eks?ref=v1.0.0-alpha.1"
 
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
@@ -143,7 +143,7 @@ module "ingress" {
 }
 
 module "oidc" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-oidc-aws-cognito.git"
+  source = "git::https://github.com/camptocamp/devops-stack-module-oidc-aws-cognito.git?ref=v1.0.0-alpha.1"
 
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
@@ -156,15 +156,20 @@ module "oidc" {
 }
 
 module "thanos" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//eks"
+  # source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git?ref=v1.0.0-alpha.4"
+  source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//eks?ref=bucket_credentials_v2"
+  # TODO Change source back to the correct release tag
 
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
   base_domain      = module.eks.base_domain
   cluster_issuer   = local.cluster_issuer
 
-  cluster_oidc_issuer_url = module.eks.cluster_oidc_issuer_url
-
+  metrics_storage = {
+    bucket_id    = aws_s3_bucket.thanos_metrics_storage.id
+    region       = aws_s3_bucket.thanos_metrics_storage.region
+    iam_role_arn = module.iam_assumable_role_thanos.iam_role_arn
+  }
   thanos = {
     oidc = module.oidc.oidc
   }
@@ -173,14 +178,20 @@ module "thanos" {
 }
 
 module "prometheus-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//eks"
+  # source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//eks?ref=v1.0.0-alpha.1"
+  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//eks?ref=variable_revamp"
+  # TODO Change source back to the correct release tag
 
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
   base_domain      = module.eks.base_domain
   cluster_issuer   = local.cluster_issuer
 
-  metrics_archives = module.thanos.metrics_archives
+  metrics_storage = {
+    bucket_id    = aws_s3_bucket.thanos_metrics_storage.id
+    region       = aws_s3_bucket.thanos_metrics_storage.region
+    iam_role_arn = module.iam_assumable_role_thanos.iam_role_arn
+  }
 
   prometheus = {
     oidc = module.oidc.oidc
@@ -197,23 +208,30 @@ module "prometheus-stack" {
 }
 
 module "loki-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack.git//eks"
+  # source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack.git//eks?ref=v1.0.0-alpha.1"
+  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack.git//eks?ref=bucket_credentials"
+  # TODO Change source back to the correct release tag
 
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
   base_domain      = module.eks.base_domain
 
-  cluster_oidc_issuer_url = module.eks.cluster_oidc_issuer_url
+  logs_storage = {
+    bucket_id    = aws_s3_bucket.loki_logs_storage.id
+    region       = aws_s3_bucket.loki_logs_storage.region
+    iam_role_arn = module.iam_assumable_role_loki.iam_role_arn
+  }
 
   depends_on = [module.prometheus-stack]
 }
 
 module "grafana" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-grafana.git"
+  source = "git::https://github.com/camptocamp/devops-stack-module-grafana.git?ref=v1.0.0-alpha.1"
 
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
   base_domain      = module.eks.base_domain
+  cluster_issuer   = local.cluster_issuer
 
   grafana = {
     oidc = module.oidc.oidc
@@ -223,7 +241,7 @@ module "grafana" {
 }
 
 module "cert-manager" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//eks"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//eks?ref=v1.0.0-alpha.1"
 
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
@@ -235,7 +253,7 @@ module "cert-manager" {
 }
 
 module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v1.0.0-alpha.1"
 
   cluster_name = module.eks.cluster_name
   oidc = {
@@ -272,30 +290,28 @@ module "argocd" {
 }
 
 module "metrics_server" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-application.git"
+  source = "git::https://github.com/camptocamp/devops-stack-module-application.git?ref=v1.1.0"
 
   name             = "metrics-server"
   argocd_namespace = local.argocd_namespace
 
   source_repo            = "https://github.com/kubernetes-sigs/metrics-server.git"
   source_repo_path       = "charts/metrics-server"
-  source_target_revision = "master"
+  source_target_revision = "metrics-server-helm-chart-3.8.2"
   destination_namespace  = "kube-system"
 
   depends_on = [module.argocd]
 }
 
 module "helloworld_apps" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git"
+  source = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git?ref=v1.1.0"
 
   depends_on = [module.argocd]
 
   name                   = "helloworld-apps"
   argocd_namespace       = local.argocd_namespace
   project_dest_namespace = "*"
-  project_source_repos = [
-    "https://github.com/camptocamp/devops-stack-helloworld-templates.git",
-  ]
+  project_source_repo    = "https://github.com/camptocamp/devops-stack-helloworld-templates.git"
 
   generators = [
     {
@@ -333,11 +349,11 @@ module "helloworld_apps" {
               name: "${module.eks.cluster_name}"
               domain: "${module.eks.base_domain}"
             apps:
-              traefik_dashboard: false # TODO Add variable when we configure the Traefik Dashboard
-              grafana: ${module.grafana.grafana_enabled || module.prometheus-stack.grafana_enabled}
-              prometheus: ${module.prometheus-stack.prometheus_enabled}
-              thanos: ${module.thanos.thanos_enabled}
-              alertmanager: ${module.prometheus-stack.alertmanager_enabled}
+              traefik_dashboard: false
+              grafana: true
+              prometheus: true
+              thanos: true
+              alertmanager: true
           EOT
         }
       }

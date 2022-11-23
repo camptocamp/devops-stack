@@ -36,7 +36,7 @@ resource "aws_efs_mount_target" "eks" {
 
 
 module "efs" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-efs-csi-driver.git"
+  source = "git::https://github.com/camptocamp/devops-stack-module-efs-csi-driver.git?ref=v1.0.0-alpha.1"
 
   argocd_namespace   = local.argocd_namespace
   efs_file_system_id = aws_efs_file_system.eks.id
