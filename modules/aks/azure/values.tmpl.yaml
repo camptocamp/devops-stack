@@ -251,10 +251,10 @@ kube-prometheus-stack:
   prometheus-node-exporter:
     resources:
       limits:
-        memory: 24Mi
+        memory: 36Mi
       requests:
-        cpu: 10m
-        memory: 16Mi
+        cpu: 50m
+        memory: 24Mi
     rbac:
       pspEnabled: false
 
