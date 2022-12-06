@@ -11,24 +11,26 @@ urls:
   latest_version_segment: latest # Define each component's latest version as the latest in the URL 
 content:
   sources:
-  - url: ./
+  # - url: ./
+  - url: https://github.com/camptocamp/devops-stack.git
     start_path: docs
-    branches: []
-    tags:
-      # Build all version tags
-      - "v*"
+    branches: [v1-documentation] # TODO Change this to v1 before merging to v1 branch
+    # Tags deactivated for as long as we only have this doc published on the main repository
+    # tags:
+    #   # Build all version tags
+    #   - "v*"
 
-      # Exclude old versions
-      - "!v0.{1..56}.*" # Exclude versions from v0.1.* until v0.56.*
-      - "!v1-alpha*"
+    #   # Exclude old versions
+    #   - "!v0.{1..56}.*" # Exclude versions from v0.1.* until v0.56.*
+    #   - "!v1-alpha*"
 
-      # TODO Remove this block evetually as it will no longer be needed since we will not have this problem anymore.
-      # Exclude specific versions where the version in antora.yml wasn’t updated during release process
-      - "!v0.44.0"
-      - "!v0.49.1"
-      - "!v0.50.4"
-      - "!v0.51.0"
-      - "!v0.53.0"
+    #   # TODO Remove this block evetually as it will no longer be needed since we will not have this problem anymore.
+    #   # Exclude specific versions where the version in antora.yml wasn’t updated during release process
+    #   - "!v0.44.0"
+    #   - "!v0.49.1"
+    #   - "!v0.50.4"
+    #   - "!v0.51.0"
+    #   - "!v0.53.0"
   - url: https://github.com/camptocamp/devops-stack-module-kind.git
     start_path: docs
     branches: []
