@@ -24,7 +24,7 @@ content:
     #   - "!v0.{1..56}.*" # Exclude versions from v0.1.* until v0.56.*
     #   - "!v1-alpha*"
 
-    #   # TODO Remove this block evetually as it will no longer be needed since we will not have this problem anymore.
+    #   # TODO Remove this block eventually as it will no longer be needed since we will not have this problem anymore.
     #   # Exclude specific versions where the version in antora.yml wasn’t updated during release process
     #   - "!v0.44.0"
     #   - "!v0.49.1"
