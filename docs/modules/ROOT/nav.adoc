@@ -60,6 +60,18 @@
 ** xref:ROOT:explanations/documentation.adoc[Docs as Code]
 
 .*Modules*
+* xref:kind:ROOT:README.adoc[KinD]
 * xref:application:ROOT:README.adoc[Application]
 * xref:applicationset:ROOT:README.adoc[ApplicationSet]
+* https://github.com/camptocamp/devops-stack-module-argocd[Argo CD,window=_blank]
+* https://github.com/camptocamp/devops-stack-module-cert-manager[Cert-manager,window=_blank]
+* https://github.com/camptocamp/devops-stack-module-dex[Dex,window=_blank]
+* https://github.com/camptocamp/devops-stack-module-efs-csi-driver[EFS CSI Driver,window=_blank]
+* https://github.com/camptocamp/devops-stack-module-grafana[Grafana,window=_blank]
+* https://github.com/camptocamp/devops-stack-module-keycloak[Keycloak,window=_blank]
+* https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack[Kube-prometheus-stack,window=_blank]
+* https://github.com/camptocamp/devops-stack-module-loki-stack[Loki,window=_blank]
+* https://github.com/camptocamp/devops-stack-module-minio[MinIO,window=_blank]
+* https://github.com/camptocamp/devops-stack-module-oidc-aws-cognito[OIDC Cognito,window=_blank]
 * xref:thanos:ROOT:README.adoc[Thanos]
+* https://github.com/camptocamp/devops-stack-module-traefik[Traefik,window=_blank]
