@@ -14,7 +14,7 @@ content:
   # - url: ./
   - url: https://github.com/camptocamp/devops-stack.git
     start_path: docs
-    branches: [v1-documentation] # TODO Change this to v1 before merging to v1 branch
+    branches: [v1]
     # Tags deactivated for as long as we only have this doc published on the main repository
     # tags:
     #   # Build all version tags
