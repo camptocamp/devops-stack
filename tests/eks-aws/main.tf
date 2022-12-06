@@ -1,7 +1,3 @@
-locals {
-  cluster_issuer = "letsencrypt-staging"
-}
-
 data "aws_availability_zones" "available" {}
 
 module "vpc" {
@@ -70,11 +66,11 @@ resource "aws_cognito_user_in_group" "add_admin_argocd_admin" {
 */
 
 module "eks" {
-  source = "../../modules/eks/aws"
+  source = "git::https://github.com/camptocamp/devops-stack.git//modules/eks/aws?ref=v1"
 
-  cluster_name = "ckg-v1test"
+  cluster_name = "gh-v1-cluster"
   base_domain  = "is-sandbox.camptocamp.com"
-  #cluster_version = "1.22"
+  # cluster_version = "1.22"
 
   vpc_id         = module.vpc.vpc_id
   vpc_cidr_block = module.vpc.vpc_cidr_block
@@ -109,10 +105,6 @@ provider "helm" {
     cluster_ca_certificate = module.eks.kubernetes_cluster_ca_certificate
     token                  = module.eks.kubernetes_token
   }
-}
-
-locals {
-  argocd_namespace = "argocd"
 }
 
 module "argocd_bootstrap" {
@@ -151,7 +143,7 @@ module "ingress" {
 }
 
 module "oidc" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-oidc-aws-cognito.git/"
+  source = "git::https://github.com/camptocamp/devops-stack-module-oidc-aws-cognito.git"
 
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
@@ -163,14 +155,32 @@ module "oidc" {
   depends_on = [module.eks]
 }
 
-module "monitoring" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git/"
+module "thanos" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//eks"
 
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
   base_domain      = module.eks.base_domain
   cluster_issuer   = local.cluster_issuer
-  metrics_archives = {}
+
+  cluster_oidc_issuer_url = module.eks.cluster_oidc_issuer_url
+
+  thanos = {
+    oidc = module.oidc.oidc
+  }
+
+  depends_on = [module.argocd_bootstrap]
+}
+
+module "prometheus-stack" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//eks"
+
+  cluster_name     = module.eks.cluster_name
+  argocd_namespace = local.argocd_namespace
+  base_domain      = module.eks.base_domain
+  cluster_issuer   = local.cluster_issuer
+
+  metrics_archives = module.thanos.metrics_archives
 
   prometheus = {
     oidc = module.oidc.oidc
@@ -179,36 +189,11 @@ module "monitoring" {
     oidc = module.oidc.oidc
   }
   grafana = {
-    enable = false
+    # enable = false # Optional
+    additional_data_sources = true
   }
-  helm_values = [{
-    kube-prometheus-stack = {
-      grafana = {
-        forceDeployDashboards = true
-        forceDeployDatasources = true
-        sidecar = {
-          datasources = {
-            defaultDatasourceEnabled = false
-          }
-        }
-        additionalDataSources = [
-          {
-            name = "Prometheus"
-            type = "prometheus"
-            url       = "http://kube-prometheus-stack-prometheus.kube-prometheus-stack:9090"
-            access    = "proxy"
-            isDefault = true
-            jsonData = {
-              tlsAuth           = false
-              tlsAuthWithCACert = false
-              oauthPassThru     = true
-            }
-          },
-        ]
-      }
-    }
-  }]
-  depends_on = [module.argocd_bootstrap]
+
+  depends_on = [module.argocd_bootstrap, module.thanos]
 }
 
 module "loki-stack" {
@@ -220,7 +205,7 @@ module "loki-stack" {
 
   cluster_oidc_issuer_url = module.eks.cluster_oidc_issuer_url
 
-  depends_on = [module.monitoring]
+  depends_on = [module.prometheus-stack]
 }
 
 module "grafana" {
@@ -229,11 +214,12 @@ module "grafana" {
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
   base_domain      = module.eks.base_domain
+
   grafana = {
     oidc = module.oidc.oidc
   }
-  
-  depends_on = [module.monitoring, module.loki-stack]
+
+  depends_on = [module.prometheus-stack, module.loki-stack]
 }
 
 module "cert-manager" {
@@ -245,14 +231,14 @@ module "cert-manager" {
 
   cluster_oidc_issuer_url = module.eks.cluster_oidc_issuer_url
 
-  depends_on = [module.monitoring]
+  depends_on = [module.prometheus-stack]
 }
 
 module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git/"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git"
 
   cluster_name = module.eks.cluster_name
-  oidc         = {
+  oidc = {
     name         = "OIDC"
     issuer       = module.oidc.oidc.issuer_url
     clientID     = module.oidc.oidc.client_id
@@ -282,21 +268,39 @@ module "argocd" {
   #    revision = local.target_revision
   #  }}
 
-  depends_on = [module.cert-manager, module.monitoring]
+  depends_on = [module.cert-manager, module.prometheus-stack, module.grafana]
 }
 
-module "helloworld" {
-  source           = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git/"
-  name             = "apps"
-  argocd_namespace = "argocd"
-  namespace        = "helloworld"
+module "metrics_server" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-application.git"
+
+  name             = "metrics-server"
+  argocd_namespace = local.argocd_namespace
+
+  source_repo            = "https://github.com/kubernetes-sigs/metrics-server.git"
+  source_repo_path       = "charts/metrics-server"
+  source_target_revision = "master"
+  destination_namespace  = "kube-system"
 
   depends_on = [module.argocd]
+}
+
+module "helloworld_apps" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git"
+
+  depends_on = [module.argocd]
+
+  name                   = "helloworld-apps"
+  argocd_namespace       = local.argocd_namespace
+  project_dest_namespace = "*"
+  project_source_repos = [
+    "https://github.com/camptocamp/devops-stack-helloworld-templates.git",
+  ]
 
   generators = [
     {
       git = {
-        repoURL  = "https://github.com/camptocamp/devops-stack-helloworld-templates.git/"
+        repoURL  = "https://github.com/camptocamp/devops-stack-helloworld-templates.git"
         revision = "main"
 
         directories = [
@@ -313,34 +317,41 @@ module "helloworld" {
     }
 
     spec = {
-      project = "default"
+      project = "helloworld-apps"
 
       source = {
-        repoURL        = "https://github.com/camptocamp/devops-stack-helloworld-templates.git/"
+        repoURL        = "https://github.com/camptocamp/devops-stack-helloworld-templates.git"
         targetRevision = "main"
         path           = "{{path}}"
 
         helm = {
           valueFiles = []
           # The following value defines this global variables that will be available to all apps in apps/*
-          # This apps needs these to generate the ingresses containing the name and base domain of the cluster. 
-          values     = <<-EOT
+          # These are needed to generate the ingresses containing the name and base domain of the cluster.
+          values = <<-EOT
             cluster:
               name: "${module.eks.cluster_name}"
               domain: "${module.eks.base_domain}"
+            apps:
+              traefik_dashboard: false # TODO Add variable when we configure the Traefik Dashboard
+              grafana: ${module.grafana.grafana_enabled || module.prometheus-stack.grafana_enabled}
+              prometheus: ${module.prometheus-stack.prometheus_enabled}
+              thanos: ${module.thanos.thanos_enabled}
+              alertmanager: ${module.prometheus-stack.alertmanager_enabled}
           EOT
         }
       }
 
       destination = {
-        server    = "https://kubernetes.default.svc"
+        name      = "in-cluster"
         namespace = "{{path.basename}}"
       }
-      
+
       syncPolicy = {
         automated = {
-          selfHeal = true
-          prune    = true
+          allowEmpty = false
+          selfHeal   = true
+          prune      = true
         }
         syncOptions = [
           "CreateNamespace=true"
@@ -349,115 +360,3 @@ module "helloworld" {
     }
   }
 }
-
-/*
-# This module here has a slight variation on the definition above.
-# What happens is: this module defines an application set (saved in the argocd namespace) that then
-# iterates over each folder in apps/*, creating a namespace for each one and in each one of
-# those namespaces it creates another another application set that takes the chart inside the 
-# folder charts and the definition inside charts/projects.
-
-### Chart.yaml
-# apiVersion: v2
-# appVersion: "1.0"
-# description: projects
-# name: projects
-# version: 1.0.0
-
-### applicationset.yaml
-# ---
-# apiVersion: argoproj.io/v1alpha1
-# kind: ApplicationSet
-# metadata:
-#   annotations:
-#     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
-#   name: {{ $.Values.project_name }}
-#   namespace: argocd
-# spec:
-#   generators:
-#   - git:
-#       directories:
-#       - path: apps/{{ $.Values.project_name }}/*
-#       repoURL: git@gitlab.com:camptocamp/is/shared-services/argo-cd.git
-#       revision: HEAD
-#   template:
-#     metadata:
-#       name: {{ printf "%s-%s" $.Values.project_name "{{path.basename}}" }}
-#     spec:
-#       destination:
-#         namespace: {{ $.Values.project_name }}
-#         server: https://kubernetes.default.svc
-#       project: default
-#       source:
-#         helm:
-#           valueFiles:
-#           - values.yaml
-#           - secrets.yaml
-#         path: {{ "'{{path}}'" }}
-#         repoURL: git@gitlab.com:camptocamp/is/shared-services/argo-cd.git
-#         targetRevision: HEAD
-#       syncPolicy:
-#         automated: 
-#           selfHeal: true
-#           prune: true
-#         syncOptions:
-#           - CreateNamespace=true
-
-module "helloworld" {
-  source           = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git/"
-  name             = "apps"
-  argocd_namespace = "argocd"
-  namespace        = "argocd"
-  generators = [
-    {
-      git = {
-        repoURL  = "https://github.com/lentidas/devops-stack-helloworld-templates"
-        revision = "main"
-
-        directories = [
-          {
-            path = "apps/*"
-          }
-        ]
-      }
-    }
-  ]
-  template = {
-    metadata = {
-      name = "{{path.basename}}"
-    }
-
-    spec = {
-      project = "default"
-
-      source = {
-        repoURL        = "https://github.com/lentidas/devops-stack-helloworld-templates"
-        targetRevision = "main"
-        path           = "charts/projects"
-
-        helm = {
-          valueFiles = []
-          values     = <<-EOT
-            project_name: "{{path.basename}}"
-          EOT
-        }
-      }
-
-      destination = {
-        server    = "https://kubernetes.default.svc"
-        namespace = "{{path.basename}}"
-      }
-      
-      syncPolicy = {
-        automated = {
-          selfHeal = true
-          prune    = true
-        }
-        syncOptions = [
-          "CreateNamespace=true"
-        ]
-      }
-    }
-  }
-}
-*/
