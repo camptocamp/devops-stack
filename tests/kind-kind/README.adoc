@@ -1,0 +1,5 @@
+= KinD test deployment
+
+Test deployment using KinD. Simply do a `terraform init and terraform apply` on this folder to get started.
+
+NOTE: To destroy the cluster you'll need the command `terraform state rm $(terraform state list | grep "argocd_application\|argocd_project\|kubernetes_\|helm_") && terraform destroy`.
