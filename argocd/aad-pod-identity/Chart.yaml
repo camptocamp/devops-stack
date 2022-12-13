@@ -8,5 +8,5 @@ description: |
   This chart enables assigning Azure Active Directory Identities to Kubernetes applications.
 dependencies:
   - name: "aad-pod-identity"
-    version: "4.1.1"
+    version: "4.1.14"
     repository: "https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts"
