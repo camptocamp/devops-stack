@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.61.0](https://github.com/camptocamp/devops-stack/compare/v0.60.2...v0.61.0) (2022-12-14)
+
+
+### Features
+
+* **aad_pod_identity:** update chart ([996a03a](https://github.com/camptocamp/devops-stack/commit/996a03a6e0215ab952bdc10cf69b9d4a4b052835))
+
 ## [0.60.2](https://github.com/camptocamp/devops-stack/compare/v0.60.1...v0.60.2) (2022-11-16)
 
 
