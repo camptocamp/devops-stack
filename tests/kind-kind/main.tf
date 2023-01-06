@@ -1,40 +1,39 @@
-# Cluster
-
 locals {
-  cluster_name     = "gh-v1-cluster"
-  cluster_issuer   = "ca-issuer"
-  argocd_namespace = "argocd"
+  cluster_name   = "kind"
+  cluster_issuer = "ca-issuer"
 }
 
 module "kind" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-kind.git?ref=v1.0.0"
+  source = "../../github/camptocamp/devops-stack-modules/devops-stack-module-cluster-kind"
 
-  cluster_name = local.cluster_name
-  # base_domain  = "127-0-0-1.nip.io" # I need this line in Windows to access my pods in WSL 2
-
-  # Need to use < v1.25 because of Keycloak trying to deploy a PodDisruptionBudget
-  # https://kubernetes.io/docs/reference/using-api/deprecation-guide/#poddisruptionbudget-v125 
+  cluster_name       = local.cluster_name
   kubernetes_version = "v1.24.7"
 }
 
-#######
-
-# Providers
-
 provider "kubernetes" {
-  host                   = module.kind.kubernetes_host
-  client_certificate     = module.kind.kubernetes_client_certificate
-  client_key             = module.kind.kubernetes_client_key
-  cluster_ca_certificate = module.kind.kubernetes_cluster_ca_certificate
+  host                   = module.kind.parsed_kubeconfig.host
+  client_certificate     = module.kind.parsed_kubeconfig.client_certificate
+  client_key             = module.kind.parsed_kubeconfig.client_key
+  cluster_ca_certificate = module.kind.parsed_kubeconfig.cluster_ca_certificate
 }
 
 provider "helm" {
   kubernetes {
-    host               = module.kind.kubernetes_host
-    client_certificate = module.kind.kubernetes_client_certificate
-    client_key         = module.kind.kubernetes_client_key
-    insecure           = true # This is needed because the Certificate Authority is self-signed.
+    host               = module.kind.parsed_kubeconfig.host
+    client_certificate = module.kind.parsed_kubeconfig.client_certificate
+    client_key         = module.kind.parsed_kubeconfig.client_key
+    insecure           = true
   }
+}
+
+module "metallb" {
+  source = "../../github/camptocamp/devops-stack-modules/devops-stack-module-metallb"
+
+  subnet = module.kind.kind_subnet
+}
+
+module "argocd_bootstrap" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=bootstrap_minimal"
 }
 
 provider "argocd" {
@@ -43,165 +42,74 @@ provider "argocd" {
   insecure                    = true
   plain_text                  = true
   port_forward                = true
-  port_forward_with_namespace = local.argocd_namespace
-
+  port_forward_with_namespace = module.argocd_bootstrap.argocd_namespace
   kubernetes {
-    host                   = module.kind.kubernetes_host
-    client_certificate     = module.kind.kubernetes_client_certificate
-    client_key             = module.kind.kubernetes_client_key
-    cluster_ca_certificate = module.kind.kubernetes_cluster_ca_certificate
+    host                   = module.kind.parsed_kubeconfig.host
+    client_certificate     = module.kind.parsed_kubeconfig.client_certificate
+    client_key             = module.kind.parsed_kubeconfig.client_key
+    cluster_ca_certificate = module.kind.parsed_kubeconfig.cluster_ca_certificate
   }
 }
 
-#######
-
-# Bootstrap Argo CD
-
-module "argocd_bootstrap" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v1.0.0-alpha.1"
-
-  cluster_name = module.kind.cluster_name
-  base_domain  = module.kind.base_domain
-
-  # An empty cluster issuer is the only way I got the bootstrap Argo CD to be deployed.
-  # The `ca-issuer` is only available after we deployed `cert-manager`.
-  cluster_issuer = ""
-
-  depends_on = [module.kind]
-}
-
-#######
-
-# Cluster apps
-
 module "ingress" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//nodeport?ref=v1.0.0-alpha.4"
+  source          = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//kind?ref=refactor-local-module"
+  target_revision = "refactor-local-module"
 
-  cluster_name     = module.kind.cluster_name
-  base_domain      = module.kind.base_domain
-  argocd_namespace = local.argocd_namespace
+  cluster_name = local.cluster_name
 
-  # We cannot have multiple Traefik replicas binding to the same ports while both are deployed on 
-  # the same KinD container in Docker, which is our case as we only deploy the control-plane node.
-  # TODO Consider adding these modifications to the module directly.
-  helm_values = [{
-    traefik = {
-      deployment = {
-        replicas = 1
-      }
-      nodeSelector = {
-        "ingress-ready" = "true"
-      }
-      tolerations = [
-        {
-          key      = "node-role.kubernetes.io/control-plane"
-          operator = "Equal"
-          effect   = "NoSchedule"
-        },
-        {
-          key      = "node-role.kubernetes.io/master"
-          operator = "Equal"
-          effect   = "NoSchedule"
-        }
-      ]
-    }
-  }]
+  # TODO fix: the base domain is defined later. Proposal: remove redirection from traefik module and add it in dependent modules.
+  # For now random value is passed to base_domain. Redirections will not work before fix.
+  base_domain = "something.com"
 
-  depends_on = [module.argocd_bootstrap]
+  argocd_namespace = module.argocd_bootstrap.argocd_namespace
 }
 
+# TODO remove useless base_domain and cluster_name variables from "self-signed" module.
 module "cert-manager" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//self-signed?ref=v1.0.0-alpha.2"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//self-signed?ref=v1.0.0-alpha.3"
 
-  cluster_name     = module.kind.cluster_name
-  base_domain      = module.kind.base_domain
-  argocd_namespace = local.argocd_namespace
-
-  depends_on = [module.argocd_bootstrap]
+  cluster_name     = local.cluster_name
+  base_domain      = format("%s.nip.io", replace(module.ingress.external_ip, ".", "-"))
+  argocd_namespace = module.argocd_bootstrap.argocd_namespace
 }
 
+# TODO refactor keycloak module + clean up.
+# Noticed idempotence issue
+# Keycloak-operator application deletion fails. Doesn't clean up: user, client and realm
 module "oidc" {
   source = "git::https://github.com/camptocamp/devops-stack-module-keycloak?ref=v1.0.0-alpha.1"
 
-  cluster_name   = module.kind.cluster_name
-  base_domain    = module.kind.base_domain
+  cluster_name   = local.cluster_name
+  base_domain    = format("%s.nip.io", replace(module.ingress.external_ip, ".", "-"))
   cluster_issuer = local.cluster_issuer
 
-  argocd = { # TODO Simplify this variable in the Keycloak module because we only need the namespace and not the domain
-    namespace = local.argocd_namespace
-    domain    = module.argocd_bootstrap.argocd_domain
+  # Pass argocd_namespace variable like in other modules. Useless domain attribute is replaced with random value.
+  argocd = {
+    namespace = module.argocd_bootstrap.argocd_namespace
+    domain    = "something.com"
   }
 
-  depends_on = [module.ingress, module.cert-manager]
-}
-
-module "minio" {
-  # source = "git::https://github.com/camptocamp/devops-stack-module-minio?ref=v1.0.0"
-  source = "git::https://github.com/camptocamp/devops-stack-module-minio?ref=module_revamping"
-  # TODO Remove temporary source after we merged
-
-  cluster_name     = module.kind.cluster_name
-  base_domain      = module.kind.base_domain
-  argocd_namespace = local.argocd_namespace
-  target_revision  = "module_revamping" # TODO delete after we merged
-
-  minio_buckets = [
-    "thanos",
-    "loki",
-  ]
-
-  # Deactivate the ServiceMonitor because we need to deploy MinIO before the monitoring stack.
-  helm_values = [{
-    minio = {
-      metrics = {
-        serviceMonitor = {
-          enabled = false
-        }
-      }
-    }
-  }]
-
-  depends_on = [module.ingress, module.cert-manager]
-}
-
-module "thanos" {
-  # source = "git::https://github.com/camptocamp/devops-stack-module-thanos//kind?ref=v1.0.0"
-  source = "git::https://github.com/camptocamp/devops-stack-module-thanos//kind?ref=bucket_credentials_v2"
-
-  cluster_name     = module.kind.cluster_name
-  argocd_namespace = local.argocd_namespace
-  base_domain      = module.kind.base_domain
-  cluster_issuer   = local.cluster_issuer
-
-  metrics_storage = {
-    bucket_name       = "thanos"
-    endpoint          = module.minio.endpoint
-    access_key        = "readwrite_user" # Name given to the read-write user created by the module MinIO.
-    secret_access_key = module.minio.readwrite_secret_key
+  dependency_ids = {
+    traefik      = module.ingress.id
+    cert-manager = module.cert-manager.id
   }
-
-  thanos = {
-    oidc = module.oidc.oidc
-  }
-
-  depends_on = [module.oidc]
 }
+
+# module "minio" {}
+
+# module "thanos" {}
+
+# module "loki-stack" {}
 
 module "prometheus-stack" {
-  # source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack//kind?ref=v1.0.0"
-  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack//kind?ref=variable_revamp"
+  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//kind?ref=fix-secret-dependency"
 
-  cluster_name     = module.kind.cluster_name
-  argocd_namespace = local.argocd_namespace
-  base_domain      = module.kind.base_domain
+  cluster_name     = local.cluster_name
+  argocd_namespace = module.argocd_bootstrap.argocd_namespace
+  base_domain      = format("%s.nip.io", replace(module.ingress.external_ip, ".", "-"))
   cluster_issuer   = local.cluster_issuer
 
-  metrics_storage = {
-    bucket_name       = "thanos"
-    endpoint          = module.minio.endpoint
-    access_key        = "readwrite_user" # Name given to the read-write user created by the module MinIO.
-    secret_access_key = module.minio.readwrite_secret_key
-  }
+  # metrics_storage = {}
 
   prometheus = {
     oidc = module.oidc.oidc
@@ -210,58 +118,50 @@ module "prometheus-stack" {
     oidc = module.oidc.oidc
   }
   grafana = {
-    # enable = false # Optional
+    enabled                 = true
+    oidc                    = module.oidc.oidc
     additional_data_sources = true
   }
 
-  depends_on = [module.oidc]
-}
-
-module "loki-stack" {
-  # source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack//kind?ref=v1.0.0"
-  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack//kind?ref=bucket_credentials"
-
-  cluster_name     = module.kind.cluster_name
-  argocd_namespace = local.argocd_namespace
-  base_domain      = module.kind.base_domain
-
-  logs_storage = {
-    bucket_name       = "loki"
-    endpoint          = module.minio.endpoint
-    access_key        = "readwrite_user" # Name given to the read-write user created by the module MinIO.
-    secret_access_key = module.minio.readwrite_secret_key
-  }
-
-  depends_on = [module.prometheus-stack]
-}
-
-module "grafana" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-grafana.git?ref=v1.0.0-alpha.1"
-
-  cluster_name     = module.kind.cluster_name
-  argocd_namespace = local.argocd_namespace
-  base_domain      = module.kind.base_domain
-  cluster_issuer   = local.cluster_issuer
-
-  grafana = {
-    oidc = module.oidc.oidc
-    # We need to explicitly tell Grafana to ignore the self-signed certificate on the OIDC provider.
-    generic_oauth_extra_args = {
-      tls_skip_verify_insecure = true
+  # Grafana server can't validate Keycloak's certificate. Following is a temporary workaround.
+  # TODO fix this. Maybe a way to disable cert validation. If there is no way, add this config conditionally to module.
+  helm_values = [{
+    kube-prometheus-stack = {
+      grafana = {
+        extraSecretMounts = [
+          {
+            name       = "ca-certificate"
+            secretName = "grafana-tls"
+            mountPath  = "/etc/ssl/certs/ca.crt"
+            readOnly   = true
+            subPath    = "ca.crt"
+          },
+        ]
+      }
     }
-  }
+  }]
 
-  depends_on = [module.prometheus-stack, module.loki-stack]
+  # dependency_ids = {
+  #   loki-stack   = module.loki-stack.id
+  #   cert-manager = module.cert-manager.id
+  # }
 }
 
 module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v1.0.0-alpha.1"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=bootstrap_minimal"
 
-  cluster_name   = module.kind.cluster_name
-  base_domain    = module.kind.base_domain
-  cluster_issuer = local.cluster_issuer
+  target_revision = "bootstrap_minimal"
+  base_domain     = format("%s.nip.io", replace(module.ingress.external_ip, ".", "-"))
+  cluster_name    = local.cluster_name
+  cluster_issuer  = local.cluster_issuer
 
-  bootstrap_values = module.argocd_bootstrap.bootstrap_values
+  argocd = {
+    admin_enabled            = "true"
+    domain                   = format("argocd.apps.%s.%s", local.cluster_name, format("%s.nip.io", replace(module.ingress.external_ip, ".", "-")))
+    namespace                = module.argocd_bootstrap.argocd_namespace
+    accounts_pipeline_tokens = module.argocd_bootstrap.argocd_accounts_pipeline_tokens
+    server_secretkey         = module.argocd_bootstrap.argocd_server_secretkey
+  }
 
   oidc = {
     name         = "OIDC"
@@ -273,106 +173,44 @@ module "argocd" {
         essential = true
       }
     }
-    requestedScopes = [
-      "openid", "profile", "email"
-    ]
+    requestedScopes = ["email", "groups"]
   }
 
-  # TODO Get Argo CD to work with OIDC from Keycloak
   helm_values = [{
     argo-cd = {
+      # TODO same thing as Grafana.
       server = {
-        config = {
-          "oidc.tls.insecure.skip.verify" = true
+        volumeMounts = [
+          {
+            name      = "certificate"
+            mountPath = "/etc/ssl/certs/ca.crt"
+            subPath   = "ca.crt"
+          }
+        ]
+        volumes = [
+          {
+            name = "certificate"
+            secret = {
+              secretName = "argocd-tls"
+            }
+          }
+        ]
+      }
+      configs = {
+        # TODO consider adding jdoe user to a group w/ admin privelege.
+        # Related to Keycloak refactoring
+        rbac = {
+          "scopes"         = "[email]"
+          "policy.csv"     = <<-EOT
+            g, pipeline, role:admin
+            g, jdoe@example.com, role:admin
+            EOT
         }
       }
     }
   }]
 
-  argocd = {
-    namespace                = local.argocd_namespace
-    server_secretkey         = module.argocd_bootstrap.argocd_server_secretkey
-    accounts_pipeline_tokens = module.argocd_bootstrap.argocd_accounts_pipeline_tokens
-    server_admin_password    = module.argocd_bootstrap.argocd_server_admin_password
-    domain                   = module.argocd_bootstrap.argocd_domain
-    admin_enabled            = true # Enable admin user while we cannot use OIDC
+  dependency_ids = {
+    kube-prometheus-stack = module.prometheus-stack.id
   }
-
-  depends_on = [module.cert-manager, module.prometheus-stack, module.grafana]
 }
-
-# module "helloworld_apps" {
-#   source = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git?ref=v1.1.0"
-
-#   depends_on = [module.argocd]
-
-#   name                   = "helloworld-apps"
-#   argocd_namespace       = local.argocd_namespace
-#   project_dest_namespace = "*"
-#   project_source_repo    = "https://github.com/camptocamp/devops-stack-helloworld-templates.git"
-
-#   generators = [
-#     {
-#       git = {
-#         repoURL  = "https://github.com/camptocamp/devops-stack-helloworld-templates.git"
-#         revision = "main"
-
-#         directories = [
-#           {
-#             path = "apps/*"
-#           }
-#         ]
-#       }
-#     }
-#   ]
-#   template = {
-#     metadata = {
-#       name = "{{path.basename}}"
-#     }
-
-#     spec = {
-#       project = "helloworld-apps"
-
-#       source = {
-#         repoURL        = "https://github.com/camptocamp/devops-stack-helloworld-templates.git"
-#         targetRevision = "main"
-#         path           = "{{path}}"
-
-#         helm = {
-#           valueFiles = []
-#           # The following value defines this global variables that will be available to all apps in apps/*
-#           # These are needed to generate the ingresses containing the name and base domain of the cluster.
-#           values = <<-EOT
-#             cluster:
-#               name: "${module.kind.cluster_name}"
-#               domain: "${module.kind.base_domain}"
-#             apps:
-#               traefik_dashboard: false
-#               grafana: true
-#               prometheus: true
-#               thanos: true
-#               alertmanager: true
-#           EOT
-#         }
-#       }
-
-#       destination = {
-#         name      = "in-cluster"
-#         namespace = "{{path.basename}}"
-#       }
-
-#       syncPolicy = {
-#         automated = {
-#           allowEmpty = false
-#           selfHeal   = true
-#           prune      = true
-#         }
-#         syncOptions = [
-#           "CreateNamespace=true"
-#         ]
-#       }
-#     }
-#   }
-# }
-
-########
