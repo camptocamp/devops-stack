@@ -4,7 +4,7 @@ locals {
 }
 
 module "kind" {
-  source = "../../github/camptocamp/devops-stack-modules/devops-stack-module-cluster-kind"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cluster-kind.git?ref=new-setup"
 
   cluster_name       = local.cluster_name
   kubernetes_version = "v1.24.7"
@@ -27,7 +27,7 @@ provider "helm" {
 }
 
 module "metallb" {
-  source = "../../github/camptocamp/devops-stack-modules/devops-stack-module-metallb"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git"
 
   subnet = module.kind.kind_subnet
 }
