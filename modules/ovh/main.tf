@@ -57,7 +57,7 @@ module "cluster" {
 }
 
 module "argocd" {
-  source = "../../argocd-helm"
+  source = "../argocd-helm"
 
   kubeconfig              = local.kubeconfig
   repo_url                = var.repo_url
@@ -112,7 +112,7 @@ module "argocd" {
   repositories = var.repositories
 
   app_of_apps_values_overrides = [
-    templatefile("${path.module}/../values.tmpl.yaml",
+    templatefile("${path.module}/values.tmpl.yaml",
       {
         base_domain      = local.base_domain
         cluster_name     = var.cluster_name
