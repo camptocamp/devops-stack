@@ -112,7 +112,7 @@ module "argocd" {
   repositories = var.repositories
 
   app_of_apps_values_overrides = [
-    templatefile("${path.module}/values.tmpl.yaml",
+    templatefile("${path.module}../values.tmpl.yaml",
       {
         base_domain      = local.base_domain
         cluster_name     = var.cluster_name
