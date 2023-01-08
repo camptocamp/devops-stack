@@ -1,4 +1,7 @@
 locals {
+  ovh_s3_access_key_id = ovh_cloud_project_user_s3_credential.s3_op_creds.access_key_id
+  ovh_s3_secret_access_key = ovh_cloud_project_user_s3_credential.s3_op_creds.secret_access_key
+
   base_domain                       = var.base_domain
 
   kubeconfig                        = module.cluster.kubeconfig
@@ -86,8 +89,8 @@ module "argocd" {
         "bucket"     = "thanos",
         "endpoint"   = join(".",["https://s3",var.cluster_region,"io.cloud.ovh.net"]),
         "insecure"   = true,
-        "access_key" = local.minio.access_key,
-        "secret_key" = local.minio.secret_key
+        "access_key" = local.ovh_s3_access_key_id,
+        "secret_key" = local.ovh_s3_secret_access_key
       }
     }
   }
@@ -106,6 +109,8 @@ module "argocd" {
       {
         base_domain      = local.base_domain
         cluster_name     = var.cluster_name
+        ovh_s3_access_key = local.ovh_s3_access_key_id
+        ovh_s3_secret_key = local.ovh_s3_secret_access_key
         root_cert        = base64encode(tls_self_signed_cert.root.cert_pem)
         root_key         = base64encode(tls_private_key.root.private_key_pem)
       }
@@ -157,4 +162,15 @@ resource "tls_self_signed_cert" "root" {
   ]
 
   is_ca_certificate = true
+}
+
+resource "ovh_cloud_project_user" "s3_op" {
+  description  = "user allowed to manage the project's OVH object_store"
+  role_names   = [
+    "objectstore_operator"
+  ]
+}
+
+resource "ovh_cloud_project_user_s3_credential" "s3_op_creds" {
+  user_id      = ovh_cloud_project_user.s3_op.id
 }
