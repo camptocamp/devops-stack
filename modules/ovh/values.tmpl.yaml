@@ -35,7 +35,7 @@ loki-stack:
 
         aws:
           bucketnames: loki
-          endpoint: https://minio.apps.${cluster_name}.${base_domain}
+          endpoint: https://s3.${cluster_region}.io.cloud.ovh.net
           access_key_id: ${minio_access_key}
           secret_access_key: ${minio_secret_key}
           s3forcepathstyle: true

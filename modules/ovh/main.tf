@@ -8,10 +8,6 @@ locals {
   kubernetes_client_certificate     = base64decode(local.context.users.0.user.client-certificate-data)
   kubernetes_client_key             = base64decode(local.context.users.0.user.client-key-data)
 
-  minio = {
-    access_key = var.enable_minio ? random_password.minio_accesskey.0.result : ""
-    secret_key = var.enable_minio ? random_password.minio_secretkey.0.result : ""
-  }
   keycloak_user_map = { for username, infos in var.keycloak_users : username => merge(infos, tomap({ password = random_password.keycloak_passwords[username].result })) }
 
   oidc = var.oidc != null ? var.oidc : {
@@ -26,8 +22,6 @@ locals {
       "--ssl-insecure-skip-verify=true",
     ]
   }
-
-  grafana_admin_password = var.grafana_admin_password == null ? random_password.grafana_admin_password.result : var.grafana_admin_password
 }
 
 provider "helm" {
@@ -75,12 +69,6 @@ module "argocd" {
 
   oidc = merge(local.oidc, var.prometheus_oauth2_proxy_args)
 
-  minio = {
-    enable     = var.enable_minio
-    access_key = local.minio.access_key
-    secret_key = local.minio.secret_key
-  }
-
   keycloak = {
     enable   = var.oidc == null ? true : false
     user_map = local.keycloak_user_map
@@ -90,19 +78,19 @@ module "argocd" {
     bucket_name = "loki"
   }
 
-  # metrics_archives = {
-  #   bucket_name = "thanos",
-  #   bucket_config = {
-  #     "type" = "S3",
-  #     "config" = {
-  #       "bucket"     = "thanos",
-  #       "endpoint"   = "minio.minio.svc:9000",
-  #       "insecure"   = true,
-  #       "access_key" = local.minio.access_key,
-  #       "secret_key" = local.minio.secret_key
-  #     }
-  #   }
-  # }
+  metrics_archives = {
+    bucket_name = "thanos",
+    bucket_config = {
+      "type" = "S3",
+      "config" = {
+        "bucket"     = "thanos",
+        "endpoint"   = join(".",["https://s3",var.cluster_region,"io.cloud.ovh.net"]),
+        "insecure"   = true,
+        "access_key" = local.minio.access_key,
+        "secret_key" = local.minio.secret_key
+      }
+    }
+  }
 
   grafana = {
     admin_password = local.grafana_admin_password
@@ -118,8 +106,6 @@ module "argocd" {
       {
         base_domain      = local.base_domain
         cluster_name     = var.cluster_name
-        minio_access_key = local.minio.access_key
-        minio_secret_key = local.minio.secret_key
         root_cert        = base64encode(tls_self_signed_cert.root.cert_pem)
         root_key         = base64encode(tls_private_key.root.private_key_pem)
       }
@@ -150,23 +136,6 @@ resource "random_password" "keycloak_passwords" {
   for_each = var.keycloak_users
   length   = 16
   special  = false
-}
-
-resource "random_password" "minio_accesskey" {
-  count   = var.enable_minio ? 1 : 0
-  length  = 16
-  special = false
-}
-
-resource "random_password" "minio_secretkey" {
-  count   = var.enable_minio ? 1 : 0
-  length  = 16
-  special = false
-}
-
-resource "random_password" "grafana_admin_password" {
-  length  = 16
-  special = false
 }
 
 resource "tls_private_key" "root" {
