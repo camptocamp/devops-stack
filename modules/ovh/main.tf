@@ -112,7 +112,7 @@ module "argocd" {
   repositories = var.repositories
 
   app_of_apps_values_overrides = [
-    templatefile("${path.module}../values.tmpl.yaml",
+    templatefile("${path.module}/values.tmpl.yaml",
       {
         base_domain      = local.base_domain
         cluster_name     = var.cluster_name
@@ -162,9 +162,7 @@ resource "random_password" "minio_secretkey" {
   special = false
 }
 
-resource "tls_private_key" "root" {
-  algorithm = "ECDSA"
-}
+resource "tls_private_key" "root" {}
 
 resource "tls_self_signed_cert" "root" {
   private_key_pem = tls_private_key.root.private_key_pem
