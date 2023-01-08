@@ -162,7 +162,9 @@ resource "random_password" "minio_secretkey" {
   special = false
 }
 
-resource "tls_private_key" "root" {}
+resource "tls_private_key" "root" {
+  algorithm = "ECDSA"
+}
 
 resource "tls_self_signed_cert" "root" {
   private_key_pem = tls_private_key.root.private_key_pem
