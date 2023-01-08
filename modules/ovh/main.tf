@@ -7,7 +7,7 @@ locals {
   kubernetes_cluster_ca_certificate = base64decode(local.context.clusters.0.cluster.certificate-authority-data)
   kubernetes_client_certificate     = base64decode(local.context.users.0.user.client-certificate-data)
   kubernetes_client_key             = base64decode(local.context.users.0.user.client-key-data)
-  
+
   minio = {
     access_key = var.enable_minio ? random_password.minio_accesskey.0.result : ""
     secret_key = var.enable_minio ? random_password.minio_secretkey.0.result : ""
@@ -90,19 +90,19 @@ module "argocd" {
     bucket_name = "loki"
   }
 
-  metrics_archives = {
-    bucket_name = "thanos",
-    bucket_config = {
-      "type" = "S3",
-      "config" = {
-        "bucket"     = "thanos",
-        "endpoint"   = "minio.minio.svc:9000",
-        "insecure"   = true,
-        "access_key" = local.minio.access_key,
-        "secret_key" = local.minio.secret_key
-      }
-    }
-  }
+  # metrics_archives = {
+  #   bucket_name = "thanos",
+  #   bucket_config = {
+  #     "type" = "S3",
+  #     "config" = {
+  #       "bucket"     = "thanos",
+  #       "endpoint"   = "minio.minio.svc:9000",
+  #       "insecure"   = true,
+  #       "access_key" = local.minio.access_key,
+  #       "secret_key" = local.minio.secret_key
+  #     }
+  #   }
+  # }
 
   grafana = {
     admin_password = local.grafana_admin_password
