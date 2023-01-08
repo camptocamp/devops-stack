@@ -26,6 +26,8 @@ locals {
       "--ssl-insecure-skip-verify=true",
     ]
   }
+
+  grafana_admin_password = var.grafana_admin_password == null ? random_password.grafana_admin_password.result : var.grafana_admin_password
 }
 
 provider "helm" {
@@ -158,6 +160,11 @@ resource "random_password" "minio_accesskey" {
 
 resource "random_password" "minio_secretkey" {
   count   = var.enable_minio ? 1 : 0
+  length  = 16
+  special = false
+}
+
+resource "random_password" "grafana_admin_password" {
   length  = 16
   special = false
 }
