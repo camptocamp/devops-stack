@@ -56,5 +56,35 @@ loki-stack:
         compaction_interval: 5m
 
 cert-manager:
-  tlsCrt: ${root_cert}
-  tlsKey: ${root_key}
+  clusterIssuers:
+    letsencrypt:
+      enabled: true
+    acme:
+      solvers:
+        - dns01:
+            ${indent(12, yamlencode(cert_manager_dns01))}
+  replicaCount: 2
+  podLabels:
+    aadpodidbinding: cert-manager
+  resources:
+    limits:
+      memory: 64Mi
+    requests:
+      cpu: 10m
+      memory: 16Mi
+  webhook:
+    replicaCount: 2
+    resources:
+      limits:
+        memory: 24Mi
+      requests:
+        cpu: 10m
+        memory: 16Mi
+  cainjector:
+    replicaCount: 2
+    resources:
+      limits:
+        memory: 128Mi
+      requests:
+        cpu: 10m
+        memory: 32Mi

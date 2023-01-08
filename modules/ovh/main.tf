@@ -1,15 +1,16 @@
 locals {
-  ovh_s3_access_key_id = ovh_cloud_project_user_s3_credential.s3_op_creds.access_key_id
-  ovh_s3_secret_access_key = ovh_cloud_project_user_s3_credential.s3_op_creds.secret_access_key
-
   base_domain                       = var.base_domain
-
-  kubeconfig                        = module.cluster.kubeconfig
-  context                           = yamldecode(module.cluster.kubeconfig)
+  all_domains                       = toset(compact(distinct(concat([var.base_domain], var.other_domains))))
   kubernetes_host                   = local.context.clusters.0.cluster.server
   kubernetes_cluster_ca_certificate = base64decode(local.context.clusters.0.cluster.certificate-authority-data)
   kubernetes_client_certificate     = base64decode(local.context.users.0.user.client-certificate-data)
   kubernetes_client_key             = base64decode(local.context.users.0.user.client-key-data)
+
+  context                           = yamldecode(module.cluster.kubeconfig)
+  kubeconfig                        = module.cluster.kubeconfig
+
+  ovh_s3_access_key_id     = ovh_cloud_project_user_s3_credential.s3_op_creds.access_key_id
+  ovh_s3_secret_access_key = ovh_cloud_project_user_s3_credential.s3_op_creds.secret_access_key
 
   keycloak_user_map = { for username, infos in var.keycloak_users : username => merge(infos, tomap({ password = random_password.keycloak_passwords[username].result })) }
 
@@ -47,6 +48,8 @@ module "cluster" {
   source  = "qalita-io/publiccloud-kube/ovh"
   version = "0.1.0"
 
+  kubernetes_version = var.kubernetes_version
+  private_network_id = ovh_cloud_project_network_private.net
   cluster_name    = var.cluster_name
   cluster_region  = var.cluster_region
   flavor_name     = var.flavor_name
@@ -67,7 +70,7 @@ module "argocd" {
   cluster_name            = var.cluster_name
   base_domain             = local.base_domain
   argocd_server_secretkey = var.argocd_server_secretkey
-  cluster_issuer          = "ca-issuer"
+  cluster_issuer          = "letsencrypt-prod"
   wait_for_app_of_apps    = var.wait_for_app_of_apps
 
   oidc = merge(local.oidc, var.prometheus_oauth2_proxy_args)
@@ -111,8 +114,7 @@ module "argocd" {
         cluster_name     = var.cluster_name
         ovh_s3_access_key = local.ovh_s3_access_key_id
         ovh_s3_secret_key = local.ovh_s3_secret_access_key
-        root_cert        = base64encode(tls_self_signed_cert.root.cert_pem)
-        root_key         = base64encode(tls_private_key.root.private_key_pem)
+        cert_manager_dns01 = var.cert_manager_dns01
       }
     ),
     var.app_of_apps_values_overrides,
@@ -143,27 +145,6 @@ resource "random_password" "keycloak_passwords" {
   special  = false
 }
 
-resource "tls_private_key" "root" {
-  algorithm = "ECDSA"
-}
-
-resource "tls_self_signed_cert" "root" {
-  private_key_pem = tls_private_key.root.private_key_pem
-
-  subject {
-    common_name  = "devops-stack.camptocamp.com"
-    organization = "Camptocamp, SA"
-  }
-
-  validity_period_hours = 8760
-
-  allowed_uses = [
-    "cert_signing",
-  ]
-
-  is_ca_certificate = true
-}
-
 resource "ovh_cloud_project_user" "s3_op" {
   description  = "user allowed to manage the project's OVH object_store"
   role_names   = [
@@ -171,6 +152,49 @@ resource "ovh_cloud_project_user" "s3_op" {
   ]
 }
 
+resource "ovh_cloud_project_user" "net_op" {
+  description  = "user allowed to manage the project's OVH network"
+  role_names   = [
+    "network_operator"
+  ]
+}
+
 resource "ovh_cloud_project_user_s3_credential" "s3_op_creds" {
   user_id      = ovh_cloud_project_user.s3_op.id
+}
+
+resource "ovh_cloud_project_network_private" "net" {
+  name       = format("%s-net",local.cluster_name)
+}
+
+data "ovh_order_cart" "mycart" {
+  ovh_subsidiary = "fr"
+}
+
+data "ovh_order_cart_product_plan" "zone" {
+  cart_id        = data.ovh_order_cart.mycart.id
+  price_capacity = "renew"
+  product        = "dns"
+  plan_code      = "zone"
+}
+
+resource "ovh_domain_zone" "zone" {
+  ovh_subsidiary = data.ovh_order_cart.mycart.ovh_subsidiary
+  payment_mean   = "fidelity"
+
+  plan {
+    duration     = data.ovh_order_cart_product_plan.zone.selected_price.0.duration
+    plan_code    = data.ovh_order_cart_product_plan.zone.plan_code
+    pricing_mode = data.ovh_order_cart_product_plan.zone.selected_price.0.pricing_mode
+
+    configuration {
+      label = "zone"
+      value = format("%s.%s",var.cluster_name,var.base_domain)
+    }
+
+    configuration {
+      label = "template"
+      value = "minimized"
+    }
+  }
 }
