@@ -27,13 +27,15 @@ provider "helm" {
 }
 
 module "metallb" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git"
+  source = "git::https://github.com/camptocamp/devops-stack-module-metallb.git?ref=v1.0.0-alpha.1"
 
   subnet = module.kind.kind_subnet
 }
 
 module "argocd_bootstrap" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=bootstrap_minimal"
+  # TODO point at c2c repo and change ref once "bootstrap_minimal" is merged.
+  # Q: is argo_namespace output needed ?
+  source = "git::https://github.com/modridi/devops-stack-module-argocd.git//bootstrap?ref=bootstrap_minimal"
 }
 
 provider "argocd" {
@@ -64,8 +66,8 @@ module "ingress" {
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
 }
 
-# TODO remove useless base_domain and cluster_name variables from "self-signed" module.
 module "cert-manager" {
+  # TODO remove useless base_domain and cluster_name variables from "self-signed" module.
   source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//self-signed?ref=v1.0.0-alpha.3"
 
   cluster_name     = local.cluster_name
@@ -73,9 +75,6 @@ module "cert-manager" {
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
 }
 
-# TODO refactor keycloak module + clean up.
-# Noticed idempotence issue
-# Keycloak-operator application deletion fails. Doesn't clean up: user, client and realm
 module "oidc" {
   source = "git::https://github.com/camptocamp/devops-stack-module-keycloak?ref=v1.0.0-alpha.1"
 
@@ -148,7 +147,7 @@ module "prometheus-stack" {
 }
 
 module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=bootstrap_minimal"
+  source = "git::https://github.com/modridi/devops-stack-module-argocd.git?ref=bootstrap_minimal"
 
   target_revision = "bootstrap_minimal"
   base_domain     = format("%s.nip.io", replace(module.ingress.external_ip, ".", "-"))
