@@ -1,3 +1,11 @@
+# Nomenclature:
+# BM: Before merge
+# Q: open question
+
+# -------
+# BM review dependency_ids of all modules
+# TODO add repo_url / chart_path variables to all modules with argocd apps: helps with chart dev.
+
 locals {
   cluster_name   = "kind"
   cluster_issuer = "ca-issuer"
@@ -53,6 +61,7 @@ provider "argocd" {
   }
 }
 
+# TODO restore nodeport submodule and create temporary new submodule for kind.
 module "ingress" {
   source          = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//kind?ref=refactor-local-module"
   target_revision = "refactor-local-module"
@@ -76,17 +85,15 @@ module "cert-manager" {
 }
 
 module "oidc" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak?ref=v1.0.0-alpha.1"
+  # NOTE: realm export doesn't export users.
+  # TODO client secret must be generated and passed as helm value if realm import CRD will be used.
+  source          = "git::https://github.com/camptocamp/devops-stack-module-keycloak.git?ref=keycloak-refactor"
+  target_revision = "keycloak-refactor"
 
-  cluster_name   = local.cluster_name
-  base_domain    = format("%s.nip.io", replace(module.ingress.external_ip, ".", "-"))
-  cluster_issuer = local.cluster_issuer
-
-  # Pass argocd_namespace variable like in other modules. Useless domain attribute is replaced with random value.
-  argocd = {
-    namespace = module.argocd_bootstrap.argocd_namespace
-    domain    = "something.com"
-  }
+  cluster_name     = local.cluster_name
+  base_domain      = format("%s.nip.io", replace(module.ingress.external_ip, ".", "-"))
+  cluster_issuer   = local.cluster_issuer
+  argocd_namespace = module.argocd_bootstrap.argocd_namespace
 
   dependency_ids = {
     traefik      = module.ingress.id
@@ -100,59 +107,62 @@ module "oidc" {
 
 # module "loki-stack" {}
 
-module "prometheus-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//kind?ref=fix-secret-dependency"
+# module "prometheus-stack" {
+#   source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//kind?ref=fix-secret-dependency"
+#   target_revision = "fix-secret-dependency"
 
-  cluster_name     = local.cluster_name
-  argocd_namespace = module.argocd_bootstrap.argocd_namespace
-  base_domain      = format("%s.nip.io", replace(module.ingress.external_ip, ".", "-"))
-  cluster_issuer   = local.cluster_issuer
+#   cluster_name     = local.cluster_name
+#   argocd_namespace = module.argocd_bootstrap.argocd_namespace
+#   base_domain      = format("%s.nip.io", replace(module.ingress.external_ip, ".", "-"))
+#   cluster_issuer   = local.cluster_issuer
 
-  # metrics_storage = {}
+#   # metrics_storage = {}
 
-  prometheus = {
-    oidc = module.oidc.oidc
-  }
-  alertmanager = {
-    oidc = module.oidc.oidc
-  }
-  grafana = {
-    enabled                 = true
-    oidc                    = module.oidc.oidc
-    additional_data_sources = true
-  }
+#   # TODO conditional oidc activation for all 3 components.
+#   prometheus = {
+#     oidc = module.oidc.oidc
+#   }
+#   alertmanager = {
+#     oidc = module.oidc.oidc
+#   }
+#   grafana = {
+#     enabled                 = true
+#     oidc                    = module.oidc.oidc
+#     additional_data_sources = true
+#   }
+# }
 
-  # Grafana server can't validate Keycloak's certificate. Following is a temporary workaround.
-  # TODO fix this. Maybe a way to disable cert validation. If there is no way, add this config conditionally to module.
-  helm_values = [{
-    kube-prometheus-stack = {
-      grafana = {
-        extraSecretMounts = [
-          {
-            name       = "ca-certificate"
-            secretName = "grafana-tls"
-            mountPath  = "/etc/ssl/certs/ca.crt"
-            readOnly   = true
-            subPath    = "ca.crt"
-          },
-        ]
-      }
-    }
-  }]
+#   # Grafana server can't validate Keycloak's certificate. Following is a temporary workaround.
+#   # TODO fix this. Maybe a way to disable cert validation. If there is no way, add this config conditionally to module.
+#   helm_values = [{
+#     kube-prometheus-stack = {
+#       grafana = {
+#         extraSecretMounts = [
+#           {
+#             name       = "ca-certificate"
+#             secretName = "grafana-tls"
+#             mountPath  = "/etc/ssl/certs/ca.crt"
+#             readOnly   = true
+#             subPath    = "ca.crt"
+#           },
+#         ]
+#       }
+#     }
+#   }]
 
-  # dependency_ids = {
-  #   loki-stack   = module.loki-stack.id
-  #   cert-manager = module.cert-manager.id
-  # }
-}
+#   # dependency_ids = {
+#   #   keycloak     = module.oid.id
+#   #   loki-stack   = module.loki-stack.id
+#   #   cert-manager = module.cert-manager.id
+#   # }
+# }
 
 module "argocd" {
-  source = "git::https://github.com/modridi/devops-stack-module-argocd.git?ref=bootstrap_minimal"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git"
 
-  target_revision = "bootstrap_minimal"
-  base_domain     = format("%s.nip.io", replace(module.ingress.external_ip, ".", "-"))
-  cluster_name    = local.cluster_name
-  cluster_issuer  = local.cluster_issuer
+  base_domain    = format("%s.nip.io", replace(module.ingress.external_ip, ".", "-"))
+  cluster_name   = local.cluster_name
+  cluster_issuer = local.cluster_issuer
 
   argocd = {
     admin_enabled            = "true"
@@ -162,23 +172,40 @@ module "argocd" {
     server_secretkey         = module.argocd_bootstrap.argocd_server_secretkey
   }
 
+  # NOTE: obsolete oidc values. Real values will depend on how realm & co will be created.
   oidc = {
-    name         = "OIDC"
-    issuer       = module.oidc.oidc.issuer_url
-    clientID     = module.oidc.oidc.client_id
-    clientSecret = module.oidc.oidc.client_secret
+    name = "OIDC"
+    # issuer       = module.oidc.oidc.issuer_url
+    issuer = "https://keycloak.apps.kind.172-18-0-100.nip.io/realms/demo"
+    # clientID     = module.oidc.oidc.client_id
+    clientID = "argocd-client"
+    # clientSecret = module.oidc.oidc.client_secret
+    clientSecret = "W4Z6tcDCb1LAe47jjStihlN3pgZPsO1A"
     requestedIDTokenClaims = {
       groups = {
         essential = true
       }
     }
-    requestedScopes = ["email", "groups"]
   }
 
   helm_values = [{
     argo-cd = {
+      # BM remove metrics blocks: controller, repoServer and server
+      controller = {
+        metrics = {
+          enabled = false
+        }
+      }
+      repoServer = {
+        metrics = {
+          enabled = false
+        }
+      }
       # TODO same thing as Grafana.
       server = {
+        metrics = {
+          enabled = false
+        }
         volumeMounts = [
           {
             name      = "certificate"
@@ -199,17 +226,13 @@ module "argocd" {
         # TODO consider adding jdoe user to a group w/ admin privelege.
         # Related to Keycloak refactoring
         rbac = {
-          "scopes"         = "[email]"
-          "policy.csv"     = <<-EOT
+          "scopes"     = "[groups]"
+          "policy.csv" = <<-EOT
             g, pipeline, role:admin
-            g, jdoe@example.com, role:admin
+            g, platform-team, role:admin
             EOT
         }
       }
     }
   }]
-
-  dependency_ids = {
-    kube-prometheus-stack = module.prometheus-stack.id
-  }
 }
