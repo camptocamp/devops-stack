@@ -1,3 +1,11 @@
+*ATTENTION*: :warning: this project is no longer mantained! :warning:
+
+We are deprecating this project in favor of a more modular approach. Stay tuned for the official release of the DevOps Stack v1 at https://dev.to/camptocamp-ops[https://dev.to/camptocamp-ops].
+
+If you want to get to know the new modules, you can check out our v1 documentation https://devops-stack.io/docs-v1/latest/index.html[here]. Note that it is a work in progress :construction: (the first section of the documentation is entirely legacy and some of the modules do not have proper documentation yet).
+
+In the future, this repository will probably only host some examples and the main documentation pages.
+
 = Camptocamp's DevOps Stack
 
 The DevOps Stack provides a standard Kubernetes Platform, bringing together automated Provisioning as Code, Continuous Application Deployment, and readily-made configurations for the best Cloud Native tools in the industry.
