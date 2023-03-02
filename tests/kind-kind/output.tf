@@ -1,5 +1,10 @@
+output "argocd_auth_token" {
+  value     = module.argocd_bootstrap.argocd_auth_token
+  sensitive = true
+}
+
 output "minio_root_user_credentials" {
-  value     = module.minio.root_user_credentials
+  value     = module.minio.minio_root_secretkey
   sensitive = true
 }
 

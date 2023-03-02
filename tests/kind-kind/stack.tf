@@ -69,8 +69,7 @@ module "metallb" {
 }
 
 module "argocd_bootstrap" {
-  source          = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v1.0.0-alpha.6"
-  target_revision = "v1.0.0-alpha.6"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v1.0.0-alpha.6"
 }
 
 provider "argocd" {
@@ -114,15 +113,14 @@ module "cert-manager" {
 }
 
 module "minio" {
-  # source = "git::https://github.com/camptocamp/devops-stack-module-minio?ref=module_revamping"
-  source          = "/home/madridi/github/camptocamp/devops-stack-modules/devops-stack-module-minio"
-  target_revision = "module_revamping"
+  source          = "git::https://github.com/camptocamp/devops-stack-module-minio?ref=v1.0.0"
+  target_revision = "v1.0.0"
 
   cluster_name     = local.cluster_name
   base_domain      = format("%s.nip.io", replace(module.ingress.external_ip, ".", "-"))
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
 
-  config = local.minio_config
+  config_minio = local.minio_config
 
   dependency_ids = {
     traefik      = module.ingress.id
@@ -142,25 +140,10 @@ module "loki-stack" {
 
   logs_storage = {
     bucket_name       = local.minio_config.buckets.0.name
-    endpoint          = module.minio.service
+    endpoint          = module.minio.endpoint
     access_key        = local.minio_config.users.0.accessKey
     secret_access_key = local.minio_config.users.0.secretKey
   }
-
-  # helm_values = [{
-  #   loki-distributed = {
-  #     ingester = {
-  #       kind = "Deployment"
-  #       affinity = ""
-  #       persistence = {
-  #         enabled = false
-  #       }
-  #     }
-  #     indexGateway = {
-  #       enabled = false
-  #     }
-  #   }
-  # }]
 
   dependency_ids = {
     minio = module.minio.id
@@ -191,7 +174,7 @@ provider "keycloak" {
 }
 
 module "oidc_bootstrap" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak/oidc_bootstrap?ref=v1.0.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak//oidc_bootstrap?ref=v1.0.0"
 
   cluster_name   = local.cluster_name
   base_domain    = format("%s.nip.io", replace(module.ingress.external_ip, ".", "-"))
@@ -215,7 +198,7 @@ module "thanos" {
 
   metrics_storage = {
     bucket_name       = local.minio_config.buckets.1.name
-    endpoint          = module.minio.service
+    endpoint          = module.minio.endpoint
     access_key        = local.minio_config.users.1.accessKey
     secret_access_key = local.minio_config.users.1.secretKey
   }
@@ -325,3 +308,12 @@ module "argocd" {
     kube-prometheus-stack = module.prometheus-stack.id
   }
 }
+
+# module "backstage" {
+#   source = "../../../../camptocamp/devops-stack-modules/devops-stack-module-backstage"
+
+#   ingress = {
+#     host           = "backstage.apps.${local.cluster_name}.${format("%s.nip.io", replace(module.ingress.external_ip, ".", "-"))}"
+#     cluster_issuer = local.cluster_issuer
+#   }
+# }
