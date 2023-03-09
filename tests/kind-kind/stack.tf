@@ -129,7 +129,7 @@ module "minio" {
 }
 
 module "loki-stack" {
-  source          = "git::https://github.com/camptocamp/devops-stack-module-loki-stack//kind?ref=v1.0.0-alpha.11"
+  source          = "../../../../camptocamp/devops-stack-modules/devops-stack-module-loki-stack/kind"
   target_revision = "v1.0.0-alpha.11"
 
   cluster_name     = local.cluster_name
@@ -186,32 +186,32 @@ module "oidc_bootstrap" {
 }
 
 # TODO upgrade thanos module
-module "thanos" {
-  source          = "git::https://github.com/camptocamp/devops-stack-module-thanos//kind?ref=v1.0.0-alpha.6"
-  target_revision = "v1.0.0-alpha.6"
+# module "thanos" {
+#   source          = "git::https://github.com/camptocamp/devops-stack-module-thanos//kind?ref=v1.0.0-alpha.6"
+#   target_revision = "v1.0.0-alpha.6"
 
 
-  cluster_name     = local.cluster_name
-  argocd_namespace = module.argocd_bootstrap.argocd_namespace
-  base_domain      = format("%s.nip.io", replace(module.ingress.external_ip, ".", "-"))
-  cluster_issuer   = local.cluster_issuer
+#   cluster_name     = local.cluster_name
+#   argocd_namespace = module.argocd_bootstrap.argocd_namespace
+#   base_domain      = format("%s.nip.io", replace(module.ingress.external_ip, ".", "-"))
+#   cluster_issuer   = local.cluster_issuer
 
-  metrics_storage = {
-    bucket_name       = local.minio_config.buckets.1.name
-    endpoint          = module.minio.endpoint
-    access_key        = local.minio_config.users.1.accessKey
-    secret_access_key = local.minio_config.users.1.secretKey
-  }
+#   metrics_storage = {
+#     bucket_name       = local.minio_config.buckets.1.name
+#     endpoint          = module.minio.endpoint
+#     access_key        = local.minio_config.users.1.accessKey
+#     secret_access_key = local.minio_config.users.1.secretKey
+#   }
 
-  thanos = {
-    oidc = module.oidc_bootstrap.oidc
-  }
+#   thanos = {
+#     oidc = module.oidc_bootstrap.oidc
+#   }
 
-  dependency_ids = {
-    minio    = module.minio.id
-    keycloak = module.oidc.id
-  }
-}
+#   dependency_ids = {
+#     minio    = module.minio.id
+#     keycloak = module.oidc.id
+#   }
+# }
 
 module "prometheus-stack" {
   source          = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//kind?ref=v1.0.0-alpha.7"
@@ -222,12 +222,12 @@ module "prometheus-stack" {
   base_domain      = format("%s.nip.io", replace(module.ingress.external_ip, ".", "-"))
   cluster_issuer   = local.cluster_issuer
 
-  metrics_storage = {
-    bucket     = local.minio_config.buckets.1.name
-    endpoint   = module.minio.service
-    access_key = local.minio_config.users.1.accessKey
-    secret_key = local.minio_config.users.1.secretKey
-  }
+  # metrics_storage = {
+  #   bucket     = local.minio_config.buckets.1.name
+  #   endpoint   = module.minio.endpoint
+  #   access_key = local.minio_config.users.1.accessKey
+  #   secret_key = local.minio_config.users.1.secretKey
+  # }
 
   # TODO conditional oidc activation for all 3 components.
   prometheus = {
@@ -309,11 +309,11 @@ module "argocd" {
   }
 }
 
-# module "backstage" {
-#   source = "../../../../camptocamp/devops-stack-modules/devops-stack-module-backstage"
+# # module "backstage" {
+# #   source = "../../../../camptocamp/devops-stack-modules/devops-stack-module-backstage"
 
-#   ingress = {
-#     host           = "backstage.apps.${local.cluster_name}.${format("%s.nip.io", replace(module.ingress.external_ip, ".", "-"))}"
-#     cluster_issuer = local.cluster_issuer
-#   }
-# }
+# #   ingress = {
+# #     host           = "backstage.apps.${local.cluster_name}.${format("%s.nip.io", replace(module.ingress.external_ip, ".", "-"))}"
+# #     cluster_issuer = local.cluster_issuer
+# #   }
+# # }
