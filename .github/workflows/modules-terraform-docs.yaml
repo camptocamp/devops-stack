@@ -36,6 +36,7 @@ jobs:
         output-file: README.adoc
         output-method: inject
         template: "// BEGIN_TF_DOCS\n{{ .Content }}\n// END_TF_DOCS" # Define template compatible with AsciiDoc
+        args: "--hide-empty=true" # Do not show empty sections
         git-push: false
 
     - name: "Generate Terraform tables"
@@ -60,6 +61,7 @@ jobs:
         output-file: README.adoc
         output-method: inject
         template: "// BEGIN_TF_DOCS\n{{ .Content }}\n// END_TF_DOCS" # Define template compatible with AsciiDoc
+        args: "--hide-empty=true" # Do not show empty sections
         git-push: false
 
     - name: "Generate Terraform tables for the variants"
