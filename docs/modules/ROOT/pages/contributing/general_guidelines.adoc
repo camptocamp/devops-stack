@@ -1,0 +1,7 @@
+= Development Guidelines
+
+_Talk about conventional commits, the way to mark breaking changes, available commit types and scopes, etc._
+
+_Talk about the way to write a good commit message, the way to write a good PR title and description, etc._
+
+_Talk about where to write issues (each module) and stuff like that._

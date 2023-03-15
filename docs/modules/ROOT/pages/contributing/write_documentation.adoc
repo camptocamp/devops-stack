@@ -1,0 +1,5 @@
+= Documentation
+
+_Explain how the automatic documentation is generated._
+
+_Explain what you should include in each documentation page._

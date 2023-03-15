@@ -1,9 +1,0 @@
-== Wait for Keycloak to be ready
-
-```shell
-$ kubectl -n keycloak get sts
-NAME       READY   AGE
-keycloak   1/1     8m58s
-```
-
-Wait until the `READY` column says `1/1`.

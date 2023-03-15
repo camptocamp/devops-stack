@@ -1,0 +1,3 @@
+= Module Development
+
+_Describe the structure of each module, what it should contain. Recommend a basic structure and the reasoning behind each file and folder, present the file/folder tree. Refer to examples in already existing modules._

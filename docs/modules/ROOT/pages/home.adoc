@@ -1,0 +1,24 @@
+= DevOps Stack
+
+:keywords: terraform, kubernetes, kind, eks, aks, terraform, argocd, grafana, loki, traefik, prometheus, cert-manager, openid-connect, antora
+:sectanchors:
+:url-main-repo: https://github.com/camptocamp/devops-stack.git
+:url-c2c: https://www.camptocamp.com/
+
+image::devops-stack-logo_large.png[DevOps Stack]
+
+The DevOps Stack provides a standardised deployment Kubernetes Platform, bringing together automated Provisioning as Code, Continuous Application Deployment, and readily-made configurations for the best Cloud Native tools in the industry.
+
+Checkout the xref:ROOT:purpose.adoc[purpose of the DevOps Stack page] for more details.
+
+TIP: The easiest way to get started with the DevOps Stack is to follow the xref:tutorials/getting_started.adoc[Getting Started] guide. This tutorial you will leave you with a fully operational https://kind.sigs.k8s.io/[KinD] playground on your local machine.
+
+== Project Sponsor
+
+This project is mainly developed and sponsored by {url-c2c}[Camptocamp]. The source code is open and distributed under the Apache 2 license and available. This documentation as well as some examples are stored on the {url-main-repo}[main repository on GitHub]. On the sidebar you will find the documentation pages for each module and on which a link to the source code on GitHub.
+
+== Documentation
+
+These documentation pages are the main source of information for the DevOps Stack. They are written in https://asciidoc.org/[Asciidoc] and built using https://antora.org/[Antora].
+
+The main documentation contains information pertaining to the DevOps Stack as a whole while the module pages contain more specific details about each individual module. We recommend you take a look into the general documentation first in order to have an overview of a DevOps Stack deployment and then consult each module documentation to get more details about each component.
