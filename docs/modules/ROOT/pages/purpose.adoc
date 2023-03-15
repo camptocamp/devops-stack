@@ -1,3 +1,0 @@
-= Purpose
-
-_Describe the reasoning behind the creation of this project, what were the problems we had and what we are trying to solve by doing the things the way we do._

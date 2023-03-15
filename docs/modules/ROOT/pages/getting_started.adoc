@@ -1,3 +1,0 @@
-= Getting Started
-
-_Maybe do not put here a deployment with kind, but give an overview of the DevOps Stack architecture and how it works. Then, in the tutorials, you can explain how to deploy the stack with kind as a playground._

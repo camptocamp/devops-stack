@@ -1,16 +1,16 @@
 .*Main Documentation*
 * xref:ROOT:home.adoc[Home]
-* xref:ROOT:purpose.adoc[Purpose]
-* xref:ROOT:getting_started.adoc[Getting Started]
 * Tutorials
-// TODO Consider putting a guide to kind here or leave in the getting started
+** xref:ROOT:tutorials/deploy_eks.adoc[Deployment on KinD]
 ** xref:ROOT:tutorials/deploy_eks.adoc[Deployment on EKS]
 ** xref:ROOT:tutorials/deploy_aks.adoc[Deployment on AKS]
 ** xref:ROOT:tutorials/deploy_apps.adoc[Deploying Applications on the DevOps Stack]
 ** xref:ROOT:tutorials/greenfield_upgrade.adoc[Blue-Green Upgrade]
-* Contributing
-** xref:ROOT:contributing/module_development.adoc[Development]
-** xref:ROOT:contributing/write_documentation.adoc[Documentation]
+* Contributing Guidelines
+** xref:ROOT:contributing/general_guidelines.adoc[General Guidelines]
+** xref:ROOT:contributing/module_development.adoc[Module Development]
+** xref:ROOT:contributing/documentation.adoc[Documentation]
+** xref:ROOT:contributing/release.adoc[Release]
 
 .*Modules*
 * xref:kind:ROOT:README.adoc[KinD]
