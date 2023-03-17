@@ -13,7 +13,7 @@ TIP: The easiest way to get started with the DevOps Stack is to follow the tutor
 
 == Purpose
 
-_TODO Talk about the reasoning behind the DevOps Stack and the problems it solves._
+*_TODO Talk about the reasoning behind the DevOps Stack and the problems it solves._*
 
 == Quick Explanation
 

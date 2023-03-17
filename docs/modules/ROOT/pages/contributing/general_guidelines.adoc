@@ -57,7 +57,7 @@ image::guides_tutorials/branch_protection_rule.png[Branch Protection Rule]
 +
 image::guides_tutorials/add_repo_to_slack_reminder.png[Slack Reminder]
 
-6. _TODO Add a step about adding other notification to the Slack bot._
+6. *_TODO Add a step about adding other notification to the Slack bot._*
 
 
 
