@@ -1,0 +1,2 @@
+
+NOTE: Without the `!`, a `feat` commit will automatically trigger a minor version bump while a `fix` commit will only bump the patch version.

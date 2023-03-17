@@ -11,9 +11,9 @@ The DevOps Stack provides a standardized deployment Kubernetes Platform, bringin
 
 TIP: The easiest way to get started with the DevOps Stack is to follow the tutorial on the xref:tutorials/deploy_kind.adoc[Deployment on KinD] page. This tutorial you will leave you with a fully operational https://kind.sigs.k8s.io/[KinD] playground on your local machine.
 
-== Purpose
+== Project Sponsor
 
-*_TODO Talk about the reasoning behind the DevOps Stack and the problems it solves._*
+This project is mainly developed and sponsored by {url-c2c}[Camptocamp]. *It is an internal work created to standardize and maintain our Kubernetes deployments for our clients*. However, the source code is open and distributed under the Apache 2 license.
 
 == Quick Explanation
 
@@ -38,7 +38,3 @@ Since this is an internal project of {url-c2c}[Camptocamp], *some of the documen
 On the contributing section of the sidebar you'll find some guidelines on how to contribute to the DevOps Stack. You have some xref:ROOT:contributing/general_guidelines.adoc[general guidelines] on how to contribute to the project along with explanations on xref:ROOT:contributing/modules.adoc[how a module is structured], xref:ROOT:contributing/documentation.adoc[how to write documentation] and xref:ROOT:contributing/release.adoc[how the release process works].
 
 We welcome any kind of contribution, whether it's a bug report, a feature request, a documentation improvement or even a code contribution. You are also welcome to create your own cluster provisioning modules and request any help from us, but we can't guarantee any maintenance or long-term support for them.
-
-== Project Sponsor
-
-This project is mainly developed and sponsored by {url-c2c}[Camptocamp]. *It is an internal work created to standardize and maintain our Kubernetes deployments for our clients*. However, the source code is open and distributed under the Apache 2 license.
