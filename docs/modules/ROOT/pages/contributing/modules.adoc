@@ -14,7 +14,6 @@ These kinds of modules are typically the ones that provision clusters and relate
 
 A basic DevOps Stack module will contain the following files and folders:
 
-[source]
 ----
 devops-stack-module-template
 ├── .github
@@ -64,7 +63,6 @@ NOTE: The Argo CD module is a special case, as it is used to deploy the other mo
 
 A typical file/folder structure for a module with embedded Helm charts is the following:
 
-[source]
 ----
 devops-stack-module-template
 ├── .github
@@ -106,7 +104,6 @@ IMPORTANT: These kinds of modules should be called from within their variant! Th
 
 A typical file/folder structure for a module with variants is the following:
 
-[source]
 ----
 devops-stack-module-template
 ├── aks
