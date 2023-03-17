@@ -49,10 +49,11 @@ Quick overview of each file/folder:
 - `main.tf` - Contains the definition of the resources that are created by the module. This can be any type of Terraform resource, depending on the use case.
 - `outputs.tf` - Contains the definition of the output variables of the module.
 - `terraform.tf` - Contains the versions of the required providers.
-- `variables.tf` - Contains the definition of the input variables of the module.
-- `version.txt` - Contains the version of the module. You should only create it if you are creating a new module, after that it is automatically updated by the Release Please GitHub Action.
 
 IMPORTANT: The `terraform.tf` file should only contain the *minimum required version* of the required providers. This is to avoid incompatibilities between modules and it is the https://developer.hashicorp.com/terraform/language/providers/requirements#best-practices-for-provider-versions[recommended best practices by Terraform].
+
+- `variables.tf` - Contains the definition of the input variables of the module.
+- `version.txt` - Contains the version of the module. *You should only create it if you are creating a new module*, after that it is automatically updated by the Release Please GitHub Action.
 
 NOTE: Take care to properly describe each entry on the `variables.tf` and `outputs.tf` files. These descriptions are taken into account by Terraform Docs for the automatic documentation of the module.
 
@@ -201,7 +202,7 @@ output "loki_credentials" {
 - `README.adoc` - Contains the documentation for the variant. More explanations on the {documentation-page} page.
 - `variables.tf` and `terraform.tf` - These files are symbolic links to the root module.
 
-== Module Versioning
+== Versioning
 
 We use https://semver.org/[Semantic Versioning] for versioning the modules. More informations about the release process are available in the {release-page} page.
 
