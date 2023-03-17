@@ -14,7 +14,7 @@ content:
   - url: https://github.com/camptocamp/devops-stack.git
     start_path: docs
     # branches: [v1]
-    branches: [ISDEVOPS-185] # TODO Change back to v1
+    branches: [ISDEVOPS-185-v1-docs] # TODO Change back to v1
     # Tags deactivated for as long as we only have this doc published on the main repository
     # tags:
     #   # Build all version tags
