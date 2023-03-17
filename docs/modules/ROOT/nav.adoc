@@ -1,5 +1,5 @@
 .*Main Documentation*
-* xref:ROOT:home.adoc[Home]
+* xref:ROOT:index.adoc[Home]
 * Tutorials
 ** xref:ROOT:tutorials/deploy_eks.adoc[Deployment on KinD]
 ** xref:ROOT:tutorials/deploy_eks.adoc[Deployment on EKS]
