@@ -19,11 +19,27 @@ The following subsections describe some of the best practices to follow when wor
 . Keep the `main` branch clean, and only merge Pull Requests into it.
 . Create a new branch for each Pull Request. *The name of the branch should be the Jira ticket number, followed by a short description of the work done in the branch*, for example `ISDEVOPS-185-v1-docs`. This will allow the Jira ticket to be automatically linked to the branch and the Pull Request.
 
-=== Conventional Commits
+=== Commit Messages
 
-. When commiting to your branch, you should follow the https://www.conventionalcommits.org/[Conventional Commits] specification. *This will also allow the automated changelog generation to work properly.*
+. When committing to your branch, you should follow the https://www.conventionalcommits.org/[Conventional Commits] specification. *This will also allow the automated changelog generation to work properly.*
 
 . We use the following commit types:
+
+.. *`feat`* - a new feature
+.. *`fix`* - a bug fix
+.. *`docs`* - documentation only changes
+.. *`style`* - changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+.. *`refactor`* - a code change that neither fixes a bug nor adds a feature
+.. *`ci`* - changes to the CI configuration files and scripts
+.. *`chore`* - other changes that don't really modify the code (could be a merge commit, for example, `chore: rebase `main` into `ISDEVOPS-184-v1-docs before merging PR`)
+
+. If your commit adds a breaking change, you should add a `!` after the commit type, for example `feat!: add a breaking change`.
+
+IMPORTANT: Adding a breaking change will automatically trigger a major version bump when the module is released.
+
+. The commit scope is optional but recommended. It could be something as simply saying `chart` if modifying or upgrading the chart, or the name of the variant if modifying or upgrading a variant.
+
+
 
 
 === Pull Requests
