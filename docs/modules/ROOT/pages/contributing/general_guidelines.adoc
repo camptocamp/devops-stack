@@ -16,16 +16,19 @@ The following subsections describe some of the best practices to follow when wor
 
 === Branches
 
-- Keep the `main` branch clean, and only merge Pull Requests into it.
-- Create a new branch for each Pull Request. *The name of the branch should be the Jira ticket number, followed by a short description of the work done in the branch*, for example `ISDEVOPS-185-v1-docs`. This will allow the Jira ticket to be automatically linked to the branch and the Pull Request.
+. Keep the `main` branch clean, and only merge Pull Requests into it.
+. Create a new branch for each Pull Request. *The name of the branch should be the Jira ticket number, followed by a short description of the work done in the branch*, for example `ISDEVOPS-185-v1-docs`. This will allow the Jira ticket to be automatically linked to the branch and the Pull Request.
 
 === Conventional Commits
 
-- When commiting to your branch, you should follow the https://www.conventionalcommits.org/[Conventional Commits] specification. *This will also allow the automated changelog generation to work properly.*
+. When commiting to your branch, you should follow the https://www.conventionalcommits.org/[Conventional Commits] specification. *This will also allow the automated changelog generation to work properly.*
+
+. We use the following commit types:
+
 
 === Pull Requests
 
-- You can create Pull Requests from your branch any time during the development, but if it is not ready to be merged, you should mark it as a _Draft Pull Request_. This will prevent it from being merged by mistake while still allowing you to get feedback from other developers as well as the automated checks and documentation generation done by GitHub Actions.
+. You can create Pull Requests from your branch any time during the development, but if it is not ready to be merged, you should mark it as a _Draft Pull Request_. This will prevent it from being merged by mistake while still allowing you to get feedback from other developers as well as the automated checks and documentation generation done by GitHub Actions.
 
 
 
@@ -50,7 +53,7 @@ image::guides_tutorials/change_collaborators.png[Change Collaborators]
 +
 image::guides_tutorials/branch_protection_rule.png[Branch Protection Rule]
 
-5. Afterwards, go to the https://github.com/orgs/camptocamp/teams/is-devops-stack/settings/reminders[`is-devops-stack` team], and add the repository to our scheduled reminder on Slack about pending Pull Requests.
+5. Afterwards, go to the https://github.com/orgs/camptocamp/teams/is-devops-stack/[`is-devops-stack` team], and add the repository to our scheduled reminder on Slack about pending Pull Requests.
 +
 image::guides_tutorials/add_repo_to_slack_reminder.png[Slack Reminder]
 
