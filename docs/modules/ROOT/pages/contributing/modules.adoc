@@ -1,5 +1,4 @@
-= Module Development
-// TODO Define a better title
+= DevOps Stack Modules
 
 :url-template-repo: https://github.com/camptocamp/devops-stack-module-template
 :documentation-page: xref:ROOT:contributing/documentation.adoc[Documentation]

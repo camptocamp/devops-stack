@@ -35,7 +35,9 @@ Since this is an internal project of {url-c2c}[Camptocamp], *some of the documen
 
 == Contributing
 
-On the contributing section of the sidebar you'll find some guidelines on how to contribute to the DevOps Stack. We welcome any kind of contribution, whether it's a bug report, a feature request, a documentation improvement or even a code contribution. You are also welcome to create your own cluster provisioning modules and request any help from us, but we can't guarantee any maintenance or long-term support for them.
+On the contributing section of the sidebar you'll find some guidelines on how to contribute to the DevOps Stack. You have some xref:ROOT:contributing/general_guidelines.adoc[general guidelines] on how to contribute to the project along with explanations on xref:ROOT:contributing/modules.adoc[how a module is structured], xref:ROOT:contributing/documentation.adoc[how to write documentation] and xref:ROOT:contributing/release.adoc[how the release process works].
+
+We welcome any kind of contribution, whether it's a bug report, a feature request, a documentation improvement or even a code contribution. You are also welcome to create your own cluster provisioning modules and request any help from us, but we can't guarantee any maintenance or long-term support for them.
 
 == Project Sponsor
 
