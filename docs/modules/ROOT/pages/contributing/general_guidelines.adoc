@@ -7,3 +7,30 @@ _Talk about the way to write a good commit message, the way to write a good PR t
 _Talk about where to write issues (each module) and stuff like that._
 
 _Talk about PRs._
+
+_Name branchs after the Jira ticket number so it is automatically taken into account by our internal ticketing system._
+
+
+
+A basic DevOps Stack module is used to group resources that related to one another
+
+
+
+
+
+
+
+== Module Creation Checklist
+
+When first creating a module for the DevOps Stack, there are a few steps to follow:
+
+1. Create a new repository in the https://github.com/camptocamp/[Camptocamp GitHub organization], using the https://github.com/camptocamp/devops-stack-module-template[repository template].
+
+image::guides_tutorials/create_module_repository.png[Create Repository]
+
+2. 
+
+
+
+
+

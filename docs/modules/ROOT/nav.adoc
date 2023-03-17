@@ -14,7 +14,7 @@
 
 .*Modules*
 * xref:kind:ROOT:README.adoc[KinD]
-* https://github.com/camptocamp/devops-stack-module-cluster-eks[EKS,window=_blank]
+* https://github.com/camptocamp/devops-stack-module-cluster-eks[Amazon EKS,window=_blank]
 * xref:oidc-aws-cognito:ROOT:README.adoc[AWS Cognito OIDC]
 * xref:ebs-csi-driver:ROOT:README.adoc[EBS CSI Driver]
 * xref:efs-csi-driver:ROOT:README.adoc[EFS CSI Driver]
