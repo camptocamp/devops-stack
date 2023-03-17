@@ -11,10 +11,10 @@ urls:
   latest_version_segment: latest # Define each component's latest version as the latest in the URL 
 content:
   sources:
-  - url: ./
-  # - url: https://github.com/camptocamp/devops-stack.git
+  - url: https://github.com/camptocamp/devops-stack.git
     start_path: docs
-    branches: [v1]
+    # branches: [v1]
+    branches: [ISDEVOPS-185] # TODO Change back to v1
     # Tags deactivated for as long as we only have this doc published on the main repository
     # tags:
     #   # Build all version tags
@@ -36,13 +36,13 @@ content:
     branches: []
     tags:
     - "v1*"
-  - url: https://github.com/camptocamp/devops-stack-module-oidc-aws-cognito.git
-    start_path: docs
-    branches: []
-    tags:
-    - "v1*"
-    - "!v1.0.0"
-    - "!v1.0.0-alpha.*"
+  # - url: https://github.com/camptocamp/devops-stack-module-oidc-aws-cognito.git
+  #   start_path: docs
+  #   branches: []
+  #   tags:
+  #   - "v1*"
+  #   - "!v1.0.0"
+  #   - "!v1.0.0-alpha.*"
   - url: https://github.com/camptocamp/devops-stack-module-ebs-csi-driver.git
     start_path: docs
     branches: []
