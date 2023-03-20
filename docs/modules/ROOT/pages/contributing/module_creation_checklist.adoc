@@ -4,20 +4,21 @@ When first creating a module for the DevOps Stack, there are a few steps to foll
 
 1. Create a new repository in the https://github.com/camptocamp/[Camptocamp GitHub organization], using the https://github.com/camptocamp/devops-stack-module-template[repository template].
 +
-image::guides_tutorials/create_module_repository.png[Create Repository]
+image::guides_tutorials/module_checklist/create_module_repository.png[Create Repository]
 
 2. On the settings of the repository, in the _General_ tab, on the _Pull Requests_ section, disable the _Allow squash commits_ option and enable the _Automatically delete head branches_ option.
 
 3. Then go to the _Collaborators and teams_ tab, add the `infrastructure-department` team as _Maintainers_ and the `is-devops-stack` team as _Administrators_.
 +
-image::guides_tutorials/change_collaborators.png[Change Collaborators]
+image::guides_tutorials/module_checklist/change_collaborators.png[Change Collaborators]
 
 4. Then go to the _Branches_ tab, and create a new branch protection rule for the `main` branch, with the following settings.
 +
-image::guides_tutorials/branch_protection_rule.png[Branch Protection Rule]
+image::guides_tutorials/module_checklist/branch_protection_rule.png[Branch Protection Rule]
 
 5. Afterwards, go to the https://github.com/orgs/camptocamp/teams/is-devops-stack/[`is-devops-stack` team], and add the repository to our scheduled reminder on Slack about pending Pull Requests.
 +
-image::guides_tutorials/add_repo_to_slack_reminder.png[Slack Reminder]
+image::guides_tutorials/module_checklist/add_repo_to_slack_reminder.png[Slack Reminder]
 
+// TODO Add a step about adding other notification to the Slack bot.
 6. *_TODO Add a step about adding other notification to the Slack bot._*
