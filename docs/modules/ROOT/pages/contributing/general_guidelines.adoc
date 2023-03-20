@@ -37,7 +37,11 @@ The following subsections describe some of the best practices to follow when wor
 +
 IMPORTANT: Adding a breaking change will automatically trigger a major version bump when the module is released.
 
-. The commit scope is optional but recommended. *At least, for the modules that have variants, it is recommended to add the variant on the scope (`eks`, `aks` or `kind`).* If modifying something on the chart, you should add `chart` as the scope. 
+// TODO Clarify what to put on the scope
+. The commit scope is optional but recommended:
+.. At least, for the modules that have variants, *it is recommended to add the variant on the scope (`eks`, `aks` or `kind`)*. It could simply use the variant or use the variant as a prefix (for example, `docs(eks-variables): add descriptions`).
+.. If modifying something on the chart, *you should add `chart` as the scope*.
+.. Otherwise, recommended scopes could just be the type of code changed, for example, `variables`, `outputs`, `main`, etc. 
 
 . The conventional commits specification also allows you to add a body and a footer to the commit message. You could use the body to add more details and context to the commit, but keep it short. The footer could be used to add a reference to a Jira ticket, for example.
 
