@@ -19,14 +19,22 @@ image::guides_tutorials/module_checklist/branch_protection_rule.png[Branch Prote
 5. Afterwards, you need to add the Slack app to the repository in order to activate notifications on the https://camptocamp.slack.com/archives/C01DPEV82F6[#is-devops-stack] channel. To do so, go to the channel and do the following:
   
   a. Type `/github subscribe camptocamp/<MODULE_NAME>`.
+
   b. Since it a new repository, Slack is not yet added as an authorized application, as you'll see by the information on the channel. So you simply need to click _Install GitHub App_.
-  image::guides_tutorials/module_checklist/slack_install_github_app.png[Slack Install GitHub App]
++
+image::guides_tutorials/module_checklist/slack_install_github_app.png[Slack Install GitHub App]
+
   c. On the window that appears, select the Camptocamp organization then select the repository you to add the Slack app to.
-  image::guides_tutorials/module_checklist/slack_install_github_app_window.png[Slack GitHub App Window]
++
+image::guides_tutorials/module_checklist/slack_install_github_app_window.png[Slack GitHub App Window]
+
   d. Then, you can go back to the channel and type `/github subscribe camptocamp/<MODULE_NAME>` again. This time, you should see a confirmation message.
-  image::guides_tutorials/module_checklist/slack_github_subscribe.png[Slack GitHub Subscribe]
++
+image::guides_tutorials/module_checklist/slack_github_subscribe.png[Slack GitHub Subscribe]
+
   e. Finally, unsubscribe to all the other types of notifications, except for _Releases_ with the command: `/github unsubscribe camptocamp/<MODULE_NAME> issues pulls commits deployments`.
-  image::guides_tutorials/module_checklist/slack_github_unsubscribe.png[Slack GitHub Unsubscribe]
++
+image::guides_tutorials/module_checklist/slack_github_unsubscribe.png[Slack GitHub Unsubscribe]
 
 6. All that is left to do is adding the repository to our team reminder. For that, you can go to the https://github.com/orgs/camptocamp/teams/is-devops-stack/[`is-devops-stack` team], and add the repository to our scheduled reminder on Slack about pending Pull Requests.
 +
