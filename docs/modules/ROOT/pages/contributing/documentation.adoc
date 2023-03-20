@@ -1,5 +1,8 @@
 = Documentation
 
-_Explain how the automatic documentation is generated._
+_Work In Progress_
 
-_Explain what you should include in each documentation page._
+// TODO Explain how the automatic documentation is generated.
+// TODO Explain what you should include in each documentation page.
+// TODO Link to the repository where we have the patched image of the Antora container.
+// TODO Link to the repository where we have the UI with the patched Terraform syntax highlighter and explain how it is built and used by the antora playbook.
