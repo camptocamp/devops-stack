@@ -2,12 +2,8 @@
 
 The DevOps Stack provides a standard Kubernetes Platform, bringing together automated Provisioning as Code, Continuous Application Deployment, and readily-made configurations for the best Cloud Native tools in the industry.
 
-
 == Documentation
 
-The documentation is published here: https://devops-stack.io
+The documentation is published here: https://devops-stack.io/docs/latest
 
-
-== Community
-
-You can join us on the `#camptocamp-devops-stack` channel on the https://slack.k8s.io/[Kubernetes Slack Server].
+There you will find everything you need to know to get started with the DevOps Stack as well as how our contribution guidelines.
