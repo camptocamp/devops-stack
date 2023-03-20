@@ -1,2 +1,88 @@
+= Release
 
-NOTE: Without the `!`, a `feat` commit will automatically trigger a minor version bump while a `fix` commit will only bump the patch version.
+Each module is released and versioned independently. The release process is automated and triggered by a GitHub Action that is triggered when a PR is merged into the `main` branch. This action uses the https://github.com/google-github-actions/release-please-action[Release Please tool developed by Google] to automatically create a new release PR that updates the `CHANGELOG.md` file and bumps the version in the `version.txt` and `variables.tf` files. For a release to be completed, the release PR needs to be manually approved and then merged into the `main` branch.
+
+In the subsections below we will go through the release process in more detail and then explain some steps when manually setting a version.
+
+== Release Please Configuration
+
+The Release Please tool can be found on https://github.com/googleapis/release-please[this repository] and the GitHub Action we use is available on a https://github.com/google-github-actions/release-please-action[another repository]. Both are maintained by Google.
+
+Every DevOps Stack module contains a GitHub workflow that simply calls a centralized workflow.
+
+=== Centralized Workflow
+
+The workflow definition available in the https://github.com/camptocamp/devops-stack/blob/master/.github/workflows/modules-release-please.yaml[main repository].
+
+[source,yaml]
+----
+---
+# GitHub Actions workflow to automatically create releases and changelogs in our DevOps Stack repositories.
+#
+# IMPORTANT: This workflow is called by other workflows in our DevOps Stack repositories and it is centralized here in 
+# order to be easily maintained across modules. Because of this, please make sure you're not introducing any breaking 
+# changes when modifying this workflow.
+
+name: "Release Modules"
+
+on:
+  workflow_call:
+
+jobs:
+  release-please:
+    runs-on: "ubuntu-latest"
+    steps:
+    - uses: "google-github-actions/release-please-action@v3"
+      with:
+        release-type: "simple"
+        bump-minor-pre-major: true
+        extra-files: |
+          variables.tf
+----
+
+Note following lines:
+
+. The `workflow_call` setting means the workflow is only triggered by an external call (i.e. when a module calls it).
+
+. The `release-type` setting is set to `simple` which means it only updates the `CHANGELOG.md` file and bumps the version in the `version.txt` file.
+
+. The `extra-files` setting is used to specify additional files that need to be updated when bumping the version. In our case, we also need to update the `variables.tf` file. *This is because we need to statically define the variable `target_revision`, which is used to pin the module version in `argocd_application` resources.*
+
+=== Caller Workflow
+
+The caller workflow on every module simply points to this workflow and is set to run on every push to the `main` branch. This is the workflow definition:
+
+[source,yaml]
+----
+---
+name: "Release"
+
+on:
+  push:
+    branches:
+    - "main"
+
+jobs:
+  release:
+    uses: camptocamp/devops-stack/.github/workflows/modules-release-please.yaml@master
+----
+
+NOTE: Our https://github.com/camptocamp/devops-stack-module-template/blob/main/.github/workflows/release-please.yaml[module template] already contains this workflow definition, but with a caveat. To avoid creating releases on the template itself, it was deactivated and you need to re-activate it when creating a new module. The comments on the file are self-explanatory.
+
+== Automatic Versioning
+
+The commit messages are used to determine the type of release that needs to be created. 
+
+Only the `feat` and `fix` commit types will trigger the release CI. The `feat` commit type will trigger a minor version bump while the `fix` commit type will trigger a patch version bump. If you add a `!` after the commit type, the release will be a major version bump. For example, `feat!: this is a breaking change` will trigger a major version bump.
+
+Any other commit type will not trigger a release. This includes `chore`, `docs`, `style`, `refactor`, `perf` and `test`. If you still want to force a release, you can add a footer to any commit message with the `Release-As:` prefix.
+
+=== Versioning while on pre-release stage
+
+When a module is still in pre-release stage, the versioning is a bit different. The versioning is done manually through the `Release-As:` footer.
+
+We propose that for as long as the module is in pre-release stage, you should only do a `Squash and Merge` and add the `Release-As:` footer to the merge comment. The release PR will contain the version that you specified in the `Release-As:` footer. You can then approve and merge the release PR.
+
+For pre-release versioning, we propose to use `v1.0.0-alpha.X` or `v1.0.0-beta.X`, depending on the maturity. `X` is the pre-release version and is what should be incremented manually.
+
+IMPORTANT: When a module is ready for the first release, you need to add the `Release-As: v1.0.0` footer and this will trigger the first release. After that, the release process will be automatic.
