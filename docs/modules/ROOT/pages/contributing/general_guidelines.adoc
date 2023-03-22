@@ -40,7 +40,6 @@ The following subsections describe some of the best practices to follow when wor
 +
 IMPORTANT: Adding a breaking change will automatically trigger a major version bump when the module is released.
 
-// TODO Clarify what to put on the scope
 . The commit scope is optional but recommended:
 .. At least, for the modules that have variants, *it is recommended to add the variant on the scope (`eks`, `aks` or `kind`)*. It could simply use the variant or use the variant as a prefix (for example, `docs(eks-variables): add descriptions`).
 .. If modifying something on the chart, *you should add `chart` as the scope*.
@@ -72,4 +71,4 @@ IMPORTANT: If you do a `Squash and Merge` on a Pull Request, *the commit message
 
 . If it is a feature request/proposition, describe why the feature is needed and what problem it will solve for you.
 
-. *The issues are more useful for external users of the DevOps Stack*, if possible we can discuss the issue on our weekly meeting and then decide if it is something that we want to implement or not. In that case, we can then create a Jira ticket or an issue for it, to keep track of the work that needs to be done.
+. *The issues are more useful for external users of the DevOps Stack*, if possible we can discuss the issue on our weekly meeting and then decide if it is something that we want to implement or not. In that case, we can then create a Jira ticket, to keep track of the work that needs to be done.
