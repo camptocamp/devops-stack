@@ -16,3 +16,6 @@ tests/*/kubeconfig.yaml
 tests/*/terraform.tfstate
 tests/*/terraform.tfstate.backup
 tests/*/secrets.yml
+
+docs/modules/ROOT_OLD
+docs_test
