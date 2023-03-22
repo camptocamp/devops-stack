@@ -1,8 +1,9 @@
 = DevOps Stack Modules
 
-:url-template-repo: https://github.com/camptocamp/devops-stack-module-template
 :documentation-page: xref:ROOT:contributing/documentation.adoc[Documentation]
 :release-page: xref:ROOT:contributing/release.adoc[Release]
+// These URLs are used in the document as-is to generate new URLs, so they should not contain any trailing slash.
+:url-template-repo: https://github.com/camptocamp/devops-stack-module-template
 
 The DevOps Stack is separated into multiple Terraform modules, each of them containing a set of related resources. 
 

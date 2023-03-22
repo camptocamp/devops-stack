@@ -2,8 +2,10 @@
 
 :keywords: terraform, kubernetes, kind, eks, aks, terraform, argocd, grafana, loki, traefik, prometheus, cert-manager, openid-connect, antora
 :sectanchors:
-:url-main-repo: https://github.com/camptocamp/devops-stack.git
-:url-c2c: https://www.camptocamp.com/
+
+// These URLs are used in the document as-is to generate new URLs, so they should not contain any trailing slash.
+:url-main-repo: https://github.com/camptocamp/devops-stack
+:url-c2c: https://www.camptocamp.com
 
 image::devops-stack-logo_large.png[DevOps Stack]
 

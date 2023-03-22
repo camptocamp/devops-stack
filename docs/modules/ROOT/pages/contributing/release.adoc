@@ -1,5 +1,9 @@
 = Release
 
+// These URLs are used in the document as-is to generate new URLs, so they should not contain any trailing slash.
+:url-main-repo: https://github.com/camptocamp/devops-stack
+:url-template-repo: https://github.com/camptocamp/devops-stack-module-template
+
 Each module is released and versioned independently. The release process is automated and triggered by a GitHub Action that is triggered when a PR is merged into the `main` branch. This action uses the https://github.com/google-github-actions/release-please-action[Release Please tool developed by Google] to automatically create a new release PR that updates the `CHANGELOG.md` file and bumps the version in the `version.txt` and `variables.tf` files. For a release to be completed, the release PR needs to be manually approved and then merged into the `main` branch.
 
 In the subsections below we will go through the release process in more detail and then explain some steps when manually setting a version.
@@ -12,7 +16,7 @@ Every DevOps Stack module contains a GitHub workflow that simply calls a central
 
 === Centralized Workflow
 
-The workflow definition available in the https://github.com/camptocamp/devops-stack/blob/master/.github/workflows/modules-release-please.yaml[main repository].
+The workflow definition available in the {url-main-repo}/blob/master/.github/workflows/modules-release-please.yaml[main repository].
 
 [source,yaml]
 ----
@@ -67,7 +71,7 @@ jobs:
     uses: camptocamp/devops-stack/.github/workflows/modules-release-please.yaml@master
 ----
 
-NOTE: Our https://github.com/camptocamp/devops-stack-module-template/blob/main/.github/workflows/release-please.yaml[module template] already contains this workflow definition, but with a caveat. To avoid creating releases on the template itself, it was deactivated and you need to re-activate it when creating a new module. The comments on the file are self-explanatory.
+NOTE: Our {url-template-repo}/blob/main/.github/workflows/release-please.yaml[module template] already contains this workflow definition, but with a caveat. To avoid creating releases on the template itself, it was deactivated and you need to re-activate it when creating a new module. The comments on the file are self-explanatory.
 
 == Automatic Versioning
 

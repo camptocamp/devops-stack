@@ -1,5 +1,8 @@
 = General Contributing Guidelines
 
+// These URLs are used in the document as-is to generate new URLs, so they should not contain any trailing slash.
+:url-main-repo: https://github.com/camptocamp/devops-stack
+
 This document describes the general guidelines for contributing to the DevOps Stack.
 
 The DevOps Stack is a collection of modules, each of them having its own release cycle, in order to ease the development and maintenance of each module.

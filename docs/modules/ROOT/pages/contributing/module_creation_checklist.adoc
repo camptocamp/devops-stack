@@ -1,8 +1,11 @@
 = Module Creation Checklist
 
+// These URLs are used in the document as-is to generate new URLs, so they should not contain any trailing slash.
+:url-template-repo: https://github.com/camptocamp/devops-stack-module-template
+
 When first creating a module for the DevOps Stack, there are a few steps to follow:
 
-1. Create a new repository in the https://github.com/camptocamp/[Camptocamp GitHub organization], using the https://github.com/camptocamp/devops-stack-module-template[repository template].
+1. Create a new repository in the https://github.com/camptocamp/[Camptocamp GitHub organization], using the {url-template-repo}[repository template].
 +
 image::guides_tutorials/module_checklist/create_module_repository.png[Create Repository]
 
