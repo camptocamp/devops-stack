@@ -1,0 +1,7 @@
+= Contributing to the DevOps Stack
+
+Our https://devops-stack.io/docs/latest[documentation pages] include our Contribution Guidelines, which we encourage you to read before contributing to the project.
+
+There you will find everything from examples to the reasoning behind our design decisions.
+
+*Note that this project is more geared to the internal teams of https://www.camptocamp.com/[Camptocamp].* However, we welcome any kind of contribution, whether it's a bug report, a feature request, a documentation improvement or even a code contribution. You are also welcome to create your own cluster provisioning modules and request any help from us, but we can't guarantee any maintenance or long-term support for them.

@@ -11,7 +11,6 @@ urls:
   latest_version_segment: latest # Define each component's latest version as the latest in the URL 
 content:
   sources:
-  # - url: ./
   - url: https://github.com/camptocamp/devops-stack.git
     start_path: docs
     branches: [v1]
@@ -36,6 +35,26 @@ content:
     branches: []
     tags:
     - "v1*"
+  - url: https://github.com/camptocamp/devops-stack-module-oidc-aws-cognito.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    - "!v1.0.0-alpha.*"
+  - url: https://github.com/camptocamp/devops-stack-module-ebs-csi-driver.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    - "!v1.0.0"
+    - "!v1.0.0-alpha.*"
+  - url: https://github.com/camptocamp/devops-stack-module-efs-csi-driver.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    - "!v1.0.0"
+    - "!v1.0.0-alpha.*"
   - url: https://github.com/camptocamp/devops-stack-module-application.git
     start_path: docs
     branches: []
@@ -47,6 +66,12 @@ content:
     branches: []
     tags:
     - "v1*"
+  - url: https://github.com/camptocamp/devops-stack-module-keycloak.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    - "!v1.0.0-alpha.*"
   - url: https://github.com/camptocamp/devops-stack-module-thanos.git
     start_path: docs
     branches: []

@@ -1,0 +1,74 @@
+= General Contributing Guidelines
+
+// These URLs are used in the document as-is to generate new URLs, so they should not contain any trailing slash.
+:url-main-repo: https://github.com/camptocamp/devops-stack
+
+This document describes the general guidelines for contributing to the DevOps Stack.
+
+The DevOps Stack is a collection of modules, each of them having its own release cycle, in order to ease the development and maintenance of each module.
+
+== Development Workflow
+
+When a new feature or fix is required, the typical workflow is the following:
+
+1. You should create a new branch from the `main` branch of the module you want to work on;
+2. Work and test on your branch;
+3. When you think you feature/fix is ready, create a Pull Request to merge your branch into the `main` branch.
+
+The following subsections describe some of the best practices to follow when working on the DevOps Stack.
+
+=== Branches
+
+. Keep the `main` branch clean, and only merge Pull Requests into it.
+. Create a new branch for each Pull Request. *The name of the branch should be the Jira ticket number, followed by a short description of the work done in the branch*, for example `ISDEVOPS-185-v1-docs`. This will allow the Jira ticket to be automatically linked to the branch and the Pull Request.
+
+=== Commit Messages
+
+. When committing to your branch, you should follow the https://www.conventionalcommits.org/[Conventional Commits] specification. *This will also allow the automated changelog generation to work properly.*
+
+. We use the following commit types:
+
+.. *`feat`* - a new feature
+.. *`fix`* - a bug fix
+.. *`docs`* - documentation only changes
+.. *`style`* - changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+.. *`refactor`* - a code change that neither fixes a bug nor adds a feature
+.. *`ci`* - changes to the CI configuration files and scripts
+.. *`chore`* - other changes that don't really modify the code (could be a merge commit, for example, `chore: rebase 'main' into 'ISDEVOPS-184-v1-docs' before merging PR`)
+
+. *If your commit adds a breaking change, you should add a `!` after the commit type*, for example `feat!: add a breaking change`.
++
+IMPORTANT: Adding a breaking change will automatically trigger a major version bump when the module is released.
+
+. The commit scope is optional but recommended:
+.. At least, for the modules that have variants, *it is recommended to add the variant on the scope (`eks`, `aks` or `kind`)*. It could simply use the variant or use the variant as a prefix (for example, `docs(eks-variables): add descriptions`).
+.. If modifying something on the chart, *you should add `chart` as the scope*.
+.. Otherwise, recommended scopes could just be the type of code changed, for example, `variables`, `outputs`, `main`, etc. 
+
+. The conventional commits specification also allows you to add a body and a footer to the commit message. You could use the body to add more details and context to the commit, but keep it short. The footer could be used to add a reference to a Jira ticket, for example.
+
+=== Pull Requests
+
+. You can create Pull Requests from your branch any time during the development, but if it is not ready to be merged, you should mark it as a _Draft Pull Request_. This will prevent it from being merged by mistake while still allowing you to get feedback from other developers as well as the automated checks and documentation generation done by GitHub Actions.
+
+. For a PR to be merged, you need to have at least a review from another developer and all the automated checks must pass. Comments on the PR are welcome and allow us to keep track of the discussions that happen on the PR.
+
+. *We prefer using the `Rebase and Merge` option when merging a PR.* This allows the automatic release process to add multiple entries on the changelog, one for each commit on the PR. *This is particularly useful when the PR contains multiple changes*, for example, when adding a new feature and fixing a bug at the same time.
++
+IMPORTANT: The downside of this approach is that the commit history needs to be looked after. For example, having multiple commits that say `docs: fix typo` is not appropriate. *In this case, you should manually squash the commits into a single commit with a proper commit message.* The same goes for multiple commits that where iteratively used to fix a bug or develop a feature. *In this case, you should squash the commits into a single commit, one for each fix or feature.*
+
+// TODO Maybe add an example of a good commit history and a bad commit history.
+
+. Take care to properly title and describe your Pull Request. *The title should be descriptive enough and follow the conventional commits specification*. As for the description, follow the template that is provided.
++
+IMPORTANT: If you do a `Squash and Merge` on a Pull Request, *the commit message will be the title of the Pull Request*. So, make sure the title is descriptive enough and follows the conventional commits specification, otherwise we will have to manually fix the commit message in the `main` branch, which is inconvenient, to say the least.
+
+=== Issues
+
+. If you find some issue on the DevOps Stack, you could create an issue on the repository in which you find the issue. An issue could be a bug or a feature request/proposition.
+
+. If it is a bug, take care to properly describe the issue and provide as much context as possible.
+
+. If it is a feature request/proposition, describe why the feature is needed and what problem it will solve for you.
+
+. *The issues are more useful for external users of the DevOps Stack*, if possible we can discuss the issue on our weekly meeting and then decide if it is something that we want to implement or not. In that case, we can then create a Jira ticket, to keep track of the work that needs to be done.

@@ -1,3 +1,0 @@
-== Creating your Pipeline with GitLab
-
-include::partial$pipelines_gitlab.adoc[ci-variables, terraform-provider, terraform-provider-link]

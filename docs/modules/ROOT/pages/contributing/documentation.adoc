@@ -1,0 +1,122 @@
+= Documentation
+
+// These URLs are used in the document as-is to generate new URLs, so they should not contain any trailing slash.
+:url-main-repo: https://github.com/camptocamp/devops-stack
+:url-template-repo: https://github.com/camptocamp/devops-stack-module-template
+:url-docker-antora-repo: https://github.com/camptocamp/devops-stack-docker-antora
+:url-antora-ui-repo: https://github.com/camptocamp/devops-stack-antora-ui
+
+These documentation pages are written in https://asciidoc.org/[AsciiDoc] format and this website you are is generated using https://antora.org/[Antora].
+
+== How Does Antora Work?
+
+Antora builds this documentation website from the settings in an https://docs.antora.org/antora/latest/playbook/[Antora Playbook], which is a YAML file that describes the documentation sources and the output of the build.
+
+=== Content Sources
+
+*Our playbook is stored on the root of the {url-main-repo}[main repository] of the DevOps Stack project, in the {url-main-repo}/blob/master/antora-playbook.yml[`antora-playbook.yml` file].* It is this file that defines the content sources (in our case each module of the DevOps Stack project) as well as the tags to take into account when building the documentation.
+
+In this file you'll see a source for the main documentation (that is, the more generic pages stored in the {url-main-repo}[main repository]) and sources for each module on a list under `content.sources`. Each source is defined by a `url` to its repo and a `start_path` that tells Antora where the respective documentation is stored.
+
+=== File Structure
+
+Each documentation source is expected to have a precise file structure, as documented in extensive detail in the https://docs.antora.org/antora/latest/standard-directories/[Antora documentation].
+
+In short, each documentation source is expected to have a `antora.yml` file at its root and a `modules` folder that contains the documentation modules and a `nav.adoc`. The `nav.adoc` file is used to generate the navigation menu on the left of the documentation website and the documentation pages are used to generate the content of the website. You'll see this folder structure throughout our modules inside the `docs` folder.
+
+NOTE: More information about the `antora.yml` and the `nav.adoc` file can be found https://docs.antora.org/antora/latest/component-version-descriptor/[here] and https://docs.antora.org/antora/latest/navigation/files-and-lists/[here], respectively.
+
+In short, our documentation sources are expected to have at least the following structure:
+
+----
+docs
+├── antora.yml
+└── modules
+    └── ROOT
+        ├── nav.adoc
+        └── pages
+            └── ...
+----
+
+The `antora.yml` for each module is quite simple:
+
+[source,yaml]
+----
+---
+name: "<MODULE_NAME>" # The name of the module that will appear in the URL of the generated documentation, use something short.
+title: "<MODULE_NAME>" # The title of the module that will appear in the navigation menu of the generated documentation.
+version: true # Tells Antora to use the version tag of the module as the version of the documentation.
+start_page: README.adoc # Tells Antora which page to use as the start page of this module's documentation.
+nav:
+  - "modules/ROOT/nav.adoc" # Tells Antora which navigation file to use for this module's documentation.
+----
+
+=== Versioning
+
+Each module's documentation page is versioned using its repository tags. These are automatically created by the Release Please CI. On each source of our Antora playbook, we can define which version tags we include or exclude using the syntax explained https://docs.antora.org/antora/latest/playbook/content-tags/[here].
+
+In our case, note that we choose to use the tags instead of the branches for versioning the document pages. This is because we release each new version on a single branch but through multiple tags. More explanations about the different versioning methods are available https://docs.antora.org/antora/latest/content-source-versioning-methods/[here].
+
+=== Building The Documentation
+
+Our documentation is built using a GitHub Action on the main repository, available {url-main-repo}/blob/master/.github/workflows/documentation-v1.yml[here].
+
+In the workflow, you will note that our documentation is generated using a {url-docker-antora-repo}[customized Docker image of Antora]. This is because we require two extensions on top of Antora, as explained in the {url-docker-antora-repo}#readme[`README.adoc`]. The release process of this image is also explained on said `README.adoc`.
+
+The UI of the documentation pages comes from a fork of the default Antora UI, available {url-antora-ui-repo}[here]. This fork is used to add a custom syntax highlighter for Terraform code blocks. In order to use this UI, we simply create a `*.zip` bundle with a GitHub Actions workflow that is then pointed to by our {url-main-repo}/blob/master/antora-playbook.yml[`antora-playbook.yml` file].
+
+TIP: The `README.adoc` of the {url-docker-antora-repo}[customized Docker image] contains a command that you can use to build the documentation pages locally to preview you changes.
+
+After generating the documentation, it is then published to the {url-main-repo}/tree/gh-pages[`gh-pages`] branch of the main repository. This branch is then used by GitHub Pages to serve the documentation website.
+
+== Module Documentation
+
+The documentation in each module is quite particular in the sense that we have not put the documentation pages on the `docs` folder. Instead we have symbolic links to the `README.adoc` on the root of the repository and to the `README.adoc` inside each variant. Consequently, a typical module as a structure like this:
+
+----
+devops-stack-module-template
+└── docs
+    ├── antora.yml
+    └── modules
+        └── ROOT
+            ├── nav.adoc
+            └── pages
+                ├── aks
+                │   └── README.adoc -> ../../../../../aks/README.adoc
+                ├── eks
+                │   └── README.adoc -> ../../../../../eks/README.adoc
+                ├── kind
+                │   └── README.adoc -> ../../../../../kind/README.adoc
+                └── README.adoc -> ../../../../README.adoc
+----
+
+As you can see, besides the root `README.adoc`, each variant should have its own file. This is because of the way the automatic documentation is generated (Terraform Docs needs to put the generated documentation on separate files) and because each variant has its own specificities.
+
+A simple module without variants has a simpler structure:
+
+----
+devops-stack-module-template
+└── docs
+    ├── antora.yml
+    └── modules
+        └── ROOT
+            ├── nav.adoc
+            └── pages
+                └── README.adoc -> ../../../../README.adoc
+----
+
+=== Content
+
+The {url-template-repo}[module template] contains a good example of what the `README.adoc` should include in the content.
+
+A good `README.adoc` should contain a small description of what the module does and, if it installs a chart, list the chart version along with a link to the official chart and documentation. Next, show some examples of the usage of the module, from the simplest to the most complex. Finally, the end of the module will contain the automatic documentation.
+
+A module that has variants will be a bit different. The main `README.adoc` should contain an introduction and chart version, but it is each variant's `README.adoc` that should have usage examples, as these are different from module to module.
+
+TIP: Check the existing module's documentation pages for examples (the xref:thanos:ROOT:README.adoc[Thanos module] is a good example of a module with variants and the xref:keycloak:ROOT:README.adoc[Keycloak module] is an example without).
+
+=== Terraform Docs Documentation
+
+You'll notice that the last sections of the `README.adoc` that are automatically generated by Terraform Docs.
+
+Everything that is between the comments `BEGIN_TF_DOCS` / `END_TF_DOCS` and `BEGIN_TF_TABLES` / `END_TF_TABLES` is generated automatically by a GitHub workflow, that is available in the {url-main-repo}/blob/master/.github/workflows/modules-terraform-docs.yaml[main repository].
