@@ -37,12 +37,12 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="loki" data-version="v1.0.0">
+<div class="nav-container" data-component="argocd" data-version="v1.0.0-alpha.9">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-    <h3 class="title"><a href="README.html">Loki Module</a></h3>
+    <h3 class="title"><a href="README.html">Argo CD Module</a></h3>
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
@@ -54,18 +54,12 @@
     <span class="nav-text">Module Variants</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="aks/README.html">AKS</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="eks/README.html">EKS</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="kind/README.html">KinD</a>
+    <a class="nav-link" href="bootstrap/README.html">Bootstrap</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text"><a href="https://github.com/camptocamp/devops-stack-module-loki-stack" target="_blank" rel="noopener">Repository</a></span>
+    <span class="nav-text"><a href="https://github.com/camptocamp/devops-stack-module-argocd" target="_blank" rel="noopener">Repository</a></span>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../../latest/index.html"><em>Return to DevOps Stack docs</em></a>
@@ -77,8 +71,8 @@
 </div>
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
-    <span class="title">Loki Module</span>
-    <span class="version">v1.0.0</span>
+    <span class="title">Argo CD Module</span>
+    <span class="version">v1.0.0-alpha.9</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -138,11 +132,11 @@
         </li>
       </ul>
     </li>
-    <li class="component">
-      <a class="title" href="../../argocd/latest/README.html">Argo CD Module</a>
+    <li class="component is-current">
+      <a class="title" href="README.html">Argo CD Module</a>
       <ul class="versions">
-        <li class="version is-latest">
-          <a href="../../argocd/latest/README.html">v1.0.0-alpha.9</a>
+        <li class="version is-current is-latest">
+          <a href="README.html">v1.0.0-alpha.9</a>
         </li>
       </ul>
     </li>
@@ -229,11 +223,11 @@
         </li>
       </ul>
     </li>
-    <li class="component is-current">
-      <a class="title" href="README.html">Loki Module</a>
+    <li class="component">
+      <a class="title" href="../../loki/latest/README.html">Loki Module</a>
       <ul class="versions">
-        <li class="version is-current is-latest">
-          <a href="README.html">v1.0.0</a>
+        <li class="version is-latest">
+          <a href="../../loki/latest/README.html">v1.0.0</a>
         </li>
       </ul>
     </li>
@@ -263,11 +257,11 @@
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="README.html">Loki Module</a></li>
+    <li><a href="README.html">Argo CD Module</a></li>
     <li><a href="README.html">Home</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-loki-stack/blob/v1.0.0/docs/modules/ROOT/pages/README.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-argocd/blob/v1.0.0-alpha.9/docs/modules/ROOT/pages/README.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -282,19 +276,25 @@
 <div class="ulist">
 <ul>
 <li>
-<p><a id="requirement_argocd"></a> <a href="#requirement_argocd">argocd</a> (&gt;= 4)</p>
+<p><a id="requirement_terraform"></a> <a href="#requirement_terraform">terraform</a> (&gt;= 1.2)</p>
+</li>
+<li>
+<p><a id="requirement_argocd"></a> <a href="#requirement_argocd">argocd</a> (&gt;= 4.2)</p>
 </li>
 <li>
 <p><a id="requirement_htpasswd"></a> <a href="#requirement_htpasswd">htpasswd</a> (&gt;= 1)</p>
 </li>
 <li>
-<p><a id="requirement_null"></a> <a href="#requirement_null">null</a> (&gt;= 3)</p>
+<p><a id="requirement_jwt"></a> <a href="#requirement_jwt">jwt</a> (&gt;= 1.1)</p>
 </li>
 <li>
 <p><a id="requirement_random"></a> <a href="#requirement_random">random</a> (&gt;= 3)</p>
 </li>
 <li>
-<p><a id="requirement_utils"></a> <a href="#requirement_utils">utils</a> (&gt;= 1)</p>
+<p><a id="requirement_time"></a> <a href="#requirement_time">time</a> (&gt;= 0.9)</p>
+</li>
+<li>
+<p><a id="requirement_utils"></a> <a href="#requirement_utils">utils</a> (&gt;= 1.6)</p>
 </li>
 </ul>
 </div>
@@ -307,19 +307,13 @@
 <div class="ulist">
 <ul>
 <li>
-<p><a id="provider_argocd"></a> <a href="#provider_argocd">argocd</a> (&gt;= 4)</p>
+<p><a id="provider_argocd"></a> <a href="#provider_argocd">argocd</a> (&gt;= 4.2)</p>
 </li>
 <li>
-<p><a id="provider_htpasswd"></a> <a href="#provider_htpasswd">htpasswd</a> (&gt;= 1)</p>
+<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
 </li>
 <li>
-<p><a id="provider_null"></a> <a href="#provider_null">null</a> (&gt;= 3)</p>
-</li>
-<li>
-<p><a id="provider_random"></a> <a href="#provider_random">random</a> (&gt;= 3)</p>
-</li>
-<li>
-<p><a id="provider_utils"></a> <a href="#provider_utils">utils</a> (&gt;= 1)</p>
+<p><a id="provider_utils"></a> <a href="#provider_utils">utils</a> (&gt;= 1.6)</p>
 </li>
 </ul>
 </div>
@@ -338,16 +332,10 @@
 <p><a href="https://registry.terraform.io/providers/oboukili/argocd/latest/docs/resources/project">argocd_project.this</a> (resource)</p>
 </li>
 <li>
-<p><a href="https://registry.terraform.io/providers/loafoe/htpasswd/latest/docs/resources/password">htpasswd_password.loki_password_hash</a> (resource)</p>
+<p><a href="https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource">null_resource.dependencies</a> (resource)</p>
 </li>
 <li>
-<p><a href="https://registry.terraform.io/providers/null/latest/docs/resources/resource">null_resource.dependencies</a> (resource)</p>
-</li>
-<li>
-<p><a href="https://registry.terraform.io/providers/null/latest/docs/resources/resource">null_resource.this</a> (resource)</p>
-</li>
-<li>
-<p><a href="https://registry.terraform.io/providers/random/latest/docs/resources/password">random_password.loki_password</a> (resource)</p>
+<p><a href="https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource">null_resource.this</a> (resource)</p>
 </li>
 <li>
 <p><a href="https://registry.terraform.io/providers/cloudposse/utils/latest/docs/data-sources/deep_merge_yaml">utils_deep_merge_yaml.values</a> (data source)</p>
@@ -356,9 +344,72 @@
 </div>
 </div>
 <div class="sect2">
+<h3 id="_required_inputs"><a class="anchor" href="#_required_inputs"></a>Required Inputs</h3>
+<div class="paragraph">
+<p>The following input variables are required:</p>
+</div>
+<div class="sect3">
+<h4 id="_accounts_pipeline_tokens"><a class="anchor" href="#_accounts_pipeline_tokens"></a><a id="input_accounts_pipeline_tokens"></a> <a href="#input_accounts_pipeline_tokens">accounts_pipeline_tokens</a></h4>
+<div class="paragraph">
+<p>Description: API token for pipeline account.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_base_domain"><a class="anchor" href="#_base_domain"></a><a id="input_base_domain"></a> <a href="#input_base_domain">base_domain</a></h4>
+<div class="paragraph">
+<p>Description: The base domain for building Ingress following DevOps Stack convention, e.g. argocd.apps.&lt;cluster_name&gt;.&lt;base_domain&gt;</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cluster_issuer"><a class="anchor" href="#_cluster_issuer"></a><a id="input_cluster_issuer"></a> <a href="#input_cluster_issuer">cluster_issuer</a></h4>
+<div class="paragraph">
+<p>Description: Cluster Issuer</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cluster_name"><a class="anchor" href="#_cluster_name"></a><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></h4>
+<div class="paragraph">
+<p>Description: The name of the cluster to create.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_server_secretkey"><a class="anchor" href="#_server_secretkey"></a><a id="input_server_secretkey"></a> <a href="#input_server_secretkey">server_secretkey</a></h4>
+<div class="paragraph">
+<p>Description: Signature key for session validation. Must reuse bootstrap secretkey.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_optional_inputs"><a class="anchor" href="#_optional_inputs"></a>Optional Inputs</h3>
 <div class="paragraph">
 <p>The following input variables are optional (have default values):</p>
+</div>
+<div class="sect3">
+<h4 id="_admin_enabled"><a class="anchor" href="#_admin_enabled"></a><a id="input_admin_enabled"></a> <a href="#input_admin_enabled">admin_enabled</a></h4>
+<div class="paragraph">
+<p>Description: Flag to indicate whether to enable admin user.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>bool</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>false</code></p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_app_autosync"><a class="anchor" href="#_app_autosync"></a><a id="input_app_autosync"></a> <a href="#input_app_autosync">app_autosync</a></h4>
@@ -393,7 +444,7 @@
 <div class="sect3">
 <h4 id="_argocd_namespace"><a class="anchor" href="#_argocd_namespace"></a><a id="input_argocd_namespace"></a> <a href="#input_argocd_namespace">argocd_namespace</a></h4>
 <div class="paragraph">
-<p>Description: Namespace used by Argo CD where the Application and AppProject resources should be created.</p>
+<p>Description: Namespace for the resources AppProject and Application.</p>
 </div>
 <div class="paragraph">
 <p>Type: <code>string</code></p>
@@ -403,33 +454,9 @@
 </div>
 </div>
 <div class="sect3">
-<h4 id="_base_domain"><a class="anchor" href="#_base_domain"></a><a id="input_base_domain"></a> <a href="#input_base_domain">base_domain</a></h4>
-<div class="paragraph">
-<p>Description: Base domain of the cluster. Value used for the ingress' URL of the application.</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>string</code></p>
-</div>
-<div class="paragraph">
-<p>Default: <code>null</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_cluster_name"><a class="anchor" href="#_cluster_name"></a><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></h4>
-<div class="paragraph">
-<p>Description: Name given to the cluster. Value used for the ingress' URL of the application.</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>string</code></p>
-</div>
-<div class="paragraph">
-<p>Default: <code>null</code></p>
-</div>
-</div>
-<div class="sect3">
 <h4 id="_dependency_ids"><a class="anchor" href="#_dependency_ids"></a><a id="input_dependency_ids"></a> <a href="#input_dependency_ids">dependency_ids</a></h4>
 <div class="paragraph">
-<p>Description: IDs of the other modules on which this module depends on.</p>
+<p>Description: n/a</p>
 </div>
 <div class="paragraph">
 <p>Type: <code>map(string)</code></p>
@@ -439,72 +466,60 @@
 </div>
 </div>
 <div class="sect3">
-<h4 id="_distributed_mode"><a class="anchor" href="#_distributed_mode"></a><a id="input_distributed_mode"></a> <a href="#input_distributed_mode">distributed_mode</a></h4>
-<div class="paragraph">
-<p>Description: Boolean to activate Loki in distributed mode.</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>bool</code></p>
-</div>
-<div class="paragraph">
-<p>Default: <code>false</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_enable_filebeat"><a class="anchor" href="#_enable_filebeat"></a><a id="input_enable_filebeat"></a> <a href="#input_enable_filebeat">enable_filebeat</a></h4>
-<div class="paragraph">
-<p>Description: n/a</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>bool</code></p>
-</div>
-<div class="paragraph">
-<p>Default: <code>false</code></p>
-</div>
-</div>
-<div class="sect3">
 <h4 id="_helm_values"><a class="anchor" href="#_helm_values"></a><a id="input_helm_values"></a> <a href="#input_helm_values">helm_values</a></h4>
 <div class="paragraph">
-<p>Description: Helm chart value overrides. They should be passed as a list of HCL structures.</p>
+<p>Description: Helm values, passed as a list of HCL structures.</p>
 </div>
 <div class="paragraph">
 <p>Type: <code>any</code></p>
 </div>
 <div class="paragraph">
-<p>Default: <code>[]</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_ingress"><a class="anchor" href="#_ingress"></a><a id="input_ingress"></a> <a href="#input_ingress">ingress</a></h4>
-<div class="paragraph">
-<p>Description: Loki frontend ingress configuration.</p>
-</div>
-<div class="paragraph">
-<p>Type:</p>
+<p>Default:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">object({
-    hosts          = list(string)
-    cluster_issuer = string
-    allowed_ips    = optional(list(string), [])
-  })</code></pre>
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">[
+  {
+    "argo-cd": {}
+  }
+]</code></pre>
 </div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_namespace"><a class="anchor" href="#_namespace"></a><a id="input_namespace"></a> <a href="#input_namespace">namespace</a></h4>
+<div class="paragraph">
+<p>Description: Destination Namespace for Application child resources.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"argocd"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_oidc"><a class="anchor" href="#_oidc"></a><a id="input_oidc"></a> <a href="#input_oidc">oidc</a></h4>
+<div class="paragraph">
+<p>Description: OIDC Settings</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>any</code></p>
 </div>
 <div class="paragraph">
 <p>Default: <code>null</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_namespace"><a class="anchor" href="#_namespace"></a><a id="input_namespace"></a> <a href="#input_namespace">namespace</a></h4>
+<h4 id="_repositories"><a class="anchor" href="#_repositories"></a><a id="input_repositories"></a> <a href="#input_repositories">repositories</a></h4>
 <div class="paragraph">
-<p>Description: Namespace where the applications&#8217;s Kubernetes resources should be created. Namespace will be created in case it doesn&#8217;t exist.</p>
+<p>Description: A list of repositories to add to ArgoCD.</p>
 </div>
 <div class="paragraph">
-<p>Type: <code>string</code></p>
+<p>Type: <code>map(map(string))</code></p>
 </div>
 <div class="paragraph">
-<p>Default: <code>"loki-stack"</code></p>
+<p>Default: <code>{}</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -516,7 +531,7 @@
 <p>Type: <code>string</code></p>
 </div>
 <div class="paragraph">
-<p>Default: <code>"v1.0.0-alpha.13"</code></p>
+<p>Default: <code>"v1.0.0-alpha.8"</code></p>
 </div>
 </div>
 </div>
@@ -527,12 +542,6 @@
 </div>
 <div class="sect3">
 <h4 id="_id"><a class="anchor" href="#_id"></a><a id="output_id"></a> <a href="#output_id">id</a></h4>
-<div class="paragraph">
-<p>Description: ID to pass other modules in order to refer to this module as a dependency.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_loki_credentials"><a class="anchor" href="#_loki_credentials"></a><a id="output_loki_credentials"></a> <a href="#output_loki_credentials">loki_credentials</a></h4>
 <div class="paragraph">
 <p>Description: n/a
 = Requirements</p>
@@ -551,10 +560,18 @@
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_terraform"></a> <a href="#requirement_terraform">terraform</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 1.2</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="requirement_argocd"></a> <a href="#requirement_argocd">argocd</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>&gt;= 4</p>
+<p>&gt;= 4.2</p>
 </div></div></td>
 </tr>
 <tr>
@@ -567,10 +584,10 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="requirement_null"></a> <a href="#requirement_null">null</a></p>
+<p><a id="requirement_jwt"></a> <a href="#requirement_jwt">jwt</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>&gt;= 3</p>
+<p>&gt;= 1.1</p>
 </div></div></td>
 </tr>
 <tr>
@@ -583,10 +600,18 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_time"></a> <a href="#requirement_time">time</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 0.9</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="requirement_utils"></a> <a href="#requirement_utils">utils</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>&gt;= 1</p>
+<p>&gt;= 1.6</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -611,15 +636,7 @@
 <p><a id="provider_argocd"></a> <a href="#provider_argocd">argocd</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>&gt;= 4</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="provider_htpasswd"></a> <a href="#provider_htpasswd">htpasswd</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>&gt;= 1</p>
+<p>&gt;= 4.2</p>
 </div></div></td>
 </tr>
 <tr>
@@ -627,15 +644,7 @@
 <p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>&gt;= 3</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="provider_random"></a> <a href="#provider_random">random</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>&gt;= 3</p>
+<p>n/a</p>
 </div></div></td>
 </tr>
 <tr>
@@ -643,7 +652,7 @@
 <p><a id="provider_utils"></a> <a href="#provider_utils">utils</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>&gt;= 1</p>
+<p>&gt;= 1.6</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -679,7 +688,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="https://registry.terraform.io/providers/loafoe/htpasswd/latest/docs/resources/password">htpasswd_password.loki_password_hash</a></p>
+<p><a href="https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource">null_resource.dependencies</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>resource</p>
@@ -687,23 +696,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="https://registry.terraform.io/providers/null/latest/docs/resources/resource">null_resource.dependencies</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>resource</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="https://registry.terraform.io/providers/null/latest/docs/resources/resource">null_resource.this</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>resource</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="https://registry.terraform.io/providers/random/latest/docs/resources/password">random_password.loki_password</a></p>
+<p><a href="https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource">null_resource.this</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>resource</p>
@@ -740,6 +733,40 @@
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_accounts_pipeline_tokens"></a> <a href="#input_accounts_pipeline_tokens">accounts_pipeline_tokens</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>API token for pipeline account.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_admin_enabled"></a> <a href="#input_admin_enabled">admin_enabled</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Flag to indicate whether to enable admin user.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>bool</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>false</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="input_app_autosync"></a> <a href="#input_app_autosync">app_autosync</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -772,7 +799,7 @@
 <p><a id="input_argocd_namespace"></a> <a href="#input_argocd_namespace">argocd_namespace</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Namespace used by Argo CD where the Application and AppProject resources should be created.</p>
+<p>Namespace for the resources AppProject and Application.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>string</code></p>
@@ -789,16 +816,33 @@
 <p><a id="input_base_domain"></a> <a href="#input_base_domain">base_domain</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Base domain of the cluster. Value used for the ingress' URL of the application.</p>
+<p>The base domain for building Ingress following DevOps Stack convention, e.g. argocd.apps.&lt;cluster_name&gt;.&lt;base_domain&gt;</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>string</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>null</code></p>
+<p>n/a</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>no</p>
+<p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_cluster_issuer"></a> <a href="#input_cluster_issuer">cluster_issuer</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Cluster Issuer</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
 </div></div></td>
 </tr>
 <tr>
@@ -806,16 +850,16 @@
 <p><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Name given to the cluster. Value used for the ingress' URL of the application.</p>
+<p>The name of the cluster to create.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>string</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>null</code></p>
+<p>n/a</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>no</p>
+<p>yes</p>
 </div></div></td>
 </tr>
 <tr>
@@ -823,7 +867,7 @@
 <p><a id="input_dependency_ids"></a> <a href="#input_dependency_ids">dependency_ids</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>IDs of the other modules on which this module depends on.</p>
+<p>n/a</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>map(string)</code></p>
@@ -837,73 +881,22 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_distributed_mode"></a> <a href="#input_distributed_mode">distributed_mode</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Boolean to activate Loki in distributed mode.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>bool</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>false</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>no</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_enable_filebeat"></a> <a href="#input_enable_filebeat">enable_filebeat</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>bool</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>false</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>no</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="input_helm_values"></a> <a href="#input_helm_values">helm_values</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Helm chart value overrides. They should be passed as a list of HCL structures.</p>
+<p>Helm values, passed as a list of HCL structures.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>any</code></p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>[]</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>no</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_ingress"></a> <a href="#input_ingress">ingress</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Loki frontend ingress configuration.</p>
-</div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">object({
-    hosts          = list(string)
-    cluster_issuer = string
-    allowed_ips    = optional(list(string), [])
-  })</code></pre>
+<pre class="highlightjs highlight"><code class="language-none hljs">[
+  {
+    "argo-cd": {}
+  }
+]</code></pre>
 </div>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>null</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
@@ -914,16 +907,67 @@
 <p><a id="input_namespace"></a> <a href="#input_namespace">namespace</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Namespace where the applications&#8217;s Kubernetes resources should be created. Namespace will be created in case it doesn&#8217;t exist.</p>
+<p>Destination Namespace for Application child resources.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>string</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"loki-stack"</code></p>
+<p><code>"argocd"</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_oidc"></a> <a href="#input_oidc">oidc</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>OIDC Settings</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>any</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>null</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_repositories"></a> <a href="#input_repositories">repositories</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A list of repositories to add to ArgoCD.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>map(map(string))</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>{}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_server_secretkey"></a> <a href="#input_server_secretkey">server_secretkey</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Signature key for session validation. Must reuse bootstrap secretkey.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
 </div></div></td>
 </tr>
 <tr>
@@ -937,7 +981,7 @@
 <p><code>string</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"v1.0.0-alpha.13"</code></p>
+<p><code>"v1.0.0-alpha.8"</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
@@ -961,14 +1005,6 @@
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="output_id"></a> <a href="#output_id">id</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>ID to pass other modules in order to refer to this module as a dependency.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="output_loki_credentials"></a> <a href="#output_loki_credentials">loki_credentials</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>n/a</p>
