@@ -11,6 +11,8 @@ urls:
   latest_version_segment: latest # Define each component's latest version as the latest in the URL 
 content:
   sources:
+
+  # Main Repository
   - url: https://github.com/camptocamp/devops-stack.git
     start_path: docs
     branches: [v1]
@@ -30,30 +32,15 @@ content:
     #   - "!v0.50.4"
     #   - "!v0.51.0"
     #   - "!v0.53.0"
-  - url: https://github.com/camptocamp/devops-stack-module-kind.git
+
+  # Modules Repositories
+  - url: https://github.com/camptocamp/devops-stack-module-aad-pod-identity.git
     start_path: docs
     branches: []
     tags:
     - "v1*"
-  - url: https://github.com/camptocamp/devops-stack-module-oidc-aws-cognito.git
-    start_path: docs
-    branches: []
-    tags:
-    - "v1*"
-    - "!v1.0.0-alpha.*"
-  - url: https://github.com/camptocamp/devops-stack-module-ebs-csi-driver.git
-    start_path: docs
-    branches: []
-    tags:
-    - "v1*"
-    - "!v1.0.0"
-    - "!v1.0.0-alpha.*"
-  - url: https://github.com/camptocamp/devops-stack-module-efs-csi-driver.git
-    start_path: docs
-    branches: []
-    tags:
-    - "v1*"
-    - "!v1.0.0"
+    # Exclude versions without proper folder structure
+    - "!v1.{0..1}.{0..1}"
     - "!v1.0.0-alpha.*"
   - url: https://github.com/camptocamp/devops-stack-module-application.git
     start_path: docs
@@ -66,18 +53,113 @@ content:
     branches: []
     tags:
     - "v1*"
+  - url: https://github.com/camptocamp/devops-stack-module-argocd.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    # Exclude versions without proper folder structure
+    - "!v1.0.0-alpha.{0..8}"
+  - url: https://github.com/camptocamp/devops-stack-module-cert-manager.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    # Exclude versions without proper folder structure
+    - "!v1.0.0-alpha.*"
+  - url: https://github.com/camptocamp/devops-stack-module-cluster-eks.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    # Exclude versions without proper folder structure
+    - "!v1.0.0-alpha.*"
+  - url: https://github.com/camptocamp/devops-stack-module-cluster-kind.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v2*"
+    # Exclude versions without proper folder structure
+    - "!v2.{0..1}.{0..1}"
+  - url: https://github.com/camptocamp/devops-stack-module-dex.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    # Exclude versions without proper folder structure
+    - "!v1.0.0-alpha.{0..1}"
+  - url: https://github.com/camptocamp/devops-stack-module-ebs-csi-driver.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    # Exclude versions without proper folder structure
+    - "!v1.0.0"
+    - "!v1.0.0-alpha.*"
+  - url: https://github.com/camptocamp/devops-stack-module-efs-csi-driver.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    # Exclude versions without proper folder structure
+    - "!v1.0.0"
+    - "!v1.0.0-alpha.*"
+  - url: https://github.com/camptocamp/devops-stack-module-grafana.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    # Exclude versions without proper folder structure
+    - "!v1.0.0-alpha.*"
   - url: https://github.com/camptocamp/devops-stack-module-keycloak.git
     start_path: docs
     branches: []
     tags:
     - "v1*"
+    # Exclude versions without proper folder structure
+    - "!v1.0.0-alpha.*"
+  - url: https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    # Exclude versions without proper folder structure
+    - "!v1.0.0-alpha.*"
+  - url: https://github.com/camptocamp/devops-stack-module-loki-stack.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    # Exclude versions without proper folder structure
+    - "!v1.0.0-alpha.*"
+  - url: https://github.com/camptocamp/devops-stack-module-metallb.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    # Exclude versions without proper folder structure
+    - "!v1.0.0-alpha.*"
+  - url: https://github.com/camptocamp/devops-stack-module-oidc-aws-cognito.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    # Exclude versions without proper folder structure
     - "!v1.0.0-alpha.*"
   - url: https://github.com/camptocamp/devops-stack-module-thanos.git
     start_path: docs
     branches: []
     tags:
     - "v1*"
-  # TODO Add other modules gradually when there is a folder docs added to their repository
+    # Exclude versions without proper folder structure
+    - "!v1.0.0-alpha.{0..7}"
+  - url: https://github.com/camptocamp/devops-stack-module-traefik.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    # Exclude versions without proper folder structure
+    - "!v1.0.0-alpha.*"
 ui:
   bundle:
     url: https://github.com/camptocamp/devops-stack-antora-ui/releases/download/master-LATEST/ui-bundle.zip
