@@ -97,22 +97,22 @@
   </li>
   <li class="nav-item" data-depth="0">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text"><strong>Modules</strong></span>
+    <span class="nav-text"><strong>Cluster Modules</strong></span>
 <ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../eks/latest/README.html">Amazon EKS</a>
+  </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../kind/latest/README.html">KinD</a>
   </li>
-  <li class="nav-item" data-depth="1">
-    <span class="nav-text"><a href="https://github.com/camptocamp/devops-stack-module-cluster-eks" target="_blank" rel="noopener">Amazon EKS</a></span>
+</ul>
   </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text"><strong>Chart Modules</strong></span>
+<ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="#oidc-aws-cognito:ROOT:README.adoc">AWS Cognito OIDC</a>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../ebs-csi-driver/latest/README.html">EBS CSI Driver</a>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../efs-csi-driver/latest/README.html">EFS CSI Driver</a>
+    <a class="nav-link" href="../aad-pod-identity/latest/README.html">AAD Pod Identity</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../application/latest/README.html">Application</a>
@@ -121,34 +121,43 @@
     <a class="nav-link" href="../applicationset/latest/README.html">ApplicationSet</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text"><a href="https://github.com/camptocamp/devops-stack-module-argocd" target="_blank" rel="noopener">Argo CD</a></span>
+    <a class="nav-link" href="#argocd:ROOT:README.adoc">Argo CD</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text"><a href="https://github.com/camptocamp/devops-stack-module-cert-manager" target="_blank" rel="noopener">Cert-manager</a></span>
+    <a class="nav-link" href="../oidc-aws-cognito/latest/README.html">AWS Cognito OIDC</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text"><a href="https://github.com/camptocamp/devops-stack-module-dex" target="_blank" rel="noopener">Dex</a></span>
+    <a class="nav-link" href="#cert-manager:ROOT:README.adoc">Cert-manager</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text"><a href="https://github.com/camptocamp/devops-stack-module-grafana" target="_blank" rel="noopener">Grafana</a></span>
+    <a class="nav-link" href="#dex:ROOT:README.adoc">Dex</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../ebs-csi-driver/latest/README.html">EBS CSI Driver</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../efs-csi-driver/latest/README.html">EFS CSI Driver</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../grafana/latest/README.html">Grafana</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../keycloak/latest/README.html">Keycloak</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text"><a href="https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack" target="_blank" rel="noopener">Kube-prometheus-stack</a></span>
+    <a class="nav-link" href="../kube-prometheus-stack/latest/README.html">Kube-prometheus-stack</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text"><a href="https://github.com/camptocamp/devops-stack-module-loki-stack" target="_blank" rel="noopener">Loki</a></span>
+    <a class="nav-link" href="../loki/latest/README.html">Loki</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text"><a href="https://github.com/camptocamp/devops-stack-module-minio" target="_blank" rel="noopener">MinIO</a></span>
+    <a class="nav-link" href="#metallb:ROOT:README.adoc">MetalLB</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../thanos/latest/README.html">Thanos</a>
+    <a class="nav-link" href="#thanos:ROOT:README.adoc">Thanos</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text"><a href="https://github.com/camptocamp/devops-stack-module-traefik" target="_blank" rel="noopener">Traefik</a></span>
+    <a class="nav-link" href="../traefik/latest/README.html">Traefik</a>
   </li>
 </ul>
   </li>
@@ -161,6 +170,14 @@
     <span class="version">v1</span>
   </div>
   <ul class="components">
+    <li class="component">
+      <a class="title" href="../aad-pod-identity/latest/README.html">AAD Pod Identity Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../aad-pod-identity/latest/README.html">v1.1.2</a>
+        </li>
+      </ul>
+    </li>
     <li class="component">
       <a class="title" href="../application/latest/README.html">Application Module</a>
       <ul class="versions">
@@ -210,6 +227,14 @@
         </li>
       </ul>
     </li>
+    <li class="component">
+      <a class="title" href="../oidc-aws-cognito/latest/README.html">AWS Cognito OIDC Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../oidc-aws-cognito/latest/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
     <li class="component is-current">
       <a class="title" href="index.html">DevOps Stack</a>
       <ul class="versions">
@@ -235,6 +260,22 @@
       </ul>
     </li>
     <li class="component">
+      <a class="title" href="../eks/latest/README.html">EKS Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../eks/latest/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../grafana/latest/README.html">Grafana Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../grafana/latest/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
       <a class="title" href="../keycloak/latest/README.html">Keycloak Module</a>
       <ul class="versions">
         <li class="version is-latest">
@@ -246,42 +287,42 @@
       </ul>
     </li>
     <li class="component">
-      <a class="title" href="../kind/latest/README.html">KinD</a>
+      <a class="title" href="../kind/latest/README.html">KinD Cluster Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../kind/latest/README.html">v1.0.1</a>
-        </li>
-        <li class="version">
-          <a href="../kind/v1.0.0/README.html">v1.0.0</a>
+          <a href="../kind/latest/README.html">v2.1.2</a>
         </li>
       </ul>
     </li>
     <li class="component">
-      <a class="title" href="../thanos/latest/README.html">Thanos Module</a>
+      <a class="title" href="../kube-prometheus-stack/latest/README.html">Kube-prometheus-stack Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../thanos/latest/README.html">v1.0.0-alpha.8</a>
+          <a href="../kube-prometheus-stack/latest/README.html">v1.0.0</a>
         </li>
-        <li class="version">
-          <a href="../thanos/v1.0.0-alpha.7/README.html">v1.0.0-alpha.7</a>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../loki/latest/README.html">Loki Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../loki/latest/README.html">v1.0.0</a>
         </li>
-        <li class="version">
-          <a href="../thanos/v1.0.0-alpha.6/README.html">v1.0.0-alpha.6</a>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../matallb/latest/README.html">MetalLB Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../matallb/latest/README.html">v1.0.0</a>
         </li>
-        <li class="version">
-          <a href="../thanos/v1.0.0-alpha.5/README.html">v1.0.0-alpha.5</a>
-        </li>
-        <li class="version">
-          <a href="../thanos/v1.0.0-alpha.4/README.html">v1.0.0-alpha.4</a>
-        </li>
-        <li class="version">
-          <a href="../thanos/v1.0.0-alpha.3/README.html">v1.0.0-alpha.3</a>
-        </li>
-        <li class="version">
-          <a href="../thanos/v1.0.0-alpha.2/README.html">v1.0.0-alpha.2</a>
-        </li>
-        <li class="version">
-          <a href="../thanos/v1.0.0-alpha.1/README.html">v1.0.0-alpha.1</a>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../traefik/latest/README.html">Traefik Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../traefik/latest/README.html">v1.0.0</a>
         </li>
       </ul>
     </li>
