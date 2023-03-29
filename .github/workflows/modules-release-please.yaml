@@ -17,6 +17,7 @@ jobs:
     - uses: "google-github-actions/release-please-action@v3"
       with:
         release-type: "simple"
+        pull-request-title-pattern: "chore: release ${version}"
         bump-minor-pre-major: true
         extra-files: |
           variables.tf
