@@ -17,6 +17,11 @@ on:
         required: false
         default: ""
 
+env:
+  ARGS: "--hide-empty=true --sort=false" # Do not show empty sections and do not sort items
+  DOCS_TPL: "// BEGIN_TF_DOCS\n{{ .Content }}\n// END_TF_DOCS" # Define template compatible with AsciiDoc
+  TABLES_TPL: "// BEGIN_TF_TABLES\n{{ .Content }}\n// END_TF_TABLES" # Define template compatible with AsciiDoc
+
 jobs:
   terraform-docs:
     runs-on: ubuntu-latest
@@ -35,8 +40,8 @@ jobs:
         output-format: asciidoc document
         output-file: README.adoc
         output-method: inject
-        template: "// BEGIN_TF_DOCS\n{{ .Content }}\n// END_TF_DOCS" # Define template compatible with AsciiDoc
-        args: "--hide-empty=true" # Do not show empty sections
+        template: ${{ env.DOCS_TPL }}
+        args: ${{ env.TF_ARGS }}
         git-push: false
 
     - name: "Generate Terraform tables"
@@ -47,8 +52,8 @@ jobs:
         output-format: asciidoc table
         output-file: README.adoc
         output-method: inject
-        template: "// BEGIN_TF_TABLES\n{{ .Content }}\n// END_TF_TABLES" # Define template compatible with AsciiDoc
-        args: "--hide-empty=true" # Do not show empty sections
+        template: ${{ env.TABLES_TPL }}
+        args: ${{ env.TF_ARGS }}
         git-push: false
 
     - name: "Generate Terraform docs for the variants"
@@ -60,8 +65,8 @@ jobs:
         output-format: asciidoc document
         output-file: README.adoc
         output-method: inject
-        template: "// BEGIN_TF_DOCS\n{{ .Content }}\n// END_TF_DOCS" # Define template compatible with AsciiDoc
-        args: "--hide-empty=true" # Do not show empty sections
+        template: ${{ env.DOCS_TPL }}
+        args: ${{ env.TF_ARGS }}
         git-push: false
 
     - name: "Generate Terraform tables for the variants"
@@ -73,8 +78,8 @@ jobs:
         output-format: asciidoc table
         output-file: README.adoc
         output-method: inject
-        template: "// BEGIN_TF_TABLES\n{{ .Content }}\n// END_TF_TABLES" # Define template compatible with AsciiDoc
-        args: "--hide-empty=true" # Do not show empty sections
+        template: ${{ env.TABLES_TPL }}
+        args: ${{ env.TF_ARGS }}
         git-push: false
 
     # This step comes after long hours of debugging permission errors on the workflow when trying to do a commit after
