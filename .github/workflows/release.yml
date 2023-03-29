@@ -1,0 +1,36 @@
+---
+name: "Release"
+
+on:
+  push:
+    branches:
+      - "master"
+
+jobs:
+  release-please:
+    name: "Release Please"
+
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - id: "release-please"
+        uses: "GoogleCloudPlatform/release-please-action@v3"
+        with:
+          release-type: "simple"
+          pull-request-title-pattern: "chore: release ${version}"
+          bump-minor-pre-major: true
+          extra-files: |
+            modules/variables.tf
+            docs/antora.yml
+
+    outputs:
+      release_created: "${{ steps.release-please.outputs.release_created }}"
+
+  documentation:
+    name: "Publish documentation"
+
+    needs:
+      - "release-please"
+
+    if: "needs.release-please.outputs.release_created"
+    uses: "./.github/workflows/documentation.yml"

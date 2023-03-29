@@ -1,0 +1,56 @@
+---
+name: "Documentation"
+
+on:
+  pull_request:
+    paths:
+      - "docs/**"
+      - "modules/**/*variables.tf"
+      - "argocd/*/values.yaml"
+
+  workflow_call:
+
+  workflow_dispatch:
+
+jobs:
+  publish:
+    name: "Publish documentation"
+
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - name: "Check out repository"
+        uses: "actions/checkout@v2"
+        with:
+          fetch-depth: 0 # Fetch all branches and tags
+
+      - name: "Generate modules documentation pages"
+        if: "github.event_name == 'pull_request'"
+        uses: "docker://ghcr.io/camptocamp/antora:v3"
+        with:
+          args: "make refs"
+
+      - name: "Check generated documentation pages"
+        if: "github.event_name == 'pull_request'"
+        run: "[ -z \"$(git status --porcelain)\" ] || exit 1"
+
+      - name: "Build documentation with Antora"
+        uses: "docker://ghcr.io/camptocamp/antora:v3"
+        with:
+          args: "make docs"
+
+      - name: "Upload generated artifact"
+        if: "github.event_name == 'pull_request'"
+        uses: "actions/upload-artifact@v2"
+        with:
+          name: "documentation"
+          path: "${{ github.workspace }}/public/docs"
+
+      - name: "Deploy documentation to GitHub Pages"
+        if: "(github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref_name == 'master'"
+        uses: "JamesIves/github-pages-deploy-action@v4.2.5"
+        with:
+          branch: "gh-pages"
+          folder: "public/docs"
+          target-folder: "docs"
+          commit-message: "ci: publish documentation for ${{ github.sha }}"

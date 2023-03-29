@@ -1,83 +1,55 @@
-name: Website
+---
+name: "Website"
 
 on:
-  release:
-    types:
-      - released
+  pull_request:
+    paths:
+      - "website/**"
 
-env:
-  SITE_DIR: 'site'
+  push:
+    branches:
+      - "master"
+
+    paths:
+      - "website/**"
+
+  workflow_dispatch:
+
 jobs:
-  build_site:
-    name: "Build main site with Hugo"
-    runs-on: [ubuntu-latest]
+  publish:
+    name: "Publish website"
+
+    runs-on: "ubuntu-latest"
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - name: "Check out repository"
+        uses: "actions/checkout@v2"
         with:
-          submodules: true # Fetch Hugo themes
-          fetch-depth: 0   # Fetch all history for .gitinfo and .lastmod
+          submodules: true # Fetch Hugo theme
+          fetch-depth: 0   # Fetch all history for .GitInfo and .Lastmod
+
       - name: "Setup Hugo"
-        uses: peaceiris/actions-hugo@v2
+        uses: "peaceiris/actions-hugo@v2"
         with:
-          hugo-version: '0.79.1'
+          hugo-version: "0.92.2"
           extended: true
-      - name: "Build"
-        run: hugo --minify -s site
-      - name: "Upload generated site"
-        uses: actions/upload-artifact@v1.0.0
+
+      - name: "Build website with Hugo"
+        run: "hugo --minify --source 'website' --destination '../public'"
+
+      - name: "Upload generated artifact"
+        if: "github.event_name == 'pull_request'"
+        uses: "actions/upload-artifact@v2"
         with:
-          name: hugo
-          path: "${{ github.workspace }}/site/public"
-  build_antora:
-    name: "Build docs site with Antora"
-    runs-on: [ubuntu-latest]
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+          name: "website"
+          path: "${{ github.workspace }}/public"
+
+      - name: "Deploy website to GitHub Pages"
+        if: "(github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref_name == 'master'"
+        uses: "JamesIves/github-pages-deploy-action@v4.2.5"
         with:
-          fetch-depth: 0   # Fetch all history for .gitinfo and .lastmod
-      - name: "Generate site using antora site action"
-        uses: kameshsampath/antora-site-action@6069ae47f8c6dfd2a7c842d2dea766c639ab0053
-        with:
-          antora_playbook: antora-playbook.yml
-          antora_generator: "antora-site-generator-lunr"
-          antora_docsearch_enabled: "true"
-          antora_docsearch_index_version: "latest"
-      - name: "List folder"
-        run: |
-          ls -ltr $GITHUB_WORKSPACE/build/
-      - name: "Upload generated site"
-        uses: actions/upload-artifact@v1.0.0
-        with:
-          name: antora
-          path: "${{ github.workspace }}/build/${{ env.SITE_DIR }}"
-  deploy_site:
-    runs-on: [ubuntu-latest]
-    needs: [build_site, build_antora]
-    name: "Deploy GitHub Pages"
-    steps:
-     - name: Setup Node.js for use with actions
-       uses: actions/setup-node@v1.4.4
-       with:
-         node-version: 12.x
-     - name: Checkout
-       uses: actions/checkout@v2
-     - name: Download generated Hugo site
-       uses: actions/download-artifact@v1
-       with:
-         name: hugo
-         path: "${{ github.workspace }}/${{ env.SITE_DIR }}"
-     - name: Download generated Antora docs
-       uses: actions/download-artifact@v1
-       with:
-         name: antora
-         path: "${{ github.workspace }}/${{ env.SITE_DIR }}/docs"
-     - name: Deploy to GitHub Pages
-       uses: JamesIves/github-pages-deploy-action@3.2.1
-       with:
-        # ACCESS_TOKEN: # optional
-        GITHUB_TOKEN: "${{ github.token}}"
-        FOLDER: "${{ env.SITE_DIR }}"
-        BRANCH: 'gh-pages'
-        COMMIT_MESSAGE: "[CI] Publish Documentation for ${{ github.sha }}"
+          branch: "gh-pages"
+          folder: "public"
+          commit-message: "ci: publish website for ${{ github.sha }}"
+          clean-exclude: |
+            docs
