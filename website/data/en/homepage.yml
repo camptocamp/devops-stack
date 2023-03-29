@@ -3,7 +3,7 @@ banner:
   title: "DevOps Stack"
   subtitle: "Your Kubernetes Platform is one Git commit away."
   image: "images/devops-stack-logo_large.png"
-  
+
   content: |
     The DevOps Stack provides a standard Kubernetes Platform, bringing together
     automated Provisioning as Code, Continuous Application Deployment,
@@ -12,28 +12,28 @@ banner:
   button:
     enable: false
     label: "Learn more"
-    link: "docs"
+    link: "docs/latest"
 
   quickstart:
     item:
       - label: "EKS Quickstart"
         icon: "fab fa-aws"
-        link: "/docs/devops-stack/__VERSION__/howtos/quickstart_eks.html"
+        link: "/docs/latest/howtos/quickstart_eks.html"
       - label: "AKS Quickstart"
         icon: "fab fa-microsoft"
-        link: "/docs/devops-stack/__VERSION__/howtos/quickstart_aks.html"
+        link: "/docs/latest/howtos/quickstart_aks.html"
       - label: "SKS Quickstart"
         icon: "fas fa-mountain"
-        link: "/docs/devops-stack/__VERSION__/howtos/quickstart_sks.html"
+        link: "/docs/latest/howtos/quickstart_sks.html"
       - label: "OpenShift Quickstart"
         icon: "fab fa-redhat"
-        link: "/docs/devops-stack/__VERSION__/howtos/quickstart_ocp_ipi_aws.html"
+        link: "/docs/latest/howtos/quickstart_ocp_ipi_aws.html"
       - label: "K3S Quickstart"
         icon: "fa fa-hat-cowboy-side"
-        link: "/docs/devops-stack/__VERSION__/howtos/quickstart_k3s_docker.html"
+        link: "/docs/latest/howtos/quickstart_k3s_docker.html"
       - label: "Kind Quickstart"
         icon: "fa fa-wine-bottle"
-        link: "/docs/devops-stack/__VERSION__/howtos/quickstart_kind.html"
+        link: "/docs/latest/howtos/quickstart_kind.html"
 
 # Components
 components:
@@ -59,22 +59,22 @@ components:
       icon: "prometheus.png"
       link: "https://prometheus.io"
       content : "The standard in Kubernetes Time Series Database, set up for the whole Stack out-of-the-box."
-      
+
     - name: "Grafana"
       icon: "grafana.png"
       link: "https://grafana.com"
       content : "Readily-made Observability Dashboards are provided for the Kubernetes cluster and Stack Components."
-      
+
     - name: "Loki"
       icon: "loki.png"
       link: "https://grafana.com/oss/loki/"
       content : "Logs from the Stack components and additional applications are gathered and made accessible in Grafana using Loki."
-      
+
     - name: "Cert-Manager"
       icon: "cert-manager.png"
       link: "https://cert-manager.io"
       content : "Valid public certificates are automatically provided for all Stack Components, courtesy of Let's Encrypt."
-      
+
     - name: "Open ID Connect"
       icon: "oidc.png"
       link: "https://openid.net/connect/"
@@ -84,7 +84,7 @@ components:
       icon: "traefik.jpeg"
       link: "https://traefik.io/"
       content: "The Traefik Ingress controller is used to route web access to all Components, on your domain of choice."
-      
+
 
 
 
@@ -103,8 +103,8 @@ services:
       button:
         enable: true
         label: "Show me the Cloud Menu"
-        link: "/docs/devops-stack/__VERSION__/explanations/cloud_agnostic.html"
-        
+        link: "/docs/latest/explanations/cloud_agnostic.html"
+
     # service item loop
     - title: "Defined as Code"
       images:
@@ -113,8 +113,8 @@ services:
       button:
         enable: true
         label: "I want to code!"
-        link: "/docs/devops-stack/__VERSION__/explanations/infrastructure-as-code.html"
-        
+        link: "/docs/latest/explanations/infrastructure-as-code.html"
+
     # service item loop
     - title: "Continuously Deployed"
       images:
@@ -125,8 +125,8 @@ services:
       button:
         enable: true
         label: "Deploy it"
-        link: "/docs/devops-stack/__VERSION__/explanations/gitops.html"
-        
+        link: "/docs/latest/explanations/gitops.html"
+
     # service item loop
     - title: "Operate"
       images:
@@ -135,15 +135,15 @@ services:
       button:
         enable: true
         label: "Show me the dashboards"
-        link: "/docs/devops-stack/__VERSION__/explanations/lifecycle_operations.html"
-        
+        link: "/docs/latest/explanations/lifecycle_operations.html"
+
 ################### Screenshot ########################
 screenshot:
   enable: true
   title: "From Zero to Hero, in a few lines a code"
   image: "images/devops-stack_vscode.png"
 
-  
+
 
 ##################### Call to action #####################
 call_to_action:
@@ -153,7 +153,7 @@ call_to_action:
   content: "Wherever you are in your Cloud Native journey, you can either dive straight into the technical documentation, or contact us for a demo or a consulting session."
   buttons:
     - label: "Technical documentation"
-      link: "docs"
+      link: "docs/latest"
       icon: "fa fa-book"
     - label: "Request a demo"
       link: "/contact"

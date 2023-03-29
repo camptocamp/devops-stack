@@ -15,8 +15,6 @@ org_logo = "images/logo/camptocamp.png"
 org_logo_width = "200px"
 org_url = "https://camptocamp.com"
 
-version = "0.53.0"
-
 google_analytics = "G-GDBX9466LL"
 
 contact_form_action = "https://kwes.io/api/foreign/forms/FGzCbmO0jIjih6M1qbSG"
@@ -91,7 +89,7 @@ link = "https://kwes.io/v2/kwes-script.js"
 [[menu.main]]
 name = "Docs"
 pre = "<i class='fas fa-book'></i> "
-url = "docs"
+url = "docs/latest"
 weight = 1
 
 [[menu.main]]
@@ -138,7 +136,7 @@ url = "https://bivac.io"
 # footer menu right
 [[menu.footer_right]]
 name = "Documentation"
-url = "docs"
+url = "docs/latest"
 
 [[menu.footer_right]]
 name = "Sources"
