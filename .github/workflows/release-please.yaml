@@ -17,9 +17,6 @@ jobs:
         release-type: "simple"
         pull-request-title-pattern: "chore: release ${version}"
         bump-minor-pre-major: true
-        extra-files: |
-          modules/variables.tf
-          docs/antora.yml
 
     outputs:
       release_created: "${{ steps.release-please.outputs.release_created }}"
@@ -28,4 +25,4 @@ jobs:
     needs:
     - "release-please"
     if: "needs.release-please.outputs.release_created"
-    uses: "./.github/workflows/documentation.yaml"
+    uses: "./.github/workflows/publish-antora-docs.yaml" # Call the Antora documentation workflow
