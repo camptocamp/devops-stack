@@ -1,5 +1,5 @@
 ---
-name: "Documentation v1"
+name: "publish-antora-docs-v1"
 
 on:
   push:

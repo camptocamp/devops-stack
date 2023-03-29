@@ -1,5 +1,5 @@
 ---
-name: "Documentation"
+name: "publish-antora-docs"
 
 on:
   pull_request:

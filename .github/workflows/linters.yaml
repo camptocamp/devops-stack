@@ -1,11 +1,10 @@
 ---
-name: "Linters"
+name: "commits-checks"
 
 on: ["pull_request"]
 
 jobs:
-  validate-commits:
-    runs-on: "ubuntu-latest"
+  commits-checks:
     steps:
       - name: "Check out code into the Go module directory"
         uses: "actions/checkout@v1"

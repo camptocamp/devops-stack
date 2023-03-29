@@ -1,5 +1,5 @@
 ---
-name: "Website"
+name: "publish-website"
 
 on:
   pull_request:
@@ -16,9 +16,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  publish:
-    name: "Publish website"
-
+  publish-website:
     runs-on: "ubuntu-latest"
 
     steps:

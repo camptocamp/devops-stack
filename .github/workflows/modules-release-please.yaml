@@ -5,7 +5,7 @@
 # order to be easily maintained across modules. Because of this, please make sure you're not introducing any breaking 
 # changes when modifying this workflow.
 
-name: "Release Modules"
+name: "modules-release-please"
 
 on:
   workflow_call:
