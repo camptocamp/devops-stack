@@ -18,22 +18,18 @@ banner:
     item:
       - label: "EKS Quickstart"
         icon: "fab fa-aws"
-        link: "/docs/latest/howtos/quickstart_eks.html"
+        link: "/docs/latest"
       - label: "AKS Quickstart"
         icon: "fab fa-microsoft"
-        link: "/docs/latest/howtos/quickstart_aks.html"
+        link: "/docs/latest"
       - label: "SKS Quickstart"
         icon: "fas fa-mountain"
-        link: "/docs/latest/howtos/quickstart_sks.html"
-      - label: "OpenShift Quickstart"
-        icon: "fab fa-redhat"
-        link: "/docs/latest/howtos/quickstart_ocp_ipi_aws.html"
-      - label: "K3S Quickstart"
-        icon: "fa fa-hat-cowboy-side"
-        link: "/docs/latest/howtos/quickstart_k3s_docker.html"
-      - label: "Kind Quickstart"
+        link: "/docs/latest"
+      - label: "Scaleway Quickstart"
+        link: "/docs/latest"
+      - label: "KinD Quickstart"
         icon: "fa fa-wine-bottle"
-        link: "/docs/latest/howtos/quickstart_kind.html"
+        link: "/docs/latest"
 
 # Components
 components:
@@ -86,8 +82,6 @@ components:
       content: "The Traefik Ingress controller is used to route web access to all Components, on your domain of choice."
 
 
-
-
 ######################### Service #####################
 services:
   enable: true
@@ -97,9 +91,8 @@ services:
       images:
       - "images/banner/aws-eks.png"
       - "images/banner/azure-aks.png"
-      - "images/banner/rancher-k3s.png"
       - "images/banner/exoscale.png"
-      content: "Whether you want to deploy AKS on Azure, EKS on Amazon, or K3S for a local playground, the DevOps Stack has you covered with ready-to-go Terraform modules."
+      content: "Whether you want to deploy AKS on Azure, EKS on Amazon, or KinD for a local playground, the DevOps Stack has you covered with ready-to-go Terraform modules."
       button:
         enable: true
         label: "Show me the Cloud Menu"
@@ -137,12 +130,12 @@ services:
         label: "Show me the dashboards"
         link: "/docs/latest/explanations/lifecycle_operations.html"
 
+
 ################### Screenshot ########################
 screenshot:
   enable: true
   title: "From Zero to Hero, in a few lines a code"
   image: "images/devops-stack_vscode.png"
-
 
 
 ##################### Call to action #####################

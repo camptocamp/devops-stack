@@ -3,7 +3,6 @@ languageCode = "en-us"
 title = "DevOps Stack"
 theme = "bigspring"
 
-
 [params]
 author = "Camptocamp"
 #logo = "images/devops-stack-logo_wave_by_c2c_black2.png"
@@ -18,6 +17,7 @@ org_url = "https://camptocamp.com"
 google_analytics = "G-GDBX9466LL"
 
 contact_form_action = "https://kwes.io/api/foreign/forms/FGzCbmO0jIjih6M1qbSG"
+
 
 ############################# social site ########################
 [[params.social]]
@@ -61,8 +61,6 @@ icon = "fas fa-share-alt"
 link = "https://stackshare.io/camptocamp/infrastructure"
 
 
-
-
 ############################# Plugins ##############################
 
 # CSS Plugins
@@ -82,6 +80,7 @@ link = "plugins/bootstrap/bootstrap.min.js"
 link = "plugins/slick/slick.min.js"
 [[params.plugins.js]]
 link = "https://kwes.io/v2/kwes-script.js"
+
 
 ############################## navigation ###############################
 
@@ -108,7 +107,6 @@ weight = 3
 #url = "faq"
 #weight = 4
 
-
 # footer menu left
 [[menu.footer_left]]
 name = "Camptocamp"
@@ -117,21 +115,6 @@ url = "https://camptocamp.com"
 [[menu.footer_left]]
 name = "Our Services"
 url = "https://www.camptocamp.com/infrastructure_solutions_and_services"
-
-
-# footer menu middle
-[[menu.footer_middle]]
-name = "FacterDB"
-url = "https://camptocamp.github.io/facterdb/"
-
-[[menu.footer_middle]]
-name = "Terraboard"
-url = "https://terraboard.io"
-
-[[menu.footer_middle]]
-name = "Bivac"
-url = "https://bivac.io"
-
 
 # footer menu right
 [[menu.footer_right]]
