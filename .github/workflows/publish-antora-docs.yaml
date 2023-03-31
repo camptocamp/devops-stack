@@ -35,7 +35,7 @@ jobs:
         path: ${{ github.workspace }}/public/docs
 
     - name: "Deploy documentation to GitHub Pages"
-      if: github.ref_name == 'master' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_call')
+      if: github.ref_name == 'main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_call')
       uses: JamesIves/github-pages-deploy-action@v4.4.1
       with:
         branch: gh-pages
