@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>devops-stack-module-cluster-eks :: DevOps Stack</title>
+    <meta name="generator" content="Antora 3.1.2">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GDBX9466LL"></script>
+    <script>function gtag(){dataLayer.push(arguments)};window.dataLayer=window.dataLayer||[];gtag('js',new Date());gtag('config','G-GDBX9466LL')</script>
+    <script>var uiRootPath = '../../_'</script>
+    <link rel="icon" href="../../_/img/favicon.png" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://devops-stack.io"><img width="200px" src="../../_/img/devops-stack-logo_light_by_c2c_black.png"/></a>
+      <div class="navbar-item search hide-for-print">
+        <div id="search-field" class="field">
+          <input id="search-input" type="text" placeholder="Search the docs">
+        </div>
+      </div>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/camptocamp/devops-stack"><i class="fa fa-github-alt"></i>&nbsp;GitHub</a>
+        <a class="navbar-item" href="https://www.camptocamp.com">Camptocamp</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="eks" data-version="v1.0.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="README.html">EKS Cluster Module</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="README.html">Home</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><a href="https://github.com/camptocamp/devops-stack-module-cluster-eks" target="_blank" rel="noopener">Repository</a></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../latest/index.html"><em>Return to DevOps Stack docs</em></a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">EKS Cluster Module</span>
+    <span class="version">v1.0.0</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../aad-pod-identity/latest/README.html">AAD Pod Identity Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../aad-pod-identity/latest/README.html">v1.1.2</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../application/latest/README.html">Application Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../application/latest/README.html">v1.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.2.1/README.html">v1.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.2.0/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.1.1/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../applicationset/latest/README.html">ApplicationSet Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../applicationset/latest/README.html">v1.2.4</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.2.3/README.html">v1.2.3</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.2.2/README.html">v1.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.2.1/README.html">v1.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.2.0/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.1.1/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../argocd/latest/README.html">Argo CD Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../argocd/latest/README.html">v1.0.0-alpha.9</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../oidc-aws-cognito/latest/README.html">AWS Cognito OIDC Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../oidc-aws-cognito/latest/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../cert-manager/latest/README.html">Cert-manager Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../cert-manager/latest/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../latest/index.html">DevOps Stack</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../latest/index.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../dex/latest/README.html">Dex Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../dex/latest/README.html">v1.0.0-alpha.3</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../ebs-csi-driver/latest/README.html">EBS CSI Driver Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../ebs-csi-driver/latest/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../efs-csi-driver/latest/README.html">EFS CSI Driver Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../efs-csi-driver/latest/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="README.html">EKS Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../grafana/latest/README.html">Grafana Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../grafana/latest/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../keycloak/latest/README.html">Keycloak Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../keycloak/latest/README.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../kind/latest/README.html">KinD Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../kind/latest/README.html">v2.1.2</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../kube-prometheus-stack/latest/README.html">Kube-prometheus-stack Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../kube-prometheus-stack/latest/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../loki/latest/README.html">Loki Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../loki/latest/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../matallb/latest/README.html">MetalLB Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../matallb/latest/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../metallb/latest/README.html">MetalLB Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../metallb/latest/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../traefik/latest/README.html">Traefik Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../traefik/latest/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="README.html">EKS Cluster Module</a></li>
+    <li><a href="README.html">Home</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-cluster-eks/blob/v1.0.0/docs/modules/ROOT/pages/README.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
+  </div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">devops-stack-module-cluster-eks</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <a href="https://devops-stack.io/">DevOps Stack</a> module to deploy and configure an EKS cluster on Amazon Web Services.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_technical_reference"><a class="anchor" href="#_technical_reference"></a>Technical Reference</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_dependencies"><a class="anchor" href="#_dependencies"></a>Dependencies</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_requirements"><a class="anchor" href="#_requirements"></a>Requirements</h3>
+<div class="paragraph">
+<p>The following requirements are needed by this module:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="requirement_terraform"></a> <a href="#requirement_terraform">terraform</a> (&gt;= 1.0)</p>
+</li>
+<li>
+<p><a id="requirement_argocd"></a> <a href="#requirement_argocd">argocd</a> (&gt;= 4)</p>
+</li>
+<li>
+<p><a id="requirement_aws"></a> <a href="#requirement_aws">aws</a> (&gt;= 4)</p>
+</li>
+<li>
+<p><a id="requirement_helm"></a> <a href="#requirement_helm">helm</a> (&gt;= 2)</p>
+</li>
+<li>
+<p><a id="requirement_kubernetes"></a> <a href="#requirement_kubernetes">kubernetes</a> (&gt;= 2)</p>
+</li>
+<li>
+<p><a id="requirement_local"></a> <a href="#requirement_local">local</a> (&gt;= 2)</p>
+</li>
+<li>
+<p><a id="requirement_null"></a> <a href="#requirement_null">null</a> (&gt;= 3)</p>
+</li>
+<li>
+<p><a id="requirement_random"></a> <a href="#requirement_random">random</a> (&gt;= 3)</p>
+</li>
+<li>
+<p><a id="requirement_utils"></a> <a href="#requirement_utils">utils</a> (&gt;= 1)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_providers"><a class="anchor" href="#_providers"></a>Providers</h3>
+<div class="paragraph">
+<p>The following providers are used by this module:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="provider_aws"></a> <a href="#provider_aws">aws</a> (&gt;= 4)</p>
+</li>
+<li>
+<p><a id="provider_dns"></a> <a href="#provider_dns">dns</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_modules"><a class="anchor" href="#_modules"></a>Modules</h3>
+<div class="paragraph">
+<p>The following Modules are called:</p>
+</div>
+<div class="sect3">
+<h4 id="_cluster"><a class="anchor" href="#_cluster"></a><a id="module_cluster"></a> <a href="#module_cluster">cluster</a></h4>
+<div class="paragraph">
+<p>Source: terraform-aws-modules/eks/aws</p>
+</div>
+<div class="paragraph">
+<p>Version: ~&gt; 19.0</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_iam_assumable_role_cluster_autoscaler"><a class="anchor" href="#_iam_assumable_role_cluster_autoscaler"></a><a id="module_iam_assumable_role_cluster_autoscaler"></a> <a href="#module_iam_assumable_role_cluster_autoscaler">iam_assumable_role_cluster_autoscaler</a></h4>
+<div class="paragraph">
+<p>Source: terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc</p>
+</div>
+<div class="paragraph">
+<p>Version: ~&gt; 5.0</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_nlb"><a class="anchor" href="#_nlb"></a><a id="module_nlb"></a> <a href="#module_nlb">nlb</a></h4>
+<div class="paragraph">
+<p>Source: terraform-aws-modules/alb/aws</p>
+</div>
+<div class="paragraph">
+<p>Version: ~&gt; 8.0</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_nlb_private"><a class="anchor" href="#_nlb_private"></a><a id="module_nlb_private"></a> <a href="#module_nlb_private">nlb_private</a></h4>
+<div class="paragraph">
+<p>Source: terraform-aws-modules/alb/aws</p>
+</div>
+<div class="paragraph">
+<p>Version: ~&gt; 8.0</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_resources"><a class="anchor" href="#_resources"></a>Resources</h3>
+<div class="paragraph">
+<p>The following resources are used by this module:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy">aws_iam_policy.cluster_autoscaler</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record">aws_route53_record.wildcard</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/eks_cluster_auth">aws_eks_cluster_auth.cluster</a> (data source)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document">aws_iam_policy_document.cluster_autoscaler</a> (data source)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region">aws_region.current</a> (data source)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/route53_zone">aws_route53_zone.this</a> (data source)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/hashicorp/dns/latest/docs/data-sources/a_record_set">dns_a_record_set.nlb</a> (data source)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_required_inputs"><a class="anchor" href="#_required_inputs"></a>Required Inputs</h3>
+<div class="paragraph">
+<p>The following input variables are required:</p>
+</div>
+<div class="sect3">
+<h4 id="_cluster_name"><a class="anchor" href="#_cluster_name"></a><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></h4>
+<div class="paragraph">
+<p>Description: n/a</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_private_subnet_ids"><a class="anchor" href="#_private_subnet_ids"></a><a id="input_private_subnet_ids"></a> <a href="#input_private_subnet_ids">private_subnet_ids</a></h4>
+<div class="paragraph">
+<p>Description: List of IDs of private subnets that the EKS instances will be attached to.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>list(string)</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_vpc_cidr_block"><a class="anchor" href="#_vpc_cidr_block"></a><a id="input_vpc_cidr_block"></a> <a href="#input_vpc_cidr_block">vpc_cidr_block</a></h4>
+<div class="paragraph">
+<p>Description: n/a</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_vpc_id"><a class="anchor" href="#_vpc_id"></a><a id="input_vpc_id"></a> <a href="#input_vpc_id">vpc_id</a></h4>
+<div class="paragraph">
+<p>Description: VPC where the cluster and nodes will be deployed.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_optional_inputs"><a class="anchor" href="#_optional_inputs"></a>Optional Inputs</h3>
+<div class="paragraph">
+<p>The following input variables are optional (have default values):</p>
+</div>
+<div class="sect3">
+<h4 id="_aws_auth_accounts"><a class="anchor" href="#_aws_auth_accounts"></a><a id="input_aws_auth_accounts"></a> <a href="#input_aws_auth_accounts">aws_auth_accounts</a></h4>
+<div class="paragraph">
+<p>Description: Additional AWS account numbers to add to the aws-auth configmap. See examples/basic/variables.tf in the terraform-aws-eks module&#8217;s code for example format.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>list(string)</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>[]</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_aws_auth_roles"><a class="anchor" href="#_aws_auth_roles"></a><a id="input_aws_auth_roles"></a> <a href="#input_aws_auth_roles">aws_auth_roles</a></h4>
+<div class="paragraph">
+<p>Description: Additional IAM roles to add to the aws-auth configmap. See examples/basic/variables.tf in the terraform-aws-eks module&#8217;s code for example format.</p>
+</div>
+<div class="paragraph">
+<p>Type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">list(object({
+    rolearn  = string
+    username = string
+    groups   = list(string)
+  }))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Default: <code>[]</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_aws_auth_users"><a class="anchor" href="#_aws_auth_users"></a><a id="input_aws_auth_users"></a> <a href="#input_aws_auth_users">aws_auth_users</a></h4>
+<div class="paragraph">
+<p>Description: Additional IAM users to add to the aws-auth configmap. See examples/basic/variables.tf in the terraform-aws-eks module&#8217;s code for example format.</p>
+</div>
+<div class="paragraph">
+<p>Type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">list(object({
+    userarn  = string
+    username = string
+    groups   = list(string)
+  }))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Default: <code>[]</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_base_domain"><a class="anchor" href="#_base_domain"></a><a id="input_base_domain"></a> <a href="#input_base_domain">base_domain</a></h4>
+<div class="paragraph">
+<p>Description: The base domain used for Ingresses.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>null</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cluster_autoscaler_role_arn"><a class="anchor" href="#_cluster_autoscaler_role_arn"></a><a id="input_cluster_autoscaler_role_arn"></a> <a href="#input_cluster_autoscaler_role_arn">cluster_autoscaler_role_arn</a></h4>
+<div class="paragraph">
+<p>Description: Role ARN linked to the cluster autoscaler ServiceAccount</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>""</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cluster_endpoint_public_access_cidrs"><a class="anchor" href="#_cluster_endpoint_public_access_cidrs"></a><a id="input_cluster_endpoint_public_access_cidrs"></a> <a href="#input_cluster_endpoint_public_access_cidrs">cluster_endpoint_public_access_cidrs</a></h4>
+<div class="paragraph">
+<p>Description: List of CIDR blocks which can access the Amazon EKS public API server endpoint.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>list(string)</code></p>
+</div>
+<div class="paragraph">
+<p>Default:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">[
+  "0.0.0.0/0"
+]</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_create_private_nlb"><a class="anchor" href="#_create_private_nlb"></a><a id="input_create_private_nlb"></a> <a href="#input_create_private_nlb">create_private_nlb</a></h4>
+<div class="paragraph">
+<p>Description: Whether to create an internal NLB attached the private subnets</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>bool</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>false</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_create_public_nlb"><a class="anchor" href="#_create_public_nlb"></a><a id="input_create_public_nlb"></a> <a href="#input_create_public_nlb">create_public_nlb</a></h4>
+<div class="paragraph">
+<p>Description: Whether to create an internet-facing NLB attached to the public subnets</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>bool</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>true</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_enable_cluster_autoscaler"><a class="anchor" href="#_enable_cluster_autoscaler"></a><a id="input_enable_cluster_autoscaler"></a> <a href="#input_enable_cluster_autoscaler">enable_cluster_autoscaler</a></h4>
+<div class="paragraph">
+<p>Description: Whether to setup a cluster autoscaler</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>bool</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>false</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_extra_lb_http_tcp_listeners"><a class="anchor" href="#_extra_lb_http_tcp_listeners"></a><a id="input_extra_lb_http_tcp_listeners"></a> <a href="#input_extra_lb_http_tcp_listeners">extra_lb_http_tcp_listeners</a></h4>
+<div class="paragraph">
+<p>Description: Additional load-balancer listeners</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>list(any)</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>[]</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_extra_lb_target_groups"><a class="anchor" href="#_extra_lb_target_groups"></a><a id="input_extra_lb_target_groups"></a> <a href="#input_extra_lb_target_groups">extra_lb_target_groups</a></h4>
+<div class="paragraph">
+<p>Description: Additional load-balancer target groups</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>list(any)</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>[]</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_kubernetes_version"><a class="anchor" href="#_kubernetes_version"></a><a id="input_kubernetes_version"></a> <a href="#input_kubernetes_version">kubernetes_version</a></h4>
+<div class="paragraph">
+<p>Description: Kubernetes version to use for the EKS cluster.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"1.25"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_nlb_attached_node_groups"><a class="anchor" href="#_nlb_attached_node_groups"></a><a id="input_nlb_attached_node_groups"></a> <a href="#input_nlb_attached_node_groups">nlb_attached_node_groups</a></h4>
+<div class="paragraph">
+<p>Description: List of node_groups indexes that the NLB(s) should be attached to</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>list(any)</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>[]</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_node_groups"><a class="anchor" href="#_node_groups"></a><a id="input_node_groups"></a> <a href="#input_node_groups">node_groups</a></h4>
+<div class="paragraph">
+<p>Description: A map of node group configurations to be created.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>any</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>{}</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_public_subnet_ids"><a class="anchor" href="#_public_subnet_ids"></a><a id="input_public_subnet_ids"></a> <a href="#input_public_subnet_ids">public_subnet_ids</a></h4>
+<div class="paragraph">
+<p>Description: List of IDs of public subnets the public NLB will be attached to if enabled with 'create_public_nlb'.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>list(string)</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>[]</code></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_outputs"><a class="anchor" href="#_outputs"></a>Outputs</h3>
+<div class="paragraph">
+<p>The following outputs are exported:</p>
+</div>
+<div class="sect3">
+<h4 id="_base_domain_2"><a class="anchor" href="#_base_domain_2"></a><a id="output_base_domain"></a> <a href="#output_base_domain">base_domain</a></h4>
+<div class="paragraph">
+<p>Description: n/a</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cluster_name_2"><a class="anchor" href="#_cluster_name_2"></a><a id="output_cluster_name"></a> <a href="#output_cluster_name">cluster_name</a></h4>
+<div class="paragraph">
+<p>Description: n/a</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cluster_oidc_issuer_url"><a class="anchor" href="#_cluster_oidc_issuer_url"></a><a id="output_cluster_oidc_issuer_url"></a> <a href="#output_cluster_oidc_issuer_url">cluster_oidc_issuer_url</a></h4>
+<div class="paragraph">
+<p>Description: The URL on the EKS cluster OIDC Issuer</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_kubernetes"><a class="anchor" href="#_kubernetes"></a><a id="output_kubernetes"></a> <a href="#output_kubernetes">kubernetes</a></h4>
+<div class="paragraph">
+<p>Description: n/a</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_kubernetes_cluster_ca_certificate"><a class="anchor" href="#_kubernetes_cluster_ca_certificate"></a><a id="output_kubernetes_cluster_ca_certificate"></a> <a href="#output_kubernetes_cluster_ca_certificate">kubernetes_cluster_ca_certificate</a></h4>
+<div class="paragraph">
+<p>Description: n/a</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_kubernetes_host"><a class="anchor" href="#_kubernetes_host"></a><a id="output_kubernetes_host"></a> <a href="#output_kubernetes_host">kubernetes_host</a></h4>
+<div class="paragraph">
+<p>Description: n/a</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_kubernetes_token"><a class="anchor" href="#_kubernetes_token"></a><a id="output_kubernetes_token"></a> <a href="#output_kubernetes_token">kubernetes_token</a></h4>
+<div class="paragraph">
+<p>Description: n/a</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_nlb_target_groups"><a class="anchor" href="#_nlb_target_groups"></a><a id="output_nlb_target_groups"></a> <a href="#output_nlb_target_groups">nlb_target_groups</a></h4>
+<div class="paragraph">
+<p>Description: n/a</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_node_groups_2"><a class="anchor" href="#_node_groups_2"></a><a id="output_node_groups"></a> <a href="#output_node_groups">node_groups</a></h4>
+<div class="paragraph">
+<p>Description: Security group ID attached to the EKS nodes.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_node_security_group_id"><a class="anchor" href="#_node_security_group_id"></a><a id="output_node_security_group_id"></a> <a href="#output_node_security_group_id">node_security_group_id</a></h4>
+<div class="paragraph">
+<p>Description: n/a</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_reference_in_table_format"><a class="anchor" href="#_reference_in_table_format"></a>Reference in table format</h3>
+<details>
+<summary class="title">Show tables</summary>
+<div class="content">
+<div class="paragraph">
+<p>= Requirements</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_terraform"></a> <a href="#requirement_terraform">terraform</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 1.0</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_argocd"></a> <a href="#requirement_argocd">argocd</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 4</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_aws"></a> <a href="#requirement_aws">aws</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 4</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_helm"></a> <a href="#requirement_helm">helm</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 2</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_kubernetes"></a> <a href="#requirement_kubernetes">kubernetes</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 2</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_local"></a> <a href="#requirement_local">local</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 2</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_null"></a> <a href="#requirement_null">null</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 3</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_random"></a> <a href="#requirement_random">random</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 3</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_utils"></a> <a href="#requirement_utils">utils</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 1</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>= Providers</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_aws"></a> <a href="#provider_aws">aws</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 4</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_dns"></a> <a href="#provider_dns">dns</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>= Modules</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Source</th>
+<th class="tableblock halign-left valign-top">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="module_cluster"></a> <a href="#module_cluster">cluster</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>terraform-aws-modules/eks/aws</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>~&gt; 19.0</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="module_iam_assumable_role_cluster_autoscaler"></a> <a href="#module_iam_assumable_role_cluster_autoscaler">iam_assumable_role_cluster_autoscaler</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>~&gt; 5.0</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="module_nlb"></a> <a href="#module_nlb">nlb</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>terraform-aws-modules/alb/aws</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>~&gt; 8.0</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="module_nlb_private"></a> <a href="#module_nlb_private">nlb_private</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>terraform-aws-modules/alb/aws</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>~&gt; 8.0</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>= Resources</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy">aws_iam_policy.cluster_autoscaler</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record">aws_route53_record.wildcard</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/eks_cluster_auth">aws_eks_cluster_auth.cluster</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>data source</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document">aws_iam_policy_document.cluster_autoscaler</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>data source</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region">aws_region.current</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>data source</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/route53_zone">aws_route53_zone.this</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>data source</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/dns/latest/docs/data-sources/a_record_set">dns_a_record_set.nlb</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>data source</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>= Inputs</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_aws_auth_accounts"></a> <a href="#input_aws_auth_accounts">aws_auth_accounts</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Additional AWS account numbers to add to the aws-auth configmap. See examples/basic/variables.tf in the terraform-aws-eks module&#8217;s code for example format.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>list(string)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>[]</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_aws_auth_roles"></a> <a href="#input_aws_auth_roles">aws_auth_roles</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Additional IAM roles to add to the aws-auth configmap. See examples/basic/variables.tf in the terraform-aws-eks module&#8217;s code for example format.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">list(object({
+    rolearn  = string
+    username = string
+    groups   = list(string)
+  }))</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>[]</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_aws_auth_users"></a> <a href="#input_aws_auth_users">aws_auth_users</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Additional IAM users to add to the aws-auth configmap. See examples/basic/variables.tf in the terraform-aws-eks module&#8217;s code for example format.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">list(object({
+    userarn  = string
+    username = string
+    groups   = list(string)
+  }))</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>[]</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_base_domain"></a> <a href="#input_base_domain">base_domain</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The base domain used for Ingresses.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>null</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_cluster_autoscaler_role_arn"></a> <a href="#input_cluster_autoscaler_role_arn">cluster_autoscaler_role_arn</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Role ARN linked to the cluster autoscaler ServiceAccount</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>""</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_cluster_endpoint_public_access_cidrs"></a> <a href="#input_cluster_endpoint_public_access_cidrs">cluster_endpoint_public_access_cidrs</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>List of CIDR blocks which can access the Amazon EKS public API server endpoint.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>list(string)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">[
+  "0.0.0.0/0"
+]</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_create_private_nlb"></a> <a href="#input_create_private_nlb">create_private_nlb</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Whether to create an internal NLB attached the private subnets</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>bool</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>false</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_create_public_nlb"></a> <a href="#input_create_public_nlb">create_public_nlb</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Whether to create an internet-facing NLB attached to the public subnets</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>bool</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>true</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_enable_cluster_autoscaler"></a> <a href="#input_enable_cluster_autoscaler">enable_cluster_autoscaler</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Whether to setup a cluster autoscaler</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>bool</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>false</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_extra_lb_http_tcp_listeners"></a> <a href="#input_extra_lb_http_tcp_listeners">extra_lb_http_tcp_listeners</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Additional load-balancer listeners</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>list(any)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>[]</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_extra_lb_target_groups"></a> <a href="#input_extra_lb_target_groups">extra_lb_target_groups</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Additional load-balancer target groups</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>list(any)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>[]</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_kubernetes_version"></a> <a href="#input_kubernetes_version">kubernetes_version</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Kubernetes version to use for the EKS cluster.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>"1.25"</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_nlb_attached_node_groups"></a> <a href="#input_nlb_attached_node_groups">nlb_attached_node_groups</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>List of node_groups indexes that the NLB(s) should be attached to</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>list(any)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>[]</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_node_groups"></a> <a href="#input_node_groups">node_groups</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A map of node group configurations to be created.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>any</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>{}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_private_subnet_ids"></a> <a href="#input_private_subnet_ids">private_subnet_ids</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>List of IDs of private subnets that the EKS instances will be attached to.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>list(string)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_public_subnet_ids"></a> <a href="#input_public_subnet_ids">public_subnet_ids</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>List of IDs of public subnets the public NLB will be attached to if enabled with 'create_public_nlb'.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>list(string)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>[]</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_vpc_cidr_block"></a> <a href="#input_vpc_cidr_block">vpc_cidr_block</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_vpc_id"></a> <a href="#input_vpc_id">vpc_id</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>VPC where the cluster and nodes will be deployed.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>= Outputs</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_base_domain"></a> <a href="#output_base_domain">base_domain</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_cluster_name"></a> <a href="#output_cluster_name">cluster_name</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_cluster_oidc_issuer_url"></a> <a href="#output_cluster_oidc_issuer_url">cluster_oidc_issuer_url</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The URL on the EKS cluster OIDC Issuer</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_kubernetes"></a> <a href="#output_kubernetes">kubernetes</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_kubernetes_cluster_ca_certificate"></a> <a href="#output_kubernetes_cluster_ca_certificate">kubernetes_cluster_ca_certificate</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_kubernetes_host"></a> <a href="#output_kubernetes_host">kubernetes_host</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_kubernetes_token"></a> <a href="#output_kubernetes_token">kubernetes_token</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_nlb_target_groups"></a> <a href="#output_nlb_target_groups">nlb_target_groups</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_node_groups"></a> <a href="#output_node_groups">node_groups</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Security group ID attached to the EKS nodes.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_node_security_group_id"></a> <a href="#output_node_security_group_id">node_security_group_id</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>Copyright © Camptocamp <script> document.write(new Date().getFullYear()) </script> — All Rights Reserved</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/terraform.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/vendor/lunr.js"></script>
+<script src="../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../.." data-snippet-length="100" data-stylesheet="../../_/css/search.css"></script>
+<script async src="../../search-index.js"></script>
+  </body>
+</html>
