@@ -14,7 +14,7 @@ jobs:
   publish:
     name: "Publish Antora documentation"
 
-    runs-on: "ubuntu-latest"
+    runs-on: ubuntu-latest
 
     steps:
     - name: "Check out repository"

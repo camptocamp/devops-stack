@@ -4,25 +4,25 @@ name: "release-please"
 on:
   push:
     branches:
-    - "main"
+    - main
 
 jobs:
   release-please:
-    runs-on: "ubuntu-latest"
+    runs-on: ubuntu-latest
 
     steps:
-    - uses: "google-github-actions/release-please-action@v3"
-      id: "release-please"
+    - uses: google-github-actions/release-please-action@v3
+      id: release-please
       with:
-        release-type: "simple"
+        release-type: simple
         pull-request-title-pattern: "chore: release ${version}"
         bump-minor-pre-major: true
 
     outputs:
-      release_created: "${{ steps.release-please.outputs.release_created }}"
+      release_created: ${{ steps.release-please.outputs.release_created }}
 
   publish-documentation:
     needs:
-    - "release-please"
-    if: "needs.release-please.outputs.release_created"
+    - release-please
+    if: needs.release-please.outputs.release_created
     uses: "./.github/workflows/publish-antora-docs.yaml" # Call the Antora documentation workflow

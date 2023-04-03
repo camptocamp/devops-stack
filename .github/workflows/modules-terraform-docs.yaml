@@ -41,7 +41,7 @@ jobs:
         output-file: README.adoc
         output-method: inject
         template: ${{ env.DOCS_TPL }}
-        args: ${{ env.TF_ARGS }}
+        args: ${{ env.ARGS }}
         git-push: false
 
     - name: "Generate Terraform tables"
@@ -53,7 +53,7 @@ jobs:
         output-file: README.adoc
         output-method: inject
         template: ${{ env.TABLES_TPL }}
-        args: ${{ env.TF_ARGS }}
+        args: ${{ env.ARGS }}
         git-push: false
 
     - name: "Generate Terraform docs for the variants"
@@ -66,7 +66,7 @@ jobs:
         output-file: README.adoc
         output-method: inject
         template: ${{ env.DOCS_TPL }}
-        args: ${{ env.TF_ARGS }}
+        args: ${{ env.ARGS }}
         git-push: false
 
     - name: "Generate Terraform tables for the variants"
@@ -79,14 +79,13 @@ jobs:
         output-file: README.adoc
         output-method: inject
         template: ${{ env.TABLES_TPL }}
-        args: ${{ env.TF_ARGS }}
+        args: ${{ env.ARGS }}
         git-push: false
 
     # This step comes after long hours of debugging permission errors on the workflow when trying to do a commit after
     # executing the terraform-docs actions. See https://github.com/terraform-docs/gh-actions/issues/90
     - name: "Correct ownership of files in preparation for the next step"
-      run: |
-        sudo chown runner:docker -Rv .git
+      run: sudo chown runner:docker -Rv .git
 
     # This step avoids a commit for each previous step and instead commits everything on a single commit
     - name: "Commit changes done in the previous steps"
