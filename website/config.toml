@@ -107,12 +107,12 @@ weight = 3
 #url = "faq"
 #weight = 4
 
-# footer menu left
-[[menu.footer_left]]
+# footer menu middle
+[[menu.footer_middle]]
 name = "Camptocamp"
 url = "https://camptocamp.com"
 
-[[menu.footer_left]]
+[[menu.footer_middle]]
 name = "Our Services"
 url = "https://www.camptocamp.com/infrastructure_solutions_and_services"
 
