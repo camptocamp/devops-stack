@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0](https://github.com/camptocamp/devops-stack/compare/v0.61.0...v1.0.0) (2023-04-03)
+
+
+### Miscellaneous Chores
+
+* release v1.0.0 ([#977](https://github.com/camptocamp/devops-stack/issues/977)) ([bbb1988](https://github.com/camptocamp/devops-stack/commit/bbb1988cf4f6c035606e033faaba284b8bce3d36))
+
 ## [0.61.0](https://github.com/camptocamp/devops-stack/compare/v0.60.2...v0.61.0) (2022-12-14)
 
 
