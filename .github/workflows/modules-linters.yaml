@@ -1,0 +1,38 @@
+---
+# GitHub Actions workflow to check that the Terraform code is well formatted and if the commits have the conventional 
+# commit message structure (the latter is needed to properly create automatic releases with Release Please).
+#
+# IMPORTANT: This workflow is called by other workflows in our DevOps Stack repositories and it is centralized here in 
+# order to be easily maintained across modules. Because of this, please make sure you're not introducing any breaking 
+# changes when modifying this workflow.
+
+name: "modules-linters"
+
+on:
+  workflow_call:
+
+jobs:
+  terraform-format:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: "Check out the repository"
+      uses: actions/checkout@v3
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+
+    - name: "Run terraform fmt -check"
+      run: "terraform fmt -check"
+
+  commits-checks:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: "Check out the repository"
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0 # Fetch all history for all tags and branches
+
+    - name: "Check commit messages"
+      uses: docker://aevea/commitsar

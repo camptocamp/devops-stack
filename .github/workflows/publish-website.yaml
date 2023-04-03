@@ -1,0 +1,52 @@
+---
+name: "publish-website"
+
+on:
+  pull_request:
+    paths:
+    - "website/**"
+
+  push:
+    branches:
+    - "main"
+    paths:
+    - "website/**"
+
+  workflow_dispatch:
+
+jobs:
+  publish-website:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: "Check out the repository"
+      uses: actions/checkout@v3
+      with:
+        submodules: true # Fetch Hugo theme
+        fetch-depth: 0   # Fetch all history for .GitInfo and .Lastmod
+
+    - name: "Setup Hugo"
+      uses: peaceiris/actions-hugo@v2
+      with:
+        hugo-version: "0.92.2"
+        extended: true
+
+    - name: "Build website with Hugo"
+      run: hugo --minify --source 'website' --destination '../public'
+
+    - name: "Upload generated artifact"
+      if: github.event_name == 'pull_request'
+      uses: actions/upload-artifact@v2
+      with:
+        name: website
+        path: "${{ github.workspace }}/public"
+
+    - name: "Deploy website to GitHub Pages"
+      if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref_name == 'main'
+      uses: JamesIves/github-pages-deploy-action@v4.4.1
+      with:
+        branch: gh-pages
+        folder: public
+        commit-message: "ci: publish website for ${{ github.sha }}"
+        clean-exclude: |
+          docs

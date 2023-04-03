@@ -1,6 +1,0 @@
-= Azure AKS Terraform Module
-
-The `aks/azure` Terraform module provides a way to install and configure:
-
-* An AKS cluster
-
