@@ -64,6 +64,7 @@ content:
     tags:
     - "v1*"
     # Exclude versions without proper folder structure
+    - "!v1.0.0"
     - "!v1.0.0-alpha.*"
     - "!v1-*"
   - url: https://github.com/camptocamp/devops-stack-module-cluster-eks.git
