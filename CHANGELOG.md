@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.62.0](https://github.com/camptocamp/devops-stack/compare/v0.61.0...v0.62.0) (2023-04-03)
+
+
+### Features
+
+* **argocd:** update chart to v5.14.1 ([e2e6d68](https://github.com/camptocamp/devops-stack/commit/e2e6d68603fd25e30e8c9640e2d92b6fc0819d9f))
+
 ## [0.61.0](https://github.com/camptocamp/devops-stack/compare/v0.60.2...v0.61.0) (2022-12-14)
 
 
