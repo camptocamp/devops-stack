@@ -21,22 +21,30 @@ output "argocd_server_admin_password" {
   value       = module.argocd.argocd_server_admin_password
 }
 
+output "argocd_server_secretkey" {
+  description = "ArgoCD Server Secert Key to avoid regenerate token on redeploy."
+  sensitive   = true
+  value       = module.argocd.argocd_server_secretkey
+}
+
+output "argocd_accounts_pipeline_tokens" {
+  description = "The ArgoCD accounts pipeline tokens."
+  sensitive   = true
+  value       = module.argocd.argocd_accounts_pipeline_tokens
+}
+
+output "argocd_namespace" {
+  value = module.argocd.argo_namespace
+}
+
+output "argocd_domain" {
+  value = module.argocd.argocd_domain
+}
+
 output "repo_url" {
   value = var.repo_url
 }
 
 output "target_revision" {
   value = var.target_revision
-}
-
-output "grafana_admin_password" {
-  description = "The admin password for Grafana."
-  value       = local.grafana_admin_password
-  sensitive   = true
-}
-
-output "app_of_apps_values" {
-  description = "App of Apps values"
-  sensitive   = true
-  value       = module.argocd.app_of_apps_values
 }

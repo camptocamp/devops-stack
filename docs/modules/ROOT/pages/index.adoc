@@ -1,35 +1,42 @@
 = DevOps Stack
 
-:description: This repository contains the DevOps Stack of Camptocamp's Infrastructure Solutions Department.
-:keywords: terraform, docker, kubernetes, k3s, eks, aks, terraform, argocd, grafana, loki, traefik, prometheus, cert-manager, openid-connect, antora
+:keywords: terraform, kubernetes, kind, eks, aks, terraform, argocd, grafana, loki, traefik, prometheus, cert-manager, openid-connect, antora
 :sectanchors:
-:url-repo: https://github.com/camptocamp/devops-stack.git
-:url-c2c: https://www.camptocamp.com/
 
-The DevOps Stack provides a standard Kubernetes Platform, bringing together
-automated Provisioning as Code, Continuous Application Deployment,
-and readily-made configurations for the best Cloud Native tools in the industry.
-
-See the xref:ROOT:explanations/purpose.adoc[purpose of the DevOps Stack page]
-for more details.
+// These URLs are used in the document as-is to generate new URLs, so they should not contain any trailing slash.
+:url-main-repo: https://github.com/camptocamp/devops-stack
+:url-c2c: https://www.camptocamp.com
 
 image::devops-stack-logo_large.png[DevOps Stack]
 
-TIP: The easiest way to get started with the DevOps Stack is to follow
-the xref:howtos/quickstart_k3s_docker.adoc[K3s on Docker Quickstart].
-This way you will leave you with a fully operational https://k3s.io/[K3s]
-playground on your local machine.
+The DevOps Stack provides a standardized deployment Kubernetes Platform, bringing together automated Provisioning as Code, Continuous Application Deployment, and readily-made configurations for the best Cloud Native tools in the industry.
 
+TIP: The easiest way to get started with the DevOps Stack is to follow the tutorial on the xref:tutorials/deploy_kind.adoc[Deployment on KinD] page. This tutorial you will leave you with a fully operational https://kind.sigs.k8s.io/[KinD] playground on your local machine.
 
+== Project Sponsor
 
-== Project sponsor
+This project is mainly developed and sponsored by {url-c2c}[Camptocamp]. *It is an internal work created to standardize and maintain our Kubernetes deployments for our clients*. However, the source code is open and distributed under the Apache 2 license.
 
-This project is mainly developed and sponsored by {url-c2c}[Camptocamp].
-The source code is open, distributed under the Apache 2 license
-and available on {url-repo}[GitHub].
+== Quick Explanation
+
+The DevOps Stack is composed of several Terraform modules used to deploy a Kubernetes cluster along with a stack of components that will allow you to deploy applications as well as monitor and troubleshoot your cluster.
+
+The choice of the cluster module is dependant on the provider on which you wish to deploy your cluster. The DevOps Stack currently supports Amazon EKS, Azure AKS and a local testing deployment using KinD. The modules that deploy the remaining components of the stack are as generic as possible, but some have provider-specific variants that deploy different resources depending on the platform.
+
+As you'll see in the examples, after the cluster is deployed, a temporary Argo CD is installed to then deploy the rest of the components. After all the components have been deployed, this Argo CD instance is then replaced by a permanent one that will manage the updates of all the components and can be used to deploy your applications (we also created module to create and configure Argo CD xref:application:ROOT:README.adoc[Applications] and xref:applicationset:ROOT:README.adoc[ApplicationSets]).
 
 == Documentation
 
-This documentation is inspired by the https://documentation.divio.com/structure/[Divio documentation structure]. It is written in https://asciidoc.org/[Asciidoc] and built using https://antora.org/[Antora]. All the details related to the documentation are available on the xref:explanations/documentation.adoc[Docs as Code] page. 
+These documentation pages are the main source of information for the DevOps Stack. They are written in https://asciidoc.org/[AsciiDoc] and built using https://antora.org/[Antora].
 
-include::partial$compatibility_matrix.adoc[]
+The main documentation contains information pertaining to the DevOps Stack as a whole while the module pages contain more specific and technical details about each individual module. We recommend you take a look into the general documentation first in order to have an overview of a DevOps Stack deployment and then navigate the sidebar to consult each module documentation.
+
+This documentation as well as some examples are stored on the {url-main-repo}[main repository on GitHub].
+
+Since this is an internal project of {url-c2c}[Camptocamp], *some of the documentation pages may be more geared towards our employees and teams*.
+
+== Contributing
+
+On the contributing section of the sidebar you'll find some guidelines on how to contribute to the DevOps Stack. You have some xref:ROOT:contributing/general_guidelines.adoc[general guidelines] on how to contribute to the project along with explanations on xref:ROOT:contributing/modules.adoc[how a module is structured], xref:ROOT:contributing/documentation.adoc[how to write documentation] and xref:ROOT:contributing/release.adoc[how the release process works].
+
+We welcome any kind of contribution, whether it's a bug report, a feature request, a documentation improvement or even a code contribution. You are also welcome to create your own cluster provisioning modules and request any help from us, but we can't guarantee any maintenance or long-term support for them.

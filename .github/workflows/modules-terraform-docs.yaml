@@ -6,7 +6,7 @@
 # order to be easily maintained across modules. Because of this, please make sure you're not introducing any breaking 
 # changes when modifying this workflow.
 
-name: "Terraform Docs"
+name: "modules-terraform-docs"
 
 on:
   workflow_call:
@@ -16,6 +16,11 @@ on:
         type: string
         required: false
         default: ""
+
+env:
+  ARGS: "--hide-empty=true --sort=false" # Do not show empty sections and do not sort items
+  DOCS_TPL: "// BEGIN_TF_DOCS\n{{ .Content }}\n// END_TF_DOCS" # Define template compatible with AsciiDoc
+  TABLES_TPL: "// BEGIN_TF_TABLES\n{{ .Content }}\n// END_TF_TABLES" # Define template compatible with AsciiDoc
 
 jobs:
   terraform-docs:
@@ -35,8 +40,8 @@ jobs:
         output-format: asciidoc document
         output-file: README.adoc
         output-method: inject
-        template: "// BEGIN_TF_DOCS\n{{ .Content }}\n// END_TF_DOCS" # Define template compatible with AsciiDoc
-        args: "--hide-empty=true" # Do not show empty sections
+        template: ${{ env.DOCS_TPL }}
+        args: ${{ env.ARGS }}
         git-push: false
 
     - name: "Generate Terraform tables"
@@ -47,8 +52,8 @@ jobs:
         output-format: asciidoc table
         output-file: README.adoc
         output-method: inject
-        template: "// BEGIN_TF_TABLES\n{{ .Content }}\n// END_TF_TABLES" # Define template compatible with AsciiDoc
-        args: "--hide-empty=true" # Do not show empty sections
+        template: ${{ env.TABLES_TPL }}
+        args: ${{ env.ARGS }}
         git-push: false
 
     - name: "Generate Terraform docs for the variants"
@@ -60,8 +65,8 @@ jobs:
         output-format: asciidoc document
         output-file: README.adoc
         output-method: inject
-        template: "// BEGIN_TF_DOCS\n{{ .Content }}\n// END_TF_DOCS" # Define template compatible with AsciiDoc
-        args: "--hide-empty=true" # Do not show empty sections
+        template: ${{ env.DOCS_TPL }}
+        args: ${{ env.ARGS }}
         git-push: false
 
     - name: "Generate Terraform tables for the variants"
@@ -73,15 +78,14 @@ jobs:
         output-format: asciidoc table
         output-file: README.adoc
         output-method: inject
-        template: "// BEGIN_TF_TABLES\n{{ .Content }}\n// END_TF_TABLES" # Define template compatible with AsciiDoc
-        args: "--hide-empty=true" # Do not show empty sections
+        template: ${{ env.TABLES_TPL }}
+        args: ${{ env.ARGS }}
         git-push: false
 
     # This step comes after long hours of debugging permission errors on the workflow when trying to do a commit after
     # executing the terraform-docs actions. See https://github.com/terraform-docs/gh-actions/issues/90
     - name: "Correct ownership of files in preparation for the next step"
-      run: |
-        sudo chown runner:docker -Rv .git
+      run: sudo chown runner:docker -Rv .git
 
     # This step avoids a commit for each previous step and instead commits everything on a single commit
     - name: "Commit changes done in the previous steps"

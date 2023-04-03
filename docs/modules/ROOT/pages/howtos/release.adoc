@@ -1,3 +1,0 @@
-= Release
-
-* Merge the Pull Request with label `autorelease:pending` managed by https://github.com/googleapis/release-please[Release Please]

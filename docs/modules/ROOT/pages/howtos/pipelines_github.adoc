@@ -1,3 +1,0 @@
-== Creating your Pipeline with GitHub
-
-include::partial$pipelines_github.adoc[ci-variables, terraform-provider, terraform-provider-link]

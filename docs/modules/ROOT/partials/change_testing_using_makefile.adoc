@@ -1,8 +1,0 @@
-=== Testing a terraform change
-
-By simply running the Makefile again all changes to the terraform code will be applied.
-
-=== Making a change to an Application deployed by ArgoCD
-
-Due to how ArgoCD works, you need to commit and push your change to a fork of the project for it to be visible.
-ArgoCD should be in auto-sync by default, if it is not, you can visit the administration page of ArgoCD which url was given in the terraform ouput and manually sync.

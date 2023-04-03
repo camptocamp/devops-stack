@@ -1,7 +1,6 @@
 ---
 name: "ROOT"
 title: "DevOps Stack"
-version: "0.61.0" # x-release-please-version
-prerelease: true
+version: true # Get version directly from the tag
 nav:
-  - "modules/ROOT/nav.adoc"
+- "modules/ROOT/nav.adoc"

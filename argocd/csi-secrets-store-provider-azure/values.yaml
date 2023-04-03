@@ -1,5 +1,0 @@
----
-csi-secrets-store-provider-azure:
-  secrets-store-csi-driver:
-    syncSecret:
-      enabled: true

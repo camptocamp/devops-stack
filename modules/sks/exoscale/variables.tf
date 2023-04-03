@@ -1,3 +1,8 @@
+variable "cluster_name" {
+  description = "The name of the Kubernetes cluster to create."
+  type        = string
+}
+
 variable "base_domain" {
   description = "The base domain used for Ingresses."
   type        = string
@@ -7,7 +12,6 @@ variable "base_domain" {
 variable "kubernetes_version" {
   description = "Specify which Kubernetes release to use."
   type        = string
-  default     = "1.21.6"
 }
 
 variable "zone" {
@@ -18,17 +22,9 @@ variable "zone" {
 variable "nodepools" {
   description = "The SKS node pools to create."
   type        = map(any)
-  default     = null
 }
 
 variable "router_nodepool" {
   description = "The node to attach the NLB to."
   type        = string
-  default     = null
-}
-
-variable "keycloak_users" {
-  description = "List of keycloak users"
-  type        = map(map(string))
-  default = {}
 }

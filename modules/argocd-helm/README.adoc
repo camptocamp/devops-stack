@@ -1,9 +1,0 @@
-= ArgoCD Helm Terraform Module
-
-The `argocd-helm` Terraform module provides a way to install and configure:
-
-* ArgoCD
-* A base umbrella app for the DevOps Stack
-* Optional additional umbrella apps
-
-

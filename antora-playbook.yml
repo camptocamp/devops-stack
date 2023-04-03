@@ -1,40 +1,169 @@
+---
 site:
   title: DevOps Stack
   keys:
     google_analytics: "G-GDBX9466LL"
 antora:
   extensions:
-    - require: "@antora/lunr-extension"
-      index_latest_only: true
+  - require: "@antora/lunr-extension"
+    index_latest_only: true
+urls:
+  latest_version_segment: latest # Define each component's latest version as the latest in the URL 
 content:
-  branches: []
-  tags:
-    # Build all version tags
-    - "v*"
-
-    # Exclude old versions
-    - "!v0.1*"
-    - "!v0.2*"
-    - "!v0.3.*"
-    - "!v0.4.*"
-    - "!v0.5.*"
-    - "!v0.6.*"
-    - "!v0.7.*"
-    - "!v0.8.*"
-    - "!v0.9.*"
-
-    # Exclude specific versions where the version in antora.yml
-    # wasn’t updated during release process
-    - "!v0.44.0"
-    - "!v0.49.1"
-    - "!v0.50.4"
-    - "!v0.51.0"
-    - "!v0.53.0"
   sources:
-  - url: ./
+
+  # Main Repository
+  - url: https://github.com/camptocamp/devops-stack.git
     start_path: docs
+    branches: []
+    tags:
+      # Build all version tags
+      - "v1*"
+
+      # Exclude old versions
+      - "!v1-alpha*"
+
+  # Modules Repositories
+  - url: https://github.com/camptocamp/devops-stack-module-aad-pod-identity.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    # Exclude versions without proper folder structure
+    - "!v1.{0..1}.{0..1}"
+    - "!v1.0.0-alpha.*"
+  - url: https://github.com/camptocamp/devops-stack-module-application.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    - "!v1.0.0"
+  - url: https://github.com/camptocamp/devops-stack-module-applicationset.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+  - url: https://github.com/camptocamp/devops-stack-module-argocd.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    # Exclude versions without proper folder structure
+    - "!v1.0.0-alpha.1"
+    - "!v1.0.0-alpha.2"
+    - "!v1.0.0-alpha.3"
+    - "!v1.0.0-alpha.4"
+    - "!v1.0.0-alpha.5"
+    - "!v1.0.0-alpha.6"
+    - "!v1.0.0-alpha.7"
+    - "!v1.0.0-alpha.8"
+    - "!v1-*"
+  - url: https://github.com/camptocamp/devops-stack-module-cert-manager.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    # Exclude versions without proper folder structure
+    - "!v1.0.0-alpha.*"
+    - "!v1-*"
+  - url: https://github.com/camptocamp/devops-stack-module-cluster-eks.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    # Exclude versions without proper folder structure
+    - "!v1.0.0-alpha.*"
+  - url: https://github.com/camptocamp/devops-stack-module-cluster-kind.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v2*"
+    # Exclude versions without proper folder structure
+    - "!v2.{0..1}.{0..1}"
+  - url: https://github.com/camptocamp/devops-stack-module-dex.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    # Exclude versions without proper folder structure
+    - "!v1.0.0-alpha.1"
+    - "!v1.0.0-alpha.2"
+    - "!v1-*"
+  - url: https://github.com/camptocamp/devops-stack-module-ebs-csi-driver.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    # Exclude versions without proper folder structure
+    - "!v1.0.0"
+    - "!v1.0.0-alpha.*"
+  - url: https://github.com/camptocamp/devops-stack-module-efs-csi-driver.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    # Exclude versions without proper folder structure
+    - "!v1.0.0"
+    - "!v1.0.0-alpha.*"
+  - url: https://github.com/camptocamp/devops-stack-module-grafana.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    # Exclude versions without proper folder structure
+    - "!v1.0.0-alpha.*"
+  - url: https://github.com/camptocamp/devops-stack-module-keycloak.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    # Exclude versions without proper folder structure
+    - "!v1.0.0-alpha.*"
+  - url: https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    # Exclude versions without proper folder structure
+    - "!v1.0.0-alpha.*"
+    - "!v1-*"
+  - url: https://github.com/camptocamp/devops-stack-module-loki-stack.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    # Exclude versions without proper folder structure
+    - "!v1.0.0-alpha.*"
+  - url: https://github.com/camptocamp/devops-stack-module-metallb.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    # Exclude versions without proper folder structure
+    - "!v1.0.0-alpha.*"
+  - url: https://github.com/camptocamp/devops-stack-module-oidc-aws-cognito.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    # Exclude versions without proper folder structure
+    - "!v1.0.0-alpha.*"
+  - url: https://github.com/camptocamp/devops-stack-module-thanos.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    # Exclude versions without proper folder structure
+    - "!v1.0.0-alpha.*"
+  - url: https://github.com/camptocamp/devops-stack-module-traefik.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    # Exclude versions without proper folder structure
+    - "!v1.0.0-alpha.*"
+    - "!v1-alpha*"
 ui:
   bundle:
     url: https://github.com/camptocamp/devops-stack-antora-ui/releases/download/master-LATEST/ui-bundle.zip
     snapshot: true
-  supplemental_files: ./docs/supplemental_ui

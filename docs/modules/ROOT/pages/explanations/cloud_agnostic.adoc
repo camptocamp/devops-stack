@@ -1,9 +1,0 @@
-= Cloud Agnostic
-
-Nobody likes to be locked-in. That’s why the DevOps Stack provides a Cloud abstraction so you can deploy it on top of multiple Cloud platforms, in an agnostic way.
-
-Good "agnostic" automation practices offer many benefits.
-
-== Getting started
-
-include::partial$getting_started.adoc[]

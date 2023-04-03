@@ -1,0 +1,24 @@
+---
+name: "pr-issues-project"
+
+on:
+  workflow_call:
+
+  # issues:
+  #   types: 
+  #   - opened
+  #   - reopened
+  
+  # pull_request:
+  #   types:
+  #   - opened
+  #   - reopened
+
+jobs:
+  add-to-project:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/add-to-project@v0.4.1
+      with:
+        project-url: https://github.com/orgs/camptocamp/projects/3/
+        github-token: ${{ secrets.APP_TOKEN}}

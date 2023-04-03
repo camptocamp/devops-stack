@@ -1,8 +1,0 @@
-== Deploy the cluster
-
-```shell
-$ terraform init
-$ terraform apply
-```
-
-You should see the services URL as Terraform outputs.
