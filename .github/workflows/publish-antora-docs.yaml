@@ -6,14 +6,16 @@ on:
     paths:
     - "docs/**"
 
+  schedule:
+    # Every day at 3:00 AM in order to generate documentation for every module that had a new release
+    - cron: "0 3 * * *"
+
   workflow_call:
 
   workflow_dispatch:
 
 jobs:
-  publish:
-    name: "Publish Antora documentation"
-
+  publish-antora-docs:
     runs-on: ubuntu-latest
 
     steps:
@@ -35,7 +37,7 @@ jobs:
         path: ${{ github.workspace }}/public/docs
 
     - name: "Deploy documentation to GitHub Pages"
-      if: github.ref_name == 'main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_call')
+      if: github.ref_name == 'main' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_call')
       uses: JamesIves/github-pages-deploy-action@v4.4.1
       with:
         branch: gh-pages
