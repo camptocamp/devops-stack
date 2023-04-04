@@ -16,7 +16,7 @@ Every DevOps Stack module contains a GitHub workflow that simply calls a central
 
 === Centralized Workflow
 
-The workflow definition available in the {url-main-repo}/blob/master/.github/workflows/modules-release-please.yaml[main repository].
+The workflow definition available in the {url-main-repo}/blob/main/.github/workflows/modules-release-please.yaml[main repository].
 
 [source,yaml]
 ----
