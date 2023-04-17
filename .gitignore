@@ -14,3 +14,9 @@ tests/*/.terraform.lock.hcl
 tests/*/kubeconfig.yaml
 tests/*/terraform.tfstate
 tests/*/terraform.tfstate.backup
+examples/*/.terraform
+examples/*/terraform.tfstate
+examples/*/terraform.tfstate.*
+examples/*/.terraform.tfstate.lock.info
+examples/*/*-config
+examples/*/.terraform.lock.hcl
