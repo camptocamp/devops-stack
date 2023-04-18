@@ -37,7 +37,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="ROOT" data-version="v1.0.1">
+<div class="nav-container" data-component="ROOT" data-version="v1.0.2">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -56,13 +56,16 @@
     <span class="nav-text">Tutorials</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="deploy_eks.html">Deployment on KinD</a>
+    <a class="nav-link" href="deploy_kind.html">Deployment on KinD</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="deploy_aks.html">Deployment on AKS</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="deploy_eks.html">Deployment on EKS</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="deploy_aks.html">Deployment on AKS</a>
+    <a class="nav-link" href="deploy_aks.html">Deployment on SKS</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="deploy_apps.html">Deploying Applications on the DevOps Stack</a>
@@ -101,6 +104,9 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../../eks/latest/README.html">Amazon EKS</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="#sks:ROOT:README.adoc">Exoscale SKS</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../../kind/latest/README.html">KinD</a>
@@ -154,6 +160,9 @@
     <a class="nav-link" href="../../metallb/latest/README.html">MetalLB</a>
   </li>
   <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="#minio:ROOT:README.adoc">MinIO</a>
+  </li>
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../../thanos/latest/README.html">Thanos</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -167,7 +176,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">DevOps Stack</span>
-    <span class="version">v1.0.1</span>
+    <span class="version">v1.0.2</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -239,9 +248,6 @@
         <li class="version">
           <a href="../../argocd/v1.0.0/README.html">v1.0.0</a>
         </li>
-        <li class="version">
-          <a href="../../argocd/v1.0.0-alpha.9/README.html">v1.0.0-alpha.9</a>
-        </li>
       </ul>
     </li>
     <li class="component">
@@ -256,7 +262,10 @@
       <a class="title" href="../../cert-manager/latest/README.html">Cert-manager Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../cert-manager/latest/README.html">v1.0.1</a>
+          <a href="../../cert-manager/latest/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v1.0.1/README.html">v1.0.1</a>
         </li>
       </ul>
     </li>
@@ -264,7 +273,10 @@
       <a class="title" href="../index.html">DevOps Stack</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../index.html">v1.0.1</a>
+          <a href="../index.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.0.1/index.html">v1.0.1</a>
         </li>
         <li class="version">
           <a href="../../v1.0.0/index.html">v1.0.0</a>
@@ -337,7 +349,10 @@
       <a class="title" href="../../kube-prometheus-stack/latest/README.html">Kube-prometheus-stack Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../kube-prometheus-stack/latest/README.html">v1.0.0</a>
+          <a href="../../kube-prometheus-stack/latest/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v1.0.0/README.html">v1.0.0</a>
         </li>
       </ul>
     </li>
@@ -345,18 +360,16 @@
       <a class="title" href="../../loki/latest/README.html">Loki Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../loki/latest/README.html">v1.1.0</a>
+          <a href="../../loki/latest/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v1.1.0/README.html">v1.1.0</a>
         </li>
         <li class="version">
           <a href="../../loki/v1.0.0/README.html">v1.0.0</a>
-        </li>
-      </ul>
-    </li>
-    <li class="component">
-      <a class="title" href="../../matallb/latest/README.html">MetalLB Module</a>
-      <ul class="versions">
-        <li class="version is-latest">
-          <a href="../../matallb/latest/README.html">v1.0.0</a>
         </li>
       </ul>
     </li>
@@ -401,13 +414,14 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v1.0.1</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v1.0.2</button>
   <div class="version-menu">
-    <a class="version is-current" href="deploy_aks.html">v1.0.1</a>
+    <a class="version is-current" href="deploy_aks.html">v1.0.2</a>
+    <a class="version" href="../../v1.0.1/tutorials/deploy_aks.html">v1.0.1</a>
     <a class="version" href="../../v1.0.0/tutorials/deploy_aks.html">v1.0.0</a>
   </div>
 </div>
-  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/blob/v1.0.1/docs/modules/ROOT/pages/tutorials/deploy_aks.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/blob/v1.0.2/docs/modules/ROOT/pages/tutorials/deploy_aks.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
