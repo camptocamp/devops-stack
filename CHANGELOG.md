@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/camptocamp/devops-stack/compare/v1.0.1...v1.0.2) (2023-04-18)
+
+
+### Documentation
+
+* add MinIO module and new versions ([#985](https://github.com/camptocamp/devops-stack/issues/985)) ([55859cf](https://github.com/camptocamp/devops-stack/commit/55859cfbc0a4da5634afc6866f90469330c3450f))
+
 ## [1.0.1](https://github.com/camptocamp/devops-stack/compare/v1.0.0...v1.0.1) (2023-04-17)
 
 
