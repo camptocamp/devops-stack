@@ -49,20 +49,13 @@ content:
     tags:
     - "v1*"
     # Exclude versions without proper folder structure
-    - "!v1.0.0-alpha.1"
-    - "!v1.0.0-alpha.2"
-    - "!v1.0.0-alpha.3"
-    - "!v1.0.0-alpha.4"
-    - "!v1.0.0-alpha.5"
-    - "!v1.0.0-alpha.6"
-    - "!v1.0.0-alpha.7"
-    - "!v1.0.0-alpha.8"
+    - "!v1.0.0-alpha.*"
     - "!v1-*"
   - url: https://github.com/camptocamp/devops-stack-module-cert-manager.git
     start_path: docs
     branches: []
     tags:
-    - "v1*"
+    - "v{1..2}*"
     # Exclude versions without proper folder structure
     - "!v1.0.0"
     - "!v1.0.0-alpha.*"
@@ -71,7 +64,7 @@ content:
     start_path: docs
     branches: []
     tags:
-    - "v1*"
+    - "v{1..2}*"
     # Exclude versions without proper folder structure
     - "!v1.0.0-alpha.*"
   - url: https://github.com/camptocamp/devops-stack-module-cluster-kind.git
@@ -124,7 +117,7 @@ content:
     start_path: docs
     branches: []
     tags:
-    - "v1*"
+    - "v{1..2}*"
     # Exclude versions without proper folder structure
     - "!v1.0.0-alpha.*"
     - "!v1-*"
@@ -132,10 +125,18 @@ content:
     start_path: docs
     branches: []
     tags:
-    - "v1*"
+    - "v{1..2}*"
     # Exclude versions without proper folder structure
     - "!v1.0.0-alpha.*"
   - url: https://github.com/camptocamp/devops-stack-module-metallb.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v1*"
+    # Exclude versions without proper folder structure
+    - "!v1.0.0"
+    - "!v1.0.0-alpha.*"
+  - url: https://github.com/camptocamp/devops-stack-module-minio.git
     start_path: docs
     branches: []
     tags:

@@ -1,9 +1,10 @@
 .*Main Documentation*
 * xref:ROOT:index.adoc[Home]
 * Tutorials
-** xref:ROOT:tutorials/deploy_eks.adoc[Deployment on KinD]
-** xref:ROOT:tutorials/deploy_eks.adoc[Deployment on EKS]
+** xref:ROOT:tutorials/deploy_kind.adoc[Deployment on KinD]
 ** xref:ROOT:tutorials/deploy_aks.adoc[Deployment on AKS]
+** xref:ROOT:tutorials/deploy_eks.adoc[Deployment on EKS]
+** xref:ROOT:tutorials/deploy_aks.adoc[Deployment on SKS]
 ** xref:ROOT:tutorials/deploy_apps.adoc[Deploying Applications on the DevOps Stack]
 ** xref:ROOT:tutorials/greenfield_upgrade.adoc[Blue-Green Upgrade]
 * Contributing Guidelines
@@ -15,6 +16,7 @@
 
 .*Cluster Modules*
 * xref:eks:ROOT:README.adoc[Amazon EKS]
+* xref:sks:ROOT:README.adoc[Exoscale SKS]
 * xref:kind:ROOT:README.adoc[KinD]
 
 .*Chart Modules*
@@ -32,5 +34,6 @@
 * xref:kube-prometheus-stack:ROOT:README.adoc[Kube-prometheus-stack]
 * xref:loki:ROOT:README.adoc[Loki]
 * xref:metallb:ROOT:README.adoc[MetalLB]
+* xref:minio:ROOT:README.adoc[MinIO]
 * xref:thanos:ROOT:README.adoc[Thanos]
 * xref:traefik:ROOT:README.adoc[Traefik]
