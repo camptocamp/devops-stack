@@ -37,7 +37,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="ROOT" data-version="v1.0.0">
+<div class="nav-container" data-component="ROOT" data-version="v1.0.1">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -154,7 +154,7 @@
     <a class="nav-link" href="../../metallb/latest/README.html">MetalLB</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="#thanos:ROOT:README.adoc">Thanos</a>
+    <a class="nav-link" href="../../thanos/latest/README.html">Thanos</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../../traefik/latest/README.html">Traefik</a>
@@ -167,7 +167,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">DevOps Stack</span>
-    <span class="version">v1.0.0</span>
+    <span class="version">v1.0.1</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -234,7 +234,13 @@
       <a class="title" href="../../argocd/latest/README.html">Argo CD Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../argocd/latest/README.html">v1.0.0-alpha.9</a>
+          <a href="../../argocd/latest/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v1.0.0/README.html">v1.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v1.0.0-alpha.9/README.html">v1.0.0-alpha.9</a>
         </li>
       </ul>
     </li>
@@ -258,7 +264,10 @@
       <a class="title" href="../index.html">DevOps Stack</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../index.html">v1.0.0</a>
+          <a href="../index.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.0.0/index.html">v1.0.0</a>
         </li>
       </ul>
     </li>
@@ -306,7 +315,10 @@
       <a class="title" href="../../keycloak/latest/README.html">Keycloak Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../keycloak/latest/README.html">v1.0.1</a>
+          <a href="../../keycloak/latest/README.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.0.1/README.html">v1.0.1</a>
         </li>
         <li class="version">
           <a href="../../keycloak/v1.0.0/README.html">v1.0.0</a>
@@ -333,7 +345,10 @@
       <a class="title" href="../../loki/latest/README.html">Loki Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../loki/latest/README.html">v1.0.0</a>
+          <a href="../../loki/latest/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v1.0.0/README.html">v1.0.0</a>
         </li>
       </ul>
     </li>
@@ -350,6 +365,14 @@
       <ul class="versions">
         <li class="version is-latest">
           <a href="../../metallb/latest/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../thanos/latest/README.html">Thanos Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../thanos/latest/README.html">v1.0.0</a>
         </li>
       </ul>
     </li>
@@ -377,7 +400,14 @@
     <li><a href="general_guidelines.html">General Guidelines</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/blob/v1.0.0/docs/modules/ROOT/pages/contributing/general_guidelines.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">v1.0.1</button>
+  <div class="version-menu">
+    <a class="version is-current" href="general_guidelines.html">v1.0.1</a>
+    <a class="version" href="../../v1.0.0/contributing/general_guidelines.html">v1.0.0</a>
+  </div>
+</div>
+  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/blob/v1.0.1/docs/modules/ROOT/pages/contributing/general_guidelines.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -419,28 +449,28 @@
 </div>
 <div class="sect2">
 <h3 id="_branches"><a class="anchor" href="#_branches"></a>Branches</h3>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
 <p>Keep the <code>main</code> branch clean, and only merge Pull Requests into it.</p>
 </li>
 <li>
 <p>Create a new branch for each Pull Request. <strong>The name of the branch should be the Jira ticket number, followed by a short description of the work done in the branch</strong>, for example <code>ISDEVOPS-185-v1-docs</code>. This will allow the Jira ticket to be automatically linked to the branch and the Pull Request.</p>
 </li>
-</ol>
+</ul>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_commit_messages"><a class="anchor" href="#_commit_messages"></a>Commit Messages</h3>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
 <p>When committing to your branch, you should follow the <a href="https://www.conventionalcommits.org/">Conventional Commits</a> specification. <strong>This will also allow the automated changelog generation to work properly.</strong></p>
 </li>
 <li>
 <p>We use the following commit types:</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
+<div class="ulist">
+<ul>
 <li>
 <p><strong><code>feat</code></strong> - a new feature</p>
 </li>
@@ -462,7 +492,7 @@
 <li>
 <p><strong><code>chore</code></strong> - other changes that don&#8217;t really modify the code (could be a merge commit, for example, <code>chore: rebase 'main' into 'ISDEVOPS-184-v1-docs' before merging PR</code>)</p>
 </li>
-</ol>
+</ul>
 </div>
 </li>
 <li>
@@ -482,10 +512,10 @@ Adding a breaking change will automatically trigger a major version bump when th
 </li>
 <li>
 <p>The commit scope is optional but recommended:</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
+<div class="ulist">
+<ul>
 <li>
-<p>At least, for the modules that have variants, <strong>it is recommended to add the variant on the scope (<code>eks</code>, <code>aks</code> or <code>kind</code>)</strong>. It could simply use the variant or use the variant as a prefix (for example, <code>docs(eks-variables): add descriptions</code>).</p>
+<p>At least, for the modules that have variants, <strong>it is recommended to include the variant on the scope (<code>eks</code>, <code>aks</code> or <code>kind</code>)</strong>. You could simply use the variant or even use the variant as a prefix (for example, <code>docs(eks-variables): add descriptions</code>).</p>
 </li>
 <li>
 <p>If modifying something on the chart, <strong>you should add <code>chart</code> as the scope</strong>.</p>
@@ -493,21 +523,21 @@ Adding a breaking change will automatically trigger a major version bump when th
 <li>
 <p>Otherwise, recommended scopes could just be the type of code changed, for example, <code>variables</code>, <code>outputs</code>, <code>main</code>, etc.</p>
 </li>
-</ol>
+</ul>
 </div>
 </li>
 <li>
 <p>The conventional commits specification also allows you to add a body and a footer to the commit message. You could use the body to add more details and context to the commit, but keep it short. The footer could be used to add a reference to a Jira ticket, for example.</p>
 </li>
-</ol>
+</ul>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_pull_requests"><a class="anchor" href="#_pull_requests"></a>Pull Requests</h3>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
-<p>You can create Pull Requests from your branch any time during the development, but if it is not ready to be merged, you should mark it as a <em>Draft Pull Request</em>. This will prevent it from being merged by mistake while still allowing you to get feedback from other developers as well as the automated checks and documentation generation done by GitHub Actions.</p>
+<p>You can create Pull Requests from your branch any time during the development, but if it isn&#8217;t ready to be merged, you should mark it as a <em>Draft Pull Request</em>. This will prevent it from being merged by mistake while still allowing you to get feedback from other developers as well as the automated checks and documentation generation done by GitHub Actions.</p>
 </li>
 <li>
 <p>For a PR to be merged, you need to have at least a review from another developer and all the automated checks must pass. Comments on the PR are welcome and allow us to keep track of the discussions that happen on the PR.</p>
@@ -527,10 +557,10 @@ The downside of this approach is that the commit history needs to be looked afte
 </table>
 </div>
 </li>
-</ol>
+</ul>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
 <p>Take care to properly title and describe your Pull Request. <strong>The title should be descriptive enough and follow the conventional commits specification</strong>. As for the description, follow the template that is provided.</p>
 <div class="admonitionblock important">
@@ -546,13 +576,13 @@ If you do a <code>Squash and Merge</code> on a Pull Request, <strong>the commit 
 </table>
 </div>
 </li>
-</ol>
+</ul>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_issues"><a class="anchor" href="#_issues"></a>Issues</h3>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
 <p>If you find some issue on the DevOps Stack, you could create an issue on the repository in which you find the issue. An issue could be a bug or a feature request/proposition.</p>
 </li>
@@ -565,7 +595,7 @@ If you do a <code>Squash and Merge</code> on a Pull Request, <strong>the commit 
 <li>
 <p><strong>The issues are more useful for external users of the DevOps Stack</strong>, if possible we can discuss the issue on our weekly meeting and then decide if it is something that we want to implement or not. In that case, we can then create a Jira ticket, to keep track of the work that needs to be done.</p>
 </li>
-</ol>
+</ul>
 </div>
 </div>
 </div>

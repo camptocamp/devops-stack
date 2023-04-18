@@ -37,7 +37,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="ROOT" data-version="v1.0.0">
+<div class="nav-container" data-component="ROOT" data-version="v1.0.1">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -154,7 +154,7 @@
     <a class="nav-link" href="../../metallb/latest/README.html">MetalLB</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="#thanos:ROOT:README.adoc">Thanos</a>
+    <a class="nav-link" href="../../thanos/latest/README.html">Thanos</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../../traefik/latest/README.html">Traefik</a>
@@ -167,7 +167,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">DevOps Stack</span>
-    <span class="version">v1.0.0</span>
+    <span class="version">v1.0.1</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -234,7 +234,13 @@
       <a class="title" href="../../argocd/latest/README.html">Argo CD Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../argocd/latest/README.html">v1.0.0-alpha.9</a>
+          <a href="../../argocd/latest/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v1.0.0/README.html">v1.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v1.0.0-alpha.9/README.html">v1.0.0-alpha.9</a>
         </li>
       </ul>
     </li>
@@ -258,7 +264,10 @@
       <a class="title" href="../index.html">DevOps Stack</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../index.html">v1.0.0</a>
+          <a href="../index.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.0.0/index.html">v1.0.0</a>
         </li>
       </ul>
     </li>
@@ -306,7 +315,10 @@
       <a class="title" href="../../keycloak/latest/README.html">Keycloak Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../keycloak/latest/README.html">v1.0.1</a>
+          <a href="../../keycloak/latest/README.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.0.1/README.html">v1.0.1</a>
         </li>
         <li class="version">
           <a href="../../keycloak/v1.0.0/README.html">v1.0.0</a>
@@ -333,7 +345,10 @@
       <a class="title" href="../../loki/latest/README.html">Loki Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../loki/latest/README.html">v1.0.0</a>
+          <a href="../../loki/latest/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v1.0.0/README.html">v1.0.0</a>
         </li>
       </ul>
     </li>
@@ -350,6 +365,14 @@
       <ul class="versions">
         <li class="version is-latest">
           <a href="../../metallb/latest/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../thanos/latest/README.html">Thanos Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../thanos/latest/README.html">v1.0.0</a>
         </li>
       </ul>
     </li>
@@ -377,7 +400,14 @@
     <li><a href="modules.html">DevOps Stack Modules</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/blob/v1.0.0/docs/modules/ROOT/pages/contributing/modules.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">v1.0.1</button>
+  <div class="version-menu">
+    <a class="version is-current" href="modules.html">v1.0.1</a>
+    <a class="version" href="../../v1.0.0/contributing/modules.html">v1.0.0</a>
+  </div>
+</div>
+  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/blob/v1.0.1/docs/modules/ROOT/pages/contributing/modules.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -396,7 +426,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_basic_structure"><a class="anchor" href="#_basic_structure"></a>Basic Structure</h2>
+<h2 id="_basic_modules"><a class="anchor" href="#_basic_modules"></a>Basic Modules</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>These kinds of modules are typically the ones that provision clusters and related resources. Good examples of this are the <a href="../../eks/latest/README.html" class="xref page">Amazon EKS module</a> and <a href="../../kind/latest/README.html" class="xref page">KinD module</a>.</p>
@@ -438,7 +468,7 @@
 <p><strong><code>CHANGELOG.md</code></strong> - Contains the changelog of the module. It is automatically updated by the Release Please GitHub Action and <strong>you do not need to create this file manually</strong>.</p>
 </li>
 <li>
-<p><strong><code>CODEOWNERS</code></strong> - Contains the list of GitHub users that will be automatically assigned as reviewers for pull requests on the module. In our case it is the <code>@camptocamp/devops-stack</code> team.</p>
+<p><strong><code>CODEOWNERS</code></strong> - Contains the list of GitHub users that will be automatically assigned as reviewers for pull requests on the module. In our case it is the <code>@camptocamp/is-devops-stack</code> team.</p>
 </li>
 <li>
 <p><strong><code>docs</code></strong> - This is a folder that contains a precise substructure needed for the rendering of these documentation pages by Antora. The actual documentation is contained on the <code>README.adoc</code> files. You will find these and some other explanations about the docs on the <a href="documentation.html" class="xref page">Documentation</a> page.</p>
@@ -557,7 +587,7 @@ The Argo CD module is a special case, as it is used to deploy the other modules.
 <p><strong><code>charts</code></strong> - Contains the Helm chart(s) deployed by the module, if any. The chart itself refers to the chart that we really want to deploy as a dependency, which should be locate in the <code>charts/CHART_NAME/charts</code> folder. The chart package is simply downloaded manually using a <code>helm dependency update</code> and uploaded to the repository along with the rest of the code.</p>
 </li>
 <li>
-<p><strong><code>locals.tf</code></strong> - Contains the definition of the local variables used in the module. It is here that we define the <code>helm_values</code> which contains the default values for the Helm chart, as needed by the module. Note that these should be written in HCL and not in YAML.</p>
+<p><strong><code>locals.tf</code></strong> - Contains the definition of the local variables used in the module. It is here that we define the <code>helm_values</code> local that contains the default values for the Helm chart, as needed by the module. These should be written in HCL and not in YAML.</p>
 </li>
 <li>
 <p><strong><code>main.tf</code></strong> - Contains the definition of the resources that are created by the module. It is here that we define the <code>argocd_project</code> and <code>argocd_application</code> resources that deploy the Helm chart.</p>
@@ -570,7 +600,7 @@ The Argo CD module is a special case, as it is used to deploy the other modules.
 <h2 id="_modules_with_variants"><a class="anchor" href="#_modules_with_variants"></a>Modules With Variants</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Some modules have multiple variants. While the core module is the same, the variants deploy different resources or customize the Helm values in order to cater to a specific use case or a different platforms. A good example is the <a href="#thanos:ROOT:README.adoc" class="xref unresolved">Thanos module</a>, which has variants for EKS, AKS and KinD.</p>
+<p>Some modules have multiple variants. While the core module is the same, the variants deploy different resources or customize the Helm values in order to cater to a specific use case or a different platform. A good example is the <a href="../../thanos/latest/README.html" class="xref page">Thanos module</a>, which has variants for EKS, AKS and KinD.</p>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -579,7 +609,7 @@ The Argo CD module is a special case, as it is used to deploy the other modules.
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-These kinds of modules should be called from within their variant! The variant then <em>recursively</em> calls the root module ir order to apply its core resources.
+<strong>These kinds of modules should be called from within their variant.</strong> The variant then <em>recursively</em> calls the root module ir order to apply its core resources.
 </td>
 </tr>
 </table>
@@ -653,7 +683,7 @@ Note how the <code>variables.tf</code> and <code>terraform.tf</code> files are s
 <p><strong><code>extra-variables.tf</code></strong> - Contains the definition of the extra input variables of the variant. These are the variables that are specific to the variant and are not present in the root module.</p>
 </li>
 <li>
-<p><strong><code>locals.tf</code></strong> - Contains the definition of the local variables used in the variant. It is here that we define the <code>helm_values</code> which contains only the values specific to the variant. Note that these should be written in HCL and not in YAML. These values will be merged with the ones coming from the <code>helm_values</code> variable and then passed on to the root module. Afterwards, they will be merged once again, translated to YAML and then passed to the <code>argocd_application</code> resource.</p>
+<p><strong><code>locals.tf</code></strong> - Contains the definition of the local variables used in the variant. It is here that we define the <code>helm_values</code> local that contains only the values specific to the variant. These should be written in HCL and not in YAML. They will be merged with the ones coming from the <code>helm_values</code> variable and then passed on to the root module. Afterwards, they will be merged once again, translated to YAML and then passed to the <code>argocd_application</code> resource.</p>
 </li>
 <li>
 <p><strong><code>main.tf</code></strong> - Usually, this file only contains the call to the root module and passes along all the variables received as well as the modified entries. In specific cases it could also contain other resources specific to the variant. Take a look at this example from the Loki module:</p>
@@ -717,14 +747,6 @@ output "loki_credentials" {
 </div>
 </div>
 <div class="sect1">
-<h2 id="_versioning"><a class="anchor" href="#_versioning"></a>Versioning</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>We use <a href="https://semver.org/">Semantic Versioning</a> for versioning the modules. More informations about the release process are available in the <a href="release.html" class="xref page">Release</a> page.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
 <h2 id="_documentation"><a class="anchor" href="#_documentation"></a>Documentation</h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -736,7 +758,7 @@ output "loki_credentials" {
 <h2 id="_release"><a class="anchor" href="#_release"></a>Release</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Each module is released and versioned separately. The release process is described in the <a href="release.html" class="xref page">Release</a> page.</p>
+<p>Each module is released and versioned separately. We use <a href="https://semver.org/">Semantic Versioning</a> for versioning the modules. The release process is described in more detail in the <a href="release.html" class="xref page">Release</a> page.</p>
 </div>
 </div>
 </div>
