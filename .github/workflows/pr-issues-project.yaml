@@ -1,4 +1,10 @@
 ---
+  # GitHub Actions workflow to automatically push PRs and issues to the DevOps Stack project board.
+  #
+  # IMPORTANT: This workflow is called by other workflows in our DevOps Stack repositories and it is centralized here in 
+  # order to be easily maintained across modules. Because of this, please make sure you're not introducing any breaking 
+  # changes when modifying this workflow.
+  
 name: "pr-issues-project"
 
 on:
@@ -18,7 +24,15 @@ jobs:
   add-to-project:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/add-to-project@v0.4.1
+    - name: Generate authentication token from GitHub App
+      id: generate_token
+      uses: tibdex/github-app-token@v1
+      with:
+        app_id: ${{ secrets.PROJECT_APP_ID }}
+        private_key: ${{ secrets.PROJECT_APP_PRIVATE_KEY }}
+
+    - name: Add PR or issue to DevOps Stack project board
+      uses: actions/add-to-project@v0.5.0
       with:
         project-url: https://github.com/orgs/camptocamp/projects/3/
-        github-token: ${{ secrets.APP_TOKEN}}
+        github-token: ${{ steps.generate_token.outputs.token }}
