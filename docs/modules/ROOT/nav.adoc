@@ -1,5 +1,11 @@
 .*Main Documentation*
 * xref:ROOT:index.adoc[Home]
+* Explanations
+** xref:ROOT:explanations/purpose.adoc[Purpose]
+** xref:ROOT:explanations/cloud_agnostic.adoc[Cloud Agnostic]
+** xref:ROOT:explanations/infrastructure_as_code.adoc[Infrastructure as Code]
+** xref:ROOT:explanations/continuous_deployment.adoc[Continuous Deployment]
+** xref:ROOT:explanations/lifecycle_operations.adoc[Lifecycle Operations]
 * Tutorials
 ** xref:ROOT:tutorials/deploy_kind.adoc[Deployment on KinD]
 ** xref:ROOT:tutorials/deploy_aks.adoc[Deployment on AKS]

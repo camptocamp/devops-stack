@@ -1,0 +1,17 @@
+= Continuous Delivery & GitOps
+
+Change management is at the heart of Infrastructure Operations. The rise of Continuous Integration and Continuous Delivery practices in the Infrastructure world has been so important that the expression DevOps Engineer is often used to describe CI/CD Engineering.
+
+The DevOps Stack takes advantage of the CI/CD approach to make changes seamless, both at the provisioning and deployment levels.
+
+== Terraform
+
+The underlying infrastructure which sets up the Kubernetes cluster underneath the DevOps Stack is managed with Terraform.
+
+It is strongly encouraged to use a CI/CD approach to manage this Terraform deployment, and the DevOps Stack provides a set of scripts to integrate pair-reviewed change process on your CI/CD platform of choice.
+
+== Argo CD
+
+On top of Kubernetes, the DevOps Stack sets up Argo CD to continuously deploy all applications to the cluster.
+
+Argo CD monitors Kubernetes resources and can keep them synchronized with their target state.

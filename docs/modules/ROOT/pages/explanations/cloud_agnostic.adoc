@@ -1,0 +1,12 @@
+= Cloud Agnostic
+
+Nobody likes to be locked-in. That's why the DevOps Stack provides a cloud abstraction so you can deploy it on top of multiple Cloud Platforms, in an agnostic way.
+
+Currently, the DevOps Stack supports the following Cloud Platforms, besides a local test deployment with KinD:
+
+- Amazon Web Services (AWS)
+- Azure
+- Exoscale
+- Scaleway
+
+Good "agnostic" automation practices offer many benefits.
