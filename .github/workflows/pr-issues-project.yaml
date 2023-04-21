@@ -9,6 +9,13 @@ name: "pr-issues-project"
 
 on:
   workflow_call:
+    secrets:
+      PROJECT_APP_ID:
+        description: "GitHub App ID for the DevOps Stack Project app"
+        required: true
+      PROJECT_APP_PRIVATE_KEY:
+        description: "GitHub App private key for the DevOps Stack Project app"
+        required: true
 
   # issues:
   #   types: 
