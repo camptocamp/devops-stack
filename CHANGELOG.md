@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/camptocamp/devops-stack/compare/v1.0.2...v1.0.3) (2023-04-21)
+
+
+### Documentation
+
+* port some of the legacy documentation ([#987](https://github.com/camptocamp/devops-stack/issues/987)) ([947260d](https://github.com/camptocamp/devops-stack/commit/947260d9ac2242f916dea4ed6e818c8a653e6011))
+
 ## [1.0.2](https://github.com/camptocamp/devops-stack/compare/v1.0.1...v1.0.2) (2023-04-18)
 
 
