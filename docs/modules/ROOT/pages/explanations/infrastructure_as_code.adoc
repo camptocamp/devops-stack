@@ -1,0 +1,9 @@
+= Infrastructure as Code
+
+Deploying Kubernetes clusters from scratch has become an easy task with IaaS interfaces. However, the proper management of all components that make up the cluster and its ecosystem can quickly become a nightmare if everything was done manually.
+
+The Infrastructure as Code approach has long proved its worth to deploy and maintain complex environments on the long run. In particular, in the context of cloud resources, it allows to make sure all resources are managed centrally and destroyed in their proper context. This is important to control the financial consequences of numerous deployments.
+
+The DevOps Stack is strongly founded on the idea that every one of its components should be managed as code. *As such, the underlying Kubernetes cluster and its components are managed with Terraform and the cluster applications are deployed using Helm charts orchestrated by Argo CD.*
+
+This allows you to keep track of all changes made at any level of the stack, using xref:ROOT:explanations/continuous_deployment.adoc[Continuous Deployment] in a GitOps approach.

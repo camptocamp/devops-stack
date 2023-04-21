@@ -1,0 +1,57 @@
+= Lifecycle Operations
+
+It is not easy to describe the different phases of an IT project, especially when you also want to talk about operational aspects. One way to do this, which seems to be used more and more, is to talk about "days".
+
+== What "days" are all about
+
+To make it very simple, here are some explanations:
+
+- *Day 0* is related to software development, questions about requirements, architecture and design.
+- *Day 1* is more about deploying software developed in the *Day 0* and starting to build and configure the hosting infrastructure.
+- *Day 2* is the time to go live and hope that the efforts made in *Day 1* are adequate. This is a crucial moment, when it is imperative to have metrics, monitoring, tools and best practices to do efficient troubleshooting.
+
+For now, the DevOps Stack is very focused on the points relating to days 1 and 2, in particular, the aspects related to the provisioning of a Kubernetes platform as well as the mandatory services related to its operational management.
+
+We must also take into account that using the Cloud and Cloud Native development practices make it much easier to handle changes related to software life cycle. The boundaries and responsibilities between these different phases have become more blurred, less strict.
+
+== Developers need love
+
+In the near future, we really want to invest significantly in aspects related to day 0 by improving the DevOps Stack in that direction, especially the software factory and development best practices related to Kubernetes integration.
+
+This is closely linked to the generalization of the https://12factor.net/[Twelve-Factor App] methodology, as well as breaking silos and embracing DevOps principles. These good practices should be applied as early as possible in projects. It is absolutely necessary.
+
+== Sysadmins want control
+
+The DevOps Stack provisions our Kubernetes clusters with a set of administration and monitoring tools out-of-the-box. Below you will find some of the services' dashboards.
+
+=== Identity Management Dashboard (Keycloak)
+
+Whether you use AKS, EKS, or your local workstation using KinD, the DevOps Stack provisions the cluster with an Identity and Access Manager.
+
+For the case of a local KinD cluster, the DevOps Stack spawns a Keycloak instance.
+
+==== User management with Keycloak
+image::explanations/keycloak_users.png[Dashboard for user management]
+
+==== Client management with Keycloak
+image::explanations/keycloak_clients.png[Dashboard for client management]
+
+=== Continuous Deployment Dashboard (ArgoCD)
+
+In a xref:ROOT:explanations/continuous_deployment.adoc[GitOps approach], the DevOps Stack uses Argo CD to continuously deploy all applications.
+
+==== Identity and Access Manager (Keycloak) deployment with Argo CD
+
+image::explanations/argo_keycloak.png[Keycloak deployment with Argo CD]
+
+=== Monitoring Dashboards (Grafana)
+
+The DevOps Stack ships with some pre-configured dashboards.
+
+==== Grafana dashboard for monitoring the K8s cluster
+
+image::explanations/grafana_k8s_cluster.png[Dashboard for monitoring the K8s cluster]
+
+==== Grafana dashboard for monitoring cert-manager
+
+image::explanations/grafana_cert_manager.png[Dashboard for monitoring cert-manager]
