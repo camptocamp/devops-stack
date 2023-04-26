@@ -10,9 +10,6 @@ name: "pr-issues-project"
 on:
   workflow_call:
     secrets:
-      PROJECT_APP_ID:
-        description: "GitHub App ID for the DevOps Stack Project app"
-        required: true
       PROJECT_APP_PRIVATE_KEY:
         description: "GitHub App private key for the DevOps Stack Project app"
         required: true
@@ -35,7 +32,7 @@ jobs:
       id: generate_token
       uses: tibdex/github-app-token@v1
       with:
-        app_id: ${{ secrets.PROJECT_APP_ID }}
+        app_id: 322306
         private_key: ${{ secrets.PROJECT_APP_PRIVATE_KEY }}
 
     - name: Add PR or issue to DevOps Stack project board
