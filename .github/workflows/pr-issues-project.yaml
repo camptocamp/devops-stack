@@ -14,15 +14,15 @@ on:
         description: "GitHub App private key for the DevOps Stack Project app"
         required: true
 
-  # issues:
-  #   types: 
-  #   - opened
-  #   - reopened
+  issues:
+    types: 
+    - opened
+    - reopened
   
-  # pull_request:
-  #   types:
-  #   - opened
-  #   - reopened
+  pull_request:
+    types:
+    - opened
+    - reopened
 
 jobs:
   add-to-project:
