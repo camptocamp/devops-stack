@@ -27,18 +27,19 @@ The workflow definition available in the {url-main-repo}/blob/main/.github/workf
 # order to be easily maintained across modules. Because of this, please make sure you're not introducing any breaking 
 # changes when modifying this workflow.
 
-name: "Release Modules"
+name: "modules-release-please"
 
 on:
   workflow_call:
 
 jobs:
   release-please:
-    runs-on: "ubuntu-latest"
+    runs-on: ubuntu-latest
     steps:
-    - uses: "google-github-actions/release-please-action@v3"
+    - uses: google-github-actions/release-please-action@v3
       with:
-        release-type: "simple"
+        release-type: simple
+        pull-request-title-pattern: "chore: release ${version}"
         bump-minor-pre-major: true
         extra-files: |
           variables.tf
@@ -59,7 +60,7 @@ The caller workflow on every module simply points to this workflow and is set to
 [source,yaml]
 ----
 ---
-name: "Release"
+name: "release-please"
 
 on:
   push:
@@ -68,7 +69,7 @@ on:
 
 jobs:
   release:
-    uses: camptocamp/devops-stack/.github/workflows/modules-release-please.yaml@master
+    uses: camptocamp/devops-stack/.github/workflows/modules-release-please.yaml@main
 ----
 
 NOTE: Our {url-template-repo}/blob/main/.github/workflows/release-please.yaml[module template] already contains this workflow definition, but with a caveat. To avoid creating releases on the template itself, it was deactivated and you need to re-activate it when creating a new module. The comments on the file are self-explanatory.
