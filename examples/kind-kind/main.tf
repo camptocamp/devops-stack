@@ -1,75 +1,22 @@
-resource "random_password" "loki_secretkey" {
-  length  = 16
-  special = false
-}
+# Providers configuration
 
-locals {
-  cluster_name   = "kind-cluster"
-  cluster_issuer = "ca-issuer"
-  minio_config = {
-    policies = [
-      {
-        name = "loki-policy"
-        statements = [
-          {
-            resources = ["arn:aws:s3:::loki-bucket"]
-            actions   = ["s3:CreateBucket", "s3:DeleteBucket", "s3:GetBucketLocation", "s3:ListBucket", "s3:ListBucketMultipartUploads"]
-          },
-          {
-            resources = ["arn:aws:s3:::loki-bucket/*"]
-            actions   = ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"]
-          }
-        ]
-      }
-    ],
-    users = [
-      {
-        accessKey = "loki-user"
-        secretKey = random_password.loki_secretkey.result
-        policy    = "loki-policy"
-      }
-    ],
-    buckets = [
-      {
-        name = "loki-bucket"
-      }
-    ]
-  }
-}
-
-# Step 1: deploy k8s cluster
-module "kind" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cluster-kind.git?ref=v2.1.0"
-
-  cluster_name       = local.cluster_name
-  kubernetes_version = "v1.24.7"
-}
+# These providers depend on the output of the respectives modules declared below.
+# However, for clarity and easo of maintenance we grouped them all together in this section.
 
 provider "kubernetes" {
-  host               = module.kind.parsed_kubeconfig.host
-  client_certificate = module.kind.parsed_kubeconfig.client_certificate
-  client_key         = module.kind.parsed_kubeconfig.client_key
-  insecure           = true
+  host                   = module.kind.parsed_kubeconfig.host
+  client_certificate     = module.kind.parsed_kubeconfig.client_certificate
+  client_key             = module.kind.parsed_kubeconfig.client_key
+  cluster_ca_certificate = module.kind.parsed_kubeconfig.cluster_ca_certificate
 }
 
 provider "helm" {
   kubernetes {
-    host               = module.kind.parsed_kubeconfig.host
-    client_certificate = module.kind.parsed_kubeconfig.client_certificate
-    client_key         = module.kind.parsed_kubeconfig.client_key
-    insecure           = true
+    host                   = module.kind.parsed_kubeconfig.host
+    client_certificate     = module.kind.parsed_kubeconfig.client_certificate
+    client_key             = module.kind.parsed_kubeconfig.client_key
+    cluster_ca_certificate = module.kind.parsed_kubeconfig.cluster_ca_certificate
   }
-}
-
-# Step 2: deploy metallb, argocd_bootstrap, traefik, cert-manager & keycloak
-module "metallb" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-metallb.git?ref=v1.0.1"
-
-  subnet = module.kind.kind_subnet
-}
-
-module "argocd_bootstrap" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v1.1.0"
 }
 
 provider "argocd" {
@@ -87,29 +34,85 @@ provider "argocd" {
   }
 }
 
+provider "keycloak" {
+  client_id                = "admin-cli"
+  username                 = module.keycloak.admin_credentials.username
+  password                 = module.keycloak.admin_credentials.password
+  url                      = "https://keycloak.apps.${local.cluster_name}.${local.base_domain}"
+  tls_insecure_skip_verify = true
+  initial_login            = false
+}
+
+###
+
+# Module declarations and configuration
+
+module "kind" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-cluster-kind.git?ref=v2.1.2"
+
+  cluster_name       = local.cluster_name
+  kubernetes_version = local.kubernetes_version
+
+  # TODO Add 3rd node as default in kind since there is a negligeable overhead
+  nodes = [
+    {
+      "platform" = "devops-stack"
+    },
+    {
+      "platform" = "devops-stack"
+    },
+    {
+      "platform" = "devops-stack"
+    }
+  ]
+}
+
+module "metallb" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-metallb.git?ref=v1.0.1"
+
+  subnet = module.kind.kind_subnet
+}
+
+module "argocd_bootstrap" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v1.1.0"
+}
+
 module "traefik" {
   source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//kind?ref=v1.0.0"
 
-  cluster_name     = local.cluster_name
-  base_domain      = "remove"
+  cluster_name = local.cluster_name
+
+  # TODO fix: the base domain is defined later. Proposal: remove redirection from traefik module and add it in dependent modules.
+  # For now random value is passed to base_domain. Redirections will not work before fix.
+  base_domain = "placeholder.com"
+
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
+
+  dependency_ids = {
+    argocd = module.argocd_bootstrap.id
+  }
 }
 
 module "cert-manager" {
   source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//self-signed?ref=v2.0.0"
 
-  cluster_name     = "remove"
-  base_domain      = "remove"
+  # TODO remove useless base_domain and cluster_name variables from "self-signed" module.
+  cluster_name     = local.cluster_name
+  base_domain      = local.base_domain
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
+
+  dependency_ids = {
+    argocd = module.argocd_bootstrap.id
+  }
 }
 
-module "minio" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-minio?ref=v1.0.0"
+module "keycloak" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak?ref=v1.0.2"
 
   cluster_name     = local.cluster_name
-  base_domain      = format("%s.nip.io", replace(module.traefik.external_ip, ".", "-"))
+  base_domain      = local.base_domain
+  cluster_issuer   = local.cluster_issuer
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
-  config_minio     = local.minio_config
 
   dependency_ids = {
     traefik      = module.traefik.id
@@ -117,18 +120,43 @@ module "minio" {
   }
 }
 
+module "oidc" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak//oidc_bootstrap?ref=v1.0.2"
+
+  cluster_name   = local.cluster_name
+  base_domain    = local.base_domain
+  cluster_issuer = local.cluster_issuer
+
+  dependency_ids = {
+    keycloak = module.keycloak.id
+  }
+}
+
+module "minio" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-minio?ref=v1.0.0"
+
+  cluster_name     = local.cluster_name
+  base_domain      = local.base_domain
+  cluster_issuer   = local.cluster_issuer
+  argocd_namespace = module.argocd_bootstrap.argocd_namespace
+
+  config_minio = local.minio_config
+
+  dependency_ids = {
+    traefik      = module.traefik.id
+    cert-manager = module.cert-manager.id
+  }
+}
 
 module "loki-stack" {
   source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack//kind?ref=v2.0.2"
-  # source          = "git::https://github.com/camptocamp/devops-stack-module-loki-stack//kind"
-  # target_revision = "fix-eventhandler-tag-monolithic"
 
   cluster_name     = local.cluster_name
-  base_domain      = format("%s.nip.io", replace(module.traefik.external_ip, ".", "-"))
+  base_domain      = local.base_domain
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
 
   distributed_mode = true
-  # This variable is used to store logs in MiniO
+
   logs_storage = {
     bucket_name       = local.minio_config.buckets.0.name
     endpoint          = module.minio.endpoint
@@ -140,61 +168,59 @@ module "loki-stack" {
     minio = module.minio.id
   }
 }
-module "keycloak" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak?ref=v1.0.2"
+
+module "thanos" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-thanos//kind?ref=v1.0.0"
 
   cluster_name     = local.cluster_name
-  base_domain      = format("%s.nip.io", replace(module.traefik.external_ip, ".", "-"))
+  base_domain      = local.base_domain
   cluster_issuer   = local.cluster_issuer
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
+
+  metrics_storage = {
+    bucket_name       = local.minio_config.buckets.1.name
+    endpoint          = module.minio.endpoint
+    access_key        = local.minio_config.users.1.accessKey
+    secret_access_key = local.minio_config.users.1.secretKey
+  }
+
+  thanos = {
+    oidc = module.oidc.oidc
+  }
 
   dependency_ids = {
     traefik      = module.traefik.id
     cert-manager = module.cert-manager.id
+    minio        = module.minio.id
+    oidc         = module.oidc.id
   }
 }
-
-provider "keycloak" {
-  client_id                = "admin-cli"
-  username                 = module.keycloak.admin_credentials.username
-  password                 = module.keycloak.admin_credentials.password
-  url                      = "https://keycloak.apps.${local.cluster_name}.${format("%s.nip.io", replace(module.traefik.external_ip, ".", "-"))}"
-  tls_insecure_skip_verify = true
-}
-
-# Step 3: provision keyclaok & deploy kube-prometheus-stack & argocd
-module "keycloak-config" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak//oidc_bootstrap?ref=v1.0.2"
-
-  cluster_name   = local.cluster_name
-  base_domain    = format("%s.nip.io", replace(module.traefik.external_ip, ".", "-"))
-  cluster_issuer = local.cluster_issuer
-
-  dependency_ids = {
-    keycloak = module.keycloak.id
-  }
-}
-
-# TBD - Thanos module
 
 module "kube-prometheus-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack//kind?ref=v2.0.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack//kind?ref=v2.2.0"
 
   cluster_name     = local.cluster_name
-  argocd_namespace = module.argocd_bootstrap.argocd_namespace
-  base_domain      = format("%s.nip.io", replace(module.traefik.external_ip, ".", "-"))
+  base_domain      = local.base_domain
   cluster_issuer   = local.cluster_issuer
+  argocd_namespace = module.argocd_bootstrap.argocd_namespace
+
+  metrics_storage = {
+    bucket     = local.minio_config.buckets.1.name
+    endpoint   = module.minio.endpoint
+    access_key = local.minio_config.users.1.accessKey
+    secret_key = local.minio_config.users.1.secretKey
+  }
 
   prometheus = {
-    oidc = module.keycloak-config.oidc
+    oidc = module.oidc.oidc
   }
   alertmanager = {
-    oidc = module.keycloak-config.oidc
+    oidc = module.oidc.oidc
   }
   grafana = {
     enabled                 = true
-    oidc                    = module.keycloak-config.oidc
-    additional_data_sources = true
+    oidc                    = module.oidc.oidc
+    additional_data_sources = false
   }
 
   helm_values = [{
@@ -214,15 +240,17 @@ module "kube-prometheus-stack" {
   }]
 
   dependency_ids = {
-    keycloak-config = module.keycloak-config.id
-    cert-manager    = module.cert-manager.id
+    traefik      = module.traefik.id
+    cert-manager = module.cert-manager.id
+    minio        = module.minio.id
+    oidc         = module.oidc.id
   }
 }
 
 module "argocd" {
   source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v1.1.0"
 
-  base_domain              = format("%s.nip.io", replace(module.traefik.external_ip, ".", "-"))
+  base_domain              = local.base_domain
   cluster_name             = local.cluster_name
   cluster_issuer           = local.cluster_issuer
   server_secretkey         = module.argocd_bootstrap.argocd_server_secretkey
@@ -230,9 +258,9 @@ module "argocd" {
 
   oidc = {
     name         = "OIDC"
-    issuer       = module.keycloak-config.oidc.issuer_url
-    clientID     = module.keycloak-config.oidc.client_id
-    clientSecret = module.keycloak-config.oidc.client_secret
+    issuer       = module.oidc.oidc.issuer_url
+    clientID     = module.oidc.oidc.client_id
+    clientSecret = module.oidc.oidc.client_secret
     requestedIDTokenClaims = {
       groups = {
         essential = true
@@ -240,22 +268,10 @@ module "argocd" {
     }
   }
 
-  helm_values = [{
-    argo-cd = {
-      configs = {
-        rbac = {
-          "scopes"     = "[groups]"
-          "policy.csv" = <<-EOT
-            g, pipeline, role:admin
-            g, devops-stack-admins, role:admin
-          EOT
-        }
-      }
-    }
-  }]
-
   dependency_ids = {
-    keycloak-config       = module.keycloak-config.id
+    traefik               = module.traefik.id
+    cert-manager          = module.cert-manager.id
+    oidc                  = module.oidc.id
     kube-prometheus-stack = module.kube-prometheus-stack.id
   }
 }
