@@ -1,6 +1,40 @@
+resource "random_password" "loki_secretkey" {
+  length  = 16
+  special = false
+}
+
 locals {
   cluster_name   = "kind-cluster"
   cluster_issuer = "ca-issuer"
+  minio_config = {
+    policies = [
+      {
+        name = "loki-policy"
+        statements = [
+          {
+            resources = ["arn:aws:s3:::loki-bucket"]
+            actions   = ["s3:CreateBucket", "s3:DeleteBucket", "s3:GetBucketLocation", "s3:ListBucket", "s3:ListBucketMultipartUploads"]
+          },
+          {
+            resources = ["arn:aws:s3:::loki-bucket/*"]
+            actions   = ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"]
+          }
+        ]
+      }
+    ],
+    users = [
+      {
+        accessKey = "loki-user"
+        secretKey = random_password.loki_secretkey.result
+        policy    = "loki-policy"
+      }
+    ],
+    buckets = [
+      {
+        name = "loki-bucket"
+      }
+    ]
+  }
 }
 
 # Step 1: deploy k8s cluster
@@ -69,10 +103,43 @@ module "cert-manager" {
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
 }
 
-# TBD - Minio module
+module "minio" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-minio?ref=v1.0.0"
 
-# TBD - Loki module
+  cluster_name     = local.cluster_name
+  base_domain      = format("%s.nip.io", replace(module.traefik.external_ip, ".", "-"))
+  argocd_namespace = module.argocd_bootstrap.argocd_namespace
+  config_minio     = local.minio_config
 
+  dependency_ids = {
+    traefik      = module.traefik.id
+    cert-manager = module.cert-manager.id
+  }
+}
+
+
+module "loki-stack" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack//kind?ref=v2.0.2"
+  # source          = "git::https://github.com/camptocamp/devops-stack-module-loki-stack//kind"
+  # target_revision = "fix-eventhandler-tag-monolithic"
+
+  cluster_name     = local.cluster_name
+  base_domain      = format("%s.nip.io", replace(module.traefik.external_ip, ".", "-"))
+  argocd_namespace = module.argocd_bootstrap.argocd_namespace
+
+  distributed_mode = true
+  # This variable is used to store logs in MiniO
+  logs_storage = {
+    bucket_name       = local.minio_config.buckets.0.name
+    endpoint          = module.minio.endpoint
+    access_key        = local.minio_config.users.0.accessKey
+    secret_access_key = local.minio_config.users.0.secretKey
+  }
+
+  dependency_ids = {
+    minio = module.minio.id
+  }
+}
 module "keycloak" {
   source = "git::https://github.com/camptocamp/devops-stack-module-keycloak?ref=v1.0.2"
 
