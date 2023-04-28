@@ -37,7 +37,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="kube-prometheus-stack" data-version="v2.0.0">
+<div class="nav-container" data-component="kube-prometheus-stack" data-version="v2.1.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -75,7 +75,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">Kube-prometheus-stack Module</span>
-    <span class="version">v2.0.0</span>
+    <span class="version">v2.1.0</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -254,7 +254,10 @@
       <a class="title" href="../README.html">Kube-prometheus-stack Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../README.html">v2.0.0</a>
+          <a href="../README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v2.0.0/README.html">v2.0.0</a>
         </li>
         <li class="version">
           <a href="../../v1.0.0/README.html">v1.0.0</a>
@@ -329,13 +332,14 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v2.0.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v2.1.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="README.html">v2.0.0</a>
+    <a class="version is-current" href="README.html">v2.1.0</a>
+    <a class="version" href="../../v2.0.0/kind/README.html">v2.0.0</a>
     <a class="version" href="../../v1.0.0/kind/README.html">v1.0.0</a>
   </div>
 </div>
-  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack/blob/v2.0.0/docs/modules/ROOT/pages/kind/README.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack/blob/v2.1.0/docs/modules/ROOT/pages/kind/README.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -363,7 +367,7 @@
 <p>The following input variables are required:</p>
 </div>
 <div class="sect3">
-<h4 id="_argocd_namespace"><a class="anchor" href="#_argocd_namespace"></a><a id="input_argocd_namespace"></a> <a href="#input_argocd_namespace">argocd_namespace</a></h4>
+<h4 id="_cluster_name"><a class="anchor" href="#_cluster_name"></a><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></h4>
 <div class="paragraph">
 <p>Description: n/a</p>
 </div>
@@ -381,7 +385,7 @@
 </div>
 </div>
 <div class="sect3">
-<h4 id="_cluster_name"><a class="anchor" href="#_cluster_name"></a><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></h4>
+<h4 id="_argocd_namespace"><a class="anchor" href="#_argocd_namespace"></a><a id="input_argocd_namespace"></a> <a href="#input_argocd_namespace">argocd_namespace</a></h4>
 <div class="paragraph">
 <p>Description: n/a</p>
 </div>
@@ -396,15 +400,74 @@
 <p>The following input variables are optional (have default values):</p>
 </div>
 <div class="sect3">
-<h4 id="_alertmanager"><a class="anchor" href="#_alertmanager"></a><a id="input_alertmanager"></a> <a href="#input_alertmanager">alertmanager</a></h4>
+<h4 id="_metrics_storage"><a class="anchor" href="#_metrics_storage"></a><a id="input_metrics_storage"></a> <a href="#input_metrics_storage">metrics_storage</a></h4>
 <div class="paragraph">
-<p>Description: Alertmanager settings</p>
+<p>Description: MinIO S3 bucket configuration values for the bucket where the archived metrics will be stored.</p>
+</div>
+<div class="paragraph">
+<p>Type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">object({
+    bucket     = string
+    endpoint   = string
+    access_key = string
+    secret_key = string
+    insecure   = optional(bool, false)
+  })</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Default: <code>null</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_target_revision"><a class="anchor" href="#_target_revision"></a><a id="input_target_revision"></a> <a href="#input_target_revision">target_revision</a></h4>
+<div class="paragraph">
+<p>Description: Override of target revision of the application chart.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"v2.0.0"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cluster_issuer"><a class="anchor" href="#_cluster_issuer"></a><a id="input_cluster_issuer"></a> <a href="#input_cluster_issuer">cluster_issuer</a></h4>
+<div class="paragraph">
+<p>Description: n/a</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"ca-issuer"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_namespace"><a class="anchor" href="#_namespace"></a><a id="input_namespace"></a> <a href="#input_namespace">namespace</a></h4>
+<div class="paragraph">
+<p>Description: n/a</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"kube-prometheus-stack"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_helm_values"><a class="anchor" href="#_helm_values"></a><a id="input_helm_values"></a> <a href="#input_helm_values">helm_values</a></h4>
+<div class="paragraph">
+<p>Description: Helm values, passed as a list of HCL structures.</p>
 </div>
 <div class="paragraph">
 <p>Type: <code>any</code></p>
 </div>
 <div class="paragraph">
-<p>Default: <code>{}</code></p>
+<p>Default: <code>[]</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -438,18 +501,6 @@
 </div>
 </div>
 <div class="sect3">
-<h4 id="_cluster_issuer"><a class="anchor" href="#_cluster_issuer"></a><a id="input_cluster_issuer"></a> <a href="#input_cluster_issuer">cluster_issuer</a></h4>
-<div class="paragraph">
-<p>Description: n/a</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>string</code></p>
-</div>
-<div class="paragraph">
-<p>Default: <code>"ca-issuer"</code></p>
-</div>
-</div>
-<div class="sect3">
 <h4 id="_dependency_ids"><a class="anchor" href="#_dependency_ids"></a><a id="input_dependency_ids"></a> <a href="#input_dependency_ids">dependency_ids</a></h4>
 <div class="paragraph">
 <p>Description: n/a</p>
@@ -459,6 +510,18 @@
 </div>
 <div class="paragraph">
 <p>Default: <code>{}</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_deep_merge_append_list"><a class="anchor" href="#_deep_merge_append_list"></a><a id="input_deep_merge_append_list"></a> <a href="#input_deep_merge_append_list">deep_merge_append_list</a></h4>
+<div class="paragraph">
+<p>Description: A boolean flag to enable/disable appending lists instead of overwriting them.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>bool</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>false</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -474,38 +537,27 @@
 </div>
 </div>
 <div class="sect3">
-<h4 id="_helm_values"><a class="anchor" href="#_helm_values"></a><a id="input_helm_values"></a> <a href="#input_helm_values">helm_values</a></h4>
+<h4 id="_prometheus"><a class="anchor" href="#_prometheus"></a><a id="input_prometheus"></a> <a href="#input_prometheus">prometheus</a></h4>
 <div class="paragraph">
-<p>Description: Helm values, passed as a list of HCL structures.</p>
+<p>Description: Prometheus settings</p>
 </div>
 <div class="paragraph">
 <p>Type: <code>any</code></p>
 </div>
 <div class="paragraph">
-<p>Default: <code>[]</code></p>
+<p>Default: <code>{}</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_metrics_storage"><a class="anchor" href="#_metrics_storage"></a><a id="input_metrics_storage"></a> <a href="#input_metrics_storage">metrics_storage</a></h4>
+<h4 id="_alertmanager"><a class="anchor" href="#_alertmanager"></a><a id="input_alertmanager"></a> <a href="#input_alertmanager">alertmanager</a></h4>
 <div class="paragraph">
-<p>Description: MinIO S3 bucket configuration values for the bucket where the archived metrics will be stored.</p>
-</div>
-<div class="paragraph">
-<p>Type:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">object({
-    bucket     = string
-    endpoint   = string
-    access_key = string
-    secret_key = string
-    insecure   = optional(bool, false)
-  })</code></pre>
-</div>
+<p>Description: Alertmanager settings</p>
 </div>
 <div class="paragraph">
-<p>Default: <code>null</code></p>
+<p>Type: <code>any</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>{}</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -520,42 +572,6 @@
 <p>Default: <code>{}</code></p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_namespace"><a class="anchor" href="#_namespace"></a><a id="input_namespace"></a> <a href="#input_namespace">namespace</a></h4>
-<div class="paragraph">
-<p>Description: n/a</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>string</code></p>
-</div>
-<div class="paragraph">
-<p>Default: <code>"kube-prometheus-stack"</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_prometheus"><a class="anchor" href="#_prometheus"></a><a id="input_prometheus"></a> <a href="#input_prometheus">prometheus</a></h4>
-<div class="paragraph">
-<p>Description: Prometheus settings</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>any</code></p>
-</div>
-<div class="paragraph">
-<p>Default: <code>{}</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_target_revision"><a class="anchor" href="#_target_revision"></a><a id="input_target_revision"></a> <a href="#input_target_revision">target_revision</a></h4>
-<div class="paragraph">
-<p>Description: Override of target revision of the application chart.</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>string</code></p>
-</div>
-<div class="paragraph">
-<p>Default: <code>"v1.0.0"</code></p>
-</div>
-</div>
 </div>
 <div class="sect2">
 <h3 id="_outputs"><a class="anchor" href="#_outputs"></a>Outputs</h3>
@@ -563,7 +579,7 @@
 <p>The following outputs are exported:</p>
 </div>
 <div class="sect3">
-<h4 id="_alertmanager_enabled"><a class="anchor" href="#_alertmanager_enabled"></a><a id="output_alertmanager_enabled"></a> <a href="#output_alertmanager_enabled">alertmanager_enabled</a></h4>
+<h4 id="_id"><a class="anchor" href="#_id"></a><a id="output_id"></a> <a href="#output_id">id</a></h4>
 <div class="paragraph">
 <p>Description: n/a</p>
 </div>
@@ -581,13 +597,13 @@
 </div>
 </div>
 <div class="sect3">
-<h4 id="_id"><a class="anchor" href="#_id"></a><a id="output_id"></a> <a href="#output_id">id</a></h4>
+<h4 id="_prometheus_enabled"><a class="anchor" href="#_prometheus_enabled"></a><a id="output_prometheus_enabled"></a> <a href="#output_prometheus_enabled">prometheus_enabled</a></h4>
 <div class="paragraph">
 <p>Description: n/a</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_prometheus_enabled"><a class="anchor" href="#_prometheus_enabled"></a><a id="output_prometheus_enabled"></a> <a href="#output_prometheus_enabled">prometheus_enabled</a></h4>
+<h4 id="_alertmanager_enabled"><a class="anchor" href="#_alertmanager_enabled"></a><a id="output_alertmanager_enabled"></a> <a href="#output_alertmanager_enabled">alertmanager_enabled</a></h4>
 <div class="paragraph">
 <p>Description: n/a</p>
 </div>
@@ -638,16 +654,143 @@
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_alertmanager"></a> <a href="#input_alertmanager">alertmanager</a></p>
+<p><a id="input_metrics_storage"></a> <a href="#input_metrics_storage">metrics_storage</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Alertmanager settings</p>
+<p>MinIO S3 bucket configuration values for the bucket where the archived metrics will be stored.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">object({
+    bucket     = string
+    endpoint   = string
+    access_key = string
+    secret_key = string
+    insecure   = optional(bool, false)
+  })</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>null</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_base_domain"></a> <a href="#input_base_domain">base_domain</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_argocd_namespace"></a> <a href="#input_argocd_namespace">argocd_namespace</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_target_revision"></a> <a href="#input_target_revision">target_revision</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Override of target revision of the application chart.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>"v2.0.0"</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_cluster_issuer"></a> <a href="#input_cluster_issuer">cluster_issuer</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>"ca-issuer"</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_namespace"></a> <a href="#input_namespace">namespace</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>"kube-prometheus-stack"</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_helm_values"></a> <a href="#input_helm_values">helm_values</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Helm values, passed as a list of HCL structures.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>any</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>{}</code></p>
+<p><code>[]</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
@@ -684,74 +827,6 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_argocd_namespace"></a> <a href="#input_argocd_namespace">argocd_namespace</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>string</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>yes</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_base_domain"></a> <a href="#input_base_domain">base_domain</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>string</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>yes</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_cluster_issuer"></a> <a href="#input_cluster_issuer">cluster_issuer</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>string</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"ca-issuer"</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>no</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>string</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>yes</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="input_dependency_ids"></a> <a href="#input_dependency_ids">dependency_ids</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -762,6 +837,23 @@
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>{}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_deep_merge_append_list"></a> <a href="#input_deep_merge_append_list">deep_merge_append_list</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A boolean flag to enable/disable appending lists instead of overwriting them.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>bool</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>false</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
@@ -786,16 +878,16 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_helm_values"></a> <a href="#input_helm_values">helm_values</a></p>
+<p><a id="input_prometheus"></a> <a href="#input_prometheus">prometheus</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Helm values, passed as a list of HCL structures.</p>
+<p>Prometheus settings</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>any</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>[]</code></p>
+<p><code>{}</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
@@ -803,24 +895,16 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_metrics_storage"></a> <a href="#input_metrics_storage">metrics_storage</a></p>
+<p><a id="input_alertmanager"></a> <a href="#input_alertmanager">alertmanager</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>MinIO S3 bucket configuration values for the bucket where the archived metrics will be stored.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">object({
-    bucket     = string
-    endpoint   = string
-    access_key = string
-    secret_key = string
-    insecure   = optional(bool, false)
-  })</code></pre>
-</div>
+<p>Alertmanager settings</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>null</code></p>
+<p><code>any</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>{}</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
@@ -843,57 +927,6 @@
 <p>no</p>
 </div></div></td>
 </tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_namespace"></a> <a href="#input_namespace">namespace</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>string</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"kube-prometheus-stack"</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>no</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_prometheus"></a> <a href="#input_prometheus">prometheus</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Prometheus settings</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>any</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>{}</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>no</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_target_revision"></a> <a href="#input_target_revision">target_revision</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Override of target revision of the application chart.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>string</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"v1.0.0"</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>no</p>
-</div></div></td>
-</tr>
 </tbody>
 </table>
 <h1 id="_outputs_2" class="sect0"><a class="anchor" href="#_outputs_2"></a>Outputs</h1>
@@ -911,7 +944,7 @@
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="output_alertmanager_enabled"></a> <a href="#output_alertmanager_enabled">alertmanager_enabled</a></p>
+<p><a id="output_id"></a> <a href="#output_id">id</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>n/a</p>
@@ -935,7 +968,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="output_id"></a> <a href="#output_id">id</a></p>
+<p><a id="output_prometheus_enabled"></a> <a href="#output_prometheus_enabled">prometheus_enabled</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>n/a</p>
@@ -943,7 +976,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="output_prometheus_enabled"></a> <a href="#output_prometheus_enabled">prometheus_enabled</a></p>
+<p><a id="output_alertmanager_enabled"></a> <a href="#output_alertmanager_enabled">alertmanager_enabled</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>n/a</p>
