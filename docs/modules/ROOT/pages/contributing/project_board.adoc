@@ -1,0 +1,82 @@
+= GitHub Project Board
+
+// These URLs are used in the document as-is to generate new URLs, so they should not contain any trailing slash.
+:url-main-repo: https://github.com/camptocamp/devops-stack
+
+In order to ease up the burden of the project maintainers, we created an internal Project Board on GitHub. This board is used to track the progress of the PRs and issues. The board is available only to the https://github.com/orgs/camptocamp/teams/is-devops-stack/[`@camptocamp/is-devops-stack` team] and is available https://github.com/orgs/camptocamp/projects/3/[here]. All the repositories of the DevOps Stack are also connected to this project upon creation.
+
+The way this is accomplished is somewhat convoluted, hence the reason for this documentation page.
+
+== DevOps Stack Project
+
+The project itself has been manually created on the https://github.com/orgs/camptocamp/[`@camptocamp`] organization, using the GitHub web interface (https://docs.github.com/en/issues/planning-and-tracking-with-projects/creating-projects/creating-a-project[documentation]). *The project is private (https://docs.github.com/en/issues/planning-and-tracking-with-projects/managing-your-project/managing-visibility-of-your-projects[documentation]) and only accessible to the `@camptocamp/is-devops-stack` team* (https://docs.github.com/en/issues/planning-and-tracking-with-projects/managing-your-project/managing-access-to-your-projects[documentation]).
+
+All the boards and tables have also been created manually. In the settings of the project, there are automation workflows (https://docs.github.com/en/issues/planning-and-tracking-with-projects/automating-your-project/using-the-built-in-automations[documentation]) that move the Issues and PRs around depending on their status (open, closed, merged, etc.).
+
+== Adding a PR/Issue to the Project
+
+Since there are some limits on how many repositories we can add to a project using the default workflows, we were forced to automate this process using a GitHub workflow, as suggested on the https://docs.github.com/en/issues/planning-and-tracking-with-projects/automating-your-project/automating-projects-using-actions#example-workflow-authenticating-with-a-github-app[official documentation].
+
+Although the official documentation explicitly calls the API with `gh` commands, we opted to use an official GitHub Action (https://github.com/actions/add-to-project)[`actions/add-to-project`] to accomplish this. Moreover, in order to allow the workflows to modify the project we needed to create a GitHub app that the sole purpose is providing the necessary permissions to the workflows.
+
+=== DevOps Stack Project App
+
+The app is called `DevOps Stack Project` and is available https://github.com/apps/devops-stack-project[here] (note that since the app is private you won't probably be able to see it unless you are an administrator of our organization).
+
+This app was created on our organization by an administrator and is configured with a limited scope of permissions: it can only access the projects of the organization where it is installed as well as the PRs and Issues of repositories on which it is installed (https://docs.github.com/en/apps/creating-github-apps/setting-up-a-github-app/creating-a-github-app[official documentation] on how to create a GitHub app).
+
+After the app creation, an administrator was needed to install it on the organization and all the repositories of the DevOps Stack. This was done by going to the app page and clicking on the `Install` button then configuring the proper settings after installation (all this is done on the organization settings, check the https://docs.github.com/en/apps/maintaining-github-apps/installing-github-apps#installing-your-private-github-app-on-your-repository[official documentation]). 
+
+IMPORTANT: The reason to not install the app on all the repositories by default was to further limit the scope of the app, although *this adds the burden of installing it on each repository manually every time a new repository of the DevOps Stack is created*.
+
+=== Centralized Workflow
+
+The workflow definition is available in the {url-main-repo}/blob/main/.github/workflows/modules-release-please.yaml[main repository].
+
+[source,yaml]
+----
+---
+# GitHub Actions workflow to automatically push PRs and issues to the DevOps Stack project board.
+#
+# IMPORTANT: This workflow is called by other workflows in our DevOps Stack repositories and it is centralized here in 
+# order to be easily maintained across modules. Because of this, please make sure you're not introducing any breaking 
+# changes when modifying this workflow.
+  
+name: "pr-issues-project"
+
+on:
+  workflow_call:
+    secrets:
+      PROJECT_APP_PRIVATE_KEY:
+        description: "GitHub App private key for the DevOps Stack Project app"
+        required: true
+
+  issues:
+    types: 
+    - opened
+    - reopened
+  
+  pull_request:
+    types:
+    - opened
+    - reopened
+
+jobs:
+  add-to-project:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Generate authentication token from GitHub App
+      id: generate_token
+      uses: tibdex/github-app-token@v1
+      with:
+        app_id: 322306
+        private_key: ${{ secrets.PROJECT_APP_PRIVATE_KEY }}
+
+    - name: Add PR or issue to DevOps Stack project board
+      uses: actions/add-to-project@v0.5.0
+      with:
+        project-url: https://github.com/orgs/camptocamp/projects/3/
+        github-token: ${{ steps.generate_token.outputs.token }}
+----
+
+NOTE: It is the step _Generate authentication token from GitHub App_ that uses the GitHub app created above in order to generate a token with the proper permissions that is then passed to the _Add PR or issue to DevOps Stack project board_ step.

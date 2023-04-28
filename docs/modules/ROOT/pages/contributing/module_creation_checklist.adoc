@@ -9,9 +9,13 @@ When first creating a module for the DevOps Stack, there are a few steps to foll
 +
 image::guides_tutorials/module_checklist/create_module_repository.png[Create Repository]
 
-2. On the settings of the repository, in the _General_ tab, on the _Pull Requests_ section, disable the _Allow squash commits_ option and enable the _Automatically delete head branches_ option.
+2. Go to the settings of the repository and to the _General_ tab:
 
-3. Then go to the _Collaborators and teams_ tab, add the `infrastructure-department` team as _Maintainers_ and the `is-devops-stack` team as _Administrators_.
+  a. On the _Features_ section, disable the _Wikis_, _Sponsorships_ and _Discussions_, then make sure the _Issues_ and _Projects_ are enabled.
+  
+  b. On the _Pull Requests_ section, disable the _Allow merge commits_ option and enable the _Automatically delete head branches_ option.
+
+3. Then go to the _Collaborators and teams_ tab, add the `infrastructure-department` team as _Maintainers_ and the https://github.com/orgs/camptocamp/teams/is-devops-stack/[`@camptocamp/is-devops-stack` team] team as _Administrators_.
 +
 image::guides_tutorials/module_checklist/change_collaborators.png[Change Collaborators]
 
@@ -19,7 +23,13 @@ image::guides_tutorials/module_checklist/change_collaborators.png[Change Collabo
 +
 image::guides_tutorials/module_checklist/branch_protection_rule.png[Branch Protection Rule]
 
-5. Afterwards, you need to add the Slack app to the repository in order to activate notifications on the https://camptocamp.slack.com/archives/C01DPEV82F6[#is-devops-stack] channel. To do so, go to the channel and do the following:
+5. Finally, still on the settings of the repository, under _Secrets and variables_, go to _Actions_ and add the secret `PROJECT_APP_PRIVATE_KEY`, which is needed to automatically add Issues and PRs to our project board. Check with the team where you can find this secret.
+
+6. Go the the _Projects_ tab of the repository and add the https://github.com/orgs/camptocamp/projects/3/[DevOps Stack project] (https://docs.github.com/en/issues/planning-and-tracking-with-projects/managing-your-project/adding-your-project-to-a-repository[documentation]).
+
+7. Request that an administrator of our GitHub organization adds the newly created repository to the app that automatically adds Issues and PRs to our project board (check the xref:ROOT:contributing/project_board.adoc[Project Board] page for more information).
+
+8. Afterwards, you need to add the Slack app to the repository in order to activate notifications on the https://camptocamp.slack.com/archives/C01DPEV82F6[#is-devops-stack] channel. To do so, go to the channel and do the following:
   
   a. Type `/github subscribe camptocamp/<MODULE_NAME>`.
 
@@ -39,6 +49,6 @@ image::guides_tutorials/module_checklist/slack_github_subscribe.png[Slack GitHub
 +
 image::guides_tutorials/module_checklist/slack_github_unsubscribe.png[Slack GitHub Unsubscribe]
 
-6. All that is left to do is adding the repository to our team reminder. For that, you can go to the https://github.com/orgs/camptocamp/teams/is-devops-stack/[`is-devops-stack` team], and add the repository to our scheduled reminder on Slack about pending Pull Requests.
+9. All that is left to do is adding the repository to our team reminder. For that, you can go to the https://github.com/orgs/camptocamp/teams/is-devops-stack/[`@camptocamp/is-devops-stack` team], and add the repository to our scheduled reminder on Slack about pending Pull Requests.
 +
 image::guides_tutorials/module_checklist/slack_reminder_team.png[Slack Reminder]

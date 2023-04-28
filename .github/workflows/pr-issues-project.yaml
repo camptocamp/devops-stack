@@ -1,9 +1,9 @@
 ---
-  # GitHub Actions workflow to automatically push PRs and issues to the DevOps Stack project board.
-  #
-  # IMPORTANT: This workflow is called by other workflows in our DevOps Stack repositories and it is centralized here in 
-  # order to be easily maintained across modules. Because of this, please make sure you're not introducing any breaking 
-  # changes when modifying this workflow.
+# GitHub Actions workflow to automatically push PRs and issues to the DevOps Stack project board.
+#
+# IMPORTANT: This workflow is called by other workflows in our DevOps Stack repositories and it is centralized here in 
+# order to be easily maintained across modules. Because of this, please make sure you're not introducing any breaking 
+# changes when modifying this workflow.
   
 name: "pr-issues-project"
 
