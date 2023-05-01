@@ -7,7 +7,7 @@ This document describes the general guidelines for contributing to the DevOps St
 
 The DevOps Stack is a collection of modules, each of them having its own release cycle, in order to ease the development and maintenance of each module.
 
-TIP: We have created a private GitHub project owned by the https://github.com/orgs/camptocamp/teams/is-devops-stack/[`@camptocamp/is-devops-stack` team] that is available https://github.com/orgs/camptocamp/projects/3/[here]. It is a useful way to follow the progress of the PRs and Issues of all the repositories. For more information on how it is implemented, check the xref:ROOT:contributing/project_board.adoc[Project Board] page.
+TIP: A private GitHub project owned by the https://github.com/orgs/camptocamp/teams/is-devops-stack/[`@camptocamp/is-devops-stack` team] is available https://github.com/orgs/camptocamp/projects/3/[here]. It is a useful way to follow the progress of the PRs and Issues of all the repositories. For more information on how it is implemented, check the xref:ROOT:contributing/project_board.adoc[Project Board] page.
 
 == Development Workflow
 

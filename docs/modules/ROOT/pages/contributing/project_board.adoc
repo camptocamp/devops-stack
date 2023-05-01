@@ -3,7 +3,7 @@
 // These URLs are used in the document as-is to generate new URLs, so they should not contain any trailing slash.
 :url-main-repo: https://github.com/camptocamp/devops-stack
 
-In order to ease up the burden of the project maintainers, we created an internal Project Board on GitHub. This board is used to track the progress of the PRs and issues. The board is available only to the https://github.com/orgs/camptocamp/teams/is-devops-stack/[`@camptocamp/is-devops-stack` team] and is available https://github.com/orgs/camptocamp/projects/3/[here]. All the repositories of the DevOps Stack are also connected to this project upon creation.
+In order to ease up the burden of the project maintainers, there is an internal Project Board on GitHub used to track the progress of the PRs and issues. The board is available only to the https://github.com/orgs/camptocamp/teams/is-devops-stack/[`@camptocamp/is-devops-stack` team] and is available https://github.com/orgs/camptocamp/projects/3/[here]. All the repositories of the DevOps Stack are also connected to this project upon creation.
 
 The way this is accomplished is somewhat convoluted, hence the reason for this documentation page.
 
