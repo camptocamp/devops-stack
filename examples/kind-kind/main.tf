@@ -275,3 +275,29 @@ module "argocd" {
     kube-prometheus-stack = module.kube-prometheus-stack.id
   }
 }
+
+module "metrics_server" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-application.git?ref=v1.2.2"
+
+  name             = "metrics-server"
+  argocd_namespace = module.argocd_bootstrap.argocd_namespace
+
+  source_repo            = "https://github.com/kubernetes-sigs/metrics-server.git"
+  source_repo_path       = "charts/metrics-server"
+  source_target_revision = "metrics-server-helm-chart-3.8.3"
+  destination_namespace  = "kube-system"
+
+  helm_values = [{
+    args = [
+      "--kubelet-insecure-tls"
+    ]
+    # apiService = {
+    #   insecureSkipTLSVerify = false
+    #   caBundle = module.kind.parsed_kubeconfig.cluster_ca_certificate
+    # }
+  }]
+
+  dependency_ids = {
+    argocd = module.argocd.id
+  }
+}
