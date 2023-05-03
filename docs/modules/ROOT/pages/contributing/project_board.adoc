@@ -17,11 +17,11 @@ All the boards and tables have also been created manually. In the settings of th
 
 Since there are some limits on how many repositories we can add to a project using the default workflows, we were forced to automate this process using a GitHub workflow, as suggested on the https://docs.github.com/en/issues/planning-and-tracking-with-projects/automating-your-project/automating-projects-using-actions#example-workflow-authenticating-with-a-github-app[official documentation].
 
-Although the official documentation explicitly calls the API with `gh` commands, we opted to use an official GitHub Action (https://github.com/actions/add-to-project)[`actions/add-to-project`] to accomplish this. Moreover, in order to allow the workflows to modify the project we needed to create a GitHub app that the sole purpose is providing the necessary permissions to the workflows.
+Although the official documentation explicitly calls the API with `gh` commands, we opted to use an official GitHub Action (https://github.com/actions/add-to-project[`actions/add-to-project`]) to accomplish this. Moreover, in order to allow the workflows to modify the project we needed to create a GitHub app that the sole purpose is providing the necessary permissions to the workflows.
 
 === DevOps Stack Project App
 
-The app is called `DevOps Stack Project` and is available https://github.com/apps/devops-stack-project[here] (note that since the app is private you won't probably be able to see it unless you are an administrator of our organization).
+The app is called `DevOps Stack Project` and is available https://github.com/apps/devops-stack-project[here].
 
 This app was created on our organization by an administrator and is configured with a limited scope of permissions: it can only access the projects of the organization where it is installed as well as the PRs and Issues of repositories on which it is installed (https://docs.github.com/en/apps/creating-github-apps/setting-up-a-github-app/creating-a-github-app[official documentation] on how to create a GitHub app).
 
@@ -31,7 +31,7 @@ IMPORTANT: The reason to not install the app on all the repositories by default 
 
 === Centralized Workflow
 
-The workflow definition is available in the {url-main-repo}/blob/main/.github/workflows/modules-release-please.yaml[main repository].
+The workflow definition is available in the {url-main-repo}/blob/main/.github/workflows/pr-issues-project.yaml[main repository].
 
 [source,yaml]
 ----
