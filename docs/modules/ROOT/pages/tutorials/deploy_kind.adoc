@@ -1,3 +1,46 @@
 = Deployment With KinD
 
-_Work In Progress_
+The deployment is done in three steps:
+
+1. Provision the Kubernetes cluster
+2. Deploy the Keycloak module
+3. Provision the Keycloak module and
+
+Other modules, such as Minio, Loki and others can be deploy in parallel of steps 2 or 3.
+
+== Install requirements
+
+* https://docs.docker.com/get-docker[docker]
+* https://kind.sigs.k8s.io/[KinD]
+* https://www.terraform.io/[Terraform]
+
+== Download dependencies
+
+Download all required providers and modules locally (in `./.terraform`):
+```bash
+terraform init
+```
+
+== Configure the locals
+
+In `locals.tf`, setup the
+
+
+Run `terraform init` in order
+
+== Troubleshooting
+
+=== ArgoCD: connection refused
+
+This error happens when ArgoCD bootstraps itself
+```bash
+╷
+│ Error: Error while waiting for application argocd to be created
+│
+│   with module.argocd.argocd_application.this,
+│   on .terraform/modules/argocd/main.tf line 55, in resource "argocd_application" "this":
+│   55: resource "argocd_application" "this" {
+│
+│ error while waiting for application argocd to be synced and healthy: rpc error: code = Unavailable desc = connection error: desc = "transport: error while dialing: dial tcp 127.0.0.1:45729: connect: connection refused"
+╵
+```
