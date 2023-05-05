@@ -20,3 +20,4 @@ examples/*/terraform.tfstate.*
 examples/*/.terraform.tfstate.lock.info
 examples/*/*-config
 examples/*/.terraform.lock.hcl
+docs_test

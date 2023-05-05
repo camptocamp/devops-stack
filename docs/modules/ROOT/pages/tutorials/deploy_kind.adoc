@@ -1,5 +1,6 @@
 = Deployment With KinD
 
+
 The deployment is done in three steps:
 
 1. Provision the Kubernetes cluster
@@ -10,16 +11,24 @@ Other modules, such as Minio, Loki and others can be deploy in parallel of steps
 
 == Install requirements
 
-* https://docs.docker.com/get-docker[docker]
+* https://docs.docker.com/get-docker[Docker]
 * https://kind.sigs.k8s.io/[KinD]
 * https://www.terraform.io/[Terraform]
 
 == Download dependencies
 
 Download all required providers and modules locally (in `./.terraform`):
-```bash
+
+[source,bash]
+----
 terraform init
-```
+----
+
+== Specificities of the KinD deployment
+
+TODO: MetalLB
+
+TODO: Self-signed certificates + add secrets everywhere
 
 == Configure the locals
 
@@ -33,7 +42,8 @@ Run `terraform init` in order
 === ArgoCD: connection refused
 
 This error happens when ArgoCD bootstraps itself
-```bash
+[source,bash]
+----
 ╷
 │ Error: Error while waiting for application argocd to be created
 │
@@ -43,4 +53,11 @@ This error happens when ArgoCD bootstraps itself
 │
 │ error while waiting for application argocd to be synced and healthy: rpc error: code = Unavailable desc = connection error: desc = "transport: error while dialing: dial tcp 127.0.0.1:45729: connect: connection refused"
 ╵
-```
+----
+
+Example of `locals.tf`
+
+[source,hcl]
+----
+include::example$deploy_examples/kind-kind/locals.tf[]
+----
