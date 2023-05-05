@@ -184,7 +184,9 @@ module "thanos" {
 }
 
 module "kube-prometheus-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack//kind?ref=v2.2.0"
+  # TODO Point to the latest version after this PR is merged https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack/pull/52
+  # source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack//kind?ref=v2.2.0"
+  source = "../../../devops-stack-module-kube-prometheus-stack/kind"
 
   cluster_name     = local.cluster_name
   base_domain      = local.base_domain
@@ -205,26 +207,8 @@ module "kube-prometheus-stack" {
     oidc = module.oidc.oidc
   }
   grafana = {
-    enabled                 = true
-    oidc                    = module.oidc.oidc
-    additional_data_sources = false
+    oidc = module.oidc.oidc
   }
-
-  helm_values = [{
-    kube-prometheus-stack = {
-      grafana = {
-        extraSecretMounts = [
-          {
-            name       = "ca-certificate"
-            secretName = "grafana-tls"
-            mountPath  = "/etc/ssl/certs/ca.crt"
-            readOnly   = true
-            subPath    = "ca.crt"
-          },
-        ]
-      }
-    }
-  }]
 
   dependency_ids = {
     traefik      = module.traefik.id
@@ -276,7 +260,7 @@ module "metrics_server" {
 
   helm_values = [{
     args = [
-      "--kubelet-insecure-tls"
+      "--kubelet-insecure-tls" # Ignore self-signed certificates of the KinD cluster
     ]
   }]
 
