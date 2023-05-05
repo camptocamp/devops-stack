@@ -48,23 +48,10 @@ provider "keycloak" {
 # Module declarations and configuration
 
 module "kind" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cluster-kind.git?ref=v2.1.2"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cluster-kind.git?ref=v2.2.0"
 
   cluster_name       = local.cluster_name
   kubernetes_version = local.kubernetes_version
-
-  # TODO Add 3rd node as default in kind since there is a negligeable overhead
-  nodes = [
-    {
-      "platform" = "devops-stack"
-    },
-    {
-      "platform" = "devops-stack"
-    },
-    {
-      "platform" = "devops-stack"
-    }
-  ]
 }
 
 module "metallb" {
@@ -291,10 +278,6 @@ module "metrics_server" {
     args = [
       "--kubelet-insecure-tls"
     ]
-    # apiService = {
-    #   insecureSkipTLSVerify = false
-    #   caBundle = module.kind.parsed_kubeconfig.cluster_ca_certificate
-    # }
   }]
 
   dependency_ids = {
