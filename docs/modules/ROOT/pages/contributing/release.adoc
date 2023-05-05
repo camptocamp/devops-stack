@@ -20,29 +20,7 @@ The workflow definition available in the {url-main-repo}/blob/main/.github/workf
 
 [source,yaml]
 ----
----
-# GitHub Actions workflow to automatically create releases and changelogs in our DevOps Stack repositories.
-#
-# IMPORTANT: This workflow is called by other workflows in our DevOps Stack repositories and it is centralized here in 
-# order to be easily maintained across modules. Because of this, please make sure you're not introducing any breaking 
-# changes when modifying this workflow.
-
-name: "modules-release-please"
-
-on:
-  workflow_call:
-
-jobs:
-  release-please:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: google-github-actions/release-please-action@v3
-      with:
-        release-type: simple
-        pull-request-title-pattern: "chore: release ${version}"
-        bump-minor-pre-major: true
-        extra-files: |
-          variables.tf
+include::example$github_workflows/modules-release-please.yaml[]
 ----
 
 Note following lines:
@@ -76,7 +54,7 @@ NOTE: Our {url-template-repo}/blob/main/.github/workflows/release-please.yaml[mo
 
 == Automatic Versioning
 
-The commit messages are used to determine the type of release that needs to be created. 
+The commit messages are used to determine the type of release that needs to be created.
 
 Only the `feat` and `fix` commit types will trigger the release CI. The `feat` commit type will trigger a minor version bump while the `fix` commit type will trigger a patch version bump. If you add a `!` after the commit type, the release will be a major version bump. For example, `feat!: this is a breaking change` will trigger a major version bump.
 
