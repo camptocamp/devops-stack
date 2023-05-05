@@ -1,64 +1,69 @@
 = Deployment With KinD
 
-An example of a local deployment in KinD is provided https://github.com/camptocamp/devops-stack/tree/main/examples/kind-kind[here]. Clone this repository and modify it at your convenance.
+An example of a local deployment in KinD is provided https://github.com/camptocamp/devops-stack/tree/main/examples/kind[here]. Clone this repository and modify it at your convenance.
 In the folder, as in a standard https://developer.hashicorp.com/terraform/tutorials/modules/module#what-is-a-terraform-module[Terraform module], you will find the following files:
 
-* `terraform.tf`: declaration of the Terraform providers used in this project
+* `terraform.tf`: declaration of the Terraform providers used in this project.
 * `locals.tf`: local variables used in the DevOps Stacks.
-* `main.tf`: definition of all deployed modules
-* `s3_bucket.tf`: Configuration of the Minio bucket, used as backend for Loki and Thanos.
-* `outputs.tf`: The output variables of the DevOps stack, e.g. credentials and K8s config.
+* `main.tf`: definition of all deployed modules.
+* `s3_bucket.tf`: configuration of the MinIO bucket, used as backend for Loki and Thanos.
+* `outputs.tf`: the output variables of the DevOps Stack, e.g. credentials and the `.kubeconfig` file to use with `kubectl`.
 
 == Specificities of the KinD deployment
 
-==== Local load balancer
+==== Local Load Balancer
 
-In order to replicate the load balancing options of cloud providers, https://metallb.universe.tf/[MetalLB] is deployed on the cluster.
+https://metallb.universe.tf/[MetalLB] is used as a load balancer for the cluster. This allows us to have a multi-node KinD cluster without the need to use Traefik in a single replica with a NodePort configuration.
 
-==== Self-signed certificates + add secrets everywhere
+==== Self-signed SSL Certificates
 
-All certificates are self-signed and handled by Cert Manager.
+Since KinD is locally deployed, there is no easy way of creating valid SSL certificates for the ingresses using Let's Encrypt. As such, `cert-manager` is configured to use a self-signed Certificate Authority and the remaining modules are configured to ignore the SSL warnings/errors that are a consequence of that.
 
-== Install requirements
+NOTE: When accessing the ingresses on your browser, you'll obviously see warnings saying that the certificate is not valid. You can safely ignore them. 
 
-For this setup, you will need:
+== Requirements
 
-* https://docs.docker.com/get-docker[Docker] to manage containers
-* https://kind.sigs.k8s.io/[KinD] to deploy Kubernetes nodes as Docker containers
-* https://www.terraform.io/[Terraform] to provision the whole architecture
-* https://kubernetes.io/[Kubernetes] to interact with your cluster (optional)
+For this setup, you will need to have installed on your machine:
 
-== Download dependencies
+* https://docs.docker.com/get-docker[Docker] to deploy the KinD containers
+* https://www.terraform.io/[Terraform] to provision the whole stack
+* https://kubernetes.io/docs/reference/kubectl/[`kubectl`] to interact with your cluster
 
-Download all required providers and modules locally (in `./.terraform`):
+== Deployment
 
+1. From the source of the example deployment, initialize Terraform, which downloads all required providers and modules locally (they will be stored in the hidden folder `.terraform`).
++
 [source,bash]
 ----
 terraform init
 ----
 
-== Deployment
+2. Check out the modules you want to deploy in the `main.tf` file, and comment out the others.
++
+TIP: You can also add your owns Terraform modules in this file or any other file on the root folder. A good place to start to write your own module is to clone the https://github.com/camptocamp/devops-stack-helloworld[devops-stack-helloworld] repository and adapt it to your needs.
 
-* Describe the modules you want to deploy in `main.tf`, and comment out the others.
-
-You can also add your owns Terraform modules here. A good place to start to write your own module is to clone the
-https://github.com/camptocamp/devops-stack-helloworld[devops-stack-helloworld] repository and adapt it to your needs.
-
-* Setup the variables in `locals.tf`:
-
+3. Configure the variables in `locals.tf` to your preference:
++
 [source,hcl]
 ----
-include::example$deploy_examples/kind-kind/locals.tf[]
+include::example$deploy_examples/kind/locals.tf[]
 ----
 
-* Run `terraform init` to create the K8s nodes as Docker containers, and populate them with our services. They will be stored in the hidden folder `.terraform`.
+4. Finally, run `terraform apply` and accept the proposed changes to create the Kubernetes nodes as Docker containers, and populate them with our services.
++
+[source,bash]
+----
+terraform apply
+----
 
 === Troubleshooting
 
 ==== ArgoCD: connection refused
 
+Because at the end of the deployment we use the Argo CD to deploy and manage itself, there could be an error like this one:
+
 This error happens when ArgoCD bootstraps itself.
-[source,]
+[source,shell]
 ----
 ╷
 │ Error: Error while waiting for application argocd to be created
@@ -71,11 +76,11 @@ This error happens when ArgoCD bootstraps itself.
 ╵
 ----
 
-Simply reapply the command `terraform apply`.
+This happens because the Argo CD server pod is redeployed and the Argo CD Terraform provider loses connection. You can simply re-run the command `terraform apply` to finalize the bootstrap of the cluster.
 
 == Access the applications
 
-The URLs of the applications are visibles in the ingress of the K8s cluster:
+The URLs of the applications are visible in the ingresses of the cluster. You can get them by running the following command:
 
 [source,bash]
 ----
@@ -95,17 +100,18 @@ https://thanos-bucketweb.apps.172-19-0-1.nip.io
 https://thanos-query.apps.172-19-0-1.nip.io
 ----
 
-The applications credentials are managed by keycloak OIDC, and are written to the Terraform output:
+You can access the applications using the credentials created by the Keycloak module. They are written to the Terraform output:
 
 [source,bash]
 ----
-$ # List all outputs:
+# List all outputs:
 $ terraform output
 keycloak_admin_credentials = <sensitive>
 keycloak_users = <sensitive>
 kubernetes_kubeconfig = <sensitive>
 minio_root_user_credentials = <sensitive>
-$ # To get the credentials for Grafana, Prometheus, etc.
+
+# To get the credentials for Grafana, Prometheus, etc.
 $ terraform output keycloak_users
 {
   "devopsadmin" = "aqhEbd3L0Msryjjp547ej7nyN6E2FllV"
@@ -114,6 +120,5 @@ $ terraform output keycloak_users
 
 == Conclusion
 
-That's it, you have deployed the DevOps Stack locally ! For more informations, visit out https://devops-stack.io/[website], read the
-https://devops-stack.io/docs/latest/[documentation] and checkout the code on
-https://github.com/camptocamp/devops-stack[GitHub].
+That's it, you have deployed the DevOps Stack locally! For more informations, keep on reading the
+https://devops-stack.io/docs/latest/[documentation]. **You can explore the possibilities of each module and get the link to the source code on their respective documentation pages.**
