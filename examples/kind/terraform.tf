@@ -1,12 +1,16 @@
 terraform {
   required_providers {
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "~> 2"
+    }
+    helm = {
+      source  = "hashicorp/helm"
+      version = "~> 2"
+    }
     argocd = {
       source  = "oboukili/argocd"
       version = "~> 4"
-    }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "~>2"
     }
     keycloak = {
       source  = "mrparkers/keycloak"
