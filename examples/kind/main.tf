@@ -207,6 +207,7 @@ module "kube-prometheus-stack" {
     oidc = module.oidc.oidc
   }
   grafana = {
+    enabled = true # This line can be removed after this PR is merged -> https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack/pull/53
     oidc = module.oidc.oidc
   }
 
