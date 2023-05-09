@@ -185,8 +185,7 @@ module "thanos" {
 
 module "kube-prometheus-stack" {
   # TODO Point to the latest version after this PR is merged https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack/pull/52
-  # source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack//kind?ref=v2.2.0"
-  source = "../../../devops-stack-module-kube-prometheus-stack/kind"
+  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack//kind?ref=v2.2.0"
 
   cluster_name     = local.cluster_name
   base_domain      = local.base_domain
