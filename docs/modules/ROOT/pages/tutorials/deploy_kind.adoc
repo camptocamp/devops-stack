@@ -15,7 +15,7 @@ In the folder, as in a standard https://developer.hashicorp.com/terraform/tutori
 
 https://metallb.universe.tf/[MetalLB] is used as a load balancer for the cluster. This allows us to have a multi-node KinD cluster without the need to use Traefik in a single replica with a NodePort configuration.
 
-==== Self-signed SSL Certificates
+==== Self-signed SSL certificates
 
 Since KinD is locally deployed, there is no easy way of creating valid SSL certificates for the ingresses using Let's Encrypt. As such, `cert-manager` is configured to use a self-signed Certificate Authority and the remaining modules are configured to ignore the SSL warnings/errors that are a consequence of that.
 
@@ -78,11 +78,11 @@ This error happens when ArgoCD bootstraps itself.
 
 This happens because the Argo CD server pod is redeployed and the Argo CD Terraform provider loses connection. You can simply re-run the command `terraform apply` to finalize the bootstrap of the cluster.
 
-==== loki-stack-promtail pods stuck with status CrashLoopBackOff
+==== `loki-stack-promtail` pods stuck with status `CrashLoopBackOff`
 
-When the pods of loki-stack-promtail are stuck in a creation loop with the following logs:
+When the pods of `loki-stack-promtail` are stuck in a creation loop with the following logs:
 
-[source,]
+[source]
 ----
 level=error ts=2023-05-09T06:32:38.495673778Z caller=main.go:117 msg="error creating promtail" error="failed to make file target manager: too many open files"
 Stream closed EOF for loki-stack/loki-stack-promtail-bxcmw (promtail)
@@ -165,19 +165,17 @@ To properly stop the cluster, we can use the following command:
 terraform state rm $(terraform state list | grep "argocd_application\|argocd_project\|kubernetes_\|helm_") && terraform destroy
 ----
 
-An dirtier alternative is to directly destroy the Docker containers and volumes:
+A dirtier alternative is to directly destroy the Docker containers and volumes:
 
 [source,bash]
 ----
 # Stop and remove Docker containers:
-docker container stop kind-cluster-control-plane kind-cluster-worker{,2,3} &&\
+docker container stop kind-cluster-control-plane kind-cluster-worker{,2,3} && \
   docker container rm -v kind-cluster-control-plane kind-cluster-worker{,2,3}
 # Remove the Terraform state:
 rm terraform.state
 ----
 
-
 == Conclusion
 
-That's it, you have deployed the DevOps Stack locally! For more informations, keep on reading the
-https://devops-stack.io/docs/latest/[documentation]. **You can explore the possibilities of each module and get the link to the source code on their respective documentation pages.**
+That's it, you have deployed the DevOps Stack locally! For more informations, keep on reading the https://devops-stack.io/docs/latest/[documentation]. **You can explore the possibilities of each module and get the link to the source code on their respective documentation pages.**
