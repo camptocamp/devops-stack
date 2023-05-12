@@ -94,8 +94,8 @@ You will have to increase the upper limit on the number of INotify instances tha
 ----
 # Increase the limit until next reboot:
 sudo sysctl fs.inotify.max_user_instances=512
-# Increase the limit permanently:
-sudo echo 'fs.inotify.max_user_instances=512' >> /etc/sysctl.conf
+# Increase the limit permanently (run this command as root):
+echo 'fs.inotify.max_user_instances=512' >> /etc/sysctl.conf
 ----
 
 == Access the applications
@@ -140,8 +140,7 @@ $ terraform output keycloak_users
 
 == Pause the cluster
 
-The `docker pause` command can be used to halt the cluster for a while in order
-to save energy:
+The `docker pause` command can be used to halt the cluster for a while in order to save energy (replace `kind-cluster` by the cluster name you defined in `locals.tf`):
 
 [source,bash]
 ----
@@ -158,14 +157,14 @@ recreated.
 
 == Stop the cluster
 
-To properly stop the cluster, we can use the following command:
+To definitively stop the cluster on a single command (that is the reason we delete some resources from the state file), we can use the following command:
 
 [source,bash]
 ----
-terraform state rm $(terraform state list | grep "argocd_application\|argocd_project\|kubernetes_\|helm_") && terraform destroy
+terraform state rm $(terraform state list | grep "argocd_application\|argocd_project\|kubernetes_\|helm_\|keycloak_") && terraform destroy
 ----
 
-A dirtier alternative is to directly destroy the Docker containers and volumes:
+A dirtier alternative is to directly destroy the Docker containers and volumes (replace `kind-cluster` by the cluster name you defined in `locals.tf`):
 
 [source,bash]
 ----

@@ -1,4 +1,3 @@
-
 resource "random_password" "loki_secretkey" {
   length  = 32
   special = false
