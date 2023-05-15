@@ -94,8 +94,7 @@ module "cert-manager" {
 }
 
 module "keycloak" {
-  # TODO Add new version after https://github.com/camptocamp/devops-stack-module-keycloak/pull/16
-  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak?ref=v1.0.2"
+  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak?ref=v1.1.0"
 
   cluster_name     = local.cluster_name
   base_domain      = local.base_domain
@@ -109,8 +108,7 @@ module "keycloak" {
 }
 
 module "oidc" {
-  # TODO Add new version after https://github.com/camptocamp/devops-stack-module-keycloak/pull/16
-  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak//oidc_bootstrap?ref=v1.0.2"
+  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak//oidc_bootstrap?ref=v1.1.0"
 
   cluster_name   = local.cluster_name
   base_domain    = local.base_domain
@@ -122,8 +120,7 @@ module "oidc" {
 }
 
 module "minio" {
-  # TODO Add new version after https://github.com/camptocamp/devops-stack-module-minio/pull/23
-  source = "git::https://github.com/camptocamp/devops-stack-module-minio?ref=v1.0.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-minio?ref=v1.1.0"
 
   cluster_name     = local.cluster_name
   base_domain      = local.base_domain
@@ -192,8 +189,7 @@ module "thanos" {
 }
 
 module "kube-prometheus-stack" {
-  # TODO Point to the latest version after this PR is merged https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack/pull/52
-  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack//kind?ref=v2.2.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack//kind?ref=v2.3.0"
 
   cluster_name     = local.cluster_name
   base_domain      = local.base_domain
@@ -214,8 +210,7 @@ module "kube-prometheus-stack" {
     oidc = module.oidc.oidc
   }
   grafana = {
-    enabled = true # This line can be removed after this PR is merged -> https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack/pull/53
-    oidc    = module.oidc.oidc
+    oidc = module.oidc.oidc
   }
 
   dependency_ids = {
