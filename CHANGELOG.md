@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/camptocamp/devops-stack/compare/v1.0.3...v1.1.0) (2023-05-16)
+
+
+### Features
+
+* add updated KinD example ([#993](https://github.com/camptocamp/devops-stack/issues/993)) ([e3e1a35](https://github.com/camptocamp/devops-stack/commit/e3e1a35b6a90a2990878d6c06775a6dba94637af))
+
 ## [1.0.3](https://github.com/camptocamp/devops-stack/compare/v1.0.2...v1.0.3) (2023-04-21)
 
 
