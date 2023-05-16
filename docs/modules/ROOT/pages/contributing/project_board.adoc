@@ -25,7 +25,7 @@ The app is called `DevOps Stack Project` and is available https://github.com/app
 
 This app was created on our organization by an administrator and is configured with a limited scope of permissions: it can only access the projects of the organization where it is installed as well as the PRs and Issues of repositories on which it is installed (https://docs.github.com/en/apps/creating-github-apps/setting-up-a-github-app/creating-a-github-app[official documentation] on how to create a GitHub app).
 
-After the app creation, an administrator was needed to install it on the organization and all the repositories of the DevOps Stack. This was done by going to the app page and clicking on the `Install` button then configuring the proper settings after installation (all this is done on the organization settings, check the https://docs.github.com/en/apps/maintaining-github-apps/installing-github-apps#installing-your-private-github-app-on-your-repository[official documentation]). 
+After the app creation, an administrator was needed to install it on the organization and all the repositories of the DevOps Stack. This was done by going to the app page and clicking on the `Install` button then configuring the proper settings after installation (all this is done on the organization settings, check the https://docs.github.com/en/apps/maintaining-github-apps/installing-github-apps#installing-your-private-github-app-on-your-repository[official documentation]).
 
 IMPORTANT: The reason to not install the app on all the repositories by default was to further limit the scope of the app, although *this adds the burden of installing it on each repository manually every time a new repository of the DevOps Stack is created*.
 
@@ -35,48 +35,7 @@ The workflow definition is available in the {url-main-repo}/blob/main/.github/wo
 
 [source,yaml]
 ----
----
-# GitHub Actions workflow to automatically push PRs and issues to the DevOps Stack project board.
-#
-# IMPORTANT: This workflow is called by other workflows in our DevOps Stack repositories and it is centralized here in 
-# order to be easily maintained across modules. Because of this, please make sure you're not introducing any breaking 
-# changes when modifying this workflow.
-  
-name: "pr-issues-project"
-
-on:
-  workflow_call:
-    secrets:
-      PROJECT_APP_PRIVATE_KEY:
-        description: "GitHub App private key for the DevOps Stack Project app"
-        required: true
-
-  issues:
-    types: 
-    - opened
-    - reopened
-  
-  pull_request:
-    types:
-    - opened
-    - reopened
-
-jobs:
-  add-to-project:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Generate authentication token from GitHub App
-      id: generate_token
-      uses: tibdex/github-app-token@v1
-      with:
-        app_id: 322306
-        private_key: ${{ secrets.PROJECT_APP_PRIVATE_KEY }}
-
-    - name: Add PR or issue to DevOps Stack project board
-      uses: actions/add-to-project@v0.5.0
-      with:
-        project-url: https://github.com/orgs/camptocamp/projects/3/
-        github-token: ${{ steps.generate_token.outputs.token }}
+include::example$github_workflows/pr-issues-project.yaml[]
 ----
 
 NOTE: It is the step _Generate authentication token from GitHub App_ that uses the GitHub app created above in order to generate a token with the proper permissions that is then passed to the _Add PR or issue to DevOps Stack project board_ step.

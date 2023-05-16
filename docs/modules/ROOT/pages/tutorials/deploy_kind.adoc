@@ -1,3 +1,180 @@
 = Deployment With KinD
 
-_Work In Progress_
+An example of a local deployment in KinD is provided https://github.com/camptocamp/devops-stack/tree/main/examples/kind[here]. Clone this repository and modify it at your convenance.
+In the folder, as in a standard https://developer.hashicorp.com/terraform/tutorials/modules/module#what-is-a-terraform-module[Terraform module], you will find the following files:
+
+* `terraform.tf`: declaration of the Terraform providers used in this project.
+* `locals.tf`: local variables used in the DevOps Stacks.
+* `main.tf`: definition of all deployed modules.
+* `s3_bucket.tf`: configuration of the MinIO bucket, used as backend for Loki and Thanos.
+* `outputs.tf`: the output variables of the DevOps Stack, e.g. credentials and the `.kubeconfig` file to use with `kubectl`.
+
+== Specificities of the KinD deployment
+
+==== Local Load Balancer
+
+https://metallb.universe.tf/[MetalLB] is used as a load balancer for the cluster. This allows us to have a multi-node KinD cluster without the need to use Traefik in a single replica with a NodePort configuration.
+
+==== Self-signed SSL certificates
+
+Since KinD is locally deployed, there is no easy way of creating valid SSL certificates for the ingresses using Let's Encrypt. As such, `cert-manager` is configured to use a self-signed Certificate Authority and the remaining modules are configured to ignore the SSL warnings/errors that are a consequence of that.
+
+NOTE: When accessing the ingresses on your browser, you'll obviously see warnings saying that the certificate is not valid. You can safely ignore them.
+
+== Requirements
+
+For this setup, you will need to have installed on your machine:
+
+* https://docs.docker.com/get-docker[Docker] to deploy the KinD containers
+* https://www.terraform.io/[Terraform] to provision the whole stack
+* https://kubernetes.io/docs/reference/kubectl/[`kubectl`] to interact with your cluster
+
+== Deployment
+
+1. From the source of the example deployment, initialize Terraform, which downloads all required providers and modules locally (they will be stored in the hidden folder `.terraform`).
++
+[source,bash]
+----
+terraform init
+----
+
+2. Check out the modules you want to deploy in the `main.tf` file, and comment out the others.
++
+TIP: You can also add your owns Terraform modules in this file or any other file on the root folder. A good place to start to write your own module is to clone the https://github.com/camptocamp/devops-stack-helloworld[devops-stack-helloworld] repository and adapt it to your needs.
+
+3. Configure the variables in `locals.tf` to your preference:
++
+[source,hcl]
+----
+include::example$deploy_examples/kind/locals.tf[]
+----
+
+4. Finally, run `terraform apply` and accept the proposed changes to create the Kubernetes nodes as Docker containers, and populate them with our services.
++
+[source,bash]
+----
+terraform apply
+----
+
+=== Troubleshooting
+
+==== ArgoCD: connection refused
+
+Because at the end of the deployment we use the Argo CD to deploy and manage itself, there could be an error like this one:
+
+This error happens when ArgoCD bootstraps itself.
+[source,shell]
+----
+╷
+│ Error: Error while waiting for application argocd to be created
+│
+│   with module.argocd.argocd_application.this,
+│   on .terraform/modules/argocd/main.tf line 55, in resource "argocd_application" "this":
+│   55: resource "argocd_application" "this" {
+│
+│ error while waiting for application argocd to be synced and healthy: rpc error: code = Unavailable desc = connection error: desc = "transport: error while dialing: dial tcp 127.0.0.1:45729: connect: connection refused"
+╵
+----
+
+This happens because the Argo CD server pod is redeployed and the Argo CD Terraform provider loses connection. You can simply re-run the command `terraform apply` to finalize the bootstrap of the cluster.
+
+==== `loki-stack-promtail` pods stuck with status `CrashLoopBackOff`
+
+When the pods of `loki-stack-promtail` are stuck in a creation loop with the following logs:
+
+[source]
+----
+level=error ts=2023-05-09T06:32:38.495673778Z caller=main.go:117 msg="error creating promtail" error="failed to make file target manager: too many open files"
+Stream closed EOF for loki-stack/loki-stack-promtail-bxcmw (promtail)
+----
+
+You will have to increase the upper limit on the number of INotify instances that can be created per real user ID:
+
+[source,bash]
+----
+# Increase the limit until next reboot:
+sudo sysctl fs.inotify.max_user_instances=512
+# Increase the limit permanently (run this command as root):
+echo 'fs.inotify.max_user_instances=512' >> /etc/sysctl.conf
+----
+
+== Access the applications
+
+The URLs of the applications are visible in the ingresses of the cluster. You can get them by running the following command:
+
+[source,bash]
+----
+kubectl get ingress --all-namespaces
+----
+
+For example, if the base domain name is `172-19-0-1.nip.io`, the applications are accessible at the following adresses:
+
+----
+https://grafana.apps.172-19-0-1.nip.io
+https://alertmanager.apps.172-19-0-1.nip.io
+https://prometheus.apps.172-19-0-1.nip.io
+https://keycloak.apps.172-19-0-1.nip.io
+https://minio.apps.172-19-0-1.nip.io
+https://argocd.apps.172-19-0-1.nip.io
+https://thanos-bucketweb.apps.172-19-0-1.nip.io
+https://thanos-query.apps.172-19-0-1.nip.io
+----
+
+You can access the applications using the credentials created by the Keycloak module. They are written to the Terraform output:
+
+[source,bash]
+----
+# List all outputs:
+$ terraform output
+keycloak_admin_credentials = <sensitive>
+keycloak_users = <sensitive>
+kubernetes_kubeconfig = <sensitive>
+minio_root_user_credentials = <sensitive>
+
+# To get the credentials for Grafana, Prometheus, etc.
+$ terraform output keycloak_users
+{
+  "devopsadmin" = "aqhEbd3L0Msryjjp547ej7nyN6E2FllV"
+}
+----
+
+== Pause the cluster
+
+The `docker pause` command can be used to halt the cluster for a while in order to save energy (replace `kind-cluster` by the cluster name you defined in `locals.tf`):
+
+[source,bash]
+----
+# Pause the cluster:
+docker pause kind-cluster-control-plane kind-cluster-worker{,2,3}
+
+# Resume the cluster:
+docker unpause kind-cluster-control-plane kind-cluster-worker{,2,3}
+----
+
+NOTE: When the host computer is restarted, the Docker container will start
+again, but the cluster will not resume correctly. It has to be destroyed and
+recreated.
+
+== Stop the cluster
+
+To definitively stop the cluster on a single command (that is the reason we delete some resources from the state file), we can use the following command:
+
+[source,bash]
+----
+terraform state rm $(terraform state list | grep "argocd_application\|argocd_project\|kubernetes_\|helm_\|keycloak_") && terraform destroy
+----
+
+A dirtier alternative is to directly destroy the Docker containers and volumes (replace `kind-cluster` by the cluster name you defined in `locals.tf`):
+
+[source,bash]
+----
+# Stop and remove Docker containers:
+docker container stop kind-cluster-control-plane kind-cluster-worker{,2,3} && \
+  docker container rm -v kind-cluster-control-plane kind-cluster-worker{,2,3}
+# Remove the Terraform state:
+rm terraform.state
+----
+
+== Conclusion
+
+That's it, you have deployed the DevOps Stack locally! For more informations, keep on reading the https://devops-stack.io/docs/latest/[documentation]. **You can explore the possibilities of each module and get the link to the source code on their respective documentation pages.**
