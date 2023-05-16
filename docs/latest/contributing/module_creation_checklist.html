@@ -37,7 +37,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="ROOT" data-version="v1.0.3">
+<div class="nav-container" data-component="ROOT" data-version="v1.1.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -114,6 +114,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="release.html">Release</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="project_board.html">Project Board</a>
   </li>
 </ul>
   </li>
@@ -197,7 +200,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">DevOps Stack</span>
-    <span class="version">v1.0.3</span>
+    <span class="version">v1.1.0</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -297,7 +300,10 @@
       <a class="title" href="../index.html">DevOps Stack</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../index.html">v1.0.3</a>
+          <a href="../index.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.0.3/index.html">v1.0.3</a>
         </li>
         <li class="version">
           <a href="../../v1.0.2/index.html">v1.0.2</a>
@@ -374,7 +380,10 @@
       <a class="title" href="../../kind/latest/README.html">KinD Cluster Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../kind/latest/README.html">v2.2.0</a>
+          <a href="../../kind/latest/README.html">v2.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kind/v2.2.0/README.html">v2.2.0</a>
         </li>
         <li class="version">
           <a href="../../kind/v2.1.2/README.html">v2.1.2</a>
@@ -485,15 +494,16 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v1.0.3</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v1.1.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="module_creation_checklist.html">v1.0.3</a>
+    <a class="version is-current" href="module_creation_checklist.html">v1.1.0</a>
+    <a class="version" href="../../v1.0.3/contributing/module_creation_checklist.html">v1.0.3</a>
     <a class="version" href="../../v1.0.2/contributing/module_creation_checklist.html">v1.0.2</a>
     <a class="version" href="../../v1.0.1/contributing/module_creation_checklist.html">v1.0.1</a>
     <a class="version" href="../../v1.0.0/contributing/module_creation_checklist.html">v1.0.0</a>
   </div>
 </div>
-  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/blob/v1.0.3/docs/modules/ROOT/pages/contributing/module_creation_checklist.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/blob/v1.1.0/docs/modules/ROOT/pages/contributing/module_creation_checklist.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -515,10 +525,20 @@
 </div>
 </li>
 <li>
-<p>On the settings of the repository, in the <em>General</em> tab, on the <em>Pull Requests</em> section, disable the <em>Allow squash commits</em> option and enable the <em>Automatically delete head branches</em> option.</p>
+<p>Go to the settings of the repository and to the <em>General</em> tab:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>On the <em>Features</em> section, disable the <em>Wikis</em>, <em>Sponsorships</em> and <em>Discussions</em>, then make sure the <em>Issues</em> and <em>Projects</em> are enabled.</p>
 </li>
 <li>
-<p>Then go to the <em>Collaborators and teams</em> tab, add the <code>infrastructure-department</code> team as <em>Maintainers</em> and the <code>is-devops-stack</code> team as <em>Administrators</em>.</p>
+<p>On the <em>Pull Requests</em> section, disable the <em>Allow merge commits</em> option and enable the <em>Automatically delete head branches</em> option.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Then go to the <em>Collaborators and teams</em> tab, add the <code>infrastructure-department</code> team as <em>Maintainers</em> and the <a href="https://github.com/orgs/camptocamp/teams/is-devops-stack/"><code>@camptocamp/is-devops-stack</code> team</a> team as <em>Administrators</em>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="../_images/guides_tutorials/module_checklist/change_collaborators.png" alt="Change Collaborators">
@@ -532,6 +552,15 @@
 <img src="../_images/guides_tutorials/module_checklist/branch_protection_rule.png" alt="Branch Protection Rule">
 </div>
 </div>
+</li>
+<li>
+<p>Finally, still on the settings of the repository, under <em>Secrets and variables</em>, go to <em>Actions</em> and add the secret <code>PROJECT_APP_PRIVATE_KEY</code>, which is needed to automatically add Issues and PRs to our project board. Check with the team where you can find this secret.</p>
+</li>
+<li>
+<p>Go the the <em>Projects</em> tab of the repository and add the <a href="https://github.com/orgs/camptocamp/projects/3/">DevOps Stack project</a> (<a href="https://docs.github.com/en/issues/planning-and-tracking-with-projects/managing-your-project/adding-your-project-to-a-repository">documentation</a>).</p>
+</li>
+<li>
+<p>Request that an administrator of our GitHub organization adds the newly created repository to the app that automatically adds Issues and PRs to our project board (check the <a href="project_board.html" class="xref page">Project Board</a> page for more information).</p>
 </li>
 <li>
 <p>Afterwards, you need to add the Slack app to the repository in order to activate notifications on the <a href="https://camptocamp.slack.com/archives/C01DPEV82F6">#is-devops-stack</a> channel. To do so, go to the channel and do the following:</p>
@@ -576,7 +605,7 @@
 </div>
 </li>
 <li>
-<p>All that is left to do is adding the repository to our team reminder. For that, you can go to the <a href="https://github.com/orgs/camptocamp/teams/is-devops-stack/"><code>is-devops-stack</code> team</a>, and add the repository to our scheduled reminder on Slack about pending Pull Requests.</p>
+<p>All that is left to do is adding the repository to our team reminder. For that, you can go to the <a href="https://github.com/orgs/camptocamp/teams/is-devops-stack/"><code>@camptocamp/is-devops-stack</code> team</a>, and add the repository to our scheduled reminder on Slack about pending Pull Requests.</p>
 <div class="imageblock">
 <div class="content">
 <img src="../_images/guides_tutorials/module_checklist/slack_reminder_team.png" alt="Slack Reminder">
