@@ -1,7 +1,7 @@
 # Providers configuration
 
 # These providers depend on the output of the respectives modules declared below.
-# However, for clarity and easo of maintenance we grouped them all together in this section.
+# However, for clarity and ease of maintenance we grouped them all together in this section.
 
 provider "kubernetes" {
   host                   = module.kind.parsed_kubeconfig.host
@@ -48,7 +48,7 @@ provider "keycloak" {
 # Module declarations and configuration
 
 module "kind" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cluster-kind.git?ref=v2.2.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cluster-kind.git?ref=v2.2.2"
 
   cluster_name       = local.cluster_name
   kubernetes_version = local.kubernetes_version
@@ -65,7 +65,7 @@ module "argocd_bootstrap" {
 }
 
 module "traefik" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//kind?ref=v1.0.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//kind?ref=v1.1.0"
 
   cluster_name = local.cluster_name
 
@@ -81,12 +81,11 @@ module "traefik" {
 }
 
 module "cert-manager" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//self-signed?ref=v2.0.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//self-signed?ref=v3.1.0"
 
-  # TODO remove useless base_domain and cluster_name variables from "self-signed" module.
-  cluster_name     = local.cluster_name
-  base_domain      = local.base_domain
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
+
+  enable_service_monitor = local.enable_service_monitor
 
   dependency_ids = {
     argocd = module.argocd_bootstrap.id
@@ -127,7 +126,7 @@ module "minio" {
   cluster_issuer   = local.cluster_issuer
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
 
-  enable_service_monitor = false
+  enable_service_monitor = local.enable_service_monitor
 
   config_minio = local.minio_config
 
