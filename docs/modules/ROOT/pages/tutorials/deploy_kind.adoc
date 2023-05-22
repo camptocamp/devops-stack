@@ -1,4 +1,4 @@
-= Deployment With KinD
+= Deployment on KinD
 
 An example of a local deployment in KinD is provided https://github.com/camptocamp/devops-stack/tree/main/examples/kind[here]. Clone this repository and modify it at your convenance.
 In the folder, as in a standard https://developer.hashicorp.com/terraform/tutorials/modules/module#what-is-a-terraform-module[Terraform module], you will find the following files:
@@ -11,11 +11,11 @@ In the folder, as in a standard https://developer.hashicorp.com/terraform/tutori
 
 == Specificities of the KinD deployment
 
-==== Local Load Balancer
+=== Local Load Balancer
 
 https://metallb.universe.tf/[MetalLB] is used as a load balancer for the cluster. This allows us to have a multi-node KinD cluster without the need to use Traefik in a single replica with a NodePort configuration.
 
-==== Self-signed SSL certificates
+=== Self-signed SSL certificates
 
 Since KinD is locally deployed, there is no easy way of creating valid SSL certificates for the ingresses using Let's Encrypt. As such, `cert-manager` is configured to use a self-signed Certificate Authority and the remaining modules are configured to ignore the SSL warnings/errors that are a consequence of that.
 
@@ -56,13 +56,18 @@ include::example$deploy_examples/kind/locals.tf[]
 terraform apply
 ----
 
+5. After the first deployment (please note the troubleshooting step related with Argo CD), you can go to locals and enable the ServiceMonitor boolean to activate the Prometheus exporters that will send metrics to Prometheus.
++
+IMPORTANT: This flag needs to be set as `false` for the first bootstrap of the cluster, otherwise the applications will fail to deploy while the Custom Resource Definitions of the kube-prometheus-stack are not yet created.
++
+NOTE: You can either set the flag as `true` in the `locals.tf` file or you can simply delete the line on the modules declarations, since this variable is set as `true` by default on each module.
+
 === Troubleshooting
 
-==== ArgoCD: connection refused
+==== Argo CD: connection refused
 
-Because at the end of the deployment we use the Argo CD to deploy and manage itself, there could be an error like this one:
+In some cases, you could encounter an error like this one:
 
-This error happens when ArgoCD bootstraps itself.
 [source,shell]
 ----
 ╷
@@ -76,11 +81,15 @@ This error happens when ArgoCD bootstraps itself.
 ╵
 ----
 
-This happens because the Argo CD server pod is redeployed and the Argo CD Terraform provider loses connection. You can simply re-run the command `terraform apply` to finalize the bootstrap of the cluster.
+This error is due to the way we finally provision Argo CD on the final steps of the deployment. We use the bootstrap Argo CD to deploy and manage the final Argo CD module, which causes a redeployment of Argo CD and consequently a momentary loss of connection between the Argo CD Terraform provider and the Argo CD server.
+
+You can simply re-run the command `terraform apply` to finalize the bootstrap of the cluster.
+
+TIP: For more informations about the Argo CD module, please refer to the xref:argocd:ROOT:README.adoc[respective documentation page].
 
 ==== `loki-stack-promtail` pods stuck with status `CrashLoopBackOff`
 
-When the pods of `loki-stack-promtail` are stuck in a creation loop with the following logs:
+You could stumble upon `loki-stack-promtail` stuck in a creation loop with the following logs:
 
 [source]
 ----
@@ -88,17 +97,17 @@ level=error ts=2023-05-09T06:32:38.495673778Z caller=main.go:117 msg="error crea
 Stream closed EOF for loki-stack/loki-stack-promtail-bxcmw (promtail)
 ----
 
-You will have to increase the upper limit on the number of INotify instances that can be created per real user ID:
+If that's the case, you will have to increase the upper limit on the number of INotify instances that can be created per real user ID:
 
 [source,bash]
 ----
-# Increase the limit until next reboot:
+# Increase the limit until next reboot
 sudo sysctl fs.inotify.max_user_instances=512
-# Increase the limit permanently (run this command as root):
+# Increase the limit permanently (run this command as root)
 echo 'fs.inotify.max_user_instances=512' >> /etc/sysctl.conf
 ----
 
-== Access the applications
+== Access the DevOps Stack applications
 
 The URLs of the applications are visible in the ingresses of the cluster. You can get them by running the following command:
 
@@ -124,7 +133,7 @@ You can access the applications using the credentials created by the Keycloak mo
 
 [source,bash]
 ----
-# List all outputs:
+# List all outputs
 $ terraform output
 keycloak_admin_credentials = <sensitive>
 keycloak_users = <sensitive>
@@ -151,9 +160,7 @@ docker pause kind-cluster-control-plane kind-cluster-worker{,2,3}
 docker unpause kind-cluster-control-plane kind-cluster-worker{,2,3}
 ----
 
-NOTE: When the host computer is restarted, the Docker container will start
-again, but the cluster will not resume correctly. It has to be destroyed and
-recreated.
+NOTE: When the host computer is restarted, the Docker container will start again, but the cluster will not resume correctly. It has to be destroyed and recreated.
 
 == Stop the cluster
 
@@ -168,10 +175,9 @@ A dirtier alternative is to directly destroy the Docker containers and volumes (
 
 [source,bash]
 ----
-# Stop and remove Docker containers:
-docker container stop kind-cluster-control-plane kind-cluster-worker{,2,3} && \
-  docker container rm -v kind-cluster-control-plane kind-cluster-worker{,2,3}
-# Remove the Terraform state:
+# Stop and remove Docker containers
+docker container stop kind-cluster-control-plane kind-cluster-worker{,2,3} && docker container rm -v kind-cluster-control-plane kind-cluster-worker{,2,3}
+# Remove the Terraform state file
 rm terraform.state
 ----
 

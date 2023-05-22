@@ -29,7 +29,7 @@ After the app creation, an administrator was needed to install it on the organiz
 
 IMPORTANT: The reason to not install the app on all the repositories by default was to further limit the scope of the app, although *this adds the burden of installing it on each repository manually every time a new repository of the DevOps Stack is created*.
 
-=== Centralized Workflow
+=== Centralized workflow
 
 The workflow definition is available in the {url-main-repo}/blob/main/.github/workflows/pr-issues-project.yaml[main repository].
 

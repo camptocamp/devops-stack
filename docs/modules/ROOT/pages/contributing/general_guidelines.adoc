@@ -9,7 +9,7 @@ The DevOps Stack is a collection of modules, each of them having its own release
 
 TIP: A private GitHub project owned by the https://github.com/orgs/camptocamp/teams/is-devops-stack/[`@camptocamp/is-devops-stack` team] is available https://github.com/orgs/camptocamp/projects/3/[here]. It is a useful way to follow the progress of the PRs and Issues of all the repositories. For more information on how it is implemented, check the xref:ROOT:contributing/project_board.adoc[Project Board] page.
 
-== Development Workflow
+== Development workflow
 
 When a new feature or fix is required, the typical workflow is the following:
 
@@ -24,7 +24,7 @@ The following subsections describe some of the best practices to follow when wor
 * Keep the `main` branch clean, and only merge Pull Requests into it.
 * Create a new branch for each Pull Request. *The name of the branch should be the Jira ticket number, followed by a short description of the work done in the branch*, for example `ISDEVOPS-185-v1-docs`. This will allow the Jira ticket to be automatically linked to the branch and the Pull Request.
 
-=== Commit Messages
+=== Commit messages
 
 * When committing to your branch, you should follow the https://www.conventionalcommits.org/[Conventional Commits] specification. *This will also allow the automated changelog generation to work properly.*
 
