@@ -8,13 +8,13 @@ Each module is released and versioned independently. The release process is auto
 
 In the subsections below we will go through the release process in more detail and then explain some steps when manually setting a version.
 
-== Release Please Configuration
+== Release Please configuration
 
 The Release Please tool can be found on https://github.com/googleapis/release-please[this repository] and the GitHub Action we use is available on a https://github.com/google-github-actions/release-please-action[another repository]. Both are maintained by Google.
 
 Every DevOps Stack module contains a GitHub workflow that simply calls a centralized workflow.
 
-=== Centralized Workflow
+=== Centralized workflow
 
 The workflow definition available in the {url-main-repo}/blob/main/.github/workflows/modules-release-please.yaml[main repository].
 
@@ -31,7 +31,7 @@ Note following lines:
 
 . The `extra-files` setting is used to specify additional files that need to be updated when bumping the version. In our case, we also need to update the `variables.tf` file. *This is because we need to statically define the variable `target_revision`, which is used to pin the module version in `argocd_application` resources.*
 
-=== Caller Workflow
+=== Caller workflow
 
 The caller workflow on every module simply points to this workflow and is set to run on every push to the `main` branch. This is the workflow definition:
 
@@ -52,7 +52,7 @@ jobs:
 
 NOTE: Our {url-template-repo}/blob/main/.github/workflows/release-please.yaml[module template] already contains this workflow definition, but with a caveat. To avoid creating releases on the template itself, it was deactivated and you need to re-activate it when creating a new module. The comments on the file are self-explanatory.
 
-== Automatic Versioning
+== Automatic versioning
 
 The commit messages are used to determine the type of release that needs to be created.
 

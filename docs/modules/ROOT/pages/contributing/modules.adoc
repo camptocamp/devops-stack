@@ -9,7 +9,7 @@ The DevOps Stack is separated into multiple Terraform modules, each of them cont
 
 In order to improve the readability and maintenance of the code, this page contains some guidelines and explanations behind the creation and development of DevOps Stack modules. There is also a {url-template-repo}[repository template on GitHub] that can be used as a starting point for new modules and you can refer to it while reading this page.
 
-== Basic Modules
+== Basic modules
 
 These kinds of modules are typically the ones that provision clusters and related resources. Good examples of this are the xref:eks:ROOT:README.adoc[Amazon EKS module] and xref:kind:ROOT:README.adoc[KinD module].
 
@@ -56,9 +56,9 @@ IMPORTANT: The `terraform.tf` file should only contain the *minimum required ver
 
 NOTE: Take care to properly describe each entry on the `variables.tf` and `outputs.tf` files. These descriptions are taken into account by Terraform Docs for the automatic documentation of the module.
 
-== Modules With Embedded Helm Charts
+== Modules with embedded Helm charts
 
-These are the more typical modules of the DevOps Stack and are used to deploy the remaining components of the stack. Good examples of this are the xref:argocd:ROOT:README.adoc[Argo CD module] and xref:cert-manager:ROOT:README.adoc[Cert-manager module].
+These are the more typical modules of the DevOps Stack and are used to deploy the remaining components of the stack. Good examples of this are the xref:argocd:ROOT:README.adoc[Argo CD module] and xref:cert-manager:ROOT:README.adoc[cert-manager module].
 
 NOTE: The Argo CD module is a special case, as it is used to deploy the other modules. A bootstrap Argo CD is deployed using resources of the type `helm_release`. This Argo CD is then responsible to deploy the remaining modules, which use resources of the type `argocd_project` and `argocd_application`.
 
@@ -109,6 +109,7 @@ A typical file/folder structure for a module with variants is the following:
 devops-stack-module-template
 ├── aks
 │   ├── extra-variables.tf
+│   ├── extra-terraform.tf
 │   ├── locals.tf
 │   ├── main.tf
 │   ├── outputs.tf
@@ -123,6 +124,7 @@ devops-stack-module-template
 │   └── ...
 ├── eks
 │   ├── extra-variables.tf
+│   ├── extra-terraform.tf
 │   ├── locals.tf
 │   ├── main.tf
 │   ├── outputs.tf
@@ -133,6 +135,7 @@ devops-stack-module-template
 │   └── ...
 ├── kind
 │   ├── extra-variables.tf
+│   ├── extra-terraform.tf
 │   ├── locals.tf
 │   ├── main.tf
 │   ├── outputs.tf
@@ -149,11 +152,12 @@ devops-stack-module-template
 └── version.txt
 ----
 
-IMPORTANT: Note how the `variables.tf` and `terraform.tf` files are symbolic links to the root module. This is to avoid having to maintain the same variables and providers in multiple places.
+IMPORTANT: Note how the `variables.tf` and `terraform.tf` files are symbolic links to the root module. This is to avoid having to maintain the same variables and providers in multiple places. In case there are specific variables and/or providers you need to set, you can simply create new files like `extra-variables.tf` and `extra-terraform.tf` and add them to the variant.
 
 Comparatively to a more basic module, note the following files inside the variants (all the other files are the same and are described above):
 
 . *`extra-variables.tf`* - Contains the definition of the extra input variables of the variant. These are the variables that are specific to the variant and are not present in the root module.
+. *`extra-terraform.tf`* - Contains the versions of the required providers of the variant. These are the providers that are specific to the variant and are not present in the root module.
 . *`locals.tf`* - Contains the definition of the local variables used in the variant. It is here that we define the `helm_values` local that contains only the values specific to the variant. These should be written in HCL and not in YAML. They will be merged with the ones coming from the `helm_values` variable and then passed on to the root module. Afterwards, they will be merged once again, translated to YAML and then passed to the `argocd_application` resource.
 . *`main.tf`* - Usually, this file only contains the call to the root module and passes along all the variables received as well as the modified entries. In specific cases it could also contain other resources specific to the variant. Take a look at this example from the Loki module:
 
