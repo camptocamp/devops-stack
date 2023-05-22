@@ -65,7 +65,7 @@ module "argocd_bootstrap" {
 }
 
 module "traefik" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//kind?ref=v1.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//kind?ref=v1.2.0"
 
   cluster_name = local.cluster_name
 
@@ -74,6 +74,8 @@ module "traefik" {
   base_domain = "placeholder.com"
 
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
+
+  enable_service_monitor = local.enable_service_monitor
 
   dependency_ids = {
     argocd = module.argocd_bootstrap.id
