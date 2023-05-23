@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>DevOps Stack Modules :: DevOps Stack</title>
+    <meta name="generator" content="Antora 3.1.2">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GDBX9466LL"></script>
+    <script>function gtag(){dataLayer.push(arguments)};window.dataLayer=window.dataLayer||[];gtag('js',new Date());gtag('config','G-GDBX9466LL')</script>
+    <script>var uiRootPath = '../../_'</script>
+    <link rel="icon" href="../../_/img/favicon.png" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://devops-stack.io"><img width="200px" src="../../_/img/devops-stack-logo_light_by_c2c_black.png"/></a>
+      <div class="navbar-item search hide-for-print">
+        <div id="search-field" class="field">
+          <input id="search-input" type="text" placeholder="Search the docs">
+        </div>
+      </div>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/camptocamp/devops-stack"><i class="fa fa-github-alt"></i>&nbsp;GitHub</a>
+        <a class="navbar-item" href="https://www.camptocamp.com">Camptocamp</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="ROOT" data-version="v1.1.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">DevOps Stack</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text"><strong>Main Documentation</strong></span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Explanations</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../explanations/purpose.html">Purpose</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../explanations/cloud_agnostic.html">Cloud Agnostic</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../explanations/infrastructure_as_code.html">Infrastructure as Code</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../explanations/continuous_deployment.html">Continuous Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../explanations/lifecycle_operations.html">Lifecycle Operations</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Tutorials</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../tutorials/deploy_kind.html">Deployment on KinD</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../tutorials/deploy_aks.html">Deployment on AKS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../tutorials/deploy_eks.html">Deployment on EKS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../tutorials/deploy_aks.html">Deployment on SKS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../tutorials/deploy_apps.html">Deploying Applications on the DevOps Stack</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../tutorials/greenfield_upgrade.html">Blue-Green Upgrade</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Contributing Guidelines</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="general_guidelines.html">General Guidelines</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="modules.html">DevOps Stack Modules</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module_creation_checklist.html">Module Creation Checklist</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="documentation.html">Documentation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="release.html">Release</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="project_board.html">Project Board</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text"><strong>Cluster Modules</strong></span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../eks/latest/README.html">Amazon EKS</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="#sks:ROOT:README.adoc">Exoscale SKS</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../kind/latest/README.html">KinD</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text"><strong>Chart Modules</strong></span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../aad-pod-identity/latest/README.html">AAD Pod Identity</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../application/latest/README.html">Application</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../applicationset/latest/README.html">ApplicationSet</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../argocd/latest/README.html">Argo CD</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../oidc-aws-cognito/latest/README.html">AWS Cognito OIDC</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../cert-manager/latest/README.html">Cert-manager</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../dex/latest/README.html">Dex</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../ebs-csi-driver/latest/README.html">EBS CSI Driver</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../efs-csi-driver/latest/README.html">EFS CSI Driver</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../grafana/latest/README.html">Grafana</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../keycloak/latest/README.html">Keycloak</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../kube-prometheus-stack/latest/README.html">Kube-prometheus-stack</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../loki/latest/README.html">Loki</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../metallb/latest/README.html">MetalLB</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../minio/latest/README.html">MinIO</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../thanos/latest/README.html">Thanos</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../traefik/latest/README.html">Traefik</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">DevOps Stack</span>
+    <span class="version">v1.1.0</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../aad-pod-identity/latest/README.html">AAD Pod Identity Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../aad-pod-identity/latest/README.html">v1.1.2</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../application/latest/README.html">Application Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../application/latest/README.html">v1.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.2.1/README.html">v1.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.2.0/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.1.1/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../applicationset/latest/README.html">ApplicationSet Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../applicationset/latest/README.html">v1.2.4</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.2.3/README.html">v1.2.3</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.2.2/README.html">v1.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.2.1/README.html">v1.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.2.0/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.1.1/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../argocd/latest/README.html">Argo CD Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../argocd/latest/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../oidc-aws-cognito/latest/README.html">AWS Cognito OIDC Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../oidc-aws-cognito/latest/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../cert-manager/latest/README.html">Cert-manager Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../cert-manager/latest/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../../latest/index.html">DevOps Stack</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../latest/index.html">v1.2.0</a>
+        </li>
+        <li class="version is-current">
+          <a href="../index.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.0.3/index.html">v1.0.3</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.0.2/index.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.0.1/index.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.0.0/index.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../dex/latest/README.html">Dex Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../dex/latest/README.html">v1.0.0-alpha.3</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../ebs-csi-driver/latest/README.html">EBS CSI Driver Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../ebs-csi-driver/latest/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../efs-csi-driver/latest/README.html">EFS CSI Driver Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../efs-csi-driver/latest/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../eks/latest/README.html">EKS Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../eks/latest/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../grafana/latest/README.html">Grafana Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../grafana/latest/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../keycloak/latest/README.html">Keycloak Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../keycloak/latest/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.0.2/README.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.0.1/README.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../kind/latest/README.html">KinD Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../kind/latest/README.html">v2.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../kind/v2.2.1/README.html">v2.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kind/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kind/v2.1.2/README.html">v2.1.2</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../kube-prometheus-stack/latest/README.html">Kube-prometheus-stack Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../kube-prometheus-stack/latest/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.2.3/README.html">v2.2.3</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.2.2/README.html">v2.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.2.1/README.html">v2.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../loki/latest/README.html">Loki Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../loki/latest/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.0.2/README.html">v2.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../metallb/latest/README.html">MetalLB Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../metallb/latest/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../minio/latest/README.html">MinIO Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../minio/latest/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../thanos/latest/README.html">Thanos Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../thanos/latest/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../traefik/latest/README.html">Traefik Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../traefik/latest/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">DevOps Stack</a></li>
+    <li><strong>Main Documentation</strong></li>
+    <li>Contributing Guidelines</li>
+    <li><a href="modules.html">DevOps Stack Modules</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">v1.1.0</button>
+  <div class="version-menu">
+    <a class="version" href="../../latest/contributing/modules.html">v1.2.0</a>
+    <a class="version is-current" href="modules.html">v1.1.0</a>
+    <a class="version" href="../../v1.0.3/contributing/modules.html">v1.0.3</a>
+    <a class="version" href="../../v1.0.2/contributing/modules.html">v1.0.2</a>
+    <a class="version" href="../../v1.0.1/contributing/modules.html">v1.0.1</a>
+    <a class="version" href="../../v1.0.0/contributing/modules.html">v1.0.0</a>
+  </div>
+</div>
+  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/blob/v1.1.0/docs/modules/ROOT/pages/contributing/modules.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
+  </div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">DevOps Stack Modules</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The DevOps Stack is separated into multiple Terraform modules, each of them containing a set of related resources.</p>
+</div>
+<div class="paragraph">
+<p>In order to improve the readability and maintenance of the code, this page contains some guidelines and explanations behind the creation and development of DevOps Stack modules. There is also a <a href="https://github.com/camptocamp/devops-stack-module-template">repository template on GitHub</a> that can be used as a starting point for new modules and you can refer to it while reading this page.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_basic_modules"><a class="anchor" href="#_basic_modules"></a>Basic Modules</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>These kinds of modules are typically the ones that provision clusters and related resources. Good examples of this are the <a href="../../eks/latest/README.html" class="xref page">Amazon EKS module</a> and <a href="../../kind/latest/README.html" class="xref page">KinD module</a>.</p>
+</div>
+<div class="paragraph">
+<p>A basic DevOps Stack module will contain the following files and folders:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>devops-stack-module-template
+├── .github
+│   └── workflows
+│       ├── linters.yaml
+│       ├── release-please.yaml
+│       └── terraform-docs.yaml
+├── CHANGELOG.md
+├── CODEOWNERS
+├── docs
+│   └── ...
+├── LICENSE
+├── locals.tf
+├── main.tf
+├── outputs.tf
+├── README.adoc
+├── terraform.tf
+├── variables.tf
+└── version.txt</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Quick overview of each file/folder:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong><code>.github</code></strong> - Contains the GitHub Actions workflows that are used to lint the code, generate the documentation and release the module. <strong>They are stored on the main repository and each module calls the same workflows.</strong></p>
+</li>
+<li>
+<p><strong><code>CHANGELOG.md</code></strong> - Contains the changelog of the module. It is automatically updated by the Release Please GitHub Action and <strong>you do not need to create this file manually</strong>.</p>
+</li>
+<li>
+<p><strong><code>CODEOWNERS</code></strong> - Contains the list of GitHub users that will be automatically assigned as reviewers for pull requests on the module. In our case it is the <a href="https://github.com/orgs/camptocamp/teams/is-devops-stack/"><code>@camptocamp/is-devops-stack</code> team</a>.</p>
+</li>
+<li>
+<p><strong><code>docs</code></strong> - This is a folder that contains a precise substructure needed for the rendering of these documentation pages by Antora. The actual documentation is contained on the <code>README.adoc</code> files. You will find these and some other explanations about the docs on the <a href="documentation.html" class="xref page">Documentation</a> page.</p>
+</li>
+<li>
+<p><strong><code>LICENSE</code></strong> - The license of the module. In our case it is the Apache 2.0 license.</p>
+</li>
+<li>
+<p><strong><code>README.adoc</code></strong> - The documentation of the module. It is written in AsciiDoc and contains the example usage along with some explanations as well as the automatic documentation generated by Terraform Docs.</p>
+</li>
+<li>
+<p><strong><code>locals.tf</code></strong> - Contains the definition of the local variables used in the module.</p>
+</li>
+<li>
+<p><strong><code>main.tf</code></strong> - Contains the definition of the resources that are created by the module. This can be any type of Terraform resource, depending on the use case.</p>
+</li>
+<li>
+<p><strong><code>outputs.tf</code></strong> - Contains the definition of the output variables of the module.</p>
+</li>
+<li>
+<p><strong><code>terraform.tf</code></strong> - Contains the versions of the required providers.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The <code>terraform.tf</code> file should only contain the <strong>minimum required version</strong> of the required providers. This is to avoid incompatibilities between modules and it is the <a href="https://developer.hashicorp.com/terraform/language/providers/requirements#best-practices-for-provider-versions">recommended best practices by Terraform</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong><code>variables.tf</code></strong> - Contains the definition of the input variables of the module.</p>
+</li>
+<li>
+<p><strong><code>version.txt</code></strong> - Contains the version of the module. <strong>You should only create it if you are creating a new module</strong>, after that it is automatically updated by the Release Please GitHub Action.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Take care to properly describe each entry on the <code>variables.tf</code> and <code>outputs.tf</code> files. These descriptions are taken into account by Terraform Docs for the automatic documentation of the module.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_modules_with_embedded_helm_charts"><a class="anchor" href="#_modules_with_embedded_helm_charts"></a>Modules With Embedded Helm Charts</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>These are the more typical modules of the DevOps Stack and are used to deploy the remaining components of the stack. Good examples of this are the <a href="../../argocd/latest/README.html" class="xref page">Argo CD module</a> and <a href="../../cert-manager/latest/README.html" class="xref page">Cert-manager module</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The Argo CD module is a special case, as it is used to deploy the other modules. A bootstrap Argo CD is deployed using resources of the type <code>helm_release</code>. This Argo CD is then responsible to deploy the remaining modules, which use resources of the type <code>argocd_project</code> and <code>argocd_application</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>A typical file/folder structure for a module with embedded Helm charts is the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>devops-stack-module-template
+├── .github
+│   └── ...
+├── CHANGELOG.md
+├── charts
+│   └── CHART_NAME
+│       ├── Chart.lock
+│       ├── charts
+│       │   └── CHART_NAME.tar.gz
+│       ├── Chart.yaml
+│       ├── templates
+│       │   └── RESOURCE.yaml
+│       └── values.yaml
+├── CODEOWNERS
+├── docs
+│   └── ...
+├── LICENSE
+├── locals.tf
+├── main.tf
+├── outputs.tf
+├── README.adoc
+├── terraform.tf
+├── variables.tf
+└── version.txt</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Comparatively to a more basic module, note the following changes (all the other files are the same and are described above):</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong><code>charts</code></strong> - Contains the Helm chart(s) deployed by the module, if any. The chart itself refers to the chart that we really want to deploy as a dependency, which should be locate in the <code>charts/CHART_NAME/charts</code> folder. The chart package is simply downloaded manually using a <code>helm dependency update</code> and uploaded to the repository along with the rest of the code.</p>
+</li>
+<li>
+<p><strong><code>locals.tf</code></strong> - Contains the definition of the local variables used in the module. It is here that we define the <code>helm_values</code> local that contains the default values for the Helm chart, as needed by the module. These should be written in HCL and not in YAML.</p>
+</li>
+<li>
+<p><strong><code>main.tf</code></strong> - Contains the definition of the resources that are created by the module. It is here that we define the <code>argocd_project</code> and <code>argocd_application</code> resources that deploy the Helm chart.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_modules_with_variants"><a class="anchor" href="#_modules_with_variants"></a>Modules With Variants</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Some modules have multiple variants. While the core module is the same, the variants deploy different resources or customize the Helm values in order to cater to a specific use case or a different platform. A good example is the <a href="../../thanos/latest/README.html" class="xref page">Thanos module</a>, which has variants for EKS, AKS and KinD.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<strong>These kinds of modules should be called from within their variant.</strong> The variant then <em>recursively</em> calls the root module ir order to apply its core resources.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>A typical file/folder structure for a module with variants is the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>devops-stack-module-template
+├── aks
+│   ├── extra-variables.tf
+│   ├── locals.tf
+│   ├── main.tf
+│   ├── outputs.tf
+│   ├── README.adoc
+│   ├── variables.tf -&gt; ../variables.tf
+│   └── terraform.tf -&gt; ../terraform.tf
+├── CHANGELOG.md
+├── charts
+│   └── ...
+├── CODEOWNERS
+├── docs
+│   └── ...
+├── eks
+│   ├── extra-variables.tf
+│   ├── locals.tf
+│   ├── main.tf
+│   ├── outputs.tf
+│   ├── README.adoc
+│   ├── variables.tf -&gt; ../variables.tf
+│   └── terraform.tf -&gt; ../terraform.tf
+├── .github
+│   └── ...
+├── kind
+│   ├── extra-variables.tf
+│   ├── locals.tf
+│   ├── main.tf
+│   ├── outputs.tf
+│   ├── README.adoc
+│   ├── variables.tf -&gt; ../variables.tf
+│   └── terraform.tf -&gt; ../terraform.tf
+├── LICENSE
+├── locals.tf
+├── main.tf
+├── outputs.tf
+├── README.adoc
+├── variables.tf
+├── terraform.tf
+└── version.txt</pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Note how the <code>variables.tf</code> and <code>terraform.tf</code> files are symbolic links to the root module. This is to avoid having to maintain the same variables and providers in multiple places.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Comparatively to a more basic module, note the following files inside the variants (all the other files are the same and are described above):</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong><code>extra-variables.tf</code></strong> - Contains the definition of the extra input variables of the variant. These are the variables that are specific to the variant and are not present in the root module.</p>
+</li>
+<li>
+<p><strong><code>locals.tf</code></strong> - Contains the definition of the local variables used in the variant. It is here that we define the <code>helm_values</code> local that contains only the values specific to the variant. These should be written in HCL and not in YAML. They will be merged with the ones coming from the <code>helm_values</code> variable and then passed on to the root module. Afterwards, they will be merged once again, translated to YAML and then passed to the <code>argocd_application</code> resource.</p>
+</li>
+<li>
+<p><strong><code>main.tf</code></strong> - Usually, this file only contains the call to the root module and passes along all the variables received as well as the modified entries. In specific cases it could also contain other resources specific to the variant. Take a look at this example from the Loki module:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-terraform hljs" data-lang="terraform">module "loki-stack" {
+  source = "../"
+
+  cluster_name     = var.cluster_name
+  base_domain      = var.base_domain
+  argocd_namespace = var.argocd_namespace
+  target_revision  = var.target_revision
+  namespace        = var.namespace
+  app_autosync     = var.app_autosync
+  dependency_ids   = var.dependency_ids
+
+  distributed_mode = var.distributed_mode
+  ingress          = var.ingress
+  enable_filebeat  = var.enable_filebeat
+
+  sensitive_values = merge({}, var.sensitive_values)
+
+  helm_values = concat(local.helm_values, var.helm_values)
+}</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong><code>outputs.tf</code></strong> - Contains the definition of the output variables of the variant. At the very least, it should contain the the same outputs present in the root module, in order to <em>propagate them out</em>. In addition, it can contain other outputs specific to the variant. See this example from the Loki module (<strong>note the <code>id</code> output, which only propagates the <code>id</code> output of the root module</strong>):</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-terraform hljs" data-lang="terraform">output "id" {
+  description = "..."
+  value       = module.loki-stack.id
+}
+
+output "loki_credentials" {
+  description = "..."
+  value       = module.loki-stack.loki_credentials
+  sensitive   = true
+}</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong><code>README.adoc</code></strong> - Contains the documentation for the variant. More explanations on the <a href="documentation.html" class="xref page">Documentation</a> page.</p>
+</li>
+<li>
+<p><strong><code>variables.tf</code></strong> and <strong><code>terraform.tf</code></strong> - These files are symbolic links to the root module.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_documentation"><a class="anchor" href="#_documentation"></a>Documentation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The specific documentation for each modules is located in its <code>README.adoc</code> file. If a module contains a variant (e.g. <code>eks</code> or <code>aks</code>), the documentation should be split into multiple files, one per variant. See the <a href="documentation.html" class="xref page">Documentation</a> page for more information.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_release"><a class="anchor" href="#_release"></a>Release</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Each module is released and versioned separately. We use <a href="https://semver.org/">Semantic Versioning</a> for versioning the modules. The release process is described in more detail in the <a href="release.html" class="xref page">Release</a> page.</p>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>Copyright © Camptocamp <script> document.write(new Date().getFullYear()) </script> — All Rights Reserved</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/terraform.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/vendor/lunr.js"></script>
+<script src="../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../.." data-snippet-length="100" data-stylesheet="../../_/css/search.css"></script>
+<script async src="../../search-index.js"></script>
+  </body>
+</html>

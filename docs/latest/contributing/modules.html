@@ -37,7 +37,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="ROOT" data-version="v1.1.0">
+<div class="nav-container" data-component="ROOT" data-version="v1.2.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -157,7 +157,7 @@
     <a class="nav-link" href="../../oidc-aws-cognito/latest/README.html">AWS Cognito OIDC</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../../cert-manager/latest/README.html">Cert-manager</a>
+    <a class="nav-link" href="../../cert-manager/latest/README.html">cert-manager</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../../dex/latest/README.html">Dex</a>
@@ -175,7 +175,7 @@
     <a class="nav-link" href="../../keycloak/latest/README.html">Keycloak</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../../kube-prometheus-stack/latest/README.html">Kube-prometheus-stack</a>
+    <a class="nav-link" href="../../kube-prometheus-stack/latest/README.html">kube-prometheus-stack</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../../loki/latest/README.html">Loki</a>
@@ -200,7 +200,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">DevOps Stack</span>
-    <span class="version">v1.1.0</span>
+    <span class="version">v1.2.0</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -300,7 +300,10 @@
       <a class="title" href="../index.html">DevOps Stack</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../index.html">v1.1.0</a>
+          <a href="../index.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.1.0/index.html">v1.1.0</a>
         </li>
         <li class="version">
           <a href="../../v1.0.3/index.html">v1.0.3</a>
@@ -380,7 +383,10 @@
       <a class="title" href="../../kind/latest/README.html">KinD Cluster Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../kind/latest/README.html">v2.2.1</a>
+          <a href="../../kind/latest/README.html">v2.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../kind/v2.2.1/README.html">v2.2.1</a>
         </li>
         <li class="version">
           <a href="../../kind/v2.2.0/README.html">v2.2.0</a>
@@ -473,7 +479,10 @@
       <a class="title" href="../../traefik/latest/README.html">Traefik Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../traefik/latest/README.html">v1.1.0</a>
+          <a href="../../traefik/latest/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.1.0/README.html">v1.1.0</a>
         </li>
         <li class="version">
           <a href="../../traefik/v1.0.0/README.html">v1.0.0</a>
@@ -497,16 +506,17 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v1.1.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v1.2.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="modules.html">v1.1.0</a>
+    <a class="version is-current" href="modules.html">v1.2.0</a>
+    <a class="version" href="../../v1.1.0/contributing/modules.html">v1.1.0</a>
     <a class="version" href="../../v1.0.3/contributing/modules.html">v1.0.3</a>
     <a class="version" href="../../v1.0.2/contributing/modules.html">v1.0.2</a>
     <a class="version" href="../../v1.0.1/contributing/modules.html">v1.0.1</a>
     <a class="version" href="../../v1.0.0/contributing/modules.html">v1.0.0</a>
   </div>
 </div>
-  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/blob/v1.1.0/docs/modules/ROOT/pages/contributing/modules.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/blob/v1.2.0/docs/modules/ROOT/pages/contributing/modules.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -525,7 +535,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_basic_modules"><a class="anchor" href="#_basic_modules"></a>Basic Modules</h2>
+<h2 id="_basic_modules"><a class="anchor" href="#_basic_modules"></a>Basic modules</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>These kinds of modules are typically the ones that provision clusters and related resources. Good examples of this are the <a href="../../eks/latest/README.html" class="xref page">Amazon EKS module</a> and <a href="../../kind/latest/README.html" class="xref page">KinD module</a>.</p>
@@ -629,10 +639,10 @@ Take care to properly describe each entry on the <code>variables.tf</code> and <
 </div>
 </div>
 <div class="sect1">
-<h2 id="_modules_with_embedded_helm_charts"><a class="anchor" href="#_modules_with_embedded_helm_charts"></a>Modules With Embedded Helm Charts</h2>
+<h2 id="_modules_with_embedded_helm_charts"><a class="anchor" href="#_modules_with_embedded_helm_charts"></a>Modules with embedded Helm charts</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>These are the more typical modules of the DevOps Stack and are used to deploy the remaining components of the stack. Good examples of this are the <a href="../../argocd/latest/README.html" class="xref page">Argo CD module</a> and <a href="../../cert-manager/latest/README.html" class="xref page">Cert-manager module</a>.</p>
+<p>These are the more typical modules of the DevOps Stack and are used to deploy the remaining components of the stack. Good examples of this are the <a href="../../argocd/latest/README.html" class="xref page">Argo CD module</a> and <a href="../../cert-manager/latest/README.html" class="xref page">cert-manager module</a>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -721,6 +731,7 @@ The Argo CD module is a special case, as it is used to deploy the other modules.
 <pre>devops-stack-module-template
 ├── aks
 │   ├── extra-variables.tf
+│   ├── extra-terraform.tf
 │   ├── locals.tf
 │   ├── main.tf
 │   ├── outputs.tf
@@ -735,6 +746,7 @@ The Argo CD module is a special case, as it is used to deploy the other modules.
 │   └── ...
 ├── eks
 │   ├── extra-variables.tf
+│   ├── extra-terraform.tf
 │   ├── locals.tf
 │   ├── main.tf
 │   ├── outputs.tf
@@ -745,6 +757,7 @@ The Argo CD module is a special case, as it is used to deploy the other modules.
 │   └── ...
 ├── kind
 │   ├── extra-variables.tf
+│   ├── extra-terraform.tf
 │   ├── locals.tf
 │   ├── main.tf
 │   ├── outputs.tf
@@ -768,7 +781,7 @@ The Argo CD module is a special case, as it is used to deploy the other modules.
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Note how the <code>variables.tf</code> and <code>terraform.tf</code> files are symbolic links to the root module. This is to avoid having to maintain the same variables and providers in multiple places.
+Note how the <code>variables.tf</code> and <code>terraform.tf</code> files are symbolic links to the root module. This is to avoid having to maintain the same variables and providers in multiple places. In case there are specific variables and/or providers you need to set, you can simply create new files like <code>extra-variables.tf</code> and <code>extra-terraform.tf</code> and add them to the variant.
 </td>
 </tr>
 </table>
@@ -780,6 +793,9 @@ Note how the <code>variables.tf</code> and <code>terraform.tf</code> files are s
 <ol class="arabic">
 <li>
 <p><strong><code>extra-variables.tf</code></strong> - Contains the definition of the extra input variables of the variant. These are the variables that are specific to the variant and are not present in the root module.</p>
+</li>
+<li>
+<p><strong><code>extra-terraform.tf</code></strong> - Contains the versions of the required providers of the variant. These are the providers that are specific to the variant and are not present in the root module.</p>
 </li>
 <li>
 <p><strong><code>locals.tf</code></strong> - Contains the definition of the local variables used in the variant. It is here that we define the <code>helm_values</code> local that contains only the values specific to the variant. These should be written in HCL and not in YAML. They will be merged with the ones coming from the <code>helm_values</code> variable and then passed on to the root module. Afterwards, they will be merged once again, translated to YAML and then passed to the <code>argocd_application</code> resource.</p>

@@ -37,7 +37,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="ROOT" data-version="v1.1.0">
+<div class="nav-container" data-component="ROOT" data-version="v1.2.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -157,7 +157,7 @@
     <a class="nav-link" href="../../oidc-aws-cognito/latest/README.html">AWS Cognito OIDC</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../../cert-manager/latest/README.html">Cert-manager</a>
+    <a class="nav-link" href="../../cert-manager/latest/README.html">cert-manager</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../../dex/latest/README.html">Dex</a>
@@ -175,7 +175,7 @@
     <a class="nav-link" href="../../keycloak/latest/README.html">Keycloak</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../../kube-prometheus-stack/latest/README.html">Kube-prometheus-stack</a>
+    <a class="nav-link" href="../../kube-prometheus-stack/latest/README.html">kube-prometheus-stack</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../../loki/latest/README.html">Loki</a>
@@ -200,7 +200,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">DevOps Stack</span>
-    <span class="version">v1.1.0</span>
+    <span class="version">v1.2.0</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -300,7 +300,10 @@
       <a class="title" href="../index.html">DevOps Stack</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../index.html">v1.1.0</a>
+          <a href="../index.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.1.0/index.html">v1.1.0</a>
         </li>
         <li class="version">
           <a href="../../v1.0.3/index.html">v1.0.3</a>
@@ -380,7 +383,10 @@
       <a class="title" href="../../kind/latest/README.html">KinD Cluster Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../kind/latest/README.html">v2.2.1</a>
+          <a href="../../kind/latest/README.html">v2.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../kind/v2.2.1/README.html">v2.2.1</a>
         </li>
         <li class="version">
           <a href="../../kind/v2.2.0/README.html">v2.2.0</a>
@@ -473,7 +479,10 @@
       <a class="title" href="../../traefik/latest/README.html">Traefik Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../traefik/latest/README.html">v1.1.0</a>
+          <a href="../../traefik/latest/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.1.0/README.html">v1.1.0</a>
         </li>
         <li class="version">
           <a href="../../traefik/v1.0.0/README.html">v1.0.0</a>
@@ -497,16 +506,17 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v1.1.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v1.2.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="release.html">v1.1.0</a>
+    <a class="version is-current" href="release.html">v1.2.0</a>
+    <a class="version" href="../../v1.1.0/contributing/release.html">v1.1.0</a>
     <a class="version" href="../../v1.0.3/contributing/release.html">v1.0.3</a>
     <a class="version" href="../../v1.0.2/contributing/release.html">v1.0.2</a>
     <a class="version" href="../../v1.0.1/contributing/release.html">v1.0.1</a>
     <a class="version" href="../../v1.0.0/contributing/release.html">v1.0.0</a>
   </div>
 </div>
-  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/blob/v1.1.0/docs/modules/ROOT/pages/contributing/release.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/blob/v1.2.0/docs/modules/ROOT/pages/contributing/release.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -525,7 +535,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_release_please_configuration"><a class="anchor" href="#_release_please_configuration"></a>Release Please Configuration</h2>
+<h2 id="_release_please_configuration"><a class="anchor" href="#_release_please_configuration"></a>Release Please configuration</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The Release Please tool can be found on <a href="https://github.com/googleapis/release-please">this repository</a> and the GitHub Action we use is available on a <a href="https://github.com/google-github-actions/release-please-action">another repository</a>. Both are maintained by Google.</p>
@@ -534,7 +544,7 @@
 <p>Every DevOps Stack module contains a GitHub workflow that simply calls a centralized workflow.</p>
 </div>
 <div class="sect2">
-<h3 id="_centralized_workflow"><a class="anchor" href="#_centralized_workflow"></a>Centralized Workflow</h3>
+<h3 id="_centralized_workflow"><a class="anchor" href="#_centralized_workflow"></a>Centralized workflow</h3>
 <div class="paragraph">
 <p>The workflow definition available in the <a href="https://github.com/camptocamp/devops-stack/blob/main/.github/workflows/modules-release-please.yaml">main repository</a>.</p>
 </div>
@@ -583,7 +593,7 @@ jobs:
 </div>
 </div>
 <div class="sect2">
-<h3 id="_caller_workflow"><a class="anchor" href="#_caller_workflow"></a>Caller Workflow</h3>
+<h3 id="_caller_workflow"><a class="anchor" href="#_caller_workflow"></a>Caller workflow</h3>
 <div class="paragraph">
 <p>The caller workflow on every module simply points to this workflow and is set to run on every push to the <code>main</code> branch. This is the workflow definition:</p>
 </div>
@@ -618,7 +628,7 @@ Our <a href="https://github.com/camptocamp/devops-stack-module-template/blob/mai
 </div>
 </div>
 <div class="sect1">
-<h2 id="_automatic_versioning"><a class="anchor" href="#_automatic_versioning"></a>Automatic Versioning</h2>
+<h2 id="_automatic_versioning"><a class="anchor" href="#_automatic_versioning"></a>Automatic versioning</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The commit messages are used to determine the type of release that needs to be created.</p>
