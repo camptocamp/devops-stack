@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/camptocamp/devops-stack/compare/v1.2.0...v1.3.0) (2023-05-24)
+
+
+### Features
+
+* update Traefik version ([170367a](https://github.com/camptocamp/devops-stack/commit/170367a466c62a7b81b114256ddaf06f70b8ca85))
+
 ## [1.2.0](https://github.com/camptocamp/devops-stack/compare/v1.1.0...v1.2.0) (2023-05-22)
 
 
