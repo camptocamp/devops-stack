@@ -66,7 +66,7 @@ resource "aws_cognito_user_in_group" "add_admin_argocd_admin" {
 */
 
 module "eks" {
-  source = "git::https://github.com/camptocamp/devops-stack.git//modules/eks/aws?ref=v1"
+  source = "git::https://github.com/camptocamp/devops-stack.git//modules/eks/aws?ref=v2.0.1"
 
   cluster_name = "gh-v1-cluster"
   base_domain  = "is-sandbox.camptocamp.com"
@@ -108,7 +108,7 @@ provider "helm" {
 }
 
 module "argocd_bootstrap" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v1.1.1"
 
   cluster_name   = module.eks.cluster_name
   base_domain    = module.eks.base_domain
@@ -133,7 +133,7 @@ provider "argocd" {
 }
 
 module "ingress" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//eks"
+  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//eks?v=1.2.1"
 
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
@@ -143,7 +143,7 @@ module "ingress" {
 }
 
 module "oidc" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-oidc-aws-cognito.git"
+  source = "git::https://github.com/camptocamp/devops-stack-module-oidc-aws-cognito.git=v1.0.0"
 
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
@@ -156,7 +156,7 @@ module "oidc" {
 }
 
 module "thanos" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//eks"
+  source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//eks?v=v1.0.0-alpha.8"
 
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
@@ -173,7 +173,7 @@ module "thanos" {
 }
 
 module "prometheus-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//eks"
+  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//eks?v=2.3.0"
 
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
@@ -189,15 +189,14 @@ module "prometheus-stack" {
     oidc = module.oidc.oidc
   }
   grafana = {
-    # enable = false # Optional
-    additional_data_sources = true
+    oidc = module.oidc.oidc
   }
 
   depends_on = [module.argocd_bootstrap, module.thanos]
 }
 
 module "loki-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack.git//eks"
+  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack.git//eks?v=2.2.0"
 
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
@@ -208,22 +207,8 @@ module "loki-stack" {
   depends_on = [module.prometheus-stack]
 }
 
-module "grafana" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-grafana.git"
-
-  cluster_name     = module.eks.cluster_name
-  argocd_namespace = local.argocd_namespace
-  base_domain      = module.eks.base_domain
-
-  grafana = {
-    oidc = module.oidc.oidc
-  }
-
-  depends_on = [module.prometheus-stack, module.loki-stack]
-}
-
 module "cert-manager" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//eks"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//eks?v=4.0.0"
 
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
@@ -235,7 +220,7 @@ module "cert-manager" {
 }
 
 module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?v=1.1.0"
 
   cluster_name = module.eks.cluster_name
   oidc = {
@@ -272,7 +257,7 @@ module "argocd" {
 }
 
 module "metrics_server" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-application.git"
+  source = "git::https://github.com/camptocamp/devops-stack-module-application.git=v1.2.2"
 
   name             = "metrics-server"
   argocd_namespace = local.argocd_namespace
@@ -286,7 +271,7 @@ module "metrics_server" {
 }
 
 module "helloworld_apps" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git"
+  source = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git?v=1.2.4"
 
   depends_on = [module.argocd]
 
