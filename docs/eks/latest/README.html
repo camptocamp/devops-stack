@@ -37,7 +37,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="eks" data-version="v2.0.0">
+<div class="nav-container" data-component="eks" data-version="v2.0.1">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -63,7 +63,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">EKS Cluster Module</span>
-    <span class="version">v2.0.0</span>
+    <span class="version">v2.0.1</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -216,7 +216,10 @@
       <a class="title" href="README.html">EKS Cluster Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="README.html">v2.0.0</a>
+          <a href="README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../v2.0.0/README.html">v2.0.0</a>
         </li>
         <li class="version">
           <a href="../v1.0.0/README.html">v1.0.0</a>
@@ -351,7 +354,10 @@
       <a class="title" href="../../traefik/latest/README.html">Traefik Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../traefik/latest/README.html">v1.2.0</a>
+          <a href="../../traefik/latest/README.html">v1.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.2.0/README.html">v1.2.0</a>
         </li>
         <li class="version">
           <a href="../../traefik/v1.1.0/README.html">v1.1.0</a>
@@ -376,13 +382,14 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v2.0.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v2.0.1</button>
   <div class="version-menu">
-    <a class="version is-current" href="README.html">v2.0.0</a>
+    <a class="version is-current" href="README.html">v2.0.1</a>
+    <a class="version" href="../v2.0.0/README.html">v2.0.0</a>
     <a class="version" href="../v1.0.0/README.html">v1.0.0</a>
   </div>
 </div>
-  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-cluster-eks/blob/v2.0.0/docs/modules/ROOT/pages/README.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-cluster-eks/blob/v2.0.1/docs/modules/ROOT/pages/README.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -477,10 +484,10 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 <div class="ulist">
 <ul>
 <li>
-<p><a id="provider_aws"></a> <a href="#provider_aws">aws</a> (&gt;= 4)</p>
+<p><a id="provider_dns"></a> <a href="#provider_dns">dns</a></p>
 </li>
 <li>
-<p><a id="provider_dns"></a> <a href="#provider_dns">dns</a></p>
+<p><a id="provider_aws"></a> <a href="#provider_aws">aws</a> (&gt;= 4)</p>
 </li>
 </ul>
 </div>
@@ -558,15 +565,6 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 </div>
 </div>
 <div class="sect3">
-<h4 id="_private_subnet_ids"><a class="anchor" href="#_private_subnet_ids"></a><a id="input_private_subnet_ids"></a> <a href="#input_private_subnet_ids">private_subnet_ids</a></h4>
-<div class="paragraph">
-<p>Description: List of IDs of private subnets that the EKS instances will be attached to.</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>list(string)</code></p>
-</div>
-</div>
-<div class="sect3">
 <h4 id="_vpc_id"><a class="anchor" href="#_vpc_id"></a><a id="input_vpc_id"></a> <a href="#input_vpc_id">vpc_id</a></h4>
 <div class="paragraph">
 <p>Description: ID of the VPC where the cluster and nodes will be deployed.</p>
@@ -575,11 +573,84 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 <p>Type: <code>string</code></p>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_private_subnet_ids"><a class="anchor" href="#_private_subnet_ids"></a><a id="input_private_subnet_ids"></a> <a href="#input_private_subnet_ids">private_subnet_ids</a></h4>
+<div class="paragraph">
+<p>Description: List of IDs of private subnets that the EKS instances will be attached to.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>list(string)</code></p>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_optional_inputs"><a class="anchor" href="#_optional_inputs"></a>Optional Inputs</h3>
 <div class="paragraph">
 <p>The following input variables are optional (have default values):</p>
+</div>
+<div class="sect3">
+<h4 id="_base_domain"><a class="anchor" href="#_base_domain"></a><a id="input_base_domain"></a> <a href="#input_base_domain">base_domain</a></h4>
+<div class="paragraph">
+<p>Description: The base domain for the cluster.</p>
+</div>
+<div class="paragraph">
+<p>This module needs a Route 53 zone matching this variable with permission to create DNS records. It will create a wildcard CNAME record <code>*.apps.&lt;base_domain&gt;</code> that points to an Elastic Load Balancer routing ingress traffic to all cluster nodes. Such urls will be used by default by other DevOps Stack modules for the applications they deploy (e.g. Argo CD, Prometheus, etc).</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>null</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_kubernetes_version"><a class="anchor" href="#_kubernetes_version"></a><a id="input_kubernetes_version"></a> <a href="#input_kubernetes_version">kubernetes_version</a></h4>
+<div class="paragraph">
+<p>Description: Kubernetes version for the EKS cluster.</p>
+</div>
+<div class="paragraph">
+<p>Please check the <a href="https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html">AWS EKS documentation</a> to find the available versions.</p>
+</div>
+<div class="paragraph">
+<p>This variable can be changed on an existing cluster to update it. <strong>Note that this triggers an "instance refresh" on the nodes' auto scaling group, and so will recreate all pods running on the cluster</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"1.25"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cluster_endpoint_public_access_cidrs"><a class="anchor" href="#_cluster_endpoint_public_access_cidrs"></a><a id="input_cluster_endpoint_public_access_cidrs"></a> <a href="#input_cluster_endpoint_public_access_cidrs">cluster_endpoint_public_access_cidrs</a></h4>
+<div class="paragraph">
+<p>Description: List of CIDR blocks which can access the Amazon EKS public API server endpoint.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>list(string)</code></p>
+</div>
+<div class="paragraph">
+<p>Default:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">[
+  "0.0.0.0/0"
+]</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_public_subnet_ids"><a class="anchor" href="#_public_subnet_ids"></a><a id="input_public_subnet_ids"></a> <a href="#input_public_subnet_ids">public_subnet_ids</a></h4>
+<div class="paragraph">
+<p>Description: List of IDs of public subnets the public NLB will be attached to if enabled with 'create_public_nlb'.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>list(string)</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>[]</code></p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_aws_auth_accounts"><a class="anchor" href="#_aws_auth_accounts"></a><a id="input_aws_auth_accounts"></a> <a href="#input_aws_auth_accounts">aws_auth_accounts</a></h4>
@@ -636,49 +707,15 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 </div>
 </div>
 <div class="sect3">
-<h4 id="_base_domain"><a class="anchor" href="#_base_domain"></a><a id="input_base_domain"></a> <a href="#input_base_domain">base_domain</a></h4>
+<h4 id="_node_groups"><a class="anchor" href="#_node_groups"></a><a id="input_node_groups"></a> <a href="#input_node_groups">node_groups</a></h4>
 <div class="paragraph">
-<p>Description: The base domain for the cluster.</p>
-</div>
-<div class="paragraph">
-<p>This module needs a Route 53 zone matching this variable with permission to create DNS records. It will create a wildcard CNAME record <code>*.apps.&lt;base_domain&gt;</code> that points to an Elastic Load Balancer routing ingress traffic to all cluster nodes. Such urls will be used by default by other DevOps Stack modules for the applications they deploy (e.g. Argo CD, Prometheus, etc).</p>
+<p>Description: A map of node group configurations to be created.</p>
 </div>
 <div class="paragraph">
-<p>Type: <code>string</code></p>
+<p>Type: <code>any</code></p>
 </div>
 <div class="paragraph">
-<p>Default: <code>null</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_cluster_endpoint_public_access_cidrs"><a class="anchor" href="#_cluster_endpoint_public_access_cidrs"></a><a id="input_cluster_endpoint_public_access_cidrs"></a> <a href="#input_cluster_endpoint_public_access_cidrs">cluster_endpoint_public_access_cidrs</a></h4>
-<div class="paragraph">
-<p>Description: List of CIDR blocks which can access the Amazon EKS public API server endpoint.</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>list(string)</code></p>
-</div>
-<div class="paragraph">
-<p>Default:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">[
-  "0.0.0.0/0"
-]</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_create_private_nlb"><a class="anchor" href="#_create_private_nlb"></a><a id="input_create_private_nlb"></a> <a href="#input_create_private_nlb">create_private_nlb</a></h4>
-<div class="paragraph">
-<p>Description: Whether to create an internal NLB attached the private subnets</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>bool</code></p>
-</div>
-<div class="paragraph">
-<p>Default: <code>false</code></p>
+<p>Default: <code>{}</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -694,12 +731,21 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 </div>
 </div>
 <div class="sect3">
-<h4 id="_extra_lb_http_tcp_listeners"><a class="anchor" href="#_extra_lb_http_tcp_listeners"></a><a id="input_extra_lb_http_tcp_listeners"></a> <a href="#input_extra_lb_http_tcp_listeners">extra_lb_http_tcp_listeners</a></h4>
+<h4 id="_create_private_nlb"><a class="anchor" href="#_create_private_nlb"></a><a id="input_create_private_nlb"></a> <a href="#input_create_private_nlb">create_private_nlb</a></h4>
 <div class="paragraph">
-<p>Description: Additional Listeners to attach to Network LBs.</p>
+<p>Description: Whether to create an internal NLB attached the private subnets</p>
 </div>
 <div class="paragraph">
-<p>A list of maps describing the HTTP listeners. Required key/values: <code>port</code>, <code>protocol</code>. Optional key/values: <code>target_group_index</code> (defaults to <code>http_tcp_listeners[count.index]</code>).</p>
+<p>Type: <code>bool</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>false</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_nlb_attached_node_groups"><a class="anchor" href="#_nlb_attached_node_groups"></a><a id="input_nlb_attached_node_groups"></a> <a href="#input_nlb_attached_node_groups">nlb_attached_node_groups</a></h4>
+<div class="paragraph">
+<p>Description: List of node_groups indexes that the NLB(s) should be attached to</p>
 </div>
 <div class="paragraph">
 <p>Type: <code>list(any)</code></p>
@@ -724,54 +770,15 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 </div>
 </div>
 <div class="sect3">
-<h4 id="_kubernetes_version"><a class="anchor" href="#_kubernetes_version"></a><a id="input_kubernetes_version"></a> <a href="#input_kubernetes_version">kubernetes_version</a></h4>
+<h4 id="_extra_lb_http_tcp_listeners"><a class="anchor" href="#_extra_lb_http_tcp_listeners"></a><a id="input_extra_lb_http_tcp_listeners"></a> <a href="#input_extra_lb_http_tcp_listeners">extra_lb_http_tcp_listeners</a></h4>
 <div class="paragraph">
-<p>Description: Kubernetes version for the EKS cluster.</p>
+<p>Description: Additional Listeners to attach to Network LBs.</p>
 </div>
 <div class="paragraph">
-<p>Please check the <a href="https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html">AWS EKS documentation</a> to find the available versions.</p>
-</div>
-<div class="paragraph">
-<p>This variable can be changed on an existing cluster to update it. <strong>Note that this triggers an "instance refresh" on the nodes' auto scaling group, and so will recreate all pods running on the cluster</strong>.</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>string</code></p>
-</div>
-<div class="paragraph">
-<p>Default: <code>"1.25"</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_nlb_attached_node_groups"><a class="anchor" href="#_nlb_attached_node_groups"></a><a id="input_nlb_attached_node_groups"></a> <a href="#input_nlb_attached_node_groups">nlb_attached_node_groups</a></h4>
-<div class="paragraph">
-<p>Description: List of node_groups indexes that the NLB(s) should be attached to</p>
+<p>A list of maps describing the HTTP listeners. Required key/values: <code>port</code>, <code>protocol</code>. Optional key/values: <code>target_group_index</code> (defaults to <code>http_tcp_listeners[count.index]</code>).</p>
 </div>
 <div class="paragraph">
 <p>Type: <code>list(any)</code></p>
-</div>
-<div class="paragraph">
-<p>Default: <code>[]</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_node_groups"><a class="anchor" href="#_node_groups"></a><a id="input_node_groups"></a> <a href="#input_node_groups">node_groups</a></h4>
-<div class="paragraph">
-<p>Description: A map of node group configurations to be created.</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>any</code></p>
-</div>
-<div class="paragraph">
-<p>Default: <code>{}</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_public_subnet_ids"><a class="anchor" href="#_public_subnet_ids"></a><a id="input_public_subnet_ids"></a> <a href="#input_public_subnet_ids">public_subnet_ids</a></h4>
-<div class="paragraph">
-<p>Description: List of IDs of public subnets the public NLB will be attached to if enabled with 'create_public_nlb'.</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>list(string)</code></p>
 </div>
 <div class="paragraph">
 <p>Default: <code>[]</code></p>
@@ -784,15 +791,15 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 <p>The following outputs are exported:</p>
 </div>
 <div class="sect3">
-<h4 id="_base_domain_2"><a class="anchor" href="#_base_domain_2"></a><a id="output_base_domain"></a> <a href="#output_base_domain">base_domain</a></h4>
-<div class="paragraph">
-<p>Description: The base domain for the cluster.</p>
-</div>
-</div>
-<div class="sect3">
 <h4 id="_cluster_name_2"><a class="anchor" href="#_cluster_name_2"></a><a id="output_cluster_name"></a> <a href="#output_cluster_name">cluster_name</a></h4>
 <div class="paragraph">
 <p>Description: Name of the EKS cluster.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_base_domain_2"><a class="anchor" href="#_base_domain_2"></a><a id="output_base_domain"></a> <a href="#output_base_domain">base_domain</a></h4>
+<div class="paragraph">
+<p>Description: The base domain for the cluster.</p>
 </div>
 </div>
 <div class="sect3">
@@ -802,21 +809,27 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 </div>
 </div>
 <div class="sect3">
-<h4 id="_kubernetes"><a class="anchor" href="#_kubernetes"></a><a id="output_kubernetes"></a> <a href="#output_kubernetes">kubernetes</a></h4>
+<h4 id="_node_security_group_id"><a class="anchor" href="#_node_security_group_id"></a><a id="output_node_security_group_id"></a> <a href="#output_node_security_group_id">node_security_group_id</a></h4>
 <div class="paragraph">
-<p>Description: Kubernetes API endpoint and CA certificate as a structured value.</p>
+<p>Description: ID of the node shared security group</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_kubernetes_cluster_ca_certificate"><a class="anchor" href="#_kubernetes_cluster_ca_certificate"></a><a id="output_kubernetes_cluster_ca_certificate"></a> <a href="#output_kubernetes_cluster_ca_certificate">kubernetes_cluster_ca_certificate</a></h4>
+<h4 id="_node_groups_2"><a class="anchor" href="#_node_groups_2"></a><a id="output_node_groups"></a> <a href="#output_node_groups">node_groups</a></h4>
 <div class="paragraph">
-<p>Description: Certificate data required to communicate with the cluster.</p>
+<p>Description: Map of attribute maps for all node groups created.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_kubernetes_host"><a class="anchor" href="#_kubernetes_host"></a><a id="output_kubernetes_host"></a> <a href="#output_kubernetes_host">kubernetes_host</a></h4>
 <div class="paragraph">
 <p>Description: Endpoint for your Kubernetes API server.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_kubernetes_cluster_ca_certificate"><a class="anchor" href="#_kubernetes_cluster_ca_certificate"></a><a id="output_kubernetes_cluster_ca_certificate"></a> <a href="#output_kubernetes_cluster_ca_certificate">kubernetes_cluster_ca_certificate</a></h4>
+<div class="paragraph">
+<p>Description: Certificate data required to communicate with the cluster.</p>
 </div>
 </div>
 <div class="sect3">
@@ -832,15 +845,9 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 </div>
 </div>
 <div class="sect3">
-<h4 id="_node_groups_2"><a class="anchor" href="#_node_groups_2"></a><a id="output_node_groups"></a> <a href="#output_node_groups">node_groups</a></h4>
+<h4 id="_kubernetes"><a class="anchor" href="#_kubernetes"></a><a id="output_kubernetes"></a> <a href="#output_kubernetes">kubernetes</a></h4>
 <div class="paragraph">
-<p>Description: Map of attribute maps for all node groups created.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_node_security_group_id"><a class="anchor" href="#_node_security_group_id"></a><a id="output_node_security_group_id"></a> <a href="#output_node_security_group_id">node_security_group_id</a></h4>
-<div class="paragraph">
-<p>Description: ID of the node shared security group</p>
+<p>Description: Kubernetes API endpoint and CA certificate as a structured value.</p>
 </div>
 </div>
 </div>
@@ -899,18 +906,18 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="provider_aws"></a> <a href="#provider_aws">aws</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>&gt;= 4</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="provider_dns"></a> <a href="#provider_dns">dns</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>n/a</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_aws"></a> <a href="#provider_aws">aws</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 4</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1047,6 +1054,138 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Name of the EKS cluster. Must be unique in the AWS account.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_base_domain"></a> <a href="#input_base_domain">base_domain</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The base domain for the cluster.</p>
+</div>
+<div class="paragraph">
+<p>This module needs a Route 53 zone matching this variable with permission to create DNS records. It will create a wildcard CNAME record <code>*.apps.&lt;base_domain&gt;</code> that points to an Elastic Load Balancer routing ingress traffic to all cluster nodes. Such urls will be used by default by other DevOps Stack modules for the applications they deploy (e.g. Argo CD, Prometheus, etc).</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>null</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_kubernetes_version"></a> <a href="#input_kubernetes_version">kubernetes_version</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Kubernetes version for the EKS cluster.</p>
+</div>
+<div class="paragraph">
+<p>Please check the <a href="https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html">AWS EKS documentation</a> to find the available versions.</p>
+</div>
+<div class="paragraph">
+<p>This variable can be changed on an existing cluster to update it. <strong>Note that this triggers an "instance refresh" on the nodes' auto scaling group, and so will recreate all pods running on the cluster</strong>.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>"1.25"</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_cluster_endpoint_public_access_cidrs"></a> <a href="#input_cluster_endpoint_public_access_cidrs">cluster_endpoint_public_access_cidrs</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>List of CIDR blocks which can access the Amazon EKS public API server endpoint.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>list(string)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">[
+  "0.0.0.0/0"
+]</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_vpc_id"></a> <a href="#input_vpc_id">vpc_id</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>ID of the VPC where the cluster and nodes will be deployed.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_private_subnet_ids"></a> <a href="#input_private_subnet_ids">private_subnet_ids</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>List of IDs of private subnets that the EKS instances will be attached to.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>list(string)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_public_subnet_ids"></a> <a href="#input_public_subnet_ids">public_subnet_ids</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>List of IDs of public subnets the public NLB will be attached to if enabled with 'create_public_nlb'.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>list(string)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>[]</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="input_aws_auth_accounts"></a> <a href="#input_aws_auth_accounts">aws_auth_accounts</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -1110,74 +1249,16 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_base_domain"></a> <a href="#input_base_domain">base_domain</a></p>
+<p><a id="input_node_groups"></a> <a href="#input_node_groups">node_groups</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The base domain for the cluster.</p>
-</div>
-<div class="paragraph">
-<p>This module needs a Route 53 zone matching this variable with permission to create DNS records. It will create a wildcard CNAME record <code>*.apps.&lt;base_domain&gt;</code> that points to an Elastic Load Balancer routing ingress traffic to all cluster nodes. Such urls will be used by default by other DevOps Stack modules for the applications they deploy (e.g. Argo CD, Prometheus, etc).</p>
+<p>A map of node group configurations to be created.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>string</code></p>
+<p><code>any</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>null</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>no</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_cluster_endpoint_public_access_cidrs"></a> <a href="#input_cluster_endpoint_public_access_cidrs">cluster_endpoint_public_access_cidrs</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>List of CIDR blocks which can access the Amazon EKS public API server endpoint.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>list(string)</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">[
-  "0.0.0.0/0"
-]</code></pre>
-</div>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>no</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Name of the EKS cluster. Must be unique in the AWS account.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>string</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>yes</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_create_private_nlb"></a> <a href="#input_create_private_nlb">create_private_nlb</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Whether to create an internal NLB attached the private subnets</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>bool</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>false</code></p>
+<p><code>{}</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
@@ -1202,13 +1283,27 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_extra_lb_http_tcp_listeners"></a> <a href="#input_extra_lb_http_tcp_listeners">extra_lb_http_tcp_listeners</a></p>
+<p><a id="input_create_private_nlb"></a> <a href="#input_create_private_nlb">create_private_nlb</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Additional Listeners to attach to Network LBs.</p>
-</div>
-<div class="paragraph">
-<p>A list of maps describing the HTTP listeners. Required key/values: <code>port</code>, <code>protocol</code>. Optional key/values: <code>target_group_index</code> (defaults to <code>http_tcp_listeners[count.index]</code>).</p>
+<p>Whether to create an internal NLB attached the private subnets</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>bool</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>false</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_nlb_attached_node_groups"></a> <a href="#input_nlb_attached_node_groups">nlb_attached_node_groups</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>List of node_groups indexes that the NLB(s) should be attached to</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>list(any)</code></p>
@@ -1242,33 +1337,13 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_kubernetes_version"></a> <a href="#input_kubernetes_version">kubernetes_version</a></p>
+<p><a id="input_extra_lb_http_tcp_listeners"></a> <a href="#input_extra_lb_http_tcp_listeners">extra_lb_http_tcp_listeners</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Kubernetes version for the EKS cluster.</p>
+<p>Additional Listeners to attach to Network LBs.</p>
 </div>
 <div class="paragraph">
-<p>Please check the <a href="https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html">AWS EKS documentation</a> to find the available versions.</p>
-</div>
-<div class="paragraph">
-<p>This variable can be changed on an existing cluster to update it. <strong>Note that this triggers an "instance refresh" on the nodes' auto scaling group, and so will recreate all pods running on the cluster</strong>.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>string</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"1.25"</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>no</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_nlb_attached_node_groups"></a> <a href="#input_nlb_attached_node_groups">nlb_attached_node_groups</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>List of node_groups indexes that the NLB(s) should be attached to</p>
+<p>A list of maps describing the HTTP listeners. Required key/values: <code>port</code>, <code>protocol</code>. Optional key/values: <code>target_group_index</code> (defaults to <code>http_tcp_listeners[count.index]</code>).</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>list(any)</code></p>
@@ -1278,74 +1353,6 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_node_groups"></a> <a href="#input_node_groups">node_groups</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>A map of node group configurations to be created.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>any</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>{}</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>no</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_private_subnet_ids"></a> <a href="#input_private_subnet_ids">private_subnet_ids</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>List of IDs of private subnets that the EKS instances will be attached to.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>list(string)</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>yes</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_public_subnet_ids"></a> <a href="#input_public_subnet_ids">public_subnet_ids</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>List of IDs of public subnets the public NLB will be attached to if enabled with 'create_public_nlb'.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>list(string)</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>[]</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>no</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_vpc_id"></a> <a href="#input_vpc_id">vpc_id</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>ID of the VPC where the cluster and nodes will be deployed.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>string</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>yes</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1367,18 +1374,18 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="output_base_domain"></a> <a href="#output_base_domain">base_domain</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The base domain for the cluster.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="output_cluster_name"></a> <a href="#output_cluster_name">cluster_name</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Name of the EKS cluster.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_base_domain"></a> <a href="#output_base_domain">base_domain</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The base domain for the cluster.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1391,18 +1398,18 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="output_kubernetes"></a> <a href="#output_kubernetes">kubernetes</a></p>
+<p><a id="output_node_security_group_id"></a> <a href="#output_node_security_group_id">node_security_group_id</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Kubernetes API endpoint and CA certificate as a structured value.</p>
+<p>ID of the node shared security group</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="output_kubernetes_cluster_ca_certificate"></a> <a href="#output_kubernetes_cluster_ca_certificate">kubernetes_cluster_ca_certificate</a></p>
+<p><a id="output_node_groups"></a> <a href="#output_node_groups">node_groups</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Certificate data required to communicate with the cluster.</p>
+<p>Map of attribute maps for all node groups created.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1411,6 +1418,14 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Endpoint for your Kubernetes API server.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_kubernetes_cluster_ca_certificate"></a> <a href="#output_kubernetes_cluster_ca_certificate">kubernetes_cluster_ca_certificate</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Certificate data required to communicate with the cluster.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1431,18 +1446,10 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="output_node_groups"></a> <a href="#output_node_groups">node_groups</a></p>
+<p><a id="output_kubernetes"></a> <a href="#output_kubernetes">kubernetes</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Map of attribute maps for all node groups created.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="output_node_security_group_id"></a> <a href="#output_node_security_group_id">node_security_group_id</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>ID of the node shared security group</p>
+<p>Kubernetes API endpoint and CA certificate as a structured value.</p>
 </div></div></td>
 </tr>
 </tbody>
