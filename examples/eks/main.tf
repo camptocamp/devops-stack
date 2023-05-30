@@ -66,7 +66,7 @@ resource "aws_cognito_user_in_group" "add_admin_argocd_admin" {
 */
 
 module "eks" {
-  source = "git::https://github.com/camptocamp/devops-stack.git//modules/eks/aws?ref=v2.0.1"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cluster-eks.git?ref=v2.0.1"
 
   cluster_name = "gh-v1-cluster"
   base_domain  = "is-sandbox.camptocamp.com"
@@ -156,7 +156,7 @@ module "oidc" {
 }
 
 module "thanos" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//eks?v=v1.0.0-alpha.8"
+  source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//eks?v=v1.0.0"
 
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
