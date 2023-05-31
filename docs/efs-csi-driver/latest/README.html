@@ -37,7 +37,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="efs-csi-driver" data-version="v1.0.1">
+<div class="nav-container" data-component="efs-csi-driver" data-version="v1.0.2">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -63,7 +63,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">EFS CSI Driver Module</span>
-    <span class="version">v1.0.1</span>
+    <span class="version">v1.0.2</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -78,7 +78,10 @@
       <a class="title" href="../../application/latest/README.html">Application Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../application/latest/README.html">v1.2.2</a>
+          <a href="../../application/latest/README.html">v1.2.3</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.2.2/README.html">v1.2.2</a>
         </li>
         <li class="version">
           <a href="../../application/v1.2.1/README.html">v1.2.1</a>
@@ -101,7 +104,10 @@
       <a class="title" href="../../applicationset/latest/README.html">ApplicationSet Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../applicationset/latest/README.html">v1.2.4</a>
+          <a href="../../applicationset/latest/README.html">v1.2.5</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.2.4/README.html">v1.2.4</a>
         </li>
         <li class="version">
           <a href="../../applicationset/v1.2.3/README.html">v1.2.3</a>
@@ -200,7 +206,10 @@
       <a class="title" href="../../ebs-csi-driver/latest/README.html">EBS CSI Driver Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../ebs-csi-driver/latest/README.html">v1.0.1</a>
+          <a href="../../ebs-csi-driver/latest/README.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v1.0.1/README.html">v1.0.1</a>
         </li>
       </ul>
     </li>
@@ -208,7 +217,10 @@
       <a class="title" href="README.html">EFS CSI Driver Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="README.html">v1.0.1</a>
+          <a href="README.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../v1.0.1/README.html">v1.0.1</a>
         </li>
       </ul>
     </li>
@@ -238,7 +250,10 @@
       <a class="title" href="../../keycloak/latest/README.html">Keycloak Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../keycloak/latest/README.html">v1.1.0</a>
+          <a href="../../keycloak/latest/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.1.0/README.html">v1.1.0</a>
         </li>
         <li class="version">
           <a href="../../keycloak/v1.0.2/README.html">v1.0.2</a>
@@ -335,7 +350,10 @@
       <a class="title" href="../../minio/latest/README.html">MinIO Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../minio/latest/README.html">v1.1.0</a>
+          <a href="../../minio/latest/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v1.1.0/README.html">v1.1.0</a>
         </li>
         <li class="version">
           <a href="../../minio/v1.0.0/README.html">v1.0.0</a>
@@ -354,7 +372,10 @@
       <a class="title" href="../../traefik/latest/README.html">Traefik Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../traefik/latest/README.html">v1.2.1</a>
+          <a href="../../traefik/latest/README.html">v1.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.2.1/README.html">v1.2.1</a>
         </li>
         <li class="version">
           <a href="../../traefik/v1.2.0/README.html">v1.2.0</a>
@@ -381,7 +402,14 @@
     <li><a href="README.html">Home</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-efs-csi-driver/blob/v1.0.1/docs/modules/ROOT/pages/README.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">v1.0.2</button>
+  <div class="version-menu">
+    <a class="version is-current" href="README.html">v1.0.2</a>
+    <a class="version" href="../v1.0.1/README.html">v1.0.1</a>
+  </div>
+</div>
+  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-efs-csi-driver/blob/v1.0.2/docs/modules/ROOT/pages/README.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -542,6 +570,9 @@ resource "aws_efs_mount_target" "eks" {
 <p><a id="requirement_argocd"></a> <a href="#requirement_argocd">argocd</a> (&gt;= 4)</p>
 </li>
 <li>
+<p><a id="requirement_null"></a> <a href="#requirement_null">null</a> (&gt;= 3)</p>
+</li>
+<li>
 <p><a id="requirement_utils"></a> <a href="#requirement_utils">utils</a> (&gt;= 1)</p>
 </li>
 </ul>
@@ -555,16 +586,16 @@ resource "aws_efs_mount_target" "eks" {
 <div class="ulist">
 <ul>
 <li>
-<p><a id="provider_argocd"></a> <a href="#provider_argocd">argocd</a> (&gt;= 4)</p>
+<p><a id="provider_utils"></a> <a href="#provider_utils">utils</a> (&gt;= 1)</p>
 </li>
 <li>
 <p><a id="provider_aws"></a> <a href="#provider_aws">aws</a></p>
 </li>
 <li>
-<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
+<p><a id="provider_argocd"></a> <a href="#provider_argocd">argocd</a> (&gt;= 4)</p>
 </li>
 <li>
-<p><a id="provider_utils"></a> <a href="#provider_utils">utils</a> (&gt;= 1)</p>
+<p><a id="provider_null"></a> <a href="#provider_null">null</a> (&gt;= 3)</p>
 </li>
 </ul>
 </div>
@@ -627,15 +658,6 @@ resource "aws_efs_mount_target" "eks" {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_create_role"><a class="anchor" href="#_create_role"></a><a id="input_create_role"></a> <a href="#input_create_role">create_role</a></h4>
-<div class="paragraph">
-<p>Description: Boolean to indicate that the OIDC assumable IAM role should be created. <strong>If passing <code>iam_role_arn</code> this should be false, otherwise if you want to create the OIDC assumable IAM role provided by this module, you will need to specify the variable <code>cluster_oidc_issuer_url</code>.</strong></p>
-</div>
-<div class="paragraph">
-<p>Type: <code>bool</code></p>
-</div>
-</div>
-<div class="sect3">
 <h4 id="_efs_file_system_id"><a class="anchor" href="#_efs_file_system_id"></a><a id="input_efs_file_system_id"></a> <a href="#input_efs_file_system_id">efs_file_system_id</a></h4>
 <div class="paragraph">
 <p>Description: EFS Filesystem ID to use by the CSI driver to create volumes.</p>
@@ -644,11 +666,56 @@ resource "aws_efs_mount_target" "eks" {
 <p>Type: <code>string</code></p>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_create_role"><a class="anchor" href="#_create_role"></a><a id="input_create_role"></a> <a href="#input_create_role">create_role</a></h4>
+<div class="paragraph">
+<p>Description: Boolean to indicate that the OIDC assumable IAM role should be created. <strong>If passing <code>iam_role_arn</code> this should be false, otherwise if you want to create the OIDC assumable IAM role provided by this module, you will need to specify the variable <code>cluster_oidc_issuer_url</code>.</strong></p>
+</div>
+<div class="paragraph">
+<p>Type: <code>bool</code></p>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_optional_inputs"><a class="anchor" href="#_optional_inputs"></a>Optional Inputs</h3>
 <div class="paragraph">
 <p>The following input variables are optional (have default values):</p>
+</div>
+<div class="sect3">
+<h4 id="_cluster_name"><a class="anchor" href="#_cluster_name"></a><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></h4>
+<div class="paragraph">
+<p>Description: Name given to the cluster. Value used for naming some the resources created by the module.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"cluster"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_target_revision"><a class="anchor" href="#_target_revision"></a><a id="input_target_revision"></a> <a href="#input_target_revision">target_revision</a></h4>
+<div class="paragraph">
+<p>Description: Override of target revision of the application chart.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"v1.0.1"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_helm_values"><a class="anchor" href="#_helm_values"></a><a id="input_helm_values"></a> <a href="#input_helm_values">helm_values</a></h4>
+<div class="paragraph">
+<p>Description: Helm chart value overrides. They should be passed as a list of HCL structures.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>any</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>[]</code></p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_app_autosync"><a class="anchor" href="#_app_autosync"></a><a id="input_app_autosync"></a> <a href="#input_app_autosync">app_autosync</a></h4>
@@ -681,30 +748,6 @@ resource "aws_efs_mount_target" "eks" {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_cluster_name"><a class="anchor" href="#_cluster_name"></a><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></h4>
-<div class="paragraph">
-<p>Description: Name given to the cluster. Value used for naming some the resources created by the module.</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>string</code></p>
-</div>
-<div class="paragraph">
-<p>Default: <code>"cluster"</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_cluster_oidc_issuer_url"><a class="anchor" href="#_cluster_oidc_issuer_url"></a><a id="input_cluster_oidc_issuer_url"></a> <a href="#input_cluster_oidc_issuer_url">cluster_oidc_issuer_url</a></h4>
-<div class="paragraph">
-<p>Description: Cluster OIDC issuer URL used to create the OIDC assumable IAM role. This variable is required to create a IAM role if you set <code>create_role</code> as true.</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>string</code></p>
-</div>
-<div class="paragraph">
-<p>Default: <code>""</code></p>
-</div>
-</div>
-<div class="sect3">
 <h4 id="_dependency_ids"><a class="anchor" href="#_dependency_ids"></a><a id="input_dependency_ids"></a> <a href="#input_dependency_ids">dependency_ids</a></h4>
 <div class="paragraph">
 <p>Description: IDs of the other modules on which this module depends on.</p>
@@ -714,30 +757,6 @@ resource "aws_efs_mount_target" "eks" {
 </div>
 <div class="paragraph">
 <p>Default: <code>{}</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_helm_values"><a class="anchor" href="#_helm_values"></a><a id="input_helm_values"></a> <a href="#input_helm_values">helm_values</a></h4>
-<div class="paragraph">
-<p>Description: Helm chart value overrides. They should be passed as a list of HCL structures.</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>any</code></p>
-</div>
-<div class="paragraph">
-<p>Default: <code>[]</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_iam_role_arn"><a class="anchor" href="#_iam_role_arn"></a><a id="input_iam_role_arn"></a> <a href="#input_iam_role_arn">iam_role_arn</a></h4>
-<div class="paragraph">
-<p>Description: ARN of an OIDC assumable IAM role that has access to the EFS filesystem. When specified, this is added as an annotation to the EFS CSI driver controller ServiceAccount, to allow the driver to manage EFS access points for dynamic volumes provisioning.</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>string</code></p>
-</div>
-<div class="paragraph">
-<p>Default: <code>null</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -753,15 +772,27 @@ resource "aws_efs_mount_target" "eks" {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_target_revision"><a class="anchor" href="#_target_revision"></a><a id="input_target_revision"></a> <a href="#input_target_revision">target_revision</a></h4>
+<h4 id="_iam_role_arn"><a class="anchor" href="#_iam_role_arn"></a><a id="input_iam_role_arn"></a> <a href="#input_iam_role_arn">iam_role_arn</a></h4>
 <div class="paragraph">
-<p>Description: Override of target revision of the application chart.</p>
+<p>Description: ARN of an OIDC assumable IAM role that has access to the EFS filesystem. When specified, this is added as an annotation to the EFS CSI driver controller ServiceAccount, to allow the driver to manage EFS access points for dynamic volumes provisioning.</p>
 </div>
 <div class="paragraph">
 <p>Type: <code>string</code></p>
 </div>
 <div class="paragraph">
-<p>Default: <code>"v1.0.0"</code></p>
+<p>Default: <code>null</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cluster_oidc_issuer_url"><a class="anchor" href="#_cluster_oidc_issuer_url"></a><a id="input_cluster_oidc_issuer_url"></a> <a href="#input_cluster_oidc_issuer_url">cluster_oidc_issuer_url</a></h4>
+<div class="paragraph">
+<p>Description: Cluster OIDC issuer URL used to create the OIDC assumable IAM role. This variable is required to create a IAM role if you set <code>create_role</code> as true.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>""</code></p>
 </div>
 </div>
 </div>
@@ -807,6 +838,14 @@ resource "aws_efs_mount_target" "eks" {
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_null"></a> <a href="#requirement_null">null</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 3</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="requirement_utils"></a> <a href="#requirement_utils">utils</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -832,6 +871,14 @@ resource "aws_efs_mount_target" "eks" {
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 3</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="provider_argocd"></a> <a href="#provider_argocd">argocd</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -840,26 +887,18 @@ resource "aws_efs_mount_target" "eks" {
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="provider_aws"></a> <a href="#provider_aws">aws</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="provider_utils"></a> <a href="#provider_utils">utils</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>&gt;= 1</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_aws"></a> <a href="#provider_aws">aws</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -982,6 +1021,74 @@ resource "aws_efs_mount_target" "eks" {
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Name given to the cluster. Value used for naming some the resources created by the module.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>"cluster"</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_argocd_namespace"></a> <a href="#input_argocd_namespace">argocd_namespace</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Namespace used by Argo CD where the Application and AppProject resources should be created.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_target_revision"></a> <a href="#input_target_revision">target_revision</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Override of target revision of the application chart.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>"v1.0.1"</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_helm_values"></a> <a href="#input_helm_values">helm_values</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Helm chart value overrides. They should be passed as a list of HCL structures.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>any</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>[]</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="input_app_autosync"></a> <a href="#input_app_autosync">app_autosync</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -1011,74 +1118,6 @@ resource "aws_efs_mount_target" "eks" {
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_argocd_namespace"></a> <a href="#input_argocd_namespace">argocd_namespace</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Namespace used by Argo CD where the Application and AppProject resources should be created.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>string</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>yes</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Name given to the cluster. Value used for naming some the resources created by the module.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>string</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"cluster"</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>no</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_cluster_oidc_issuer_url"></a> <a href="#input_cluster_oidc_issuer_url">cluster_oidc_issuer_url</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Cluster OIDC issuer URL used to create the OIDC assumable IAM role. This variable is required to create a IAM role if you set <code>create_role</code> as true.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>string</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>""</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>no</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_create_role"></a> <a href="#input_create_role">create_role</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Boolean to indicate that the OIDC assumable IAM role should be created. <strong>If passing <code>iam_role_arn</code> this should be false, otherwise if you want to create the OIDC assumable IAM role provided by this module, you will need to specify the variable <code>cluster_oidc_issuer_url</code>.</strong></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>bool</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>yes</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="input_dependency_ids"></a> <a href="#input_dependency_ids">dependency_ids</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -1089,57 +1128,6 @@ resource "aws_efs_mount_target" "eks" {
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>{}</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>no</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_efs_file_system_id"></a> <a href="#input_efs_file_system_id">efs_file_system_id</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>EFS Filesystem ID to use by the CSI driver to create volumes.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>string</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>yes</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_helm_values"></a> <a href="#input_helm_values">helm_values</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Helm chart value overrides. They should be passed as a list of HCL structures.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>any</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>[]</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>no</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_iam_role_arn"></a> <a href="#input_iam_role_arn">iam_role_arn</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>ARN of an OIDC assumable IAM role that has access to the EFS filesystem. When specified, this is added as an annotation to the EFS CSI driver controller ServiceAccount, to allow the driver to manage EFS access points for dynamic volumes provisioning.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>string</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>null</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
@@ -1164,16 +1152,67 @@ resource "aws_efs_mount_target" "eks" {
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_target_revision"></a> <a href="#input_target_revision">target_revision</a></p>
+<p><a id="input_efs_file_system_id"></a> <a href="#input_efs_file_system_id">efs_file_system_id</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Override of target revision of the application chart.</p>
+<p>EFS Filesystem ID to use by the CSI driver to create volumes.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>string</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"v1.0.0"</code></p>
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_create_role"></a> <a href="#input_create_role">create_role</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Boolean to indicate that the OIDC assumable IAM role should be created. <strong>If passing <code>iam_role_arn</code> this should be false, otherwise if you want to create the OIDC assumable IAM role provided by this module, you will need to specify the variable <code>cluster_oidc_issuer_url</code>.</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>bool</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_iam_role_arn"></a> <a href="#input_iam_role_arn">iam_role_arn</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>ARN of an OIDC assumable IAM role that has access to the EFS filesystem. When specified, this is added as an annotation to the EFS CSI driver controller ServiceAccount, to allow the driver to manage EFS access points for dynamic volumes provisioning.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>null</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_cluster_oidc_issuer_url"></a> <a href="#input_cluster_oidc_issuer_url">cluster_oidc_issuer_url</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Cluster OIDC issuer URL used to create the OIDC assumable IAM role. This variable is required to create a IAM role if you set <code>create_role</code> as true.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>""</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
