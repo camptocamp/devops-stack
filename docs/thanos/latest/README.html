@@ -37,7 +37,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="thanos" data-version="v1.0.0">
+<div class="nav-container" data-component="thanos" data-version="v1.0.1">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -78,7 +78,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">Thanos Module</span>
-    <span class="version">v1.0.0</span>
+    <span class="version">v1.0.1</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -382,7 +382,10 @@
       <a class="title" href="README.html">Thanos Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="README.html">v1.0.0</a>
+          <a href="README.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../v1.0.0/README.html">v1.0.0</a>
         </li>
       </ul>
     </li>
@@ -420,7 +423,14 @@
     <li><a href="README.html">Home</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-thanos/blob/v1.0.0/docs/modules/ROOT/pages/README.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">v1.0.1</button>
+  <div class="version-menu">
+    <a class="version is-current" href="README.html">v1.0.1</a>
+    <a class="version" href="../v1.0.0/README.html">v1.0.0</a>
+  </div>
+</div>
+  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-thanos/blob/v1.0.1/docs/modules/ROOT/pages/README.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -453,7 +463,7 @@
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>12.0.0</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/bitnami/charts/tree/master/bitnami/thanos">Chart</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://artifacthub.io/packages/helm/bitnami/thanos?modal=values"><code>values.yaml</code></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://artifacthub.io/packages/helm/bitnami/thanos/12.0.0?modal=values"><code>values.yaml</code></a></p></td>
 </tr>
 </tbody>
 </table>
@@ -469,6 +479,28 @@
 <h2 id="_technical_reference"><a class="anchor" href="#_technical_reference"></a>Technical Reference</h2>
 <div class="sectionbody">
 <div class="sect2">
+<h3 id="_requirements"><a class="anchor" href="#_requirements"></a>Requirements</h3>
+<div class="paragraph">
+<p>The following requirements are needed by this module:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="requirement_argocd"></a> <a href="#requirement_argocd">argocd</a> (&gt;= 4)</p>
+</li>
+<li>
+<p><a id="requirement_null"></a> <a href="#requirement_null">null</a> (&gt;= 3)</p>
+</li>
+<li>
+<p><a id="requirement_random"></a> <a href="#requirement_random">random</a> (&gt;= 3)</p>
+</li>
+<li>
+<p><a id="requirement_utils"></a> <a href="#requirement_utils">utils</a> (&gt;= 1)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_providers"><a class="anchor" href="#_providers"></a>Providers</h3>
 <div class="paragraph">
 <p>The following providers are used by this module:</p>
@@ -476,16 +508,16 @@
 <div class="ulist">
 <ul>
 <li>
-<p><a id="provider_argocd"></a> <a href="#provider_argocd">argocd</a></p>
+<p><a id="provider_random"></a> <a href="#provider_random">random</a> (&gt;= 3)</p>
 </li>
 <li>
-<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
+<p><a id="provider_utils"></a> <a href="#provider_utils">utils</a> (&gt;= 1)</p>
 </li>
 <li>
-<p><a id="provider_random"></a> <a href="#provider_random">random</a></p>
+<p><a id="provider_argocd"></a> <a href="#provider_argocd">argocd</a> (&gt;= 4)</p>
 </li>
 <li>
-<p><a id="provider_utils"></a> <a href="#provider_utils">utils</a></p>
+<p><a id="provider_null"></a> <a href="#provider_null">null</a> (&gt;= 3)</p>
 </li>
 </ul>
 </div>
@@ -524,9 +556,9 @@
 <p>The following input variables are required:</p>
 </div>
 <div class="sect3">
-<h4 id="_argocd_namespace"><a class="anchor" href="#_argocd_namespace"></a><a id="input_argocd_namespace"></a> <a href="#input_argocd_namespace">argocd_namespace</a></h4>
+<h4 id="_cluster_name"><a class="anchor" href="#_cluster_name"></a><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></h4>
 <div class="paragraph">
-<p>Description: Namespace used by Argo CD where the Application and AppProject resources should be created.</p>
+<p>Description: Name given to the cluster. Value used for the ingress' URL of the application.</p>
 </div>
 <div class="paragraph">
 <p>Type: <code>string</code></p>
@@ -541,20 +573,71 @@
 <p>Type: <code>string</code></p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_cluster_name"><a class="anchor" href="#_cluster_name"></a><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></h4>
-<div class="paragraph">
-<p>Description: Name given to the cluster. Value used for the ingress' URL of the application.</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>string</code></p>
-</div>
-</div>
 </div>
 <div class="sect2">
 <h3 id="_optional_inputs"><a class="anchor" href="#_optional_inputs"></a>Optional Inputs</h3>
 <div class="paragraph">
 <p>The following input variables are optional (have default values):</p>
+</div>
+<div class="sect3">
+<h4 id="_argocd_namespace"><a class="anchor" href="#_argocd_namespace"></a><a id="input_argocd_namespace"></a> <a href="#input_argocd_namespace">argocd_namespace</a></h4>
+<div class="paragraph">
+<p>Description: Namespace used by Argo CD where the Application and AppProject resources should be created.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"argocd"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_target_revision"><a class="anchor" href="#_target_revision"></a><a id="input_target_revision"></a> <a href="#input_target_revision">target_revision</a></h4>
+<div class="paragraph">
+<p>Description: Override of target revision of the application chart.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"v1.0.0"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cluster_issuer"><a class="anchor" href="#_cluster_issuer"></a><a id="input_cluster_issuer"></a> <a href="#input_cluster_issuer">cluster_issuer</a></h4>
+<div class="paragraph">
+<p>Description: SSL certificate issuer to use. Usually you would configure this value as <code>letsencrypt-staging</code> or <code>letsencrypt-prod</code> on your root <code>*.tf</code> files.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"ca-issuer"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_namespace"><a class="anchor" href="#_namespace"></a><a id="input_namespace"></a> <a href="#input_namespace">namespace</a></h4>
+<div class="paragraph">
+<p>Description: Namespace where the applications&#8217;s Kubernetes resources should be created. Namespace will be created in case it doesn&#8217;t exist.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"thanos"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_helm_values"><a class="anchor" href="#_helm_values"></a><a id="input_helm_values"></a> <a href="#input_helm_values">helm_values</a></h4>
+<div class="paragraph">
+<p>Description: Helm chart value overrides. They should be passed as a list of HCL structures.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>any</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>[]</code></p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_app_autosync"><a class="anchor" href="#_app_autosync"></a><a id="input_app_autosync"></a> <a href="#input_app_autosync">app_autosync</a></h4>
@@ -587,18 +670,6 @@
 </div>
 </div>
 <div class="sect3">
-<h4 id="_cluster_issuer"><a class="anchor" href="#_cluster_issuer"></a><a id="input_cluster_issuer"></a> <a href="#input_cluster_issuer">cluster_issuer</a></h4>
-<div class="paragraph">
-<p>Description: SSL certificate issuer to use. Usually you would configure this value as <code>letsencrypt-staging</code> or <code>letsencrypt-prod</code> on your root <code>*.tf</code> files.</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>string</code></p>
-</div>
-<div class="paragraph">
-<p>Default: <code>"ca-issuer"</code></p>
-</div>
-</div>
-<div class="sect3">
 <h4 id="_dependency_ids"><a class="anchor" href="#_dependency_ids"></a><a id="input_dependency_ids"></a> <a href="#input_dependency_ids">dependency_ids</a></h4>
 <div class="paragraph">
 <p>Description: IDs of the other modules on which this module depends on.</p>
@@ -608,42 +679,6 @@
 </div>
 <div class="paragraph">
 <p>Default: <code>{}</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_helm_values"><a class="anchor" href="#_helm_values"></a><a id="input_helm_values"></a> <a href="#input_helm_values">helm_values</a></h4>
-<div class="paragraph">
-<p>Description: Helm chart value overrides. They should be passed as a list of HCL structures.</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>any</code></p>
-</div>
-<div class="paragraph">
-<p>Default: <code>[]</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_namespace"><a class="anchor" href="#_namespace"></a><a id="input_namespace"></a> <a href="#input_namespace">namespace</a></h4>
-<div class="paragraph">
-<p>Description: Namespace where the applications&#8217;s Kubernetes resources should be created. Namespace will be created in case it doesn&#8217;t exist.</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>string</code></p>
-</div>
-<div class="paragraph">
-<p>Default: <code>"thanos"</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_target_revision"><a class="anchor" href="#_target_revision"></a><a id="input_target_revision"></a> <a href="#input_target_revision">target_revision</a></h4>
-<div class="paragraph">
-<p>Description: Override of target revision of the application chart.</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>string</code></p>
-</div>
-<div class="paragraph">
-<p>Default: <code>"v1.0.0"</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -677,6 +712,55 @@
 <summary class="title">Show tables</summary>
 <div class="content">
 <div class="paragraph">
+<p>= Requirements</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_argocd"></a> <a href="#requirement_argocd">argocd</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 4</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_null"></a> <a href="#requirement_null">null</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 3</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_random"></a> <a href="#requirement_random">random</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 3</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_utils"></a> <a href="#requirement_utils">utils</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 1</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
 <p>= Providers</p>
 </div>
 <table class="tableblock frame-all grid-all fit-content">
@@ -693,18 +777,18 @@
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="provider_argocd"></a> <a href="#provider_argocd">argocd</a></p>
+<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
+<p>&gt;= 3</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
+<p><a id="provider_argocd"></a> <a href="#provider_argocd">argocd</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
+<p>&gt;= 4</p>
 </div></div></td>
 </tr>
 <tr>
@@ -712,7 +796,7 @@
 <p><a id="provider_random"></a> <a href="#provider_random">random</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
+<p>&gt;= 3</p>
 </div></div></td>
 </tr>
 <tr>
@@ -720,7 +804,7 @@
 <p><a id="provider_utils"></a> <a href="#provider_utils">utils</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
+<p>&gt;= 1</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -813,39 +897,10 @@
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_app_autosync"></a> <a href="#input_app_autosync">app_autosync</a></p>
+<p><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Automated sync options for the Argo CD Application resource.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">object({
-    allow_empty = optional(bool)
-    prune       = optional(bool)
-    self_heal   = optional(bool)
-  })</code></pre>
-</div>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">{
-  "allow_empty": false,
-  "prune": true,
-  "self_heal": true
-}</code></pre>
-</div>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>no</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_argocd_namespace"></a> <a href="#input_argocd_namespace">argocd_namespace</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Namespace used by Argo CD where the Application and AppProject resources should be created.</p>
+<p>Name given to the cluster. Value used for the ingress' URL of the application.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>string</code></p>
@@ -876,6 +931,40 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_argocd_namespace"></a> <a href="#input_argocd_namespace">argocd_namespace</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Namespace used by Argo CD where the Application and AppProject resources should be created.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>"argocd"</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_target_revision"></a> <a href="#input_target_revision">target_revision</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Override of target revision of the application chart.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>"v1.0.0"</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="input_cluster_issuer"></a> <a href="#input_cluster_issuer">cluster_issuer</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -886,57 +975,6 @@
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>"ca-issuer"</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>no</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Name given to the cluster. Value used for the ingress' URL of the application.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>string</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>yes</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_dependency_ids"></a> <a href="#input_dependency_ids">dependency_ids</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>IDs of the other modules on which this module depends on.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>map(string)</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>{}</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>no</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_helm_values"></a> <a href="#input_helm_values">helm_values</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Helm chart value overrides. They should be passed as a list of HCL structures.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>any</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>[]</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
@@ -961,16 +999,62 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_target_revision"></a> <a href="#input_target_revision">target_revision</a></p>
+<p><a id="input_helm_values"></a> <a href="#input_helm_values">helm_values</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Override of target revision of the application chart.</p>
+<p>Helm chart value overrides. They should be passed as a list of HCL structures.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>string</code></p>
+<p><code>any</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"v1.0.0"</code></p>
+<p><code>[]</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_app_autosync"></a> <a href="#input_app_autosync">app_autosync</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Automated sync options for the Argo CD Application resource.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">object({
+    allow_empty = optional(bool)
+    prune       = optional(bool)
+    self_heal   = optional(bool)
+  })</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">{
+  "allow_empty": false,
+  "prune": true,
+  "self_heal": true
+}</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_dependency_ids"></a> <a href="#input_dependency_ids">dependency_ids</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>IDs of the other modules on which this module depends on.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>map(string)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>{}</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
