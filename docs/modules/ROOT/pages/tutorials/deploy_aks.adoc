@@ -1,3 +1,17 @@
 = Deployment On Azure AKS
 
-_Work In Progress_
+This tutorial shows how to deploy a DevOps Stack instance on Azure Cloud.
+
+== Prerequisites
+
+* An Azure account with an active subscription.
+* "Application Developer" Azure AD role assignment on the Azure AD instance the subscription trusts.
+* "Owner" Azure role assignment on the subscription.
+
+== State file
+
+== DNS
+
+== Provisions and cluster
+
+== Stack
