@@ -37,7 +37,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="loki" data-version="v2.2.0">
+<div class="nav-container" data-component="loki" data-version="v2.3.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -78,7 +78,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">Loki Module</span>
-    <span class="version">v2.2.0</span>
+    <span class="version">v2.3.0</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -334,7 +334,10 @@
       <a class="title" href="README.html">Loki Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="README.html">v2.2.0</a>
+          <a href="README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../v2.2.0/README.html">v2.2.0</a>
         </li>
         <li class="version">
           <a href="../v2.1.0/README.html">v2.1.0</a>
@@ -368,7 +371,10 @@
       <a class="title" href="../../minio/latest/README.html">MinIO Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../minio/latest/README.html">v1.1.1</a>
+          <a href="../../minio/latest/README.html">v1.1.2</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v1.1.1/README.html">v1.1.1</a>
         </li>
         <li class="version">
           <a href="../../minio/v1.1.0/README.html">v1.1.0</a>
@@ -424,9 +430,10 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v2.2.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v2.3.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="README.html">v2.2.0</a>
+    <a class="version is-current" href="README.html">v2.3.0</a>
+    <a class="version" href="../v2.2.0/README.html">v2.2.0</a>
     <a class="version" href="../v2.1.0/README.html">v2.1.0</a>
     <a class="version" href="../v2.0.2/README.html">v2.0.2</a>
     <a class="version" href="../v2.0.1/README.html">v2.0.1</a>
@@ -435,7 +442,7 @@
     <a class="version" href="../v1.0.0/README.html">v1.0.0</a>
   </div>
 </div>
-  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-loki-stack/blob/v2.2.0/docs/modules/ROOT/pages/README.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-loki-stack/blob/v2.3.0/docs/modules/ROOT/pages/README.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -475,6 +482,9 @@
 <div class="ulist">
 <ul>
 <li>
+<p><a id="provider_null"></a> <a href="#provider_null">null</a> (&gt;= 3)</p>
+</li>
+<li>
 <p><a id="provider_random"></a> <a href="#provider_random">random</a> (&gt;= 3)</p>
 </li>
 <li>
@@ -485,9 +495,6 @@
 </li>
 <li>
 <p><a id="provider_argocd"></a> <a href="#provider_argocd">argocd</a> (&gt;= 4)</p>
-</li>
-<li>
-<p><a id="provider_null"></a> <a href="#provider_null">null</a> (&gt;= 3)</p>
 </li>
 </ul>
 </div>
@@ -509,13 +516,13 @@
 <p><a href="https://registry.terraform.io/providers/loafoe/htpasswd/latest/docs/resources/password">htpasswd_password.loki_password_hash</a> (resource)</p>
 </li>
 <li>
-<p><a href="https://registry.terraform.io/providers/null/latest/docs/resources/resource">null_resource.dependencies</a> (resource)</p>
+<p><a href="https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource">null_resource.dependencies</a> (resource)</p>
 </li>
 <li>
-<p><a href="https://registry.terraform.io/providers/null/latest/docs/resources/resource">null_resource.this</a> (resource)</p>
+<p><a href="https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource">null_resource.this</a> (resource)</p>
 </li>
 <li>
-<p><a href="https://registry.terraform.io/providers/random/latest/docs/resources/password">random_password.loki_password</a> (resource)</p>
+<p><a href="https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password">random_password.loki_password</a> (resource)</p>
 </li>
 <li>
 <p><a href="https://registry.terraform.io/providers/cloudposse/utils/latest/docs/data-sources/deep_merge_yaml">utils_deep_merge_yaml.values</a> (data source)</p>
@@ -527,30 +534,6 @@
 <h3 id="_optional_inputs"><a class="anchor" href="#_optional_inputs"></a>Optional Inputs</h3>
 <div class="paragraph">
 <p>The following input variables are optional (have default values):</p>
-</div>
-<div class="sect3">
-<h4 id="_cluster_name"><a class="anchor" href="#_cluster_name"></a><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></h4>
-<div class="paragraph">
-<p>Description: Name given to the cluster. Value used for the ingress' URL of the application.</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>string</code></p>
-</div>
-<div class="paragraph">
-<p>Default: <code>null</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_base_domain"><a class="anchor" href="#_base_domain"></a><a id="input_base_domain"></a> <a href="#input_base_domain">base_domain</a></h4>
-<div class="paragraph">
-<p>Description: Base domain of the cluster. Value used for the ingress' URL of the application.</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>string</code></p>
-</div>
-<div class="paragraph">
-<p>Default: <code>null</code></p>
-</div>
 </div>
 <div class="sect3">
 <h4 id="_argocd_namespace"><a class="anchor" href="#_argocd_namespace"></a><a id="input_argocd_namespace"></a> <a href="#input_argocd_namespace">argocd_namespace</a></h4>
@@ -573,7 +556,7 @@
 <p>Type: <code>string</code></p>
 </div>
 <div class="paragraph">
-<p>Default: <code>"v2.1.0"</code></p>
+<p>Default: <code>"v2.2.0"</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -687,6 +670,18 @@
 <p>Default: <code>false</code></p>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_retention"><a class="anchor" href="#_retention"></a><a id="input_retention"></a> <a href="#input_retention">retention</a></h4>
+<div class="paragraph">
+<p>Description: Logs retention period.To deactivate retention, pass 0s.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"30d"</code></p>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_outputs"><a class="anchor" href="#_outputs"></a>Outputs</h3>
@@ -776,6 +771,14 @@
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 3</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="provider_random"></a> <a href="#provider_random">random</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -804,14 +807,6 @@
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>&gt;= 4</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>&gt;= 3</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -855,7 +850,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="https://registry.terraform.io/providers/null/latest/docs/resources/resource">null_resource.dependencies</a></p>
+<p><a href="https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource">null_resource.dependencies</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>resource</p>
@@ -863,7 +858,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="https://registry.terraform.io/providers/null/latest/docs/resources/resource">null_resource.this</a></p>
+<p><a href="https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource">null_resource.this</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>resource</p>
@@ -871,7 +866,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="https://registry.terraform.io/providers/random/latest/docs/resources/password">random_password.loki_password</a></p>
+<p><a href="https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password">random_password.loki_password</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>resource</p>
@@ -908,40 +903,6 @@
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Name given to the cluster. Value used for the ingress' URL of the application.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>string</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>null</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>no</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_base_domain"></a> <a href="#input_base_domain">base_domain</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Base domain of the cluster. Value used for the ingress' URL of the application.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>string</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>null</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>no</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="input_argocd_namespace"></a> <a href="#input_argocd_namespace">argocd_namespace</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -968,7 +929,7 @@
 <p><code>string</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"v2.1.0"</code></p>
+<p><code>"v2.2.0"</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
@@ -1106,6 +1067,23 @@
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>false</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_retention"></a> <a href="#input_retention">retention</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Logs retention period.To deactivate retention, pass 0s.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>"30d"</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
