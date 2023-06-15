@@ -15,3 +15,9 @@ output "keycloak_users" {
   value       = module.oidc.devops_stack_users_passwords
   sensitive   = true
 }
+
+output "vault_dev_root_token" {
+  description = "Vault dev mode root token for authentication" # Isn't the output name explicit enough ?
+  value       = random_password.vault_dev_root_token.result
+  sensitive   = true
+}

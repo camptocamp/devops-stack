@@ -45,6 +45,13 @@ provider "keycloak" {
 
 ###
 
+# TODO secure dev root key: make sure it isn't shown in plan.
+
+resource "random_password" "vault_dev_root_token" {
+  length  = 32
+  special = false
+}
+
 # Module declarations and configuration
 
 module "kind" {
@@ -61,7 +68,118 @@ module "metallb" {
 }
 
 module "argocd_bootstrap" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v1.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v2.0.0"
+
+  helm_values = [{
+    argo-cd = {
+      repoServer = {
+        volumes = [
+          {
+            configMap = {
+              name = "avp-helm-cm"
+            }
+            name = "avp-helm-volume"
+          },
+          {
+            name     = "custom-tools"
+            emptyDir = {}
+          }
+        ]
+        initContainers = [
+          {
+            name  = "download-copy-avp"
+            image = "registry.access.redhat.com/ubi8" # TODO change image.
+            env = [
+              {
+                name  = "AVP_VERSION"
+                value = "1.14.0"
+              }
+            ]
+            command = ["sh", "-c"]
+            args = [
+              "curl -L https://github.com/argoproj-labs/argocd-vault-plugin/releases/download/v$(AVP_VERSION)/argocd-vault-plugin_$(AVP_VERSION)_linux_amd64 -o argocd-vault-plugin && chmod +x argocd-vault-plugin && mv argocd-vault-plugin /custom-tools/"
+            ]
+            volumeMounts = [
+              {
+                mountPath = "/custom-tools"
+                name      = "custom-tools"
+              }
+            ]
+          }
+        ]
+        extraContainers = [
+          {
+            name    = "avp-helm-cmp"
+            command = ["/var/run/argocd/argocd-cmp-server"]
+            image   = "quay.io/argoproj/argocd:v2.6.6" # TODO version hard-coded for now. Use local after transfer to module.
+            securityContext = {
+              runAsNonRoot = true
+              runAsUser    = 999
+            }
+            env = [
+              {
+                name  = "VAULT_ADDR"
+                value = "http://vault.vault:8200" # TODO local variable ? 
+              },
+              {
+                name  = "VAULT_TOKEN"
+                value = random_password.vault_dev_root_token.result
+              },
+              {
+                name  = "AVP_TYPE"
+                value = "vault"
+              },
+              {
+                name  = "AVP_AUTH_TYPE"
+                value = "token"
+              }
+            ]
+            volumeMounts = [
+              {
+                mountPath = "/var/run/argocd"
+                name      = "var-files"
+              },
+              {
+                mountPath = "/home/argocd/cmp-server/plugins"
+                name      = "plugins"
+              },
+              {
+                mountPath = "/home/argocd/cmp-server/config/plugin.yaml"
+                subPath   = "plugin.yaml"
+                name      = "avp-helm-volume"
+              },
+              {
+                mountPath = "/usr/local/bin/argocd-vault-plugin"
+                subPath   = "argocd-vault-plugin"
+                name      = "custom-tools"
+              }
+            ]
+          }
+        ]
+      }
+      extraObjects = [
+        {
+          apiVersion = "v1"
+          kind       = "ConfigMap"
+          metadata = {
+            name = "avp-helm-cm"
+          }
+          data = {
+            "plugin.yaml" = <<-EOT
+              apiVersion: argoproj.io/v1alpha1
+              kind: ConfigManagementPlugin
+              metadata:
+                name: avp-helm
+              spec:
+                generate:
+                  command: ["/bin/sh", "-c"]
+                  args: ["echo \"$ARGOCD_ENV_HELM_VALUES\" | helm template . --name-template $ARGOCD_APP_NAME --namespace $ARGOCD_APP_NAMESPACE $ARGOCD_ENV_HELM_ARGS -f - --include-crds | argocd-vault-plugin generate -"]
+            EOT
+          }
+        }
+      ]
+    }
+  }]
 }
 
 module "traefik" {
@@ -92,6 +210,40 @@ module "cert-manager" {
   dependency_ids = {
     argocd = module.argocd_bootstrap.id
   }
+}
+
+# TODO fix probelm with "vault-agent-injector-cfg" out-of-sync
+module "vault" {
+  source          = "git::https://github.com/camptocamp/devops-stack-module-vault.git?ref=ISDEVOPS-232"
+  target_revision = "ISDEVOPS-232"
+
+  cluster_name   = local.cluster_name
+  cluster_issuer = local.cluster_issuer
+  base_domain    = local.base_domain
+
+  dev_root_token = random_password.vault_dev_root_token.result
+
+  dependency_ids = {
+    traefik      = module.traefik.id
+    cert-manager = module.cert-manager.id
+  }
+}
+
+# Note: Vault provider configuration issue requires deployment in 2 steps. TODO check & look for fix.
+
+provider "vault" {
+  address         = "https://vault.apps.${local.cluster_name}.${local.base_domain}"
+  token           = random_password.vault_dev_root_token.result
+  skip_tls_verify = true
+}
+
+# TODO secure secrets for: thanos, keycloak, minio, KPS, argocd. This might require changes in modules other than AVP(/kustomize) usage.
+
+resource "vault_generic_secret" "devops_stack_secrets" {
+  path = "secret/devops-stack"
+  data_json = jsonencode({
+    loki-secret-key = random_password.loki_secretkey.result
+  })
 }
 
 module "keycloak" {
@@ -142,10 +294,9 @@ module "minio" {
 }
 
 module "loki-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack//kind?ref=v2.0.2"
+  source          = "git::https://github.com/camptocamp/devops-stack-module-loki-stack//kind?ref=ISDEVOPS-233"
+  target_revision = "ISDEVOPS-233"
 
-  cluster_name     = local.cluster_name
-  base_domain      = local.base_domain
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
 
   distributed_mode = true
@@ -154,7 +305,7 @@ module "loki-stack" {
     bucket_name       = local.minio_config.buckets.0.name
     endpoint          = module.minio.endpoint
     access_key        = local.minio_config.users.0.accessKey
-    secret_access_key = local.minio_config.users.0.secretKey
+    secret_access_key = "<path:secret/data/devops-stack#loki-secret-key>"
   }
 
   dependency_ids = {
@@ -223,7 +374,7 @@ module "kube-prometheus-stack" {
 }
 
 module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v1.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v2.0.0"
 
   base_domain              = local.base_domain
   cluster_name             = local.cluster_name

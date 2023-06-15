@@ -16,5 +16,13 @@ terraform {
       source  = "mrparkers/keycloak"
       version = "~> 4"
     }
+    vault = {
+      source  = "hashicorp/vault"
+      version = "~>3"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = "~> 3"
+    }
   }
 }
