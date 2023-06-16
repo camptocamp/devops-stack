@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.4.0](https://github.com/camptocamp/devops-stack/compare/v1.3.0...v1.4.0) (2023-06-16)
+
+
+### Features
+
+* **examples/eks:** set modules versions and remove grafana module ([cb70e51](https://github.com/camptocamp/devops-stack/commit/cb70e5127d3d2411ba569edb55383f161fc2d6fd))
+
+
+### Bug Fixes
+
+* **examples/eks:** modules versions for thanos and eks-cluster ([7caef79](https://github.com/camptocamp/devops-stack/commit/7caef7947b297ea960dae7aa16ee0fde906609bf))
+* upgrade traefik to deactivate service monitor ([b6fa4ff](https://github.com/camptocamp/devops-stack/commit/b6fa4ff4a98a9584b898ca0020d31118a514a389))
+
+
+### Documentation
+
+* add new modules and newer module versions ([#1005](https://github.com/camptocamp/devops-stack/issues/1005)) ([2404ac1](https://github.com/camptocamp/devops-stack/commit/2404ac1892ea88995ceb90a5d52eb0c94f4a3340))
+
 ## [1.3.0](https://github.com/camptocamp/devops-stack/compare/v1.2.0...v1.3.0) (2023-05-24)
 
 
