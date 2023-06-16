@@ -37,7 +37,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="ROOT" data-version="v1.3.0">
+<div class="nav-container" data-component="ROOT" data-version="v1.4.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -154,7 +154,13 @@
     <a class="nav-link" href="../../argocd/latest/README.html">Argo CD</a>
   </li>
   <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="#azure-workload-identity:ROOT:README.adoc">Azure Workload Identity</a>
+  </li>
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../../oidc-aws-cognito/latest/README.html">AWS Cognito OIDC</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="#backup:ROOT:README.adoc">Backup</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../../cert-manager/latest/README.html">cert-manager</a>
@@ -181,6 +187,9 @@
     <a class="nav-link" href="../../loki/latest/README.html">Loki</a>
   </li>
   <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="#longhorn:ROOT:README.adoc">Longhorn</a>
+  </li>
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../../metallb/latest/README.html">MetalLB</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -200,7 +209,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">DevOps Stack</span>
-    <span class="version">v1.3.0</span>
+    <span class="version">v1.4.0</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -246,34 +255,16 @@
         <li class="version">
           <a href="../../applicationset/v1.2.4/README.html">v1.2.4</a>
         </li>
-        <li class="version">
-          <a href="../../applicationset/v1.2.3/README.html">v1.2.3</a>
-        </li>
-        <li class="version">
-          <a href="../../applicationset/v1.2.2/README.html">v1.2.2</a>
-        </li>
-        <li class="version">
-          <a href="../../applicationset/v1.2.1/README.html">v1.2.1</a>
-        </li>
-        <li class="version">
-          <a href="../../applicationset/v1.2.0/README.html">v1.2.0</a>
-        </li>
-        <li class="version">
-          <a href="../../applicationset/v1.1.1/README.html">v1.1.1</a>
-        </li>
-        <li class="version">
-          <a href="../../applicationset/v1.1.0/README.html">v1.1.0</a>
-        </li>
-        <li class="version">
-          <a href="../../applicationset/v1.0.0/README.html">v1.0.0</a>
-        </li>
       </ul>
     </li>
     <li class="component">
       <a class="title" href="../../argocd/latest/README.html">Argo CD Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../argocd/latest/README.html">v1.1.2</a>
+          <a href="../../argocd/latest/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v1.1.2/README.html">v1.1.2</a>
         </li>
         <li class="version">
           <a href="../../argocd/v1.1.1/README.html">v1.1.1</a>
@@ -312,16 +303,13 @@
       <a class="title" href="../index.html">DevOps Stack</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../index.html">v1.3.0</a>
+          <a href="../index.html">v1.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.3.0/index.html">v1.3.0</a>
         </li>
         <li class="version">
           <a href="../../v1.2.0/index.html">v1.2.0</a>
-        </li>
-        <li class="version">
-          <a href="../../v1.1.0/index.html">v1.1.0</a>
-        </li>
-        <li class="version">
-          <a href="../../v1.0.3/index.html">v1.0.3</a>
         </li>
         <li class="version">
           <a href="../../v1.0.2/index.html">v1.0.2</a>
@@ -424,10 +412,19 @@
       </ul>
     </li>
     <li class="component">
-      <a class="title" href="../../kube-prometheus-stack/latest/README.html">Kube-prometheus-stack Module</a>
+      <a class="title" href="../../kube-prometheus-stack/latest/README.html">kube-prometheus-stack Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../kube-prometheus-stack/latest/README.html">v2.3.0</a>
+          <a href="../../kube-prometheus-stack/latest/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.3.0/README.html">v2.3.0</a>
         </li>
         <li class="version">
           <a href="../../kube-prometheus-stack/v2.2.3/README.html">v2.2.3</a>
@@ -496,12 +493,6 @@
           <a href="../../minio/latest/README.html">v1.1.2</a>
         </li>
         <li class="version">
-          <a href="../../minio/v1.1.1/README.html">v1.1.1</a>
-        </li>
-        <li class="version">
-          <a href="../../minio/v1.1.0/README.html">v1.1.0</a>
-        </li>
-        <li class="version">
           <a href="../../minio/v1.0.0/README.html">v1.0.0</a>
         </li>
       </ul>
@@ -557,18 +548,17 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v1.3.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v1.4.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="documentation.html">v1.3.0</a>
+    <a class="version is-current" href="documentation.html">v1.4.0</a>
+    <a class="version" href="../../v1.3.0/contributing/documentation.html">v1.3.0</a>
     <a class="version" href="../../v1.2.0/contributing/documentation.html">v1.2.0</a>
-    <a class="version" href="../../v1.1.0/contributing/documentation.html">v1.1.0</a>
-    <a class="version" href="../../v1.0.3/contributing/documentation.html">v1.0.3</a>
     <a class="version" href="../../v1.0.2/contributing/documentation.html">v1.0.2</a>
     <a class="version" href="../../v1.0.1/contributing/documentation.html">v1.0.1</a>
     <a class="version" href="../../v1.0.0/contributing/documentation.html">v1.0.0</a>
   </div>
 </div>
-  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/blob/v1.3.0/docs/modules/ROOT/pages/contributing/documentation.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/blob/v1.4.0/docs/modules/ROOT/pages/contributing/documentation.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
