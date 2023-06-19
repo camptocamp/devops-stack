@@ -45,8 +45,6 @@ provider "keycloak" {
 
 ###
 
-# TODO secure dev root key: make sure it isn't shown in plan.
-
 resource "random_password" "vault_dev_root_token" {
   length  = 32
   special = false
@@ -68,118 +66,14 @@ module "metallb" {
 }
 
 module "argocd_bootstrap" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v2.0.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=ISDEVOPS-233"
 
-  helm_values = [{
-    argo-cd = {
-      repoServer = {
-        volumes = [
-          {
-            configMap = {
-              name = "avp-helm-cm"
-            }
-            name = "avp-helm-volume"
-          },
-          {
-            name     = "custom-tools"
-            emptyDir = {}
-          }
-        ]
-        initContainers = [
-          {
-            name  = "download-copy-avp"
-            image = "registry.access.redhat.com/ubi8" # TODO change image.
-            env = [
-              {
-                name  = "AVP_VERSION"
-                value = "1.14.0"
-              }
-            ]
-            command = ["sh", "-c"]
-            args = [
-              "curl -L https://github.com/argoproj-labs/argocd-vault-plugin/releases/download/v$(AVP_VERSION)/argocd-vault-plugin_$(AVP_VERSION)_linux_amd64 -o argocd-vault-plugin && chmod +x argocd-vault-plugin && mv argocd-vault-plugin /custom-tools/"
-            ]
-            volumeMounts = [
-              {
-                mountPath = "/custom-tools"
-                name      = "custom-tools"
-              }
-            ]
-          }
-        ]
-        extraContainers = [
-          {
-            name    = "avp-helm-cmp"
-            command = ["/var/run/argocd/argocd-cmp-server"]
-            image   = "quay.io/argoproj/argocd:v2.6.6" # TODO version hard-coded for now. Use local after transfer to module.
-            securityContext = {
-              runAsNonRoot = true
-              runAsUser    = 999
-            }
-            env = [
-              {
-                name  = "VAULT_ADDR"
-                value = "http://vault.vault:8200" # TODO local variable ? 
-              },
-              {
-                name  = "VAULT_TOKEN"
-                value = random_password.vault_dev_root_token.result
-              },
-              {
-                name  = "AVP_TYPE"
-                value = "vault"
-              },
-              {
-                name  = "AVP_AUTH_TYPE"
-                value = "token"
-              }
-            ]
-            volumeMounts = [
-              {
-                mountPath = "/var/run/argocd"
-                name      = "var-files"
-              },
-              {
-                mountPath = "/home/argocd/cmp-server/plugins"
-                name      = "plugins"
-              },
-              {
-                mountPath = "/home/argocd/cmp-server/config/plugin.yaml"
-                subPath   = "plugin.yaml"
-                name      = "avp-helm-volume"
-              },
-              {
-                mountPath = "/usr/local/bin/argocd-vault-plugin"
-                subPath   = "argocd-vault-plugin"
-                name      = "custom-tools"
-              }
-            ]
-          }
-        ]
-      }
-      extraObjects = [
-        {
-          apiVersion = "v1"
-          kind       = "ConfigMap"
-          metadata = {
-            name = "avp-helm-cm"
-          }
-          data = {
-            "plugin.yaml" = <<-EOT
-              apiVersion: argoproj.io/v1alpha1
-              kind: ConfigManagementPlugin
-              metadata:
-                name: avp-helm
-              spec:
-                generate:
-                  command: ["/bin/sh", "-c"]
-                  args: ["echo \"$ARGOCD_ENV_HELM_VALUES\" | helm template . --name-template $ARGOCD_APP_NAME --namespace $ARGOCD_APP_NAMESPACE $ARGOCD_ENV_HELM_ARGS -f - --include-crds | argocd-vault-plugin generate -"]
-            EOT
-          }
-        }
-      ]
-    }
-  }]
+  avp_config = {
+    VAULT_ADDR    = "http://vault.vault:8200"
+    AVP_AUTH_TYPE = "token"
+    VAULT_TOKEN   = random_password.vault_dev_root_token.result
+    AVP_TYPE      = "vault"
+  }
 }
 
 module "traefik" {
@@ -212,7 +106,6 @@ module "cert-manager" {
   }
 }
 
-# TODO fix probelm with "vault-agent-injector-cfg" out-of-sync
 module "vault" {
   source          = "git::https://github.com/camptocamp/devops-stack-module-vault.git?ref=ISDEVOPS-232"
   target_revision = "ISDEVOPS-232"
@@ -237,14 +130,14 @@ provider "vault" {
   skip_tls_verify = true
 }
 
-# TODO secure secrets for: thanos, keycloak, minio, KPS, argocd. This might require changes in modules other than AVP(/kustomize) usage.
-
 resource "vault_generic_secret" "devops_stack_secrets" {
   path = "secret/devops-stack"
   data_json = jsonencode({
     loki-secret-key = random_password.loki_secretkey.result
   })
 }
+
+# TODO secure secrets for: thanos, keycloak, minio, KPS, argocd. This might require changes in modules other than AVP(/kustomize) usage.
 
 module "keycloak" {
   source = "git::https://github.com/camptocamp/devops-stack-module-keycloak?ref=v1.1.0"
