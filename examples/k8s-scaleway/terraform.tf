@@ -5,7 +5,11 @@ terraform {
     }
 
     argocd = {
-      source = "oboukili/argocd"
+      source  = "oboukili/argocd"
+      version = "4.0.0"
+    }
+    keycloak = {
+      source = "mrparkers/keycloak"
     }
   }
 }

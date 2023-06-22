@@ -1,15 +1,15 @@
 provider "helm" {
   kubernetes {
-    host                   = module.cluster.kube_admin_config.host
-    token                  = module.cluster.kube_admin_config.token
-    cluster_ca_certificate = module.cluster.kube_admin_config.cluster_ca_certificate
+    host                   = module.scaleway.kubeconfig.host
+    token                  = module.scaleway.kubeconfig.token
+    cluster_ca_certificate = module.scaleway.kubeconfig.cluster_ca_certificate
   }
 }
 
 provider "kubernetes" {
-    host                   = module.cluster.kube_admin_config.host
-    token                  = module.cluster.kube_admin_config.token
-    cluster_ca_certificate = module.cluster.kube_admin_config.cluster_ca_certificate
+  host                   = module.scaleway.kubeconfig.host
+  token                  = module.scaleway.kubeconfig.token
+  cluster_ca_certificate = module.scaleway.kubeconfig.cluster_ca_certificate
 }
 
 provider "argocd" {
@@ -21,9 +21,17 @@ provider "argocd" {
   port_forward_with_namespace = module.argocd_bootstrap.argocd_namespace
 
   kubernetes {
-    host                   = module.cluster.kube_admin_config.host
-    token                  = module.cluster.kube_admin_config.token
-    cluster_ca_certificate = module.cluster.kube_admin_config.cluster_ca_certificate
+    host                   = module.scaleway.kubeconfig.host
+    token                  = module.scaleway.kubeconfig.token
+    cluster_ca_certificate = module.scaleway.kubeconfig.cluster_ca_certificate
   }
 }
 
+provider "keycloak" {
+  client_id                = "admin-cli"
+  username                 = module.authentication_with_keycloak.admin_credentials.username
+  password                 = module.authentication_with_keycloak.admin_credentials.password
+  url                      = "https://keycloak.apps.${var.cluster_name}.${format("%s.nip.io", replace(module.scaleway.lb_ip_address, ".", "-"))}"
+  initial_login            = false # Do no try to setup the provider before Keycloak is provisioned.
+  tls_insecure_skip_verify = true  # Since we are in a testing environment, do not verify the authenticity of SSL certificates.
+}

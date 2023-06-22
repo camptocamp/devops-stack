@@ -1,7 +1,6 @@
-output "argocd_server_admin_password" {
-  description = "Argocd admin password"
-  sensitive   = true
-  value       = module.argocd_bootstrap.argocd_server_admin_password
+output "kubeconfig_file" {
+  sensitive = true
+  value     = module.scaleway.kubeconfig_file
 }
 
 #output "lb_ip_address" {
