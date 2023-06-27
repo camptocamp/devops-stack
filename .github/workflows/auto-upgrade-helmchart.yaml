@@ -1,0 +1,55 @@
+name: Upgrade Helm Chart
+
+on:
+  schedule:
+    - cron: "8 0 * * 1"   
+
+jobs:
+  upgrade-helm-chart:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: v3.6.3  # Update to the desired Helm version
+
+      - name: Install Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9  # Update to the desired Python version
+
+      - name: Install pyaml
+        run: |
+          pip install pyaml==21.10.1
+
+      - name: Install updatecli
+        run: |
+          curl -sL -o /tmp/updatecli_amd64.deb https://github.com/updatecli/updatecli/releases/download/v0.24.0/updatecli_amd64.deb
+          sudo apt install /tmp/updatecli_amd64.deb
+
+      - name: Run chart bumper script
+        env:
+          CHART_PATH: ${{ secrets.CHART_PATH }}
+          BUMP_MAJOR: ${{ secrets.BUMP_MAJOR }}
+        run: |
+          python3 chart_bumper.py
+          cd ${{ secrets.CHART_PATH }}
+          helm dependency update
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          commit-message: "feat: Upgrade Helm Chart"
+          title: "chore: Upgrade Jaeger Helm Chart"
+          body: |
+            Automatic upgrade of Helm chart version using updatecli
+          branch: upgrade-helm-chart-jaeger
+          base: main
+          #token: ${{ secrets.TGITHUB_TOKEN }}
+          reviewers: |
+            # Add your teammates as reviewers
