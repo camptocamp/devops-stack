@@ -3,7 +3,7 @@ name: Upgrade Helm Chart
 on:
   schedule:
     - cron: "8 0 * * 1"   
-
+  workflow_call:
 jobs:
   upgrade-helm-chart:
     runs-on: ubuntu-latest
