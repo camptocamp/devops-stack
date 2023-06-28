@@ -37,7 +37,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="thanos" data-version="v1.0.1">
+<div class="nav-container" data-component="thanos" data-version="v1.1.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -78,7 +78,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">Thanos Module</span>
-    <span class="version">v1.0.1</span>
+    <span class="version">v1.1.0</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -328,7 +328,10 @@
       <a class="title" href="../../../loki/latest/README.html">Loki Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../../loki/latest/README.html">v2.3.0</a>
+          <a href="../../../loki/latest/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../loki/v2.3.0/README.html">v2.3.0</a>
         </li>
         <li class="version">
           <a href="../../../loki/v2.2.0/README.html">v2.2.0</a>
@@ -372,11 +375,22 @@
         </li>
       </ul>
     </li>
+    <li class="component">
+      <a class="title" href="../../../template/latest/README.html">Module Template</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../template/latest/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
     <li class="component is-current">
       <a class="title" href="../README.html">Thanos Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../README.html">v1.0.1</a>
+          <a href="../README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.0.1/README.html">v1.0.1</a>
         </li>
         <li class="version">
           <a href="../../v1.0.0/README.html">v1.0.0</a>
@@ -422,13 +436,14 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v1.0.1</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v1.1.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="README.html">v1.0.1</a>
+    <a class="version is-current" href="README.html">v1.1.0</a>
+    <a class="version" href="../../v1.0.1/eks/README.html">v1.0.1</a>
     <a class="version" href="../../v1.0.0/eks/README.html">v1.0.0</a>
   </div>
 </div>
-  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-thanos/blob/v1.0.1/docs/modules/ROOT/pages/eks/README.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-thanos/blob/v1.1.0/docs/modules/ROOT/pages/eks/README.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -454,27 +469,67 @@
 <pre class="highlightjs highlight"><code class="language-terraform hljs" data-lang="terraform">module "thanos" {
   source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//eks?ref=&lt;RELEASE&gt;"
 
-  cluster_name            = var.cluster_name
-  argocd_namespace        = module.cluster.argocd_namespace
-  base_domain             = module.cluster.base_domain
-  cluster_issuer          = var.cluster_issuer
+  cluster_name     = module.eks.cluster_name
+  base_domain      = module.eks.base_domain
+  cluster_issuer   = local.cluster_issuer
+  argocd_namespace = module.argocd_bootstrap.argocd_namespace
 
   metrics_storage = {
     bucket_id    = aws_s3_bucket.thanos_metrics_storage.id
     region       = aws_s3_bucket.thanos_metrics_storage.region
     iam_role_arn = module.iam_assumable_role_thanos.iam_role_arn
   }
-
   thanos = {
     oidc = module.oidc.oidc
   }
 
-  depends_on = [module.argocd_bootstrap]
+  dependency_ids = {
+    argocd       = module.argocd_bootstrap.id
+    traefik      = module.traefik.id
+    cert-manager = module.cert-manager.id
+    oidc         = module.oidc.id
+  }
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>As you can see, a minimum requirement for this module is an S3 bucket with an IAM policy attached and an OIDC provider (more information below).</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+You are in charge of creating a S3 bucket for Thanos to store the archived metrics. We&#8217;ve decided to keep the creation of this bucket outside of this module, mainly because the persistence of the data should not be related to the instantiation of the module itself.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Check the <a href="../../../latest/tutorials/deploy_eks.html" class="xref page">EKS deployment example</a> to see how to create the S3 bucket and to better understand the values passed on the example above.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Do not forget that the bucket configuration also needs to be passed to the module <code>kube-prometheus-stack</code>.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Although the declaration above allows you to have a barebones Thanos deployed, it is highly recommended that you customize a few settings for a production-ready deployment. You need to at least configure the resource requirements for a few of the Thanos' components and the size of the persistent volume used by the compactor. You can also configure the compactor retention times, as in the example below.</p>
@@ -484,10 +539,10 @@
 <pre class="highlightjs highlight"><code class="language-terraform hljs" data-lang="terraform">module "thanos" {
   source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//eks?ref=&lt;RELEASE&gt;"
 
-  cluster_name            = var.cluster_name
-  argocd_namespace        = module.cluster.argocd_namespace
-  base_domain             = module.cluster.base_domain
-  cluster_issuer          = var.cluster_issuer
+  cluster_name     = module.eks.cluster_name
+  base_domain      = module.eks.base_domain
+  cluster_issuer   = local.cluster_issuer
+  argocd_namespace = module.argocd_bootstrap.argocd_namespace
 
   metrics_storage = {
     bucket_id    = aws_s3_bucket.thanos_metrics_storage.id
@@ -539,7 +594,12 @@
     }
   }
 
-  depends_on = [module.argocd_bootstrap]
+  dependency_ids = {
+    argocd       = module.argocd_bootstrap.id
+    traefik      = module.traefik.id
+    cert-manager = module.cert-manager.id
+    oidc         = module.oidc.id
+  }
 }</code></pre>
 </div>
 </div>
@@ -554,10 +614,10 @@
 <pre class="highlightjs highlight"><code class="language-terraform hljs" data-lang="terraform">module "thanos" {
   source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//eks?ref=&lt;RELEASE&gt;"
 
-  cluster_name            = var.cluster_name
-  argocd_namespace        = module.cluster.argocd_namespace
-  base_domain             = module.cluster.base_domain
-  cluster_issuer          = var.cluster_issuer
+  cluster_name     = module.eks.cluster_name
+  base_domain      = module.eks.base_domain
+  cluster_issuer   = local.cluster_issuer
+  argocd_namespace = module.argocd_bootstrap.argocd_namespace
 
   metrics_storage = {
     bucket_id    = aws_s3_bucket.thanos_metrics_storage.id
@@ -592,98 +652,13 @@
     }
   }]
 
-  depends_on = [module.argocd_bootstrap]
-}</code></pre>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_s3_bucket"><a class="anchor" href="#_s3_bucket"></a>S3 Bucket</h3>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-You are in charge of creating an S3 bucket for Thanos to store the archived metrics.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>We&#8217;ve decided to keep the creation of this bucket outside of this module, mainly because the persistence of the data should not be related to the instantiation of the module itself.</p>
-</div>
-<div class="paragraph">
-<p>You can create an S3 bucket and an IAM policy using the code below:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-terraform hljs" data-lang="terraform">resource "aws_s3_bucket" "thanos_metrics_storage" {
-  bucket = format("thanos-metrics-storage-%s", module.eks.cluster_name)
-
-  force_destroy = true
-
-  tags = {
-    Name    = "Thanos metrics storage"
-    Cluster = module.eks.cluster_name
-  }
-}
-
-module "iam_assumable_role_thanos" {
-  source                     = "terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc"
-  version                    = "4.0.0"
-  create_role                = true
-  number_of_role_policy_arns = 1
-  role_name                  = format("thanos-s3-role-%s", module.eks.cluster_name)
-  provider_url               = replace(module.eks.cluster_oidc_issuer_url, "https://", "")
-  role_policy_arns           = [aws_iam_policy.thanos_s3_policy.arn]
-
-  # List of ServiceAccounts that have permission to attach to this IAM role
-  oidc_fully_qualified_subjects = [
-    "system:serviceaccount:thanos:thanos-bucketweb",
-    "system:serviceaccount:thanos:thanos-storegateway",
-    "system:serviceaccount:thanos:thanos-compactor",
-    "system:serviceaccount:thanos:thanos-sidecar",
-    "system:serviceaccount:kube-prometheus-stack:kube-prometheus-stack-prometheus"
-  ]
-}
-
-resource "aws_iam_policy" "thanos_s3_policy" {
-  name_prefix = "thanos-s3-"
-  description = "Thanos IAM policy for cluster ${module.eks.cluster_name}"
-  policy      = data.aws_iam_policy_document.thanos_s3_policy.json
-}
-
-data "aws_iam_policy_document" "thanos_s3_policy" {
-  statement {
-    actions = [
-      "s3:ListBucket",
-      "s3:PutObject",
-      "s3:GetObject",
-      "s3:DeleteObject",
-    ]
-
-    resources = [
-      aws_s3_bucket.thanos_metrics_storage.arn,
-      format("%s/*", aws_s3_bucket.thanos_metrics_storage.arn),
-    ]
-
-    effect = "Allow"
+  dependency_ids = {
+    argocd       = module.argocd_bootstrap.id
+    traefik      = module.traefik.id
+    cert-manager = module.cert-manager.id
+    oidc         = module.oidc.id
   }
 }</code></pre>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Do not forget that the bucket configuration also needs to be passed to the module <code>kube-prometheus-stack</code>.
-</td>
-</tr>
-</table>
 </div>
 </div>
 <div class="sect2">
@@ -710,7 +685,6 @@ This module was developed with OIDC in mind.
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-terraform hljs" data-lang="terraform">module "thanos" {
   ...
-
   thanos = {
     oidc = {
       issuer_url    = "&lt;URL&gt;"
@@ -718,7 +692,6 @@ This module was developed with OIDC in mind.
       client_secret = "&lt;SECRET&gt;"
     }
   }
-
   ...
 }</code></pre>
 </div>
@@ -736,7 +709,7 @@ This module was developed with OIDC in mind.
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-At the very least you should configure the size for the <em>PersistentVolume</em> used by the compactor.
+At the very least you should configure the size for the Persistent Volume used by the compactor.
 </td>
 </tr>
 </table>
@@ -753,9 +726,21 @@ At the very least you should configure the size for the <em>PersistentVolume</em
 <div class="sect2">
 <h3 id="_dependencies"><a class="anchor" href="#_dependencies"></a>Dependencies</h3>
 <div class="sect3">
-<h4 id="_module_argocd_bootstrap"><a class="anchor" href="#_module_argocd_bootstrap"></a><code>module.argocd_bootstrap</code></h4>
+<h4 id="_module_argocd_bootstrap_id"><a class="anchor" href="#_module_argocd_bootstrap_id"></a><code>module.argocd_bootstrap.id</code></h4>
 <div class="paragraph">
-<p>This module must be one of the first ones to be deployed and consequently it needs to be deployed after the module <code>argocd_bootstrap</code>.</p>
+<p>Obviously, the module depends on an already running Argo CD in the cluster in order for the application to be created.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_module_traefik_id_and_module_cert_manager_id"><a class="anchor" href="#_module_traefik_id_and_module_cert_manager_id"></a><code>module.traefik.id</code> and <code>module.cert-manager.id</code></h4>
+<div class="paragraph">
+<p>This module has multiple ingresses and consequently it must be deployed after the module <code>traefik</code> and <code>cert-manager</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_module_oidc_id"><a class="anchor" href="#_module_oidc_id"></a><code>module.oidc.id</code></h4>
+<div class="paragraph">
+<p>You need to add the OIDC module as a dependency, since OAuth2-Proxy is deployed to restrict access to the web interfaces of the components.</p>
 </div>
 </div>
 </div>
@@ -864,7 +849,7 @@ At the very least you should configure the size for the <em>PersistentVolume</em
 <p>Type: <code>string</code></p>
 </div>
 <div class="paragraph">
-<p>Default: <code>"v1.0.0"</code></p>
+<p>Default: <code>"v1.0.1"</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -1156,7 +1141,7 @@ At the very least you should configure the size for the <em>PersistentVolume</em
 <p><code>string</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"v1.0.0"</code></p>
+<p><code>"v1.0.1"</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
