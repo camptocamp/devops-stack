@@ -1,17 +1,18 @@
 locals {
-  env          = "dev"
+  env          = ""
   cluster_name = "dev"
   cluster_issuer = "ca-issuer"
   base_domain  = (local.env == "prod" ? join(".", ["qalita", "io"]) : join(".", [local.env, "qalita", "io"]))
   vlan_id      = 10
   enable_service_monitor = false
-  kubernetes_version     = "v1.2"
 
   context                           = yamldecode(module.cluster.kubeconfig)
   kubernetes_host                   = local.context.clusters.0.cluster.server
   kubernetes_cluster_ca_certificate = base64decode(local.context.clusters.0.cluster.certificate-authority-data)
   kubernetes_client_certificate     = base64decode(local.context.users.0.user.client-certificate-data)
   kubernetes_client_key             = base64decode(local.context.users.0.user.client-key-data)
+
+  domaine_zone_name = module.cluster.domaine_zone_name
 }
 
 module "cluster" {
@@ -25,6 +26,7 @@ module "cluster" {
   vlan_subnet_network = "192.168.168.0/24"
 
   cluster_name   = local.cluster_name
+  base_domain   = local.base_domain
   cluster_region = "GRA9"
 
   flavor_name   = "c2-7"
@@ -55,6 +57,15 @@ module "traefik" {
   dependency_ids = {
     argocd = module.argocd_bootstrap.id
   }
+}
+
+# Add a record to a sub-domain
+resource "ovh_domain_zone_record" "test" {
+  zone      = local.domaine_zone_name
+  subdomain = "*"
+  fieldtype = "A"
+  ttl       = 3600
+  target    = "0.0.0.0"
 }
 
 module "cert-manager" {

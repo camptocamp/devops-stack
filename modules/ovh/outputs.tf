@@ -8,6 +8,10 @@ output "kube_admin_config" {
   }
 }
 
+output "domaine_zone_name" {
+  value = ovh_domain_zone.zone.name
+}
+
 output "kubeconfig_file" {
   value     = ovh_cloud_project_kube.k8s_cluster.kubeconfig
   sensitive = true

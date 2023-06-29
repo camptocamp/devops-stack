@@ -3,6 +3,11 @@ variable "cluster_name" {
   type        = string
 }
 
+variable "base_domain" {
+  description = "The base domain of the Kubernetes cluster to create."
+  type        = string
+}
+
 variable "cluster_region" {
   description = "The region from which we want to create the cluster"
   type        = string

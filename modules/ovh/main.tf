@@ -52,3 +52,38 @@ resource "ovh_cloud_project_kube_nodepool" "k8s_node_pool" {
 
   depends_on = [ovh_cloud_project_kube.k8s_cluster]
 }
+
+# 5. Création d'un panier
+data "ovh_order_cart" "mycart" {
+  ovh_subsidiary = "fr"
+}
+
+# 5.1. Ajout de la zone DNS
+data "ovh_order_cart_product_plan" "zone" {
+  cart_id        = data.ovh_order_cart.mycart.id
+  price_capacity = "renew"
+  product        = "dns"
+  plan_code      = "zone"
+}
+
+# 5.2. Ajout du domaine
+resource "ovh_domain_zone" "zone" {
+  ovh_subsidiary = data.ovh_order_cart.mycart.ovh_subsidiary
+  payment_mean   = "fidelity"
+
+  plan {
+    duration     = data.ovh_order_cart_product_plan.zone.selected_price.0.duration
+    plan_code    = data.ovh_order_cart_product_plan.zone.plan_code
+    pricing_mode = data.ovh_order_cart_product_plan.zone.selected_price.0.pricing_mode
+
+    configuration {
+      label = "zone"
+      value = format("%s.%s", local.cluster_name, local.base_domain)
+    }
+
+    configuration {
+      label = "template"
+      value = "minimized"
+    }
+  }
+}
