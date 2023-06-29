@@ -1,8 +1,8 @@
 locals {
   env          = "dev"
-  cluster_name = "dev"
-  cluster_issuer = "ca-issuer"
-  base_domain  = "qalita.io"
+  cluster_name = local.env
+  cluster_issuer = "letsencrypt-staging"
+  base_domain  = format("%s.%s", local.env,"qalita.io")
   vlan_id      = 10
   enable_service_monitor = false
 
@@ -13,6 +13,67 @@ locals {
   kubernetes_client_key             = base64decode(local.context.users.0.user.client-key-data)
 
   domaine_zone_name = module.cluster.domaine_zone_name
+
+  minio_config = {
+    policies = [
+      {
+        name = "loki-policy"
+        statements = [
+          {
+            resources = ["arn:aws:s3:::loki-bucket"]
+            actions   = ["s3:CreateBucket", "s3:DeleteBucket", "s3:GetBucketLocation", "s3:ListBucket", "s3:ListBucketMultipartUploads"]
+          },
+          {
+            resources = ["arn:aws:s3:::loki-bucket/*"]
+            actions   = ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"]
+          }
+        ]
+      },
+      {
+        name = "thanos-policy"
+        statements = [
+          {
+            resources = ["arn:aws:s3:::thanos-bucket"]
+            actions   = ["s3:CreateBucket", "s3:DeleteBucket", "s3:GetBucketLocation", "s3:ListBucket", "s3:ListBucketMultipartUploads"]
+          },
+          {
+            resources = ["arn:aws:s3:::thanos-bucket/*"]
+            actions   = ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"]
+          }
+        ]
+      }
+    ],
+    users = [
+      {
+        accessKey = "loki-user"
+        secretKey = random_password.loki_secretkey.result
+        policy    = "loki-policy"
+      },
+      {
+        accessKey = "thanos-user"
+        secretKey = random_password.thanos_secretkey.result
+        policy    = "thanos-policy"
+      }
+    ],
+    buckets = [
+      {
+        name = "loki-bucket"
+      },
+      {
+        name = "thanos-bucket"
+      }
+    ]
+  }
+
+}
+
+resource "random_password" "loki_secretkey" {
+  length  = 32
+  special = false
+}
+resource "random_password" "thanos_secretkey" {
+  length  = 32
+  special = false
 }
 
 module "cluster" {
@@ -46,9 +107,7 @@ module "traefik" {
 
   cluster_name = local.cluster_name
 
-  # TODO fix: the base domain is defined later. Proposal: remove redirection from traefik module and add it in dependent modules.
-  # For now random value is passed to base_domain. Redirections will not work before fix.
-  base_domain = "placeholder.com"
+  base_domain = local.base_domain
 
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
 
@@ -64,6 +123,7 @@ data "kubernetes_service" "traefik" {
     name      = "traefik"
     namespace = "traefik"
   }
+  depends_on = [ module.traefik.id ]
 }
 
 # Add a record to a sub-domain
@@ -77,11 +137,30 @@ resource "ovh_domain_zone_record" "wildcard_record" {
 }
 
 module "cert-manager" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//self-signed?ref=v3.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager?ref=v3.1.0"
 
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
 
   enable_service_monitor = local.enable_service_monitor
+
+  helm_values = [{
+    cert-manager = {
+      clusterIssuers = {
+        letsencrypt = {
+          enabled = true
+        }
+        acme = {
+          solvers = [
+            {
+              http01 = {
+                ingress = {}
+              }
+            }
+          ]
+        }
+      }
+    }
+  }]
 
   dependency_ids = {
     argocd = module.argocd_bootstrap.id
@@ -91,7 +170,7 @@ module "cert-manager" {
 module "keycloak" {
   source = "git::https://github.com/camptocamp/devops-stack-module-keycloak?ref=v1.1.0"
 
-  cluster_name     = local.cluster_name
+  cluster_name     = ""
   base_domain      = local.base_domain
   cluster_issuer   = local.cluster_issuer
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
@@ -105,7 +184,7 @@ module "keycloak" {
 module "oidc" {
   source = "git::https://github.com/camptocamp/devops-stack-module-keycloak//oidc_bootstrap?ref=v1.1.0"
 
-  cluster_name   = local.cluster_name
+  cluster_name   = ""
   base_domain    = local.base_domain
   cluster_issuer = local.cluster_issuer
 
@@ -117,7 +196,7 @@ module "oidc" {
 module "minio" {
   source = "git::https://github.com/camptocamp/devops-stack-module-minio?ref=v1.1.0"
 
-  cluster_name     = local.cluster_name
+  cluster_name     = ""
   base_domain      = local.base_domain
   cluster_issuer   = local.cluster_issuer
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
@@ -138,7 +217,7 @@ module "minio" {
 module "loki-stack" {
   source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack//kind?ref=v2.0.2"
 
-  cluster_name     = local.cluster_name
+  cluster_name     = ""
   base_domain      = local.base_domain
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
 
@@ -159,7 +238,7 @@ module "loki-stack" {
 module "thanos" {
   source = "git::https://github.com/camptocamp/devops-stack-module-thanos//kind?ref=v1.0.0"
 
-  cluster_name     = local.cluster_name
+  cluster_name     = ""
   base_domain      = local.base_domain
   cluster_issuer   = local.cluster_issuer
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
@@ -186,7 +265,7 @@ module "thanos" {
 module "kube-prometheus-stack" {
   source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack//kind?ref=v2.3.0"
 
-  cluster_name     = local.cluster_name
+  cluster_name     = ""
   base_domain      = local.base_domain
   cluster_issuer   = local.cluster_issuer
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
@@ -220,7 +299,7 @@ module "argocd" {
   source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v1.1.0"
 
   base_domain              = local.base_domain
-  cluster_name             = local.cluster_name
+  cluster_name             = ""
   cluster_issuer           = local.cluster_issuer
   server_secretkey         = module.argocd_bootstrap.argocd_server_secretkey
   accounts_pipeline_tokens = module.argocd_bootstrap.argocd_accounts_pipeline_tokens
@@ -255,12 +334,6 @@ module "metrics_server" {
   source_repo_path       = "charts/metrics-server"
   source_target_revision = "metrics-server-helm-chart-3.8.3"
   destination_namespace  = "kube-system"
-
-  helm_values = [{
-    args = [
-      "--kubelet-insecure-tls" # Ignore self-signed certificates of the KinD cluster
-    ]
-  }]
 
   dependency_ids = {
     argocd = module.argocd.id
