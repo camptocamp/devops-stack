@@ -64,9 +64,6 @@ data "kubernetes_service" "traefik" {
     name      = "traefik"
     namespace = "traefik"
   }
-  dependency_ids = {
-    traefik      = module.traefik.id
-  }
 }
 
 # Add a record to a sub-domain
@@ -76,6 +73,9 @@ resource "ovh_domain_zone_record" "test" {
   fieldtype = "A"
   ttl       = 3600
   target    = data.kubernetes_service.traefik.status.load_balancer.ingress.0.ip
+  dependency_ids = {
+    traefik      = module.traefik.id
+  }
 }
 
 module "cert-manager" {
