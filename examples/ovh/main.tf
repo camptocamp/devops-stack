@@ -15,9 +15,6 @@ locals {
 }
 
 module "cluster" {
-  providers = {
-    ovh = ovh
-  }
 
   source = "git::https://github.com/qalita-io/devops-stack.git//modules/ovh?ref=ovh"
 

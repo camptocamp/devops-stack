@@ -2,6 +2,7 @@ provider "helm" {
   kubernetes {
     host                   = module.cluster.kube_admin_config.host
     token                  = module.cluster.kube_admin_config.token
+    client_certificate     = module.cluster.kube_admin_config.client_certificate
     cluster_ca_certificate = module.cluster.kube_admin_config.cluster_ca_certificate
   }
 }
@@ -9,6 +10,7 @@ provider "helm" {
 provider "kubernetes" {
     host                   = module.cluster.kube_admin_config.host
     token                  = module.cluster.kube_admin_config.token
+    client_certificate     = module.cluster.kube_admin_config.client_certificate
     cluster_ca_certificate = module.cluster.kube_admin_config.cluster_ca_certificate
 }
 
@@ -23,7 +25,18 @@ provider "argocd" {
   kubernetes {
     host                   = module.cluster.kube_admin_config.host
     token                  = module.cluster.kube_admin_config.token
+    client_certificate     = module.cluster.kube_admin_config.client_certificate
     cluster_ca_certificate = module.cluster.kube_admin_config.cluster_ca_certificate
   }
 }
 
+provider "keycloak" {
+  client_id                = "admin-cli"
+  username                 = module.keycloak.admin_credentials.username
+  password                 = module.keycloak.admin_credentials.password
+  url                      = "https://keycloak.apps.${local.cluster_name}.${local.base_domain}"
+  tls_insecure_skip_verify = true
+  initial_login            = false
+}
+
+provider "ovh" {}
