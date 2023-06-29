@@ -72,10 +72,8 @@ resource "ovh_domain_zone_record" "test" {
   subdomain = "*"
   fieldtype = "A"
   ttl       = 3600
-  target    = data.kubernetes_service.traefik.status.load_balancer.ingress.0.ip
-  dependency_ids = {
-    traefik      = module.traefik.id
-  }
+  target    = data.kubernetes_service.traefik.status.0.load_balancer.0.ingress.0.ip
+  depends_on = [ module.traefik.id ]
 }
 
 module "cert-manager" {
