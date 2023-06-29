@@ -78,7 +78,7 @@ resource "ovh_domain_zone" "zone" {
 
     configuration {
       label = "zone"
-      value = format("%s.%s", local.cluster_name, local.base_domain)
+      value = format("%s.%s", var.cluster_name, var.base_domain)
     }
 
     configuration {
