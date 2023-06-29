@@ -67,7 +67,7 @@ data "kubernetes_service" "traefik" {
 }
 
 # Add a record to a sub-domain
-resource "ovh_domain_zone_record" "test" {
+resource "ovh_domain_zone_record" "wildcard_record" {
   zone      = local.domaine_zone_name
   subdomain = "*"
   fieldtype = "A"
