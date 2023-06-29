@@ -3,4 +3,3 @@
 The `OVH` Terraform module provides a way to install and configure:
 
 * An Kubernetes cluster
-* The xref:ROOT:references/terraform_modules/argocd-helm.adoc[ArgoCD Helm] module

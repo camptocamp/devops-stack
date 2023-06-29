@@ -1,21 +1,37 @@
 locals {
-  cluster_name   = "scaleway-test"
-  cluster_region = "fr-par"
-  cluster_zone   = "fr-par-1"
-  tags           = ["test", "${local.cluster_name}"]
+  env          = "dev"
+  cluster_name = "dev"
+  base_domain  = (local.env == "prod" ? join(".", ["qalita", "io"]) : join(".", [local.env, "qalita", "io"]))
+  vlan_id      = 10
+
+  context                           = yamldecode(module.cluster.kubeconfig)
+  kubernetes_host                   = local.context.clusters.0.cluster.server
+  kubernetes_cluster_ca_certificate = base64decode(local.context.clusters.0.cluster.certificate-authority-data)
+  kubernetes_client_certificate     = base64decode(local.context.users.0.user.client-certificate-data)
+  kubernetes_client_key             = base64decode(local.context.users.0.user.client-key-data)
 }
 
 module "cluster" {
-  source = "git::https://github.com/camptocamp/devops-stack.git//modules/ovh?ref=ovh"
+  providers = {
+    ovh = ovh
+  }
 
-  kubernetes_version = "1.24.3"
+  source = "git::https://github.com/qalita-io/devops-stack.git//modules/ovh?ref=ovh"
 
-  cluster_type = "kapsule"
-  cluster_name = local.cluster_name
-  cluster_tags = local.tags
-  region       = local.cluster_region
-  zone         = local.cluster_zone
-  lb_type      = "LB-S"
+  vlan_id             = local.vlan_id
+  vlan_name           = format("%s-net", local.cluster_name)
+  vlan_subnet_start   = "192.168.168.100"
+  vlan_subnet_end     = "192.168.168.200"
+  vlan_subnet_network = "192.168.168.0/24"
+
+  cluster_name   = local.cluster_name
+  cluster_region = "GRA9"
+
+  flavor_name   = "c2-7"
+  desired_nodes = 3
+  max_nodes     = 3
+  min_nodes     = 3
+
 
 }
 

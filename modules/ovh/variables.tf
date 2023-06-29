@@ -1,27 +1,3 @@
-variable "base_domain" {
-  description = "The base domain used for Ingresses."
-  type        = string
-  default     = null
-}
-
-variable "other_domains" {
-  description = "Other domains used for Ingresses requiring a DNS-01 challenge for Let's Encrypt validation with cert-manager (e.g. wildcard certificates)."
-  type        = list(string)
-  default     = []
-}
-
-variable "cert_manager_dns01" {
-  description = "Ingress block for the htt01 chalenge of cert-manager"
-  type        = any
-  default     = {}
-}
-
-variable "kubernetes_version" {
-  description = "Specify which Kubernetes release to use."
-  type        = string
-  default     = "1.25.4-1"
-}
-
 variable "cluster_name" {
   description = "The name of the Kubernetes cluster to create."
   type        = string
@@ -29,11 +5,6 @@ variable "cluster_name" {
 
 variable "cluster_region" {
   description = "The region from which we want to create the cluster"
-  type        = string
-}
-
-variable "cluster_region_name" {
-  description = "The region name from which we want to create S3 buckets"
   type        = string
 }
 
@@ -57,14 +28,27 @@ variable "min_nodes" {
   type        = number
 }
 
-variable "keycloak_users" {
-  description = "List of keycloak users"
-  type        = map(map(string))
-  default = {
-    jdoe = {
-      name       = "Doe"
-      first_name = "John"
-      email      = "jdoe@example.com"
-    }
-  }
+variable "vlan_id" {
+  description = "The virtual network ID"
+  type        = number
+}
+
+variable "vlan_name" {
+  description = "The Name of the virtual network"
+  type        = string
+}
+
+variable "vlan_subnet_start" {
+  description = "IP address to begin with for this subnet ex : 192.168.168.100"
+  type        = string
+}
+
+variable "vlan_subnet_end" {
+  description = "IP address to end with for this subnet ex : 192.168.168.200"
+  type        = string
+}
+
+variable "vlan_subnet_network" {
+  description = "IP address scope for this network 192.168.168.0/24"
+  type        = string
 }

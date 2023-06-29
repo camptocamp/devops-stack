@@ -1,8 +1,16 @@
 terraform {
   required_providers {
+
+    helm = {
+      source  = "hashicorp/helm"
+    }
+
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+    }
+
     ovh = {
-      source = "ovh/ovh"
-      version = "~> 0.25.0"
+      source  = "ovh/ovh"
     }
 
     argocd = {
@@ -10,3 +18,4 @@ terraform {
     }
   }
 }
+
