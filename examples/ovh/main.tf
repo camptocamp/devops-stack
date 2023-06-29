@@ -1,8 +1,11 @@
 locals {
   env          = "dev"
   cluster_name = "dev"
+  cluster_issuer = "ca-issuer"
   base_domain  = (local.env == "prod" ? join(".", ["qalita", "io"]) : join(".", [local.env, "qalita", "io"]))
   vlan_id      = 10
+  enable_service_monitor = false
+  kubernetes_version     = "v1.2"
 
   context                           = yamldecode(module.cluster.kubeconfig)
   kubernetes_host                   = local.context.clusters.0.cluster.server
