@@ -2,7 +2,7 @@ locals {
   env          = "dev"
   cluster_name = "dev"
   cluster_issuer = "ca-issuer"
-  base_domain  = (local.env == "prod" ? join(".", ["qalita", "io"]) : join(".", [local.env, "qalita", "io"]))
+  base_domain  = "qalita.io"
   vlan_id      = 10
   enable_service_monitor = false
 
@@ -59,13 +59,23 @@ module "traefik" {
   }
 }
 
+data "kubernetes_service" "traefik" {
+  metadata {
+    name      = "traefik"
+    namespace = "traefik"
+  }
+  dependency_ids = {
+    traefik      = module.traefik.id
+  }
+}
+
 # Add a record to a sub-domain
 resource "ovh_domain_zone_record" "test" {
   zone      = local.domaine_zone_name
   subdomain = "*"
   fieldtype = "A"
   ttl       = 3600
-  target    = "0.0.0.0"
+  target    = data.kubernetes_service.traefik.status.load_balancer.ingress.0.ip
 }
 
 module "cert-manager" {
