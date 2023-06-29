@@ -1,17 +1,17 @@
 provider "helm" {
   kubernetes {
-    host                   = module.cluster.kube_admin_config.host
-    client_key             = module.cluster.kube_admin_config.client_key
-    client_certificate     = module.cluster.kube_admin_config.client_certificate
-    cluster_ca_certificate = module.cluster.kube_admin_config.cluster_ca_certificate
+    host                   = module.cluster.kube_admin_config.kubernetes_host
+    client_key             = module.cluster.kube_admin_config.kubernetes_client_key
+    client_certificate     = module.cluster.kube_admin_config.kubernetes_client_certificate
+    cluster_ca_certificate = module.cluster.kube_admin_config.kubernetes_cluster_ca_certificate
   }
 }
 
 provider "kubernetes" {
-    host                   = module.cluster.kube_admin_config.host
-    client_key             = module.cluster.kube_admin_config.client_key
-    client_certificate     = module.cluster.kube_admin_config.client_certificate
-    cluster_ca_certificate = module.cluster.kube_admin_config.cluster_ca_certificate
+    host                   = module.cluster.kube_admin_config.kubernetes_host
+    client_key             = module.cluster.kube_admin_config.kubernetes_client_key
+    client_certificate     = module.cluster.kube_admin_config.kubernetes_client_certificate
+    cluster_ca_certificate = module.cluster.kube_admin_config.kubernetes_cluster_ca_certificate
 }
 
 provider "argocd" {
@@ -23,10 +23,10 @@ provider "argocd" {
   port_forward_with_namespace = module.argocd_bootstrap.argocd_namespace
 
   kubernetes {
-    host                   = module.cluster.kube_admin_config.host
-    client_key             = module.cluster.kube_admin_config.client_key
-    client_certificate     = module.cluster.kube_admin_config.client_certificate
-    cluster_ca_certificate = module.cluster.kube_admin_config.cluster_ca_certificate
+    host                   = module.cluster.kube_admin_config.kubernetes_host
+    client_key             = module.cluster.kube_admin_config.kubernetes_client_key
+    client_certificate     = module.cluster.kube_admin_config.kubernetes_client_certificate
+    cluster_ca_certificate = module.cluster.kube_admin_config.kubernetes_cluster_ca_certificate
   }
 }
 

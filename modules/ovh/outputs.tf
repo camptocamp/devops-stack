@@ -1,9 +1,10 @@
 output "kube_admin_config" {
   value = {
-    host                   = ovh_cloud_project_kube.k8s_cluster.kubeconfig_attributes.0.host
-    client_key             = ovh_cloud_project_kube.k8s_cluster.kubeconfig_attributes.0.client_key
-    cluster_ca_certificate = base64decode(ovh_cloud_project_kube.k8s_cluster.kubeconfig_attributes.0.cluster_ca_certificate)
-    client_certificate     = base64decode(ovh_cloud_project_kube.k8s_cluster.kubeconfig_attributes.0.client_certificate)
+    context                           = yamldecode(module.ovh_k8s.kubeconfig)
+    kubernetes_host                   = local.context.clusters.0.cluster.server
+    kubernetes_cluster_ca_certificate = base64decode(local.context.clusters.0.cluster.certificate-authority-data)
+    kubernetes_client_certificate     = base64decode(local.context.users.0.user.client-certificate-data)
+    kubernetes_client_key             = base64decode(local.context.users.0.user.client-key-data)
   }
 }
 
