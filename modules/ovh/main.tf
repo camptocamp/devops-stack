@@ -1,3 +1,11 @@
+locals {
+  context                           = yamldecode(ovh_cloud_project_kube.k8s_cluster.kubeconfig)
+  kubernetes_host                   = local.context.clusters.0.cluster.server
+  kubernetes_cluster_ca_certificate = base64decode(local.context.clusters.0.cluster.certificate-authority-data)
+  kubernetes_client_certificate     = base64decode(local.context.users.0.user.client-certificate-data)
+  kubernetes_client_key             = base64decode(local.context.users.0.user.client-key-data)
+}
+
 # 1. Création du réseau privé
 resource "ovh_cloud_project_network_private" "network" {
   vlan_id = var.vlan_id
