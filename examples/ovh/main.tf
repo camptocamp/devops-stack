@@ -1,5 +1,5 @@
 locals {
-  env          = ""
+  env          = "dev"
   cluster_name = "dev"
   cluster_issuer = "ca-issuer"
   base_domain  = (local.env == "prod" ? join(".", ["qalita", "io"]) : join(".", [local.env, "qalita", "io"]))
