@@ -170,7 +170,7 @@ module "cert-manager" {
 module "keycloak" {
   source = "git::https://github.com/camptocamp/devops-stack-module-keycloak?ref=v1.1.0"
 
-  cluster_name     = ""
+  cluster_name     = local.cluster_name
   base_domain      = local.base_domain
   cluster_issuer   = local.cluster_issuer
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
@@ -196,7 +196,7 @@ module "oidc" {
 module "minio" {
   source = "git::https://github.com/camptocamp/devops-stack-module-minio?ref=v1.1.0"
 
-  cluster_name     = ""
+  cluster_name     = local.cluster_name
   base_domain      = local.base_domain
   cluster_issuer   = local.cluster_issuer
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
@@ -217,7 +217,7 @@ module "minio" {
 module "loki-stack" {
   source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack//kind?ref=v2.0.2"
 
-  cluster_name     = ""
+  cluster_name     = local.cluster_name
   base_domain      = local.base_domain
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
 
@@ -238,7 +238,7 @@ module "loki-stack" {
 module "thanos" {
   source = "git::https://github.com/camptocamp/devops-stack-module-thanos//kind?ref=v1.0.0"
 
-  cluster_name     = ""
+  cluster_name     = local.cluster_name
   base_domain      = local.base_domain
   cluster_issuer   = local.cluster_issuer
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
@@ -265,7 +265,7 @@ module "thanos" {
 module "kube-prometheus-stack" {
   source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack//kind?ref=v2.3.0"
 
-  cluster_name     = ""
+  cluster_name     = local.cluster_name
   base_domain      = local.base_domain
   cluster_issuer   = local.cluster_issuer
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
@@ -299,7 +299,7 @@ module "argocd" {
   source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v1.1.0"
 
   base_domain              = local.base_domain
-  cluster_name             = ""
+  cluster_name             = local.cluster_name
   cluster_issuer           = local.cluster_issuer
   server_secretkey         = module.argocd_bootstrap.argocd_server_secretkey
   accounts_pipeline_tokens = module.argocd_bootstrap.argocd_accounts_pipeline_tokens
