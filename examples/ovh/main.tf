@@ -201,10 +201,16 @@ module "minio" {
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
 
   enable_service_monitor = local.enable_service_monitor
-
   config_minio = local.minio_config
-
   oidc = module.oidc.oidc
+
+  helm_values = [{
+    minio = {
+      persistence = {
+        size = "50Gi"
+      }
+    }
+  }]
 
   dependency_ids = {
     traefik      = module.traefik.id
