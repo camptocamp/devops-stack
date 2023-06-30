@@ -1,10 +1,10 @@
 locals {
-  env          = "dev"
+  env          = "day"
   cluster_name = local.env
   cluster_issuer = "letsencrypt-staging"
   base_domain  = format("%s.%s", local.env,"qalita.io")
   vlan_id      = 10
-  enable_service_monitor = false
+  enable_service_monitor = true
 
   context                           = yamldecode(module.cluster.kubeconfig)
   kubernetes_host                   = local.context.clusters.0.cluster.server
@@ -67,15 +67,6 @@ locals {
 
 }
 
-resource "random_password" "loki_secretkey" {
-  length  = 32
-  special = false
-}
-resource "random_password" "thanos_secretkey" {
-  length  = 32
-  special = false
-}
-
 module "cluster" {
 
   source = "git::https://github.com/qalita-io/devops-stack.git//modules/ovh?ref=ovh"
@@ -86,7 +77,7 @@ module "cluster" {
   vlan_subnet_end     = "192.168.168.200"
   vlan_subnet_network = "192.168.168.0/24"
 
-  cluster_name   = local.cluster_name
+  cluster_name  = local.cluster_name
   base_domain   = local.base_domain
   cluster_region = "GRA9"
 
@@ -95,23 +86,31 @@ module "cluster" {
   max_nodes     = 3
   min_nodes     = 3
 
-
 }
 
 module "argocd_bootstrap" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v1.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v2.1.0"
+  depends_on = [module.cluster]
 }
 
 module "traefik" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//kind?ref=v1.2.2"
+  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//kind?ref=v1.2.3"
 
   cluster_name = local.cluster_name
-
   base_domain = local.base_domain
-
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
-
   enable_service_monitor = local.enable_service_monitor
+
+  helm_values = [{
+    traefik = {
+      certResolvers = {
+        letsencrypt = {
+          email = "ing@qalita.io"
+          tlsChallenge = true
+        }
+      }
+    }
+  }]
 
   dependency_ids = {
     argocd = module.argocd_bootstrap.id
@@ -137,7 +136,7 @@ resource "ovh_domain_zone_record" "wildcard_record" {
 }
 
 module "cert-manager" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager?ref=v3.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager?ref=v4.0.3"
 
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
 
@@ -168,7 +167,7 @@ module "cert-manager" {
 }
 
 module "keycloak" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak?ref=v1.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak?ref=v1.1.1"
 
   cluster_name     = local.cluster_name
   base_domain      = local.base_domain
@@ -182,9 +181,9 @@ module "keycloak" {
 }
 
 module "oidc" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak//oidc_bootstrap?ref=v1.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak//oidc_bootstrap?ref=v1.1.1"
 
-  cluster_name   = ""
+  cluster_name   = local.cluster_name
   base_domain    = local.base_domain
   cluster_issuer = local.cluster_issuer
 
@@ -194,7 +193,7 @@ module "oidc" {
 }
 
 module "minio" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-minio?ref=v1.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-minio?ref=v1.1.2"
 
   cluster_name     = local.cluster_name
   base_domain      = local.base_domain
@@ -214,11 +213,14 @@ module "minio" {
   }
 }
 
-module "loki-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack//kind?ref=v2.0.2"
+resource "random_password" "loki_secretkey" {
+  length  = 32
+  special = false
+}
 
-  cluster_name     = local.cluster_name
-  base_domain      = local.base_domain
+module "loki-stack" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack//kind?ref=v3.0.0"
+
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
 
   distributed_mode = true
@@ -227,7 +229,7 @@ module "loki-stack" {
     bucket_name       = local.minio_config.buckets.0.name
     endpoint          = module.minio.endpoint
     access_key        = local.minio_config.users.0.accessKey
-    secret_access_key = local.minio_config.users.0.secretKey
+    secret_key        = local.minio_config.users.0.secretKey
   }
 
   dependency_ids = {
@@ -235,8 +237,13 @@ module "loki-stack" {
   }
 }
 
+resource "random_password" "thanos_secretkey" {
+  length  = 32
+  special = false
+}
+
 module "thanos" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-thanos//kind?ref=v1.0.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-thanos//kind?ref=v1.1.0"
 
   cluster_name     = local.cluster_name
   base_domain      = local.base_domain
@@ -247,7 +254,7 @@ module "thanos" {
     bucket_name       = local.minio_config.buckets.1.name
     endpoint          = module.minio.endpoint
     access_key        = local.minio_config.users.1.accessKey
-    secret_access_key = local.minio_config.users.1.secretKey
+    secret_key        = local.minio_config.users.1.secretKey
   }
 
   thanos = {
@@ -255,15 +262,17 @@ module "thanos" {
   }
 
   dependency_ids = {
+    argocd       = module.argocd_bootstrap.id
     traefik      = module.traefik.id
     cert-manager = module.cert-manager.id
     minio        = module.minio.id
+    keycloak     = module.keycloak.id
     oidc         = module.oidc.id
   }
 }
 
 module "kube-prometheus-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack//kind?ref=v2.3.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack//kind?ref=v3.2.0"
 
   cluster_name     = local.cluster_name
   base_domain      = local.base_domain
@@ -296,12 +305,14 @@ module "kube-prometheus-stack" {
 }
 
 module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v1.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v2.1.0"
 
   base_domain              = local.base_domain
   cluster_name             = local.cluster_name
   cluster_issuer           = local.cluster_issuer
+  admin_enabled            = "true"
   server_secretkey         = module.argocd_bootstrap.argocd_server_secretkey
+  namespace                = module.argocd_bootstrap.argocd_namespace
   accounts_pipeline_tokens = module.argocd_bootstrap.argocd_accounts_pipeline_tokens
 
   oidc = {
@@ -317,25 +328,10 @@ module "argocd" {
   }
 
   dependency_ids = {
+    argocd                = module.argocd_bootstrap.id
     traefik               = module.traefik.id
     cert-manager          = module.cert-manager.id
     oidc                  = module.oidc.id
     kube-prometheus-stack = module.kube-prometheus-stack.id
-  }
-}
-
-module "metrics_server" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-application.git?ref=v1.2.2"
-
-  name             = "metrics-server"
-  argocd_namespace = module.argocd_bootstrap.argocd_namespace
-
-  source_repo            = "https://github.com/kubernetes-sigs/metrics-server.git"
-  source_repo_path       = "charts/metrics-server"
-  source_target_revision = "metrics-server-helm-chart-3.8.3"
-  destination_namespace  = "kube-system"
-
-  dependency_ids = {
-    argocd = module.argocd.id
   }
 }
