@@ -1,7 +1,7 @@
 locals {
   env                    = "dev"
   cluster_name           = local.env
-  cluster_issuer         = "letsencrypt-staging"
+  cluster_issuer         = "letsencrypt-prod"
   base_domain            = format("%s.%s", local.env, "qalita.io")
   vlan_id                = 10
   enable_service_monitor = false
@@ -100,17 +100,6 @@ module "traefik" {
   base_domain            = local.base_domain
   argocd_namespace       = module.argocd_bootstrap.argocd_namespace
   enable_service_monitor = local.enable_service_monitor
-
-  helm_values = [{
-    traefik = {
-      certResolvers = {
-        letsencrypt = {
-          email        = "ing@qalita.io"
-          tlsChallenge = true
-        }
-      }
-    }
-  }]
 
   dependency_ids = {
     argocd = module.argocd_bootstrap.id
