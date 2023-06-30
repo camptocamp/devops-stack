@@ -4,7 +4,7 @@ locals {
   cluster_issuer         = "letsencrypt-staging"
   base_domain            = format("%s.%s", local.env, "qalita.io")
   vlan_id                = 10
-  enable_service_monitor = true
+  enable_service_monitor = false
 
   context                           = yamldecode(module.cluster.kubeconfig)
   kubernetes_host                   = local.context.clusters.0.cluster.server
