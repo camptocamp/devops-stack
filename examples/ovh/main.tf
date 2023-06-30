@@ -90,7 +90,6 @@ module "cluster" {
 
 module "argocd_bootstrap" {
   source     = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v2.1.0"
-  depends_on = [module.cluster]
 }
 
 module "traefik" {
