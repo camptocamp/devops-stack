@@ -1,5 +1,5 @@
 locals {
-  env          = "day"
+  env          = "dev"
   cluster_name = local.env
   cluster_issuer = "letsencrypt-staging"
   base_domain  = format("%s.%s", local.env,"qalita.io")
