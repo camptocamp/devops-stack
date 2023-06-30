@@ -1,7 +1,7 @@
 locals {
   env                    = "dev"
   cluster_name           = local.env
-  cluster_issuer         = "letsencrypt-prod"
+  cluster_issuer         = "letsencrypt-stagging"
   base_domain            = format("%s.%s", local.env, "qalita.io")
   vlan_id                = 10
   enable_service_monitor = false
