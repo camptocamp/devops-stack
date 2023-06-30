@@ -8,10 +8,10 @@ provider "helm" {
 }
 
 provider "kubernetes" {
-    host                   = module.cluster.kube_admin_config.kubernetes_host
-    client_key             = module.cluster.kube_admin_config.kubernetes_client_key
-    client_certificate     = module.cluster.kube_admin_config.kubernetes_client_certificate
-    cluster_ca_certificate = module.cluster.kube_admin_config.kubernetes_cluster_ca_certificate
+  host                   = module.cluster.kube_admin_config.kubernetes_host
+  client_key             = module.cluster.kube_admin_config.kubernetes_client_key
+  client_certificate     = module.cluster.kube_admin_config.kubernetes_client_certificate
+  cluster_ca_certificate = module.cluster.kube_admin_config.kubernetes_cluster_ca_certificate
 }
 
 provider "argocd" {

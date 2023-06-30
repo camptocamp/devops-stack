@@ -1,9 +1,9 @@
 locals {
-  env          = "dev"
-  cluster_name = local.env
-  cluster_issuer = "letsencrypt-staging"
-  base_domain  = format("%s.%s", local.env,"qalita.io")
-  vlan_id      = 10
+  env                    = "dev"
+  cluster_name           = local.env
+  cluster_issuer         = "letsencrypt-staging"
+  base_domain            = format("%s.%s", local.env, "qalita.io")
+  vlan_id                = 10
   enable_service_monitor = true
 
   context                           = yamldecode(module.cluster.kubeconfig)
@@ -77,8 +77,8 @@ module "cluster" {
   vlan_subnet_end     = "192.168.168.200"
   vlan_subnet_network = "192.168.168.0/24"
 
-  cluster_name  = local.cluster_name
-  base_domain   = local.base_domain
+  cluster_name   = local.cluster_name
+  base_domain    = local.base_domain
   cluster_region = "GRA9"
 
   flavor_name   = "c2-7"
@@ -89,23 +89,23 @@ module "cluster" {
 }
 
 module "argocd_bootstrap" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v2.1.0"
+  source     = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v2.1.0"
   depends_on = [module.cluster]
 }
 
 module "traefik" {
   source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//kind?ref=v1.2.3"
 
-  cluster_name = local.cluster_name
-  base_domain = local.base_domain
-  argocd_namespace = module.argocd_bootstrap.argocd_namespace
+  cluster_name           = local.cluster_name
+  base_domain            = local.base_domain
+  argocd_namespace       = module.argocd_bootstrap.argocd_namespace
   enable_service_monitor = local.enable_service_monitor
 
   helm_values = [{
     traefik = {
       certResolvers = {
         letsencrypt = {
-          email = "ing@qalita.io"
+          email        = "ing@qalita.io"
           tlsChallenge = true
         }
       }
@@ -122,17 +122,17 @@ data "kubernetes_service" "traefik" {
     name      = "traefik"
     namespace = "traefik"
   }
-  depends_on = [ module.traefik.id ]
+  depends_on = [module.traefik.id]
 }
 
 # Add a record to a sub-domain
 resource "ovh_domain_zone_record" "wildcard_record" {
-  zone      = local.domaine_zone_name
-  subdomain = "*"
-  fieldtype = "A"
-  ttl       = 3600
-  target    = data.kubernetes_service.traefik.status.0.load_balancer.0.ingress.0.ip
-  depends_on = [ module.traefik.id ]
+  zone       = local.domaine_zone_name
+  subdomain  = "*"
+  fieldtype  = "A"
+  ttl        = 3600
+  target     = data.kubernetes_service.traefik.status.0.load_balancer.0.ingress.0.ip
+  depends_on = [module.traefik.id]
 }
 
 module "cert-manager" {
@@ -201,8 +201,8 @@ module "minio" {
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
 
   enable_service_monitor = local.enable_service_monitor
-  config_minio = local.minio_config
-  oidc = module.oidc.oidc
+  config_minio           = local.minio_config
+  oidc                   = module.oidc.oidc
 
   helm_values = [{
     minio = {
@@ -232,10 +232,10 @@ module "loki-stack" {
   distributed_mode = true
 
   logs_storage = {
-    bucket_name       = local.minio_config.buckets.0.name
-    endpoint          = module.minio.endpoint
-    access_key        = local.minio_config.users.0.accessKey
-    secret_key        = local.minio_config.users.0.secretKey
+    bucket_name = local.minio_config.buckets.0.name
+    endpoint    = module.minio.endpoint
+    access_key  = local.minio_config.users.0.accessKey
+    secret_key  = local.minio_config.users.0.secretKey
   }
 
   dependency_ids = {
@@ -257,10 +257,10 @@ module "thanos" {
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
 
   metrics_storage = {
-    bucket_name       = local.minio_config.buckets.1.name
-    endpoint          = module.minio.endpoint
-    access_key        = local.minio_config.users.1.accessKey
-    secret_key        = local.minio_config.users.1.secretKey
+    bucket_name = local.minio_config.buckets.1.name
+    endpoint    = module.minio.endpoint
+    access_key  = local.minio_config.users.1.accessKey
+    secret_key  = local.minio_config.users.1.secretKey
   }
 
   thanos = {
