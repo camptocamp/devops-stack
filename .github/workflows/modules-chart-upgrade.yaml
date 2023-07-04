@@ -38,7 +38,8 @@
       - name: "List charts in the ./charts folder"
         id: find-charts
         run: |
-          echo "::set-output name=charts::$(find charts -name 'Chart.yaml' -exec dirname {} \; | sed 's|^\./||' | sort -u)"
+          cd charts
+          echo "charts=$(find . -maxdepth 2 -name 'Chart.yaml' -exec dirname {} \; | sed 's|^\./||' | sort -u | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
 
     chart-upgrade:
       runs-on: ubuntu-latest
