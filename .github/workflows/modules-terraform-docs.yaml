@@ -12,7 +12,7 @@ on:
   workflow_call:
     inputs:
       variants:
-        description: "List of the variants folders as a comma-separated list inside a string (i.e. "eks,aks,sks")."
+        description: "List of the variants folders as a comma-separated list inside a string (i.e. 'eks,aks,sks')."
         type: string
         required: false
         default: ""
