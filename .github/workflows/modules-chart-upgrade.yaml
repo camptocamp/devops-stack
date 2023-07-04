@@ -1,0 +1,112 @@
+---
+  # GitHub Actions workflow to upgrade the Helm chart dependencies on our modules.
+  #
+  # IMPORTANT: This workflow is called by other workflows in our DevOps Stack repositories and it is centralized here in 
+  # order to be easily maintained across modules. Because of this, please make sure you're not introducing any breaking 
+  # changes when modifying this workflow.
+  
+  name: "modules-chart-upgrade"
+  
+  on:
+    workflow_call:
+      inputs:
+        upgrade-strategy:
+          description: "Upgrade strategy to use. Valid values are 'major', 'minor' or 'patch'."
+          type: string
+          required: true
+        excluded-dependencies:
+          description: "Comma-separated list of dependencies to exclude from upgrade (i.e. 'dependency1,dependency2,dependency3')."
+          type: string
+          required: false
+          default: ""
+        dry-run:
+          description: "Whether to run the upgrade in dry-run mode or not."
+          type: boolean
+          required: false
+          default: false
+
+  jobs:
+    list-charts:
+      runs-on: ubuntu-latest
+      outputs:
+        charts: ${{ steps.find-charts.outputs.charts }}
+      
+      steps:
+      - name: "Check out the repository"
+        uses: actions/checkout@v3
+      
+      - name: "List charts in the ./charts folder"
+        id: find-charts
+        run: |
+          echo "::set-output name=charts::$(find charts -name 'Chart.yaml' -exec dirname {} \; | sed 's|^\./||' | sort -u)"
+
+    chart-upgrade:
+      runs-on: ubuntu-latest
+      
+      # Require the previous step to be completed before running this job
+      needs: list-charts
+      
+      strategy:
+        matrix:
+          chart-name: ${{ fromJson(needs.list-charts.outputs.charts) }}
+
+      # Define global settings for both PR steps
+      env:
+        committer: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
+        branch: "chart-autoupgrade-${{ inputs.upgrade-strategy }}-${{ matrix.chart-name }}"
+        labels: "chart-autoupgrade-${{ inputs.upgrade-strategy }}"
+
+      steps:
+      - name: "Check out the repository"
+        uses: actions/checkout@v3
+
+      - name: "Upgrade Helm chart dependencies"
+        id: deps-upgrade
+        uses: camptocamp/helm-dependency-upgrade-action@v0
+        with:
+          chart-path: "charts/${{ matrix.chart-name }}"
+          excluded-dependencies: ${{ inputs.excluded-dependencies }}}
+          upgrade-strategy: "${{ inputs.upgrade-strategy }}"
+          dry-run: "${{ inputs.dry-run }}"
+
+      # TODO Add step that updates the chart version on the README.adoc using the new version from the Chart.yaml file. Maybe that step should be outside of this centralized workflow... 
+
+      - name: "Create Pull Request for a minor/patch upgrade"
+        if: ${{ inputs.upgrade-strategy != 'major' }} && ${{ steps.deps-upgrade.outputs.chart-upgraded == 'true' }} && ${{ inputs.dry-run == 'false' }}
+        uses: peter-evans/create-pull-request@v3
+        env:
+          pr-title: "chore(chart): ${{ inputs.upgrade-strategy }} upgrade of dependencies on ${{ matrix.chart-name }} chart"
+        with:
+          commit-message: ${{ env.pr-title }}
+          committer: ${{ env.committer }}}
+          branch: ${{ env.branch }}
+          title: ${{ env.pr-title }}
+          labels: "${{ env.labels }}"
+          body: |
+            :robot: I have update the chart *beep* *boop*
+            ---
+
+            ## Description of the changes
+
+            This PR upgrades the dependencies of the **${{ matrix.chart-name }}** Helm chart using a **${{ inputs.upgrade-strategy }}** upgrade strategy.
+
+      - name: "Create Pull Request for a major upgrade"
+        if: ${{ inputs.upgrade-strategy == 'major' }} && ${{ steps.deps-upgrade.outputs.chart-upgraded == 'true' }} && ${{ inputs.dry-run == 'false' }}
+        uses: peter-evans/create-pull-request@v3
+        env:
+          pr-title: "chore!(chart): major upgrade of dependencies on ${{ matrix.chart-name }} chart"
+        with:
+          commit-message: ${{ env.pr-title }}
+          committer: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
+          branch: "helm-${{ inputs.upgrade-strategy }}-autoupgrade-${{ matrix.chart-name }}"
+          title: ${{ env.pr-title }}
+          labels: "${{ env.labels }}"
+          body: |
+            :robot: I have update the chart *beep* *boop*
+            ---
+
+            ## Description of the changes
+
+            This PR upgrades the dependencies of the **${{ matrix.chart-name }}** Helm chart using a **major** upgrade strategy.
+
+            :warning: **This is a major upgrade, please take care to check the official chart changelog for breaking changes before merging.** :warning:
