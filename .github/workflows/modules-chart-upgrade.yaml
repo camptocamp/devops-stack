@@ -61,7 +61,7 @@
 
       - name: "Upgrade Helm chart dependencies"
         id: deps-upgrade
-        uses: camptocamp/helm-dependency-upgrade-action@v0.1.2
+        uses: camptocamp/helm-dependency-upgrade-action@v0.1.5
         with:
           chart-path: "charts/${{ matrix.chart-name }}"
           excluded-dependencies: ${{ inputs.excluded-dependencies }}}
