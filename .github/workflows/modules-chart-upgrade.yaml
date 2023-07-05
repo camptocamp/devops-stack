@@ -37,9 +37,7 @@
       
       - name: "List charts in the ./charts folder"
         id: find-charts
-        run: |
-          cd charts
-          echo "charts=$(find . -maxdepth 2 -name 'Chart.yaml' -exec dirname {} \; | sed 's|^\./||' | sort -u | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
+        run: cd charts && echo "charts=$(find . -maxdepth 2 -name 'Chart.yaml' -exec dirname {} \; | sed 's|^\./||' | sort -u | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
 
     chart-upgrade:
       runs-on: ubuntu-latest
@@ -73,7 +71,7 @@
       # TODO Add step that updates the chart version on the README.adoc using the new version from the Chart.yaml file. Maybe that step should be outside of this centralized workflow... 
 
       - name: "Create Pull Request for a minor/patch upgrade"
-        if: ${{ inputs.upgrade-strategy != 'major' }} && ${{ steps.deps-upgrade.outputs.chart-upgraded == 'true' }} && ${{ inputs.dry-run == 'false' }}
+        if: ${{ inputs.upgrade-strategy != 'major' && steps.deps-upgrade.outputs.chart-upgraded == 'true' && inputs.dry-run == 'false' }}
         uses: peter-evans/create-pull-request@v3
         env:
           pr-title: "chore(chart): ${{ inputs.upgrade-strategy }} upgrade of dependencies on ${{ matrix.chart-name }} chart"
@@ -92,7 +90,7 @@
             This PR upgrades the dependencies of the **${{ matrix.chart-name }}** Helm chart using a **${{ inputs.upgrade-strategy }}** upgrade strategy.
 
       - name: "Create Pull Request for a major upgrade"
-        if: ${{ inputs.upgrade-strategy == 'major' }} && ${{ steps.deps-upgrade.outputs.chart-upgraded == 'true' }} && ${{ inputs.dry-run == 'false' }}
+        if: ${{ inputs.upgrade-strategy == 'major' && steps.deps-upgrade.outputs.chart-upgraded == 'true' && inputs.dry-run == 'false' }}
         uses: peter-evans/create-pull-request@v3
         env:
           pr-title: "chore!(chart): major upgrade of dependencies on ${{ matrix.chart-name }} chart"
