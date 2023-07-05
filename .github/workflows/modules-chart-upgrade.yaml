@@ -63,7 +63,7 @@
 
       - name: "Upgrade Helm chart dependencies"
         id: deps-upgrade
-        uses: camptocamp/helm-dependency-upgrade-action@v0
+        uses: camptocamp/helm-dependency-upgrade-action@v0.1.2
         with:
           chart-path: "charts/${{ matrix.chart-name }}"
           excluded-dependencies: ${{ inputs.excluded-dependencies }}}
@@ -79,12 +79,12 @@
           pr-title: "chore(chart): ${{ inputs.upgrade-strategy }} upgrade of dependencies on ${{ matrix.chart-name }} chart"
         with:
           commit-message: ${{ env.pr-title }}
-          committer: ${{ env.committer }}}
+          committer: ${{ env.committer }}
           branch: ${{ env.branch }}
           title: ${{ env.pr-title }}
           labels: "${{ env.labels }}"
           body: |
-            :robot: I have update the chart *beep* *boop*
+            :robot: I have updated the chart *beep* *boop*
             ---
 
             ## Description of the changes
@@ -98,12 +98,12 @@
           pr-title: "chore!(chart): major upgrade of dependencies on ${{ matrix.chart-name }} chart"
         with:
           commit-message: ${{ env.pr-title }}
-          committer: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
+          committer: ${{ env.committer }}
           branch: "helm-${{ inputs.upgrade-strategy }}-autoupgrade-${{ matrix.chart-name }}"
           title: ${{ env.pr-title }}
           labels: "${{ env.labels }}"
           body: |
-            :robot: I have update the chart *beep* *boop*
+            :robot: I have updated the chart *beep* *boop*
             ---
 
             ## Description of the changes
