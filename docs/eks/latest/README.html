@@ -37,7 +37,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="eks" data-version="v2.0.1">
+<div class="nav-container" data-component="eks" data-version="v2.0.2">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -63,7 +63,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">EKS Cluster Module</span>
-    <span class="version">v2.0.1</span>
+    <span class="version">v2.0.2</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -215,7 +215,10 @@
       <a class="title" href="../../ebs-csi-driver/latest/README.html">EBS CSI Driver Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../ebs-csi-driver/latest/README.html">v1.0.2</a>
+          <a href="../../ebs-csi-driver/latest/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v1.0.2/README.html">v1.0.2</a>
         </li>
         <li class="version">
           <a href="../../ebs-csi-driver/v1.0.1/README.html">v1.0.1</a>
@@ -226,7 +229,10 @@
       <a class="title" href="../../efs-csi-driver/latest/README.html">EFS CSI Driver Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../efs-csi-driver/latest/README.html">v1.0.2</a>
+          <a href="../../efs-csi-driver/latest/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v1.0.2/README.html">v1.0.2</a>
         </li>
         <li class="version">
           <a href="../../efs-csi-driver/v1.0.1/README.html">v1.0.1</a>
@@ -237,7 +243,10 @@
       <a class="title" href="README.html">EKS Cluster Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="README.html">v2.0.1</a>
+          <a href="README.html">v2.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../v2.0.1/README.html">v2.0.1</a>
         </li>
         <li class="version">
           <a href="../v2.0.0/README.html">v2.0.0</a>
@@ -259,7 +268,10 @@
       <a class="title" href="../../keycloak/latest/README.html">Keycloak Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../keycloak/latest/README.html">v1.1.1</a>
+          <a href="../../keycloak/latest/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.1.1/README.html">v1.1.1</a>
         </li>
         <li class="version">
           <a href="../../keycloak/v1.1.0/README.html">v1.1.0</a>
@@ -425,7 +437,10 @@
       <a class="title" href="../../thanos/latest/README.html">Thanos Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../thanos/latest/README.html">v1.1.0</a>
+          <a href="../../thanos/latest/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v1.1.0/README.html">v1.1.0</a>
         </li>
         <li class="version">
           <a href="../../thanos/v1.0.1/README.html">v1.0.1</a>
@@ -476,14 +491,15 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v2.0.1</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v2.0.2</button>
   <div class="version-menu">
-    <a class="version is-current" href="README.html">v2.0.1</a>
+    <a class="version is-current" href="README.html">v2.0.2</a>
+    <a class="version" href="../v2.0.1/README.html">v2.0.1</a>
     <a class="version" href="../v2.0.0/README.html">v2.0.0</a>
     <a class="version" href="../v1.0.0/README.html">v1.0.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-cluster-eks/blob/v2.0.1/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-cluster-eks/blob/v2.0.2/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -540,7 +556,7 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 </table>
 </div>
 <div class="paragraph">
-<p>Depending on the <code>create_public_nlb</code> and <code>create_private_nlb</code> variales, it creates a public and/or public Network Load Balancer(s). The node groups that have the <code>target_group_arns = module.my_cluster.nlb_target_groups</code> value set will be added as backends of the LBs. By default, the LBs only forward traffic on the ports <code>80</code> and <code>443</code>, but you can customize this using the <code>extra_lb_target_groups</code> and <code>extra_lb_http_tcp_listeners</code> variables to add other ports. Look at the <code>lb.tf</code> file in this module for the syntax.</p>
+<p>Depending on the <code>create_public_nlb</code> and <code>create_private_nlb</code> variables, it creates a public and/or public Network Load Balancer(s). The node groups that have the <code>target_group_arns = module.my_cluster.nlb_target_groups</code> value set will be added as backends of the LBs. By default, the LBs only forward traffic on the ports <code>80</code> and <code>443</code>, but you can customize this using the <code>extra_lb_target_groups</code> and <code>extra_lb_http_tcp_listeners</code> variables to add other ports. Look at the <code>lb.tf</code> file in this module for the syntax.</p>
 </div>
 <div class="paragraph">
 <p>This module needs a Route 53 DNS zone in the same AWS account to create a wildcard CNAME record that points to the Network LB. The DNS zone must be passed in the <code>base_domain</code> variable. This record is used by other DevOps Stack modules as default URLs for their applications.</p>
@@ -550,10 +566,6 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 <div class="sect1">
 <h2 id="_technical_reference"><a class="anchor" href="#_technical_reference"></a>Technical Reference</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_dependencies"><a class="anchor" href="#_dependencies"></a>Dependencies</h3>
-
-</div>
 <div class="sect2">
 <h3 id="_requirements"><a class="anchor" href="#_requirements"></a>Requirements</h3>
 <div class="paragraph">
