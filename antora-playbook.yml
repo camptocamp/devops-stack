@@ -197,5 +197,5 @@ content:
     - "!v1.0.0-alpha.*"
 ui:
   bundle:
-    url: https://github.com/camptocamp/devops-stack-antora-ui/releases/download/master-LATEST/ui-bundle.zip
+    url: https://github.com/camptocamp/devops-stack-antora-ui/releases/download/main-latest/ui-bundle.zip
     snapshot: true
