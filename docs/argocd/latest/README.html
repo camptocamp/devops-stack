@@ -37,7 +37,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="argocd" data-version="v3.1.0">
+<div class="nav-container" data-component="argocd" data-version="v3.1.1">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -72,7 +72,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">Argo CD Module</span>
-    <span class="version">v3.1.0</span>
+    <span class="version">v3.1.1</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -133,7 +133,10 @@
       <a class="title" href="README.html">Argo CD Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="README.html">v3.1.0</a>
+          <a href="README.html">v3.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../v3.1.0/README.html">v3.1.0</a>
         </li>
         <li class="version">
           <a href="../v3.0.0/README.html">v3.0.0</a>
@@ -500,9 +503,10 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v3.1.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v3.1.1</button>
   <div class="version-menu">
-    <a class="version is-current" href="README.html">v3.1.0</a>
+    <a class="version is-current" href="README.html">v3.1.1</a>
+    <a class="version" href="../v3.1.0/README.html">v3.1.0</a>
     <a class="version" href="../v3.0.0/README.html">v3.0.0</a>
     <a class="version" href="../v2.1.0/README.html">v2.1.0</a>
     <a class="version" href="../v2.0.0/README.html">v2.0.0</a>
@@ -512,7 +516,7 @@
     <a class="version" href="../v1.0.0/README.html">v1.0.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-argocd/blob/v3.1.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-argocd/blob/v3.1.1/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -923,29 +927,6 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_rbac"><a class="anchor" href="#_rbac"></a><a id="input_rbac"></a> <a href="#input_rbac">rbac</a></h4>
-<div class="paragraph">
-<p>Description: RBAC settings for the Argo CD users.</p>
-</div>
-<div class="paragraph">
-<p>Type:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">object({
-    scopes         = optional(string, "[groups, cognito:groups, roles]")
-    policy_default = optional(string, "")
-    policy_csv = optional(string, &lt;&lt;-EOT
-                                    g, pipeline, role:admin
-                                    g, argocd-admin, role:admin
-                                    g, devops-stack-admins, role:admin
-                                  EOT
-    )
-  })</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
 <h4 id="_accounts_pipeline_tokens"><a class="anchor" href="#_accounts_pipeline_tokens"></a><a id="input_accounts_pipeline_tokens"></a> <a href="#input_accounts_pipeline_tokens">accounts_pipeline_tokens</a></h4>
 <div class="paragraph">
 <p>Description: API token for pipeline account.</p>
@@ -990,7 +971,7 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 <p>Type: <code>string</code></p>
 </div>
 <div class="paragraph">
-<p>Default: <code>"v3.0.0"</code></p>
+<p>Default: <code>"v3.1.0"</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -1026,16 +1007,7 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 <p>Type: <code>any</code></p>
 </div>
 <div class="paragraph">
-<p>Default:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">[
-  {
-    "argo-cd": {}
-  }
-]</code></pre>
-</div>
+<p>Default: <code>[]</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -1090,6 +1062,32 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 </div>
 <div class="paragraph">
 <p>Default: <code>null</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_rbac"><a class="anchor" href="#_rbac"></a><a id="input_rbac"></a> <a href="#input_rbac">rbac</a></h4>
+<div class="paragraph">
+<p>Description: RBAC settings for the Argo CD users.</p>
+</div>
+<div class="paragraph">
+<p>Type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">object({
+    scopes         = optional(string, "[groups, cognito:groups, roles]")
+    policy_default = optional(string, "")
+    policy_csv = optional(string, &lt;&lt;-EOT
+                                    g, pipeline, role:admin
+                                    g, argocd-admin, role:admin
+                                    g, devops-stack-admins, role:admin
+                                  EOT
+    )
+  })</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Default: <code>{}</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -1348,6 +1346,14 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 3</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="provider_jwt"></a> <a href="#provider_jwt">jwt</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -1384,14 +1390,6 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>&gt;= 5</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>&gt;= 3</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1560,7 +1558,7 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 <p><code>string</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"v3.0.0"</code></p>
+<p><code>"v3.1.0"</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
@@ -1610,14 +1608,8 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>any</code></p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">[
-  {
-    "argo-cd": {}
-  }
-]</code></pre>
-</div>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>[]</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
@@ -1708,10 +1700,10 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 </div>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
+<p><code>{}</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>yes</p>
+<p>no</p>
 </div></div></td>
 </tr>
 <tr>
