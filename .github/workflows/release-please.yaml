@@ -9,11 +9,21 @@ on:
 jobs:
   release-please:
     runs-on: ubuntu-latest
-
+    outputs:
+      releases_created: ${{ steps.release-please.outputs.releases_created }}
     steps:
     - uses: google-github-actions/release-please-action@v3
       id: release-please
       with:
         release-type: simple
+        labels: "autorelease-pending"
+        release-labels: "autorelease-tagged"
         pull-request-title-pattern: "chore: release ${version}"
         bump-minor-pre-major: true
+
+  add-pr-to-project:
+    needs: release-please
+    if: ${{ needs.release-please.outputs.releases_created }}
+    uses: camptocamp/devops-stack/.github/workflows/pr-issues-project.yaml@main
+    secrets:
+      PROJECT_APP_PRIVATE_KEY: ${{ secrets.PROJECT_APP_PRIVATE_KEY }}

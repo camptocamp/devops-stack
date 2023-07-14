@@ -9,15 +9,31 @@ name: "modules-release-please"
 
 on:
   workflow_call:
+    secrets:
+      PROJECT_APP_PRIVATE_KEY:
+        description: "GitHub App private key for the DevOps Stack Project app"
+        required: true
 
 jobs:
   release-please:
     runs-on: ubuntu-latest
+    outputs:
+      releases_created: ${{ steps.release-please.outputs.releases_created }}
     steps:
     - uses: google-github-actions/release-please-action@v3
+      id: release-please
       with:
         release-type: simple
+        labels: "autorelease-pending"
+        release-labels: "autorelease-tagged"
         pull-request-title-pattern: "chore: release ${version}"
         bump-minor-pre-major: true
         extra-files: |
           variables.tf
+
+  add-pr-to-project:
+    needs: release-please
+    if: ${{ needs.release-please.outputs.releases_created }}
+    uses: camptocamp/devops-stack/.github/workflows/pr-issues-project.yaml@main
+    secrets:
+      PROJECT_APP_PRIVATE_KEY: ${{ secrets.PROJECT_APP_PRIVATE_KEY }}
