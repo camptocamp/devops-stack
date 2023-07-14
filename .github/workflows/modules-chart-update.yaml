@@ -76,7 +76,7 @@
           dry-run: "${{ inputs.dry-run }}"
 
       - name: "Create Pull Request for a minor/patch update"
-        if: ${{ !inputs.dry-run && steps.deps-update.outputs.update-type != 'none' && !steps.deps-update.outputs.update-type != 'major' }}
+        if: ${{ !inputs.dry-run && steps.deps-update.outputs.update-type != 'none' && steps.deps-update.outputs.update-type != 'major' }}
         id: minor-pr
         uses: peter-evans/create-pull-request@v3
         env:
