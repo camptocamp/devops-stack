@@ -67,7 +67,7 @@
 
       - name: "Upgrade Helm chart dependencies"
         id: deps-update
-        uses: camptocamp/helm-dependency-update-action@v0.3.3
+        uses: camptocamp/helm-dependency-update-action@v0.4.0
         with:
           chart-path: "charts/${{ matrix.chart-name }}"
           readme-path: "README.adoc"
