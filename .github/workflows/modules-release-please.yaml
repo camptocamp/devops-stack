@@ -9,10 +9,6 @@ name: "modules-release-please"
 
 on:
   workflow_call:
-    secrets:
-      PROJECT_APP_PRIVATE_KEY:
-        description: "GitHub App private key for the DevOps Stack Project app"
-        required: true
 
 jobs:
   release-please:
@@ -30,10 +26,3 @@ jobs:
         bump-minor-pre-major: true
         extra-files: |
           variables.tf
-
-  add-pr-to-project:
-    needs: release-please
-    if: ${{ needs.release-please.outputs.releases_created }}
-    uses: camptocamp/devops-stack/.github/workflows/pr-issues-project.yaml@main
-    secrets:
-      PROJECT_APP_PRIVATE_KEY: ${{ secrets.PROJECT_APP_PRIVATE_KEY }}

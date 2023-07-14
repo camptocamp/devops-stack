@@ -24,10 +24,6 @@
           type: boolean
           required: false
           default: false
-      secrets:
-        PROJECT_APP_PRIVATE_KEY:
-          description: "GitHub App private key for the DevOps Stack Project app"
-          required: true
 
   jobs:
     list-charts:
@@ -121,10 +117,3 @@
             This PR updates the dependencies of the **${{ matrix.chart-name }}** Helm chart. .
 
             :warning: This was a **major** update!. Please check the changelog of the updated dependencies and take notice of any breaking changes before merging. :warning:
-
-    add-pr-to-project:
-      needs: chart-update
-      if: ${{ needs.chart-update.outputs.minor-pr-number || needs.chart-update.outputs.major-pr-number }}
-      uses: camptocamp/devops-stack/.github/workflows/pr-issues-project.yaml@main
-      secrets:
-        PROJECT_APP_PRIVATE_KEY: ${{ secrets.PROJECT_APP_PRIVATE_KEY }}
