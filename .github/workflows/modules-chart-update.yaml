@@ -116,4 +116,4 @@
 
             This PR updates the dependencies of the **${{ matrix.chart-name }}** Helm chart. .
 
-            :warning: This was a **major** update!. Please check the changelog of the updated dependencies and take notice of any breaking changes before merging. :warning:
+            :warning: This was a **major** update! Please check the changelog of the updated dependencies and **take notice of any breaking changes before merging**. :warning:
