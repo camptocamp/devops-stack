@@ -1,26 +1,26 @@
 ---
-  # GitHub Actions workflow to upgrade the Helm chart dependencies on our modules.
+  # GitHub Actions workflow to update the Helm chart dependencies on our modules.
   #
   # IMPORTANT: This workflow is called by other workflows in our DevOps Stack repositories and it is centralized here in 
   # order to be easily maintained across modules. Because of this, please make sure you're not introducing any breaking 
   # changes when modifying this workflow.
   
-  name: "modules-chart-upgrade"
+  name: "modules-chart-update"
   
   on:
     workflow_call:
       inputs:
-        upgrade-strategy:
+        update-strategy:
           description: "Upgrade strategy to use. Valid values are 'major', 'minor' or 'patch'"
           type: string
           required: true
         excluded-dependencies:
-          description: "Comma-separated list of dependencies to exclude from upgrade (i.e. 'dependency1,dependency2,dependency3')"
+          description: "Comma-separated list of dependencies to exclude from the update (i.e. 'dependency1,dependency2,dependency3')"
           type: string
           required: false
           default: ""
         dry-run:
-          description: "Whether to run the upgrade in dry-run mode or not"
+          description: "Whether to run the update in dry-run mode or not"
           type: boolean
           required: false
           default: false
@@ -43,7 +43,7 @@
         id: find-charts
         run: cd charts && echo "charts=$(find . -maxdepth 2 -name 'Chart.yaml' -exec dirname {} \; | sed 's|^\./||' | sort -u | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
 
-    chart-upgrade:
+    chart-update:
       runs-on: ubuntu-latest
 
       needs: list-charts
@@ -66,63 +66,65 @@
         uses: actions/checkout@v3
 
       - name: "Upgrade Helm chart dependencies"
-        id: deps-upgrade
-        uses: camptocamp/helm-dependency-upgrade-action@v0.3.3
+        id: deps-update
+        uses: camptocamp/helm-dependency-update-action@v0.3.3
         with:
           chart-path: "charts/${{ matrix.chart-name }}"
           readme-path: "README.adoc"
           excluded-dependencies: ${{ inputs.excluded-dependencies }}
-          upgrade-strategy: "${{ inputs.upgrade-strategy }}"
+          update-strategy: "${{ inputs.update-strategy }}"
           dry-run: "${{ inputs.dry-run }}"
 
-      - name: "Create Pull Request for a minor/patch upgrade"
-        if: ${{ !inputs.dry-run && steps.deps-upgrade.outputs.upgrade-type != 'none' && !steps.deps-upgrade.outputs.upgrade-type != 'major' }}
+      - name: "Create Pull Request for a minor/patch update"
+        if: ${{ !inputs.dry-run && steps.deps-update.outputs.update-type != 'none' && !steps.deps-update.outputs.update-type != 'major' }}
         id: minor-pr
         uses: peter-evans/create-pull-request@v3
         env:
-          pr-title: "chore(chart): ${{ steps.deps-upgrade.outputs.upgrade-type }} upgrade of dependencies on ${{ matrix.chart-name }} chart"
-          branch: "chart-autoupgrade-${{ steps.deps-upgrade.outputs.upgrade-type }}-${{ matrix.chart-name }}"
-          labels: "chart-autoupgrade-${{ steps.deps-upgrade.outputs.upgrade-type }}"
+          pr-title: "feat(chart): ${{ steps.deps-update.outputs.update-type }} update of dependencies on ${{ matrix.chart-name }} chart"
+          branch: "chart-autoupdate-${{ steps.deps-update.outputs.update-type }}-${{ matrix.chart-name }}"
+          labels: "chart-autoupdate-${{ steps.deps-update.outputs.update-type }}"
 
         with:
           commit-message: ${{ env.pr-title }}
           committer: ${{ env.committer }}
-          branch: "chart-autoupgrade-${{ steps.deps-upgrade.outputs.upgrade-type }}-${{ matrix.chart-name }}"
+          branch: "chart-autoupdate-${{ steps.deps-update.outputs.update-type }}-${{ matrix.chart-name }}"
           title: ${{ env.pr-title }}
-          labels: "chart-autoupgrade-${{ steps.deps-upgrade.outputs.upgrade-type }}"
+          labels: "chart-autoupdate-${{ steps.deps-update.outputs.update-type }}"
           body: |
             :robot: I have updated the chart *beep* *boop*
             ---
 
             ## Description of the changes
 
-            This PR upgrades the dependencies of the **${{ matrix.chart-name }}** Helm chart. The maximum version bump was a **${{ steps.deps-upgrade.outputs.upgrade-type }}**.
+            This PR updates the dependencies of the **${{ matrix.chart-name }}** Helm chart.
+            
+            The maximum version bump was a **${{ steps.deps-update.outputs.update-type }}** step.
 
-      - name: "Create Pull Request for a major upgrade"
-        if: ${{ !inputs.dry-run && steps.deps-upgrade.outputs.upgrade-type != 'none' && steps.deps-upgrade.outputs.upgrade-type == 'major' }}
+      - name: "Create Pull Request for a major update"
+        if: ${{ !inputs.dry-run && steps.deps-update.outputs.update-type != 'none' && steps.deps-update.outputs.update-type == 'major' }}
         id: major-pr
         uses: peter-evans/create-pull-request@v3
         env:
-          pr-title: "chore!(chart): major upgrade of dependencies on ${{ matrix.chart-name }} chart"
+          pr-title: "feat!(chart): major update of dependencies on ${{ matrix.chart-name }} chart"
         with:
           commit-message: ${{ env.pr-title }}
           committer: ${{ env.committer }}
-          branch: "chart-autoupgrade-major-${{ matrix.chart-name }}"
+          branch: "chart-autoupdate-major-${{ matrix.chart-name }}"
           title: ${{ env.pr-title }}
-          labels: "chart-autoupgrade-major"
+          labels: "chart-autoupdate-major"
           body: |
             :robot: I have updated the chart *beep* *boop*
             ---
 
             ## Description of the changes
 
-            This PR upgrades the dependencies of the **${{ matrix.chart-name }}** Helm chart. .
+            This PR updates the dependencies of the **${{ matrix.chart-name }}** Helm chart. .
 
-            :warning: This was a **major** upgrade!. Please check the changelog of the updated dependencies and take notice of any breaking changes before merging. :warning:
+            :warning: This was a **major** update!. Please check the changelog of the updated dependencies and take notice of any breaking changes before merging. :warning:
 
     add-pr-to-project:
-      needs: chart-upgrade
-      if: ${{ needs.chart-upgrade.outputs.minor-pr-number || needs.chart-upgrade.outputs.major-pr-number }}
+      needs: chart-update
+      if: ${{ needs.chart-update.outputs.minor-pr-number || needs.chart-update.outputs.major-pr-number }}
       uses: camptocamp/devops-stack/.github/workflows/pr-issues-project.yaml@main
       secrets:
         PROJECT_APP_PRIVATE_KEY: ${{ secrets.PROJECT_APP_PRIVATE_KEY }}
