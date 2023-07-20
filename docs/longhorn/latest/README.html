@@ -37,7 +37,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="longhorn" data-version="v2.0.0">
+<div class="nav-container" data-component="longhorn" data-version="v2.1.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -63,7 +63,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">Longhorn Module</span>
-    <span class="version">v2.0.0</span>
+    <span class="version">v2.1.0</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -124,7 +124,10 @@
       <a class="title" href="../../argocd/latest/README.html">Argo CD Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../argocd/latest/README.html">v3.1.1</a>
+          <a href="../../argocd/latest/README.html">v3.1.2</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.1.1/README.html">v3.1.1</a>
         </li>
         <li class="version">
           <a href="../../argocd/v3.1.0/README.html">v3.1.0</a>
@@ -311,7 +314,10 @@
       <a class="title" href="../../kube-prometheus-stack/latest/README.html">kube-prometheus-stack Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../kube-prometheus-stack/latest/README.html">v5.0.0</a>
+          <a href="../../kube-prometheus-stack/latest/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v5.0.0/README.html">v5.0.0</a>
         </li>
         <li class="version">
           <a href="../../kube-prometheus-stack/v4.0.1/README.html">v4.0.1</a>
@@ -361,7 +367,10 @@
       <a class="title" href="../../loki/latest/README.html">Loki Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../loki/latest/README.html">v4.0.0</a>
+          <a href="../../loki/latest/README.html">v4.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v4.0.0/README.html">v4.0.0</a>
         </li>
         <li class="version">
           <a href="../../loki/v3.0.1/README.html">v3.0.1</a>
@@ -399,7 +408,10 @@
       <a class="title" href="README.html">Longhorn Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="README.html">v2.0.0</a>
+          <a href="README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../v2.0.0/README.html">v2.0.0</a>
         </li>
         <li class="version">
           <a href="../v1.0.0/README.html">v1.0.0</a>
@@ -432,7 +444,10 @@
       <a class="title" href="../../sks/latest/README.html">SKS Cluster Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../sks/latest/README.html">v1.0.0</a>
+          <a href="../../sks/latest/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../sks/v1.0.0/README.html">v1.0.0</a>
         </li>
       </ul>
     </li>
@@ -494,13 +509,14 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v2.0.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v2.1.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="README.html">v2.0.0</a>
+    <a class="version is-current" href="README.html">v2.1.0</a>
+    <a class="version" href="../v2.0.0/README.html">v2.0.0</a>
     <a class="version" href="../v1.0.0/README.html">v1.0.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-longhorn/blob/v2.0.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-longhorn/blob/v2.1.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -935,7 +951,7 @@ On the technical reference below you will find further customization options, su
 <p>Type: <code>string</code></p>
 </div>
 <div class="paragraph">
-<p>Default: <code>"v1.0.0"</code></p>
+<p>Default: <code>"v2.0.0"</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -1172,6 +1188,34 @@ On the technical reference below you will find further customization options, su
 <p>Default: <code>null</code></p>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_tolerations"><a class="anchor" href="#_tolerations"></a><a id="input_tolerations"></a> <a href="#input_tolerations">tolerations</a></h4>
+<div class="paragraph">
+<p>Description: Tolerations to be added to the core Longhorn components that manage storage on nodes. <strong>These tolerations are required if you want Longhorn to schedule storage on nodes that are tainted.</strong></p>
+</div>
+<div class="paragraph">
+<p>These settings only have an effect on the first deployment. If added at a later time, you need to also add them on the <em>Settings</em> tab in the Longhorn Dashboard. Check the <a href="https://longhorn.io/docs/latest/advanced-resources/deploy/taint-toleration/">official documentation</a> for more detailed information.</p>
+</div>
+<div class="paragraph">
+<p><strong>Only tolerations with the "Equal" operator are supported</strong>, because the Longhorn Helm chart expects a parsed list as a string in the <code>defaultSettings.taintToleration</code> value.</p>
+</div>
+<div class="paragraph">
+<p>Type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">list(object({
+    key      = string
+    operator = string
+    value    = string
+    effect   = string
+  }))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Default: <code>[]</code></p>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_outputs"><a class="anchor" href="#_outputs"></a>Outputs</h3>
@@ -1256,14 +1300,6 @@ On the technical reference below you will find further customization options, su
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="provider_utils"></a> <a href="#provider_utils">utils</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -1276,6 +1312,14 @@ On the technical reference below you will find further customization options, su
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>&gt;= 5</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1445,7 +1489,7 @@ On the technical reference below you will find further customization options, su
 <p><code>string</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"v1.0.0"</code></p>
+<p><code>"v2.0.0"</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
@@ -1732,6 +1776,36 @@ On the technical reference below you will find further customization options, su
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>null</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_tolerations"></a> <a href="#input_tolerations">tolerations</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Tolerations to be added to the core Longhorn components that manage storage on nodes. <strong>These tolerations are required if you want Longhorn to schedule storage on nodes that are tainted.</strong></p>
+</div>
+<div class="paragraph">
+<p>These settings only have an effect on the first deployment. If added at a later time, you need to also add them on the <em>Settings</em> tab in the Longhorn Dashboard. Check the <a href="https://longhorn.io/docs/latest/advanced-resources/deploy/taint-toleration/">official documentation</a> for more detailed information.</p>
+</div>
+<div class="paragraph">
+<p><strong>Only tolerations with the "Equal" operator are supported</strong>, because the Longhorn Helm chart expects a parsed list as a string in the <code>defaultSettings.taintToleration</code> value.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">list(object({
+    key      = string
+    operator = string
+    value    = string
+    effect   = string
+  }))</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>[]</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>

@@ -1,0 +1,1863 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>devops-stack-module-cluster-sks :: DevOps Stack</title>
+    <meta name="generator" content="Antora 3.1.2">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GDBX9466LL"></script>
+    <script>function gtag(){dataLayer.push(arguments)};window.dataLayer=window.dataLayer||[];gtag('js',new Date());gtag('config','G-GDBX9466LL')</script>
+    <script>var uiRootPath = '../../_'</script>
+    <link rel="icon" href="../../_/img/favicon.png" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://devops-stack.io"><img width="200px" src="../../_/img/devops-stack-logo_light_by_c2c_black.png"/></a>
+      <div class="navbar-item search hide-for-print">
+        <div id="search-field" class="field">
+          <input id="search-input" type="text" placeholder="Search the docs">
+        </div>
+      </div>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/camptocamp/devops-stack"><i class="fa fa-github-alt"></i>&nbsp;GitHub</a>
+        <a class="navbar-item" href="https://www.camptocamp.com">Camptocamp</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="sks" data-version="v1.0.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="README.html">SKS Cluster Module</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="README.html">Home</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><a href="https://github.com/camptocamp/devops-stack-module-cluster-sks" target="_blank" rel="noopener">Repository</a></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../latest/index.html"><em>Return to DevOps Stack docs</em></a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">SKS Cluster Module</span>
+    <span class="version">v1.0.0</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../aad-pod-identity/latest/README.html">AAD Pod Identity Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../aad-pod-identity/latest/README.html">v1.1.2</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../application/latest/README.html">Application Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../application/latest/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.2.3/README.html">v1.2.3</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.2.2/README.html">v1.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.2.1/README.html">v1.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.2.0/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.1.1/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../applicationset/latest/README.html">ApplicationSet Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../applicationset/latest/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.2.6/README.html">v1.2.6</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.2.5/README.html">v1.2.5</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.2.4/README.html">v1.2.4</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../argocd/latest/README.html">Argo CD Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../argocd/latest/README.html">v3.1.2</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.1.1/README.html">v3.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v1.1.2/README.html">v1.1.2</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v1.1.1/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../oidc-aws-cognito/latest/README.html">AWS Cognito OIDC Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../oidc-aws-cognito/latest/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../cert-manager/latest/README.html">cert-manager Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../cert-manager/latest/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v4.0.3/README.html">v4.0.3</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../latest/index.html">DevOps Stack</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../latest/index.html">v1.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.3.0/index.html">v1.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.2.0/index.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.0.2/index.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.0.1/index.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.0.0/index.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../dex/latest/README.html">Dex Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../dex/latest/README.html">v1.0.0-alpha.4</a>
+        </li>
+        <li class="version">
+          <a href="../../dex/v1.0.0-alpha.3/README.html">v1.0.0-alpha.3</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../ebs-csi-driver/latest/README.html">EBS CSI Driver Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../ebs-csi-driver/latest/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v1.0.2/README.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../efs-csi-driver/latest/README.html">EFS CSI Driver Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../efs-csi-driver/latest/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v1.0.2/README.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../eks/latest/README.html">EKS Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../eks/latest/README.html">v2.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../grafana/latest/README.html">Grafana Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../grafana/latest/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../keycloak/latest/README.html">Keycloak Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../keycloak/latest/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.1.1/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.0.2/README.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.0.1/README.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../kind/latest/README.html">KinD Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../kind/latest/README.html">v2.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../kind/v2.2.1/README.html">v2.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kind/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kind/v2.1.2/README.html">v2.1.2</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../kube-prometheus-stack/latest/README.html">kube-prometheus-stack Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../kube-prometheus-stack/latest/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v5.0.0/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v4.0.1/README.html">v4.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v4.0.0/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v3.3.0/README.html">v3.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.2.3/README.html">v2.2.3</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.2.2/README.html">v2.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.2.1/README.html">v2.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../loki/latest/README.html">Loki Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../loki/latest/README.html">v4.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v4.0.0/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v3.0.1/README.html">v3.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.0.2/README.html">v2.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../longhorn/latest/README.html">Longhorn Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../longhorn/latest/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../metallb/latest/README.html">MetalLB Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../metallb/latest/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../minio/latest/README.html">MinIO Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../minio/latest/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v1.1.2/README.html">v1.1.2</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../latest/README.html">SKS Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../latest/README.html">v1.1.0</a>
+        </li>
+        <li class="version is-current">
+          <a href="README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../thanos/latest/README.html">Thanos Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../thanos/latest/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v1.0.1/README.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../traefik/latest/README.html">Traefik Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../traefik/latest/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.2.3/README.html">v1.2.3</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.2.2/README.html">v1.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.2.1/README.html">v1.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.2.0/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="README.html">SKS Cluster Module</a></li>
+    <li><a href="README.html">Home</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">v1.0.0</button>
+  <div class="version-menu">
+    <a class="version" href="../latest/README.html">v1.1.0</a>
+    <a class="version is-current" href="README.html">v1.0.0</a>
+  </div>
+</div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-cluster-sks/blob/v1.0.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">devops-stack-module-cluster-sks</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <a href="https://devops-stack.io/">DevOps Stack</a> module to deploy a Kubernetes cluster on <a href="https://community.exoscale.com/documentation/sks/overview/">Exoscale SKS</a>.</p>
+</div>
+<div class="paragraph">
+<p>The module creates a Kubernetes cluster with the node pools passed as input. It also creates anti-affinity group for each node pool, a Network Load Balancer (NLB), and a security group for the entire cluster.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_usage"><a class="anchor" href="#_usage"></a>Usage</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This module can be used with the following declaration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-terraform hljs" data-lang="terraform">module "sks" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-cluster-sks.git?ref=v1.0.0"
+
+  cluster_name       = local.cluster_name
+  kubernetes_version = local.kubernetes_version
+  zone               = local.zone
+  base_domain        = local.base_domain
+
+  nodepools = {
+    "${local.cluster_name}-default" = {
+      size            = 3
+      instance_type   = "standard.large"
+      description     = "Default node pool for ${local.cluster_name}."
+      instance_prefix = "default"
+    },
+  }
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+A minimum of a single node pool with 3 nodes is required. See the <a href="#_persistent_volumes">Persistent Volumes</a> section for more information.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Multiple node pools and with more complex settings can be declared. The following example adds a node pool with a taint and label to be used exclusively for monitoring workloads:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-terraform hljs" data-lang="terraform">module "sks" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-cluster-sks.git?ref=v1.0.0"
+
+  cluster_name       = local.cluster_name
+  kubernetes_version = local.kubernetes_version
+  zone               = local.zone
+  base_domain        = local.base_domain
+
+  nodepools = {
+    "${local.cluster_name}-default" = {
+      size            = 3
+      instance_type   = "standard.large"
+      description     = "Default node pool for ${local.cluster_name}."
+      instance_prefix = "default"
+    },
+    "${local.cluster_name}-monitoring" = {
+      size            = 2
+      instance_type   = "standard.large"
+      description     = "Monitoring node pool for ${local.cluster_name}."
+      instance_prefix = "monitoring"
+      disk_size       = 150
+      labels = {
+        role = "monitoring"
+      }
+      taints = {
+        nodepool = "monitoring:NoSchedule"
+      }
+    },
+  }
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can consult the available instance types on the <a href="https://www.exoscale.com/pricing/#compute">Pricing page</a> of Exoscale. Note that not all instance types are available in all zones and take note of the <a href="https://community.exoscale.com/documentation/sks/overview/#limitations">these limitations of SKS</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_kubeconfig"><a class="anchor" href="#_kubeconfig"></a>Kubeconfig</h3>
+<div class="paragraph">
+<p>The module uses the <a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/sks_kubeconfig"><code>exoscale_sks_kubeconfig</code> resource</a> to get a Kubeconfig with administrator privileges on the cluster. We use this configuration file to parse the credentials needed to set the providers on the caller module.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If the variable <code>create_kubeconfig_file</code> is activated, a local file is created with the Kubeconfig content, which can be used to interact with the cluster. You can still get the Kubeconfig&#8217;s important values from the outputs <code>kubernetes_*</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The validity of the client certificate is limited to 30 days by default and the earliest time for renewal is 10 days. This means that if no <code>terraform apply</code> is run between the 10th and 30th days after the last <code>terraform apply</code>, the Kubeconfig will be invalid and the next on will fail. There are variables available to customize these values to suit your needs.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In the case that you have left your Kubeconfig pass the expiry time, you can still get a new one by running a targeted <code>terraform apply</code> on the module:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ terraform apply -target module.sks.exoscale_sks_kubeconfig.this</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_dns_and_the_base_domain_variable"><a class="anchor" href="#_dns_and_the_base_domain_variable"></a>DNS and the <code>base_domain</code> variable</h3>
+<div class="paragraph">
+<p>In production, this module requires a domain name to be passed in the <code>base_domain</code> variable. This module will take care to create a CNAME record that points to the NLB, using the cluster name as an hostname.</p>
+</div>
+<div class="paragraph">
+<p>The DNS zone should be created outside this module and it requires a DNS Subscription in the same Exoscale account. This can be added on the Exoscale portal, on the <em>DNS</em> tab. The subscription needs to be manually activated on the web interface, but it is recommended that the DNS zone is created on your root Terraform module.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Check the Terraform code of the <a href="../../latest/tutorials/deploy_eks.html" class="xref page">SKS example</a> to learn how to create the DNS zone.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>If no value is passed to the <code>base_domain</code> variable, the module will create a <a href="https://nip.io/">nip.io</a> domain prefixed with the IP of the NLB. You can check said domain in the <code>base_domain</code> output.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_network_load_balancer_and_ingress_traffic"><a class="anchor" href="#_network_load_balancer_and_ingress_traffic"></a>Network Load Balancer and ingress traffic</h3>
+<div class="paragraph">
+<p>The NLB is created in this module without any service associated. The NLB services are created by the Exoscale Cloud Controller Manager (CCM), which is deployed by default on SKS clusters. The CCM takes into account annotations on the <code>LoadBalancer</code> services to create the corresponding services on the NLB. These annotations are added by the <a href="../../traefik/latest/README.html" class="xref page">Traefik module</a> and for that reason you need to pass the outputs <code>nlb_id</code>, <code>router_nodepool_id</code> and <code>router_instance_pool_id</code> from this module to the Traefik module.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Check the official documentation of the <a href="https://github.com/exoscale/exoscale-cloud-controller-manager/blob/master/docs/service-loadbalancer.md/">CCM</a> and this <a href="https://www.exoscale.com/syslog/exoscale-kubernetes-cloud-controller-manager-release/">blog post</a> to learn more. An example is also provided by Exoscale on the <a href="https://community.exoscale.com/documentation/sks/loadbalancer-ingress/">SKS documentation</a>, which contains the required annotations as well was a few interesting comments.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_persistent_volumes"><a class="anchor" href="#_persistent_volumes"></a>Persistent Volumes</h3>
+<div class="paragraph">
+<p>This module requires that you deploy <a href="../../longhorn/latest/README.html" class="xref page">Longhorn</a> in order to have a way to provision persistent volumes for your workloads. We configured the Longhorn module to replicate the volumes at least 3 times throughout the available nodes. For that reason, you need to deploy at least a node pool with minimum 3 nodes.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_upgrading_the_cluster"><a class="anchor" href="#_upgrading_the_cluster"></a>Upgrading the cluster</h2>
+<div class="sectionbody">
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The <a href="https://community.exoscale.com/documentation/sks/lifecycle-management/">official documentation</a> is a good starting point to understand the upgrade process of SKS clusters.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_manual_upgrade_of_a_minor_kubernetes_version"><a class="anchor" href="#_manual_upgrade_of_a_minor_kubernetes_version"></a>Manual upgrade of a minor Kubernetes version</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>On your root Terraform code change the Kubernetes version deployed by your SKS module and do a <code>terraform apply</code>. This will upgrade the version of the control plane of the SKS cluster.</p>
+</li>
+<li>
+<p>Scale up all your node pools (router one included) through the <code>size</code> parameter on the <code>nodepools</code> and <code>router_nodepool</code> variables to twice their original size and do a <code>terraform apply</code>.</p>
+</li>
+<li>
+<p>Wait for all new nodes to be in a ready state and check that their Kubernetes version match the one you configured. Check in Longhorn Dashboard that all the nodes are schedulable. It is advised you to do a backup of all your volumes in case of troubles during the upgrade to avoid losing your applications persistent volumes.</p>
+</li>
+<li>
+<p>In the Longhorn dashboard, go to the <em>Volume</em> tab, select all your volumes and select <em>Update Replicas Count</em> action. In the dialog box, replace the actual replicas count of these volumes by twice your old schedulable node count (by default it&#8217;s 3) in order to replicate your volumes on the new nodes.</p>
+</li>
+<li>
+<p>Cordon all the old nodes and start draining them one by one using <code>kubectl drain --ignore-daemonsets --delete-emptydir-data --timeout=1m &lt;node_id&gt;</code>. This will move all the pods to the new nodes.</p>
+</li>
+<li>
+<p>When all the old nodes are drained and all pods are deployed to new nodes, do a <code>terraform refresh</code>. If you use a Keycloak module provisioned by Terraform with Keycloak provider you should have diffs on Keycloak&#8217;s resources. Apply them.</p>
+</li>
+<li>
+<p>Before deleting the old nodes, be sure to test and validate your cluster health! Once you&#8217;re confident enough, you can restore original node pool sizes in Terraform and apply. This will delete the old nodes.</p>
+</li>
+<li>
+<p>Finally, go to the Longhorn dashboard, restore the original replicas count for every volumes and check that every volumes are in healthy state.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+SKS instance pools will automatically choose cordoned nodes to delete in priority.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_technical_reference"><a class="anchor" href="#_technical_reference"></a>Technical Reference</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_requirements"><a class="anchor" href="#_requirements"></a>Requirements</h3>
+<div class="paragraph">
+<p>The following requirements are needed by this module:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="requirement_terraform"></a> <a href="#requirement_terraform">terraform</a> (&gt;= 1.0)</p>
+</li>
+<li>
+<p><a id="requirement_exoscale"></a> <a href="#requirement_exoscale">exoscale</a> (&gt;= 0.49)</p>
+</li>
+<li>
+<p><a id="requirement_external"></a> <a href="#requirement_external">external</a> (&gt;= 2.1)</p>
+</li>
+<li>
+<p><a id="requirement_kubernetes"></a> <a href="#requirement_kubernetes">kubernetes</a> (&gt;= 2.21)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_providers"><a class="anchor" href="#_providers"></a>Providers</h3>
+<div class="paragraph">
+<p>The following providers are used by this module:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="provider_exoscale"></a> <a href="#provider_exoscale">exoscale</a> (&gt;= 0.49)</p>
+</li>
+<li>
+<p><a id="provider_local"></a> <a href="#provider_local">local</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_resources"><a class="anchor" href="#_resources"></a>Resources</h3>
+<div class="paragraph">
+<p>The following resources are used by this module:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/anti_affinity_group">exoscale_anti_affinity_group.this</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/domain_record">exoscale_domain_record.wildcard_with_cluster_name</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/nlb">exoscale_nlb.this</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/security_group">exoscale_security_group.this</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/security_group_rule">exoscale_security_group_rule.all</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/security_group_rule">exoscale_security_group_rule.calico_traffic</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/security_group_rule">exoscale_security_group_rule.cilium_health_check</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/security_group_rule">exoscale_security_group_rule.cilium_health_check_icmp</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/security_group_rule">exoscale_security_group_rule.cilium_traffic</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/security_group_rule">exoscale_security_group_rule.http</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/security_group_rule">exoscale_security_group_rule.https</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/security_group_rule">exoscale_security_group_rule.nodeport_tcp_services</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/security_group_rule">exoscale_security_group_rule.nodeport_udp_services</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/security_group_rule">exoscale_security_group_rule.sks_logs</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/sks_cluster">exoscale_sks_cluster.this</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/sks_kubeconfig">exoscale_sks_kubeconfig.this</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/sks_nodepool">exoscale_sks_nodepool.this</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/sensitive_file">local_sensitive_file.sks_kubeconfig_file</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/data-sources/domain">exoscale_domain.this</a> (data source)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_required_inputs"><a class="anchor" href="#_required_inputs"></a>Required Inputs</h3>
+<div class="paragraph">
+<p>The following input variables are required:</p>
+</div>
+<div class="sect3">
+<h4 id="_cluster_name"><a class="anchor" href="#_cluster_name"></a><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></h4>
+<div class="paragraph">
+<p>Description: The name of the Kubernetes cluster to create.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_zone"><a class="anchor" href="#_zone"></a><a id="input_zone"></a> <a href="#input_zone">zone</a></h4>
+<div class="paragraph">
+<p>Description: The name of the zone where to deploy the SKS cluster. Available zones can be consulted <a href="https://community.exoscale.com/documentation/sks/overview/#availability">here</a>.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_kubernetes_version"><a class="anchor" href="#_kubernetes_version"></a><a id="input_kubernetes_version"></a> <a href="#input_kubernetes_version">kubernetes_version</a></h4>
+<div class="paragraph">
+<p>Description: Kubernetes version to use for the SKS cluster. See <code>exo compute sks versions</code> for reference. May only be set at creation time.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_optional_inputs"><a class="anchor" href="#_optional_inputs"></a>Optional Inputs</h3>
+<div class="paragraph">
+<p>The following input variables are optional (have default values):</p>
+</div>
+<div class="sect3">
+<h4 id="_base_domain"><a class="anchor" href="#_base_domain"></a><a id="input_base_domain"></a> <a href="#input_base_domain">base_domain</a></h4>
+<div class="paragraph">
+<p>Description: The base domain used for Ingresses. If not provided, nip.io will be used taking the NLB IP address.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>null</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_auto_upgrade"><a class="anchor" href="#_auto_upgrade"></a><a id="input_auto_upgrade"></a> <a href="#input_auto_upgrade">auto_upgrade</a></h4>
+<div class="paragraph">
+<p>Description: Enable automatic upgrade of the SKS cluster control plane.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>bool</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>false</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_service_level"><a class="anchor" href="#_service_level"></a><a id="input_service_level"></a> <a href="#input_service_level">service_level</a></h4>
+<div class="paragraph">
+<p>Description: Choose the service level for the SKS cluster. <em>Starter</em> can be used for test and development purposes, <em>Pro</em> is recommended for production workloads. The official documentation is available <a href="https://community.exoscale.com/documentation/sks/overview/#pricing-tiers">here</a>.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"pro"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_nodepools"><a class="anchor" href="#_nodepools"></a><a id="input_nodepools"></a> <a href="#input_nodepools">nodepools</a></h4>
+<div class="paragraph">
+<p>Description: Map containing the SKS node pools to create.</p>
+</div>
+<div class="paragraph">
+<p>Needs to be a map of maps, where the key is the name of the node pool and the value is a map containing at least the keys <code>instance_type</code> and <code>size</code>.
+The other keys are optional: <code>description</code>, <code>instance_prefix</code>, <code>disk_size</code>, <code>labels</code>, <code>taints</code> and <code>private_network_ids</code>. Check the official documentation <a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/sks_nodepool">here</a> for more information.</p>
+</div>
+<div class="paragraph">
+<p>Type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">map(object({
+    size                = number
+    instance_type       = string
+    description         = optional(string)
+    instance_prefix     = optional(string, "pool")
+    disk_size           = optional(number, 50)
+    labels              = optional(map(string), {})
+    taints              = optional(map(string), {})
+    private_network_ids = optional(list(string), [])
+  }))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Default: <code>null</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_router_nodepool"><a class="anchor" href="#_router_nodepool"></a><a id="input_router_nodepool"></a> <a href="#input_router_nodepool">router_nodepool</a></h4>
+<div class="paragraph">
+<p>Description: Configuration of the router node pool. The defaults of this variable are sensible and rarely need to be changed. <strong>The variable is mainly used to change the size of the node pool when doing cluster upgrades.</strong></p>
+</div>
+<div class="paragraph">
+<p>Type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">object({
+    size            = number
+    instance_type   = string
+    instance_prefix = optional(string, "router")
+    disk_size       = optional(number, 20)
+    labels          = optional(map(string), {})
+    taints = optional(map(string), {
+      nodepool = "router:NoSchedule"
+    })
+    private_network_ids = optional(list(string), [])
+  })</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Default:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "instance_type": "standard.small",
+  "size": 2
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_tcp_node_ports_world_accessible"><a class="anchor" href="#_tcp_node_ports_world_accessible"></a><a id="input_tcp_node_ports_world_accessible"></a> <a href="#input_tcp_node_ports_world_accessible">tcp_node_ports_world_accessible</a></h4>
+<div class="paragraph">
+<p>Description: Create a security group rule that allows world access to to NodePort TCP services. Recommended to leave open as per <a href="https://community.exoscale.com/documentation/sks/quick-start/#creating-a-cluster-from-the-cli">SKS documentation</a>.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>bool</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>true</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_udp_node_ports_world_accessible"><a class="anchor" href="#_udp_node_ports_world_accessible"></a><a id="input_udp_node_ports_world_accessible"></a> <a href="#input_udp_node_ports_world_accessible">udp_node_ports_world_accessible</a></h4>
+<div class="paragraph">
+<p>Description: Create a security group rule that allows world access to to NodePort UDP services.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>bool</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>false</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cni"><a class="anchor" href="#_cni"></a><a id="input_cni"></a> <a href="#input_cni">cni</a></h4>
+<div class="paragraph">
+<p>Description: Specify which CNI plugin to use (cannot be changed after the first deployment). Accepted values are <code>calico</code> or <code>cilium</code>. This module creates the required security group rules.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"cilium"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_kubeconfig_ttl"><a class="anchor" href="#_kubeconfig_ttl"></a><a id="input_kubeconfig_ttl"></a> <a href="#input_kubeconfig_ttl">kubeconfig_ttl</a></h4>
+<div class="paragraph">
+<p>Description: Validity period of the Kubeconfig file in seconds. See <a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/sks_kubeconfig#ttl_seconds">official documentation</a> for more information.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>number</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>0</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_kubeconfig_early_renewal"><a class="anchor" href="#_kubeconfig_early_renewal"></a><a id="input_kubeconfig_early_renewal"></a> <a href="#input_kubeconfig_early_renewal">kubeconfig_early_renewal</a></h4>
+<div class="paragraph">
+<p>Description: Renew the Kubeconfig file if its age is older than this value in seconds. See <a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/sks_kubeconfig#early_renewal_seconds">official documentation</a> for more information.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>number</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>0</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_create_kubeconfig_file"><a class="anchor" href="#_create_kubeconfig_file"></a><a id="input_create_kubeconfig_file"></a> <a href="#input_create_kubeconfig_file">create_kubeconfig_file</a></h4>
+<div class="paragraph">
+<p>Description: Create a Kubeconfig file in the directory where <code>terraform apply</code> is run. The file will be named <code>&lt;cluster_name&gt;-config.yaml</code>.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>bool</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>false</code></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_outputs"><a class="anchor" href="#_outputs"></a>Outputs</h3>
+<div class="paragraph">
+<p>The following outputs are exported:</p>
+</div>
+<div class="sect3">
+<h4 id="_cluster_name_2"><a class="anchor" href="#_cluster_name_2"></a><a id="output_cluster_name"></a> <a href="#output_cluster_name">cluster_name</a></h4>
+<div class="paragraph">
+<p>Description: Name of the SKS cluster.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_base_domain_2"><a class="anchor" href="#_base_domain_2"></a><a id="output_base_domain"></a> <a href="#output_base_domain">base_domain</a></h4>
+<div class="paragraph">
+<p>Description: The base domain for the SKS cluster.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cluster_id"><a class="anchor" href="#_cluster_id"></a><a id="output_cluster_id"></a> <a href="#output_cluster_id">cluster_id</a></h4>
+<div class="paragraph">
+<p>Description: ID of the SKS cluster.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_nlb_ip_address"><a class="anchor" href="#_nlb_ip_address"></a><a id="output_nlb_ip_address"></a> <a href="#output_nlb_ip_address">nlb_ip_address</a></h4>
+<div class="paragraph">
+<p>Description: IP address of the Network Load Balancer.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_nlb_id"><a class="anchor" href="#_nlb_id"></a><a id="output_nlb_id"></a> <a href="#output_nlb_id">nlb_id</a></h4>
+<div class="paragraph">
+<p>Description: ID of the Network Load Balancer.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_router_nodepool_id"><a class="anchor" href="#_router_nodepool_id"></a><a id="output_router_nodepool_id"></a> <a href="#output_router_nodepool_id">router_nodepool_id</a></h4>
+<div class="paragraph">
+<p>Description: ID of the node pool specifically created for Traefik.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_router_instance_pool_id"><a class="anchor" href="#_router_instance_pool_id"></a><a id="output_router_instance_pool_id"></a> <a href="#output_router_instance_pool_id">router_instance_pool_id</a></h4>
+<div class="paragraph">
+<p>Description: Instance pool ID of the node pool specifically created for Traefik.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cluster_security_group_id"><a class="anchor" href="#_cluster_security_group_id"></a><a id="output_cluster_security_group_id"></a> <a href="#output_cluster_security_group_id">cluster_security_group_id</a></h4>
+<div class="paragraph">
+<p>Description: Security group ID attached to the SKS nodepool instances.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_kubernetes_host"><a class="anchor" href="#_kubernetes_host"></a><a id="output_kubernetes_host"></a> <a href="#output_kubernetes_host">kubernetes_host</a></h4>
+<div class="paragraph">
+<p>Description: Endpoint for your Kubernetes API server.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_kubernetes_cluster_ca_certificate"><a class="anchor" href="#_kubernetes_cluster_ca_certificate"></a><a id="output_kubernetes_cluster_ca_certificate"></a> <a href="#output_kubernetes_cluster_ca_certificate">kubernetes_cluster_ca_certificate</a></h4>
+<div class="paragraph">
+<p>Description: Certificate Authority required to communicate with the cluster.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_kubernetes_client_key"><a class="anchor" href="#_kubernetes_client_key"></a><a id="output_kubernetes_client_key"></a> <a href="#output_kubernetes_client_key">kubernetes_client_key</a></h4>
+<div class="paragraph">
+<p>Description: Certificate Client Key required to communicate with the cluster.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_kubernetes_client_certificate"><a class="anchor" href="#_kubernetes_client_certificate"></a><a id="output_kubernetes_client_certificate"></a> <a href="#output_kubernetes_client_certificate">kubernetes_client_certificate</a></h4>
+<div class="paragraph">
+<p>Description: Certificate Client Certificate required to communicate with the cluster.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_raw_kubeconfig"><a class="anchor" href="#_raw_kubeconfig"></a><a id="output_raw_kubeconfig"></a> <a href="#output_raw_kubeconfig">raw_kubeconfig</a></h4>
+<div class="paragraph">
+<p>Description: Raw <code>.kube/config</code> file for <code>kubectl</code> access.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_reference_in_table_format"><a class="anchor" href="#_reference_in_table_format"></a>Reference in table format</h3>
+<details>
+<summary class="title">Show tables</summary>
+<div class="content">
+<div class="paragraph">
+<p>= Requirements</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_terraform"></a> <a href="#requirement_terraform">terraform</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 1.0</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_exoscale"></a> <a href="#requirement_exoscale">exoscale</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 0.49</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_external"></a> <a href="#requirement_external">external</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 2.1</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_kubernetes"></a> <a href="#requirement_kubernetes">kubernetes</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 2.21</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>= Providers</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_exoscale"></a> <a href="#provider_exoscale">exoscale</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 0.49</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_local"></a> <a href="#provider_local">local</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>= Resources</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/anti_affinity_group">exoscale_anti_affinity_group.this</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/domain_record">exoscale_domain_record.wildcard_with_cluster_name</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/nlb">exoscale_nlb.this</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/security_group">exoscale_security_group.this</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/security_group_rule">exoscale_security_group_rule.all</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/security_group_rule">exoscale_security_group_rule.calico_traffic</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/security_group_rule">exoscale_security_group_rule.cilium_health_check</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/security_group_rule">exoscale_security_group_rule.cilium_health_check_icmp</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/security_group_rule">exoscale_security_group_rule.cilium_traffic</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/security_group_rule">exoscale_security_group_rule.http</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/security_group_rule">exoscale_security_group_rule.https</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/security_group_rule">exoscale_security_group_rule.nodeport_tcp_services</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/security_group_rule">exoscale_security_group_rule.nodeport_udp_services</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/security_group_rule">exoscale_security_group_rule.sks_logs</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/sks_cluster">exoscale_sks_cluster.this</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/sks_kubeconfig">exoscale_sks_kubeconfig.this</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/sks_nodepool">exoscale_sks_nodepool.this</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/sensitive_file">local_sensitive_file.sks_kubeconfig_file</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/data-sources/domain">exoscale_domain.this</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>data source</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>= Inputs</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The name of the Kubernetes cluster to create.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_base_domain"></a> <a href="#input_base_domain">base_domain</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The base domain used for Ingresses. If not provided, nip.io will be used taking the NLB IP address.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>null</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_zone"></a> <a href="#input_zone">zone</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The name of the zone where to deploy the SKS cluster. Available zones can be consulted <a href="https://community.exoscale.com/documentation/sks/overview/#availability">here</a>.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_kubernetes_version"></a> <a href="#input_kubernetes_version">kubernetes_version</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Kubernetes version to use for the SKS cluster. See <code>exo compute sks versions</code> for reference. May only be set at creation time.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_auto_upgrade"></a> <a href="#input_auto_upgrade">auto_upgrade</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Enable automatic upgrade of the SKS cluster control plane.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>bool</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>false</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_service_level"></a> <a href="#input_service_level">service_level</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Choose the service level for the SKS cluster. <em>Starter</em> can be used for test and development purposes, <em>Pro</em> is recommended for production workloads. The official documentation is available <a href="https://community.exoscale.com/documentation/sks/overview/#pricing-tiers">here</a>.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>"pro"</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_nodepools"></a> <a href="#input_nodepools">nodepools</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Map containing the SKS node pools to create.
+Needs to be a map of maps, where the key is the name of the node pool and the value is a map containing at least the keys <code>instance_type</code> and <code>size</code>.
+The other keys are optional: <code>description</code>, <code>instance_prefix</code>, <code>disk_size</code>, <code>labels</code>, <code>taints</code> and <code>private_network_ids</code>. Check the official documentation <a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/sks_nodepool">here</a> for more information.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">map(object({
+    size                = number
+    instance_type       = string
+    description         = optional(string)
+    instance_prefix     = optional(string, "pool")
+    disk_size           = optional(number, 50)
+    labels              = optional(map(string), {})
+    taints              = optional(map(string), {})
+    private_network_ids = optional(list(string), [])
+  }))</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>null</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_router_nodepool"></a> <a href="#input_router_nodepool">router_nodepool</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Configuration of the router node pool. The defaults of this variable are sensible and rarely need to be changed. <strong>The variable is mainly used to change the size of the node pool when doing cluster upgrades.</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">object({
+    size            = number
+    instance_type   = string
+    instance_prefix = optional(string, "router")
+    disk_size       = optional(number, 20)
+    labels          = optional(map(string), {})
+    taints = optional(map(string), {
+      nodepool = "router:NoSchedule"
+    })
+    private_network_ids = optional(list(string), [])
+  })</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">{
+  "instance_type": "standard.small",
+  "size": 2
+}</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_tcp_node_ports_world_accessible"></a> <a href="#input_tcp_node_ports_world_accessible">tcp_node_ports_world_accessible</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Create a security group rule that allows world access to to NodePort TCP services. Recommended to leave open as per <a href="https://community.exoscale.com/documentation/sks/quick-start/#creating-a-cluster-from-the-cli">SKS documentation</a>.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>bool</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>true</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_udp_node_ports_world_accessible"></a> <a href="#input_udp_node_ports_world_accessible">udp_node_ports_world_accessible</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Create a security group rule that allows world access to to NodePort UDP services.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>bool</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>false</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_cni"></a> <a href="#input_cni">cni</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Specify which CNI plugin to use (cannot be changed after the first deployment). Accepted values are <code>calico</code> or <code>cilium</code>. This module creates the required security group rules.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>"cilium"</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_kubeconfig_ttl"></a> <a href="#input_kubeconfig_ttl">kubeconfig_ttl</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Validity period of the Kubeconfig file in seconds. See <a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/sks_kubeconfig#ttl_seconds">official documentation</a> for more information.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>number</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>0</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_kubeconfig_early_renewal"></a> <a href="#input_kubeconfig_early_renewal">kubeconfig_early_renewal</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Renew the Kubeconfig file if its age is older than this value in seconds. See <a href="https://registry.terraform.io/providers/exoscale/exoscale/latest/docs/resources/sks_kubeconfig#early_renewal_seconds">official documentation</a> for more information.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>number</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>0</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_create_kubeconfig_file"></a> <a href="#input_create_kubeconfig_file">create_kubeconfig_file</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Create a Kubeconfig file in the directory where <code>terraform apply</code> is run. The file will be named <code>&lt;cluster_name&gt;-config.yaml</code>.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>bool</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>false</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>= Outputs</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_cluster_name"></a> <a href="#output_cluster_name">cluster_name</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Name of the SKS cluster.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_base_domain"></a> <a href="#output_base_domain">base_domain</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The base domain for the SKS cluster.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_cluster_id"></a> <a href="#output_cluster_id">cluster_id</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>ID of the SKS cluster.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_nlb_ip_address"></a> <a href="#output_nlb_ip_address">nlb_ip_address</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>IP address of the Network Load Balancer.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_nlb_id"></a> <a href="#output_nlb_id">nlb_id</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>ID of the Network Load Balancer.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_router_nodepool_id"></a> <a href="#output_router_nodepool_id">router_nodepool_id</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>ID of the node pool specifically created for Traefik.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_router_instance_pool_id"></a> <a href="#output_router_instance_pool_id">router_instance_pool_id</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Instance pool ID of the node pool specifically created for Traefik.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_cluster_security_group_id"></a> <a href="#output_cluster_security_group_id">cluster_security_group_id</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Security group ID attached to the SKS nodepool instances.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_kubernetes_host"></a> <a href="#output_kubernetes_host">kubernetes_host</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Endpoint for your Kubernetes API server.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_kubernetes_cluster_ca_certificate"></a> <a href="#output_kubernetes_cluster_ca_certificate">kubernetes_cluster_ca_certificate</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Certificate Authority required to communicate with the cluster.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_kubernetes_client_key"></a> <a href="#output_kubernetes_client_key">kubernetes_client_key</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Certificate Client Key required to communicate with the cluster.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_kubernetes_client_certificate"></a> <a href="#output_kubernetes_client_certificate">kubernetes_client_certificate</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Certificate Client Certificate required to communicate with the cluster.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_raw_kubeconfig"></a> <a href="#output_raw_kubeconfig">raw_kubeconfig</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Raw <code>.kube/config</code> file for <code>kubectl</code> access.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>Copyright © Camptocamp <script> document.write(new Date().getFullYear()) </script> — All Rights Reserved</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/terraform.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/vendor/lunr.js"></script>
+<script src="../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../.." data-snippet-length="100" data-stylesheet="../../_/css/search.css"></script>
+<script async src="../../search-index.js"></script>
+  </body>
+</html>
