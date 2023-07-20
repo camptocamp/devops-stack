@@ -3,11 +3,7 @@ output "kubeconfig_file" {
   value     = module.scaleway.kubeconfig_file
 }
 
-#output "lb_ip_address" {
-#  value = scaleway_lb_ip.this.ip_address
-#}
-#
-#output "lb_id" {
-#  value = scaleway_lb.this.id
-#}
+output "base_domain" {
+  value = module.scaleway.base_domain
+}
 

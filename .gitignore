@@ -11,4 +11,8 @@ examples/*/terraform.tfstate*
 examples/*/.terraform.lock.hcl
 examples/*/kubeconfig.yml
 examples/*/issue.txt
+examples/*/log.txt
+examples/*/*.png
+examples/*/*.html
+examples/*/issuers.yml
 **/*.swp

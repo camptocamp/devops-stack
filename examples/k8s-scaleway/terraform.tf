@@ -6,7 +6,7 @@ terraform {
 
     argocd = {
       source  = "oboukili/argocd"
-      version = "4.0.0"
+      version = "4.2.0"
     }
     keycloak = {
       source = "mrparkers/keycloak"
