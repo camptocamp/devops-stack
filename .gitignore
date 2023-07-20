@@ -5,6 +5,7 @@ examples/*/terraform.tfstate
 examples/*/terraform.tfstate.*
 examples/*/.terraform.tfstate.lock.info
 examples/*/*-config
+examples/*/secrets.yml
 examples/*/.terraform.lock.hcl
 
 
@@ -16,6 +17,14 @@ public
 
 ### Antora
 build/
+
+examples/*/kubeconfig.yml
+examples/*/issue.txt
+examples/*/log.txt
+examples/*/*.png
+examples/*/*.html
+examples/*/issuers.yml
+**/*.swp
 docs_test
 
 ### VS Code
