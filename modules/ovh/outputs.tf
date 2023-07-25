@@ -21,7 +21,3 @@ output "kubeconfig" {
   value     = ovh_cloud_project_kube.k8s_cluster.kubeconfig
   sensitive = true
 }
-
-output "openstackID" {
-  value = one(ovh_cloud_project_network_private.network.regions_attributes[*].openstackid)
-}
