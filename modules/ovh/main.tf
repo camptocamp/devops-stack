@@ -49,6 +49,7 @@ resource "ovh_cloud_project_kube_nodepool" "k8s_node_pool" {
   desired_nodes = var.desired_nodes
   max_nodes     = var.max_nodes
   min_nodes     = var.min_nodes
+  autoscale     = true
 
   depends_on = [ovh_cloud_project_kube.k8s_cluster]
 }
