@@ -3,7 +3,6 @@ locals {
   cluster_name           = local.env
   cluster_issuer         = "letsencrypt-stagging"
   base_domain            = format("%s.%s", local.env, "qalita.io")
-  vlan_id                = 10
   enable_service_monitor = false
 
   context                           = yamldecode(module.cluster.kubeconfig)
@@ -71,7 +70,6 @@ module "cluster" {
 
   source = "git::https://github.com/qalita-io/devops-stack.git//modules/ovh?ref=ovh"
 
-  vlan_id             = local.vlan_id
   vlan_name           = format("%s-net", local.cluster_name)
   vlan_subnet_start   = "192.168.168.100"
   vlan_subnet_end     = "192.168.168.200"

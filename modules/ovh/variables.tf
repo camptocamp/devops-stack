@@ -33,11 +33,6 @@ variable "min_nodes" {
   type        = number
 }
 
-variable "vlan_id" {
-  description = "The virtual network ID"
-  type        = number
-}
-
 variable "vlan_name" {
   description = "The Name of the virtual network"
   type        = string

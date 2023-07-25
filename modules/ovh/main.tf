@@ -8,7 +8,6 @@ locals {
 
 # 1. Création du réseau privé
 resource "ovh_cloud_project_network_private" "network" {
-  vlan_id = var.vlan_id
   name    = var.vlan_name
   regions = [var.cluster_region]
 }
