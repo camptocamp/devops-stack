@@ -9,11 +9,14 @@ on:
 jobs:
   release-please:
     runs-on: ubuntu-latest
-
+    outputs:
+      releases_created: ${{ steps.release-please.outputs.releases_created }}
     steps:
     - uses: google-github-actions/release-please-action@v3
       id: release-please
       with:
         release-type: simple
+        labels: "autorelease-pending"
+        release-labels: "autorelease-tagged"
         pull-request-title-pattern: "chore: release ${version}"
         bump-minor-pre-major: true
