@@ -109,7 +109,7 @@ module "keycloak" {
 }
 
 module "oidc" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak//oidc_bootstrap?ref=v1.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak//oidc_bootstrap?ref=v2.0.1"
 
   cluster_name   = local.cluster_name
   base_domain    = local.base_domain
