@@ -1,119 +1,118 @@
 ---
-  # GitHub Actions workflow to update the Helm chart dependencies on our modules.
-  #
-  # IMPORTANT: This workflow is called by other workflows in our DevOps Stack repositories and it is centralized here in 
-  # order to be easily maintained across modules. Because of this, please make sure you're not introducing any breaking 
-  # changes when modifying this workflow.
-  
-  name: "modules-chart-update"
-  
-  on:
-    workflow_call:
-      inputs:
-        update-strategy:
-          description: "Upgrade strategy to use. Valid values are 'major', 'minor' or 'patch'"
-          type: string
-          required: true
-        excluded-dependencies:
-          description: "Comma-separated list of dependencies to exclude from the update (i.e. 'dependency1,dependency2,dependency3')"
-          type: string
-          required: false
-          default: ""
-        dry-run:
-          description: "Whether to run the update in dry-run mode or not"
-          type: boolean
-          required: false
-          default: false
+# GitHub Actions workflow to update the Helm chart dependencies on our modules.
+#
+# IMPORTANT: This workflow is called by other workflows in our DevOps Stack repositories and it is centralized here in 
+# order to be easily maintained across modules. Because of this, please make sure you're not introducing any breaking 
+# changes when modifying this workflow.
 
-  jobs:
-    list-charts:
-      runs-on: ubuntu-latest
-      outputs:
-        charts: ${{ steps.find-charts.outputs.charts }}
-      
-      steps:
-      - name: "Check out the repository"
-        uses: actions/checkout@v3
-      
-      - name: "List charts in the ./charts folder"
-        id: find-charts
-        run: cd charts && echo "charts=$(find . -maxdepth 2 -name 'Chart.yaml' -exec dirname {} \; | sed 's|^\./||' | sort -u | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
+name: "modules-chart-update"
 
-    chart-update:
-      runs-on: ubuntu-latest
+on:
+  workflow_call:
+    inputs:
+      update-strategy:
+        description: "Upgrade strategy to use. Valid values are 'major', 'minor' or 'patch'"
+        type: string
+        required: true
+      excluded-dependencies:
+        description: "Comma-separated list of dependencies to exclude from the update (i.e. 'dependency1,dependency2,dependency3')"
+        type: string
+        required: false
+        default: ""
+      dry-run:
+        description: "Whether to run the update in dry-run mode or not"
+        type: boolean
+        required: false
+        default: false
 
-      needs: list-charts
-      
-      # Pass the PR number output to activate the add-pr-to-project job only if a PR is created.
-      outputs:
-        minor-pr-number: ${{ steps.minor-pr.outputs.pull-request-number }}
-        major-pr-number: ${{ steps.major-pr.outputs.pull-request-number }}
+jobs:
+  list-charts:
+    runs-on: ubuntu-latest
 
-      strategy:
-        matrix:
-          chart-name: ${{ fromJson(needs.list-charts.outputs.charts) }}
+    outputs:
+      charts: ${{ steps.find-charts.outputs.charts }}
+    
+    steps:
+    - name: "Check out the repository"
+      uses: actions/checkout@v3
+    
+    - name: "List charts in the ./charts folder"
+      id: find-charts
+      run: cd charts && echo "charts=$(find . -maxdepth 2 -name 'Chart.yaml' -exec dirname {} \; | sed 's|^\./||' | sort -u | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
 
-      # Define global settings for both PR steps.
+  chart-update:
+    runs-on: ubuntu-latest
+
+    needs: list-charts
+
+    strategy:
+      matrix:
+        chart-name: ${{ fromJson(needs.list-charts.outputs.charts) }}
+
+    # Define global settings for both PR steps.
+    env:
+      author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
+
+    steps:
+    - name: "Check out the repository"
+      uses: actions/checkout@v3
+
+    - name: "Upgrade Helm chart dependencies"
+      id: deps-update
+      uses: camptocamp/helm-dependency-update-action@v0.4.0
+      with:
+        chart-path: "charts/${{ matrix.chart-name }}"
+        readme-path: "README.adoc"
+        excluded-dependencies: ${{ inputs.excluded-dependencies }}
+        update-strategy: "${{ inputs.update-strategy }}"
+        dry-run: "${{ inputs.dry-run }}"
+
+    - name: "Create Pull Request for a minor/patch update"
+      if: ${{ !inputs.dry-run && steps.deps-update.outputs.update-type != 'none' && steps.deps-update.outputs.update-type != 'major' }}
+      id: minor-pr
+      uses: peter-evans/create-pull-request@v5
       env:
-        committer: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
+        pr-title: "feat(chart): ${{ steps.deps-update.outputs.update-type }} update of dependencies on ${{ matrix.chart-name }} chart"
+        branch: "chart-autoupdate-${{ steps.deps-update.outputs.update-type }}-${{ matrix.chart-name }}"
+        labels: "chart-autoupdate-${{ steps.deps-update.outputs.update-type }}"
+      with:
+        commit-message: ${{ env.pr-title }}
+        author: ${{ env.author }}
+        committer: ${{ env.author }}
+        branch: "chart-autoupdate-${{ steps.deps-update.outputs.update-type }}-${{ matrix.chart-name }}"
+        title: ${{ env.pr-title }}
+        labels: "chart-autoupdate-${{ steps.deps-update.outputs.update-type }}"
+        body: |
+          :robot: I have updated the chart *beep* *boop*
+          ---
 
-      steps:
-      - name: "Check out the repository"
-        uses: actions/checkout@v3
+          ## Description of the changes
 
-      - name: "Upgrade Helm chart dependencies"
-        id: deps-update
-        uses: camptocamp/helm-dependency-update-action@v0.4.0
-        with:
-          chart-path: "charts/${{ matrix.chart-name }}"
-          readme-path: "README.adoc"
-          excluded-dependencies: ${{ inputs.excluded-dependencies }}
-          update-strategy: "${{ inputs.update-strategy }}"
-          dry-run: "${{ inputs.dry-run }}"
+          This PR updates the dependencies of the **${{ matrix.chart-name }}** Helm chart.
+          
+          The maximum version bump was a **${{ steps.deps-update.outputs.update-type }}** step.
 
-      - name: "Create Pull Request for a minor/patch update"
-        if: ${{ !inputs.dry-run && steps.deps-update.outputs.update-type != 'none' && steps.deps-update.outputs.update-type != 'major' }}
-        id: minor-pr
-        uses: peter-evans/create-pull-request@v3
-        env:
-          pr-title: "feat(chart): ${{ steps.deps-update.outputs.update-type }} update of dependencies on ${{ matrix.chart-name }} chart"
-          branch: "chart-autoupdate-${{ steps.deps-update.outputs.update-type }}-${{ matrix.chart-name }}"
-          labels: "chart-autoupdate-${{ steps.deps-update.outputs.update-type }}"
+    - name: "Create Pull Request for a major update"
+      if: ${{ !inputs.dry-run && steps.deps-update.outputs.update-type != 'none' && steps.deps-update.outputs.update-type == 'major' }}
+      id: major-pr
+      uses: peter-evans/create-pull-request@v5
+      env:
+        # This step does not have a branch and labels environment variable, because it is forcefully a major update, 
+        # unlike the previous step, which can either be a patch, minor or major update.
+        pr-title: "feat!(chart): major update of dependencies on ${{ matrix.chart-name }} chart"
+      with:
+        commit-message: ${{ env.pr-title }}
+        author: ${{ env.author }}
+        committer: ${{ env.author }}
+        branch: "chart-autoupdate-major-${{ matrix.chart-name }}"
+        title: ${{ env.pr-title }}
+        labels: "chart-autoupdate-major"
+        body: |
+          :robot: I have updated the chart *beep* *boop*
+          ---
 
-        with:
-          commit-message: ${{ env.pr-title }}
-          committer: ${{ env.committer }}
-          branch: "chart-autoupdate-${{ steps.deps-update.outputs.update-type }}-${{ matrix.chart-name }}"
-          title: ${{ env.pr-title }}
-          labels: "chart-autoupdate-${{ steps.deps-update.outputs.update-type }}"
-          body: |
-            :robot: I have updated the chart *beep* *boop*
-            ---
+          ## Description of the changes
 
-            ## Description of the changes
+          This PR updates the dependencies of the **${{ matrix.chart-name }}** Helm chart. .
 
-            This PR updates the dependencies of the **${{ matrix.chart-name }}** Helm chart.
-            
-            The maximum version bump was a **${{ steps.deps-update.outputs.update-type }}** step.
-
-      - name: "Create Pull Request for a major update"
-        if: ${{ !inputs.dry-run && steps.deps-update.outputs.update-type != 'none' && steps.deps-update.outputs.update-type == 'major' }}
-        id: major-pr
-        uses: peter-evans/create-pull-request@v3
-        env:
-          pr-title: "feat!(chart): major update of dependencies on ${{ matrix.chart-name }} chart"
-        with:
-          commit-message: ${{ env.pr-title }}
-          committer: ${{ env.committer }}
-          branch: "chart-autoupdate-major-${{ matrix.chart-name }}"
-          title: ${{ env.pr-title }}
-          labels: "chart-autoupdate-major"
-          body: |
-            :robot: I have updated the chart *beep* *boop*
-            ---
-
-            ## Description of the changes
-
-            This PR updates the dependencies of the **${{ matrix.chart-name }}** Helm chart. .
-
-            :warning: This was a **major** update! Please check the changelog of the updated dependencies and **take notice of any breaking changes before merging**. :warning:
+          :warning: This was a **major** update! Please check the changelog of the updated dependencies and **take notice of any breaking changes before merging**. :warning:
