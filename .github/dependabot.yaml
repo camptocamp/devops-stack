@@ -4,10 +4,10 @@ updates:
 - package-ecosystem: "github-actions"
   directory: "/"
   schedule:
-    # Check for updates to GitHub Actions every week
+    # Check for updated GitHub Actions every week
     interval: "weekly"
 - package-ecosystem: "terraform"
-  directory: "/examples/kind"
+  directory: "/examples/kind" # TODO Add other examples when we are sure everything works
   schedule:
-    # Check for updates to Terraform modules every week
-    interval: "weekly"
+    # Check for updated Terraform modules daily
+    interval: "daily"
