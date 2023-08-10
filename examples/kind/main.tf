@@ -20,12 +20,10 @@ provider "helm" {
 }
 
 provider "argocd" {
-  server_addr                 = "127.0.0.1:8080"
   auth_token                  = module.argocd_bootstrap.argocd_auth_token
+  port_forward_with_namespace = module.argocd_bootstrap.argocd_namespace
   insecure                    = true
   plain_text                  = true
-  port_forward                = true
-  port_forward_with_namespace = module.argocd_bootstrap.argocd_namespace
   kubernetes {
     host                   = module.kind.parsed_kubeconfig.host
     client_certificate     = module.kind.parsed_kubeconfig.client_certificate
