@@ -95,7 +95,7 @@ module "cert-manager" {
 }
 
 module "keycloak" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak?ref=v1.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak?ref=v2.0.1"
 
   cluster_name     = local.cluster_name
   base_domain      = local.base_domain
