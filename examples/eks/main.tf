@@ -23,48 +23,6 @@ module "vpc" {
   }
 }
 
-resource "aws_cognito_user_pool" "pool" {
-  name = module.eks.cluster_name
-}
-
-resource "aws_cognito_user_pool_domain" "pool_domain" {
-  domain       = module.eks.cluster_name
-  user_pool_id = aws_cognito_user_pool.pool.id
-}
-
-resource "aws_cognito_user_group" "argocd_admin_group" {
-  name         = "argocd-admin"
-  user_pool_id = aws_cognito_user_pool.pool.id
-  description  = "Users with admin access to Argo CD"
-}
-
-/* Available only in provider hashicorp/aws >= v4.0.0
-resource "random_string" "admin_password" {
-  length  = 25
-  special = false
-} # TODO create an output for this password
-
-resource "aws_cognito_user" "admin" {
-  user_pool_id = aws_cognito_user_pool.admin.id
-  username = admin
-  password = random_string.admin_password.result
-
-  message_action = SUPRESS # Do not send welcome message since password is hardcoded and email is non-existant
-
-  attributes = {
-    email = "admin@example.org"
-    email_verified = true
-    terraform = true
-  }
-}
-
-resource "aws_cognito_user_in_group" "add_admin_argocd_admin" {
-  user_pool_id = aws_cognito_user_pool.admin.id
-  group_name   = aws_cognito_user_group.argocd_admin_group.name
-  username     = aws_cognito_user.admin.username
-}
-*/
-
 module "eks" {
   source = "git::https://github.com/camptocamp/devops-stack-module-cluster-eks.git?ref=v2.0.2"
 
@@ -142,18 +100,6 @@ module "ingress" {
   base_domain      = module.eks.base_domain
 
   depends_on = [module.argocd_bootstrap]
-}
-
-module "oidc" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-oidc-aws-cognito.git?ref=v1.0.0"
-
-  cluster_name = module.eks.cluster_name
-  base_domain  = module.eks.base_domain
-
-  cognito_user_pool_id     = aws_cognito_user_pool.pool.id
-  cognito_user_pool_domain = aws_cognito_user_pool_domain.pool_domain.domain
-
-  depends_on = [module.eks]
 }
 
 module "prometheus-stack" {

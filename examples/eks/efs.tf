@@ -39,8 +39,11 @@ module "efs" {
 
   argocd_namespace = local.argocd_namespace
 
-  create_role        = true
   efs_file_system_id = aws_efs_file_system.eks.id
+
+  cluster_oidc_issuer_url = module.eks.cluster_oidc_issuer_url
+
+  create_role = true
 
   depends_on = [module.argocd_bootstrap]
 }

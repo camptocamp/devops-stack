@@ -13,7 +13,9 @@ module "iam_assumable_role_thanos" {
 
   # List of ServiceAccounts that have permission to attach to this IAM role
   oidc_fully_qualified_subjects = [
-    "system:serviceaccount:thanos-stack:thanos"
+    "system:serviceaccount:thanos:thanos-bucketweb",
+    "system:serviceaccount:thanos:thanos-compactor",
+    "system:serviceaccount:thanos:thanos-storegateway",
   ]
 }
 
