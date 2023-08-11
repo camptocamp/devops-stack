@@ -36,14 +36,14 @@ jobs:
 
     - name: "Upload generated artifact"
       if: github.event_name == 'pull_request'
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: website
         path: "${{ github.workspace }}/public"
 
     - name: "Deploy website to GitHub Pages"
       if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref_name == 'main'
-      uses: JamesIves/github-pages-deploy-action@v4.4.1
+      uses: JamesIves/github-pages-deploy-action@v4.4.3
       with:
         branch: gh-pages
         folder: public

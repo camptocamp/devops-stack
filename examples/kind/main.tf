@@ -20,12 +20,10 @@ provider "helm" {
 }
 
 provider "argocd" {
-  server_addr                 = "127.0.0.1:8080"
   auth_token                  = module.argocd_bootstrap.argocd_auth_token
+  port_forward_with_namespace = module.argocd_bootstrap.argocd_namespace
   insecure                    = true
   plain_text                  = true
-  port_forward                = true
-  port_forward_with_namespace = module.argocd_bootstrap.argocd_namespace
   kubernetes {
     host                   = module.kind.parsed_kubeconfig.host
     client_certificate     = module.kind.parsed_kubeconfig.client_certificate
@@ -61,11 +59,11 @@ module "metallb" {
 }
 
 module "argocd_bootstrap" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v1.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v3.1.2"
 }
 
 module "traefik" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//kind?ref=v1.2.2"
+  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//kind?ref=v2.0.1"
 
   cluster_name = local.cluster_name
 
@@ -83,7 +81,7 @@ module "traefik" {
 }
 
 module "cert-manager" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//self-signed?ref=v3.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//self-signed?ref=v5.0.1"
 
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
 
@@ -95,7 +93,7 @@ module "cert-manager" {
 }
 
 module "keycloak" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak?ref=v1.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak?ref=v2.0.1"
 
   cluster_name     = local.cluster_name
   base_domain      = local.base_domain
@@ -109,7 +107,7 @@ module "keycloak" {
 }
 
 module "oidc" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak//oidc_bootstrap?ref=v1.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak//oidc_bootstrap?ref=v2.0.1"
 
   cluster_name   = local.cluster_name
   base_domain    = local.base_domain
@@ -121,7 +119,7 @@ module "oidc" {
 }
 
 module "minio" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-minio?ref=v1.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-minio?ref=v2.0.1"
 
   cluster_name     = local.cluster_name
   base_domain      = local.base_domain
@@ -142,7 +140,7 @@ module "minio" {
 }
 
 module "loki-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack//kind?ref=v2.0.2"
+  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack//kind?ref=v4.0.2"
 
   cluster_name     = local.cluster_name
   base_domain      = local.base_domain
@@ -163,7 +161,7 @@ module "loki-stack" {
 }
 
 module "thanos" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-thanos//kind?ref=v1.0.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-thanos//kind?ref=v2.0.1"
 
   cluster_name     = local.cluster_name
   base_domain      = local.base_domain
@@ -190,7 +188,7 @@ module "thanos" {
 }
 
 module "kube-prometheus-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack//kind?ref=v2.3.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack//kind?ref=v6.0.1"
 
   cluster_name     = local.cluster_name
   base_domain      = local.base_domain
@@ -223,7 +221,7 @@ module "kube-prometheus-stack" {
 }
 
 module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v1.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v3.1.2"
 
   base_domain              = local.base_domain
   cluster_name             = local.cluster_name
@@ -252,7 +250,7 @@ module "argocd" {
 }
 
 module "metrics_server" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-application.git?ref=v1.2.2"
+  source = "git::https://github.com/camptocamp/devops-stack-module-application.git?ref=v2.0.1"
 
   name             = "metrics-server"
   argocd_namespace = module.argocd_bootstrap.argocd_namespace

@@ -1,0 +1,13 @@
+# Use Dependabot to update GitHub Actions and the Terraform modules on our examples
+version: 2
+updates:
+- package-ecosystem: "github-actions"
+  directory: "/"
+  schedule:
+    # Check for updated GitHub Actions every week
+    interval: "weekly"
+- package-ecosystem: "terraform"
+  directory: "/examples/kind" # TODO Add other examples when we are sure everything works
+  schedule:
+    # Check for updated Terraform modules daily
+    interval: "daily"
