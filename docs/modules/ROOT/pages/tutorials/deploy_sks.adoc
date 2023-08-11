@@ -1,3 +1,256 @@
-= Deployment On Exoscale SKS
+= Deployment on Exoscale SKS
 
-_Work In Progress_
+An example of a local deployment on Exoscale SKS is provided https://github.com/camptocamp/devops-stack/tree/main/examples/sks[here]. Clone this repository and modify the files at your convenience.
+In the folder, as in a standard https://developer.hashicorp.com/terraform/tutorials/modules/module#what-is-a-terraform-module[Terraform module], you will find the following files:
+
+* *`terraform.tf`* - declaration of the Terraform providers used in this project as well as their configuration;
+* *`locals.tf`* - local variables used by the DevOps Stack modules;
+* *`variables.tf`* - definition of the variables that pass the credentials required for the S3 provider;
+* *`main.tf`* - definition of all the deployed modules;
+* *`dns.tf`* - definition of some of the DNS resources required for the base domain;
+* *`s3_buckets.tf`* - creation of the required S3 buckets needed by Longhorn, Loki and Thanos;
+* *`outputs.tf`* - the output variables of the DevOps Stack, e.g. credentials and the `.kubeconfig` file to use with `kubectl`;
+
+== Requirements
+
+On your local machine, you need to have the following tools installed:
+
+* https://www.terraform.io/[Terraform] to provision the whole stack;
+* https://kubernetes.io/docs/reference/kubectl/[`kubectl`] or https://github.com/derailed/k9s[`k9s`]to interact with your cluster;
+* https://community.exoscale.com/documentation/tools/exoscale-command-line-interface/[Exoscale CLI] to interact with your Exoscale account;
+* https://dev.to/camptocamp-ops/simple-secret-sharing-with-gopass-and-summon-40jk[`gopass` and `summon`] to easily pass the IAM secrets as environment variables when running `terraform` commands;
+
+Other than that, you will require the following:
+
+* an Exoscale account;
+* an Exoscale IAM key with at least the tags `Compute`, `DBAAS`, `DNS`, `IAM` and `SOS`, which you can create in the Exoscale portal (you can use your personal administrator IAM key, but it is best you create a dedicated IAM key for this deployment);
+* a domain name and a DNS subscription on the Exoscale account;
+* an AWS account and associated IAM key in order to have a S3 bucket and DynamoDB to store the Terraform state (optional you if you choose to store the Terraform state locally, *which is not recommended in production*);
+
+== Specificities and explanations
+
+=== `secrets.yml`
+
+TIP: Check https://dev.to/camptocamp-ops/simple-secret-sharing-with-gopass-and-summon-40jk[this blog post] for more information on how to configure `gopass` and `summon` to work together.
+
+For simplicity and ease of use, as well as security, the example uses `gopass` and `summon` to pass the IAM credentials to the Terraform commands. The `secrets.yml` file contains the path to the the secret values on the `gopass` password store. On execution, the `summon` command will then read the `secrets.yml` file and pass the credentials as environment variables to the Terraform commands.
+
+The commands presented on this tutorial all use the `summon` command.
+
+=== Remote Terraform state
+
+If you do not want to configure the remote Terraform state backend, you can simply remove the `backend` block from the `terraform.tf` file.
+
+NOTE: Exoscale has an https://github.com/exoscale/terraform-provider-exoscale/tree/master/examples/sos-backend[example] for configuring Terraform to use SOS buckets as a backend for the Terraform state. However, at the time of writing, SOS buckets did not support encryption and there was no equivalent to DynamoDB to have the state lock feature, so in the end we preferred to use S3 buckets on AWS as a backend.
+
+NOTE: More information about the remote backends is available on the https://developer.hashicorp.com/terraform/language/settings/backends/configuration[official documentation].
+
+=== S3 buckets
+
+The _Simple Object Storage_ (SOS) service provided by Exoscale follows the S3 specification. The Exoscale provider does not provide a way to create S3 buckets on their service. As recommended by their documentation, you have to use the AWS provider to create the S3 buckets.
+
+Since we are already using the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables to configure the Terraform backend, we cannot use them to configure the `aws` provider to create the S3 buckets. Because of that, we have to have two Terraform variables, `exoscale_iam_key` and `exoscale_iam_secret`, to pass the Exoscale IAM credentials to the `aws` provider. The values of these two variables are then set using the `TF_VAR_exoscale_iam_key` and `TF_VAR_exoscale_iam_secret` environment variables.
+
+Your `aws` provider configuration should then look something like this:
+
+[source,terraform]
+----
+provider "aws" {
+  endpoints {
+    s3 = "https://sos-${local.zone}.exo.io"
+  }
+
+  region = local.zone
+
+  access_key = var.exoscale_iam_key
+  secret_key = var.exoscale_iam_secret
+
+  # Skip validations specific to AWS in order to use this provider for Exoscale services
+  skip_credentials_validation = true
+  skip_requesting_account_id  = true
+  skip_metadata_api_check     = true
+  skip_region_validation      = true
+}
+----
+
+TIP: If you are not using the remote Terraform state, you can use the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables with the Exoscale IAM key to then configure the `aws` provider. Don not forget to remove the `access_key` and `secret_key` values from said provider block.
+
+=== DNS and the `base_domain` variable
+
+As-is, the code from the example requires a DNS subscription on the Exoscale account and unique domain in order to create a DNS zone on the Exoscale DNS service.
+
+You can bypass this requirement by deleting the `dns.tf` file and by not passing a value to the `base_domain` variable of the cluster module. This will make the cluster module return you a `nip.io` domain prefixed with the IP of the NLB
+
+NOTE: It is for this reason that every other DevOps Stack module receives the `base_domain` variable from the output `module.sks.base_domain` instead of using the `local.base_domain`.
+
+TIP: Check the xref:sks:ROOT:README.adoc[cluster module documentation] for more information on the `base_domain` variable.
+
+=== OIDC authentication
+
+IMPORTANT: The DevOps Stack modules are developed with OIDC in mind. In production, you should have an identity provider that supports OIDC and use it to authenticate to the DevOps Stack applications.
+
+TIP: You can have a local containing the OIDC configuration properly structured for the DevOps Stack applications and simply use an external OIDC provider instead of using Keycloak. Check https://github.com/camptocamp/devops-stack-module-keycloak/blob/main/oidc_bootstrap/locals.tf[this `locals.tf` on the Keycloak module] for an example.
+
+To quickly deploy a testing environment on SKS you can use the Keycloak module, as shown in the example.
+
+After deploying Keycloak, you can use the OIDC bootstrap module to create the Keycloak realm, groups, users, etc.
+
+The `user_map` variable of that module allows you to create OIDC users used to authenticate to the DevOps Stack applications. The module will generate a password for each user, which you can check later after the deployment.
+
+TIP: If you do not provide a value for the `user_map` variable, the module will create a user named `devopsadmin` with a random password.
+
+=== Let's Encrypt SSL certificates
+
+By default, to avoid rate-limiting your domain by Let's Encrypt, the example uses the `letsencrypt-staging` configuration of the cert-manager module to generate certificates using the Let's Encrypt staging environment which has an invalid CA certificate.
+
+If you feel ready to test with production certificates, you can simply edit the `locals.tf` file and change the `cluster_issuer` variable to `letsencrypt-prod`.
+
+== Deployment
+
+1. Clone the repository and `cd` into the `examples/sks` folder;
+
+2. Adapt the `secrets.yml` file to point to the correct path on your `gopass` password store;
+
+3. Check out the modules you want to deploy in the `main.tf` file, and comment out the others;
++
+TIP: You can also add your own Terraform modules in this file or any other file on the root folder. A good place to start to write your own module is to clone the https://github.com/camptocamp/devops-stack-module-template[devops-stack-module-template] repository and adapt it to your needs.
+
+4. On the `oidc` module, adapt the `user_map` variable as you wish (please check the <<oidc-authentication,OIDC section>> for more information).
+
+5. From the source of the example deployment, initialize the Terraform modules and providers:
++
+[source,bash]
+----
+summon terraform init
+----
+
+6. Configure the variables in `locals.tf` to your preference:
++
+IMPORTANT: The `cluster_name` must be unique for each DevOps Stack deployment in a single Exoscale account.
++
+TIP: The xref:sks:ROOT:README.adoc[cluster module documentation] can help you know what to put in the `kubernetes_version`, `zone` and `service_level` variables.
++
+[source,terraform]
+----
+include::example$deploy_examples/sks/locals.tf[]
+----
+
+7. Finally, run `terraform apply` and accept the proposed changes to create the Kubernetes nodes on Exoscale SKS and populate them with our services;
++
+[source,bash]
+----
+summon terraform apply
+----
+
+8. After the first deployment (please note the troubleshooting step related with kube-prometheus-stack and Argo CD), you can go to the `locals.tf` and enable the _ServiceMonitor_ boolean to activate the Prometheus exporters that will send metrics to Prometheus;
++
+IMPORTANT: This flag needs to be set as `false` for the first bootstrap of the cluster, otherwise the applications will fail to deploy while the Custom Resource Definitions of the kube-prometheus-stack are not yet created.
++
+NOTE: You can either set the flag as `true` in the `locals.tf` file or you can simply delete the line on the modules' declarations, since this variable is set as `true` by default on each module.
++
+TIP: Take note of the local called `app_autosync`. If you set the condition of the ternary operator to `false` you will disable the auto-sync for all the DevOps Stack modules. This allows you to choose when to manually sync the module on the Argo CD interface and is useful for troubleshooting purposes.
+
+== Access the cluster and the DevOps Stack applications
+
+You can use the content of the `kubernetes_kubeconfig` output to manually generate a Kubeconfig file or you can use the Exoscale CLI to recover a new one.
+
+IMPORTANT: Note that if you use the `kubernetes_kubeconfig` output, you will be using exactly the same credentials that the Terraform code uses to interact with the cluster, so it's best to avoid it.
+
+To use the Exoscale CLI, you can run the following command:
+
+[source,bash]
+----
+summon exo compute sks kubeconfig YOUR_CLUSTER_NAME kube-admin --zone YOUR_CLUSTER_ZONE --group system:masters > ~/.kube/NAME_TO_GIVE_YOUR_CONFIG.config
+----
+
+Then you can use the `kubectl` or `k9s` command to interact with the cluster:
+
+[source,bash]
+----
+k9s --kubeconfig ~/.kube/NAME_TO_GIVE_YOUR_CONFIG.config
+----
+
+As for the DevOps Stack applications, you can access them through the ingress domain that you can find in the `ingress_domain` output. If you used the code from the example without modifying the outputs, you will see something like this on your terminal after the `terraform apply` has done its job:
+
+[source,shell]
+----
+Outputs:
+
+ingress_domain = "your.domain.here"
+keycloak_admin_credentials = <sensitive>
+keycloak_users = <sensitive>
+kubernetes_kubeconfig = <sensitive>
+----
+
+Or you can use `kubectl` to get all the ingresses and their respective URLs:
+
+[source,bash]
+----
+kubectl get ingress --all-namespaces --kubeconfig ~/.kube/NAME_TO_GIVE_YOUR_CONFIG.config
+----
+
+The password for the Keycloak admin user is available in the `keycloak_admin_credentials` output and the users are available in the `keycloak_users` output:
+
+[source,bash]
+----
+summon terraform output keycloak_users
+----
+
+== Stop the cluster
+
+To definitively stop the cluster on a single command (that is the reason we delete some resources from the state file), you can use the following command:
+
+[source,bash]
+----
+summon terraform state rm $(summon terraform state list | grep "argocd_application\|argocd_project\|kubernetes_\|helm_\|keycloak_") && summon terraform destroy
+----
+
+== Conclusion
+
+That's it, you now have a fully functional Kubernetes cluster in Exoscale SKS with the DevOps Stack applications deployed on it. For more information, keep on reading the https://devops-stack.io/docs/latest/[documentation]. **You can explore the possibilities of each module and get the link to the source code on their respective documentation pages.**
+
+== Troubleshooting
+
+=== `connection_error` during the first deployment
+
+In some cases, you could encounter an error like these the first deployment:
+
+[source,shell]
+----
+╷
+│ Error: error while waiting for application kube-prometheus-stack to be created
+│ 
+│   with module.kube-prometheus-stack.module.kube-prometheus-stack.argocd_application.this,
+│   on ../../devops-stack-module-kube-prometheus-stack/main.tf line 91, in resource "argocd_application" "this":
+│   91: resource "argocd_application" "this" {
+│ 
+│ error while waiting for application kube-prometheus-stack to be synced and healthy: rpc
+│ error: code = Unavailable desc = connection error: desc = "transport: error while dialing:
+│ dial tcp 127.0.0.1:46649: connect: connection refused"
+╵
+----
+
+[source,shell]
+----
+╷
+│ Error: error while waiting for application argocd to be created
+│ 
+│   with module.argocd.argocd_application.this,
+│   on .terraform/modules/argocd/main.tf line 55, in resource "argocd_application" "this":
+│   55: resource "argocd_application" "this" {
+│ 
+│ error while waiting for application argocd to be synced and healthy: rpc error: code = Unavailable desc = error reading from server: EOF
+╵
+----
+
+In the case of the Argo CD module, the error is due to the way we provision Argo CD on the final steps of the deployment. We use the bootstrap Argo CD to deploy the final Argo CD module, which causes a redeployment of Argo CD and consequently a momentary loss of connection between the Argo CD Terraform provider and the Argo CD server.
+
+As for the kube-prometheus-stack module, this error only appeared on the SKS platform. We are still investigating the root cause of this issue.
+
+*You can simply re-run the command `summon terraform apply` to finalize the bootstrap of the cluster every time you encounter this error.*
+
+=== Argo CD interface reload loop when clicking on login
+
+If you encounter a loop when clicking on the login button on the Argo CD interface, you can try to delete the Argo CD server pod and let it be recreated.
+
+TIP: For more informations about the Argo CD module, please refer to the xref:argocd:ROOT:README.adoc[respective documentation page].

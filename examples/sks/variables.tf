@@ -1,19 +1,11 @@
-variable "repo_url" {
-  type    = string
-  default = "https://github.com/camptocamp/devops-stack.git"
+variable "exoscale_iam_key" {
+  description = "Exoscale IAM access key to use for the S3 provider."
+  type        = string
+  sensitive   = true
 }
 
-variable "target_revision" {
-  type    = string
-  default = "master"
-}
-
-variable "cluster_name" {
-  type    = string
-  default = "devops-stack-example"
-}
-
-variable "zone" {
-  type    = string
-  default = "de-fra-1"
+variable "exoscale_iam_secret" {
+  description = "Exoscale IAM access secret to use for the S3 provider."
+  type        = string
+  sensitive   = true
 }
