@@ -130,6 +130,17 @@ provider "vault" {
   skip_tls_verify = true
 }
 
+locals {
+  devops_stack_secrets = {
+    loki = {
+      loki-secret-key = random_password.loki_secretkey.result
+    }
+    thanos = {
+      thanos-secret-key = random_password.thanos_secretkey.result
+    }
+  }
+}
+
 resource "vault_generic_secret" "devops_stack_secrets" {
   for_each = local.devops_stack_secrets
 
@@ -168,8 +179,9 @@ module "oidc" {
 }
 
 module "minio" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-minio?ref=v1.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-minio?ref=ISDEVOPS-233"
 
+  target_revision  = "ISDEVOPS-233"
   cluster_name     = local.cluster_name
   base_domain      = local.base_domain
   cluster_issuer   = local.cluster_issuer

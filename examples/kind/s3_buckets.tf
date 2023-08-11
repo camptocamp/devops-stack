@@ -45,7 +45,7 @@ locals {
       },
       {
         accessKey = "thanos-user"
-        secretKey = random_password.thanos_secretkey.result
+        secretKey = "<path:secret/data/devops-stack/thanos#thanos-secret-key>"
         policy    = "thanos-policy"
       }
     ],
