@@ -1,3 +1,8 @@
+output "ingress_domain" {
+  description = "The domain to use for accessing the applications."
+  value       = "${local.cluster_name}.${local.base_domain}"
+}
+
 output "kubernetes_kubeconfig" {
   description = "Configuration that can be copied into `.kube/config in order to access the cluster with `kubectl`."
   value       = module.kind.raw_kubeconfig
