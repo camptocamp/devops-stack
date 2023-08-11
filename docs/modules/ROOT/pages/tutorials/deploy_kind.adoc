@@ -1,115 +1,113 @@
 = Deployment on KinD
 
-An example of a local deployment in KinD is provided https://github.com/camptocamp/devops-stack/tree/main/examples/kind[here]. Clone this repository and modify it at your convenance.
+An example of a local deployment on KinD is provided https://github.com/camptocamp/devops-stack/tree/main/examples/kind[here]. Clone this repository and modify the files at your convenience.
 In the folder, as in a standard https://developer.hashicorp.com/terraform/tutorials/modules/module#what-is-a-terraform-module[Terraform module], you will find the following files:
 
-* `terraform.tf`: declaration of the Terraform providers used in this project.
-* `locals.tf`: local variables used in the DevOps Stacks.
-* `main.tf`: definition of all deployed modules.
-* `s3_bucket.tf`: configuration of the MinIO bucket, used as backend for Loki and Thanos.
-* `outputs.tf`: the output variables of the DevOps Stack, e.g. credentials and the `.kubeconfig` file to use with `kubectl`.
+* *`terraform.tf`* - declaration of the Terraform providers used in this project as well as their configuration;
+* *`locals.tf`* - local variables used by the DevOps Stack modules;
+* *`main.tf`* - definition of all the deployed modules;
+* *`s3_bucket.tf`* - configuration of the MinIO bucket, used as backend for Loki and Thanos;
+* *`outputs.tf`* - the output variables of the DevOps Stack, e.g. credentials and the `.kubeconfig` file to use with `kubectl`;
 
-== Specificities of the KinD deployment
+== Requirements
+
+On your local machine, you need to have the following tools installed:
+
+* https://docs.docker.com/get-docker[Docker] to deploy the KinD containers;
+* https://www.terraform.io/[Terraform] to provision the whole stack;
+* https://kubernetes.io/docs/reference/kubectl/[`kubectl`] or https://github.com/derailed/k9s[`k9s`]to interact with your cluster;
+
+== Specificities and explanations
 
 === Local Load Balancer
 
 https://metallb.universe.tf/[MetalLB] is used as a load balancer for the cluster. This allows us to have a multi-node KinD cluster without the need to use Traefik in a single replica with a NodePort configuration.
 
+=== OIDC authentication
+
+IMPORTANT: The DevOps Stack modules are developed with OIDC in mind. In production, you should have an identity provider that supports OIDC and use it to authenticate to the DevOps Stack applications.
+
+TIP: You can have a local containing the OIDC configuration properly structured for the DevOps Stack applications and simply use an external OIDC provider instead of using Keycloak. Check https://github.com/camptocamp/devops-stack-module-keycloak/blob/main/oidc_bootstrap/locals.tf[this `locals.tf` on the Keycloak module] for an example.
+
+To quickly deploy a testing environment on KinD you can use the Keycloak module, as shown in the example.
+
+After deploying Keycloak, you can use the OIDC bootstrap module to create the Keycloak realm, groups, users, etc.
+
+The `user_map` variable of that module allows you to create OIDC users used to authenticate to the DevOps Stack applications. The module will generate a password for each user, which you can check later after the deployment.
+
+TIP: If you do not provide a value for the `user_map` variable, the module will create a user named `devopsadmin` with a random password.
+
 === Self-signed SSL certificates
 
-Since KinD is locally deployed, there is no easy way of creating valid SSL certificates for the ingresses using Let's Encrypt. As such, `cert-manager` is configured to use a self-signed Certificate Authority and the remaining modules are configured to ignore the SSL warnings/errors that are a consequence of that.
+Since KinD is deployed on your machine, there is no easy way of creating valid SSL certificates for the ingresses using Let's Encrypt. As such, `cert-manager` is configured to use a self-signed Certificate Authority and the remaining modules are configured to ignore the SSL warnings/errors that are a consequence of that.
 
 NOTE: When accessing the ingresses on your browser, you'll obviously see warnings saying that the certificate is not valid. You can safely ignore them.
 
-== Requirements
-
-For this setup, you will need to have installed on your machine:
-
-* https://docs.docker.com/get-docker[Docker] to deploy the KinD containers
-* https://www.terraform.io/[Terraform] to provision the whole stack
-* https://kubernetes.io/docs/reference/kubectl/[`kubectl`] to interact with your cluster
-
 == Deployment
 
-1. From the source of the example deployment, initialize Terraform, which downloads all required providers and modules locally (they will be stored in the hidden folder `.terraform`).
+1. Clone the repository and `cd` into the `examples/kind` folder.
+
+2. Check out the modules you want to deploy in the `main.tf` file, and comment out the others;
++
+TIP: You can also add your own Terraform modules in this file or any other file on the root folder. A good place to start to write your own module is to clone the https://github.com/camptocamp/devops-stack-module-template[devops-stack-module-template] repository and adapt it to your needs;
+
+3. On the `oidc` module, adapt the `user_map` variable as you wish (please check the <<oidc-authentication,OIDC section>> for more information).
+
+4. From the source of the example deployment, initialize Terraform, which downloads all required providers and modules locally (they will be stored in the hidden folder `.terraform`);
 +
 [source,bash]
 ----
 terraform init
 ----
 
-2. Check out the modules you want to deploy in the `main.tf` file, and comment out the others.
+5. Configure the variables in `locals.tf` to your preference:
 +
-TIP: You can also add your owns Terraform modules in this file or any other file on the root folder. A good place to start to write your own module is to clone the https://github.com/camptocamp/devops-stack-helloworld[devops-stack-helloworld] repository and adapt it to your needs.
-
-3. Configure the variables in `locals.tf` to your preference:
-+
-[source,hcl]
+[source,terraform]
 ----
 include::example$deploy_examples/kind/locals.tf[]
 ----
 
-4. Finally, run `terraform apply` and accept the proposed changes to create the Kubernetes nodes as Docker containers, and populate them with our services.
+6. Finally, run `terraform apply` and accept the proposed changes to create the Kubernetes nodes as Docker containers, and populate them with our services;
 +
 [source,bash]
 ----
 terraform apply
 ----
 
-5. After the first deployment (please note the troubleshooting step related with Argo CD), you can go to locals and enable the ServiceMonitor boolean to activate the Prometheus exporters that will send metrics to Prometheus.
+7. After the first deployment (please note the troubleshooting step related with Argo CD), you can go to locals and enable the _ServiceMonitor_ boolean to activate the Prometheus exporters that will send metrics to Prometheus;
 +
 IMPORTANT: This flag needs to be set as `false` for the first bootstrap of the cluster, otherwise the applications will fail to deploy while the Custom Resource Definitions of the kube-prometheus-stack are not yet created.
 +
-NOTE: You can either set the flag as `true` in the `locals.tf` file or you can simply delete the line on the modules declarations, since this variable is set as `true` by default on each module.
+NOTE: You can either set the flag as `true` in the `locals.tf` file or you can simply delete the line on the modules' declarations, since this variable is set as `true` by default on each module.
++
+TIP: Take note of the local called `app_autosync`. If you set the condition of the ternary operator to `false` you will disable the auto-sync for all the DevOps Stack modules. This allows you to choose when to manually sync the module on the Argo CD interface and is useful for troubleshooting purposes.
 
-=== Troubleshooting
+== Access the cluster and the DevOps Stack applications
 
-==== Argo CD: connection refused
+Typically the KinD Terraform provider used in our code already appends the credentials to your default Kubeconfig, so you should be good to go to access the cluster.
 
-In some cases, you could encounter an error like this one:
+Otherwise, you can use the content of the `kubernetes_kubeconfig` output to manually generate a Kubeconfig file or you can use the one automatically created on the root folder of the project.
 
-[source,shell]
-----
-╷
-│ Error: Error while waiting for application argocd to be created
-│
-│   with module.argocd.argocd_application.this,
-│   on .terraform/modules/argocd/main.tf line 55, in resource "argocd_application" "this":
-│   55: resource "argocd_application" "this" {
-│
-│ error while waiting for application argocd to be synced and healthy: rpc error: code = Unavailable desc = connection error: desc = "transport: error while dialing: dial tcp 127.0.0.1:45729: connect: connection refused"
-╵
-----
-
-This error is due to the way we finally provision Argo CD on the final steps of the deployment. We use the bootstrap Argo CD to deploy and manage the final Argo CD module, which causes a redeployment of Argo CD and consequently a momentary loss of connection between the Argo CD Terraform provider and the Argo CD server.
-
-You can simply re-run the command `terraform apply` to finalize the bootstrap of the cluster.
-
-TIP: For more informations about the Argo CD module, please refer to the xref:argocd:ROOT:README.adoc[respective documentation page].
-
-==== `loki-stack-promtail` pods stuck with status `CrashLoopBackOff`
-
-You could stumble upon `loki-stack-promtail` stuck in a creation loop with the following logs:
-
-[source]
-----
-level=error ts=2023-05-09T06:32:38.495673778Z caller=main.go:117 msg="error creating promtail" error="failed to make file target manager: too many open files"
-Stream closed EOF for loki-stack/loki-stack-promtail-bxcmw (promtail)
-----
-
-If that's the case, you will have to increase the upper limit on the number of INotify instances that can be created per real user ID:
+Then you can use the `kubectl` or `k9s` command to interact with the cluster:
 
 [source,bash]
 ----
-# Increase the limit until next reboot
-sudo sysctl fs.inotify.max_user_instances=512
-# Increase the limit permanently (run this command as root)
-echo 'fs.inotify.max_user_instances=512' >> /etc/sysctl.conf
+k9s --kubeconfig <PATH_TO_TERRAFORM_PROJECT>/<CLUSTER_NAME>-config
 ----
 
-== Access the DevOps Stack applications
+As for the DevOps Stack applications, you can access them through the ingress domain that you can find in the `ingress_domain` output. If you used the code from the example without modifying the outputs, you will see something like this on your terminal after the `terraform apply` has done its job:
 
-The URLs of the applications are visible in the ingresses of the cluster. You can get them by running the following command:
+[source,shell]
+----
+Outputs:
+
+ingress_domain = "your.domain.here"
+keycloak_admin_credentials = <sensitive>
+keycloak_users = <sensitive>
+kubernetes_kubeconfig = <sensitive>
+----
+
+Or you can use `kubectl` to get all the ingresses and their respective URLs:
 
 [source,bash]
 ----
@@ -143,7 +141,7 @@ minio_root_user_credentials = <sensitive>
 # To get the credentials for Grafana, Prometheus, etc.
 $ terraform output keycloak_users
 {
-  "devopsadmin" = "aqhEbd3L0Msryjjp547ej7nyN6E2FllV"
+  "devopsadmin" = "PASSWORD"
 }
 ----
 
@@ -164,7 +162,7 @@ NOTE: When the host computer is restarted, the Docker container will start again
 
 == Stop the cluster
 
-To definitively stop the cluster on a single command (that is the reason we delete some resources from the state file), we can use the following command:
+To definitively stop the cluster on a single command (that is the reason we delete some resources from the state file), you can use the following command:
 
 [source,bash]
 ----
@@ -183,4 +181,55 @@ rm terraform.state
 
 == Conclusion
 
-That's it, you have deployed the DevOps Stack locally! For more informations, keep on reading the https://devops-stack.io/docs/latest/[documentation]. **You can explore the possibilities of each module and get the link to the source code on their respective documentation pages.**
+That's it, you have deployed the DevOps Stack locally! For more information, keep on reading the https://devops-stack.io/docs/latest/[documentation]. **You can explore the possibilities of each module and get the link to the source code on their respective documentation pages.**
+
+== Troubleshooting
+
+=== `connection_error` during the first deployment
+
+In some cases, you could encounter an error like this the first deployment:
+
+[source,shell]
+----
+╷
+│ Error: Error while waiting for application argocd to be created
+│
+│   with module.argocd.argocd_application.this,
+│   on .terraform/modules/argocd/main.tf line 55, in resource "argocd_application" "this":
+│   55: resource "argocd_application" "this" {
+│
+│ error while waiting for application argocd to be synced and healthy: rpc error: code = Unavailable desc = connection error: desc = "transport: error while dialing: dial tcp 127.0.0.1:45729: connect: connection refused"
+╵
+----
+
+This error is due to the way we provision Argo CD on the final steps of the deployment. We use the bootstrap Argo CD to deploy the final Argo CD module, which causes a redeployment of Argo CD and consequently a momentary loss of connection between the Argo CD Terraform provider and the Argo CD server.
+
+*You can simply re-run the command `terraform apply` to finalize the bootstrap of the cluster.*
+
+TIP: For more informations about the Argo CD module, please refer to the xref:argocd:ROOT:README.adoc[respective documentation page].
+
+=== Argo CD interface reload loop when clicking on login
+
+If you encounter a loop when clicking on the login button on the Argo CD interface, you can try to delete the Argo CD server pod and let it be recreated.
+
+TIP: For more informations about the Argo CD module, please refer to the xref:argocd:ROOT:README.adoc[respective documentation page].
+
+=== `loki-stack-promtail` pods stuck with status `CrashLoopBackOff`
+
+You could stumble upon `loki-stack-promtail` stuck in a creation loop with the following logs:
+
+[source]
+----
+level=error ts=2023-05-09T06:32:38.495673778Z caller=main.go:117 msg="error creating promtail" error="failed to make file target manager: too many open files"
+Stream closed EOF for loki-stack/loki-stack-promtail-bxcmw (promtail)
+----
+
+If that's the case, you will have to increase the upper limit on the number of INotify instances that can be created per real user ID:
+
+[source,bash]
+----
+# Increase the limit until next reboot
+sudo sysctl fs.inotify.max_user_instances=512
+# Increase the limit permanently (run this command as root)
+echo 'fs.inotify.max_user_instances=512' >> /etc/sysctl.conf
+----

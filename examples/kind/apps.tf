@@ -1,5 +1,6 @@
 module "helloworld_apps" {
   source = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git?ref=v2.0.1"
+  # source = "../../devops-stack-module-applicationset"
 
   dependency_ids = {
     argocd = module.argocd.id
@@ -9,6 +10,8 @@ module "helloworld_apps" {
   argocd_namespace       = module.argocd_bootstrap.argocd_namespace
   project_dest_namespace = "*"
   project_source_repo    = "https://github.com/camptocamp/devops-stack-helloworld-templates.git"
+
+  app_autosync = local.app_autosync
 
   generators = [
     {
@@ -47,11 +50,12 @@ module "helloworld_apps" {
               domain: "${local.base_domain}"
               issuer: "${local.cluster_issuer}"
             apps:
-              traefik_dashboard: false
+              keycloak: true
+              traefik: false
+              minio: true
               grafana: true
               prometheus: true
               thanos: true
-              alertmanager: true
           EOT
         }
       }
