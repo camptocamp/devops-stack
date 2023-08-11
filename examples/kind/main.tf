@@ -131,16 +131,17 @@ provider "vault" {
 }
 
 resource "vault_generic_secret" "devops_stack_secrets" {
-  path = "secret/devops-stack"
-  data_json = jsonencode({
-    loki-secret-key = random_password.loki_secretkey.result
-  })
+  for_each = local.devops_stack_secrets
+
+  path      = "secret/devops-stack/${each.key}"
+  data_json = jsonencode(each.value)
 }
 
 # TODO secure secrets for: thanos, keycloak, minio, KPS, argocd. This might require changes in modules other than AVP(/kustomize) usage.
 
 module "keycloak" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak?ref=v1.1.0"
+  source          = "git::https://github.com/camptocamp/devops-stack-module-keycloak?ref=ISDEVOPS-233"
+  target_revision = "ISDEVOPS-233"
 
   cluster_name     = local.cluster_name
   base_domain      = local.base_domain
@@ -150,6 +151,7 @@ module "keycloak" {
   dependency_ids = {
     traefik      = module.traefik.id
     cert-manager = module.cert-manager.id
+    vault        = module.vault.id
   }
 }
 
@@ -198,7 +200,7 @@ module "loki-stack" {
     bucket_name       = local.minio_config.buckets.0.name
     endpoint          = module.minio.endpoint
     access_key        = local.minio_config.users.0.accessKey
-    secret_access_key = "<path:secret/data/devops-stack#loki-secret-key>"
+    secret_access_key = local.minio_config.users.0.secretKey
   }
 
   dependency_ids = {

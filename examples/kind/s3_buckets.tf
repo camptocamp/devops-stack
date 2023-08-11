@@ -40,7 +40,7 @@ locals {
     users = [
       {
         accessKey = "loki-user"
-        secretKey = random_password.loki_secretkey.result
+        secretKey = "<path:secret/data/devops-stack/loki#loki-secret-key>"
         policy    = "loki-policy"
       },
       {
