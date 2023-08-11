@@ -34,11 +34,12 @@ resource "aws_efs_mount_target" "eks" {
   security_groups = [aws_security_group.efs_eks.id]
 }
 
-
 module "efs" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-efs-csi-driver.git"
+  source = "git::https://github.com/camptocamp/devops-stack-module-efs-csi-driver.git?ref=v2.0.1"
 
-  argocd_namespace   = local.argocd_namespace
+  argocd_namespace = local.argocd_namespace
+
+  create_role        = true
   efs_file_system_id = aws_efs_file_system.eks.id
 
   depends_on = [module.argocd_bootstrap]
