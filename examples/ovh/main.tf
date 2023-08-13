@@ -16,6 +16,29 @@ module "argocd_bootstrap" {
   depends_on = [module.cluster]
 }
 
+resource "null_resource" "install_crds" {
+  # Only run if local.enable_service_monitor is true
+  count = local.enable_service_monitor ? 1 : 0
+
+  # Use the local-exec provisioner to run Helm commands
+  provisioner "local-exec" {
+    command = <<EOT
+      kubectl config set-cluster terraform-cluster --server=${local.kubernetes_host} --certificate-authority=${local.kubernetes_cluster_ca_certificate}
+      kubectl config set-credentials terraform-user --client-certificate=${local.kubernetes_client_certificate} --client-key=${local.kubernetes_client_key}
+      kubectl config set-context terraform --cluster=terraform-cluster --user=terraform-user
+      kubectl config use-context terraform
+      helm upgrade --install prometheus-operator-crds https://github.com/prometheus-community/helm-charts/releases/download/prometheus-operator-crds-5.1.0/prometheus-operator-crds-5.1.0.tgz || true
+    EOT
+  }
+
+  # Always run this provisioner
+  triggers = {
+    always_run = "${timestamp()}"
+  }
+
+  depends_on = [module.cluster]
+}
+
 module "traefik" {
   source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//kind?ref=v2.0.1"
 
@@ -23,7 +46,7 @@ module "traefik" {
   base_domain            = local.base_domain
   argocd_namespace       = module.argocd_bootstrap.argocd_namespace
   enable_service_monitor = local.enable_service_monitor
-  depends_on             = [module.cluster]
+  depends_on             = [module.cluster, null_resource.install_crds]
   helm_values = [{
     traefik = {
       ports = {
@@ -110,18 +133,18 @@ module "keycloak" {
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
   target_revision  = "v2.0.8"
 
-
   dependency_ids = {
     traefik      = module.traefik.id
     cert-manager = module.cert-manager.id
   }
 
   helm_values = [{
-    pvc = {
-      enabled = true
+    keycloak = {
+      pvc = {
+        enabled = true
+      }
     }
   }]
-
 }
 
 module "oidc" {
@@ -245,11 +268,15 @@ module "loki-stack" {
     endpoint    = var.s3_endpoint
     insecure    = false
   }
+
+  dependency_ids = {
+    argocd = module.argocd.id
+  }
 }
 
 
 module "metrics_server" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-application.git?ref=v2.0.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-application.git?ref=v2.0.1"
 
   name             = "metrics-server"
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
