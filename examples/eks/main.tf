@@ -1,13 +1,14 @@
 data "aws_availability_zones" "available" {}
 
+
 module "vpc" {
   source               = "terraform-aws-modules/vpc/aws"
   version              = "~> 5"
   name                 = module.eks.cluster_name
-  cidr                 = "10.56.0.0/16"
+  cidr                 = local.vpc_cidr
   azs                  = data.aws_availability_zones.available.names
-  private_subnets      = ["10.56.1.0/24", "10.56.2.0/24", "10.56.3.0/24"]
-  public_subnets       = ["10.56.4.0/24", "10.56.5.0/24", "10.56.6.0/24"]
+  private_subnets      = local.private_subnets
+  public_subnets       = local.public_subnets
   enable_nat_gateway   = true
   create_igw           = true
   enable_dns_hostnames = true
@@ -26,8 +27,8 @@ module "vpc" {
 module "eks" {
   source = "git::https://github.com/camptocamp/devops-stack-module-cluster-eks.git?ref=v2.0.2"
 
-  cluster_name = "example-eks"
-  base_domain  = "is-sandbox.camptocamp.com"
+  cluster_name = local.cluster_name
+  base_domain  = local.base_domain
 
   kubernetes_version = "1.27"
 
