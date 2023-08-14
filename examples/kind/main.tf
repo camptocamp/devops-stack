@@ -59,7 +59,7 @@ module "metallb" {
 }
 
 module "argocd_bootstrap" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v3.1.2"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v3.1.3"
 }
 
 module "traefik" {
