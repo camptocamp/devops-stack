@@ -2,12 +2,12 @@ data "aws_availability_zones" "available" {}
 
 module "vpc" {
   source               = "terraform-aws-modules/vpc/aws"
-  version              = "3.14.0"
+  version              = "~> 5.0"
   name                 = module.eks.cluster_name
-  cidr                 = "10.56.0.0/16"
+  cidr                 = local.vpc_cidr
   azs                  = data.aws_availability_zones.available.names
-  private_subnets      = ["10.56.1.0/24", "10.56.2.0/24", "10.56.3.0/24"]
-  public_subnets       = ["10.56.4.0/24", "10.56.5.0/24", "10.56.6.0/24"]
+  private_subnets      = local.private_subnets
+  public_subnets       = local.public_subnets
   enable_nat_gateway   = true
   create_igw           = true
   enable_dns_hostnames = true
@@ -23,58 +23,14 @@ module "vpc" {
   }
 }
 
-resource "aws_cognito_user_pool" "pool" {
-  name = module.eks.cluster_name
-}
-
-resource "aws_cognito_user_pool_domain" "pool_domain" {
-  domain       = module.eks.cluster_name
-  user_pool_id = aws_cognito_user_pool.pool.id
-}
-
-resource "aws_cognito_user_group" "argocd_admin_group" {
-  name         = "argocd-admin"
-  user_pool_id = aws_cognito_user_pool.pool.id
-  description  = "Users with admin access to Argo CD"
-}
-
-/* Available only in provider hashicorp/aws >= v4.0.0
-resource "random_string" "admin_password" {
-  length  = 25
-  special = false
-} # TODO create an output for this password
-
-resource "aws_cognito_user" "admin" {
-  user_pool_id = aws_cognito_user_pool.admin.id
-  username = admin
-  password = random_string.admin_password.result
-
-  message_action = SUPRESS # Do not send welcome message since password is hardcoded and email is non-existant
-
-  attributes = {
-    email = "admin@example.org"
-    email_verified = true
-    terraform = true
-  }
-}
-
-resource "aws_cognito_user_in_group" "add_admin_argocd_admin" {
-  user_pool_id = aws_cognito_user_pool.admin.id
-  group_name   = aws_cognito_user_group.argocd_admin_group.name
-  username     = aws_cognito_user.admin.username
-}
-*/
-
 module "eks" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cluster-eks.git?ref=v2.0.1"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cluster-eks?ref=v2.0.2"
 
-  cluster_name = "gh-v1-cluster"
-  base_domain  = "is-sandbox.camptocamp.com"
-  # cluster_version = "1.22"
+  cluster_name       = local.cluster_name
+  kubernetes_version = local.kubernetes_version
+  base_domain        = local.base_domain
 
-  vpc_id         = module.vpc.vpc_id
-  vpc_cidr_block = module.vpc.vpc_cidr_block
-
+  vpc_id             = module.vpc.vpc_id
   private_subnet_ids = module.vpc.private_subnets
   public_subnet_ids  = module.vpc.public_subnets
 
@@ -93,136 +49,165 @@ module "eks" {
   create_public_nlb = true
 }
 
-provider "kubernetes" {
-  host                   = module.eks.kubernetes_host
-  cluster_ca_certificate = module.eks.kubernetes_cluster_ca_certificate
-  token                  = module.eks.kubernetes_token
-}
+module "oidc" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-oidc-aws-cognito.git?ref=v1.0.0"
 
-provider "helm" {
-  kubernetes {
-    host                   = module.eks.kubernetes_host
-    cluster_ca_certificate = module.eks.kubernetes_cluster_ca_certificate
-    token                  = module.eks.kubernetes_token
+  cluster_name = module.eks.cluster_name
+  base_domain  = module.eks.base_domain
+
+  create_pool = true
+
+  user_map = {
+    YOUR_USERNAME = {
+      username   = "YOUR_USERNAME"
+      email      = "YOUR_EMAIL"
+      first_name = "YOUR_FIRST_NAME"
+      last_name  = "YOUR_LAST_NAME"
+    }
   }
 }
 
 module "argocd_bootstrap" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v1.1.1"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=3.1.3"
+
+  depends_on = [module.eks]
+}
+
+module "traefik" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//eks?ref=v2.0.1"
+
+  cluster_name     = module.eks.cluster_name
+  base_domain      = module.eks.base_domain
+  argocd_namespace = module.argocd_bootstrap.argocd_namespace
+
+  app_autosync           = local.app_autosync
+  enable_service_monitor = local.enable_service_monitor
+
+  dependency_ids = {
+    argocd = module.argocd_bootstrap.id
+  }
+}
+
+module "cert-manager" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//eks?ref=v5.1.0"
+
+  cluster_name     = module.eks.cluster_name
+  base_domain      = module.eks.base_domain
+  argocd_namespace = module.argocd_bootstrap.argocd_namespace
+
+  app_autosync           = local.app_autosync
+  enable_service_monitor = local.enable_service_monitor
+
+  cluster_oidc_issuer_url = module.eks.cluster_oidc_issuer_url
+
+  dependency_ids = {
+    argocd = module.argocd_bootstrap.id
+  }
+}
+
+module "loki-stack" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack//eks?ref=v4.0.2"
+
+  argocd_namespace = module.argocd_bootstrap.argocd_namespace
+
+  app_autosync = local.app_autosync
+
+  distributed_mode = true
+
+  logs_storage = {
+    bucket_id    = aws_s3_bucket.loki_logs_storage.id
+    region       = aws_s3_bucket.loki_logs_storage.region
+    iam_role_arn = module.iam_assumable_role_loki.iam_role_arn
+  }
+
+  dependency_ids = {
+    argocd = module.argocd_bootstrap.id
+    ebs    = module.ebs.id
+  }
+}
+
+module "thanos" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//eks?ref=v2.1.0"
+
+  cluster_name     = module.eks.cluster_name
+  base_domain      = module.eks.base_domain
+  cluster_issuer   = local.cluster_issuer
+  argocd_namespace = module.argocd_bootstrap.argocd_namespace
+
+  app_autosync = local.app_autosync
+
+  metrics_storage = {
+    bucket_id    = aws_s3_bucket.thanos_metrics_storage.id
+    region       = aws_s3_bucket.thanos_metrics_storage.region
+    iam_role_arn = module.iam_assumable_role_thanos.iam_role_arn
+  }
+  thanos = {
+    oidc = module.oidc.oidc
+  }
+
+  dependency_ids = {
+    argocd       = module.argocd_bootstrap.id
+    ebs          = module.ebs.id
+    traefik      = module.traefik.id
+    cert-manager = module.cert-manager.id
+    oidc         = module.oidc.id
+  }
+}
+
+module "kube-prometheus-stack" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//eks?ref=v6.1.1"
+
+  cluster_name     = module.eks.cluster_name
+  argocd_namespace = module.argocd_bootstrap.argocd_namespace
+  base_domain      = module.eks.base_domain
+  cluster_issuer   = local.cluster_issuer
+
+  app_autosync = local.app_autosync
+
+  metrics_storage = {
+    bucket_id    = aws_s3_bucket.thanos_metrics_storage.id
+    region       = aws_s3_bucket.thanos_metrics_storage.region
+    iam_role_arn = module.iam_assumable_role_thanos.iam_role_arn
+  }
+
+  prometheus = {
+    oidc = module.oidc.oidc
+  }
+
+  alertmanager = {
+    oidc = module.oidc.oidc
+  }
+
+  grafana = {
+    oidc = module.oidc.oidc
+  }
+
+  dependency_ids = {
+    argocd       = module.argocd_bootstrap.id
+    ebs          = module.ebs.id
+    traefik      = module.traefik.id
+    cert-manager = module.cert-manager.id
+    oidc         = module.oidc.id
+    thanos       = module.thanos.id
+    loki-stack   = module.loki-stack.id
+  }
+}
+
+module "argocd" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=3.1.3"
 
   cluster_name   = module.eks.cluster_name
   base_domain    = module.eks.base_domain
   cluster_issuer = local.cluster_issuer
 
-  depends_on = [module.eks]
-}
+  accounts_pipeline_tokens = module.argocd_bootstrap.argocd_accounts_pipeline_tokens
+  server_secretkey         = module.argocd_bootstrap.argocd_server_secretkey
 
-provider "argocd" {
-  server_addr                 = "some.stupid.name.that.doesnt.exist"
-  auth_token                  = module.argocd_bootstrap.argocd_auth_token
-  insecure                    = true
-  plain_text                  = true
-  port_forward                = true
-  port_forward_with_namespace = local.argocd_namespace
+  app_autosync = local.app_autosync
 
-  kubernetes {
-    host                   = module.eks.kubernetes_host
-    cluster_ca_certificate = module.eks.kubernetes_cluster_ca_certificate
-    token                  = module.eks.kubernetes_token
-  }
-}
+  admin_enabled = false
+  exec_enabled  = true
 
-module "ingress" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//eks?v=1.2.1"
-
-  cluster_name     = module.eks.cluster_name
-  argocd_namespace = local.argocd_namespace
-  base_domain      = module.eks.base_domain
-
-  depends_on = [module.argocd_bootstrap]
-}
-
-module "oidc" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-oidc-aws-cognito.git=v1.0.0"
-
-  cluster_name     = module.eks.cluster_name
-  argocd_namespace = local.argocd_namespace
-  base_domain      = module.eks.base_domain
-
-  cognito_user_pool_id     = aws_cognito_user_pool.pool.id
-  cognito_user_pool_domain = aws_cognito_user_pool_domain.pool_domain.domain
-
-  depends_on = [module.eks]
-}
-
-module "thanos" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//eks?v=v1.0.0"
-
-  cluster_name     = module.eks.cluster_name
-  argocd_namespace = local.argocd_namespace
-  base_domain      = module.eks.base_domain
-  cluster_issuer   = local.cluster_issuer
-
-  cluster_oidc_issuer_url = module.eks.cluster_oidc_issuer_url
-
-  thanos = {
-    oidc = module.oidc.oidc
-  }
-
-  depends_on = [module.argocd_bootstrap]
-}
-
-module "prometheus-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//eks?v=2.3.0"
-
-  cluster_name     = module.eks.cluster_name
-  argocd_namespace = local.argocd_namespace
-  base_domain      = module.eks.base_domain
-  cluster_issuer   = local.cluster_issuer
-
-  metrics_archives = module.thanos.metrics_archives
-
-  prometheus = {
-    oidc = module.oidc.oidc
-  }
-  alertmanager = {
-    oidc = module.oidc.oidc
-  }
-  grafana = {
-    oidc = module.oidc.oidc
-  }
-
-  depends_on = [module.argocd_bootstrap, module.thanos]
-}
-
-module "loki-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack.git//eks?v=2.2.0"
-
-  cluster_name     = module.eks.cluster_name
-  argocd_namespace = local.argocd_namespace
-  base_domain      = module.eks.base_domain
-
-  cluster_oidc_issuer_url = module.eks.cluster_oidc_issuer_url
-
-  depends_on = [module.prometheus-stack]
-}
-
-module "cert-manager" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//eks?v=4.0.0"
-
-  cluster_name     = module.eks.cluster_name
-  argocd_namespace = local.argocd_namespace
-  base_domain      = module.eks.base_domain
-
-  cluster_oidc_issuer_url = module.eks.cluster_oidc_issuer_url
-
-  depends_on = [module.prometheus-stack]
-}
-
-module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?v=1.1.0"
-
-  cluster_name = module.eks.cluster_name
   oidc = {
     name         = "OIDC"
     issuer       = module.oidc.oidc.issuer_url
@@ -237,111 +222,37 @@ module "argocd" {
       "openid", "profile", "email"
     ]
   }
-  argocd = {
-    namespace                = local.argocd_namespace
-    server_secretkey         = module.argocd_bootstrap.argocd_server_secretkey
-    accounts_pipeline_tokens = module.argocd_bootstrap.argocd_accounts_pipeline_tokens
-    server_admin_password    = module.argocd_bootstrap.argocd_server_admin_password
-    domain                   = module.argocd_bootstrap.argocd_domain
-  }
-  base_domain      = module.eks.base_domain
-  cluster_issuer   = local.cluster_issuer
-  bootstrap_values = module.argocd_bootstrap.bootstrap_values
-  #  repositories = {
-  #    "argocd" = {
-  #    url      = local.repo_url
-  #    revision = local.target_revision
-  #  }}
 
-  depends_on = [module.cert-manager, module.prometheus-stack, module.grafana]
+  rbac = {
+    policy_csv = <<-EOT
+      g, pipeline, role:admin
+      g, devops-stack-admins, role:admin
+    EOT
+  }
+
+  dependency_ids = {
+    argocd                = module.argocd_bootstrap.id
+    traefik               = module.traefik.id
+    cert-manager          = module.cert-manager.id
+    oidc                  = module.oidc.id
+    kube-prometheus-stack = module.kube-prometheus-stack.id
+  }
 }
 
 module "metrics_server" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-application.git=v1.2.2"
+  source = "git::https://github.com/camptocamp/devops-stack-module-application.git?ref=v2.0.1"
 
   name             = "metrics-server"
-  argocd_namespace = local.argocd_namespace
+  argocd_namespace = module.argocd_bootstrap.argocd_namespace
+
+  app_autosync = local.app_autosync
 
   source_repo            = "https://github.com/kubernetes-sigs/metrics-server.git"
   source_repo_path       = "charts/metrics-server"
-  source_target_revision = "master"
+  source_target_revision = "metrics-server-helm-chart-3.10.0"
   destination_namespace  = "kube-system"
 
-  depends_on = [module.argocd]
-}
-
-module "helloworld_apps" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git?v=1.2.4"
-
-  depends_on = [module.argocd]
-
-  name                   = "helloworld-apps"
-  argocd_namespace       = local.argocd_namespace
-  project_dest_namespace = "*"
-  project_source_repos = [
-    "https://github.com/camptocamp/devops-stack-helloworld-templates.git",
-  ]
-
-  generators = [
-    {
-      git = {
-        repoURL  = "https://github.com/camptocamp/devops-stack-helloworld-templates.git"
-        revision = "main"
-
-        directories = [
-          {
-            path = "apps/*"
-          }
-        ]
-      }
-    }
-  ]
-  template = {
-    metadata = {
-      name = "{{path.basename}}"
-    }
-
-    spec = {
-      project = "helloworld-apps"
-
-      source = {
-        repoURL        = "https://github.com/camptocamp/devops-stack-helloworld-templates.git"
-        targetRevision = "main"
-        path           = "{{path}}"
-
-        helm = {
-          valueFiles = []
-          # The following value defines this global variables that will be available to all apps in apps/*
-          # These are needed to generate the ingresses containing the name and base domain of the cluster.
-          values = <<-EOT
-            cluster:
-              name: "${module.eks.cluster_name}"
-              domain: "${module.eks.base_domain}"
-            apps:
-              traefik_dashboard: false # TODO Add variable when we configure the Traefik Dashboard
-              grafana: ${module.grafana.grafana_enabled || module.prometheus-stack.grafana_enabled}
-              prometheus: ${module.prometheus-stack.prometheus_enabled}
-              thanos: ${module.thanos.thanos_enabled}
-              alertmanager: ${module.prometheus-stack.alertmanager_enabled}
-          EOT
-        }
-      }
-
-      destination = {
-        name      = "in-cluster"
-        namespace = "{{path.basename}}"
-      }
-
-      syncPolicy = {
-        automated = {
-          allowEmpty = false
-          selfHeal   = true
-          prune      = true
-        }
-        syncOptions = [
-          "CreateNamespace=true"
-        ]
-      }
-    }
+  dependency_ids = {
+    argocd = module.argocd.id
   }
 }
