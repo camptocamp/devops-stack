@@ -1,3 +1,193 @@
-= Deployment On Amazon EKS
+= Deployment on Amazon EKS
 
-_Work In Progress_
+An example of a local deployment on Amazon EKS is provided https://github.com/camptocamp/devops-stack/tree/main/examples/eks[here]. Clone this repository and modify the files at your convenience.
+In the folder, as in a standard https://developer.hashicorp.com/terraform/tutorials/modules/module#what-is-a-terraform-module[Terraform module], you will find the following files:
+
+* *`terraform.tf`* - declaration of the Terraform providers used in this project;
+* *`locals.tf`* - local variables used by the DevOps Stack modules;
+* *`main.tf`* - definition of all the deployed modules;
+* *`s3_loki.tf`* - creation of the IAM policy, assumable role and bucket used by Loki;
+* *`s3_thanos.tf`* - creation of the IAM policy, assumable role and bucket used by Thanos;
+* *`csi_drivers.tf`* - creation of the required resources as well as the DevOps Stack modules needed for the CSI drivers of the cluster;
+* *`outputs.tf`* - the output variables of the DevOps Stack;
+
+== Requirements
+
+On your local machine, you need to have the following tools installed:
+
+* https://www.terraform.io/[Terraform] to provision the whole stack;
+* https://kubernetes.io/docs/reference/kubectl/[`kubectl`] or https://github.com/derailed/k9s[`k9s`]to interact with your cluster;
+* https://aws.amazon.com/cli/[AWS CLI] to interact with your AWS account;
+* https://dev.to/camptocamp-ops/simple-secret-sharing-with-gopass-and-summon-40jk[`gopass` and `summon`] to easily pass the IAM secrets as environment variables when running `terraform` commands;
+
+Other than that, you will require the following:
+
+* an AWS account;
+* an AWS IAM key with at least the ... ... ...
+// TODO Check with Christian for other requirements and specificities
+* a Route 53 zone;
+
+== Specificities and explanations
+
+=== `secrets.yml`
+
+TIP: Check https://dev.to/camptocamp-ops/simple-secret-sharing-with-gopass-and-summon-40jk[this blog post] for more information on how to configure `gopass` and `summon` to work together.
+
+For simplicity and ease of use, as well as security, the example uses `gopass` and `summon` to pass the IAM credentials to the Terraform commands. The `secrets.yml` file contains the path to the the secret values on the `gopass` password store. On execution, the `summon` command will then read the `secrets.yml` file and pass the credentials as environment variables to the Terraform commands.
+
+The commands presented on this tutorial all use the `summon` command.
+
+IMPORTANT: The environment variable `AWS_DEFAULT_REGION` defines where all the AWS resources created by Terraform will reside, including the EKS cluster.
+
+=== Remote Terraform state
+
+If you do not want to configure the remote Terraform state backend, you can simply remove the `backend` block from the `terraform.tf` file.
+
+NOTE: More information about the remote backends is available on the https://developer.hashicorp.com/terraform/language/settings/backends/configuration[official documentation].
+
+=== OIDC authentication
+
+IMPORTANT: The DevOps Stack modules are developed with OIDC in mind. In production, you should have an identity provider that supports OIDC and use it to authenticate to the DevOps Stack applications.
+
+In this example, we use the https://aws.amazon.com/eks/[Amazon EKS] OIDC provider. We provide a xref:oidc-aws-cognito:ROOT:README.adoc[module] that takes in a Cognito pool ID and its domain to provide you with the required configuration to deploy the DevOps Stack applications.
+
+This assumes that you have created a Cognito pool yourself, however you can use our module to also create the pool and populate it with users, as shown in the example.
+
+NOTE: Check the xref:oidc-aws-cognito:ROOT:README.adoc[AWS Cognito OIDC] usage documentation for more information on how to use it.
+
+The `user_map` variable of that module allows you to create OIDC users used to authenticate to the DevOps Stack applications. You should receive an e-mail from AWS with a temporary password to login for the first time.
+
+=== Let's Encrypt SSL certificates
+
+By default, to avoid rate-limiting your domain by Let's Encrypt, the example uses the `letsencrypt-staging` configuration of the cert-manager module to generate certificates using the Let's Encrypt staging environment which has an invalid CA certificate.
+
+If you feel ready to test with production certificates, you can simply edit the `locals.tf` file and change the `cluster_issuer` variable to `letsencrypt-prod`.
+
+== Deployment
+
+1. Clone the repository and `cd` into the `examples/eks` folder;
+
+2. Adapt the `secrets.yml` file to point to the correct path on your `gopass` password store;
+
+3. Check out the modules you want to deploy in the `main.tf` file, and comment out the others;
++
+TIP: You can also add your own Terraform modules in this file or any other file on the root folder. A good place to start to write your own module is to clone the https://github.com/camptocamp/devops-stack-module-template[devops-stack-module-template] repository and adapt it to your needs.
+
+4. On the `oidc` module, adapt the `user_map` variable as you wish (please check the <<oidc-authentication,OIDC section>> for more information).
+
+5. From the source of the example deployment, initialize the Terraform modules and providers:
++
+[source,bash]
+----
+summon terraform init
+----
+
+6. Configure the variables in `locals.tf` to your preference:
++
+IMPORTANT: The `cluster_name` and `vpc_cidr` must be unique for each DevOps Stack deployment in a single AWS account and the `base_domain` must match a Route 53 zone in that same account.
++
+TIP: The xref:eks:ROOT:README.adoc[cluster module documentation] can help you know what to put in the `kubernetes_version`, for example.
++
+[source,terraform]
+----
+include::example$deploy_examples/sks/locals.tf[]
+----
+
+7. Finally, run `terraform apply` and accept the proposed changes to create the Kubernetes nodes on Amazon EKS and populate them with our services;
++
+[source,bash]
+----
+summon terraform apply
+----
+
+8. After the first deployment (please note the troubleshooting step related with Argo CD), you can go to the `locals.tf` and enable the _ServiceMonitor_ boolean to activate the Prometheus exporters that will send metrics to Prometheus;
++
+IMPORTANT: This flag needs to be set as `false` for the first bootstrap of the cluster, otherwise the applications will fail to deploy while the Custom Resource Definitions of the kube-prometheus-stack are not yet created.
++
+NOTE: You can either set the flag as `true` in the `locals.tf` file or you can simply delete the line on the modules' declarations, since this variable is set as `true` by default on each module.
++
+TIP: Take note of the local called `app_autosync`. If you set the condition of the ternary operator to `false` you will disable the auto-sync for all the DevOps Stack modules. This allows you to choose when to manually sync the module on the Argo CD interface and is useful for troubleshooting purposes.
+
+== Access the cluster and the DevOps Stack applications
+
+To access your cluster you need to use the AWS CLI to recover a Kubeconfig you can use:
+
+[source,bash]
+----
+summon aws eks update-kubeconfig --name YOUR_CLUSTER_NAME --region YOUR_CLUSTER_ZONE --kubeconfig ~/.kube/NAME_TO_GIVE_YOUR_CONFIG.config
+----
+
+Then you can use the `kubectl` or `k9s` command to interact with the cluster:
+
+[source,bash]
+----
+k9s --kubeconfig ~/.kube/NAME_TO_GIVE_YOUR_CONFIG.config
+----
+
+As for the DevOps Stack applications, you can access them through the ingress domain that you can find in the `ingress_domain` output. If you used the code from the example without modifying the outputs, you will see something like this on your terminal after the `terraform apply` has done its job:
+
+[source,shell]
+----
+Outputs:
+
+devops_admins = <sensitive>
+ingress_domain = "your.domain.here"
+----
+
+Or you can use `kubectl` to get all the ingresses and their respective URLs:
+
+[source,bash]
+----
+kubectl get ingress --all-namespaces --kubeconfig ~/.kube/NAME_TO_GIVE_YOUR_CONFIG.config
+----
+
+The output `devops_admins` list all users and respective e-mails that were configured using the OIDC module:
+
+[source,bash]
+----
+summon terraform output devops_admins
+----
+
+Those users should have received an e-mail with a temporary password in order to login to the DevOps Stack applications for the first time.
+
+== Stop the cluster
+
+To definitively stop the cluster on a single command (that is the reason we delete some resources from the state file), you can use the following command:
+
+[source,bash]
+----
+summon terraform state rm $(summon terraform state list | grep "argocd_application\|argocd_project\|kubernetes_\|helm_") && summon terraform destroy
+----
+
+== Conclusion
+
+That's it, you now have a fully functional Kubernetes cluster in Amazon EKS with the DevOps Stack applications deployed on it. For more information, keep on reading the https://devops-stack.io/docs/latest/[documentation]. **You can explore the possibilities of each module and get the link to the source code on their respective documentation pages.**
+
+== Troubleshooting
+
+=== `connection_error` during the first deployment
+
+In some cases, you could encounter an error like these the first deployment:
+
+[source,shell]
+----
+╷
+│ Error: error while waiting for application argocd to be created
+│ 
+│   with module.argocd.argocd_application.this,
+│   on .terraform/modules/argocd/main.tf line 55, in resource "argocd_application" "this":
+│   55: resource "argocd_application" "this" {
+│ 
+│ error while waiting for application argocd to be synced and healthy: rpc error: code = Unavailable desc = error reading from server: EOF
+╵
+----
+
+The error is due to the way we provision Argo CD on the final steps of the deployment. We use the bootstrap Argo CD to deploy the final Argo CD module, which causes a redeployment of Argo CD and consequently a momentary loss of connection between the Argo CD Terraform provider and the Argo CD server.
+
+*You can simply re-run the command `summon terraform apply` to finalize the bootstrap of the cluster every time you encounter this error.*
+
+=== Argo CD interface reload loop when clicking on login
+
+If you encounter a loop when clicking on the login button on the Argo CD interface, you can try to delete the Argo CD server pod and let it be recreated.
+
+TIP: For more informations about the Argo CD module, please refer to the xref:argocd:ROOT:README.adoc[respective documentation page].
