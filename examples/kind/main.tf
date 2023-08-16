@@ -144,7 +144,7 @@ locals {
 resource "vault_generic_secret" "devops_stack_secrets" {
   for_each = local.devops_stack_secrets
 
-  path      = "secret/devops-stack/${each.key}"
+  path      = "secret/devops-stack/root-modules/${each.key}"
   data_json = jsonencode(each.value)
 }
 
@@ -221,7 +221,7 @@ module "loki-stack" {
 }
 
 module "thanos" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-thanos//kind?ref=v1.0.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-thanos//kind?ref=ISDEVOPS-233"
 
   cluster_name     = local.cluster_name
   base_domain      = local.base_domain
@@ -229,10 +229,10 @@ module "thanos" {
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
 
   metrics_storage = {
-    bucket_name       = local.minio_config.buckets.1.name
-    endpoint          = module.minio.endpoint
-    access_key        = local.minio_config.users.1.accessKey
-    secret_access_key = local.minio_config.users.1.secretKey
+    bucket_name = local.minio_config.buckets.1.name
+    endpoint    = module.minio.endpoint
+    access_key  = local.minio_config.users.1.accessKey
+    secret_key  = local.minio_config.users.1.secretKey
   }
 
   thanos = {

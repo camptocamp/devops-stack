@@ -40,12 +40,12 @@ locals {
     users = [
       {
         accessKey = "loki-user"
-        secretKey = "<path:secret/data/devops-stack/loki#loki-secret-key>"
+        secretKey = "<path:secret/data/devops-stack/root-modules/loki#loki-secret-key>"
         policy    = "loki-policy"
       },
       {
         accessKey = "thanos-user"
-        secretKey = "<path:secret/data/devops-stack/thanos#thanos-secret-key>"
+        secretKey = "<path:secret/data/devops-stack/root-modules/thanos#thanos-secret-key>"
         policy    = "thanos-policy"
       }
     ],
