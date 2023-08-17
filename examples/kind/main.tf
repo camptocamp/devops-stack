@@ -179,9 +179,9 @@ module "oidc" {
 }
 
 module "minio" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-minio?ref=ISDEVOPS-233"
+  source          = "git::https://github.com/camptocamp/devops-stack-module-minio?ref=ISDEVOPS-233"
+  target_revision = "ISDEVOPS-233"
 
-  target_revision  = "ISDEVOPS-233"
   cluster_name     = local.cluster_name
   base_domain      = local.base_domain
   cluster_issuer   = local.cluster_issuer
@@ -221,7 +221,8 @@ module "loki-stack" {
 }
 
 module "thanos" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-thanos//kind?ref=ISDEVOPS-233"
+  source          = "git::https://github.com/camptocamp/devops-stack-module-thanos//kind?ref=ISDEVOPS-233"
+  target_revision = "ISDEVOPS-233"
 
   cluster_name     = local.cluster_name
   base_domain      = local.base_domain
@@ -248,8 +249,8 @@ module "thanos" {
 }
 
 module "kube-prometheus-stack" {
-  # source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack//kind?ref=v2.3.0"
-  source = "../../../devops-stack-modules/devops-stack-module-kube-prometheus-stack/kind"
+  source          = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack//kind?ref=ISDEVOPS-233"
+  target_revision = "ISDEVOPS-233"
 
   cluster_name     = local.cluster_name
   base_domain      = local.base_domain
