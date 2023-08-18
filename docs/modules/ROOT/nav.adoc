@@ -10,7 +10,7 @@
 ** xref:ROOT:tutorials/deploy_kind.adoc[Deployment on KinD]
 ** xref:ROOT:tutorials/deploy_aks.adoc[Deployment on AKS]
 ** xref:ROOT:tutorials/deploy_eks.adoc[Deployment on EKS]
-** xref:ROOT:tutorials/deploy_aks.adoc[Deployment on SKS]
+** xref:ROOT:tutorials/deploy_sks.adoc[Deployment on SKS]
 ** xref:ROOT:tutorials/deploy_apps.adoc[Deploying Applications on the DevOps Stack]
 ** xref:ROOT:tutorials/greenfield_upgrade.adoc[Blue-Green Upgrade]
 * Contributing Guidelines
