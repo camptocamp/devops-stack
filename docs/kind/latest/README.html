@@ -36,7 +36,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="kind" data-version="v2.2.2">
+<div class="nav-container" data-component="kind" data-version="v2.3.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -62,17 +62,9 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">KinD Cluster Module</span>
-    <span class="version">v2.2.2</span>
+    <span class="version">v2.3.0</span>
   </div>
   <ul class="components">
-    <li class="component">
-      <a class="title" href="../../aad-pod-identity/latest/README.html">AAD Pod Identity Module</a>
-      <ul class="versions">
-        <li class="version is-latest">
-          <a href="../../aad-pod-identity/latest/README.html">v1.1.2</a>
-        </li>
-      </ul>
-    </li>
     <li class="component">
       <a class="title" href="../../application/latest/README.html">Application Module</a>
       <ul class="versions">
@@ -129,7 +121,10 @@
       <a class="title" href="../../argocd/latest/README.html">Argo CD Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../argocd/latest/README.html">v3.1.3</a>
+          <a href="../../argocd/latest/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.1.3/README.html">v3.1.3</a>
         </li>
         <li class="version">
           <a href="../../argocd/v3.1.2/README.html">v3.1.2</a>
@@ -298,14 +293,6 @@
       </ul>
     </li>
     <li class="component">
-      <a class="title" href="../../grafana/latest/README.html">Grafana Module</a>
-      <ul class="versions">
-        <li class="version is-latest">
-          <a href="../../grafana/latest/README.html">v1.0.0</a>
-        </li>
-      </ul>
-    </li>
-    <li class="component">
       <a class="title" href="../../keycloak/latest/README.html">Keycloak Module</a>
       <ul class="versions">
         <li class="version is-latest">
@@ -335,7 +322,10 @@
       <a class="title" href="README.html">KinD Cluster Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="README.html">v2.2.2</a>
+          <a href="README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../v2.2.2/README.html">v2.2.2</a>
         </li>
         <li class="version">
           <a href="../v2.2.1/README.html">v2.2.1</a>
@@ -577,15 +567,16 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v2.2.2</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v2.3.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="README.html">v2.2.2</a>
+    <a class="version is-current" href="README.html">v2.3.0</a>
+    <a class="version" href="../v2.2.2/README.html">v2.2.2</a>
     <a class="version" href="../v2.2.1/README.html">v2.2.1</a>
     <a class="version" href="../v2.2.0/README.html">v2.2.0</a>
     <a class="version" href="../v2.1.2/README.html">v2.1.2</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-cluster-kind/blob/v2.2.2/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-cluster-kind/blob/v2.3.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -599,10 +590,22 @@
 <p>A <a href="https://devops-stack.io">DevOps Stack</a> module to deploy a KinD cluster based on Docker.</p>
 </div>
 <div class="paragraph">
-<p>This cluster module is mainly used to deploy a <strong>single-node</strong> Kubernetes cluster used for testing and development as well as for onboarding new users of the DevOps Stack.</p>
+<p>This cluster module is mainly used to deploy a Kubernetes cluster used for testing and development as well as for onboarding new users of the DevOps Stack.</p>
 </div>
 <div class="paragraph">
-<p>Because KinD is nothing more than a Kubernetes cluster running inside a container, it is required that you have Docker up and running on your machine (the documentation to install Docker is available here <a href="https://docs.docker.com/engine/install/">here</a>).</p>
+<p>KinD is nothing more than a local Kubernetes cluster using Docker container "nodes". As such, it is required that you have Docker up and running on your machine (the documentation to install Docker is available here <a href="https://docs.docker.com/engine/install/">here</a>).</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+An example of a deployment of the DevOps Stack using KinD is available <a href="https://github.com/camptocamp/devops-stack/tree/main/examples/kind">here</a> as well as an accompanying <a href="#ROOT:tutorials/deploy_aks.adoc" class="xref unresolved">quick tutorial</a>.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -631,12 +634,12 @@
 
   cluster_name = local.cluster_name
 
-  kubernetes_version = "1.25.3"
+  kubernetes_version = "1.27.3"
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>It is also possible to configure the ports that are mapped between the KinD container and your machine. This is needed in order to access services that you deploy inside the cluster. By default, this module already maps the ports needed for HTTP and HTTPS traffic.</p>
+<p>By default, this module deploys a cluster with a control plane node and 3 worker nodes. If you want to deploy one more worker node, you can do it like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -645,21 +648,22 @@
 
   cluster_name = local.cluster_name
 
-  extra_port_mappings = ["tcp/22", "udp/53"]
+  nodes = [
+    {
+      "platform" = "devops-stack"
+    },
+    {
+      "platform" = "devops-stack"
+    },
+    {
+      "platform" = "devops-stack"
+    },
+    {
+      "platform" = "devops-stack"
+    },
+  ]
 }</code></pre>
 </div>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-A test deployment of the DevOps Stack is available <a href="https://github.com/camptocamp/devops-stack/tree/master/tests/kind-kind">here</a>.
-</td>
-</tr>
-</table>
 </div>
 </div>
 </div>
@@ -674,9 +678,10 @@ A test deployment of the DevOps Stack is available <a href="https://github.com/c
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-terraform hljs" data-lang="terraform">locals {
-  cluster_name     = "gh-v1-cluster"
-  cluster_issuer   = "ca-issuer"
-  argocd_namespace = "argocd"
+  kubernetes_version     = "v1.27.3"
+  cluster_name           = "YOUR_CLUSTER_NAME"
+  base_domain            = format("%s.nip.io", replace(module.traefik.external_ip, ".", "-"))
+  cluster_issuer         = "ca-issuer"
 }</code></pre>
 </div>
 </div>
@@ -755,13 +760,13 @@ A test deployment of the DevOps Stack is available <a href="https://github.com/c
 <p>Type: <code>string</code></p>
 </div>
 <div class="paragraph">
-<p>Default: <code>"v1.26.0"</code></p>
+<p>Default: <code>"v1.27.3"</code></p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_nodes"><a class="anchor" href="#_nodes"></a><a id="input_nodes"></a> <a href="#input_nodes">nodes</a></h4>
 <div class="paragraph">
-<p>Description: List of nodes</p>
+<p>Description: List of worker nodes to create in the KinD cluster. To increase the number of nodes, simply duplicate the objects on the list.</p>
 </div>
 <div class="paragraph">
 <p>Type: <code>list(map(string))</code></p>
@@ -963,7 +968,7 @@ A test deployment of the DevOps Stack is available <a href="https://github.com/c
 <p><code>string</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"v1.26.0"</code></p>
+<p><code>"v1.27.3"</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
@@ -974,7 +979,7 @@ A test deployment of the DevOps Stack is available <a href="https://github.com/c
 <p><a id="input_nodes"></a> <a href="#input_nodes">nodes</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>List of nodes</p>
+<p>List of worker nodes to create in the KinD cluster. To increase the number of nodes, simply duplicate the objects on the list.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>list(map(string))</code></p>
