@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.5.0](https://github.com/camptocamp/devops-stack/compare/v1.4.0...v1.5.0) (2023-08-18)
+
+
+### Features
+
+* **examples/eks:** add updated and improved EKS deployment example ([9f09347](https://github.com/camptocamp/devops-stack/commit/9f09347de36de8f813051eae5c981dc8cae5c393))
+* **examples/sks:** add SKS example ([5d660c5](https://github.com/camptocamp/devops-stack/commit/5d660c5717536a4d579ec105b22843f55fd1567a))
+
+
+### Bug Fixes
+
+* **examples/kind:** update the KinD example and improve the tutorial ([85297b7](https://github.com/camptocamp/devops-stack/commit/85297b76b10cb57df4c6f8e4929db6b3e72b23c1))
+
 ## [1.4.0](https://github.com/camptocamp/devops-stack/compare/v1.3.0...v1.4.0) (2023-06-16)
 
 
