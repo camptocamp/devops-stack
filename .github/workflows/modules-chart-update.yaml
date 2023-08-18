@@ -99,7 +99,7 @@ jobs:
       env:
         # This step does not have a branch and labels environment variable, because it is forcefully a major update, 
         # unlike the previous step, which can either be a patch, minor or major update.
-        pr-title: "feat!(chart): major update of dependencies on ${{ matrix.chart-name }} chart"
+        pr-title: "feat(chart)!: major update of dependencies on ${{ matrix.chart-name }} chart"
       with:
         commit-message: ${{ env.pr-title }}
         author: ${{ env.author }}
