@@ -25,14 +25,6 @@ content:
     - "!v1.1.0"
 
   # Modules Repositories
-  - url: https://github.com/camptocamp/devops-stack-module-aad-pod-identity.git
-    start_path: docs
-    branches: []
-    tags:
-    - "v@({1..9})*({0..9}).+({0..9}).*"
-    # Exclude versions without proper folder structure or with generation errors
-    - "!v1.{0..1}.{0..1}"
-    - "!v1.0.0-alpha.*"
   - url: https://github.com/camptocamp/devops-stack-module-application.git
     start_path: docs
     branches: []
@@ -48,13 +40,6 @@ content:
     # Exclude versions with generation errors
     - "!v1.{0..2}.{0..3}"
   - url: https://github.com/camptocamp/devops-stack-module-argocd.git
-    start_path: docs
-    branches: []
-    tags:
-    - "v@({1..9})*({0..9}).+({0..9}).*"
-    # Exclude versions without proper folder structure or with generation errors
-    - "!v1.0.0-alpha.*"
-  - url: https://github.com/camptocamp/devops-stack-module-azure-workload-identity.git
     start_path: docs
     branches: []
     tags:
@@ -121,13 +106,6 @@ content:
     - "v@({1..9})*({0..9}).+({0..9}).*"
     # Exclude versions without proper folder structure or with generation errors
     - "!v1.0.0"
-    - "!v1.0.0-alpha.*"
-  - url: https://github.com/camptocamp/devops-stack-module-grafana.git
-    start_path: docs
-    branches: []
-    tags:
-    - "v@({1..9})*({0..9}).+({0..9}).*"
-    # Exclude versions without proper folder structure or with generation errors
     - "!v1.0.0-alpha.*"
   - url: https://github.com/camptocamp/devops-stack-module-keycloak.git
     start_path: docs
