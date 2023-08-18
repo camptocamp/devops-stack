@@ -36,7 +36,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="ROOT" data-version="v1.4.0">
+<div class="nav-container" data-component="ROOT" data-version="v1.5.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -208,7 +208,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">DevOps Stack</span>
-    <span class="version">v1.4.0</span>
+    <span class="version">v1.5.0</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -347,7 +347,10 @@
       <a class="title" href="../index.html">DevOps Stack</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../index.html">v1.4.0</a>
+          <a href="../index.html">v1.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.4.0/index.html">v1.4.0</a>
         </li>
         <li class="version">
           <a href="../../v1.3.0/index.html">v1.3.0</a>
@@ -384,7 +387,10 @@
       <a class="title" href="../../ebs-csi-driver/latest/README.html">EBS CSI Driver Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../ebs-csi-driver/latest/README.html">v2.1.0</a>
+          <a href="../../ebs-csi-driver/latest/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v2.1.0/README.html">v2.1.0</a>
         </li>
         <li class="version">
           <a href="../../ebs-csi-driver/v2.0.1/README.html">v2.0.1</a>
@@ -719,9 +725,10 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v1.4.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v1.5.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="deploy_kind.html">v1.4.0</a>
+    <a class="version is-current" href="deploy_kind.html">v1.5.0</a>
+    <a class="version" href="../../v1.4.0/tutorials/deploy_kind.html">v1.4.0</a>
     <a class="version" href="../../v1.3.0/tutorials/deploy_kind.html">v1.3.0</a>
     <a class="version" href="../../v1.2.0/tutorials/deploy_kind.html">v1.2.0</a>
     <a class="version" href="../../v1.0.2/tutorials/deploy_kind.html">v1.0.2</a>
@@ -729,7 +736,7 @@
     <a class="version" href="../../v1.0.0/tutorials/deploy_kind.html">v1.0.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/blob/v1.4.0/docs/modules/ROOT/pages/tutorials/deploy_kind.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/blob/v1.5.0/docs/modules/ROOT/pages/tutorials/deploy_kind.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -740,32 +747,53 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>An example of a local deployment in KinD is provided <a href="https://github.com/camptocamp/devops-stack/tree/main/examples/kind">here</a>. Clone this repository and modify it at your convenance.
+<p>An example of a local deployment on KinD is provided <a href="https://github.com/camptocamp/devops-stack/tree/main/examples/kind">here</a>. Clone this repository and modify the files at your convenience.
 In the folder, as in a standard <a href="https://developer.hashicorp.com/terraform/tutorials/modules/module#what-is-a-terraform-module">Terraform module</a>, you will find the following files:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>terraform.tf</code>: declaration of the Terraform providers used in this project.</p>
+<p><strong><code>terraform.tf</code></strong> - declaration of the Terraform providers used in this project as well as their configuration;</p>
 </li>
 <li>
-<p><code>locals.tf</code>: local variables used in the DevOps Stacks.</p>
+<p><strong><code>locals.tf</code></strong> - local variables used by the DevOps Stack modules;</p>
 </li>
 <li>
-<p><code>main.tf</code>: definition of all deployed modules.</p>
+<p><strong><code>main.tf</code></strong> - definition of all the deployed modules;</p>
 </li>
 <li>
-<p><code>s3_bucket.tf</code>: configuration of the MinIO bucket, used as backend for Loki and Thanos.</p>
+<p><strong><code>s3_bucket.tf</code></strong> - configuration of the MinIO bucket, used as backend for Loki and Thanos;</p>
 </li>
 <li>
-<p><code>outputs.tf</code>: the output variables of the DevOps Stack, e.g. credentials and the <code>.kubeconfig</code> file to use with <code>kubectl</code>.</p>
+<p><strong><code>outputs.tf</code></strong> - the output variables of the DevOps Stack, e.g. credentials and the <code>.kubeconfig</code> file to use with <code>kubectl</code>;</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_specificities_of_the_kind_deployment"><a class="anchor" href="#_specificities_of_the_kind_deployment"></a>Specificities of the KinD deployment</h2>
+<h2 id="_requirements"><a class="anchor" href="#_requirements"></a>Requirements</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>On your local machine, you need to have the following tools installed:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.docker.com/get-docker">Docker</a> to deploy the KinD containers;</p>
+</li>
+<li>
+<p><a href="https://www.terraform.io/">Terraform</a> to provision the whole stack;</p>
+</li>
+<li>
+<p><a href="https://kubernetes.io/docs/reference/kubectl/"><code>kubectl</code></a> or <a href="https://github.com/derailed/k9s"><code>k9s</code></a>to interact with your cluster;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_specificities_and_explanations"><a class="anchor" href="#_specificities_and_explanations"></a>Specificities and explanations</h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_local_load_balancer"><a class="anchor" href="#_local_load_balancer"></a>Local Load Balancer</h3>
@@ -774,9 +802,57 @@ In the folder, as in a standard <a href="https://developer.hashicorp.com/terrafo
 </div>
 </div>
 <div class="sect2">
+<h3 id="_oidc_authentication"><a class="anchor" href="#_oidc_authentication"></a>OIDC authentication</h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The DevOps Stack modules are developed with OIDC in mind. In production, you should have an identity provider that supports OIDC and use it to authenticate to the DevOps Stack applications.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can have a local containing the OIDC configuration properly structured for the DevOps Stack applications and simply use an external OIDC provider instead of using Keycloak. Check <a href="https://github.com/camptocamp/devops-stack-module-keycloak/blob/main/oidc_bootstrap/locals.tf">this <code>locals.tf</code> on the Keycloak module</a> for an example.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To quickly deploy a testing environment on KinD you can use the Keycloak module, as shown in the example.</p>
+</div>
+<div class="paragraph">
+<p>After deploying Keycloak, you can use the OIDC bootstrap module to create the Keycloak realm, groups, users, etc.</p>
+</div>
+<div class="paragraph">
+<p>The <code>user_map</code> variable of that module allows you to create OIDC users used to authenticate to the DevOps Stack applications. The module will generate a password for each user, which you can check later after the deployment.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you do not provide a value for the <code>user_map</code> variable, the module will create a user named <code>devopsadmin</code> with a random password.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_self_signed_ssl_certificates"><a class="anchor" href="#_self_signed_ssl_certificates"></a>Self-signed SSL certificates</h3>
 <div class="paragraph">
-<p>Since KinD is locally deployed, there is no easy way of creating valid SSL certificates for the ingresses using Let&#8217;s Encrypt. As such, <code>cert-manager</code> is configured to use a self-signed Certificate Authority and the remaining modules are configured to ignore the SSL warnings/errors that are a consequence of that.</p>
+<p>Since KinD is deployed on your machine, there is no easy way of creating valid SSL certificates for the ingresses using Let&#8217;s Encrypt. As such, <code>cert-manager</code> is configured to use a self-signed Certificate Authority and the remaining modules are configured to ignore the SSL warnings/errors that are a consequence of that.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -794,41 +870,15 @@ When accessing the ingresses on your browser, you&#8217;ll obviously see warning
 </div>
 </div>
 <div class="sect1">
-<h2 id="_requirements"><a class="anchor" href="#_requirements"></a>Requirements</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>For this setup, you will need to have installed on your machine:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://docs.docker.com/get-docker">Docker</a> to deploy the KinD containers</p>
-</li>
-<li>
-<p><a href="https://www.terraform.io/">Terraform</a> to provision the whole stack</p>
-</li>
-<li>
-<p><a href="https://kubernetes.io/docs/reference/kubectl/"><code>kubectl</code></a> to interact with your cluster</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
 <h2 id="_deployment"><a class="anchor" href="#_deployment"></a>Deployment</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>From the source of the example deployment, initialize Terraform, which downloads all required providers and modules locally (they will be stored in the hidden folder <code>.terraform</code>).</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">terraform init</code></pre>
-</div>
-</div>
+<p>Clone the repository and <code>cd</code> into the <code>examples/kind</code> folder.</p>
 </li>
 <li>
-<p>Check out the modules you want to deploy in the <code>main.tf</code> file, and comment out the others.</p>
+<p>Check out the modules you want to deploy in the <code>main.tf</code> file, and comment out the others;</p>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -836,28 +886,40 @@ When accessing the ingresses on your browser, you&#8217;ll obviously see warning
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-You can also add your owns Terraform modules in this file or any other file on the root folder. A good place to start to write your own module is to clone the <a href="https://github.com/camptocamp/devops-stack-helloworld">devops-stack-helloworld</a> repository and adapt it to your needs.
+You can also add your own Terraform modules in this file or any other file on the root folder. A good place to start to write your own module is to clone the <a href="https://github.com/camptocamp/devops-stack-module-template">devops-stack-module-template</a> repository and adapt it to your needs;
 </td>
 </tr>
 </table>
 </div>
 </li>
 <li>
+<p>On the <code>oidc</code> module, adapt the <code>user_map</code> variable as you wish (please check the <a href="#oidc-authentication">OIDC section</a> for more information).</p>
+</li>
+<li>
+<p>From the source of the example deployment, initialize Terraform, which downloads all required providers and modules locally (they will be stored in the hidden folder <code>.terraform</code>);</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">terraform init</code></pre>
+</div>
+</div>
+</li>
+<li>
 <p>Configure the variables in <code>locals.tf</code> to your preference:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">locals {
-  kubernetes_version     = "v1.27.1"
-  cluster_name           = "kind-cluster"
+<pre class="highlightjs highlight"><code class="language-terraform hljs" data-lang="terraform">locals {
+  kubernetes_version     = "v1.27.3"
+  cluster_name           = "YOUR_CLUSTER_NAME"
   base_domain            = format("%s.nip.io", replace(module.traefik.external_ip, ".", "-"))
   cluster_issuer         = "ca-issuer"
-  enable_service_monitor = false
+  enable_service_monitor = false # Can be enabled after the first bootstrap.
+  app_autosync           = true ? { allow_empty = false, prune = true, self_heal = true } : {}
 }</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>Finally, run <code>terraform apply</code> and accept the proposed changes to create the Kubernetes nodes as Docker containers, and populate them with our services.</p>
+<p>Finally, run <code>terraform apply</code> and accept the proposed changes to create the Kubernetes nodes as Docker containers, and populate them with our services;</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">terraform apply</code></pre>
@@ -865,7 +927,7 @@ You can also add your owns Terraform modules in this file or any other file on t
 </div>
 </li>
 <li>
-<p>After the first deployment (please note the troubleshooting step related with Argo CD), you can go to locals and enable the ServiceMonitor boolean to activate the Prometheus exporters that will send metrics to Prometheus.</p>
+<p>After the first deployment (please note the troubleshooting step related with Argo CD), you can go to locals and enable the <em>ServiceMonitor</em> boolean to activate the Prometheus exporters that will send metrics to Prometheus;</p>
 <div class="admonitionblock important">
 <table>
 <tr>
@@ -885,39 +947,10 @@ This flag needs to be set as <code>false</code> for the first bootstrap of the c
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-You can either set the flag as <code>true</code> in the <code>locals.tf</code> file or you can simply delete the line on the modules declarations, since this variable is set as <code>true</code> by default on each module.
+You can either set the flag as <code>true</code> in the <code>locals.tf</code> file or you can simply delete the line on the modules' declarations, since this variable is set as <code>true</code> by default on each module.
 </td>
 </tr>
 </table>
-</div>
-</li>
-</ol>
-</div>
-<div class="sect2">
-<h3 id="_troubleshooting"><a class="anchor" href="#_troubleshooting"></a>Troubleshooting</h3>
-<div class="sect3">
-<h4 id="_argo_cd_connection_refused"><a class="anchor" href="#_argo_cd_connection_refused"></a>Argo CD: connection refused</h4>
-<div class="paragraph">
-<p>In some cases, you could encounter an error like this one:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">╷
-│ Error: Error while waiting for application argocd to be created
-│
-│   with module.argocd.argocd_application.this,
-│   on .terraform/modules/argocd/main.tf line 55, in resource "argocd_application" "this":
-│   55: resource "argocd_application" "this" {
-│
-│ error while waiting for application argocd to be synced and healthy: rpc error: code = Unavailable desc = connection error: desc = "transport: error while dialing: dial tcp 127.0.0.1:45729: connect: connection refused"
-╵</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This error is due to the way we finally provision Argo CD on the final steps of the deployment. We use the bootstrap Argo CD to deploy and manage the final Argo CD module, which causes a redeployment of Argo CD and consequently a momentary loss of connection between the Argo CD Terraform provider and the Argo CD server.</p>
-</div>
-<div class="paragraph">
-<p>You can simply re-run the command <code>terraform apply</code> to finalize the bootstrap of the cluster.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -926,43 +959,48 @@ You can either set the flag as <code>true</code> in the <code>locals.tf</code> f
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-For more informations about the Argo CD module, please refer to the <a href="../../argocd/latest/README.html" class="xref page">respective documentation page</a>.
+Take note of the local called <code>app_autosync</code>. If you set the condition of the ternary operator to <code>false</code> you will disable the auto-sync for all the DevOps Stack modules. This allows you to choose when to manually sync the module on the Argo CD interface and is useful for troubleshooting purposes.
 </td>
 </tr>
 </table>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_loki_stack_promtail_pods_stuck_with_status_crashloopbackoff"><a class="anchor" href="#_loki_stack_promtail_pods_stuck_with_status_crashloopbackoff"></a><code>loki-stack-promtail</code> pods stuck with status <code>CrashLoopBackOff</code></h4>
-<div class="paragraph">
-<p>You could stumble upon <code>loki-stack-promtail</code> stuck in a creation loop with the following logs:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">level=error ts=2023-05-09T06:32:38.495673778Z caller=main.go:117 msg="error creating promtail" error="failed to make file target manager: too many open files"
-Stream closed EOF for loki-stack/loki-stack-promtail-bxcmw (promtail)</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If that&#8217;s the case, you will have to increase the upper limit on the number of INotify instances that can be created per real user ID:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># Increase the limit until next reboot
-sudo sysctl fs.inotify.max_user_instances=512
-# Increase the limit permanently (run this command as root)
-echo 'fs.inotify.max_user_instances=512' &gt;&gt; /etc/sysctl.conf</code></pre>
-</div>
-</div>
-</div>
+</li>
+</ol>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_access_the_devops_stack_applications"><a class="anchor" href="#_access_the_devops_stack_applications"></a>Access the DevOps Stack applications</h2>
+<h2 id="_access_the_cluster_and_the_devops_stack_applications"><a class="anchor" href="#_access_the_cluster_and_the_devops_stack_applications"></a>Access the cluster and the DevOps Stack applications</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The URLs of the applications are visible in the ingresses of the cluster. You can get them by running the following command:</p>
+<p>Typically the KinD Terraform provider used in our code already appends the credentials to your default Kubeconfig, so you should be good to go to access the cluster.</p>
+</div>
+<div class="paragraph">
+<p>Otherwise, you can use the content of the <code>kubernetes_kubeconfig</code> output to manually generate a Kubeconfig file or you can use the one automatically created on the root folder of the project.</p>
+</div>
+<div class="paragraph">
+<p>Then you can use the <code>kubectl</code> or <code>k9s</code> command to interact with the cluster:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">k9s --kubeconfig &lt;PATH_TO_TERRAFORM_PROJECT&gt;/&lt;CLUSTER_NAME&gt;-config</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As for the DevOps Stack applications, you can access them through the ingress domain that you can find in the <code>ingress_domain</code> output. If you used the code from the example without modifying the outputs, you will see something like this on your terminal after the <code>terraform apply</code> has done its job:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">Outputs:
+
+ingress_domain = "your.domain.here"
+keycloak_admin_credentials = &lt;sensitive&gt;
+keycloak_users = &lt;sensitive&gt;
+kubernetes_kubeconfig = &lt;sensitive&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or you can use <code>kubectl</code> to get all the ingresses and their respective URLs:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -999,7 +1037,7 @@ minio_root_user_credentials = &lt;sensitive&gt;
 # To get the credentials for Grafana, Prometheus, etc.
 $ terraform output keycloak_users
 {
-  "devopsadmin" = "aqhEbd3L0Msryjjp547ej7nyN6E2FllV"
+  "devopsadmin" = "PASSWORD"
 }</code></pre>
 </div>
 </div>
@@ -1038,7 +1076,7 @@ When the host computer is restarted, the Docker container will start again, but 
 <h2 id="_stop_the_cluster"><a class="anchor" href="#_stop_the_cluster"></a>Stop the cluster</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To definitively stop the cluster on a single command (that is the reason we delete some resources from the state file), we can use the following command:</p>
+<p>To definitively stop the cluster on a single command (that is the reason we delete some resources from the state file), you can use the following command:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1062,7 +1100,90 @@ rm terraform.state</code></pre>
 <h2 id="_conclusion"><a class="anchor" href="#_conclusion"></a>Conclusion</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>That&#8217;s it, you have deployed the DevOps Stack locally! For more informations, keep on reading the <a href="https://devops-stack.io/docs/latest/">documentation</a>. <strong>You can explore the possibilities of each module and get the link to the source code on their respective documentation pages.</strong></p>
+<p>That&#8217;s it, you have deployed the DevOps Stack locally! For more information, keep on reading the <a href="https://devops-stack.io/docs/latest/">documentation</a>. <strong>You can explore the possibilities of each module and get the link to the source code on their respective documentation pages.</strong></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_troubleshooting"><a class="anchor" href="#_troubleshooting"></a>Troubleshooting</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_connection_error_during_the_first_deployment"><a class="anchor" href="#_connection_error_during_the_first_deployment"></a><code>connection_error</code> during the first deployment</h3>
+<div class="paragraph">
+<p>In some cases, you could encounter an error like this the first deployment:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">╷
+│ Error: Error while waiting for application argocd to be created
+│
+│   with module.argocd.argocd_application.this,
+│   on .terraform/modules/argocd/main.tf line 55, in resource "argocd_application" "this":
+│   55: resource "argocd_application" "this" {
+│
+│ error while waiting for application argocd to be synced and healthy: rpc error: code = Unavailable desc = connection error: desc = "transport: error while dialing: dial tcp 127.0.0.1:45729: connect: connection refused"
+╵</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This error is due to the way we provision Argo CD on the final steps of the deployment. We use the bootstrap Argo CD to deploy the final Argo CD module, which causes a redeployment of Argo CD and consequently a momentary loss of connection between the Argo CD Terraform provider and the Argo CD server.</p>
+</div>
+<div class="paragraph">
+<p><strong>You can simply re-run the command <code>terraform apply</code> to finalize the bootstrap of the cluster.</strong></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+For more informations about the Argo CD module, please refer to the <a href="../../argocd/latest/README.html" class="xref page">respective documentation page</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_argo_cd_interface_reload_loop_when_clicking_on_login"><a class="anchor" href="#_argo_cd_interface_reload_loop_when_clicking_on_login"></a>Argo CD interface reload loop when clicking on login</h3>
+<div class="paragraph">
+<p>If you encounter a loop when clicking on the login button on the Argo CD interface, you can try to delete the Argo CD server pod and let it be recreated.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+For more informations about the Argo CD module, please refer to the <a href="../../argocd/latest/README.html" class="xref page">respective documentation page</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_loki_stack_promtail_pods_stuck_with_status_crashloopbackoff"><a class="anchor" href="#_loki_stack_promtail_pods_stuck_with_status_crashloopbackoff"></a><code>loki-stack-promtail</code> pods stuck with status <code>CrashLoopBackOff</code></h3>
+<div class="paragraph">
+<p>You could stumble upon <code>loki-stack-promtail</code> stuck in a creation loop with the following logs:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">level=error ts=2023-05-09T06:32:38.495673778Z caller=main.go:117 msg="error creating promtail" error="failed to make file target manager: too many open files"
+Stream closed EOF for loki-stack/loki-stack-promtail-bxcmw (promtail)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If that&#8217;s the case, you will have to increase the upper limit on the number of INotify instances that can be created per real user ID:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># Increase the limit until next reboot
+sudo sysctl fs.inotify.max_user_instances=512
+# Increase the limit permanently (run this command as root)
+echo 'fs.inotify.max_user_instances=512' &gt;&gt; /etc/sysctl.conf</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>

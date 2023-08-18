@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Deployment On Amazon EKS :: DevOps Stack</title>
+    <title>Deployment on Amazon EKS :: DevOps Stack</title>
     <meta name="generator" content="Antora 3.1.2">
     <link rel="stylesheet" href="../../_/css/site.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -36,7 +36,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="ROOT" data-version="v1.4.0">
+<div class="nav-container" data-component="ROOT" data-version="v1.5.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -208,7 +208,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">DevOps Stack</span>
-    <span class="version">v1.4.0</span>
+    <span class="version">v1.5.0</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -347,7 +347,10 @@
       <a class="title" href="../index.html">DevOps Stack</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../index.html">v1.4.0</a>
+          <a href="../index.html">v1.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.4.0/index.html">v1.4.0</a>
         </li>
         <li class="version">
           <a href="../../v1.3.0/index.html">v1.3.0</a>
@@ -384,7 +387,10 @@
       <a class="title" href="../../ebs-csi-driver/latest/README.html">EBS CSI Driver Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../ebs-csi-driver/latest/README.html">v2.1.0</a>
+          <a href="../../ebs-csi-driver/latest/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v2.1.0/README.html">v2.1.0</a>
         </li>
         <li class="version">
           <a href="../../ebs-csi-driver/v2.0.1/README.html">v2.0.1</a>
@@ -719,9 +725,10 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v1.4.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v1.5.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="deploy_eks.html">v1.4.0</a>
+    <a class="version is-current" href="deploy_eks.html">v1.5.0</a>
+    <a class="version" href="../../v1.4.0/tutorials/deploy_eks.html">v1.4.0</a>
     <a class="version" href="../../v1.3.0/tutorials/deploy_eks.html">v1.3.0</a>
     <a class="version" href="../../v1.2.0/tutorials/deploy_eks.html">v1.2.0</a>
     <a class="version" href="../../v1.0.2/tutorials/deploy_eks.html">v1.0.2</a>
@@ -729,16 +736,437 @@
     <a class="version" href="../../v1.0.0/tutorials/deploy_eks.html">v1.0.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/blob/v1.4.0/docs/modules/ROOT/pages/tutorials/deploy_eks.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/blob/v1.5.0/docs/modules/ROOT/pages/tutorials/deploy_eks.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Deployment On Amazon EKS</h1>
+<h1 class="page">Deployment on Amazon EKS</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p><em>Work In Progress</em></p>
+<p>An example of a local deployment on Amazon EKS is provided <a href="https://github.com/camptocamp/devops-stack/tree/main/examples/eks">here</a>. Clone this repository and modify the files at your convenience.
+In the folder, as in a standard <a href="https://developer.hashicorp.com/terraform/tutorials/modules/module#what-is-a-terraform-module">Terraform module</a>, you will find the following files:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><code>terraform.tf</code></strong> - declaration of the Terraform providers used in this project;</p>
+</li>
+<li>
+<p><strong><code>locals.tf</code></strong> - local variables used by the DevOps Stack modules;</p>
+</li>
+<li>
+<p><strong><code>main.tf</code></strong> - definition of all the deployed modules;</p>
+</li>
+<li>
+<p><strong><code>s3_loki.tf</code></strong> - creation of the IAM policy, assumable role and bucket used by Loki;</p>
+</li>
+<li>
+<p><strong><code>s3_thanos.tf</code></strong> - creation of the IAM policy, assumable role and bucket used by Thanos;</p>
+</li>
+<li>
+<p><strong><code>csi_drivers.tf</code></strong> - creation of the required resources as well as the DevOps Stack modules needed for the CSI drivers of the cluster;</p>
+</li>
+<li>
+<p><strong><code>outputs.tf</code></strong> - the output variables of the DevOps Stack;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_requirements"><a class="anchor" href="#_requirements"></a>Requirements</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>On your local machine, you need to have the following tools installed:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.terraform.io/">Terraform</a> to provision the whole stack;</p>
+</li>
+<li>
+<p><a href="https://kubernetes.io/docs/reference/kubectl/"><code>kubectl</code></a> or <a href="https://github.com/derailed/k9s"><code>k9s</code></a>to interact with your cluster;</p>
+</li>
+<li>
+<p><a href="https://aws.amazon.com/cli/">AWS CLI</a> to interact with your AWS account;</p>
+</li>
+<li>
+<p><a href="https://dev.to/camptocamp-ops/simple-secret-sharing-with-gopass-and-summon-40jk"><code>gopass</code> and <code>summon</code></a> to easily pass the IAM secrets as environment variables when running <code>terraform</code> commands;</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Other than that, you will require the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>an AWS account;</p>
+</li>
+<li>
+<p>an AWS IAM key with at least the &#8230;&#8203; &#8230;&#8203; &#8230;&#8203;</p>
+</li>
+<li>
+<p>a Route 53 zone;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_specificities_and_explanations"><a class="anchor" href="#_specificities_and_explanations"></a>Specificities and explanations</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_secrets_yml"><a class="anchor" href="#_secrets_yml"></a><code>secrets.yml</code></h3>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Check <a href="https://dev.to/camptocamp-ops/simple-secret-sharing-with-gopass-and-summon-40jk">this blog post</a> for more information on how to configure <code>gopass</code> and <code>summon</code> to work together.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>For simplicity and ease of use, as well as security, the example uses <code>gopass</code> and <code>summon</code> to pass the IAM credentials to the Terraform commands. The <code>secrets.yml</code> file contains the path to the the secret values on the <code>gopass</code> password store. On execution, the <code>summon</code> command will then read the <code>secrets.yml</code> file and pass the credentials as environment variables to the Terraform commands.</p>
+</div>
+<div class="paragraph">
+<p>The commands presented on this tutorial all use the <code>summon</code> command.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The environment variable <code>AWS_DEFAULT_REGION</code> defines where all the AWS resources created by Terraform will reside, including the EKS cluster.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_remote_terraform_state"><a class="anchor" href="#_remote_terraform_state"></a>Remote Terraform state</h3>
+<div class="paragraph">
+<p>If you do not want to configure the remote Terraform state backend, you can simply remove the <code>backend</code> block from the <code>terraform.tf</code> file.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+More information about the remote backends is available on the <a href="https://developer.hashicorp.com/terraform/language/settings/backends/configuration">official documentation</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_oidc_authentication"><a class="anchor" href="#_oidc_authentication"></a>OIDC authentication</h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The DevOps Stack modules are developed with OIDC in mind. In production, you should have an identity provider that supports OIDC and use it to authenticate to the DevOps Stack applications.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In this example, we use the <a href="https://aws.amazon.com/eks/">Amazon EKS</a> OIDC provider. We provide a <a href="../../oidc-aws-cognito/latest/README.html" class="xref page">module</a> that takes in a Cognito pool ID and its domain to provide you with the required configuration to deploy the DevOps Stack applications.</p>
+</div>
+<div class="paragraph">
+<p>This assumes that you have created a Cognito pool yourself, however you can use our module to also create the pool and populate it with users, as shown in the example.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Check the <a href="../../oidc-aws-cognito/latest/README.html" class="xref page">AWS Cognito OIDC</a> usage documentation for more information on how to use it.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The <code>user_map</code> variable of that module allows you to create OIDC users used to authenticate to the DevOps Stack applications. You should receive an e-mail from AWS with a temporary password to login for the first time.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_lets_encrypt_ssl_certificates"><a class="anchor" href="#_lets_encrypt_ssl_certificates"></a>Let&#8217;s Encrypt SSL certificates</h3>
+<div class="paragraph">
+<p>By default, to avoid rate-limiting your domain by Let&#8217;s Encrypt, the example uses the <code>letsencrypt-staging</code> configuration of the cert-manager module to generate certificates using the Let&#8217;s Encrypt staging environment which has an invalid CA certificate.</p>
+</div>
+<div class="paragraph">
+<p>If you feel ready to test with production certificates, you can simply edit the <code>locals.tf</code> file and change the <code>cluster_issuer</code> variable to <code>letsencrypt-prod</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_deployment"><a class="anchor" href="#_deployment"></a>Deployment</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Clone the repository and <code>cd</code> into the <code>examples/eks</code> folder;</p>
+</li>
+<li>
+<p>Adapt the <code>secrets.yml</code> file to point to the correct path on your <code>gopass</code> password store;</p>
+</li>
+<li>
+<p>Check out the modules you want to deploy in the <code>main.tf</code> file, and comment out the others;</p>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can also add your own Terraform modules in this file or any other file on the root folder. A good place to start to write your own module is to clone the <a href="https://github.com/camptocamp/devops-stack-module-template">devops-stack-module-template</a> repository and adapt it to your needs.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>On the <code>oidc</code> module, adapt the <code>user_map</code> variable as you wish (please check the <a href="#oidc-authentication">OIDC section</a> for more information).</p>
+</li>
+<li>
+<p>From the source of the example deployment, initialize the Terraform modules and providers:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">summon terraform init</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Configure the variables in <code>locals.tf</code> to your preference:</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The <code>cluster_name</code> and <code>vpc_cidr</code> must be unique for each DevOps Stack deployment in a single AWS account and the <code>base_domain</code> must match a Route 53 zone in that same account.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The <a href="../../eks/latest/README.html" class="xref page">cluster module documentation</a> can help you know what to put in the <code>kubernetes_version</code>, for example.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-terraform hljs" data-lang="terraform">locals {
+  kubernetes_version       = "1.27.4"
+  cluster_name             = "YOUR_CLUSTER_NAME"
+  zone                     = "YOUR_CLUSTER_ZONE"
+  service_level            = "starter"
+  base_domain              = "your.domain.here"
+  activate_wildcard_record = true
+  cluster_issuer           = "letsencrypt-staging"
+  enable_service_monitor   = false # Can be enabled after the first bootstrap.
+  app_autosync             = true ? { allow_empty = false, prune = true, self_heal = true } : {}
+}</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Finally, run <code>terraform apply</code> and accept the proposed changes to create the Kubernetes nodes on Amazon EKS and populate them with our services;</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">summon terraform apply</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>After the first deployment (please note the troubleshooting step related with Argo CD), you can go to the <code>locals.tf</code> and enable the <em>ServiceMonitor</em> boolean to activate the Prometheus exporters that will send metrics to Prometheus;</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+This flag needs to be set as <code>false</code> for the first bootstrap of the cluster, otherwise the applications will fail to deploy while the Custom Resource Definitions of the kube-prometheus-stack are not yet created.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You can either set the flag as <code>true</code> in the <code>locals.tf</code> file or you can simply delete the line on the modules' declarations, since this variable is set as <code>true</code> by default on each module.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Take note of the local called <code>app_autosync</code>. If you set the condition of the ternary operator to <code>false</code> you will disable the auto-sync for all the DevOps Stack modules. This allows you to choose when to manually sync the module on the Argo CD interface and is useful for troubleshooting purposes.
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_access_the_cluster_and_the_devops_stack_applications"><a class="anchor" href="#_access_the_cluster_and_the_devops_stack_applications"></a>Access the cluster and the DevOps Stack applications</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To access your cluster you need to use the AWS CLI to recover a Kubeconfig you can use:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">summon aws eks update-kubeconfig --name YOUR_CLUSTER_NAME --region YOUR_CLUSTER_ZONE --kubeconfig ~/.kube/NAME_TO_GIVE_YOUR_CONFIG.config</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then you can use the <code>kubectl</code> or <code>k9s</code> command to interact with the cluster:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">k9s --kubeconfig ~/.kube/NAME_TO_GIVE_YOUR_CONFIG.config</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As for the DevOps Stack applications, you can access them through the ingress domain that you can find in the <code>ingress_domain</code> output. If you used the code from the example without modifying the outputs, you will see something like this on your terminal after the <code>terraform apply</code> has done its job:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">Outputs:
+
+devops_admins = &lt;sensitive&gt;
+ingress_domain = "your.domain.here"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or you can use <code>kubectl</code> to get all the ingresses and their respective URLs:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">kubectl get ingress --all-namespaces --kubeconfig ~/.kube/NAME_TO_GIVE_YOUR_CONFIG.config</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output <code>devops_admins</code> list all users and respective e-mails that were configured using the OIDC module:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">summon terraform output devops_admins</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Those users should have received an e-mail with a temporary password in order to login to the DevOps Stack applications for the first time.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_stop_the_cluster"><a class="anchor" href="#_stop_the_cluster"></a>Stop the cluster</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To definitively stop the cluster on a single command (that is the reason we delete some resources from the state file), you can use the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">summon terraform state rm $(summon terraform state list | grep "argocd_application\|argocd_project\|kubernetes_\|helm_") &amp;&amp; summon terraform destroy</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conclusion"><a class="anchor" href="#_conclusion"></a>Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>That&#8217;s it, you now have a fully functional Kubernetes cluster in Amazon EKS with the DevOps Stack applications deployed on it. For more information, keep on reading the <a href="https://devops-stack.io/docs/latest/">documentation</a>. <strong>You can explore the possibilities of each module and get the link to the source code on their respective documentation pages.</strong></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_troubleshooting"><a class="anchor" href="#_troubleshooting"></a>Troubleshooting</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_connection_error_during_the_first_deployment"><a class="anchor" href="#_connection_error_during_the_first_deployment"></a><code>connection_error</code> during the first deployment</h3>
+<div class="paragraph">
+<p>In some cases, you could encounter an error like these the first deployment:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">╷
+│ Error: error while waiting for application argocd to be created
+│
+│   with module.argocd.argocd_application.this,
+│   on .terraform/modules/argocd/main.tf line 55, in resource "argocd_application" "this":
+│   55: resource "argocd_application" "this" {
+│
+│ error while waiting for application argocd to be synced and healthy: rpc error: code = Unavailable desc = error reading from server: EOF
+╵</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The error is due to the way we provision Argo CD on the final steps of the deployment. We use the bootstrap Argo CD to deploy the final Argo CD module, which causes a redeployment of Argo CD and consequently a momentary loss of connection between the Argo CD Terraform provider and the Argo CD server.</p>
+</div>
+<div class="paragraph">
+<p><strong>You can simply re-run the command <code>summon terraform apply</code> to finalize the bootstrap of the cluster every time you encounter this error.</strong></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_argo_cd_interface_reload_loop_when_clicking_on_login"><a class="anchor" href="#_argo_cd_interface_reload_loop_when_clicking_on_login"></a>Argo CD interface reload loop when clicking on login</h3>
+<div class="paragraph">
+<p>If you encounter a loop when clicking on the login button on the Argo CD interface, you can try to delete the Argo CD server pod and let it be recreated.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+For more informations about the Argo CD module, please refer to the <a href="../../argocd/latest/README.html" class="xref page">respective documentation page</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
 </div>
 </article>
   </div>
