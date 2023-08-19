@@ -536,7 +536,10 @@
       <a class="title" href="../../traefik/latest/README.html">Traefik Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../traefik/latest/README.html">v2.0.1</a>
+          <a href="../../traefik/latest/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v2.0.1/README.html">v2.0.1</a>
         </li>
         <li class="version">
           <a href="../../traefik/v2.0.0/README.html">v2.0.0</a>
@@ -652,7 +655,7 @@ The root of this repository contains the final Argo CD module to be deployed, wh
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-terraform hljs" data-lang="terraform">module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v1.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=&lt;RELEASE&gt;"
 
   cluster_name   = local.cluster_name
   base_domain    = local.base_domain
@@ -679,7 +682,7 @@ The root of this repository contains the final Argo CD module to be deployed, wh
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-terraform hljs" data-lang="terraform">module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v1.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=&lt;RELEASE&gt;"
 
   ...
 
@@ -729,26 +732,20 @@ The sources can also be configured using the <a href="../../application/latest/R
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-terraform hljs" data-lang="terraform">module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v1.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=&lt;RELEASE&gt;"
 
   ...
 
-  helm_values = [{
-    argo-cd = {
-      configs = {
-        rbac = {
-          "policy.csv" = &lt;&lt;-EOT
-          g, pipeline, role:admin
-          g, argocd-admin, role:admin
-          p, role:read-sync, applications, get, */*, allow
-          p, role:read-sync, applications, sync, */*, allow
-          p, role:read-sync, repositories, get, *, allow
-          p, role:read-sync, projects, get, *, allow
-          EOT
-        }
-      }
-    }
-  }]
+  rbac = {
+    policy_csv = &lt;&lt;-EOT
+      g, pipeline, role:admin
+      g, argocd-admin, role:admin
+      p, role:read-sync, applications, get, */*, allow
+      p, role:read-sync, applications, sync, */*, allow
+      p, role:read-sync, repositories, get, *, allow
+      p, role:read-sync, projects, get, *, allow
+    EOT
+  }
 
   ...
 }</code></pre>
@@ -801,8 +798,10 @@ When using SOPS, you will want to give it access to an external secrets manageme
 <div class="sect1">
 <h2 id="_troubleshooting"><a class="anchor" href="#_troubleshooting"></a>Troubleshooting</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_connection_error_during_terraform_apply"><a class="anchor" href="#_connection_error_during_terraform_apply"></a><code>connection_error</code> during <code>terraform apply</code></h3>
 <div class="paragraph">
-<p>When deploying this module of Argo CD you may experience connection errors (which is normal given that argocd-server pod could have been redeployed).</p>
+<p>When deploying this module of Argo CD you may experience connection errors (which is normal given that <code>argocd-server</code> pod could have been redeployed).</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -818,6 +817,23 @@ When using SOPS, you will want to give it access to an external secrets manageme
 </div>
 <div class="paragraph">
 <p>When bootstrapping a cluster for the first time, you can simply run <code>terraform apply</code> again and the deployment should finish correctly.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>There are some settings that force the automatic redeployment of the <code>argocd-server</code> pod during the first bootstrap of the cluster.</p>
+</div>
+<div class="paragraph">
+<p>A good example is the <code>admin_enabled</code> variable which is set as <code>true</code> for the bootstrap but not for the final Argo CD module. If you pass the <code>admin_enabled = true</code> to the final Argo CD module you will most likely not encounter this error on the first deployment of you cluster, however you could run into the error of the interface looping whenever you click login (see the other troubleshoot sections).</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>However, on some cases (notably when upgrading the Argo CD module), this error could leave the Terraform resource tainted.</p>
@@ -844,6 +860,16 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 </div>
 <div class="paragraph">
 <p><strong>Untainting the resource with the command <code>terraform untaint module.argocd.argocd_application.this</code> should solve the issue</strong>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_argo_cd_interface_reload_loop_when_clicking_on_login"><a class="anchor" href="#_argo_cd_interface_reload_loop_when_clicking_on_login"></a>Argo CD interface reload loop when clicking on login</h3>
+<div class="paragraph">
+<p>If you encounter a loop when clicking on the login button on the Argo CD interface, you can try to delete the Argo CD server pod and let it be recreated.</p>
+</div>
+<div class="paragraph">
+<p>This error usually happens because there are some unapplied settings between the bootstrap Argo CD and the final Argo CD module. If you already encountered the error from the previous step, then this error should not happen, as it means the pod was already recreated.</p>
+</div>
 </div>
 </div>
 </div>
@@ -873,7 +899,7 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 <div class="sect3">
 <h4 id="_module_oidc_id"><a class="anchor" href="#_module_oidc_id"></a><code>module.oidc.id</code></h4>
 <div class="paragraph">
-<p>Only for the platforms that deploy a cluster module, such as EKS or KinD, there is also a the dependency on <code>module.oidc.id</code>.</p>
+<p>Only for the platforms that deploy a OIDC module, such as EKS, KinD or SKS, there is also a the dependency on <code>module.oidc.id</code>.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1047,7 +1073,7 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 <p>Type: <code>string</code></p>
 </div>
 <div class="paragraph">
-<p>Default: <code>"v3.1.2"</code></p>
+<p>Default: <code>"v3.1.3"</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -1422,6 +1448,14 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 3</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="provider_jwt"></a> <a href="#provider_jwt">jwt</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -1458,14 +1492,6 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>&gt;= 5</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>&gt;= 3</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1634,7 +1660,7 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 <p><code>string</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"v3.1.2"</code></p>
+<p><code>"v3.1.3"</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
