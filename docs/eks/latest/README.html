@@ -36,7 +36,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="eks" data-version="v2.0.2">
+<div class="nav-container" data-component="eks" data-version="v3.0.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -62,7 +62,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">EKS Cluster Module</span>
-    <span class="version">v2.0.2</span>
+    <span class="version">v3.0.0</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -196,7 +196,10 @@
       <a class="title" href="../../latest/index.html">DevOps Stack</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../latest/index.html">v1.5.0</a>
+          <a href="../../latest/index.html">v1.5.1</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.5.0/index.html">v1.5.0</a>
         </li>
         <li class="version">
           <a href="../../v1.4.0/index.html">v1.4.0</a>
@@ -279,7 +282,10 @@
       <a class="title" href="README.html">EKS Cluster Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="README.html">v2.0.2</a>
+          <a href="README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../v2.0.2/README.html">v2.0.2</a>
         </li>
         <li class="version">
           <a href="../v2.0.1/README.html">v2.0.1</a>
@@ -570,15 +576,16 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v2.0.2</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v3.0.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="README.html">v2.0.2</a>
+    <a class="version is-current" href="README.html">v3.0.0</a>
+    <a class="version" href="../v2.0.2/README.html">v2.0.2</a>
     <a class="version" href="../v2.0.1/README.html">v2.0.1</a>
     <a class="version" href="../v2.0.0/README.html">v2.0.0</a>
     <a class="version" href="../v1.0.0/README.html">v1.0.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-cluster-eks/blob/v2.0.2/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-cluster-eks/blob/v3.0.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -592,23 +599,23 @@
 <p>A <a href="https://devops-stack.io/">DevOps Stack</a> module to deploy a Kubernetes cluster on Amazon Web Services EKS.</p>
 </div>
 <div class="paragraph">
-<p>This module currently only supports <a href="https://docs.aws.amazon.com/eks/latest/userguide/worker.html">self-managed node groups</a> and not <a href="https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html">EKS managed nodes</a>. It uses the Terraform <a href="https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest">module "eks" by AWS</a> to manage the cluster itself.</p>
+<p>This module creates <a href="https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html">EKS managed nodes</a> by default, bug also supports <a href="https://docs.aws.amazon.com/eks/latest/userguide/worker.html">self-managed node groups</a> by setting the variable <code>use_self_managed_node_groups</code> to <code>true</code>. It uses the Terraform <a href="https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest">module "eks" by AWS</a> to manage the cluster itself.</p>
 </div>
 <div class="paragraph">
-<p>The <code>node_groups</code> variable is a map of objects. Each value of the map creates a node group referenced by its label. The value object can take any input accepted by the <a href="https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest/submodules/self-managed-node-group">self-managed-node-group</a> submodule.</p>
+<p>The <code>node_groups</code> variable is a map of objects. Each value of the map creates a node group referenced by its label. The value object can take any input accepted by the <a href="https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest/submodules/eks-managed-node-group">eks-managed-node-group</a> or <a href="https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest/submodules/self-managed-node-group">self-managed-node-group</a> submodule.</p>
 </div>
 <div class="paragraph">
-<p>Here is an example that creates one node group with 3 instances of type <code>r5a.large</code>, attaches them to the main Load Balancer, and customizes the base EBS volume size to 100 GB:</p>
+<p>Here is an example that creates one EKS managed node group with 3 instances of type <code>r5a.large</code>, attaches them to the cluster Load Balancer(s), and customizes the base EBS volume size to 100 GB:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre>  node_groups = {
     "my-node-group" = {
-      instance_type     = "r5a.xlarge"
-      min_size          = 3
-      max_size          = 3
-      desired_size      = 3
-      target_group_arns = module.my_cluster.nlb_target_groups
+      instance_types  = ["r5a.xlarge"]
+      min_size        = 3
+      max_size        = 3
+      desired_size    = 3
+      nlbs_attachment = true
 
       block_device_mappings = {
         "default" = {
@@ -621,6 +628,25 @@
     },
   }</pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>When using self-managed node groups, the instance type is instead given as a single string value instead of an array:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>      instance_type     = "r5a.xlarge"</pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -639,6 +665,41 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 </div>
 <div class="paragraph">
 <p>This module needs a Route 53 DNS zone in the same AWS account to create a wildcard CNAME record that points to the Network LB. The DNS zone must be passed in the <code>base_domain</code> variable. This record is used by other DevOps Stack modules as default URLs for their applications.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_upgrading_from_versions_earlier_than_3_x"><a class="anchor" href="#_upgrading_from_versions_earlier_than_3_x"></a>Upgrading from versions earlier than 3.x</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The versions 2.x and earlier of this module created <a href="https://docs.aws.amazon.com/eks/latest/userguide/worker.html">self-managed node groups</a> exclusively. Upgrading to versions 3.x or later requires setting the variable <code>use_self_managed_node_groups</code> to <code>true</code> to avoid breaking existing clusters.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>When going from self-managed node groups to EKS managed ones, note the following changes in node groups arguments:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>instance_type</code> argument is replaced with <code>instance_types</code> and accepts a list of strings,</p>
+</li>
+<li>
+<p>The <code>target_group_arns</code> argument isn&#8217;t supported anymore. Instead set <code>nlbs_attachment = true</code>.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Switching an existing cluster to EKS managed node groups is possible, but requires manually draining the existing nodes after the new node group is created and before the old one is destroyed (by doing a <code>terraform apply -target &lt;resource&gt;</code> in multiple steps).</p>
 </div>
 </div>
 </div>
@@ -683,21 +744,21 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 <p>The following Modules are called:</p>
 </div>
 <div class="sect3">
-<h4 id="_cluster"><a class="anchor" href="#_cluster"></a><a id="module_cluster"></a> <a href="#module_cluster">cluster</a></h4>
-<div class="paragraph">
-<p>Source: terraform-aws-modules/eks/aws</p>
-</div>
-<div class="paragraph">
-<p>Version: ~&gt; 19.0</p>
-</div>
-</div>
-<div class="sect3">
 <h4 id="_nlb"><a class="anchor" href="#_nlb"></a><a id="module_nlb"></a> <a href="#module_nlb">nlb</a></h4>
 <div class="paragraph">
 <p>Source: terraform-aws-modules/alb/aws</p>
 </div>
 <div class="paragraph">
 <p>Version: ~&gt; 8.0</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cluster"><a class="anchor" href="#_cluster"></a><a id="module_cluster"></a> <a href="#module_cluster">cluster</a></h4>
+<div class="paragraph">
+<p>Source: terraform-aws-modules/eks/aws</p>
+</div>
+<div class="paragraph">
+<p>Version: ~&gt; 19.0</p>
 </div>
 </div>
 <div class="sect3">
@@ -717,6 +778,9 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 </div>
 <div class="ulist">
 <ul>
+<li>
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_attachment">aws_autoscaling_attachment.node_groups_to_nlbs_target_groups</a> (resource)</p>
+</li>
 <li>
 <p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record">aws_route53_record.wildcard</a> (resource)</p>
 </li>
@@ -791,19 +855,22 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 <div class="sect3">
 <h4 id="_kubernetes_version"><a class="anchor" href="#_kubernetes_version"></a><a id="input_kubernetes_version"></a> <a href="#input_kubernetes_version">kubernetes_version</a></h4>
 <div class="paragraph">
-<p>Description: Kubernetes version for the EKS cluster.</p>
+<p>Description: Kubernetes <code>&lt;major&gt;.&lt;minor&gt;</code> version to use for the EKS cluster.</p>
 </div>
 <div class="paragraph">
-<p>Please check the <a href="https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html">AWS EKS documentation</a> to find the available versions.</p>
+<p>See <a href="https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html">AWS EKS documentation</a> for a list of available versions.</p>
 </div>
 <div class="paragraph">
-<p>This variable can be changed on an existing cluster to update it. <strong>Note that this triggers an "instance refresh" on the nodes' auto scaling group, and so will recreate all pods running on the cluster</strong>.</p>
+<p>If you do not specify a value, the latest available version at creation is used and no upgrades will occur except those automatically triggered by EKS.</p>
+</div>
+<div class="paragraph">
+<p>The value can be set and increased on an existing cluster to upgrade it. <strong>Note that this triggers a rolling replacement of the compute nodes, so all pods will be recreated</strong>.</p>
 </div>
 <div class="paragraph">
 <p>Type: <code>string</code></p>
 </div>
 <div class="paragraph">
-<p>Default: <code>"1.25"</code></p>
+<p>Default: <code>null</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -901,6 +968,27 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 </div>
 <div class="paragraph">
 <p>Default: <code>{}</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_use_self_managed_node_groups"><a class="anchor" href="#_use_self_managed_node_groups"></a><a id="input_use_self_managed_node_groups"></a> <a href="#input_use_self_managed_node_groups">use_self_managed_node_groups</a></h4>
+<div class="paragraph">
+<p>Description: Whether to use self-managed node groups instead of EKS managed node groups.</p>
+</div>
+<div class="paragraph">
+<p>EKS managed node groups have the advantage of automatically draining the nodes when instances are being replaced.</p>
+</div>
+<div class="paragraph">
+<p><strong>You should set this variable to <code>true</code> on clusters deployed with a module earlier than v3 because it created self-managed node groups exclusively.</strong></p>
+</div>
+<div class="paragraph">
+<p>Changing this on an existing cluster is not supported (although it is possible with some downtime and manual fixes to the load balancer target groups).</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>bool</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>false</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -1176,6 +1264,14 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_attachment">aws_autoscaling_attachment.node_groups_to_nlbs_target_groups</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record">aws_route53_record.wildcard</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -1279,19 +1375,22 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 <p><a id="input_kubernetes_version"></a> <a href="#input_kubernetes_version">kubernetes_version</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Kubernetes version for the EKS cluster.</p>
+<p>Kubernetes <code>&lt;major&gt;.&lt;minor&gt;</code> version to use for the EKS cluster.</p>
 </div>
 <div class="paragraph">
-<p>Please check the <a href="https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html">AWS EKS documentation</a> to find the available versions.</p>
+<p>See <a href="https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html">AWS EKS documentation</a> for a list of available versions.</p>
 </div>
 <div class="paragraph">
-<p>This variable can be changed on an existing cluster to update it. <strong>Note that this triggers an "instance refresh" on the nodes' auto scaling group, and so will recreate all pods running on the cluster</strong>.</p>
+<p>If you do not specify a value, the latest available version at creation is used and no upgrades will occur except those automatically triggered by EKS.</p>
+</div>
+<div class="paragraph">
+<p>The value can be set and increased on an existing cluster to upgrade it. <strong>Note that this triggers a rolling replacement of the compute nodes, so all pods will be recreated</strong>.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>string</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"1.25"</code></p>
+<p><code>null</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
@@ -1444,6 +1543,32 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>{}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_use_self_managed_node_groups"></a> <a href="#input_use_self_managed_node_groups">use_self_managed_node_groups</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Whether to use self-managed node groups instead of EKS managed node groups.</p>
+</div>
+<div class="paragraph">
+<p>EKS managed node groups have the advantage of automatically draining the nodes when instances are being replaced.</p>
+</div>
+<div class="paragraph">
+<p><strong>You should set this variable to <code>true</code> on clusters deployed with a module earlier than v3 because it created self-managed node groups exclusively.</strong></p>
+</div>
+<div class="paragraph">
+<p>Changing this on an existing cluster is not supported (although it is possible with some downtime and manual fixes to the load balancer target groups).</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>bool</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>false</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
