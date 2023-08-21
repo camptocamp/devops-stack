@@ -7,6 +7,13 @@
 
 * fix hyperlink on the navigation bar ([c65b281](https://github.com/camptocamp/devops-stack/commit/c65b281a385e9bbff3a61369c6d61a9b09084886))
 
+## [1.5.1](https://github.com/camptocamp/devops-stack/compare/v1.5.0...v1.5.1) (2023-08-21)
+
+
+### Bug Fixes
+
+* fix hyperlink on the navigation bar ([c65b281](https://github.com/camptocamp/devops-stack/commit/c65b281a385e9bbff3a61369c6d61a9b09084886))
+
 ## [1.5.0](https://github.com/camptocamp/devops-stack/compare/v1.4.0...v1.5.0) (2023-08-18)
 
 
