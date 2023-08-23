@@ -250,7 +250,6 @@ module "thanos" {
 
 module "kube-prometheus-stack" {
   source          = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack//kind?ref=ISDEVOPS-233"
-  # source = "../../../devops-stack-modules/devops-stack-module-kube-prometheus-stack/kind"
   target_revision = "ISDEVOPS-233"
 
   cluster_name     = local.cluster_name
@@ -283,34 +282,35 @@ module "kube-prometheus-stack" {
   }
 }
 
-# module "argocd" {
-#   source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v2.0.0"
+module "argocd" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=ISDEVOPS-233"
+  target_revision = "ISDEVOPS-233"
 
-#   base_domain              = local.base_domain
-#   cluster_name             = local.cluster_name
-#   cluster_issuer           = local.cluster_issuer
-#   server_secretkey         = module.argocd_bootstrap.argocd_server_secretkey
-#   accounts_pipeline_tokens = module.argocd_bootstrap.argocd_accounts_pipeline_tokens
+  base_domain              = local.base_domain
+  cluster_name             = local.cluster_name
+  cluster_issuer           = local.cluster_issuer
+  server_secretkey         = module.argocd_bootstrap.argocd_server_secretkey
+  accounts_pipeline_tokens = module.argocd_bootstrap.argocd_accounts_pipeline_tokens
 
-#   oidc = {
-#     name         = "OIDC"
-#     issuer       = module.oidc.oidc.issuer_url
-#     clientID     = module.oidc.oidc.client_id
-#     clientSecret = module.oidc.oidc.client_secret
-#     requestedIDTokenClaims = {
-#       groups = {
-#         essential = true
-#       }
-#     }
-#   }
+  oidc = {
+    name         = "OIDC"
+    issuer       = module.oidc.oidc.issuer_url
+    clientID     = module.oidc.oidc.client_id
+    clientSecret = module.oidc.oidc.client_secret
+    requestedIDTokenClaims = {
+      groups = {
+        essential = true
+      }
+    }
+  }
 
-#   dependency_ids = {
-#     traefik               = module.traefik.id
-#     cert-manager          = module.cert-manager.id
-#     oidc                  = module.oidc.id
-#     kube-prometheus-stack = module.kube-prometheus-stack.id
-#   }
-# }
+  dependency_ids = {
+    traefik               = module.traefik.id
+    cert-manager          = module.cert-manager.id
+    oidc                  = module.oidc.id
+    kube-prometheus-stack = module.kube-prometheus-stack.id
+  }
+}
 
 # # module "metrics_server" {
 # #   source = "git::https://github.com/camptocamp/devops-stack-module-application.git?ref=v1.2.2"
