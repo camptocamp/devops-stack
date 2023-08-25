@@ -36,7 +36,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="metallb" data-version="v1.0.1">
+<div class="nav-container" data-component="metallb" data-version="v1.1.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -62,7 +62,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">MetalLB Module</span>
-    <span class="version">v1.0.1</span>
+    <span class="version">v1.1.0</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -351,7 +351,10 @@
       <a class="title" href="../../kube-prometheus-stack/latest/README.html">kube-prometheus-stack Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../kube-prometheus-stack/latest/README.html">v6.1.1</a>
+          <a href="../../kube-prometheus-stack/latest/README.html">v6.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v6.1.1/README.html">v6.1.1</a>
         </li>
         <li class="version">
           <a href="../../kube-prometheus-stack/v6.1.0/README.html">v6.1.0</a>
@@ -477,7 +480,10 @@
       <a class="title" href="README.html">MetalLB Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="README.html">v1.0.1</a>
+          <a href="README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../v1.0.1/README.html">v1.0.1</a>
         </li>
       </ul>
     </li>
@@ -581,7 +587,14 @@
     <li><a href="README.html">Home</a></li>
   </ul>
 </nav>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-metallb/blob/v1.0.1/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">v1.1.0</button>
+  <div class="version-menu">
+    <a class="version is-current" href="README.html">v1.1.0</a>
+    <a class="version" href="../v1.0.1/README.html">v1.0.1</a>
+  </div>
+</div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-metallb/blob/v1.1.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -663,6 +676,18 @@
 <p>The following input variables are optional (have default values):</p>
 </div>
 <div class="sect3">
+<h4 id="_namespace"><a class="anchor" href="#_namespace"></a><a id="input_namespace"></a> <a href="#input_namespace">namespace</a></h4>
+<div class="paragraph">
+<p>Description: Namespace to deploy metallb chart to.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"metallb-system"</code></p>
+</div>
+</div>
+<div class="sect3">
 <h4 id="_helm_values"><a class="anchor" href="#_helm_values"></a><a id="input_helm_values"></a> <a href="#input_helm_values">helm_values</a></h4>
 <div class="paragraph">
 <p>Description: Override values.</p>
@@ -681,18 +706,8 @@
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_namespace"><a class="anchor" href="#_namespace"></a><a id="input_namespace"></a> <a href="#input_namespace">namespace</a></h4>
-<div class="paragraph">
-<p>Description: Namespace to deploy metallb chart to.</p>
 </div>
-<div class="paragraph">
-<p>Type: <code>string</code></p>
-</div>
-<div class="paragraph">
-<p>Default: <code>"metallb-system"</code>
-= Requirements</p>
-</div>
+<h1 id="_requirements_2" class="sect0"><a class="anchor" href="#_requirements_2"></a>Requirements</h1>
 <table class="tableblock frame-all grid-all fit-content">
 <colgroup>
 <col>
@@ -731,8 +746,6 @@
 </tr>
 </tbody>
 </table>
-</div>
-</div>
 <h1 id="_providers_2" class="sect0"><a class="anchor" href="#_providers_2"></a>Providers</h1>
 <table class="tableblock frame-all grid-all fit-content">
 <colgroup>
@@ -824,27 +837,6 @@
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_helm_values"></a> <a href="#input_helm_values">helm_values</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Override values.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>any</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">[
-  {}
-]</code></pre>
-</div>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>no</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="input_namespace"></a> <a href="#input_namespace">namespace</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -875,6 +867,27 @@
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_helm_values"></a> <a href="#input_helm_values">helm_values</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Override values.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>any</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">[
+  {}
+]</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
 </div></div></td>
 </tr>
 </tbody>
