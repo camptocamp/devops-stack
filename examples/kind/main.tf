@@ -6,13 +6,13 @@ module "kind" {
 }
 
 module "metallb" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-metallb.git?ref=v1.0.1"
+  source = "git::https://github.com/camptocamp/devops-stack-module-metallb.git?ref=v1.1.0"
 
   subnet = module.kind.kind_subnet
 }
 
 module "argocd_bootstrap" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v3.1.3"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v3.3.0"
 
   depends_on = [module.kind]
 }
@@ -130,7 +130,7 @@ module "loki-stack" {
 }
 
 module "thanos" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-thanos//kind?ref=v2.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-thanos//kind?ref=v2.2.0"
 
   cluster_name     = local.cluster_name
   base_domain      = local.base_domain
@@ -161,7 +161,7 @@ module "thanos" {
 }
 
 module "kube-prometheus-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack//kind?ref=v6.1.1"
+  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack//kind?ref=v6.3.0"
 
   cluster_name     = local.cluster_name
   base_domain      = local.base_domain
@@ -196,7 +196,7 @@ module "kube-prometheus-stack" {
 }
 
 module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v3.1.3"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v3.3.0"
 
   base_domain              = local.base_domain
   cluster_name             = local.cluster_name
@@ -246,7 +246,7 @@ module "metrics_server" {
 
   source_repo            = "https://github.com/kubernetes-sigs/metrics-server.git"
   source_repo_path       = "charts/metrics-server"
-  source_target_revision = "metrics-server-helm-chart-3.10.0"
+  source_target_revision = "metrics-server-helm-chart-3.11.0"
   destination_namespace  = "kube-system"
 
   helm_values = [{
