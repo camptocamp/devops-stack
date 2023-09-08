@@ -38,11 +38,19 @@ module "eks" {
 
   node_groups = {
     "${module.eks.cluster_name}-main" = {
-      instance_type     = "m5a.large"
-      min_size          = 2
-      max_size          = 3
-      desired_size      = 2
-      target_group_arns = module.eks.nlb_target_groups
+      instance_types  = ["m5a.large"]
+      min_size        = 3
+      max_size        = 3
+      desired_size    = 3
+      nlbs_attachment = true
+      block_device_mappings = {
+        "default" = {
+          device_name = "/dev/xvda"
+          ebs = {
+            volume_size = 100
+          }
+        }
+      }
     },
   }
 
@@ -68,7 +76,7 @@ module "oidc" {
 }
 
 module "argocd_bootstrap" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v3.2.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v3.4.0"
 
   depends_on = [module.eks]
 }
@@ -89,7 +97,7 @@ module "traefik" {
 }
 
 module "cert-manager" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//eks?ref=v5.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//eks?ref=v5.2.0"
 
   cluster_name     = module.eks.cluster_name
   base_domain      = module.eks.base_domain
@@ -127,7 +135,7 @@ module "loki-stack" {
 }
 
 module "thanos" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//eks?ref=v2.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//eks?ref=v2.4.0"
 
   cluster_name     = module.eks.cluster_name
   base_domain      = module.eks.base_domain
@@ -155,7 +163,7 @@ module "thanos" {
 }
 
 module "kube-prometheus-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//eks?ref=v6.1.1"
+  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//eks?ref=v7.0.0"
 
   cluster_name     = module.eks.cluster_name
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
@@ -194,7 +202,7 @@ module "kube-prometheus-stack" {
 }
 
 module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v3.2.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v3.4.0"
 
   cluster_name   = module.eks.cluster_name
   base_domain    = module.eks.base_domain
@@ -249,7 +257,7 @@ module "metrics_server" {
 
   source_repo            = "https://github.com/kubernetes-sigs/metrics-server.git"
   source_repo_path       = "charts/metrics-server"
-  source_target_revision = "metrics-server-helm-chart-3.10.0"
+  source_target_revision = "metrics-server-helm-chart-3.11.0"
   destination_namespace  = "kube-system"
 
   dependency_ids = {
