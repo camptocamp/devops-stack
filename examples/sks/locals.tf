@@ -1,5 +1,5 @@
 locals {
-  kubernetes_version       = "1.27.4"
+  kubernetes_version       = "1.28.1"
   cluster_name             = "YOUR_CLUSTER_NAME"
   zone                     = "YOUR_CLUSTER_ZONE"
   service_level            = "starter"

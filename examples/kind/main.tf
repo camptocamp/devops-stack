@@ -12,7 +12,7 @@ module "metallb" {
 }
 
 module "argocd_bootstrap" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v3.3.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v3.4.0"
 
   depends_on = [module.kind]
 }
@@ -196,7 +196,7 @@ module "kube-prometheus-stack" {
 }
 
 module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v3.3.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v3.4.0"
 
   base_domain              = local.base_domain
   cluster_name             = local.cluster_name
