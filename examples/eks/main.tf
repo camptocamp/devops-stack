@@ -38,7 +38,7 @@ module "eks" {
 
   node_groups = {
     "${module.eks.cluster_name}-main" = {
-      instance_type   = ["m5a.large"]
+      instance_types  = ["m5a.large"]
       min_size        = 3
       max_size        = 3
       desired_size    = 3
@@ -97,7 +97,7 @@ module "traefik" {
 }
 
 module "cert-manager" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//eks?ref=v5.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//eks?ref=v5.2.0"
 
   cluster_name     = module.eks.cluster_name
   base_domain      = module.eks.base_domain
@@ -135,7 +135,7 @@ module "loki-stack" {
 }
 
 module "thanos" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//eks?ref=v2.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//eks?ref=v2.2.0"
 
   cluster_name     = module.eks.cluster_name
   base_domain      = module.eks.base_domain
