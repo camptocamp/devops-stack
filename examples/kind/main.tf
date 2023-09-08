@@ -130,7 +130,7 @@ module "loki-stack" {
 }
 
 module "thanos" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-thanos//kind?ref=v2.2.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-thanos//kind?ref=v2.4.0"
 
   cluster_name     = local.cluster_name
   base_domain      = local.base_domain
@@ -161,7 +161,7 @@ module "thanos" {
 }
 
 module "kube-prometheus-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack//kind?ref=v6.3.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack//kind?ref=v7.0.0"
 
   cluster_name     = local.cluster_name
   base_domain      = local.base_domain
