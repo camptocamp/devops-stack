@@ -36,7 +36,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="loki" data-version="v4.0.2">
+<div class="nav-container" data-component="loki" data-version="v5.0.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -80,7 +80,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">Loki Module</span>
-    <span class="version">v4.0.2</span>
+    <span class="version">v5.0.0</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -139,7 +139,10 @@
       <a class="title" href="../../../argocd/latest/README.html">Argo CD Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../../argocd/latest/README.html">v3.3.0</a>
+          <a href="../../../argocd/latest/README.html">v3.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v3.3.0/README.html">v3.3.0</a>
         </li>
         <li class="version">
           <a href="../../../argocd/v3.2.0/README.html">v3.2.0</a>
@@ -375,7 +378,10 @@
       <a class="title" href="../../../kube-prometheus-stack/latest/README.html">kube-prometheus-stack Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../../kube-prometheus-stack/latest/README.html">v6.3.0</a>
+          <a href="../../../kube-prometheus-stack/latest/README.html">v7.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v6.3.0/README.html">v6.3.0</a>
         </li>
         <li class="version">
           <a href="../../../kube-prometheus-stack/v6.2.0/README.html">v6.2.0</a>
@@ -443,7 +449,10 @@
       <a class="title" href="../README.html">Loki Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../README.html">v4.0.2</a>
+          <a href="../README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v4.0.2/README.html">v4.0.2</a>
         </li>
         <li class="version">
           <a href="../../v4.0.1/README.html">v4.0.1</a>
@@ -552,7 +561,10 @@
       <a class="title" href="../../../thanos/latest/README.html">Thanos Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../../thanos/latest/README.html">v2.3.0</a>
+          <a href="../../../thanos/latest/README.html">v2.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../thanos/v2.3.0/README.html">v2.3.0</a>
         </li>
         <li class="version">
           <a href="../../../thanos/v2.2.0/README.html">v2.2.0</a>
@@ -625,9 +637,10 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v4.0.2</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v5.0.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="README.html">v4.0.2</a>
+    <a class="version is-current" href="README.html">v5.0.0</a>
+    <a class="version" href="../../v4.0.2/sks/README.html">v4.0.2</a>
     <a class="version" href="../../v4.0.1/sks/README.html">v4.0.1</a>
     <a class="version" href="../../v4.0.0/sks/README.html">v4.0.0</a>
     <a class="version" href="../../v3.0.1/sks/README.html">v3.0.1</a>
@@ -642,7 +655,7 @@
     <a class="version is-missing" href="../../v1.0.0/README.html">v1.0.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-loki-stack/blob/v4.0.2/docs/modules/ROOT/pages/sks/README.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-loki-stack/blob/v5.0.0/docs/modules/ROOT/pages/sks/README.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -880,7 +893,7 @@ Check the <a href="../../../latest/tutorials/deploy_sks.html" class="xref page">
 <p>Type: <code>string</code></p>
 </div>
 <div class="paragraph">
-<p>Default: <code>"v4.0.1"</code></p>
+<p>Default: <code>"v4.0.2"</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -950,18 +963,6 @@ Check the <a href="../../../latest/tutorials/deploy_sks.html" class="xref page">
 </div>
 </div>
 <div class="sect3">
-<h4 id="_distributed_mode"><a class="anchor" href="#_distributed_mode"></a><a id="input_distributed_mode"></a> <a href="#input_distributed_mode">distributed_mode</a></h4>
-<div class="paragraph">
-<p>Description: Boolean to activate Loki in distributed mode.</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>bool</code></p>
-</div>
-<div class="paragraph">
-<p>Default: <code>false</code></p>
-</div>
-</div>
-<div class="sect3">
 <h4 id="_ingress"><a class="anchor" href="#_ingress"></a><a id="input_ingress"></a> <a href="#input_ingress">ingress</a></h4>
 <div class="paragraph">
 <p>Description: Loki frontend ingress configuration.</p>
@@ -997,7 +998,7 @@ Check the <a href="../../../latest/tutorials/deploy_sks.html" class="xref page">
 <div class="sect3">
 <h4 id="_retention"><a class="anchor" href="#_retention"></a><a id="input_retention"></a> <a href="#input_retention">retention</a></h4>
 <div class="paragraph">
-<p>Description: Logs retention period.To deactivate retention, pass 0s.</p>
+<p>Description: Logs retention period. To deactivate retention, pass 0s.</p>
 </div>
 <div class="paragraph">
 <p>Type: <code>string</code></p>
@@ -1203,7 +1204,7 @@ Check the <a href="../../../latest/tutorials/deploy_sks.html" class="xref page">
 <p><code>string</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"v4.0.1"</code></p>
+<p><code>"v4.0.2"</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
@@ -1291,23 +1292,6 @@ Check the <a href="../../../latest/tutorials/deploy_sks.html" class="xref page">
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_distributed_mode"></a> <a href="#input_distributed_mode">distributed_mode</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Boolean to activate Loki in distributed mode.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>bool</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>false</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>no</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="input_ingress"></a> <a href="#input_ingress">ingress</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -1351,7 +1335,7 @@ Check the <a href="../../../latest/tutorials/deploy_sks.html" class="xref page">
 <p><a id="input_retention"></a> <a href="#input_retention">retention</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Logs retention period.To deactivate retention, pass 0s.</p>
+<p>Logs retention period. To deactivate retention, pass 0s.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>string</code></p>
