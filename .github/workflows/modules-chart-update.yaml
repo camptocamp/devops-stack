@@ -34,7 +34,7 @@ jobs:
     
     steps:
     - name: "Check out the repository"
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     
     - name: "List charts in the ./charts folder"
       id: find-charts
@@ -55,7 +55,7 @@ jobs:
 
     steps:
     - name: "Check out the repository"
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: "Upgrade Helm chart dependencies"
       id: deps-update
