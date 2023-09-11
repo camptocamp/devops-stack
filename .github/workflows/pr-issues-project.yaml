@@ -30,7 +30,7 @@ jobs:
     steps:
     - name: Generate authentication token from GitHub App
       id: generate_token
-      uses: tibdex/github-app-token@v1
+      uses: tibdex/github-app-token@v2
       with:
         app_id: 322306
         private_key: ${{ secrets.PROJECT_APP_PRIVATE_KEY }}
