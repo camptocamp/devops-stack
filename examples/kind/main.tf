@@ -109,7 +109,7 @@ module "minio" {
 }
 
 module "loki-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack//kind?ref=v4.0.2"
+  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack//kind?ref=v5.0.0"
 
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
 
