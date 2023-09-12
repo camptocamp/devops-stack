@@ -8,7 +8,7 @@ antora:
   - require: "@antora/lunr-extension"
     index_latest_only: true
 urls:
-  latest_version_segment: latest # Define each component's latest version as the latest in the URL 
+  latest_version_segment: latest # Define each component's latest version as the latest in the URL
 content:
   sources:
 
@@ -40,13 +40,6 @@ content:
     # Exclude versions with generation errors
     - "!v1.{0..2}.{0..3}"
   - url: https://github.com/camptocamp/devops-stack-module-argocd.git
-    start_path: docs
-    branches: []
-    tags:
-    - "v@({1..9})*({0..9}).+({0..9}).*"
-    # Exclude versions without proper folder structure or with generation errors
-    - "!v1.0.0-alpha.*"
-  - url: https://github.com/camptocamp/devops-stack-module-backup.git
     start_path: docs
     branches: []
     tags:
@@ -159,6 +152,13 @@ content:
     - "v@({1..9})*({0..9}).+({0..9}).*"
     # Exclude versions without proper folder structure or with generation errors
     - "!v1.0.0-alpha.*"
+  - url: https://github.com/camptocamp/devops-stack-module-rclone.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v@({1..9})*({0..9}).+({0..9}).*"
+    # Exclude versions without proper folder structure or with generation errors
+    - "!v1.0.0-alpha.*"
   - url: https://github.com/camptocamp/devops-stack-module-thanos.git
     start_path: docs
     branches: []
@@ -167,6 +167,13 @@ content:
     # Exclude versions without proper folder structure or with generation errors
     - "!v1.0.0-alpha.*"
   - url: https://github.com/camptocamp/devops-stack-module-traefik.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v@({1..9})*({0..9}).+({0..9}).*"
+    # Exclude versions without proper folder structure or with generation errors
+    - "!v1.0.0-alpha.*"
+  - url: https://github.com/camptocamp/devops-stack-module-velero.git
     start_path: docs
     branches: []
     tags:
