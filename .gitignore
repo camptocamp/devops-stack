@@ -13,10 +13,10 @@ examples/*/.terraform.lock.hcl
 node_modules
 package-lock.json
 public
-docs_test
 
 ### Antora
 build/
+docs_test
 
 ### VS Code
 
