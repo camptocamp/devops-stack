@@ -36,7 +36,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="applicationset" data-version="v2.0.1">
+<div class="nav-container" data-component="applicationset" data-version="v2.1.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -62,14 +62,17 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">ApplicationSet Module</span>
-    <span class="version">v2.0.1</span>
+    <span class="version">v2.1.0</span>
   </div>
   <ul class="components">
     <li class="component">
       <a class="title" href="../../application/latest/README.html">Application Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../application/latest/README.html">v2.0.1</a>
+          <a href="../../application/latest/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v2.0.1/README.html">v2.0.1</a>
         </li>
         <li class="version">
           <a href="../../application/v2.0.0/README.html">v2.0.0</a>
@@ -101,7 +104,10 @@
       <a class="title" href="README.html">ApplicationSet Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="README.html">v2.0.1</a>
+          <a href="README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../v2.0.1/README.html">v2.0.1</a>
         </li>
         <li class="version">
           <a href="../v2.0.0/README.html">v2.0.0</a>
@@ -603,6 +609,14 @@
         </li>
       </ul>
     </li>
+    <li class="component">
+      <a class="title" href="../../velero/latest/README.html">Velero Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../velero/latest/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
   </ul>
 </div>
     </div>
@@ -618,16 +632,17 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v2.0.1</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v2.1.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="README.html">v2.0.1</a>
+    <a class="version is-current" href="README.html">v2.1.0</a>
+    <a class="version" href="../v2.0.1/README.html">v2.0.1</a>
     <a class="version" href="../v2.0.0/README.html">v2.0.0</a>
     <a class="version" href="../v1.2.6/README.html">v1.2.6</a>
     <a class="version" href="../v1.2.5/README.html">v1.2.5</a>
     <a class="version" href="../v1.2.4/README.html">v1.2.4</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-applicationset/blob/v2.0.1/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-applicationset/blob/v2.1.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -728,7 +743,7 @@
 </div>
 <div class="imageblock">
 <div class="content">
-<a class="image" href="https://raw.githubusercontent.com/camptocamp/devops-stack-module-applicationset/main/docs/modules/ROOT/assets/images/argocd_appset.png" target="_blank" rel="noopener"><img src="_images/argocd_appset.png" alt="argocd appset"></a>
+<a class="image" href="https://raw.githubusercontent.com/camptocamp/devops-stack-module-applicationset/main/docs/modules/ROOT/assets/images/argocd_appset.png" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/camptocamp/devops-stack-module-applicationset/main/docs/modules/ROOT/assets/images/argocd_appset.png" alt="argocd appset"></a>
 </div>
 </div>
 <div class="paragraph">
@@ -736,7 +751,7 @@
 </div>
 <div class="imageblock">
 <div class="content">
-<a class="image" href="https://raw.githubusercontent.com/camptocamp/devops-stack-module-applicationset/main/docs/modules/ROOT/assets/images/argocd_app.png" target="_blank" rel="noopener"><img src="_images/argocd_app.png" alt="argocd app"></a>
+<a class="image" href="https://raw.githubusercontent.com/camptocamp/devops-stack-module-applicationset/main/docs/modules/ROOT/assets/images/argocd_app.png" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/camptocamp/devops-stack-module-applicationset/main/docs/modules/ROOT/assets/images/argocd_app.png" alt="argocd app"></a>
 </div>
 </div>
 <div class="paragraph">
@@ -926,10 +941,10 @@ Do not hardcode your password the example below! It is recommended to pass the v
 <div class="ulist">
 <ul>
 <li>
-<p><a id="provider_argocd"></a> <a href="#provider_argocd">argocd</a> (&gt;= 5)</p>
+<p><a id="provider_null"></a> <a href="#provider_null">null</a> (&gt;= 3)</p>
 </li>
 <li>
-<p><a id="provider_null"></a> <a href="#provider_null">null</a> (&gt;= 3)</p>
+<p><a id="provider_argocd"></a> <a href="#provider_argocd">argocd</a> (&gt;= 5)</p>
 </li>
 </ul>
 </div>
@@ -1021,7 +1036,7 @@ Do not hardcode your password the example below! It is recommended to pass the v
 <p>Type: <code>string</code></p>
 </div>
 <div class="paragraph">
-<p>Default: <code>"v2.0.0"</code></p>
+<p>Default: <code>"v2.0.1"</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -1067,9 +1082,33 @@ Do not hardcode your password the example below! It is recommended to pass the v
 </div>
 </div>
 <div class="sect3">
+<h4 id="_project_dest_cluster_name"><a class="anchor" href="#_project_dest_cluster_name"></a><a id="input_project_dest_cluster_name"></a> <a href="#input_project_dest_cluster_name">project_dest_cluster_name</a></h4>
+<div class="paragraph">
+<p>Description: Allowed destination cluster <strong>name</strong> in the AppProject. <strong>Must be the same as the the one configured in the ApplicationSet template.</strong></p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"in-cluster"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_project_dest_cluster_address"><a class="anchor" href="#_project_dest_cluster_address"></a><a id="input_project_dest_cluster_address"></a> <a href="#input_project_dest_cluster_address">project_dest_cluster_address</a></h4>
+<div class="paragraph">
+<p>Description: Allowed destination cluster <strong>address</strong> in the AppProject. <strong>Must be the same as the the one configured in the ApplicationSet template.</strong> If you define this variable, any value passed in the <code>project_dest_cluster_name</code> variable is ignored.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>null</code></p>
+</div>
+</div>
+<div class="sect3">
 <h4 id="_project_dest_namespace"><a class="anchor" href="#_project_dest_namespace"></a><a id="input_project_dest_namespace"></a> <a href="#input_project_dest_namespace">project_dest_namespace</a></h4>
 <div class="paragraph">
-<p>Description: Allowed destination namespace in the AppProject.</p>
+<p>Description: Allowed destination namespace in the AppProject. <strong>Must be the same as the the one configured in the ApplicationSet template.</strong></p>
 </div>
 <div class="paragraph">
 <p>Type: <code>string</code></p>
@@ -1103,21 +1142,12 @@ Do not hardcode your password the example below! It is recommended to pass the v
 <pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">object({
     username       = string
     password       = string
-    https_insecure = bool
+    https_insecure = optional(bool, false)
   })</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Default:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
-  "https_insecure": false,
-  "password": null,
-  "username": null
-}</code></pre>
-</div>
+<p>Default: <code>null</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -1208,18 +1238,18 @@ Do not hardcode your password the example below! It is recommended to pass the v
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>&gt;= 3</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="provider_argocd"></a> <a href="#provider_argocd">argocd</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>&gt;= 5</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 3</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1338,7 +1368,7 @@ Do not hardcode your password the example below! It is recommended to pass the v
 <p><code>string</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"v2.0.0"</code></p>
+<p><code>"v2.0.1"</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
@@ -1443,10 +1473,44 @@ Do not hardcode your password the example below! It is recommended to pass the v
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_project_dest_cluster_name"></a> <a href="#input_project_dest_cluster_name">project_dest_cluster_name</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Allowed destination cluster <strong>name</strong> in the AppProject. <strong>Must be the same as the the one configured in the ApplicationSet template.</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>"in-cluster"</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_project_dest_cluster_address"></a> <a href="#input_project_dest_cluster_address">project_dest_cluster_address</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Allowed destination cluster <strong>address</strong> in the AppProject. <strong>Must be the same as the the one configured in the ApplicationSet template.</strong> If you define this variable, any value passed in the <code>project_dest_cluster_name</code> variable is ignored.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>null</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="input_project_dest_namespace"></a> <a href="#input_project_dest_namespace">project_dest_namespace</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Allowed destination namespace in the AppProject.</p>
+<p>Allowed destination namespace in the AppProject. <strong>Must be the same as the the one configured in the ApplicationSet template.</strong></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>string</code></p>
@@ -1487,18 +1551,12 @@ Do not hardcode your password the example below! It is recommended to pass the v
 <pre class="highlightjs highlight"><code class="language-none hljs">object({
     username       = string
     password       = string
-    https_insecure = bool
+    https_insecure = optional(bool, false)
   })</code></pre>
 </div>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">{
-  "https_insecure": false,
-  "password": null,
-  "username": null
-}</code></pre>
-</div>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>null</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
