@@ -1,3 +1,66 @@
 = Deployment On Azure AKS
 
-_Work In Progress_
+This tutorial shows how to deploy a DevOps Stack instance on Azure Cloud.
+
+== Prerequisites
+
+* Azure CLI installed (version ~>2)
+* An Azure account with an active subscription.
+* "Application Developer" Azure (Active Directory) AD role assignment on the Azure AD instance the subscription trusts.
+* "Owner" Azure role assignment on the subscription.
+
+== Login to Azure from CLI
+
+[source,bash]
+----
+az login
+az account set --subscription <subscriptionID>
+----
+
+== State file
+
+Throughout this tutorial, Terraform state file will be stored in an Azure Blob container of an Azure storage account. In order to do this, you need to create the remote state store first, so you'll work with a local state at the beginning.
+First, Terraform apply the content of the file state.tf to create the container, the storage account and the resource group the account belongs to.
+Once these resources created, you'll add the following block to terraform.tf and set the values from the previously created resources.
+
+[source,hcl]
+----
+terraform {
+  backend "azurerm" {
+    resource_group_name  = "<resourceGroupName>"
+    storage_account_name = "<storageAccountName>"
+    container_name       = "<containerName>"
+    key                  = "tfstate"
+  }
+  ...
+}
+----
+
+Then, Terraform apply and you'll be prompted to migrate the statefile, type yes.
+
+== DNS
+
+Since Azure can't be used to buy a domain name, you need to create a DNS zone in the suscription for managing DNS records (next step) and have a https://learn.microsoft.com/en-us/azure/dns/dns-domain-delegation[delegation] set up.
+
+== Provisions and cluster
+
+Before deploying the DevOps stack components, create all the resources these components require.
+Comment the content of stack.tf (where DevOps Stack modules are declared) and Terraform apply.
+
+== Stack
+
+Terraform apply stack.tf
+
+== Login to ArgoCD
+
+Use `argocd_url` output to login to ArgoCD UI.
+Before you login using OIDC, make sure you assign yourself ArgoCD App admin role. The following steps allow to do so:
+
+* Login to Azure portal and go to Azure Active Directory
+* In the menu on the left, click `Enterprise applications`
+* Select your application and go to `Users and groups`
+* Add yourself as a user with `ArgoCD Administrator` role
+
+== k9s/kubectl
+
+To use kubectl, you need to login to Azure from CLI and select your subscription.
