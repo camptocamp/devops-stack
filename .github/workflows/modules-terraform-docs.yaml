@@ -89,6 +89,6 @@ jobs:
 
     # This step avoids a commit for each previous step and instead commits everything on a single commit
     - name: "Commit changes done in the previous steps"
-      uses: stefanzweifel/git-auto-commit-action@v4
+      uses: stefanzweifel/git-auto-commit-action@v5
       with:
         commit_message: "docs(terraform-docs): generate docs and write to README.adoc"
