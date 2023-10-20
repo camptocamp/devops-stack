@@ -59,7 +59,7 @@ module "cert-manager" {
 
 # TODO Create an external database as PoC
 module "keycloak" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak?ref=v2.0.1"
+  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak?ref=v2.1.0"
 
   cluster_name     = module.sks.cluster_name
   base_domain      = module.sks.base_domain
