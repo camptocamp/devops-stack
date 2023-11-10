@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.2](https://github.com/camptocamp/devops-stack/compare/v1.5.1...v1.5.2) (2023-11-10)
+
+
+### Documentation
+
+* update antora-playbook.yml to remove Velero ([#1122](https://github.com/camptocamp/devops-stack/issues/1122)) ([f7fb34b](https://github.com/camptocamp/devops-stack/commit/f7fb34b56cc3351604311a3e4feaa50d3e548b0d))
+
 ## [1.5.1](https://github.com/camptocamp/devops-stack/compare/v1.5.0...v1.5.1) (2023-08-21)
 
 
