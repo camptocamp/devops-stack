@@ -47,4 +47,3 @@
 * xref:rclone:ROOT:README.adoc[Rclone]
 * xref:thanos:ROOT:README.adoc[Thanos]
 * xref:traefik:ROOT:README.adoc[Traefik]
-* xref:velero:ROOT:README.adoc[Velero]
