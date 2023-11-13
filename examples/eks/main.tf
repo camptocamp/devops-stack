@@ -114,7 +114,7 @@ module "cert-manager" {
 }
 
 module "loki-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack//eks?ref=v5.0.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack//eks?ref=v6.0.0"
 
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
 
