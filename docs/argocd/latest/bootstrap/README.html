@@ -36,7 +36,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="argocd" data-version="v3.5.0">
+<div class="nav-container" data-component="argocd" data-version="v3.5.1">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -71,7 +71,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">Argo CD Module</span>
-    <span class="version">v3.5.0</span>
+    <span class="version">v3.5.1</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -139,7 +139,10 @@
       <a class="title" href="../README.html">Argo CD Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../README.html">v3.5.0</a>
+          <a href="../README.html">v3.5.1</a>
+        </li>
+        <li class="version">
+          <a href="../../v3.5.0/README.html">v3.5.0</a>
         </li>
         <li class="version">
           <a href="../../v3.4.1/README.html">v3.4.1</a>
@@ -724,9 +727,10 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v3.5.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v3.5.1</button>
   <div class="version-menu">
-    <a class="version is-current" href="README.html">v3.5.0</a>
+    <a class="version is-current" href="README.html">v3.5.1</a>
+    <a class="version" href="../../v3.5.0/bootstrap/README.html">v3.5.0</a>
     <a class="version" href="../../v3.4.1/bootstrap/README.html">v3.4.1</a>
     <a class="version" href="../../v3.4.0/bootstrap/README.html">v3.4.0</a>
     <a class="version" href="../../v3.3.0/bootstrap/README.html">v3.3.0</a>
@@ -744,7 +748,7 @@
     <a class="version" href="../../v1.0.0/bootstrap/README.html">v1.0.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-argocd/blob/v3.5.0/docs/modules/ROOT/pages/bootstrap/README.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-argocd/blob/v3.5.1/docs/modules/ROOT/pages/bootstrap/README.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -853,6 +857,9 @@ By default, the AppProjects created by this module do not contain restrictions f
 <p><a id="requirement_terraform"></a> <a href="#requirement_terraform">terraform</a> (&gt;= 1.2)</p>
 </li>
 <li>
+<p><a id="requirement_argocd"></a> <a href="#requirement_argocd">argocd</a> (&gt;= 6)</p>
+</li>
+<li>
 <p><a id="requirement_helm"></a> <a href="#requirement_helm">helm</a> (&gt;= 2)</p>
 </li>
 <li>
@@ -881,16 +888,19 @@ By default, the AppProjects created by this module do not contain restrictions f
 <div class="ulist">
 <ul>
 <li>
-<p><a id="provider_random"></a> <a href="#provider_random">random</a> (&gt;= 3)</p>
-</li>
-<li>
 <p><a id="provider_jwt"></a> <a href="#provider_jwt">jwt</a> (&gt;= 1.1)</p>
 </li>
 <li>
 <p><a id="provider_time"></a> <a href="#provider_time">time</a> (&gt;= 0.9)</p>
 </li>
 <li>
+<p><a id="provider_random"></a> <a href="#provider_random">random</a> (&gt;= 3)</p>
+</li>
+<li>
 <p><a id="provider_helm"></a> <a href="#provider_helm">helm</a> (&gt;= 2)</p>
+</li>
+<li>
+<p><a id="provider_argocd"></a> <a href="#provider_argocd">argocd</a> (&gt;= 6)</p>
 </li>
 <li>
 <p><a id="provider_utils"></a> <a href="#provider_utils">utils</a> (&gt;= 1.6)</p>
@@ -908,6 +918,9 @@ By default, the AppProjects created by this module do not contain restrictions f
 </div>
 <div class="ulist">
 <ul>
+<li>
+<p><a href="https://registry.terraform.io/providers/oboukili/argocd/latest/docs/resources/project">argocd_project.devops_stack_applications</a> (resource)</p>
+</li>
 <li>
 <p><a href="https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release">helm_release.argocd</a> (resource)</p>
 </li>
@@ -950,6 +963,33 @@ By default, the AppProjects created by this module do not contain restrictions f
 </div>
 </div>
 <div class="sect3">
+<h4 id="_argocd_projects"><a class="anchor" href="#_argocd_projects"></a><a id="input_argocd_projects"></a> <a href="#input_argocd_projects">argocd_projects</a></h4>
+<div class="paragraph">
+<p>Description: List of AppProject definitions to be created in Argo CD. By default, no projects are created since this variable defaults to an empty map.</p>
+</div>
+<div class="paragraph">
+<p>At a minimum, you need to provide the <code>destination_cluster</code> value, so that the destination cluster can be defined in the project. The name of the project is derived from the key of the map.</p>
+</div>
+<div class="paragraph">
+<p><strong>The first cluster in the list should always be your main cluster where the Argo CD will be deployed, and the destination cluster for that project must be <code>in-cluster</code>.</strong></p>
+</div>
+<div class="paragraph">
+<p>Type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">map(object({
+    destination_cluster  = string
+    allowed_source_repos = optional(list(string), ["*"])
+    allowed_namespaces   = optional(list(string), ["*"])
+  }))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Default: <code>{}</code></p>
+</div>
+</div>
+<div class="sect3">
 <h4 id="_helm_values"><a class="anchor" href="#_helm_values"></a><a id="input_helm_values"></a> <a href="#input_helm_values">helm_values</a></h4>
 <div class="paragraph">
 <p>Description: Helm chart value overrides. They should be passed as a list of HCL structures.</p>
@@ -986,6 +1026,12 @@ By default, the AppProjects created by this module do not contain restrictions f
 <h4 id="_argocd_namespace"><a class="anchor" href="#_argocd_namespace"></a><a id="output_argocd_namespace"></a> <a href="#output_argocd_namespace">argocd_namespace</a></h4>
 <div class="paragraph">
 <p>Description: The namespace where to deploy Argo CD.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_argocd_project_names"><a class="anchor" href="#_argocd_project_names"></a><a id="output_argocd_project_names"></a> <a href="#output_argocd_project_names">argocd_project_names</a></h4>
+<div class="paragraph">
+<p>Description: The names of all the Argo CD AppProjects created by the bootstrap module.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1033,6 +1079,14 @@ By default, the AppProjects created by this module do not contain restrictions f
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>&gt;= 1.2</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_argocd"></a> <a href="#requirement_argocd">argocd</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 6</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1134,6 +1188,14 @@ By default, the AppProjects created by this module do not contain restrictions f
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_argocd"></a> <a href="#provider_argocd">argocd</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 6</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="provider_utils"></a> <a href="#provider_utils">utils</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -1165,6 +1227,14 @@ By default, the AppProjects created by this module do not contain restrictions f
 </tr>
 </thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/oboukili/argocd/latest/docs/resources/project">argocd_project.devops_stack_applications</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release">helm_release.argocd</a></p>
@@ -1263,6 +1333,35 @@ By default, the AppProjects created by this module do not contain restrictions f
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_argocd_projects"></a> <a href="#input_argocd_projects">argocd_projects</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>List of AppProject definitions to be created in Argo CD. By default, no projects are created since this variable defaults to an empty map.</p>
+</div>
+<div class="paragraph">
+<p>At a minimum, you need to provide the <code>destination_cluster</code> value, so that the destination cluster can be defined in the project. The name of the project is derived from the key of the map.</p>
+</div>
+<div class="paragraph">
+<p><strong>The first cluster in the list should always be your main cluster where the Argo CD will be deployed, and the destination cluster for that project must be <code>in-cluster</code>.</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">map(object({
+    destination_cluster  = string
+    allowed_source_repos = optional(list(string), ["*"])
+    allowed_namespaces   = optional(list(string), ["*"])
+  }))</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>{}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="input_helm_values"></a> <a href="#input_helm_values">helm_values</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -1315,6 +1414,14 @@ By default, the AppProjects created by this module do not contain restrictions f
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The namespace where to deploy Argo CD.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_argocd_project_names"></a> <a href="#output_argocd_project_names">argocd_project_names</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The names of all the Argo CD AppProjects created by the bootstrap module.</p>
 </div></div></td>
 </tr>
 <tr>

@@ -36,7 +36,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="argocd" data-version="v3.5.0">
+<div class="nav-container" data-component="argocd" data-version="v3.5.1">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -71,7 +71,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">Argo CD Module</span>
-    <span class="version">v3.5.0</span>
+    <span class="version">v3.5.1</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -139,7 +139,10 @@
       <a class="title" href="README.html">Argo CD Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="README.html">v3.5.0</a>
+          <a href="README.html">v3.5.1</a>
+        </li>
+        <li class="version">
+          <a href="../v3.5.0/README.html">v3.5.0</a>
         </li>
         <li class="version">
           <a href="../v3.4.1/README.html">v3.4.1</a>
@@ -723,9 +726,10 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v3.5.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v3.5.1</button>
   <div class="version-menu">
-    <a class="version is-current" href="README.html">v3.5.0</a>
+    <a class="version is-current" href="README.html">v3.5.1</a>
+    <a class="version" href="../v3.5.0/README.html">v3.5.0</a>
     <a class="version" href="../v3.4.1/README.html">v3.4.1</a>
     <a class="version" href="../v3.4.0/README.html">v3.4.0</a>
     <a class="version" href="../v3.3.0/README.html">v3.3.0</a>
@@ -743,7 +747,7 @@
     <a class="version" href="../v1.0.0/README.html">v1.0.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-argocd/blob/v3.5.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-argocd/blob/v3.5.1/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -1099,9 +1103,6 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p><a id="provider_null"></a> <a href="#provider_null">null</a> (&gt;= 3)</p>
-</li>
-<li>
 <p><a id="provider_jwt"></a> <a href="#provider_jwt">jwt</a> (&gt;= 1.1)</p>
 </li>
 <li>
@@ -1111,10 +1112,13 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 <p><a id="provider_random"></a> <a href="#provider_random">random</a> (&gt;= 3)</p>
 </li>
 <li>
+<p><a id="provider_utils"></a> <a href="#provider_utils">utils</a> (&gt;= 1.6)</p>
+</li>
+<li>
 <p><a id="provider_argocd"></a> <a href="#provider_argocd">argocd</a> (&gt;= 5)</p>
 </li>
 <li>
-<p><a id="provider_utils"></a> <a href="#provider_utils">utils</a> (&gt;= 1.6)</p>
+<p><a id="provider_null"></a> <a href="#provider_null">null</a> (&gt;= 3)</p>
 </li>
 </ul>
 </div>
@@ -1213,6 +1217,30 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 </div>
 </div>
 <div class="sect3">
+<h4 id="_argocd_project"><a class="anchor" href="#_argocd_project"></a><a id="input_argocd_project"></a> <a href="#input_argocd_project">argocd_project</a></h4>
+<div class="paragraph">
+<p>Description: Name of the Argo CD AppProject where the Application should be created. If not set, the Application will be created in a new AppProject only for this Application.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>null</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_argocd_labels"><a class="anchor" href="#_argocd_labels"></a><a id="input_argocd_labels"></a> <a href="#input_argocd_labels">argocd_labels</a></h4>
+<div class="paragraph">
+<p>Description: Labels to attach to the Argo CD Application resource.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>map(string)</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>{}</code></p>
+</div>
+</div>
+<div class="sect3">
 <h4 id="_target_revision"><a class="anchor" href="#_target_revision"></a><a id="input_target_revision"></a> <a href="#input_target_revision">target_revision</a></h4>
 <div class="paragraph">
 <p>Description: Override of target revision of the application chart.</p>
@@ -1221,19 +1249,19 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 <p>Type: <code>string</code></p>
 </div>
 <div class="paragraph">
-<p>Default: <code>"v3.4.0"</code></p>
+<p>Default: <code>"v3.5.0"</code></p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_cluster_issuer"><a class="anchor" href="#_cluster_issuer"></a><a id="input_cluster_issuer"></a> <a href="#input_cluster_issuer">cluster_issuer</a></h4>
 <div class="paragraph">
-<p>Description: SSL certificate issuer to use. Usually you would configure this value as <code>letsencrypt-staging</code> or <code>letsencrypt-prod</code> on your root <code>*.tf</code> files.</p>
+<p>Description: SSL certificate issuer to use. Usually you would configure this value as <code>letsencrypt-staging</code> or <code>letsencrypt-prod</code> on your root <code>*.tf</code> files. You can use <code>ca-issuer</code> when using the self-signed variant of cert-manager.</p>
 </div>
 <div class="paragraph">
 <p>Type: <code>string</code></p>
 </div>
 <div class="paragraph">
-<p>Default: <code>"ca-issuer"</code></p>
+<p>Default: <code>"selfsigned-issuer"</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -1303,6 +1331,202 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 </div>
 </div>
 <div class="sect3">
+<h4 id="_resources_2"><a class="anchor" href="#_resources_2"></a><a id="input_resources"></a> <a href="#input_resources">resources</a></h4>
+<div class="paragraph">
+<p>Description: Resource limits and requests for the Argo CD components. Follow the style on <a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/">official documentation</a> to understand the format of the values.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <code>repo_server</code> requests and limits will be applied to all the extra containers that are deployed with the <code>argocd-repo-server</code> component (each container has the same requests and limits as the main container, <strong>so it is cumulative</strong>).
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you enable the HA mode using the <code>high_availability</code> variable, the values for Redis will be applied to the Redis HA chart instead of the default one.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">object({
+
+    application_set = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "100m")
+        memory = optional(string, "128Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string, "100m")
+        memory = optional(string, "128Mi")
+      }), {})
+    }), {})
+
+    controller = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "250m")
+        memory = optional(string, "256Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string, "500m")
+        memory = optional(string, "512Mi")
+      }), {})
+    }), {})
+
+    notifications = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "100m")
+        memory = optional(string, "128Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string, "200m")
+        memory = optional(string, "256Mi")
+      }), {})
+    }), {})
+
+    repo_server = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "50m")
+        memory = optional(string, "128Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string, "100m")
+        memory = optional(string, "256Mi")
+      }), {})
+    }), {})
+
+    server = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "50m")
+        memory = optional(string, "128Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string, "100m")
+        memory = optional(string, "256Mi")
+      }), {})
+    }), {})
+
+    redis = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "200m")
+        memory = optional(string, "64Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string, "300m")
+        memory = optional(string, "128Mi")
+      }), {})
+    }), {})
+
+  })</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Default: <code>{}</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_high_availability"><a class="anchor" href="#_high_availability"></a><a id="input_high_availability"></a> <a href="#input_high_availability">high_availability</a></h4>
+<div class="paragraph">
+<p>Description: Argo CD High Availability settings. By default, the HA is disabled.</p>
+</div>
+<div class="paragraph">
+<p>To enable HA using the default replicas, simply set the value <code>high_availability.enabled</code> to <code>true</code>. <strong>This will deploy Argo CD in HA without autoscaling.</strong></p>
+</div>
+<div class="paragraph">
+<p>You can enable autoscaling of the <code>argocd-server</code> and <code>argocd-repo-server</code> components by setting the <code>high_availability.server.autoscaling.enabled</code> and <code>high_availability.repo_server.autoscaling.enabled</code> values to <code>true</code>. You can also configure the minimum and maximum replicas desired or leave the default values.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Activating the HA mode automatically enables the Redis HA chart which requires at least 3 worker nodes, as this chart enforces Pods to run on separate nodes.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Since this variable uses the <code>optional</code> argument to forcing the user to define all the values, there is a side effect you can pass any other bogus value and Terraform will accept it, <strong>but they won&#8217;t be used in the chart behind the module</strong>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">object({
+    enabled = bool
+
+    controller = optional(object({
+      replicas = optional(number, 1)
+    }), {})
+
+    application_set = optional(object({
+      replicas = optional(number, 2)
+    }), {})
+
+    server = optional(object({
+      replicas = optional(number, 2)
+      autoscaling = optional(object({
+        enabled      = bool
+        min_replicas = optional(number, 2)
+        max_replicas = optional(number, 5)
+        }), {
+        enabled = false
+      })
+    }), {})
+
+    repo_server = optional(object({
+      replicas = optional(number, 2)
+      autoscaling = optional(object({
+        enabled      = bool
+        min_replicas = optional(number, 2)
+        max_replicas = optional(number, 5)
+        }), {
+        enabled = false
+      })
+    }), {})
+
+  })</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Default:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "enabled": false
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
 <h4 id="_oidc"><a class="anchor" href="#_oidc"></a><a id="input_oidc"></a> <a href="#input_oidc">oidc</a></h4>
 <div class="paragraph">
 <p>Description: OIDC settings for the log in to the Argo CD web interface.</p>
@@ -1355,7 +1579,22 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 <div class="sect3">
 <h4 id="_ssh_known_hosts"><a class="anchor" href="#_ssh_known_hosts"></a><a id="input_ssh_known_hosts"></a> <a href="#input_ssh_known_hosts">ssh_known_hosts</a></h4>
 <div class="paragraph">
-<p>Description: List of SSH known hosts to add to Argo CD. Check the official <code>values.yaml</code> to get the format to pass this value. <strong>If you set this variable, the default known hosts will be overridden by this value, so you might want to consider adding the ones you need here.</strong></p>
+<p>Description: List of SSH known hosts to add to Argo CD.</p>
+</div>
+<div class="paragraph">
+<p>Check the official <code>values.yaml</code> to get the format to pass this value.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+If you set this variable, the default known hosts will be overridden by this value, so you might want to consider adding the ones you need here."
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Type: <code>string</code></p>
@@ -1451,7 +1690,7 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 <div class="sect3">
 <h4 id="_helmfile_cmp_env_variables"><a class="anchor" href="#_helmfile_cmp_env_variables"></a><a id="input_helmfile_cmp_env_variables"></a> <a href="#input_helmfile_cmp_env_variables">helmfile_cmp_env_variables</a></h4>
 <div class="paragraph">
-<p>Description: List of environment variables to attach to the helmfile-cmp plugin, usually used to pass authentication credentials. Use a an <a href="https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/">explicit format</a> or take the values from a <a href="https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#define-container-environment-variables-using-secret-data">Kubernetes secret</a>.</p>
+<p>Description: List of environment variables to attach to the helmfile-cmp plugin, usually used to pass authentication credentials. Use an <a href="https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/">explicit format</a> or take the values from a <a href="https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#define-container-environment-variables-using-secret-data">Kubernetes secret</a>.</p>
 </div>
 <div class="paragraph">
 <p>Type:</p>
@@ -1596,14 +1835,6 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>&gt;= 3</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="provider_jwt"></a> <a href="#provider_jwt">jwt</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -1640,6 +1871,14 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>&gt;= 5</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 3</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1799,6 +2038,40 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_argocd_project"></a> <a href="#input_argocd_project">argocd_project</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Name of the Argo CD AppProject where the Application should be created. If not set, the Application will be created in a new AppProject only for this Application.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>null</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_argocd_labels"></a> <a href="#input_argocd_labels">argocd_labels</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Labels to attach to the Argo CD Application resource.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>map(string)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>{}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="input_target_revision"></a> <a href="#input_target_revision">target_revision</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -1808,7 +2081,7 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 <p><code>string</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"v3.4.0"</code></p>
+<p><code>"v3.5.0"</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
@@ -1819,13 +2092,13 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 <p><a id="input_cluster_issuer"></a> <a href="#input_cluster_issuer">cluster_issuer</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>SSL certificate issuer to use. Usually you would configure this value as <code>letsencrypt-staging</code> or <code>letsencrypt-prod</code> on your root <code>*.tf</code> files.</p>
+<p>SSL certificate issuer to use. Usually you would configure this value as <code>letsencrypt-staging</code> or <code>letsencrypt-prod</code> on your root <code>*.tf</code> files. You can use <code>ca-issuer</code> when using the self-signed variant of cert-manager.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>string</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"ca-issuer"</code></p>
+<p><code>"selfsigned-issuer"</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
@@ -1913,6 +2186,203 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_resources"></a> <a href="#input_resources">resources</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Resource limits and requests for the Argo CD components. Follow the style on <a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/">official documentation</a> to understand the format of the values.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <code>repo_server</code> requests and limits will be applied to all the extra containers that are deployed with the <code>argocd-repo-server</code> component (each container has the same requests and limits as the main container, <strong>so it is cumulative</strong>).
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you enable the HA mode using the <code>high_availability</code> variable, the values for Redis will be applied to the Redis HA chart instead of the default one.
+</td>
+</tr>
+</table>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">object({
+
+    application_set = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "100m")
+        memory = optional(string, "128Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string, "100m")
+        memory = optional(string, "128Mi")
+      }), {})
+    }), {})
+
+    controller = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "250m")
+        memory = optional(string, "256Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string, "500m")
+        memory = optional(string, "512Mi")
+      }), {})
+    }), {})
+
+    notifications = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "100m")
+        memory = optional(string, "128Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string, "200m")
+        memory = optional(string, "256Mi")
+      }), {})
+    }), {})
+
+    repo_server = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "50m")
+        memory = optional(string, "128Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string, "100m")
+        memory = optional(string, "256Mi")
+      }), {})
+    }), {})
+
+    server = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "50m")
+        memory = optional(string, "128Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string, "100m")
+        memory = optional(string, "256Mi")
+      }), {})
+    }), {})
+
+    redis = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "200m")
+        memory = optional(string, "64Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string, "300m")
+        memory = optional(string, "128Mi")
+      }), {})
+    }), {})
+
+  })</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>{}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_high_availability"></a> <a href="#input_high_availability">high_availability</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Argo CD High Availability settings. By default, the HA is disabled.</p>
+</div>
+<div class="paragraph">
+<p>To enable HA using the default replicas, simply set the value <code>high_availability.enabled</code> to <code>true</code>. <strong>This will deploy Argo CD in HA without autoscaling.</strong></p>
+</div>
+<div class="paragraph">
+<p>You can enable autoscaling of the <code>argocd-server</code> and <code>argocd-repo-server</code> components by setting the <code>high_availability.server.autoscaling.enabled</code> and <code>high_availability.repo_server.autoscaling.enabled</code> values to <code>true</code>. You can also configure the minimum and maximum replicas desired or leave the default values.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Activating the HA mode automatically enables the Redis HA chart which requires at least 3 worker nodes, as this chart enforces Pods to run on separate nodes.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Since this variable uses the <code>optional</code> argument to forcing the user to define all the values, there is a side effect you can pass any other bogus value and Terraform will accept it, <strong>but they won&#8217;t be used in the chart behind the module</strong>.
+</td>
+</tr>
+</table>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">object({
+    enabled = bool
+
+    controller = optional(object({
+      replicas = optional(number, 1)
+    }), {})
+
+    application_set = optional(object({
+      replicas = optional(number, 2)
+    }), {})
+
+    server = optional(object({
+      replicas = optional(number, 2)
+      autoscaling = optional(object({
+        enabled      = bool
+        min_replicas = optional(number, 2)
+        max_replicas = optional(number, 5)
+        }), {
+        enabled = false
+      })
+    }), {})
+
+    repo_server = optional(object({
+      replicas = optional(number, 2)
+      autoscaling = optional(object({
+        enabled      = bool
+        min_replicas = optional(number, 2)
+        max_replicas = optional(number, 5)
+        }), {
+        enabled = false
+      })
+    }), {})
+
+  })</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">{
+  "enabled": false
+}</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="input_oidc"></a> <a href="#input_oidc">oidc</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -1978,7 +2448,22 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 <p><a id="input_ssh_known_hosts"></a> <a href="#input_ssh_known_hosts">ssh_known_hosts</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>List of SSH known hosts to add to Argo CD. Check the official <code>values.yaml</code> to get the format to pass this value. <strong>If you set this variable, the default known hosts will be overridden by this value, so you might want to consider adding the ones you need here.</strong></p>
+<p>List of SSH known hosts to add to Argo CD.</p>
+</div>
+<div class="paragraph">
+<p>Check the official <code>values.yaml</code> to get the format to pass this value.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+If you set this variable, the default known hosts will be overridden by this value, so you might want to consider adding the ones you need here."
+</td>
+</tr>
+</table>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>string</code></p>
@@ -2148,7 +2633,7 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 <p><a id="input_helmfile_cmp_env_variables"></a> <a href="#input_helmfile_cmp_env_variables">helmfile_cmp_env_variables</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>List of environment variables to attach to the helmfile-cmp plugin, usually used to pass authentication credentials. Use a an <a href="https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/">explicit format</a> or take the values from a <a href="https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#define-container-environment-variables-using-secret-data">Kubernetes secret</a>.</p>
+<p>List of environment variables to attach to the helmfile-cmp plugin, usually used to pass authentication credentials. Use an <a href="https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/">explicit format</a> or take the values from a <a href="https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#define-container-environment-variables-using-secret-data">Kubernetes secret</a>.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
 <div class="content">
