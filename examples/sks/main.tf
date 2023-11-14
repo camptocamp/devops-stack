@@ -136,8 +136,6 @@ module "loki-stack" {
 
   app_autosync = local.app_autosync
 
-  distributed_mode = true
-
   logs_storage = {
     bucket_name = resource.aws_s3_bucket.this["loki"].id
     region      = resource.aws_s3_bucket.this["loki"].region
