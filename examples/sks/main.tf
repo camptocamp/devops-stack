@@ -20,17 +20,24 @@ module "sks" {
 }
 
 module "argocd_bootstrap" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v3.4.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v3.5.1"
+
+  argocd_projects = {
+    "${module.sks.cluster_name}" = {
+      destination_cluster = "in-cluster"
+    }
+  }
 
   depends_on = [module.sks]
 }
 
 module "traefik" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//sks?ref=v3.0.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//sks?ref=v4.1.0"
 
   cluster_name     = module.sks.cluster_name
   base_domain      = module.sks.base_domain
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
+  argocd_project   = module.sks.cluster_name
 
   nlb_id                  = module.sks.nlb_id
   router_nodepool_id      = module.sks.router_nodepool_id
@@ -45,12 +52,15 @@ module "traefik" {
 }
 
 module "cert-manager" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//sks?ref=v5.2.1"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//sks?ref=v7.0.1"
 
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
+  argocd_project   = module.sks.cluster_name
 
   app_autosync           = local.app_autosync
   enable_service_monitor = local.enable_service_monitor
+
+  letsencrypt_issuer_email = "letsencrypt@camptocamp.com"
 
   dependency_ids = {
     argocd = module.argocd_bootstrap.id
@@ -59,12 +69,13 @@ module "cert-manager" {
 
 # TODO Create an external database as PoC
 module "keycloak" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak?ref=v2.0.1"
+  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak.git?ref=v2.1.0"
 
   cluster_name     = module.sks.cluster_name
   base_domain      = module.sks.base_domain
   cluster_issuer   = local.cluster_issuer
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
+  argocd_project   = module.sks.cluster_name
 
   app_autosync = local.app_autosync
 
@@ -76,7 +87,7 @@ module "keycloak" {
 }
 
 module "oidc" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak//oidc_bootstrap?ref=v2.0.1"
+  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak.git//oidc_bootstrap?ref=v2.1.0"
 
   cluster_name   = module.sks.cluster_name
   base_domain    = module.sks.base_domain
@@ -97,12 +108,13 @@ module "oidc" {
 }
 
 module "longhorn" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-longhorn.git?ref=v2.2.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-longhorn.git?ref=v2.3.0"
 
   cluster_name     = module.sks.cluster_name
   base_domain      = module.sks.base_domain
   cluster_issuer   = local.cluster_issuer
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
+  argocd_project   = module.sks.cluster_name
 
   app_autosync           = local.app_autosync
   enable_service_monitor = local.enable_service_monitor
@@ -129,14 +141,13 @@ module "longhorn" {
 }
 
 module "loki-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack//sks?ref=v5.0.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack.git//sks?ref=v6.0.0"
 
   cluster_id       = module.sks.cluster_id
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
+  argocd_project   = module.sks.cluster_name
 
   app_autosync = local.app_autosync
-
-  distributed_mode = true
 
   logs_storage = {
     bucket_name = resource.aws_s3_bucket.this["loki"].id
@@ -152,13 +163,14 @@ module "loki-stack" {
 }
 
 module "thanos" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-thanos//sks?ref=v2.5.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//sks?ref=v2.7.0"
 
   cluster_name     = module.sks.cluster_name
   base_domain      = module.sks.base_domain
   cluster_issuer   = local.cluster_issuer
   cluster_id       = module.sks.cluster_id
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
+  argocd_project   = module.sks.cluster_name
 
   app_autosync = local.app_autosync
 
@@ -184,12 +196,13 @@ module "thanos" {
 }
 
 module "kube-prometheus-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack//sks?ref=v7.0.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//sks?ref=v8.0.0"
 
   cluster_name     = module.sks.cluster_name
   base_domain      = module.sks.base_domain
   cluster_issuer   = local.cluster_issuer
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
+  argocd_project   = module.sks.cluster_name
 
   app_autosync = local.app_autosync
 
@@ -222,11 +235,12 @@ module "kube-prometheus-stack" {
 }
 
 module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v3.4.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v3.5.1"
 
   cluster_name   = module.sks.cluster_name
   base_domain    = module.sks.base_domain
   cluster_issuer = local.cluster_issuer
+  argocd_project = module.sks.cluster_name
 
   accounts_pipeline_tokens = module.argocd_bootstrap.argocd_accounts_pipeline_tokens
   server_secretkey         = module.argocd_bootstrap.argocd_server_secretkey

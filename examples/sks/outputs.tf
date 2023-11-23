@@ -20,3 +20,8 @@ output "keycloak_users" {
   value       = module.oidc.devops_stack_users_passwords
   sensitive   = true
 }
+
+output "cluster_issuers" {
+  description = "Map containing the cluster issuers created by cert-manager."
+  value       = module.cert-manager.cluster_issuers
+}

@@ -1,5 +1,5 @@
 module "helloworld_apps" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git?ref=v2.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git?ref=v2.1.1"
   # source = "../../devops-stack-module-applicationset"
 
   dependency_ids = {

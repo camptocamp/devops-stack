@@ -9,7 +9,6 @@ terraform {
     dynamodb_table = "<DYANMODB_TABLE_NAME>"
   }
 
-
   required_providers {
     exoscale = {
       source  = "exoscale/exoscale"

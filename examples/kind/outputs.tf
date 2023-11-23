@@ -20,3 +20,14 @@ output "keycloak_users" {
   value       = module.oidc.devops_stack_users_passwords
   sensitive   = true
 }
+
+output "cluster_issuers" {
+  description = "Map containing the cluster issuers created by cert-manager."
+  value       = module.cert-manager.cluster_issuers
+}
+
+output "ca_cert" {
+  description = "The CA certificate used by the `ca-issuer`. You can copy this value into a `*.pem` file and use it as a CA certificate in your browser to avoid having insecure warnings."
+  value       = module.cert-manager.ca_issuer_certificate
+  sensitive   = true
+}
