@@ -87,7 +87,7 @@ module "argocd_bootstrap" {
   depends_on = [module.eks]
 }
 
-module "metrics_server" {
+module "metrics-server" {
   source = "git::https://github.com/camptocamp/devops-stack-module-metrics-server.git?ref=v1.0.0"
 
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
