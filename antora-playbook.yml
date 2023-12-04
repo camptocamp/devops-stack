@@ -136,6 +136,13 @@ content:
     # Exclude versions without proper folder structure or with generation errors
     - "!v1.0.0"
     - "!v1.0.0-alpha.*"
+  - url: https://github.com/camptocamp/devops-stack-module-metrics-server.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v@({1..9})*({0..9}).+({0..9}).*"
+    # Exclude versions without proper folder structure or with generation errors
+    - "!v1.0.0-alpha.*"
   - url: https://github.com/camptocamp/devops-stack-module-minio.git
     start_path: docs
     branches: []
