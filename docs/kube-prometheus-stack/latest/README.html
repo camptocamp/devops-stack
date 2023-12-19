@@ -36,7 +36,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="kube-prometheus-stack" data-version="v8.1.0">
+<div class="nav-container" data-component="kube-prometheus-stack" data-version="v8.2.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -80,7 +80,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">kube-prometheus-stack Module</span>
-    <span class="version">v8.1.0</span>
+    <span class="version">v8.2.0</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -435,7 +435,10 @@
       <a class="title" href="README.html">kube-prometheus-stack Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="README.html">v8.1.0</a>
+          <a href="README.html">v8.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../v8.1.0/README.html">v8.1.0</a>
         </li>
         <li class="version">
           <a href="../v8.0.2/README.html">v8.0.2</a>
@@ -744,9 +747,10 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v8.1.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v8.2.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="README.html">v8.1.0</a>
+    <a class="version is-current" href="README.html">v8.2.0</a>
+    <a class="version" href="../v8.1.0/README.html">v8.1.0</a>
     <a class="version" href="../v8.0.2/README.html">v8.0.2</a>
     <a class="version" href="../v8.0.1/README.html">v8.0.1</a>
     <a class="version" href="../v8.0.0/README.html">v8.0.0</a>
@@ -775,7 +779,7 @@
     <a class="version" href="../v1.0.0/README.html">v1.0.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack/blob/v8.1.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack/blob/v8.2.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -859,9 +863,6 @@
 <p><a id="provider_random"></a> <a href="#provider_random">random</a> (&gt;= 3)</p>
 </li>
 <li>
-<p><a id="provider_null"></a> <a href="#provider_null">null</a> (&gt;= 3)</p>
-</li>
-<li>
 <p><a id="provider_kubernetes"></a> <a href="#provider_kubernetes">kubernetes</a> (&gt;= 2)</p>
 </li>
 <li>
@@ -869,6 +870,9 @@
 </li>
 <li>
 <p><a id="provider_argocd"></a> <a href="#provider_argocd">argocd</a> (&gt;= 5)</p>
+</li>
+<li>
+<p><a id="provider_null"></a> <a href="#provider_null">null</a> (&gt;= 3)</p>
 </li>
 </ul>
 </div>
@@ -996,7 +1000,7 @@
 <p>Type: <code>string</code></p>
 </div>
 <div class="paragraph">
-<p>Default: <code>"v8.0.2"</code></p>
+<p>Default: <code>"v8.1.0"</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -1169,6 +1173,18 @@
 </div>
 <div class="paragraph">
 <p>Default: <code>{}</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_dataproxy_timeout"><a class="anchor" href="#_dataproxy_timeout"></a><a id="input_dataproxy_timeout"></a> <a href="#input_dataproxy_timeout">dataproxy_timeout</a></h4>
+<div class="paragraph">
+<p>Description: Variable to set the time when a query times out. This applies to all the Grafana&#8217;s data sources and can be manually configured per data source if desired.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>number</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>30</code></p>
 </div>
 </div>
 </div>
@@ -1532,7 +1548,7 @@
 <p><code>string</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"v8.0.2"</code></p>
+<p><code>"v8.1.0"</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
@@ -1749,6 +1765,23 @@
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>{}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_dataproxy_timeout"></a> <a href="#input_dataproxy_timeout">dataproxy_timeout</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Variable to set the time when a query times out. This applies to all the Grafana&#8217;s data sources and can be manually configured per data source if desired.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>number</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>30</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
