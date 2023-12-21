@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>GitHub Project Board :: DevOps Stack</title>
+    <meta name="generator" content="Antora 3.1.2">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GDBX9466LL"></script>
+    <script>function gtag(){dataLayer.push(arguments)};window.dataLayer=window.dataLayer||[];gtag('js',new Date());gtag('config','G-GDBX9466LL')</script>
+    <link rel="icon" href="../../_/img/favicon.png" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://devops-stack.io"><img width="200px" src="../../_/img/devops-stack-logo_light_by_c2c_black.png"/></a>
+      <div class="navbar-item search hide-for-print">
+        <div id="search-field" class="field">
+          <input id="search-input" type="text" placeholder="Search the docs">
+        </div>
+      </div>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/camptocamp/devops-stack"><i class="fa fa-github-alt"></i>&nbsp;GitHub</a>
+        <a class="navbar-item" href="https://www.camptocamp.com">Camptocamp</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="ROOT" data-version="v1.5.2">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">DevOps Stack</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text"><strong>Main Documentation</strong></span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Explanations</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../explanations/purpose.html">Purpose</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../explanations/cloud_agnostic.html">Cloud Agnostic</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../explanations/infrastructure_as_code.html">Infrastructure as Code</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../explanations/continuous_deployment.html">Continuous Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../explanations/lifecycle_operations.html">Lifecycle Operations</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Tutorials</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../tutorials/deploy_kind.html">Deployment on KinD</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../tutorials/deploy_aks.html">Deployment on AKS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../tutorials/deploy_eks.html">Deployment on EKS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../tutorials/deploy_sks.html">Deployment on SKS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../tutorials/deploy_apps.html">Deploying Applications on the DevOps Stack</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../tutorials/greenfield_upgrade.html">Blue-Green Upgrade</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Contributing Guidelines</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="general_guidelines.html">General Guidelines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="modules.html">DevOps Stack Modules</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module_creation_checklist.html">Module Creation Checklist</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="documentation.html">Documentation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="release.html">Release</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="project_board.html">Project Board</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text"><strong>Cluster Modules</strong></span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../eks/latest/README.html">Amazon EKS</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../sks/latest/README.html">Exoscale SKS</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../kind/latest/README.html">KinD</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text"><strong>Chart Modules</strong></span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="#aad-pod-identity:ROOT:README.adoc">AAD Pod Identity</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../application/latest/README.html">Application</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../applicationset/latest/README.html">ApplicationSet</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../argocd/latest/README.html">Argo CD</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="#azure-workload-identity:ROOT:README.adoc">Azure Workload Identity</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../oidc-aws-cognito/latest/README.html">AWS Cognito OIDC</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../cert-manager/latest/README.html">cert-manager</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../dex/latest/README.html">Dex</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../ebs-csi-driver/latest/README.html">EBS CSI Driver</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../efs-csi-driver/latest/README.html">EFS CSI Driver</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="#grafana:ROOT:README.adoc">Grafana</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../keycloak/latest/README.html">Keycloak</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../kube-prometheus-stack/latest/README.html">kube-prometheus-stack</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../loki/latest/README.html">Loki</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../longhorn/latest/README.html">Longhorn</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../metallb/latest/README.html">MetalLB</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../minio/latest/README.html">MinIO</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="#rclone:ROOT:README.adoc">Rclone</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../thanos/latest/README.html">Thanos</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../traefik/latest/README.html">Traefik</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">DevOps Stack</span>
+    <span class="version">v1.5.2</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../application/latest/README.html">Application Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../application/latest/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.2.3/README.html">v1.2.3</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.2.2/README.html">v1.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.2.1/README.html">v1.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.2.0/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.1.1/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../applicationset/latest/README.html">ApplicationSet Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../applicationset/latest/README.html">v2.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.2.6/README.html">v1.2.6</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.2.5/README.html">v1.2.5</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.2.4/README.html">v1.2.4</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../argocd/latest/README.html">Argo CD Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../argocd/latest/README.html">v3.5.1</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.5.0/README.html">v3.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.4.1/README.html">v3.4.1</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.4.0/README.html">v3.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.3.0/README.html">v3.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.1.3/README.html">v3.1.3</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.1.2/README.html">v3.1.2</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.1.1/README.html">v3.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v1.1.2/README.html">v1.1.2</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v1.1.1/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../oidc-aws-cognito/latest/README.html">AWS Cognito OIDC Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../oidc-aws-cognito/latest/README.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../oidc-aws-cognito/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../cert-manager/latest/README.html">cert-manager Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../cert-manager/latest/README.html">v7.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v7.0.0/README.html">v7.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v6.0.0/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v5.3.0/README.html">v5.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v5.2.1/README.html">v5.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v5.2.0/README.html">v5.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v5.1.0/README.html">v5.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v5.0.1/README.html">v5.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v5.0.0/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v4.0.3/README.html">v4.0.3</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../../latest/index.html">DevOps Stack</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../latest/index.html">v1.6.0</a>
+        </li>
+        <li class="version is-current">
+          <a href="../index.html">v1.5.2</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.5.1/index.html">v1.5.1</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.5.0/index.html">v1.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.4.0/index.html">v1.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.3.0/index.html">v1.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.2.0/index.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.0.2/index.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.0.1/index.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.0.0/index.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../dex/latest/README.html">Dex Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../dex/latest/README.html">v1.0.1-alpha.4</a>
+        </li>
+        <li class="version">
+          <a href="../../dex/v1.0.0-alpha.4/README.html">v1.0.0-alpha.4</a>
+        </li>
+        <li class="version">
+          <a href="../../dex/v1.0.0-alpha.3/README.html">v1.0.0-alpha.3</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../ebs-csi-driver/latest/README.html">EBS CSI Driver Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../ebs-csi-driver/latest/README.html">v2.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v1.0.2/README.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../efs-csi-driver/latest/README.html">EFS CSI Driver Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../efs-csi-driver/latest/README.html">v2.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v1.0.2/README.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../eks/latest/README.html">EKS Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../eks/latest/README.html">v3.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v2.0.2/README.html">v2.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../keycloak/latest/README.html">Keycloak Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../keycloak/latest/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.1.1/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.0.2/README.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.0.1/README.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../kind/latest/README.html">KinD Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../kind/latest/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kind/v2.2.2/README.html">v2.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../kind/v2.2.1/README.html">v2.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kind/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kind/v2.1.2/README.html">v2.1.2</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../kube-prometheus-stack/latest/README.html">kube-prometheus-stack Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../kube-prometheus-stack/latest/README.html">v8.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v8.1.0/README.html">v8.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v8.0.2/README.html">v8.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v8.0.1/README.html">v8.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v8.0.0/README.html">v8.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v7.1.0/README.html">v7.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v7.0.0/README.html">v7.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v6.3.0/README.html">v6.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v6.2.0/README.html">v6.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v6.1.1/README.html">v6.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v6.1.0/README.html">v6.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v6.0.1/README.html">v6.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v6.0.0/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v5.0.0/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v4.0.1/README.html">v4.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v4.0.0/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v3.3.0/README.html">v3.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.2.3/README.html">v2.2.3</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.2.2/README.html">v2.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.2.1/README.html">v2.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../loki/latest/README.html">Loki Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../loki/latest/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v5.2.0/README.html">v5.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v5.1.0/README.html">v5.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v5.0.0/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v4.0.2/README.html">v4.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v4.0.1/README.html">v4.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v4.0.0/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v3.0.1/README.html">v3.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.0.2/README.html">v2.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../longhorn/latest/README.html">Longhorn Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../longhorn/latest/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v2.1.1/README.html">v2.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../metallb/latest/README.html">MetalLB Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../metallb/latest/README.html">v1.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../metallb/v1.2.0/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../metallb/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../metallb/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../metrics-server/latest/README.html">Metrics Server Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../metrics-server/latest/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../minio/latest/README.html">MinIO Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../minio/latest/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v1.1.2/README.html">v1.1.2</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../sks/latest/README.html">SKS Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../sks/latest/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../sks/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../thanos/latest/README.html">Thanos Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../thanos/latest/README.html">v2.7.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.6.0/README.html">v2.6.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.5.0/README.html">v2.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.4.0/README.html">v2.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v1.0.1/README.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../traefik/latest/README.html">Traefik Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../traefik/latest/README.html">v4.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v4.0.0/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.2.3/README.html">v1.2.3</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.2.2/README.html">v1.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.2.1/README.html">v1.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.2.0/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">DevOps Stack</a></li>
+    <li><strong>Main Documentation</strong></li>
+    <li>Contributing Guidelines</li>
+    <li><a href="project_board.html">Project Board</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">v1.5.2</button>
+  <div class="version-menu">
+    <a class="version" href="../../latest/contributing/project_board.html">v1.6.0</a>
+    <a class="version is-current" href="project_board.html">v1.5.2</a>
+    <a class="version" href="../../v1.5.1/contributing/project_board.html">v1.5.1</a>
+    <a class="version" href="../../v1.5.0/contributing/project_board.html">v1.5.0</a>
+    <a class="version" href="../../v1.4.0/contributing/project_board.html">v1.4.0</a>
+    <a class="version" href="../../v1.3.0/contributing/project_board.html">v1.3.0</a>
+    <a class="version" href="../../v1.2.0/contributing/project_board.html">v1.2.0</a>
+    <a class="version is-missing" href="../../v1.0.2/index.html">v1.0.2</a>
+    <a class="version is-missing" href="../../v1.0.1/index.html">v1.0.1</a>
+    <a class="version is-missing" href="../../v1.0.0/index.html">v1.0.0</a>
+  </div>
+</div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/blob/v1.5.2/docs/modules/ROOT/pages/contributing/project_board.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">GitHub Project Board</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>In order to ease up the burden of the project maintainers, there is an internal Project Board on GitHub used to track the progress of the PRs and issues. The board is available only to the <a href="https://github.com/orgs/camptocamp/teams/is-devops-stack/"><code>@camptocamp/is-devops-stack</code> team</a> and is available <a href="https://github.com/orgs/camptocamp/projects/3/">here</a>. All the repositories of the DevOps Stack are also connected to this project upon creation.</p>
+</div>
+<div class="paragraph">
+<p>The way this is accomplished is somewhat convoluted, hence the reason for this documentation page.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_devops_stack_project"><a class="anchor" href="#_devops_stack_project"></a>DevOps Stack Project</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The project itself has been manually created on the <a href="https://github.com/orgs/camptocamp/"><code>@camptocamp</code></a> organization, using the GitHub web interface (<a href="https://docs.github.com/en/issues/planning-and-tracking-with-projects/creating-projects/creating-a-project">documentation</a>). <strong>The project is private (<a href="https://docs.github.com/en/issues/planning-and-tracking-with-projects/managing-your-project/managing-visibility-of-your-projects">documentation</a>) and only accessible to the <code>@camptocamp/is-devops-stack</code> team</strong> (<a href="https://docs.github.com/en/issues/planning-and-tracking-with-projects/managing-your-project/managing-access-to-your-projects">documentation</a>).</p>
+</div>
+<div class="paragraph">
+<p>All the boards and tables have also been created manually. In the settings of the project, there are automation workflows (<a href="https://docs.github.com/en/issues/planning-and-tracking-with-projects/automating-your-project/using-the-built-in-automations">documentation</a>) that move the Issues and PRs around depending on their status (open, closed, merged, etc.).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_adding_a_prissue_to_the_project"><a class="anchor" href="#_adding_a_prissue_to_the_project"></a>Adding a PR/Issue to the Project</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Since there are some limits on how many repositories we can add to a project using the default workflows, we were forced to automate this process using a GitHub workflow, as suggested on the <a href="https://docs.github.com/en/issues/planning-and-tracking-with-projects/automating-your-project/automating-projects-using-actions#example-workflow-authenticating-with-a-github-app">official documentation</a>.</p>
+</div>
+<div class="paragraph">
+<p>Although the official documentation explicitly calls the API with <code>gh</code> commands, we opted to use an official GitHub Action (<a href="https://github.com/actions/add-to-project"><code>actions/add-to-project</code></a>) to accomplish this. Moreover, in order to allow the workflows to modify the project we needed to create a GitHub app that the sole purpose is providing the necessary permissions to the workflows.</p>
+</div>
+<div class="sect2">
+<h3 id="_devops_stack_project_app"><a class="anchor" href="#_devops_stack_project_app"></a>DevOps Stack Project App</h3>
+<div class="paragraph">
+<p>The app is called <code>DevOps Stack Project</code> and is available <a href="https://github.com/apps/devops-stack-project">here</a>.</p>
+</div>
+<div class="paragraph">
+<p>This app was created on our organization by an administrator and is configured with a limited scope of permissions: it can only access the projects of the organization where it is installed as well as the PRs and Issues of repositories on which it is installed (<a href="https://docs.github.com/en/apps/creating-github-apps/setting-up-a-github-app/creating-a-github-app">official documentation</a> on how to create a GitHub app).</p>
+</div>
+<div class="paragraph">
+<p>After the app creation, an administrator was needed to install it on the organization and all the repositories of the DevOps Stack. This was done by going to the app page and clicking on the <code>Install</code> button then configuring the proper settings after installation (all this is done on the organization settings, check the <a href="https://docs.github.com/en/apps/maintaining-github-apps/installing-github-apps#installing-your-private-github-app-on-your-repository">official documentation</a>).</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The reason to not install the app on all the repositories by default was to further limit the scope of the app, although <strong>this adds the burden of installing it on each repository manually every time a new repository of the DevOps Stack is created</strong>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_centralized_workflow"><a class="anchor" href="#_centralized_workflow"></a>Centralized workflow</h3>
+<div class="paragraph">
+<p>The workflow definition is available in the <a href="https://github.com/camptocamp/devops-stack/blob/main/.github/workflows/pr-issues-project.yaml">main repository</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">---
+# GitHub Actions workflow to automatically push PRs and issues to the DevOps Stack project board.
+#
+# IMPORTANT: This workflow is called by other workflows in our DevOps Stack repositories and it is centralized here in 
+# order to be easily maintained across modules. Because of this, please make sure you're not introducing any breaking 
+# changes when modifying this workflow.
+  
+name: "pr-issues-project"
+
+on:
+  workflow_call:
+    secrets:
+      PROJECT_APP_PRIVATE_KEY:
+        description: "GitHub App private key for the DevOps Stack Project app"
+        required: true
+
+  issues:
+    types: 
+    - opened
+    - reopened
+  
+  pull_request:
+    types:
+    - opened
+    - reopened
+
+jobs:
+  add-to-project:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Generate authentication token from GitHub App
+      id: generate_token
+      uses: tibdex/github-app-token@v2
+      with:
+        app_id: 322306
+        private_key: ${{ secrets.PROJECT_APP_PRIVATE_KEY }}
+
+    - name: Add PR or issue to DevOps Stack project board
+      uses: actions/add-to-project@v0.5.0
+      with:
+        project-url: https://github.com/orgs/camptocamp/projects/3/
+        github-token: ${{ steps.generate_token.outputs.token }}</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+It is the step <em>Generate authentication token from GitHub App</em> that uses the GitHub app created above in order to generate a token with the proper permissions that is then passed to the <em>Add PR or issue to DevOps Stack project board</em> step.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>Copyright © Camptocamp <script> document.write(new Date().getFullYear()) </script> — All Rights Reserved</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/terraform.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/vendor/lunr.js"></script>
+<script src="../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../.." data-snippet-length="100" data-stylesheet="../../_/css/search.css"></script>
+<script async src="../../search-index.js"></script>
+  </body>
+</html>
