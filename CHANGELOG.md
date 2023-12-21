@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/camptocamp/devops-stack/compare/v1.5.2...v1.6.0) (2023-12-21)
+
+
+### Documentation
+
+* update antora-playbook.yml ([#1135](https://github.com/camptocamp/devops-stack/issues/1135)) ([b818218](https://github.com/camptocamp/devops-stack/commit/b8182186de1e662441fdc7347ca29344fd7ada1f))
+
 ## [1.5.2](https://github.com/camptocamp/devops-stack/compare/v1.5.1...v1.5.2) (2023-11-10)
 
 
