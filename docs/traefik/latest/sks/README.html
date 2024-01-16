@@ -36,7 +36,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="traefik" data-version="v4.1.0">
+<div class="nav-container" data-component="traefik" data-version="v5.0.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -86,7 +86,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">Traefik Module</span>
-    <span class="version">v4.1.0</span>
+    <span class="version">v5.0.0</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -715,7 +715,10 @@
       <a class="title" href="../README.html">Traefik Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../README.html">v4.1.0</a>
+          <a href="../README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v4.1.0/README.html">v4.1.0</a>
         </li>
         <li class="version">
           <a href="../../v4.0.0/README.html">v4.0.0</a>
@@ -768,9 +771,10 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v4.1.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v5.0.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="README.html">v4.1.0</a>
+    <a class="version is-current" href="README.html">v5.0.0</a>
+    <a class="version" href="../../v4.1.0/sks/README.html">v4.1.0</a>
     <a class="version" href="../../v4.0.0/sks/README.html">v4.0.0</a>
     <a class="version" href="../../v3.1.0/sks/README.html">v3.1.0</a>
     <a class="version" href="../../v3.0.0/sks/README.html">v3.0.0</a>
@@ -784,7 +788,7 @@
     <a class="version" href="../../v1.0.0/sks/README.html">v1.0.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-traefik/blob/v4.1.0/docs/modules/ROOT/pages/sks/README.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-traefik/blob/v5.0.0/docs/modules/ROOT/pages/sks/README.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -875,15 +879,6 @@
 <p>Type: <code>string</code></p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_argocd_namespace"><a class="anchor" href="#_argocd_namespace"></a><a id="input_argocd_namespace"></a> <a href="#input_argocd_namespace">argocd_namespace</a></h4>
-<div class="paragraph">
-<p>Description: Namespace used by Argo CD where the Application and AppProject resources should be created.</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>string</code></p>
-</div>
-</div>
 </div>
 <div class="sect2">
 <h3 id="_optional_inputs"><a class="anchor" href="#_optional_inputs"></a>Optional Inputs</h3>
@@ -935,31 +930,7 @@
 <p>Type: <code>string</code></p>
 </div>
 <div class="paragraph">
-<p>Default: <code>"v4.0.0"</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_namespace"><a class="anchor" href="#_namespace"></a><a id="input_namespace"></a> <a href="#input_namespace">namespace</a></h4>
-<div class="paragraph">
-<p>Description: Namespace where the applications&#8217;s Kubernetes resources should be created. Namespace will be created in case it doesn&#8217;t exist.</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>string</code></p>
-</div>
-<div class="paragraph">
-<p>Default: <code>"traefik"</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_replicas"><a class="anchor" href="#_replicas"></a><a id="input_replicas"></a> <a href="#input_replicas">replicas</a></h4>
-<div class="paragraph">
-<p>Description: Number of Traefik pods to be deployed.</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>string</code></p>
-</div>
-<div class="paragraph">
-<p>Default: <code>"2"</code></p>
+<p>Default: <code>"v5.0.0"</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -1026,6 +997,18 @@
 </div>
 <div class="paragraph">
 <p>Default: <code>{}</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_replicas"><a class="anchor" href="#_replicas"></a><a id="input_replicas"></a> <a href="#input_replicas">replicas</a></h4>
+<div class="paragraph">
+<p>Description: Number of Traefik pods to be deployed.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>number</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>2</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -1222,23 +1205,6 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_argocd_namespace"></a> <a href="#input_argocd_namespace">argocd_namespace</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Namespace used by Argo CD where the Application and AppProject resources should be created.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>string</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>yes</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="input_argocd_project"></a> <a href="#input_argocd_project">argocd_project</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -1299,41 +1265,7 @@
 <p><code>string</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"v4.0.0"</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>no</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_namespace"></a> <a href="#input_namespace">namespace</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Namespace where the applications&#8217;s Kubernetes resources should be created. Namespace will be created in case it doesn&#8217;t exist.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>string</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"traefik"</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>no</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_replicas"></a> <a href="#input_replicas">replicas</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Number of Traefik pods to be deployed.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>string</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"2"</code></p>
+<p><code>"v5.0.0"</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
@@ -1414,6 +1346,23 @@
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>{}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_replicas"></a> <a href="#input_replicas">replicas</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Number of Traefik pods to be deployed.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>number</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>2</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>

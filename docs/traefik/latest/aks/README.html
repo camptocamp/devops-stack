@@ -36,7 +36,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="traefik" data-version="v4.1.0">
+<div class="nav-container" data-component="traefik" data-version="v5.0.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -86,7 +86,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">Traefik Module</span>
-    <span class="version">v4.1.0</span>
+    <span class="version">v5.0.0</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -715,7 +715,10 @@
       <a class="title" href="../README.html">Traefik Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../README.html">v4.1.0</a>
+          <a href="../README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v4.1.0/README.html">v4.1.0</a>
         </li>
         <li class="version">
           <a href="../../v4.0.0/README.html">v4.0.0</a>
@@ -768,9 +771,10 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v4.1.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v5.0.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="README.html">v4.1.0</a>
+    <a class="version is-current" href="README.html">v5.0.0</a>
+    <a class="version" href="../../v4.1.0/aks/README.html">v4.1.0</a>
     <a class="version" href="../../v4.0.0/aks/README.html">v4.0.0</a>
     <a class="version" href="../../v3.1.0/aks/README.html">v3.1.0</a>
     <a class="version" href="../../v3.0.0/aks/README.html">v3.0.0</a>
@@ -784,7 +788,7 @@
     <a class="version" href="../../v1.0.0/aks/README.html">v1.0.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-traefik/blob/v4.1.0/docs/modules/ROOT/pages/aks/README.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-traefik/blob/v5.0.0/docs/modules/ROOT/pages/aks/README.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -811,19 +815,6 @@
 </div>
 </div>
 <div class="sect2">
-<h3 id="_providers"><a class="anchor" href="#_providers"></a>Providers</h3>
-<div class="paragraph">
-<p>The following providers are used by this module:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a id="provider_azurerm"></a> <a href="#provider_azurerm">azurerm</a></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
 <h3 id="_modules"><a class="anchor" href="#_modules"></a>Modules</h3>
 <div class="paragraph">
 <p>The following Modules are called:</p>
@@ -839,46 +830,9 @@
 </div>
 </div>
 <div class="sect2">
-<h3 id="_resources"><a class="anchor" href="#_resources"></a>Resources</h3>
-<div class="paragraph">
-<p>The following resources are used by this module:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/dns_cname_record">azurerm_dns_cname_record.wildcard</a> (resource)</p>
-</li>
-<li>
-<p><a href="https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/dns_zone">azurerm_dns_zone.this</a> (data source)</p>
-</li>
-<li>
-<p><a href="https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/resource_group">azurerm_resource_group.nodes_resource_group</a> (data source)</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
 <h3 id="_required_inputs"><a class="anchor" href="#_required_inputs"></a>Required Inputs</h3>
 <div class="paragraph">
 <p>The following input variables are required:</p>
-</div>
-<div class="sect3">
-<h4 id="_node_resource_group_name"><a class="anchor" href="#_node_resource_group_name"></a><a id="input_node_resource_group_name"></a> <a href="#input_node_resource_group_name">node_resource_group_name</a></h4>
-<div class="paragraph">
-<p>Description: The aks managed cluster resource group name.</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>string</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_dns_zone_resource_group_name"><a class="anchor" href="#_dns_zone_resource_group_name"></a><a id="input_dns_zone_resource_group_name"></a> <a href="#input_dns_zone_resource_group_name">dns_zone_resource_group_name</a></h4>
-<div class="paragraph">
-<p>Description: The Azure DNS zone&#8217;s resource group name.</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>string</code></p>
-</div>
 </div>
 <div class="sect3">
 <h4 id="_cluster_name"><a class="anchor" href="#_cluster_name"></a><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></h4>
@@ -893,15 +847,6 @@
 <h4 id="_base_domain"><a class="anchor" href="#_base_domain"></a><a id="input_base_domain"></a> <a href="#input_base_domain">base_domain</a></h4>
 <div class="paragraph">
 <p>Description: Base domain of the cluster. Value used for the ingress' URL of the application.</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>string</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_argocd_namespace"><a class="anchor" href="#_argocd_namespace"></a><a id="input_argocd_namespace"></a> <a href="#input_argocd_namespace">argocd_namespace</a></h4>
-<div class="paragraph">
-<p>Description: Namespace used by Argo CD where the Application and AppProject resources should be created.</p>
 </div>
 <div class="paragraph">
 <p>Type: <code>string</code></p>
@@ -958,31 +903,7 @@
 <p>Type: <code>string</code></p>
 </div>
 <div class="paragraph">
-<p>Default: <code>"v4.0.0"</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_namespace"><a class="anchor" href="#_namespace"></a><a id="input_namespace"></a> <a href="#input_namespace">namespace</a></h4>
-<div class="paragraph">
-<p>Description: Namespace where the applications&#8217;s Kubernetes resources should be created. Namespace will be created in case it doesn&#8217;t exist.</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>string</code></p>
-</div>
-<div class="paragraph">
-<p>Default: <code>"traefik"</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_replicas"><a class="anchor" href="#_replicas"></a><a id="input_replicas"></a> <a href="#input_replicas">replicas</a></h4>
-<div class="paragraph">
-<p>Description: Number of Traefik pods to be deployed.</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>string</code></p>
-</div>
-<div class="paragraph">
-<p>Default: <code>"2"</code></p>
+<p>Default: <code>"v5.0.0"</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -1052,6 +973,18 @@
 </div>
 </div>
 <div class="sect3">
+<h4 id="_replicas"><a class="anchor" href="#_replicas"></a><a id="input_replicas"></a> <a href="#input_replicas">replicas</a></h4>
+<div class="paragraph">
+<p>Description: Number of Traefik pods to be deployed.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>number</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>2</code></p>
+</div>
+</div>
+<div class="sect3">
 <h4 id="_enable_https_redirection"><a class="anchor" href="#_enable_https_redirection"></a><a id="input_enable_https_redirection"></a> <a href="#input_enable_https_redirection">enable_https_redirection</a></h4>
 <div class="paragraph">
 <p>Description: Enable HTTP to HTTPS redirection on all ingresses.</p>
@@ -1115,29 +1048,6 @@
 </table>
 </div>
 </div>
-<h1 id="_providers_2" class="sect0"><a class="anchor" href="#_providers_2"></a>Providers</h1>
-<table class="tableblock frame-all grid-all fit-content">
-<colgroup>
-<col>
-<col>
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Version</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="provider_azurerm"></a> <a href="#provider_azurerm">azurerm</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
 <h1 id="_modules_2" class="sect0"><a class="anchor" href="#_modules_2"></a>Modules</h1>
 <table class="tableblock frame-all grid-all fit-content">
 <colgroup>
@@ -1162,45 +1072,6 @@
 </tr>
 </tbody>
 </table>
-<h1 id="_resources_2" class="sect0"><a class="anchor" href="#_resources_2"></a>Resources</h1>
-<table class="tableblock frame-all grid-all fit-content">
-<colgroup>
-<col>
-<col>
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/dns_cname_record">azurerm_dns_cname_record.wildcard</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>resource</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/dns_zone">azurerm_dns_zone.this</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>data source</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/resource_group">azurerm_resource_group.nodes_resource_group</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>data source</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
 <h1 id="_inputs" class="sect0"><a class="anchor" href="#_inputs"></a>Inputs</h1>
 <table class="tableblock frame-all grid-all fit-content">
 <colgroup>
@@ -1220,40 +1091,6 @@
 </tr>
 </thead>
 <tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_node_resource_group_name"></a> <a href="#input_node_resource_group_name">node_resource_group_name</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The aks managed cluster resource group name.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>string</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>yes</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_dns_zone_resource_group_name"></a> <a href="#input_dns_zone_resource_group_name">dns_zone_resource_group_name</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The Azure DNS zone&#8217;s resource group name.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>string</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>yes</p>
-</div></div></td>
-</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></p>
@@ -1277,23 +1114,6 @@
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Base domain of the cluster. Value used for the ingress' URL of the application.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>string</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>yes</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_argocd_namespace"></a> <a href="#input_argocd_namespace">argocd_namespace</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Namespace used by Argo CD where the Application and AppProject resources should be created.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>string</code></p>
@@ -1367,41 +1187,7 @@
 <p><code>string</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"v4.0.0"</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>no</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_namespace"></a> <a href="#input_namespace">namespace</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Namespace where the applications&#8217;s Kubernetes resources should be created. Namespace will be created in case it doesn&#8217;t exist.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>string</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"traefik"</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>no</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_replicas"></a> <a href="#input_replicas">replicas</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Number of Traefik pods to be deployed.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>string</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"2"</code></p>
+<p><code>"v5.0.0"</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
@@ -1482,6 +1268,23 @@
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>{}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_replicas"></a> <a href="#input_replicas">replicas</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Number of Traefik pods to be deployed.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>number</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>2</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
