@@ -1,5 +1,5 @@
 module "helloworld_apps" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git?ref=v2.1.1"
+  source = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git?ref=v3.0.0"
   # source = "../../devops-stack-module-applicationset"
 
   dependency_ids = {
@@ -7,7 +7,6 @@ module "helloworld_apps" {
   }
 
   name                   = "helloworld-apps"
-  argocd_namespace       = module.argocd_bootstrap.argocd_namespace
   project_dest_namespace = "*"
   project_source_repo    = "https://github.com/camptocamp/devops-stack-helloworld-templates.git"
 

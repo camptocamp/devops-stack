@@ -20,7 +20,7 @@ module "sks" {
 }
 
 module "argocd_bootstrap" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v3.5.1"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v4.0.0"
 
   argocd_projects = {
     "${module.sks.cluster_name}" = {
@@ -32,12 +32,11 @@ module "argocd_bootstrap" {
 }
 
 module "traefik" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//sks?ref=v4.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//sks?ref=v5.0.0"
 
-  cluster_name     = module.sks.cluster_name
-  base_domain      = module.sks.base_domain
-  argocd_namespace = module.argocd_bootstrap.argocd_namespace
-  argocd_project   = module.sks.cluster_name
+  cluster_name   = module.sks.cluster_name
+  base_domain    = module.sks.base_domain
+  argocd_project = module.sks.cluster_name
 
   nlb_id                  = module.sks.nlb_id
   router_nodepool_id      = module.sks.router_nodepool_id
@@ -52,15 +51,15 @@ module "traefik" {
 }
 
 module "cert-manager" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//sks?ref=v7.0.1"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//sks?ref=v8.0.0"
 
-  argocd_namespace = module.argocd_bootstrap.argocd_namespace
-  argocd_project   = module.sks.cluster_name
+  argocd_project = module.sks.cluster_name
 
   letsencrypt_issuer_email = local.letsencrypt_issuer_email
 
   app_autosync           = local.app_autosync
   enable_service_monitor = local.enable_service_monitor
+
 
   dependency_ids = {
     argocd = module.argocd_bootstrap.id
@@ -69,13 +68,12 @@ module "cert-manager" {
 
 # TODO Create an external database as PoC
 module "keycloak" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak.git?ref=v2.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak.git?ref=v3.0.0"
 
-  cluster_name     = module.sks.cluster_name
-  base_domain      = module.sks.base_domain
-  cluster_issuer   = local.cluster_issuer
-  argocd_namespace = module.argocd_bootstrap.argocd_namespace
-  argocd_project   = module.sks.cluster_name
+  cluster_name   = module.sks.cluster_name
+  base_domain    = module.sks.base_domain
+  cluster_issuer = local.cluster_issuer
+  argocd_project = module.sks.cluster_name
 
   app_autosync = local.app_autosync
 
@@ -87,7 +85,7 @@ module "keycloak" {
 }
 
 module "oidc" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak.git//oidc_bootstrap?ref=v2.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak.git//oidc_bootstrap?ref=v3.0.0"
 
   cluster_name   = module.sks.cluster_name
   base_domain    = module.sks.base_domain
@@ -108,13 +106,12 @@ module "oidc" {
 }
 
 module "longhorn" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-longhorn.git?ref=v2.3.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-longhorn.git?ref=v3.0.0"
 
-  cluster_name     = module.sks.cluster_name
-  base_domain      = module.sks.base_domain
-  cluster_issuer   = local.cluster_issuer
-  argocd_namespace = module.argocd_bootstrap.argocd_namespace
-  argocd_project   = module.sks.cluster_name
+  cluster_name   = module.sks.cluster_name
+  base_domain    = module.sks.base_domain
+  cluster_issuer = local.cluster_issuer
+  argocd_project = module.sks.cluster_name
 
   app_autosync           = local.app_autosync
   enable_service_monitor = local.enable_service_monitor
@@ -143,9 +140,9 @@ module "longhorn" {
 module "loki-stack" {
   source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack.git//sks?ref=v6.0.0"
 
-  cluster_id       = module.sks.cluster_id
-  argocd_namespace = module.argocd_bootstrap.argocd_namespace
-  argocd_project   = module.sks.cluster_name
+  argocd_project = module.sks.cluster_name
+
+  cluster_id = module.sks.cluster_id
 
   app_autosync = local.app_autosync
 
@@ -163,14 +160,13 @@ module "loki-stack" {
 }
 
 module "thanos" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//sks?ref=v2.7.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//sks?ref=v3.0.0"
 
-  cluster_name     = module.sks.cluster_name
-  base_domain      = module.sks.base_domain
-  cluster_issuer   = local.cluster_issuer
-  cluster_id       = module.sks.cluster_id
-  argocd_namespace = module.argocd_bootstrap.argocd_namespace
-  argocd_project   = module.sks.cluster_name
+  cluster_name   = module.sks.cluster_name
+  base_domain    = module.sks.base_domain
+  cluster_issuer = local.cluster_issuer
+  cluster_id     = module.sks.cluster_id
+  argocd_project = module.sks.cluster_name
 
   app_autosync = local.app_autosync
 
@@ -196,13 +192,12 @@ module "thanos" {
 }
 
 module "kube-prometheus-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//sks?ref=v8.0.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//sks?ref=v9.0.0"
 
-  cluster_name     = module.sks.cluster_name
-  base_domain      = module.sks.base_domain
-  cluster_issuer   = local.cluster_issuer
-  argocd_namespace = module.argocd_bootstrap.argocd_namespace
-  argocd_project   = module.sks.cluster_name
+  cluster_name   = module.sks.cluster_name
+  base_domain    = module.sks.base_domain
+  cluster_issuer = local.cluster_issuer
+  argocd_project = module.sks.cluster_name
 
   app_autosync = local.app_autosync
 
@@ -235,7 +230,7 @@ module "kube-prometheus-stack" {
 }
 
 module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v3.5.1"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v4.0.0"
 
   cluster_name   = module.sks.cluster_name
   base_domain    = module.sks.base_domain
@@ -251,7 +246,7 @@ module "argocd" {
   exec_enabled  = true
 
   oidc = {
-    name         = "OIDC"
+    name         = "Keycloak"
     issuer       = module.oidc.oidc.issuer_url
     clientID     = module.oidc.oidc.client_id
     clientSecret = module.oidc.oidc.client_secret

@@ -23,7 +23,6 @@ module "iam_assumable_role_thanos" {
     "system:serviceaccount:thanos:thanos-bucketweb",
     "system:serviceaccount:thanos:thanos-storegateway",
     "system:serviceaccount:thanos:thanos-compactor",
-    "system:serviceaccount:thanos:thanos-sidecar",
     "system:serviceaccount:kube-prometheus-stack:kube-prometheus-stack-prometheus"
   ]
 }
