@@ -8,3 +8,9 @@ output "devops_admins" {
   value       = module.oidc.devops_stack_admins
   sensitive   = true
 }
+
+output "cluster_issuers" {
+  description = "Map containing the cluster issuers created by cert-manager."
+  value       = module.cert-manager.cluster_issuers
+}
+
