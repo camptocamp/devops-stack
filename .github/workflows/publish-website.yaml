@@ -36,7 +36,7 @@ jobs:
 
     - name: "Upload generated artifact"
       if: github.event_name == 'pull_request'
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: website
         path: "${{ github.workspace }}/public"
