@@ -36,7 +36,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="loki" data-version="v6.0.0">
+<div class="nav-container" data-component="loki" data-version="v7.0.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -80,7 +80,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">Loki Module</span>
-    <span class="version">v6.0.0</span>
+    <span class="version">v7.0.0</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -421,7 +421,10 @@
       <a class="title" href="../../../kind/latest/README.html">KinD Cluster Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../../kind/latest/README.html">v2.3.0</a>
+          <a href="../../../kind/latest/README.html">v2.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kind/v2.3.0/README.html">v2.3.0</a>
         </li>
         <li class="version">
           <a href="../../../kind/v2.2.2/README.html">v2.2.2</a>
@@ -530,7 +533,10 @@
       <a class="title" href="../README.html">Loki Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../README.html">v6.0.0</a>
+          <a href="../README.html">v7.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v6.0.0/README.html">v6.0.0</a>
         </li>
         <li class="version">
           <a href="../../v5.2.0/README.html">v5.2.0</a>
@@ -657,7 +663,10 @@
       <a class="title" href="../../../sks/latest/README.html">SKS Cluster Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../../sks/latest/README.html">v1.1.0</a>
+          <a href="../../../sks/latest/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../sks/v1.1.0/README.html">v1.1.0</a>
         </li>
         <li class="version">
           <a href="../../../sks/v1.0.0/README.html">v1.0.0</a>
@@ -668,7 +677,10 @@
       <a class="title" href="../../../thanos/latest/README.html">Thanos Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../../thanos/latest/README.html">v2.7.0</a>
+          <a href="../../../thanos/latest/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../thanos/v2.7.0/README.html">v2.7.0</a>
         </li>
         <li class="version">
           <a href="../../../thanos/v2.6.0/README.html">v2.6.0</a>
@@ -765,9 +777,10 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v6.0.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v7.0.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="README.html">v6.0.0</a>
+    <a class="version is-current" href="README.html">v7.0.0</a>
+    <a class="version" href="../../v6.0.0/eks/README.html">v6.0.0</a>
     <a class="version" href="../../v5.2.0/eks/README.html">v5.2.0</a>
     <a class="version" href="../../v5.1.0/eks/README.html">v5.1.0</a>
     <a class="version" href="../../v5.0.0/eks/README.html">v5.0.0</a>
@@ -786,7 +799,7 @@
     <a class="version" href="../../v1.0.0/eks/README.html">v1.0.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-loki-stack/blob/v6.0.0/docs/modules/ROOT/pages/eks/README.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-loki-stack/blob/v7.0.0/docs/modules/ROOT/pages/eks/README.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -863,18 +876,6 @@
 <p>The following input variables are optional (have default values):</p>
 </div>
 <div class="sect3">
-<h4 id="_argocd_namespace"><a class="anchor" href="#_argocd_namespace"></a><a id="input_argocd_namespace"></a> <a href="#input_argocd_namespace">argocd_namespace</a></h4>
-<div class="paragraph">
-<p>Description: Namespace used by Argo CD where the Application and AppProject resources should be created.</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>string</code></p>
-</div>
-<div class="paragraph">
-<p>Default: <code>"argocd"</code></p>
-</div>
-</div>
-<div class="sect3">
 <h4 id="_argocd_project"><a class="anchor" href="#_argocd_project"></a><a id="input_argocd_project"></a> <a href="#input_argocd_project">argocd_project</a></h4>
 <div class="paragraph">
 <p>Description: Name of the Argo CD AppProject where the Application should be created. If not set, the Application will be created in a new AppProject only for this Application.</p>
@@ -919,19 +920,7 @@
 <p>Type: <code>string</code></p>
 </div>
 <div class="paragraph">
-<p>Default: <code>"v5.2.0"</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_namespace"><a class="anchor" href="#_namespace"></a><a id="input_namespace"></a> <a href="#input_namespace">namespace</a></h4>
-<div class="paragraph">
-<p>Description: Namespace where the applications&#8217;s Kubernetes resources should be created. Namespace will be created in case it doesn&#8217;t exist.</p>
-</div>
-<div class="paragraph">
-<p>Type: <code>string</code></p>
-</div>
-<div class="paragraph">
-<p>Default: <code>"loki-stack"</code></p>
+<p>Default: <code>"v6.0.0"</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -1163,23 +1152,6 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_argocd_namespace"></a> <a href="#input_argocd_namespace">argocd_namespace</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Namespace used by Argo CD where the Application and AppProject resources should be created.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>string</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"argocd"</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>no</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="input_argocd_project"></a> <a href="#input_argocd_project">argocd_project</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -1240,24 +1212,7 @@
 <p><code>string</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"v5.2.0"</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>no</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_namespace"></a> <a href="#input_namespace">namespace</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Namespace where the applications&#8217;s Kubernetes resources should be created. Namespace will be created in case it doesn&#8217;t exist.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>string</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"loki-stack"</code></p>
+<p><code>"v6.0.0"</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
