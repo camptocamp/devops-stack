@@ -36,7 +36,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="ROOT" data-version="v1.7.0">
+<div class="nav-container" data-component="ROOT" data-version="v1.8.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -126,6 +126,9 @@
     <span class="nav-text"><strong>Cluster Modules</strong></span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../aks/latest/README.html">Azure AKS</a>
+  </li>
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../../eks/latest/README.html">Amazon EKS</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -141,9 +144,6 @@
     <span class="nav-text"><strong>Chart Modules</strong></span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="#aad-pod-identity:ROOT:README.adoc">AAD Pod Identity</a>
-  </li>
-  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../../application/latest/README.html">Application</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -151,9 +151,6 @@
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../../argocd/latest/README.html">Argo CD</a>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="#azure-workload-identity:ROOT:README.adoc">Azure Workload Identity</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../../oidc-aws-cognito/latest/README.html">AWS Cognito OIDC</a>
@@ -171,9 +168,6 @@
     <a class="nav-link" href="../../efs-csi-driver/latest/README.html">EFS CSI Driver</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="#grafana:ROOT:README.adoc">Grafana</a>
-  </li>
-  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../../keycloak/latest/README.html">Keycloak</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -187,6 +181,9 @@
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../../metallb/latest/README.html">MetalLB</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../metrics-server/latest/README.html">Metrics Server</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../../minio/latest/README.html">MinIO</a>
@@ -208,9 +205,17 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">DevOps Stack</span>
-    <span class="version">v1.7.0</span>
+    <span class="version">v1.8.0</span>
   </div>
   <ul class="components">
+    <li class="component">
+      <a class="title" href="../../aks/latest/README.html">AKS Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../aks/latest/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
     <li class="component">
       <a class="title" href="../../application/latest/README.html">Application Module</a>
       <ul class="versions">
@@ -402,7 +407,10 @@
       <a class="title" href="../index.html">DevOps Stack</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../index.html">v1.7.0</a>
+          <a href="../index.html">v1.8.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.7.0/index.html">v1.7.0</a>
         </li>
         <li class="version">
           <a href="../../v1.6.0/index.html">v1.6.0</a>
@@ -942,9 +950,10 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v1.7.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v1.8.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="deploy_sks.html">v1.7.0</a>
+    <a class="version is-current" href="deploy_sks.html">v1.8.0</a>
+    <a class="version" href="../../v1.7.0/tutorials/deploy_sks.html">v1.7.0</a>
     <a class="version" href="../../v1.6.0/tutorials/deploy_sks.html">v1.6.0</a>
     <a class="version" href="../../v1.5.2/tutorials/deploy_sks.html">v1.5.2</a>
     <a class="version" href="../../v1.5.1/tutorials/deploy_sks.html">v1.5.1</a>
@@ -957,7 +966,7 @@
     <a class="version is-missing" href="../../v1.0.0/index.html">v1.0.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/blob/v1.7.0/docs/modules/ROOT/pages/tutorials/deploy_sks.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/blob/v1.8.0/docs/modules/ROOT/pages/tutorials/deploy_sks.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -969,7 +978,7 @@
 <div class="sectionbody">
 <div class="paragraph">
 <p>An example of a local deployment on Exoscale SKS is provided <a href="https://github.com/camptocamp/devops-stack/tree/main/examples/sks">here</a>. Clone this repository and modify the files at your convenience.
-In the folder, as in a standard <a href="https://developer.hashicorp.com/terraform/tutorials/modules/module#what-is-a-terraform-module">Terraform module</a>, you will find the following files:</p>
+In the repository, as in a standard <a href="https://developer.hashicorp.com/terraform/tutorials/modules/module#what-is-a-terraform-module">Terraform module</a>, you will find the following files:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1223,7 +1232,7 @@ If you do not provide a value for the <code>user_map</code> variable, the module
 <div class="sect2">
 <h3 id="_lets_encrypt_ssl_certificates"><a class="anchor" href="#_lets_encrypt_ssl_certificates"></a>Let&#8217;s Encrypt SSL certificates</h3>
 <div class="paragraph">
-<p>By default, to avoid rate-limiting your domain by Let&#8217;s Encrypt, the example uses the <code>letsencrypt-staging</code> configuration of the cert-manager module to generate certificates using the Let&#8217;s Encrypt staging environment which has an invalid CA certificate.</p>
+<p>By default, to avoid rate-limiting your domain by Let&#8217;s Encrypt, the example uses the <code>letsencrypt-staging</code> configuration of the cert-manager module to generate certificates. This uses the Let&#8217;s Encrypt staging environment which has an invalid CA certificate.</p>
 </div>
 <div class="paragraph">
 <p>If you feel ready to test with production certificates, you can simply edit the <code>locals.tf</code> file and change the <code>cluster_issuer</code> variable to <code>letsencrypt-prod</code>.</p>
