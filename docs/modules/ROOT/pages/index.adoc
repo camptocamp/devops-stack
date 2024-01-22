@@ -11,7 +11,7 @@ image::devops-stack-logo_large.png[DevOps Stack]
 
 The DevOps Stack provides a standardized deployment Kubernetes Platform, bringing together automated Provisioning as Code, Continuous Application Deployment, and readily-made configurations for the best Cloud Native tools in the industry.
 
-TIP: The easiest way to get started with the DevOps Stack is to follow the tutorial on the xref:tutorials/deploy_kind.adoc[Deployment on KinD] page. This tutorial you will leave you with a fully operational https://kind.sigs.k8s.io/[KinD] playground on your local machine.
+TIP: The easiest way to get started with the DevOps Stack is to follow the tutorial on the xref:ROOT:tutorials/deploy_kind.adoc[Deployment on KinD] page. This tutorial you will leave you with a fully operational https://kind.sigs.k8s.io/[KinD] playground on your local machine.
 
 == Project Sponsor
 
