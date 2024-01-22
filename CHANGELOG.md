@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.8.0](https://github.com/camptocamp/devops-stack/compare/v1.7.0...v1.8.0) (2024-01-22)
+
+
+### Features
+
+* add AKS example and tutorial ([4d72cc8](https://github.com/camptocamp/devops-stack/commit/4d72cc8ee2a2f556f50f9bd05c884953f254caa4))
+* upgrade Terraform version on the existing examples ([339544f](https://github.com/camptocamp/devops-stack/commit/339544f3759f9b73fccbab02aeee2b3d27a27715))
+
 ## [1.7.0](https://github.com/camptocamp/devops-stack/compare/v1.6.0...v1.7.0) (2024-01-19)
 
 
