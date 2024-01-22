@@ -1,3 +1,187 @@
 = Deployment On Azure AKS
 
-_Work In Progress_
+An example of a local deployment of a Kubernetes cluster on Azure AKS is provided https://github.com/camptocamp/devops-stack/tree/main/examples/aks[here]. Clone this repository and modify the files at your convenience.
+In the repository, as in a standard https://developer.hashicorp.com/terraform/tutorials/modules/module#what-is-a-terraform-module[Terraform module], you will find the following files:
+
+* *`terraform.tf`* - declaration of the Terraform providers used in this project;
+* *`locals.tf`* - local variables used by the DevOps Stack modules;
+* *`main.tf`* - definition of all the deployed modules;
+* *`storage.tf`* - creation of the Storage Account and Storage Container used by Loki and Thanos;
+* *`dns.tf`* - creation of the wildcard record for the ingresses of the DevOps Stack components;
+* *`oidc.tf`* - addition of the redirect URIs to the Azure AD Enterprise Application in order to use it to authenticate to the DevOps Stack components providing a web interface;
+* *`outputs.tf`* - the output variables of the DevOps Stack;
+
+IMPORTANT: The *`requirements`* folder is not part of the Terraform code you execute directly. Its importance is explained on the next section.
+
+== Requirements
+
+On your local machine, you need to have the following tools installed:
+
+* https://learn.microsoft.com/en-us/cli/azure/[Azure CLI] to login to your Azure account and interact with your AKS cluster;
+* https://www.terraform.io/[Terraform] to provision the whole stack;
+* https://kubernetes.io/docs/reference/kubectl/[`kubectl`] or https://github.com/derailed/k9s[`k9s`]to interact with your cluster;
+
+Other than that, you will require the following:
+
+* An active Azure account with an active subscription;
+* An Enterprise Application on Entra ID to use as an identity provider for the DevOps Stack components;
+* The Azure subscription needs to have a Key Vault to store the secrets used to pass the credentials of said application to the DevOps Stack components;
+* Your Azure account needs to be part of a user group that has been assigned the role `Owner`, `Key Vault Reader` and `Key Vault Secrets User` on the subscription;
+* Your Azure account also needs to be an `Owner` of the Enterprise Application in order to add the proper redirect URIs.
+
+[TIP]
+====
+In this repository, you will find an example of Terraform code that could provision the required resources above. You can find this code https://github.com/camptocamp/devops-stack/tree/main/examples/aks/requirements[here].
+
+*Note that this code needs to be executed by an administrator with the proper rights on the on the subscription but also on Entra ID.*
+====
+
+[TIP]
+====
+An alternative to creating the required resources separately is that your user has an `Application Developer` role assignment on the Entra ID instance the subscription is linked to.
+
+This will allow you to create the Enterprise Application and add the redirect URIs directly with your code, without the need of an administrator.
+
+Check the https://github.com/camptocamp/devops-stack/tree/main/examples/aks/requirements/application.tf[`application.tf`] from the tip above and adapt the Terraform resources in order to create the application yourself.
+
+Or simply create the Enterprise Application and add the redirect URIs manually.
+====
+
+== Specificities and explanations
+
+=== Remote Terraform state
+
+If you do not want to configure the remote Terraform state backend, you can simply remove the `backend` block from the `terraform.tf` file.
+
+NOTE: More information about the remote backends is available on the https://developer.hashicorp.com/terraform/language/settings/backends/configuration[official documentation].
+
+=== OIDC authentication
+
+IMPORTANT: The DevOps Stack modules are developed with OIDC in mind. In production, you should have an identity provider that supports OIDC and use it to authenticate to the DevOps Stack applications.
+
+In this example, we use an https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/[Enterprise Applicaion] as OIDC provider.
+
+You can use any other OIDC provider by adapting the `oidc` block in the `locals.tf` file with the proper values. 
+
+=== Let's Encrypt SSL certificates
+
+By default, to avoid rate-limiting your domain by Let's Encrypt, the example uses the `letsencrypt-staging` configuration of the cert-manager module to generate certificates. This uses the Let's Encrypt staging environment which has an invalid CA certificate.
+
+If you feel ready to test with production certificates, you can simply edit the `locals.tf` file and change the `cluster_issuer` variable to `letsencrypt-prod`.
+
+== Deployment
+
+1. Clone the repository and `cd` into the `examples/aks` folder;
+
+2. Login to your Azure account with the Azure CLI, set the proper subscription and verify you are connected it:
++
+[source,bash]
+----
+az login
+az account set --subscription <subscription_id>
+az account show
+----
+
+3. Check out the modules you want to deploy in the `main.tf` file, and comment out the others;
++
+TIP: You can also add your own Terraform modules in this file or any other file on the root folder. A good place to start to write your own module is to clone the https://github.com/camptocamp/devops-stack-module-template[devops-stack-module-template] repository and adapt it to your needs.
+
+4. From the source of the example deployment, initialize the Terraform modules and providers:
++
+[source,bash]
+----
+terraform init
+----
+
+5. Configure the variables in `locals.tf` to your preference:
+TIP: The xref:eks:ROOT:README.adoc[cluster module documentation] can help you know what to put in the `kubernetes_version`, for example.
++
+[source,terraform]
+----
+include::example$deploy_examples/aks/locals.tf[]
+----
+
+6. Finally, run `terraform apply` and accept the proposed changes to create the Kubernetes nodes on Azure AKS and populate them with our services;
++
+[source,bash]
+----
+terraform apply
+----
+
+7. After the first deployment (please note the troubleshooting step related with Argo CD), you can go to the `locals.tf` and enable the _ServiceMonitor_ boolean to activate the Prometheus exporters that will send metrics to Prometheus;
++
+IMPORTANT: This flag needs to be set as `false` for the first bootstrap of the cluster, otherwise the applications will fail to deploy while the Custom Resource Definitions of the kube-prometheus-stack are not yet created.
++
+NOTE: You can either set the flag as `true` in the `locals.tf` file or you can simply delete the line on the modules' declarations, since this variable is set as `true` by default on each module.
++
+TIP: Take note of the local called `app_autosync`. If you set the condition of the ternary operator to `false` you will disable the auto-sync for all the DevOps Stack modules. This allows you to choose when to manually sync the module on the Argo CD interface and is useful for troubleshooting purposes.
+
+== Access the cluster and the DevOps Stack applications
+
+To access your cluster, you need to use the Azure CLI to recover a Kubeconfig you can use:
+
+[source,bash]
+----
+az aks get-credentials --resource-group YOUR_CLUSTER_RESOURCE_GROUP_NAME --name YOUR_CLUSTER_NAME --file ~/.kube/NAME_TO_GIVE_YOUR_CONFIG.config
+----
+
+[NOTE]
+====
+If you do not add your user's or group's object ID to the `rbac_aad_admin_group_object_ids` variable on the `main.tf`, you will need to use the `--admin` flag on the command above. This will give the privileged Kubeconfig to access the cluster.
+====
+
+Then you can use the `kubectl` or `k9s` command to interact with the cluster:
+
+[source,bash]
+----
+k9s --kubeconfig ~/.kube/NAME_TO_GIVE_YOUR_CONFIG.config
+----
+
+As for the DevOps Stack applications, you can access them through the ingress domain that you can find in the `ingress_domain` output. If you used the code from the example without modifying the outputs, you will see something like this on your terminal after the `terraform apply` has done its job:
+
+[source,shell]
+----
+Outputs:
+
+ingress_domain = "your.domain.here"
+----
+
+Or you can use `kubectl` to get all the ingresses and their respective URLs:
+
+[source,bash]
+----
+kubectl get ingress --all-namespaces --kubeconfig ~/.kube/NAME_TO_GIVE_YOUR_CONFIG.config
+----
+
+== Stop the cluster
+
+To definitively stop the cluster on a single command, you can simply use the `terraform destroy` command. This will destroy all the resources created by the Terraform code, including the Kubernetes cluster.
+
+== Troubleshooting
+
+=== `connection_error` during the first deployment
+
+In some cases, you could encounter an error like these the first deployment:
+
+[source,shell]
+----
+╷
+│ Error: error while waiting for application argocd to be created
+│ 
+│   with module.argocd.argocd_application.this,
+│   on .terraform/modules/argocd/main.tf line 55, in resource "argocd_application" "this":
+│   55: resource "argocd_application" "this" {
+│ 
+│ error while waiting for application argocd to be synced and healthy: rpc error: code = Unavailable desc = error reading from server: EOF
+╵
+----
+
+The error is due to the way we provision Argo CD on the final steps of the deployment. We use the bootstrap Argo CD to deploy the final Argo CD module, which causes a redeployment of Argo CD and consequently a momentary loss of connection between the Argo CD Terraform provider and the Argo CD server.
+
+*You can simply re-run the command `terraform apply` to finalize the bootstrap of the cluster every time you encounter this error.*
+
+=== Argo CD interface reload loop when clicking on login
+
+If you encounter a loop when clicking on the login button on the Argo CD interface, you can try to delete the Argo CD server pod and let it be recreated.
+
+TIP: For more informations about the Argo CD module, please refer to the xref:argocd:ROOT:README.adoc[respective documentation page].
