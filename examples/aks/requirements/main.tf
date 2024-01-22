@@ -3,12 +3,12 @@ data "azuread_client_config" "current" {}
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_resource_group" "default" {
-  name     = "default"
-  location = "YOUR_LOCATION"
+  name     = local.default_resource_group
+  location = local.location
 }
 
 resource "azurerm_key_vault" "main" {
-  name                = "YOUR_KEY_VAULT_NAME"
+  name                = local.default_key_vault
   location            = resource.azurerm_resource_group.default.location
   resource_group_name = resource.azurerm_resource_group.default.name
   sku_name            = "standard"
@@ -25,16 +25,16 @@ resource "azurerm_key_vault" "main" {
   ]
 }
 
-data "azuread_group" "YOUR_GROUP_NAME" {
-  object_id = "YOUR_GROUP_OBJECT_ID"
+data "azuread_group" "admins" {
+  object_id = local.admins_group_object_id
 }
 
-resource "azurerm_role_assignment" "YOUR_GROUP_NAME" {
+resource "azurerm_role_assignment" "admins" {
   for_each = toset([
     "Key Vault Reader",       # Permissions required to read Key Vault secrets
     "Key Vault Secrets User", # Permissions required to read contents of Key Vault secrets
   ])
-  principal_id         = data.azuread_group.YOUR_GROUP_NAME.object_id
+  principal_id         = data.azuread_group.admins.object_id
   role_definition_name = each.value
   scope                = "/subscriptions/${data.azurerm_client_config.current.subscription_id}"
 }

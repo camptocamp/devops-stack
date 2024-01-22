@@ -1,11 +1,13 @@
 locals {
+  # You can add here any user that should be owner of the Enterprise Application. The key can be anything an is used for
+  # identification on the for each below, the value must be a valid object ID on your Azure tenant.
   application_owners = {
-    "YOUR_GROUP_NAME" = "YOUR_GROUP_OBJECT_ID",
+    "${trimspace(data.azuread_group.admins.display_name)}" = data.azuread_group.admins.object_id,
   }
 }
 
 resource "azuread_application_registration" "default" {
-  display_name = "YOUR_APPLICATION_NAME"
+  display_name = local.oidc_application_name
 
   group_membership_claims = ["SecurityGroup"]
 }

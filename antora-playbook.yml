@@ -55,6 +55,13 @@ content:
     - "!v1.0.0"
     - "!v1.0.0-alpha.*"
     - "!v{3..4}.{0..1}.{0..2}"
+  - url: https://github.com/camptocamp/devops-stack-module-cluster-aks.git
+    start_path: docs
+    branches: []
+    tags:
+    - "v@({1..9})*({0..9}).+({0..9}).*"
+    # Exclude versions without proper folder structure or with generation errors
+    - "!v1.0.0-alpha.*"
   - url: https://github.com/camptocamp/devops-stack-module-cluster-eks.git
     start_path: docs
     branches: []

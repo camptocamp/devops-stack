@@ -1,8 +1,9 @@
 locals {
   # Parameters for the resources that are created outside this code, but still on the Azure subscription where the DevOps Stack will be deployed.
-  default_resource_group = "YOUR_DEFAULT_RESOURCE_GROUP" # The default resource group where the Key Vault with the Azure AD application credentials is located.
-  default_key_vault      = "YOUR_KEY_VAULT_NAME"         # The name of the Key Vault with the Azure AD application credentials.
-  oidc_application_name  = "YOUR_APPLICATION_NAME"       # The name of the Azure AD application that will be used for OIDC authentication.
+  default_resource_group         = "YOUR_DEFAULT_RESOURCE_GROUP" # The default resource group where the Key Vault with the Azure AD application credentials is located.
+  default_key_vault              = "YOUR_KEY_VAULT_NAME"         # The name of the Key Vault with the Azure AD application credentials.
+  oidc_application_name          = "YOUR_APPLICATION_NAME"       # The name of the Azure AD application that will be used for OIDC authentication.  cluster_admins_group_object_id = "38a1908d-0ccd-4acc-99d5-7f0228289752"
+  cluster_admins_group_object_id = "YOUR_CLUSTER_ADMINS_GROUP_OBJECT_ID"
 
   # Parameters used for this deployment of the DevOps Stack.
   common_resource_group    = "YOUR_COMMON_RESOURCE_GROUP" # The resource group where the common resources will reside. Must be unique for each DevOps Stack deployment in a single Azure subscription. 

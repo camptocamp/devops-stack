@@ -2,8 +2,8 @@ data "azuread_client_config" "current" {}
 
 data "azurerm_client_config" "current" {}
 
-data "azuread_group" "YOUR_GROUP_NAME" {
-  object_id = "YOUR_GROUP_OBJECT_ID"
+data "azuread_group" "cluster_admins" {
+  object_id = local.cluster_admins_group_object_id
 }
 
 resource "azurerm_resource_group" "main" {
@@ -31,19 +31,8 @@ module "aks" {
   kubernetes_version = local.kubernetes_version
   sku_tier           = local.sku_tier
 
-  automatic_channel_upgrade = "patch"
-  maintenance_window = {
-    allowed = [
-      {
-        day   = "Sunday",
-        hours = [22, 23]
-      },
-    ]
-    not_allowed = []
-  }
-
   rbac_aad_admin_group_object_ids = [
-    data.azuread_group.YOUR_GROUP_NAME.object_id
+    data.azuread_group.cluster_admins.object_id
   ]
 
   # Extra node pools
@@ -236,7 +225,7 @@ module "argocd" {
   rbac = {
     policy_csv = <<-EOT
       g, pipeline, role:admin
-      g, ${data.azuread_group.YOUR_GROUP_NAME.object_id}, role:admin
+      g, ${data.azuread_group.cluster_admins.object_id}, role:admin
     EOT
   }
 
