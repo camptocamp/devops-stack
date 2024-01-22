@@ -1,7 +1,7 @@
 = Deployment on Amazon EKS
 
 An example of a local deployment on Amazon EKS is provided https://github.com/camptocamp/devops-stack/tree/main/examples/eks[here]. Clone this repository and modify the files at your convenience.
-In the folder, as in a standard https://developer.hashicorp.com/terraform/tutorials/modules/module#what-is-a-terraform-module[Terraform module], you will find the following files:
+In the repository, as in a standard https://developer.hashicorp.com/terraform/tutorials/modules/module#what-is-a-terraform-module[Terraform module], you will find the following files:
 
 * *`terraform.tf`* - declaration of the Terraform providers used in this project;
 * *`locals.tf`* - local variables used by the DevOps Stack modules;
@@ -59,7 +59,7 @@ The `user_map` variable of that module allows you to create OIDC users used to a
 
 === Let's Encrypt SSL certificates
 
-By default, to avoid rate-limiting your domain by Let's Encrypt, the example uses the `letsencrypt-staging` configuration of the cert-manager module to generate certificates using the Let's Encrypt staging environment which has an invalid CA certificate.
+By default, to avoid rate-limiting your domain by Let's Encrypt, the example uses the `letsencrypt-staging` configuration of the cert-manager module to generate certificates. This uses the Let's Encrypt staging environment which has an invalid CA certificate.
 
 If you feel ready to test with production certificates, you can simply edit the `locals.tf` file and change the `cluster_issuer` variable to `letsencrypt-prod`.
 
@@ -90,7 +90,7 @@ TIP: The xref:eks:ROOT:README.adoc[cluster module documentation] can help you kn
 +
 [source,terraform]
 ----
-include::example$deploy_examples/sks/locals.tf[]
+include::example$deploy_examples/eks/locals.tf[]
 ----
 
 7. Finally, run `terraform apply` and accept the proposed changes to create the Kubernetes nodes on Amazon EKS and populate them with our services;
@@ -110,7 +110,7 @@ TIP: Take note of the local called `app_autosync`. If you set the condition of t
 
 == Access the cluster and the DevOps Stack applications
 
-To access your cluster you need to use the AWS CLI to recover a Kubeconfig you can use:
+To access your cluster, you need to use the AWS CLI to recover a Kubeconfig you can use:
 
 [source,bash]
 ----

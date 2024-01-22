@@ -1,7 +1,7 @@
 = Deployment on Exoscale SKS
 
 An example of a local deployment on Exoscale SKS is provided https://github.com/camptocamp/devops-stack/tree/main/examples/sks[here]. Clone this repository and modify the files at your convenience.
-In the folder, as in a standard https://developer.hashicorp.com/terraform/tutorials/modules/module#what-is-a-terraform-module[Terraform module], you will find the following files:
+In the repository, as in a standard https://developer.hashicorp.com/terraform/tutorials/modules/module#what-is-a-terraform-module[Terraform module], you will find the following files:
 
 * *`terraform.tf`* - declaration of the Terraform providers used in this project as well as their configuration;
 * *`locals.tf`* - local variables used by the DevOps Stack modules;
@@ -101,7 +101,7 @@ TIP: If you do not provide a value for the `user_map` variable, the module will 
 
 === Let's Encrypt SSL certificates
 
-By default, to avoid rate-limiting your domain by Let's Encrypt, the example uses the `letsencrypt-staging` configuration of the cert-manager module to generate certificates using the Let's Encrypt staging environment which has an invalid CA certificate.
+By default, to avoid rate-limiting your domain by Let's Encrypt, the example uses the `letsencrypt-staging` configuration of the cert-manager module to generate certificates. This uses the Let's Encrypt staging environment which has an invalid CA certificate.
 
 If you feel ready to test with production certificates, you can simply edit the `locals.tf` file and change the `cluster_issuer` variable to `letsencrypt-prod`.
 

@@ -1,7 +1,7 @@
 = Deployment on KinD
 
 An example of a local deployment on KinD is provided https://github.com/camptocamp/devops-stack/tree/main/examples/kind[here]. Clone this repository and modify the files at your convenience.
-In the folder, as in a standard https://developer.hashicorp.com/terraform/tutorials/modules/module#what-is-a-terraform-module[Terraform module], you will find the following files:
+In the repository, as in a standard https://developer.hashicorp.com/terraform/tutorials/modules/module#what-is-a-terraform-module[Terraform module], you will find the following files:
 
 * *`terraform.tf`* - declaration of the Terraform providers used in this project as well as their configuration;
 * *`locals.tf`* - local variables used by the DevOps Stack modules;
