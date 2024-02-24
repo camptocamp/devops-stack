@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>devops-stack-module-cluster-kind :: DevOps Stack</title>
+    <meta name="generator" content="Antora 3.1.2">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GDBX9466LL"></script>
+    <script>function gtag(){dataLayer.push(arguments)};window.dataLayer=window.dataLayer||[];gtag('js',new Date());gtag('config','G-GDBX9466LL')</script>
+    <link rel="icon" href="../../_/img/favicon.png" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://devops-stack.io"><img width="200px" src="../../_/img/devops-stack-logo_light_by_c2c_black.png"/></a>
+      <div class="navbar-item search hide-for-print">
+        <div id="search-field" class="field">
+          <input id="search-input" type="text" placeholder="Search the docs">
+        </div>
+      </div>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/camptocamp/devops-stack"><i class="fa fa-github-alt"></i>&nbsp;GitHub</a>
+        <a class="navbar-item" href="https://www.camptocamp.com">Camptocamp</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="kind" data-version="v2.4.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="README.html">KinD Cluster Module</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="README.html">Home</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><a href="https://github.com/camptocamp/devops-stack-module-cluster-kind" target="_blank" rel="noopener">Repository</a></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../latest/index.html"><em>Return to DevOps Stack docs</em></a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">KinD Cluster Module</span>
+    <span class="version">v2.4.0</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../aks/latest/README.html">AKS Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../aks/latest/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../aks/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../application/latest/README.html">Application Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../application/latest/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.2.3/README.html">v1.2.3</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.2.2/README.html">v1.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.2.1/README.html">v1.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.2.0/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.1.1/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../applicationset/latest/README.html">ApplicationSet Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../applicationset/latest/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v2.1.1/README.html">v2.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.2.6/README.html">v1.2.6</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.2.5/README.html">v1.2.5</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.2.4/README.html">v1.2.4</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../argocd/latest/README.html">Argo CD Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../argocd/latest/README.html">v4.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v4.1.0/README.html">v4.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v4.0.0/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.5.2/README.html">v3.5.2</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.5.1/README.html">v3.5.1</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.5.0/README.html">v3.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.4.1/README.html">v3.4.1</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.4.0/README.html">v3.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.3.0/README.html">v3.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.1.3/README.html">v3.1.3</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.1.2/README.html">v3.1.2</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.1.1/README.html">v3.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v1.1.2/README.html">v1.1.2</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v1.1.1/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../oidc-aws-cognito/latest/README.html">AWS Cognito OIDC Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../oidc-aws-cognito/latest/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../oidc-aws-cognito/v1.0.1/README.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../oidc-aws-cognito/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../cert-manager/latest/README.html">cert-manager Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../cert-manager/latest/README.html">v8.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v7.0.1/README.html">v7.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v7.0.0/README.html">v7.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v6.0.0/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v5.3.0/README.html">v5.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v5.2.1/README.html">v5.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v5.2.0/README.html">v5.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v5.1.0/README.html">v5.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v5.0.1/README.html">v5.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v5.0.0/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v4.0.3/README.html">v4.0.3</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../latest/index.html">DevOps Stack</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../latest/index.html">v1.8.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.7.0/index.html">v1.7.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.6.0/index.html">v1.6.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.5.2/index.html">v1.5.2</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.5.1/index.html">v1.5.1</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.5.0/index.html">v1.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.4.0/index.html">v1.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.3.0/index.html">v1.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.2.0/index.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.0.2/index.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.0.1/index.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.0.0/index.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../dex/latest/README.html">Dex Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../dex/latest/README.html">v1.0.1-alpha.4</a>
+        </li>
+        <li class="version">
+          <a href="../../dex/v1.0.0-alpha.4/README.html">v1.0.0-alpha.4</a>
+        </li>
+        <li class="version">
+          <a href="../../dex/v1.0.0-alpha.3/README.html">v1.0.0-alpha.3</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../ebs-csi-driver/latest/README.html">EBS CSI Driver Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../ebs-csi-driver/latest/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v2.4.0/README.html">v2.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v1.0.2/README.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../efs-csi-driver/latest/README.html">EFS CSI Driver Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../efs-csi-driver/latest/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v2.4.0/README.html">v2.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v1.0.2/README.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../eks/latest/README.html">EKS Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../eks/latest/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v3.0.1/README.html">v3.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v2.0.2/README.html">v2.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../keycloak/latest/README.html">Keycloak Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../keycloak/latest/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.1.1/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.0.2/README.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.0.1/README.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../latest/README.html">KinD Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../latest/README.html">v2.5.0</a>
+        </li>
+        <li class="version is-current">
+          <a href="README.html">v2.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../v2.2.2/README.html">v2.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../v2.2.1/README.html">v2.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../v2.1.2/README.html">v2.1.2</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../kube-prometheus-stack/latest/README.html">kube-prometheus-stack Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../kube-prometheus-stack/latest/README.html">v9.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v9.1.0/README.html">v9.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v9.0.0/README.html">v9.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v8.2.0/README.html">v8.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v8.1.0/README.html">v8.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v8.0.2/README.html">v8.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v8.0.1/README.html">v8.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v8.0.0/README.html">v8.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v7.1.0/README.html">v7.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v7.0.0/README.html">v7.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v6.3.0/README.html">v6.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v6.2.0/README.html">v6.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v6.1.1/README.html">v6.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v6.1.0/README.html">v6.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v6.0.1/README.html">v6.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v6.0.0/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v5.0.0/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v4.0.1/README.html">v4.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v4.0.0/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v3.3.0/README.html">v3.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.2.3/README.html">v2.2.3</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.2.2/README.html">v2.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.2.1/README.html">v2.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../loki/latest/README.html">Loki Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../loki/latest/README.html">v7.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v7.0.0/README.html">v7.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v6.0.0/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v5.2.0/README.html">v5.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v5.1.0/README.html">v5.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v5.0.0/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v4.0.2/README.html">v4.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v4.0.1/README.html">v4.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v4.0.0/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v3.0.1/README.html">v3.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.0.2/README.html">v2.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../longhorn/latest/README.html">Longhorn Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../longhorn/latest/README.html">v3.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v3.2.1/README.html">v3.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v2.1.1/README.html">v2.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../metallb/latest/README.html">MetalLB Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../metallb/latest/README.html">v1.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../metallb/v1.2.0/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../metallb/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../metallb/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../metrics-server/latest/README.html">Metrics Server Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../metrics-server/latest/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../metrics-server/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../minio/latest/README.html">MinIO Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../minio/latest/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v1.1.2/README.html">v1.1.2</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../sks/latest/README.html">SKS Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../sks/latest/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../sks/v1.1.1/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../sks/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../sks/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../thanos/latest/README.html">Thanos Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../thanos/latest/README.html">v3.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v3.0.1/README.html">v3.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.7.0/README.html">v2.7.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.6.0/README.html">v2.6.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.5.0/README.html">v2.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.4.0/README.html">v2.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v1.0.1/README.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../traefik/latest/README.html">Traefik Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../traefik/latest/README.html">v6.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v6.1.0/README.html">v6.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v6.0.0/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v5.0.0/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v4.1.0/README.html">v4.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v4.0.0/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.2.3/README.html">v1.2.3</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.2.2/README.html">v1.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.2.1/README.html">v1.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.2.0/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="README.html">KinD Cluster Module</a></li>
+    <li><a href="README.html">Home</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">v2.4.0</button>
+  <div class="version-menu">
+    <a class="version" href="../latest/README.html">v2.5.0</a>
+    <a class="version is-current" href="README.html">v2.4.0</a>
+    <a class="version" href="../v2.3.0/README.html">v2.3.0</a>
+    <a class="version" href="../v2.2.2/README.html">v2.2.2</a>
+    <a class="version" href="../v2.2.1/README.html">v2.2.1</a>
+    <a class="version" href="../v2.2.0/README.html">v2.2.0</a>
+    <a class="version" href="../v2.1.2/README.html">v2.1.2</a>
+  </div>
+</div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-cluster-kind/blob/v2.4.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">devops-stack-module-cluster-kind</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <a href="https://devops-stack.io">DevOps Stack</a> module to deploy a KinD cluster based on Docker.</p>
+</div>
+<div class="paragraph">
+<p>This cluster module is mainly used to deploy a Kubernetes cluster used for testing and development as well as for onboarding new users of the DevOps Stack.</p>
+</div>
+<div class="paragraph">
+<p>KinD is nothing more than a local Kubernetes cluster using Docker container "nodes". As such, it is required that you have Docker up and running on your machine (the documentation to install Docker is available here <a href="https://docs.docker.com/engine/install/">here</a>).</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+An example of a deployment of the DevOps Stack using KinD is available <a href="https://github.com/camptocamp/devops-stack/tree/main/examples/kind">here</a> as well as an accompanying <a href="#ROOT:tutorials/deploy_aks.adoc" class="xref unresolved">quick tutorial</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_usage"><a class="anchor" href="#_usage"></a>Usage</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This module can be declared by adding the following block on your Terraform configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-terraform hljs" data-lang="terraform">module "kind" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-kind.git?ref=&lt;RELEASE&gt;"
+
+  cluster_name = local.cluster_name
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can configure the version of Kubernetes by passing the variable <code>kubernetes_version</code>. This variable is nothing more than the tag of the image that is to be deployed. You can see the usable versions in <a href="https://hub.docker.com/r/kindest/node/tags">Docker Hub</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-terraform hljs" data-lang="terraform">module "kind" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-kind.git?ref=&lt;RELEASE&gt;"
+
+  cluster_name = local.cluster_name
+
+  kubernetes_version = "1.27.3"
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By default, this module deploys a cluster with a control plane node and 3 worker nodes. If you want to deploy one more worker node, you can do it like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-terraform hljs" data-lang="terraform">module "kind" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-kind.git?ref=&lt;RELEASE&gt;"
+
+  cluster_name = local.cluster_name
+
+  nodes = [
+    {
+      "platform" = "devops-stack"
+    },
+    {
+      "platform" = "devops-stack"
+    },
+    {
+      "platform" = "devops-stack"
+    },
+    {
+      "platform" = "devops-stack"
+    },
+  ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_technical_reference"><a class="anchor" href="#_technical_reference"></a>Technical Reference</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_dependencies"><a class="anchor" href="#_dependencies"></a>Dependencies</h3>
+<div class="paragraph">
+<p>Obviously, since this module deploys the cluster, it does not depend on any other module of the DevOps Stack. The only thing you&#8217;ll probably want to configure are some <code>locals</code> with some common variables used on all the modules:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-terraform hljs" data-lang="terraform">locals {
+  kubernetes_version     = "v1.27.3"
+  cluster_name           = "YOUR_CLUSTER_NAME"
+  base_domain            = format("%s.nip.io", replace(module.traefik.external_ip, ".", "-"))
+  cluster_issuer         = "ca-issuer"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_requirements"><a class="anchor" href="#_requirements"></a>Requirements</h3>
+<div class="paragraph">
+<p>The following requirements are needed by this module:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="requirement_docker"></a> <a href="#requirement_docker">docker</a> (&gt;= 2.23.1)</p>
+</li>
+<li>
+<p><a id="requirement_kind"></a> <a href="#requirement_kind">kind</a> (&gt;= 0.1.0)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_providers"><a class="anchor" href="#_providers"></a>Providers</h3>
+<div class="paragraph">
+<p>The following providers are used by this module:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="provider_kind"></a> <a href="#provider_kind">kind</a> (&gt;= 0.1.0)</p>
+</li>
+<li>
+<p><a id="provider_docker"></a> <a href="#provider_docker">docker</a> (&gt;= 2.23.1)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_resources"><a class="anchor" href="#_resources"></a>Resources</h3>
+<div class="paragraph">
+<p>The following resources are used by this module:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://registry.terraform.io/providers/tehcyx/kind/latest/docs/resources/cluster">kind_cluster.cluster</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/kreuzwerker/docker/latest/docs/data-sources/network">docker_network.kind</a> (data source)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_optional_inputs"><a class="anchor" href="#_optional_inputs"></a>Optional Inputs</h3>
+<div class="paragraph">
+<p>The following input variables are optional (have default values):</p>
+</div>
+<div class="sect3">
+<h4 id="_cluster_name"><a class="anchor" href="#_cluster_name"></a><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></h4>
+<div class="paragraph">
+<p>Description: The name to give to the cluster.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"kind"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_kubernetes_version"><a class="anchor" href="#_kubernetes_version"></a><a id="input_kubernetes_version"></a> <a href="#input_kubernetes_version">kubernetes_version</a></h4>
+<div class="paragraph">
+<p>Description: Kubernetes version to use for the KinD cluster (images available <a href="https://hub.docker.com/r/kindest/node/tags">here</a>).</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"v1.29.0"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_nodes"><a class="anchor" href="#_nodes"></a><a id="input_nodes"></a> <a href="#input_nodes">nodes</a></h4>
+<div class="paragraph">
+<p>Description: List of worker nodes to create in the KinD cluster. To increase the number of nodes, simply duplicate the objects on the list.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>list(map(string))</code></p>
+</div>
+<div class="paragraph">
+<p>Default:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">[
+  {
+    "platform": "devops-stack"
+  },
+  {
+    "platform": "devops-stack"
+  },
+  {
+    "platform": "devops-stack"
+  }
+]</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_outputs"><a class="anchor" href="#_outputs"></a>Outputs</h3>
+<div class="paragraph">
+<p>The following outputs are exported:</p>
+</div>
+<div class="sect3">
+<h4 id="_parsed_kubeconfig"><a class="anchor" href="#_parsed_kubeconfig"></a><a id="output_parsed_kubeconfig"></a> <a href="#output_parsed_kubeconfig">parsed_kubeconfig</a></h4>
+<div class="paragraph">
+<p>Description: Kubeconfig blocks to configure Terraform providers.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_raw_kubeconfig"><a class="anchor" href="#_raw_kubeconfig"></a><a id="output_raw_kubeconfig"></a> <a href="#output_raw_kubeconfig">raw_kubeconfig</a></h4>
+<div class="paragraph">
+<p>Description: Raw <code>.kube/config</code> file for <code>kubectl</code> access.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_kind_subnet"><a class="anchor" href="#_kind_subnet"></a><a id="output_kind_subnet"></a> <a href="#output_kind_subnet">kind_subnet</a></h4>
+<div class="paragraph">
+<p>Description: Kind IPv4 Docker network subnet.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_reference_in_table_format"><a class="anchor" href="#_reference_in_table_format"></a>Reference in table format</h3>
+<details>
+<summary class="title">Show tables</summary>
+<div class="content">
+<div class="paragraph">
+<p>= Requirements</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_docker"></a> <a href="#requirement_docker">docker</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 2.23.1</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_kind"></a> <a href="#requirement_kind">kind</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 0.1.0</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>= Providers</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_kind"></a> <a href="#provider_kind">kind</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 0.1.0</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_docker"></a> <a href="#provider_docker">docker</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 2.23.1</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>= Resources</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/tehcyx/kind/latest/docs/resources/cluster">kind_cluster.cluster</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/kreuzwerker/docker/latest/docs/data-sources/network">docker_network.kind</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>data source</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>= Inputs</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The name to give to the cluster.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>"kind"</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_kubernetes_version"></a> <a href="#input_kubernetes_version">kubernetes_version</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Kubernetes version to use for the KinD cluster (images available <a href="https://hub.docker.com/r/kindest/node/tags">here</a>).</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>"v1.29.0"</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_nodes"></a> <a href="#input_nodes">nodes</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>List of worker nodes to create in the KinD cluster. To increase the number of nodes, simply duplicate the objects on the list.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>list(map(string))</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">[
+  {
+    "platform": "devops-stack"
+  },
+  {
+    "platform": "devops-stack"
+  },
+  {
+    "platform": "devops-stack"
+  }
+]</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>= Outputs</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_parsed_kubeconfig"></a> <a href="#output_parsed_kubeconfig">parsed_kubeconfig</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Kubeconfig blocks to configure Terraform providers.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_raw_kubeconfig"></a> <a href="#output_raw_kubeconfig">raw_kubeconfig</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Raw <code>.kube/config</code> file for <code>kubectl</code> access.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_kind_subnet"></a> <a href="#output_kind_subnet">kind_subnet</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Kind IPv4 Docker network subnet.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>Copyright © Camptocamp <script> document.write(new Date().getFullYear()) </script> — All Rights Reserved</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/terraform.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/vendor/lunr.js"></script>
+<script src="../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../.." data-snippet-length="100" data-stylesheet="../../_/css/search.css"></script>
+<script async src="../../search-index.js"></script>
+  </body>
+</html>

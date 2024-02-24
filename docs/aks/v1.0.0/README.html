@@ -1,0 +1,2226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>devops-stack-module-cluster-aks :: DevOps Stack</title>
+    <meta name="generator" content="Antora 3.1.2">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GDBX9466LL"></script>
+    <script>function gtag(){dataLayer.push(arguments)};window.dataLayer=window.dataLayer||[];gtag('js',new Date());gtag('config','G-GDBX9466LL')</script>
+    <link rel="icon" href="../../_/img/favicon.png" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://devops-stack.io"><img width="200px" src="../../_/img/devops-stack-logo_light_by_c2c_black.png"/></a>
+      <div class="navbar-item search hide-for-print">
+        <div id="search-field" class="field">
+          <input id="search-input" type="text" placeholder="Search the docs">
+        </div>
+      </div>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/camptocamp/devops-stack"><i class="fa fa-github-alt"></i>&nbsp;GitHub</a>
+        <a class="navbar-item" href="https://www.camptocamp.com">Camptocamp</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="aks" data-version="v1.0.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="README.html">AKS Cluster Module</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="README.html">Home</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><a href="https://github.com/camptocamp/devops-stack-module-cluster-aks" target="_blank" rel="noopener">Repository</a></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../latest/index.html"><em>Return to DevOps Stack docs</em></a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">AKS Cluster Module</span>
+    <span class="version">v1.0.0</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../latest/README.html">AKS Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../latest/README.html">v1.1.0</a>
+        </li>
+        <li class="version is-current">
+          <a href="README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../application/latest/README.html">Application Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../application/latest/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.2.3/README.html">v1.2.3</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.2.2/README.html">v1.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.2.1/README.html">v1.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.2.0/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.1.1/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../applicationset/latest/README.html">ApplicationSet Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../applicationset/latest/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v2.1.1/README.html">v2.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.2.6/README.html">v1.2.6</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.2.5/README.html">v1.2.5</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.2.4/README.html">v1.2.4</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../argocd/latest/README.html">Argo CD Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../argocd/latest/README.html">v4.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v4.1.0/README.html">v4.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v4.0.0/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.5.2/README.html">v3.5.2</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.5.1/README.html">v3.5.1</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.5.0/README.html">v3.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.4.1/README.html">v3.4.1</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.4.0/README.html">v3.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.3.0/README.html">v3.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.1.3/README.html">v3.1.3</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.1.2/README.html">v3.1.2</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.1.1/README.html">v3.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v1.1.2/README.html">v1.1.2</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v1.1.1/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../oidc-aws-cognito/latest/README.html">AWS Cognito OIDC Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../oidc-aws-cognito/latest/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../oidc-aws-cognito/v1.0.1/README.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../oidc-aws-cognito/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../cert-manager/latest/README.html">cert-manager Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../cert-manager/latest/README.html">v8.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v7.0.1/README.html">v7.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v7.0.0/README.html">v7.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v6.0.0/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v5.3.0/README.html">v5.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v5.2.1/README.html">v5.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v5.2.0/README.html">v5.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v5.1.0/README.html">v5.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v5.0.1/README.html">v5.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v5.0.0/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v4.0.3/README.html">v4.0.3</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../latest/index.html">DevOps Stack</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../latest/index.html">v1.8.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.7.0/index.html">v1.7.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.6.0/index.html">v1.6.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.5.2/index.html">v1.5.2</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.5.1/index.html">v1.5.1</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.5.0/index.html">v1.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.4.0/index.html">v1.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.3.0/index.html">v1.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.2.0/index.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.0.2/index.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.0.1/index.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.0.0/index.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../dex/latest/README.html">Dex Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../dex/latest/README.html">v1.0.1-alpha.4</a>
+        </li>
+        <li class="version">
+          <a href="../../dex/v1.0.0-alpha.4/README.html">v1.0.0-alpha.4</a>
+        </li>
+        <li class="version">
+          <a href="../../dex/v1.0.0-alpha.3/README.html">v1.0.0-alpha.3</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../ebs-csi-driver/latest/README.html">EBS CSI Driver Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../ebs-csi-driver/latest/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v2.4.0/README.html">v2.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v1.0.2/README.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../efs-csi-driver/latest/README.html">EFS CSI Driver Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../efs-csi-driver/latest/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v2.4.0/README.html">v2.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v1.0.2/README.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../eks/latest/README.html">EKS Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../eks/latest/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v3.0.1/README.html">v3.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v2.0.2/README.html">v2.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../keycloak/latest/README.html">Keycloak Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../keycloak/latest/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.1.1/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.0.2/README.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.0.1/README.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../kind/latest/README.html">KinD Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../kind/latest/README.html">v2.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kind/v2.4.0/README.html">v2.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kind/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kind/v2.2.2/README.html">v2.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../kind/v2.2.1/README.html">v2.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kind/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kind/v2.1.2/README.html">v2.1.2</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../kube-prometheus-stack/latest/README.html">kube-prometheus-stack Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../kube-prometheus-stack/latest/README.html">v9.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v9.1.0/README.html">v9.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v9.0.0/README.html">v9.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v8.2.0/README.html">v8.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v8.1.0/README.html">v8.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v8.0.2/README.html">v8.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v8.0.1/README.html">v8.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v8.0.0/README.html">v8.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v7.1.0/README.html">v7.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v7.0.0/README.html">v7.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v6.3.0/README.html">v6.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v6.2.0/README.html">v6.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v6.1.1/README.html">v6.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v6.1.0/README.html">v6.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v6.0.1/README.html">v6.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v6.0.0/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v5.0.0/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v4.0.1/README.html">v4.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v4.0.0/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v3.3.0/README.html">v3.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.2.3/README.html">v2.2.3</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.2.2/README.html">v2.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.2.1/README.html">v2.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../loki/latest/README.html">Loki Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../loki/latest/README.html">v7.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v7.0.0/README.html">v7.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v6.0.0/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v5.2.0/README.html">v5.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v5.1.0/README.html">v5.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v5.0.0/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v4.0.2/README.html">v4.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v4.0.1/README.html">v4.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v4.0.0/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v3.0.1/README.html">v3.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.0.2/README.html">v2.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../longhorn/latest/README.html">Longhorn Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../longhorn/latest/README.html">v3.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v3.2.1/README.html">v3.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v2.1.1/README.html">v2.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../metallb/latest/README.html">MetalLB Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../metallb/latest/README.html">v1.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../metallb/v1.2.0/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../metallb/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../metallb/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../metrics-server/latest/README.html">Metrics Server Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../metrics-server/latest/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../metrics-server/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../minio/latest/README.html">MinIO Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../minio/latest/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v1.1.2/README.html">v1.1.2</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../sks/latest/README.html">SKS Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../sks/latest/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../sks/v1.1.1/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../sks/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../sks/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../thanos/latest/README.html">Thanos Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../thanos/latest/README.html">v3.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v3.0.1/README.html">v3.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.7.0/README.html">v2.7.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.6.0/README.html">v2.6.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.5.0/README.html">v2.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.4.0/README.html">v2.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v1.0.1/README.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../traefik/latest/README.html">Traefik Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../traefik/latest/README.html">v6.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v6.1.0/README.html">v6.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v6.0.0/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v5.0.0/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v4.1.0/README.html">v4.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v4.0.0/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.2.3/README.html">v1.2.3</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.2.2/README.html">v1.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.2.1/README.html">v1.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.2.0/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="README.html">AKS Cluster Module</a></li>
+    <li><a href="README.html">Home</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">v1.0.0</button>
+  <div class="version-menu">
+    <a class="version" href="../latest/README.html">v1.1.0</a>
+    <a class="version is-current" href="README.html">v1.0.0</a>
+  </div>
+</div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-cluster-aks/blob/v1.0.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">devops-stack-module-cluster-aks</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <a href="https://devops-stack.io">DevOps Stack</a> module to deploy a Kubernetes cluster on Azure AKS.</p>
+</div>
+<div class="paragraph">
+<p>This module uses the <a href="https://registry.terraform.io/modules/terraform-azurerm/aks/azurerm/latest">Terraform module "aks" by Azure</a> to in order to deploy and manage an AKS cluster. It was created in order to also manage other resources required by the DevOps Stack, such as the DNS records, resource group and subnet specific to the cluster created (these resources are helpful for the blue/green upgrading strategy). The module also provides the necessary outputs to be used by the other DevOps Stack modules.</p>
+</div>
+<div class="paragraph">
+<p>By default, this module creates the AKS control plane and a default node pool composed of 3 nodes of the type <code>Standard_D2s_v3</code>. If no version is specified, the AKS cluster and node pool will be created with the latest available version.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The variable <code>kubernetes_version</code> sets the version of the AKS control plane while the <code>orchestrator_version</code> variable sets the version of the default node pool.</p>
+</div>
+<div class="paragraph">
+<p>The <code>node_pools</code> variable allows you to define the extra node pools you want deployed besides the default one. For each extra node pool you can also define the version of Kubernetes to use with the <code>orchestrator_version</code> variable.</p>
+</div>
+<div class="paragraph">
+<p>Note that the versions of the node pools cannot be higher than the control plane.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_usage"><a class="anchor" href="#_usage"></a>Usage</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This module can be used with the following declaration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-terraform hljs" data-lang="terraform">module "aks" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-cluster-aks.git?ref=&lt;RELEASE&gt;"
+
+  cluster_name         = local.cluster_name
+  base_domain          = local.base_domain
+  location             = resource.azurerm_resource_group.main.location
+  resource_group_name  = resource.azurerm_resource_group.main.name
+  virtual_network_name = resource.azurerm_virtual_network.this.name
+  cluster_subnet       = local.cluster_subnet
+
+  kubernetes_version        = local.kubernetes_version
+  sku_tier                  = local.sku_tier
+
+  rbac_aad_admin_group_object_ids = [
+    ENTRA_ID_GROUP_UUID,
+  ]
+
+  depends_on = [resource.azurerm_resource_group.main]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Multiple node pools can be defined with the <code>node_pools</code> variable:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-terraform hljs" data-lang="terraform">module "aks" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-cluster-aks.git?ref=&lt;RELEASE&gt;"
+
+  cluster_name         = local.cluster_name
+  base_domain          = local.base_domain
+  location             = resource.azurerm_resource_group.main.location
+  resource_group_name  = resource.azurerm_resource_group.main.name
+  virtual_network_name = resource.azurerm_virtual_network.this.name
+  cluster_subnet       = local.cluster_subnet
+
+  kubernetes_version        = local.kubernetes_version
+  sku_tier                  = local.sku_tier
+
+  rbac_aad_admin_group_object_ids = [
+    ENTRA_ID_GROUP_UUID,
+  ]
+
+  # Extra node pools
+  node_pools = {
+    extra = {
+      vm_size = "Standard_D2s_v3"
+      node_count = 2
+    },
+  }
+
+  depends_on = [resource.azurerm_resource_group.main]
+}</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_upgrading_the_kubernetes_cluster"><a class="anchor" href="#_upgrading_the_kubernetes_cluster"></a>Upgrading the Kubernetes cluster</h3>
+<div class="paragraph">
+<p>From our experience, usually, enabling the auto-upgrades is a good practice, but up to a point. We recommend enabling the auto-upgrades for the control plane and the node pools.</p>
+</div>
+<div class="paragraph">
+<p>To upgrade between minor versions, you are required to first upgrade the control plane and then the node pools. This is because the node pools cannot be of a higher version than the control plane.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If using the <code>orchestrator_version</code> variable for the default or extra node pools, unfortunately, for reasons that escape our comprehension, the upgrade of the control plane through the Terraform code will not work. You would have to manually upgrade the control plane through the Azure portal.</p>
+</div>
+<div class="paragraph">
+<p>This is why we recommend leaving the <code>orchestrator_version</code> variables as <code>null</code> and follow the procedure below.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Our recommended procedure for upgrading the cluster is as follows:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Ensure that the <code>orchestrator_version</code> is not set in any part of your code.</p>
+</li>
+<li>
+<p>Go to the Azure portal and select your cluster. Then on the overview tab, click on the version of the control plane ans you should see a page like below. Click on <em>Upgrade version</em>.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="https://raw.githubusercontent.com/camptocamp/devops-stack-module-cluster-aks/main/docs/modules/ROOT/assets/images/upgrade_version_select.png" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/camptocamp/devops-stack-module-cluster-aks/main/docs/modules/ROOT/assets/images/upgrade_version_select.png" alt="upgrade version select"></a>
+</div>
+</div>
+</li>
+<li>
+<p>Afterwards, on the next screen, select the next minor version, make sure you&#8217;ve selected to upgrade the control plane and all the node pools, then start.</p>
+<div class="paragraph">
+<p><span class="image"><a class="image" href="https://raw.githubusercontent.com/camptocamp/devops-stack-module-applicationset/main/docs/modules/ROOT/assets/images/upgrade_version_select_all_node_pools.png" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/camptocamp/devops-stack-module-cluster-aks/main/docs/modules/ROOT/assets/images/upgrade_version_select_all_node_pools.png" alt="upgrade version select all node pools"></a></span></p>
+</div>
+</li>
+<li>
+<p>Wait for all the components to finish the upgrade. Then, you can set the <code>kubernetes_version</code> variable to the minor version which you&#8217;ve just upgraded to and apply the Terraform code. This will reconcile the Terraform state with the actual state of the cluster.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_automatic_cluster_upgrades"><a class="anchor" href="#_automatic_cluster_upgrades"></a>Automatic cluster upgrades</h3>
+<div class="paragraph">
+<p>You can enable automatic upgrades of the control plane and node pools by setting the <code>automatic_channel_upgrade</code> variable to a desired value. This will automatically upgrade the control plane and node pools to the latest available version given the constraints you defined in said variable. You can also specify the <code>maintenance_window</code> variable to set a maintenance window for the upgrades.</p>
+</div>
+<div class="paragraph">
+<p>An example of this settings is as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-terraform hljs" data-lang="terraform">  automatic_channel_upgrade = "patch"
+  maintenance_window = {
+    allowed = [
+      {
+        day   = "Sunday",
+        hours = [22, 23]
+      },
+    ]
+    not_allowed = []
+  }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also set the <code>node_os_channel_upgrade</code> variable and <code>maintenance_window_node_os</code> variables to upgrade the Kubernetes Cluster Nodes' OS Image.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_technical_reference"><a class="anchor" href="#_technical_reference"></a>Technical Reference</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_requirements"><a class="anchor" href="#_requirements"></a>Requirements</h3>
+<div class="paragraph">
+<p>The following requirements are needed by this module:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="requirement_azurerm"></a> <a href="#requirement_azurerm">azurerm</a> (&gt;= 3.81.0)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_providers"><a class="anchor" href="#_providers"></a>Providers</h3>
+<div class="paragraph">
+<p>The following providers are used by this module:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="provider_azurerm"></a> <a href="#provider_azurerm">azurerm</a> (&gt;= 3.81.0)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_modules"><a class="anchor" href="#_modules"></a>Modules</h3>
+<div class="paragraph">
+<p>The following Modules are called:</p>
+</div>
+<div class="sect3">
+<h4 id="_cluster"><a class="anchor" href="#_cluster"></a><a id="module_cluster"></a> <a href="#module_cluster">cluster</a></h4>
+<div class="paragraph">
+<p>Source: Azure/aks/azurerm</p>
+</div>
+<div class="paragraph">
+<p>Version: ~&gt; 7.0</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_resources"><a class="anchor" href="#_resources"></a>Resources</h3>
+<div class="paragraph">
+<p>The following resources are used by this module:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/dns_cname_record">azurerm_dns_cname_record.this</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group">azurerm_resource_group.this</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet">azurerm_subnet.this</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/dns_zone">azurerm_dns_zone.this</a> (data source)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_required_inputs"><a class="anchor" href="#_required_inputs"></a>Required Inputs</h3>
+<div class="paragraph">
+<p>The following input variables are required:</p>
+</div>
+<div class="sect3">
+<h4 id="_cluster_name"><a class="anchor" href="#_cluster_name"></a><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></h4>
+<div class="paragraph">
+<p>Description: The name of the Kubernetes cluster to create.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_base_domain"><a class="anchor" href="#_base_domain"></a><a id="input_base_domain"></a> <a href="#input_base_domain">base_domain</a></h4>
+<div class="paragraph">
+<p>Description: The base domain used for Ingresses. If not provided, nip.io will be used taking the NLB IP address.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_location"><a class="anchor" href="#_location"></a><a id="input_location"></a> <a href="#input_location">location</a></h4>
+<div class="paragraph">
+<p>Description: The location where the Kubernetes cluster will be created along side with it&#8217;s own resource group and associated resources.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_resource_group_name"><a class="anchor" href="#_resource_group_name"></a><a id="input_resource_group_name"></a> <a href="#input_resource_group_name">resource_group_name</a></h4>
+<div class="paragraph">
+<p>Description: The name of the common resource group (for example, where the virtual network and the DNS zone resides).</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_virtual_network_name"><a class="anchor" href="#_virtual_network_name"></a><a id="input_virtual_network_name"></a> <a href="#input_virtual_network_name">virtual_network_name</a></h4>
+<div class="paragraph">
+<p>Description: The name of the virtual network where to deploy the cluster.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cluster_subnet"><a class="anchor" href="#_cluster_subnet"></a><a id="input_cluster_subnet"></a> <a href="#input_cluster_subnet">cluster_subnet</a></h4>
+<div class="paragraph">
+<p>Description: The subnet CIDR where to deploy the cluster, included in the virtual network created.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_optional_inputs"><a class="anchor" href="#_optional_inputs"></a>Optional Inputs</h3>
+<div class="paragraph">
+<p>The following input variables are optional (have default values):</p>
+</div>
+<div class="sect3">
+<h4 id="_dns_zone_resource_group_name"><a class="anchor" href="#_dns_zone_resource_group_name"></a><a id="input_dns_zone_resource_group_name"></a> <a href="#input_dns_zone_resource_group_name">dns_zone_resource_group_name</a></h4>
+<div class="paragraph">
+<p>Description: The name of the resource group which contains the DNS zone for the base domain.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"default"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_sku_tier"><a class="anchor" href="#_sku_tier"></a><a id="input_sku_tier"></a> <a href="#input_sku_tier">sku_tier</a></h4>
+<div class="paragraph">
+<p>Description: The SKU Tier that should be used for this Kubernetes Cluster. Possible values are <code>Free</code> and <code>Standard</code></p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"Free"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_kubernetes_version"><a class="anchor" href="#_kubernetes_version"></a><a id="input_kubernetes_version"></a> <a href="#input_kubernetes_version">kubernetes_version</a></h4>
+<div class="paragraph">
+<p>Description: The Kubernetes version to use on the control-plane.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"1.28"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_automatic_channel_upgrade"><a class="anchor" href="#_automatic_channel_upgrade"></a><a id="input_automatic_channel_upgrade"></a> <a href="#input_automatic_channel_upgrade">automatic_channel_upgrade</a></h4>
+<div class="paragraph">
+<p>Description: The upgrade channel for this Kubernetes Cluster. Possible values are <code>patch</code>, <code>rapid</code>, <code>node-image</code> and <code>stable</code>. By default automatic-upgrades are turned off. Note that you cannot specify the patch version using <code>kubernetes_version</code> or <code>orchestrator_version</code> when using the <code>patch</code> upgrade channel. See <a href="https://learn.microsoft.com/en-us/azure/aks/auto-upgrade-cluster">the documentation</a> for more information.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>null</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_maintenance_window"><a class="anchor" href="#_maintenance_window"></a><a id="input_maintenance_window"></a> <a href="#input_maintenance_window">maintenance_window</a></h4>
+<div class="paragraph">
+<p>Description: Maintenance window configuration of the managed cluster. Only has an effect if the automatic upgrades are enabled using the variable <code>automatic_channel_upgrade</code>. Please check the variable of the same name <a href="https://github.com/Azure/terraform-azurerm-aks/blob/main/variables.tf">on the original module</a> for more information and to see the required values.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>any</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>null</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_node_os_channel_upgrade"><a class="anchor" href="#_node_os_channel_upgrade"></a><a id="input_node_os_channel_upgrade"></a> <a href="#input_node_os_channel_upgrade">node_os_channel_upgrade</a></h4>
+<div class="paragraph">
+<p>Description: The upgrade channel for this Kubernetes Cluster Nodes' OS Image. Possible values are <code>Unmanaged</code>, <code>SecurityPatch</code>, <code>NodeImage</code> and <code>None</code>.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>null</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_maintenance_window_node_os"><a class="anchor" href="#_maintenance_window_node_os"></a><a id="input_maintenance_window_node_os"></a> <a href="#input_maintenance_window_node_os">maintenance_window_node_os</a></h4>
+<div class="paragraph">
+<p>Description: Maintenance window configuration for this Kubernetes Cluster Nodes' OS Image. Only has an effect if the automatic upgrades are enabled using the variable <code>node_os_channel_upgrade</code>. Please check the variable of the same name <a href="https://github.com/Azure/terraform-azurerm-aks/blob/main/variables.tf">on the original module</a> for more information and to see the required values.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>any</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>null</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_network_policy"><a class="anchor" href="#_network_policy"></a><a id="input_network_policy"></a> <a href="#input_network_policy">network_policy</a></h4>
+<div class="paragraph">
+<p>Description: Sets up network policy to be used with Azure CNI. <a href="https://docs.microsoft.com/azure/aks/use-network-policies">Network policy allows us to control the traffic flow between pods.</a> Currently supported values are <code>calico</code> and <code>azure</code>. Changing this forces a new resource to be created.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"azure"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_rbac_aad_admin_group_object_ids"><a class="anchor" href="#_rbac_aad_admin_group_object_ids"></a><a id="input_rbac_aad_admin_group_object_ids"></a> <a href="#input_rbac_aad_admin_group_object_ids">rbac_aad_admin_group_object_ids</a></h4>
+<div class="paragraph">
+<p>Description: Object IDs of groups with administrator access to the cluster.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>list(string)</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>null</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_tags"><a class="anchor" href="#_tags"></a><a id="input_tags"></a> <a href="#input_tags">tags</a></h4>
+<div class="paragraph">
+<p>Description: Any tags that should be present on the AKS cluster resources.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>map(string)</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>{}</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_agents_pool_name"><a class="anchor" href="#_agents_pool_name"></a><a id="input_agents_pool_name"></a> <a href="#input_agents_pool_name">agents_pool_name</a></h4>
+<div class="paragraph">
+<p>Description: The default Azure AKS node pool name.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"default"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_agents_labels"><a class="anchor" href="#_agents_labels"></a><a id="input_agents_labels"></a> <a href="#input_agents_labels">agents_labels</a></h4>
+<div class="paragraph">
+<p>Description: A map of Kubernetes labels which should be applied to nodes in the default node pool. Changing this forces a new resource to be created.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>map(string)</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>{}</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_agents_size"><a class="anchor" href="#_agents_size"></a><a id="input_agents_size"></a> <a href="#input_agents_size">agents_size</a></h4>
+<div class="paragraph">
+<p>Description: The default virtual machine size for the Kubernetes agents. Changing this without specifying <code>var.temporary_name_for_rotation</code> forces a new resource to be created.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"Standard_D2s_v3"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_agents_count"><a class="anchor" href="#_agents_count"></a><a id="input_agents_count"></a> <a href="#input_agents_count">agents_count</a></h4>
+<div class="paragraph">
+<p>Description: The number of nodes that should exist in the default node pool.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>number</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>3</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_agents_max_pods"><a class="anchor" href="#_agents_max_pods"></a><a id="input_agents_max_pods"></a> <a href="#input_agents_max_pods">agents_max_pods</a></h4>
+<div class="paragraph">
+<p>Description: The maximum number of pods that can run on each agent. Changing this forces a new resource to be created.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>number</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>null</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_agents_pool_max_surge"><a class="anchor" href="#_agents_pool_max_surge"></a><a id="input_agents_pool_max_surge"></a> <a href="#input_agents_pool_max_surge">agents_pool_max_surge</a></h4>
+<div class="paragraph">
+<p>Description: The maximum number or percentage of nodes which will be added to the default node pool size during an upgrade.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"10%"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_temporary_name_for_rotation"><a class="anchor" href="#_temporary_name_for_rotation"></a><a id="input_temporary_name_for_rotation"></a> <a href="#input_temporary_name_for_rotation">temporary_name_for_rotation</a></h4>
+<div class="paragraph">
+<p>Description: Specifies the name of the temporary node pool used to cycle the default node pool for VM resizing. The <code>var.agents_size</code> is no longer ForceNew and can be resized by specifying <code>temporary_name_for_rotation</code>.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>null</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_orchestrator_version"><a class="anchor" href="#_orchestrator_version"></a><a id="input_orchestrator_version"></a> <a href="#input_orchestrator_version">orchestrator_version</a></h4>
+<div class="paragraph">
+<p>Description: The Kubernetes version to use for the default node pool. If undefined, defaults to the most recent version available on Azure.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>null</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_os_disk_size_gb"><a class="anchor" href="#_os_disk_size_gb"></a><a id="input_os_disk_size_gb"></a> <a href="#input_os_disk_size_gb">os_disk_size_gb</a></h4>
+<div class="paragraph">
+<p>Description: Disk size for default node pool nodes in GBs. The disk type created is by default <code>Managed</code>.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>number</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>50</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_node_pools"><a class="anchor" href="#_node_pools"></a><a id="input_node_pools"></a> <a href="#input_node_pools">node_pools</a></h4>
+<div class="paragraph">
+<p>Description: A map of node pools that need to be created and attached on the Kubernetes cluster. The key of the map can be the name of the node pool, and the key must be a static string. The required value for the map is a <code>node_pool</code> block as defined in the variable of the same name present in the original module, available <a href="https://github.com/Azure/terraform-azurerm-aks/blob/main/variables.tf">here</a>.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>any</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>{}</code></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_outputs"><a class="anchor" href="#_outputs"></a>Outputs</h3>
+<div class="paragraph">
+<p>The following outputs are exported:</p>
+</div>
+<div class="sect3">
+<h4 id="_cluster_name_2"><a class="anchor" href="#_cluster_name_2"></a><a id="output_cluster_name"></a> <a href="#output_cluster_name">cluster_name</a></h4>
+<div class="paragraph">
+<p>Description: Name of the AKS cluster.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_base_domain_2"><a class="anchor" href="#_base_domain_2"></a><a id="output_base_domain"></a> <a href="#output_base_domain">base_domain</a></h4>
+<div class="paragraph">
+<p>Description: The base domain for the cluster.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cluster_oidc_issuer_url"><a class="anchor" href="#_cluster_oidc_issuer_url"></a><a id="output_cluster_oidc_issuer_url"></a> <a href="#output_cluster_oidc_issuer_url">cluster_oidc_issuer_url</a></h4>
+<div class="paragraph">
+<p>Description: The URL on the EKS cluster for the OpenID Connect identity provider</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_node_resource_group_name"><a class="anchor" href="#_node_resource_group_name"></a><a id="output_node_resource_group_name"></a> <a href="#output_node_resource_group_name">node_resource_group_name</a></h4>
+<div class="paragraph">
+<p>Description: The name of the resource group in which the cluster was created.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_kubernetes_host"><a class="anchor" href="#_kubernetes_host"></a><a id="output_kubernetes_host"></a> <a href="#output_kubernetes_host">kubernetes_host</a></h4>
+<div class="paragraph">
+<p>Description: Endpoint for your Kubernetes API server.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_kubernetes_username"><a class="anchor" href="#_kubernetes_username"></a><a id="output_kubernetes_username"></a> <a href="#output_kubernetes_username">kubernetes_username</a></h4>
+<div class="paragraph">
+<p>Description: Username for Kubernetes basic auth.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_kubernetes_password"><a class="anchor" href="#_kubernetes_password"></a><a id="output_kubernetes_password"></a> <a href="#output_kubernetes_password">kubernetes_password</a></h4>
+<div class="paragraph">
+<p>Description: Password for Kubernetes basic auth.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_kubernetes_cluster_ca_certificate"><a class="anchor" href="#_kubernetes_cluster_ca_certificate"></a><a id="output_kubernetes_cluster_ca_certificate"></a> <a href="#output_kubernetes_cluster_ca_certificate">kubernetes_cluster_ca_certificate</a></h4>
+<div class="paragraph">
+<p>Description: Certificate data required to communicate with the cluster.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_kubernetes_client_key"><a class="anchor" href="#_kubernetes_client_key"></a><a id="output_kubernetes_client_key"></a> <a href="#output_kubernetes_client_key">kubernetes_client_key</a></h4>
+<div class="paragraph">
+<p>Description: Certificate Client Key required to communicate with the cluster.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_kubernetes_client_certificate"><a class="anchor" href="#_kubernetes_client_certificate"></a><a id="output_kubernetes_client_certificate"></a> <a href="#output_kubernetes_client_certificate">kubernetes_client_certificate</a></h4>
+<div class="paragraph">
+<p>Description: Certificate Client Certificate required to communicate with the cluster.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_reference_in_table_format"><a class="anchor" href="#_reference_in_table_format"></a>Reference in table format</h3>
+<details>
+<summary class="title">Show tables</summary>
+<div class="content">
+<div class="paragraph">
+<p>= Requirements</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_azurerm"></a> <a href="#requirement_azurerm">azurerm</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 3.81.0</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>= Providers</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_azurerm"></a> <a href="#provider_azurerm">azurerm</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 3.81.0</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>= Modules</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Source</th>
+<th class="tableblock halign-left valign-top">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="module_cluster"></a> <a href="#module_cluster">cluster</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Azure/aks/azurerm</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>~&gt; 7.0</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>= Resources</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/dns_cname_record">azurerm_dns_cname_record.this</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group">azurerm_resource_group.this</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet">azurerm_subnet.this</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/dns_zone">azurerm_dns_zone.this</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>data source</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>= Inputs</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The name of the Kubernetes cluster to create.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_base_domain"></a> <a href="#input_base_domain">base_domain</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The base domain used for Ingresses. If not provided, nip.io will be used taking the NLB IP address.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_location"></a> <a href="#input_location">location</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The location where the Kubernetes cluster will be created along side with it&#8217;s own resource group and associated resources.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_resource_group_name"></a> <a href="#input_resource_group_name">resource_group_name</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The name of the common resource group (for example, where the virtual network and the DNS zone resides).</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_dns_zone_resource_group_name"></a> <a href="#input_dns_zone_resource_group_name">dns_zone_resource_group_name</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The name of the resource group which contains the DNS zone for the base domain.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>"default"</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_sku_tier"></a> <a href="#input_sku_tier">sku_tier</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The SKU Tier that should be used for this Kubernetes Cluster. Possible values are <code>Free</code> and <code>Standard</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>"Free"</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_kubernetes_version"></a> <a href="#input_kubernetes_version">kubernetes_version</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The Kubernetes version to use on the control-plane.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>"1.28"</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_automatic_channel_upgrade"></a> <a href="#input_automatic_channel_upgrade">automatic_channel_upgrade</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The upgrade channel for this Kubernetes Cluster. Possible values are <code>patch</code>, <code>rapid</code>, <code>node-image</code> and <code>stable</code>. By default automatic-upgrades are turned off. Note that you cannot specify the patch version using <code>kubernetes_version</code> or <code>orchestrator_version</code> when using the <code>patch</code> upgrade channel. See <a href="https://learn.microsoft.com/en-us/azure/aks/auto-upgrade-cluster">the documentation</a> for more information.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>null</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_maintenance_window"></a> <a href="#input_maintenance_window">maintenance_window</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Maintenance window configuration of the managed cluster. Only has an effect if the automatic upgrades are enabled using the variable <code>automatic_channel_upgrade</code>. Please check the variable of the same name <a href="https://github.com/Azure/terraform-azurerm-aks/blob/main/variables.tf">on the original module</a> for more information and to see the required values.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>any</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>null</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_node_os_channel_upgrade"></a> <a href="#input_node_os_channel_upgrade">node_os_channel_upgrade</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The upgrade channel for this Kubernetes Cluster Nodes' OS Image. Possible values are <code>Unmanaged</code>, <code>SecurityPatch</code>, <code>NodeImage</code> and <code>None</code>.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>null</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_maintenance_window_node_os"></a> <a href="#input_maintenance_window_node_os">maintenance_window_node_os</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Maintenance window configuration for this Kubernetes Cluster Nodes' OS Image. Only has an effect if the automatic upgrades are enabled using the variable <code>node_os_channel_upgrade</code>. Please check the variable of the same name <a href="https://github.com/Azure/terraform-azurerm-aks/blob/main/variables.tf">on the original module</a> for more information and to see the required values.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>any</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>null</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_virtual_network_name"></a> <a href="#input_virtual_network_name">virtual_network_name</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The name of the virtual network where to deploy the cluster.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_cluster_subnet"></a> <a href="#input_cluster_subnet">cluster_subnet</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The subnet CIDR where to deploy the cluster, included in the virtual network created.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_network_policy"></a> <a href="#input_network_policy">network_policy</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Sets up network policy to be used with Azure CNI. <a href="https://docs.microsoft.com/azure/aks/use-network-policies">Network policy allows us to control the traffic flow between pods.</a> Currently supported values are <code>calico</code> and <code>azure</code>. Changing this forces a new resource to be created.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>"azure"</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_rbac_aad_admin_group_object_ids"></a> <a href="#input_rbac_aad_admin_group_object_ids">rbac_aad_admin_group_object_ids</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Object IDs of groups with administrator access to the cluster.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>list(string)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>null</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_tags"></a> <a href="#input_tags">tags</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Any tags that should be present on the AKS cluster resources.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>map(string)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>{}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_agents_pool_name"></a> <a href="#input_agents_pool_name">agents_pool_name</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The default Azure AKS node pool name.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>"default"</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_agents_labels"></a> <a href="#input_agents_labels">agents_labels</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A map of Kubernetes labels which should be applied to nodes in the default node pool. Changing this forces a new resource to be created.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>map(string)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>{}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_agents_size"></a> <a href="#input_agents_size">agents_size</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The default virtual machine size for the Kubernetes agents. Changing this without specifying <code>var.temporary_name_for_rotation</code> forces a new resource to be created.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>"Standard_D2s_v3"</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_agents_count"></a> <a href="#input_agents_count">agents_count</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The number of nodes that should exist in the default node pool.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>number</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>3</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_agents_max_pods"></a> <a href="#input_agents_max_pods">agents_max_pods</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The maximum number of pods that can run on each agent. Changing this forces a new resource to be created.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>number</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>null</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_agents_pool_max_surge"></a> <a href="#input_agents_pool_max_surge">agents_pool_max_surge</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The maximum number or percentage of nodes which will be added to the default node pool size during an upgrade.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>"10%"</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_temporary_name_for_rotation"></a> <a href="#input_temporary_name_for_rotation">temporary_name_for_rotation</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Specifies the name of the temporary node pool used to cycle the default node pool for VM resizing. The <code>var.agents_size</code> is no longer ForceNew and can be resized by specifying <code>temporary_name_for_rotation</code>.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>null</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_orchestrator_version"></a> <a href="#input_orchestrator_version">orchestrator_version</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The Kubernetes version to use for the default node pool. If undefined, defaults to the most recent version available on Azure.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>null</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_os_disk_size_gb"></a> <a href="#input_os_disk_size_gb">os_disk_size_gb</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Disk size for default node pool nodes in GBs. The disk type created is by default <code>Managed</code>.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>number</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>50</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_node_pools"></a> <a href="#input_node_pools">node_pools</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A map of node pools that need to be created and attached on the Kubernetes cluster. The key of the map can be the name of the node pool, and the key must be a static string. The required value for the map is a <code>node_pool</code> block as defined in the variable of the same name present in the original module, available <a href="https://github.com/Azure/terraform-azurerm-aks/blob/main/variables.tf">here</a>.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>any</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>{}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>= Outputs</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_cluster_name"></a> <a href="#output_cluster_name">cluster_name</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Name of the AKS cluster.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_base_domain"></a> <a href="#output_base_domain">base_domain</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The base domain for the cluster.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_cluster_oidc_issuer_url"></a> <a href="#output_cluster_oidc_issuer_url">cluster_oidc_issuer_url</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The URL on the EKS cluster for the OpenID Connect identity provider</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_node_resource_group_name"></a> <a href="#output_node_resource_group_name">node_resource_group_name</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The name of the resource group in which the cluster was created.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_kubernetes_host"></a> <a href="#output_kubernetes_host">kubernetes_host</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Endpoint for your Kubernetes API server.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_kubernetes_username"></a> <a href="#output_kubernetes_username">kubernetes_username</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Username for Kubernetes basic auth.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_kubernetes_password"></a> <a href="#output_kubernetes_password">kubernetes_password</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Password for Kubernetes basic auth.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_kubernetes_cluster_ca_certificate"></a> <a href="#output_kubernetes_cluster_ca_certificate">kubernetes_cluster_ca_certificate</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Certificate data required to communicate with the cluster.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_kubernetes_client_key"></a> <a href="#output_kubernetes_client_key">kubernetes_client_key</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Certificate Client Key required to communicate with the cluster.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_kubernetes_client_certificate"></a> <a href="#output_kubernetes_client_certificate">kubernetes_client_certificate</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Certificate Client Certificate required to communicate with the cluster.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>Copyright © Camptocamp <script> document.write(new Date().getFullYear()) </script> — All Rights Reserved</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/terraform.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/vendor/lunr.js"></script>
+<script src="../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../.." data-snippet-length="100" data-stylesheet="../../_/css/search.css"></script>
+<script async src="../../search-index.js"></script>
+  </body>
+</html>
