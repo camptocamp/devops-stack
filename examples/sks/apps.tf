@@ -44,12 +44,14 @@ module "helloworld_apps" {
             cluster:
               name: "${module.sks.cluster_name}"
               domain: "${module.sks.base_domain}"
+              subdomain: "${local.subdomain}"
               issuer: "${local.cluster_issuer}"
             apps:
               longhorn: true
               grafana: true
               prometheus: true
               thanos: true
+              alertmanager: true
           EOT
         }
       }

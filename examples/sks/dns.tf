@@ -11,7 +11,7 @@ resource "exoscale_domain_record" "wildcard" {
   count = local.activate_wildcard_record ? 1 : 0
 
   domain      = resource.exoscale_domain.domain.id
-  name        = "*.apps"
+  name        = local.subdomain != "" ? "*.${local.subdomain}" : "*"
   record_type = "A"
   ttl         = "300"
   content     = module.sks.nlb_ip_address

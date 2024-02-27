@@ -4,6 +4,7 @@ locals {
   zone                     = "YOUR_CLUSTER_ZONE"
   service_level            = "starter"
   base_domain              = "your.domain.here"
+  subdomain                = "apps"
   activate_wildcard_record = true
   cluster_issuer           = module.cert-manager.cluster_issuers.staging
   letsencrypt_issuer_email = "YOUR_EMAIL_ADDRESS"
