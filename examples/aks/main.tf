@@ -19,10 +19,11 @@ resource "azurerm_virtual_network" "this" {
 }
 
 module "aks" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cluster-aks?ref=v1.0.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cluster-aks?ref=v1.1.0"
 
   cluster_name         = local.cluster_name
   base_domain          = local.base_domain
+  subdomain            = local.subdomain
   location             = resource.azurerm_resource_group.main.location
   resource_group_name  = resource.azurerm_resource_group.main.name
   virtual_network_name = resource.azurerm_virtual_network.this.name
@@ -50,7 +51,7 @@ module "aks" {
 }
 
 module "argocd_bootstrap" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v4.0.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v4.3.0"
 
   argocd_projects = {
     "${module.aks.cluster_name}" = {
@@ -62,7 +63,7 @@ module "argocd_bootstrap" {
 }
 
 module "traefik" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//aks?ref=v5.0.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//aks?ref=v6.2.0"
 
   cluster_name   = module.aks.cluster_name
   base_domain    = module.aks.base_domain
@@ -77,7 +78,7 @@ module "traefik" {
 }
 
 module "cert-manager" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//aks?ref=v8.0.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//aks?ref=v8.1.0"
 
   cluster_name   = local.cluster_name
   base_domain    = local.base_domain
@@ -117,14 +118,16 @@ module "loki-stack" {
 }
 
 module "thanos" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//aks?ref=v3.0.1"
+  source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//aks?ref=v4.0.0"
 
   cluster_name   = module.aks.cluster_name
   base_domain    = module.aks.base_domain
+  subdomain      = local.subdomain
   cluster_issuer = local.cluster_issuer
   argocd_project = module.aks.cluster_name
 
-  app_autosync = local.app_autosync
+  app_autosync           = local.app_autosync
+  enable_service_monitor = local.enable_service_monitor
 
   metrics_storage = {
     container       = resource.azurerm_storage_container.storage["thanos"].name
@@ -146,10 +149,11 @@ module "thanos" {
 }
 
 module "kube-prometheus-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//aks?ref=v9.0.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//aks?ref=v9.2.1"
 
   cluster_name   = module.aks.cluster_name
   base_domain    = module.aks.base_domain
+  subdomain      = local.subdomain
   cluster_issuer = local.cluster_issuer
   argocd_project = module.aks.cluster_name
 
@@ -185,10 +189,11 @@ module "kube-prometheus-stack" {
 }
 
 module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v4.0.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v4.3.0"
 
   cluster_name   = module.aks.cluster_name
   base_domain    = module.aks.base_domain
+  subdomain      = local.subdomain
   cluster_issuer = local.cluster_issuer
   argocd_project = module.aks.cluster_name
 

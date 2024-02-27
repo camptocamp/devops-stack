@@ -21,11 +21,17 @@ resource "azuread_application_redirect_uris" "redirect_uris" {
   type           = "Web"
 
   redirect_uris = [
-    format("https://argocd.apps.%s.%s/auth/callback", module.aks.cluster_name, module.aks.base_domain),
-    format("https://grafana.apps.%s.%s/login/generic_oauth", module.aks.cluster_name, module.aks.base_domain),
-    format("https://prometheus.apps.%s.%s/oauth2/callback", module.aks.cluster_name, module.aks.base_domain),
-    format("https://alertmanager.apps.%s.%s/oauth2/callback", module.aks.cluster_name, module.aks.base_domain),
-    format("https://thanos-bucketweb.apps.%s.%s/oauth2/callback", module.aks.cluster_name, module.aks.base_domain),
-    format("https://thanos-query.apps.%s.%s/oauth2/callback", module.aks.cluster_name, module.aks.base_domain),
+    format("https://argocd.%s/auth/callback", trimprefix("${local.subdomain}.${module.aks.base_domain}", ".")),
+    format("https://argocd.%s.%s/auth/callback", trimprefix("${local.subdomain}.${module.aks.cluster_name}", "."), module.aks.base_domain),
+    format("https://grafana.%s/login/generic_oauth", trimprefix("${local.subdomain}.${module.aks.base_domain}", ".")),
+    format("https://grafana.%s.%s/login/generic_oauth", trimprefix("${local.subdomain}.${module.aks.cluster_name}", "."), module.aks.base_domain),
+    format("https://prometheus.%s/oauth2/callback", trimprefix("${local.subdomain}.${module.aks.base_domain}", ".")),
+    format("https://prometheus.%s.%s/oauth2/callback", trimprefix("${local.subdomain}.${module.aks.cluster_name}", "."), module.aks.base_domain),
+    format("https://alertmanager.%s/oauth2/callback", trimprefix("${local.subdomain}.${module.aks.base_domain}", ".")),
+    format("https://alertmanager.%s.%s/oauth2/callback", trimprefix("${local.subdomain}.${module.aks.cluster_name}", "."), module.aks.base_domain),
+    format("https://thanos-query.%s/oauth2/callback", trimprefix("${local.subdomain}.${module.aks.base_domain}", ".")),
+    format("https://thanos-query.%s.%s/oauth2/callback", trimprefix("${local.subdomain}.${module.aks.cluster_name}", "."), module.aks.base_domain),
+    format("https://thanos-bucketweb.%s/oauth2/callback", trimprefix("${local.subdomain}.${module.aks.base_domain}", ".")),
+    format("https://thanos-bucketweb.%s.%s/oauth2/callback", trimprefix("${local.subdomain}.${module.aks.cluster_name}", "."), module.aks.base_domain),
   ]
 }

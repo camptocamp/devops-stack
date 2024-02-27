@@ -11,7 +11,7 @@ resource "azurerm_dns_cname_record" "wildcard" {
   count = local.activate_wildcard_record ? 1 : 0
 
   zone_name           = resource.azurerm_dns_zone.this.name
-  name                = "*.apps"
+  name                = local.subdomain != "" ? "*.${local.subdomain}" : "*"
   resource_group_name = resource.azurerm_resource_group.main.name
   ttl                 = 300
   record              = format("%s-%s.%s.cloudapp.azure.com.", module.aks.cluster_name, replace(resource.azurerm_dns_zone.this.name, ".", "-"), resource.azurerm_resource_group.main.location)
