@@ -46,9 +46,9 @@ module "helloworld_apps" {
             cluster:
               name: "${local.cluster_name}"
               domain: "${local.base_domain}"
+              subdomain: "${local.subdomain}"
               issuer: "${local.cluster_issuer}"
             apps:
-              traefik_dashboard: false
               grafana: true
               prometheus: true
               thanos: true

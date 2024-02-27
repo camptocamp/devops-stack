@@ -12,6 +12,7 @@ locals {
   sku_tier                 = "Standard"
   cluster_name             = "YOUR_CLUSTER_NAME" # Must be unique for each DevOps Stack deployment in a single Azure subscription.
   base_domain              = "your.domain.here"  # Must match a DNS zone in the Azure subscription where you are deploying the DevOps Stack.
+  subdomain                = "apps"
   activate_wildcard_record = true
   cluster_issuer           = module.cert-manager.cluster_issuers.staging
   letsencrypt_issuer_email = "YOUR_EMAIL_ADDRESS"
