@@ -90,7 +90,7 @@ provider "keycloak" {
   client_id                = "admin-cli"
   username                 = module.keycloak.admin_credentials.username
   password                 = module.keycloak.admin_credentials.password
-  url                      = "https://keycloak.apps.${module.sks.cluster_name}.${module.sks.base_domain}"
+  url                      = format("https://keycloak.%s.%s", trimprefix("${local.subdomain}.${module.sks.cluster_name}", "."), module.sks.base_domain)
   tls_insecure_skip_verify = true # Can be disabled/removed when using letsencrypt-prod as cluster issuer
   initial_login            = false
 }
