@@ -160,7 +160,7 @@ module "loki-stack" {
 }
 
 module "thanos" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//sks?ref=v3.0.1"
+  source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//sks?ref=v4.0.0"
 
   cluster_name   = module.sks.cluster_name
   base_domain    = module.sks.base_domain
