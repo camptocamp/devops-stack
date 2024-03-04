@@ -85,7 +85,7 @@ module "keycloak" {
 }
 
 module "oidc" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak.git//oidc_bootstrap?ref=v3.0.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak.git//oidc_bootstrap?ref=v3.1.1"
 
   cluster_name   = module.sks.cluster_name
   base_domain    = module.sks.base_domain
