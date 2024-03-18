@@ -126,7 +126,7 @@ module "minio" {
 }
 
 module "loki-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack.git//kind?ref=v7.0.1"
+  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack.git//kind?ref=v7.1.0"
 
   argocd_project = local.cluster_name
 
