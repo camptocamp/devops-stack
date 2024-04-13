@@ -36,7 +36,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="kube-prometheus-stack" data-version="v9.2.1">
+<div class="nav-container" data-component="kube-prometheus-stack" data-version="v10.0.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -80,7 +80,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">kube-prometheus-stack Module</span>
-    <span class="version">v9.2.1</span>
+    <span class="version">v10.0.0</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -518,7 +518,10 @@
       <a class="title" href="README.html">kube-prometheus-stack Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="README.html">v9.2.1</a>
+          <a href="README.html">v10.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../v9.2.1/README.html">v9.2.1</a>
         </li>
         <li class="version">
           <a href="../v9.2.0/README.html">v9.2.0</a>
@@ -931,9 +934,10 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v9.2.1</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v10.0.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="README.html">v9.2.1</a>
+    <a class="version is-current" href="README.html">v10.0.0</a>
+    <a class="version" href="../v9.2.1/README.html">v9.2.1</a>
     <a class="version" href="../v9.2.0/README.html">v9.2.0</a>
     <a class="version" href="../v9.1.0/README.html">v9.1.0</a>
     <a class="version" href="../v9.0.0/README.html">v9.0.0</a>
@@ -967,7 +971,7 @@
     <a class="version" href="../v1.0.0/README.html">v1.0.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack/blob/v9.2.1/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack/blob/v10.0.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -998,9 +1002,9 @@
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>52.1.0</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>58.0.1</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack">Chart</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack/52.1.0?modal=values"><code>values.yaml</code></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack/58.0.1?modal=values"><code>values.yaml</code></a></p></td>
 </tr>
 </tbody>
 </table>
@@ -1188,7 +1192,7 @@
 <p>Type: <code>string</code></p>
 </div>
 <div class="paragraph">
-<p>Default: <code>"v9.2.0"</code></p>
+<p>Default: <code>"v10.0.0"</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -1469,18 +1473,10 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="provider_kubernetes"></a> <a href="#provider_kubernetes">kubernetes</a></p>
+<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>&gt;= 2</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="provider_utils"></a> <a href="#provider_utils">utils</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>&gt;= 1</p>
+<p>&gt;= 3</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1493,10 +1489,18 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
+<p><a id="provider_kubernetes"></a> <a href="#provider_kubernetes">kubernetes</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>&gt;= 3</p>
+<p>&gt;= 2</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_utils"></a> <a href="#provider_utils">utils</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 1</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1724,7 +1728,7 @@
 <p><code>string</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"v9.2.0"</code></p>
+<p><code>"v10.0.0"</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
