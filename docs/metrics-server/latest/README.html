@@ -36,7 +36,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="metrics-server" data-version="v2.0.0">
+<div class="nav-container" data-component="metrics-server" data-version="v2.1.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -49,7 +49,7 @@
     <a class="nav-link" href="README.html">Home</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text"><a href="https://github.com/camptocamp/devops-stack-module-template/" target="_blank" rel="noopener">Repository</a></span>
+    <span class="nav-text"><a href="https://github.com/camptocamp/devops-stack-module-metrics-server/" target="_blank" rel="noopener">Repository</a></span>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../../latest/index.html"><em>Return to DevOps Stack docs</em></a>
@@ -62,7 +62,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">Metrics Server Module</span>
-    <span class="version">v2.0.0</span>
+    <span class="version">v2.1.0</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -384,7 +384,10 @@
       <a class="title" href="../../efs-csi-driver/latest/README.html">EFS CSI Driver Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../efs-csi-driver/latest/README.html">v3.1.0</a>
+          <a href="../../efs-csi-driver/latest/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v3.1.0/README.html">v3.1.0</a>
         </li>
         <li class="version">
           <a href="../../efs-csi-driver/v3.0.0/README.html">v3.0.0</a>
@@ -509,7 +512,10 @@
       <a class="title" href="../../kube-prometheus-stack/latest/README.html">kube-prometheus-stack Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../kube-prometheus-stack/latest/README.html">v10.0.0</a>
+          <a href="../../kube-prometheus-stack/latest/README.html">v10.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v10.0.0/README.html">v10.0.0</a>
         </li>
         <li class="version">
           <a href="../../kube-prometheus-stack/v9.2.1/README.html">v9.2.1</a>
@@ -745,7 +751,10 @@
       <a class="title" href="README.html">Metrics Server Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="README.html">v2.0.0</a>
+          <a href="README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../v2.0.0/README.html">v2.0.0</a>
         </li>
         <li class="version">
           <a href="../v1.0.0/README.html">v1.0.0</a>
@@ -867,7 +876,10 @@
       <a class="title" href="../../traefik/latest/README.html">Traefik Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../traefik/latest/README.html">v6.2.0</a>
+          <a href="../../traefik/latest/README.html">v6.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v6.2.0/README.html">v6.2.0</a>
         </li>
         <li class="version">
           <a href="../../traefik/v6.1.1/README.html">v6.1.1</a>
@@ -934,13 +946,14 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v2.0.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v2.1.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="README.html">v2.0.0</a>
+    <a class="version is-current" href="README.html">v2.1.0</a>
+    <a class="version" href="../v2.0.0/README.html">v2.0.0</a>
     <a class="version" href="../v1.0.0/README.html">v1.0.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-metrics-server/blob/v2.0.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-metrics-server/blob/v2.1.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -1055,13 +1068,13 @@ This module is only used on platforms that do not install Metrics Server by defa
 <div class="ulist">
 <ul>
 <li>
-<p><a id="provider_null"></a> <a href="#provider_null">null</a> (&gt;= 3)</p>
+<p><a id="provider_utils"></a> <a href="#provider_utils">utils</a> (&gt;= 1)</p>
 </li>
 <li>
 <p><a id="provider_argocd"></a> <a href="#provider_argocd">argocd</a> (&gt;= 5)</p>
 </li>
 <li>
-<p><a id="provider_utils"></a> <a href="#provider_utils">utils</a> (&gt;= 1)</p>
+<p><a id="provider_null"></a> <a href="#provider_null">null</a> (&gt;= 3)</p>
 </li>
 </ul>
 </div>
@@ -1141,7 +1154,7 @@ This module is only used on platforms that do not install Metrics Server by defa
 <p>Type: <code>string</code></p>
 </div>
 <div class="paragraph">
-<p>Default: <code>"v1.0.0"</code></p>
+<p>Default: <code>"v2.0.0"</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -1193,6 +1206,44 @@ This module is only used on platforms that do not install Metrics Server by defa
 </div>
 <div class="paragraph">
 <p>Type: <code>map(string)</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>{}</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_resources_2"><a class="anchor" href="#_resources_2"></a><a id="input_resources"></a> <a href="#input_resources">resources</a></h4>
+<div class="paragraph">
+<p>Description: Resource limits and requests for metrics-servers&#8217;s pods. Follow the style on <a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/">official documentation</a> to understand the format of the values.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+These are the same values as the defaults on the Helm chart. Usually they guarantee good performance for most cluster configurations up to 100 nodes. See <a href="https://github.com/kubernetes-sigs/metrics-server?tab=readme-ov-file#scaling">the official documentation</a> for more information.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">object({
+    requests = optional(object({
+      cpu    = optional(string, "100m")
+      memory = optional(string, "256Mi")
+    }), {})
+    limits = optional(object({
+      cpu    = optional(string)
+      memory = optional(string, "256Mi")
+    }), {})
+  })</code></pre>
+</div>
 </div>
 <div class="paragraph">
 <p>Default: <code>{}</code></p>
@@ -1286,6 +1337,14 @@ This module is only used on platforms that do not install Metrics Server by defa
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 3</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="provider_utils"></a> <a href="#provider_utils">utils</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -1298,14 +1357,6 @@ This module is only used on platforms that do not install Metrics Server by defa
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>&gt;= 5</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>&gt;= 3</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1450,7 +1501,7 @@ This module is only used on platforms that do not install Metrics Server by defa
 <p><code>string</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"v1.0.0"</code></p>
+<p><code>"v2.0.0"</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
@@ -1511,6 +1562,46 @@ This module is only used on platforms that do not install Metrics Server by defa
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>map(string)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>{}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_resources"></a> <a href="#input_resources">resources</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Resource limits and requests for metrics-servers&#8217;s pods. Follow the style on <a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/">official documentation</a> to understand the format of the values.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+These are the same values as the defaults on the Helm chart. Usually they guarantee good performance for most cluster configurations up to 100 nodes. See <a href="https://github.com/kubernetes-sigs/metrics-server?tab=readme-ov-file#scaling">the official documentation</a> for more information.
+</td>
+</tr>
+</table>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">object({
+    requests = optional(object({
+      cpu    = optional(string, "100m")
+      memory = optional(string, "256Mi")
+    }), {})
+    limits = optional(object({
+      cpu    = optional(string)
+      memory = optional(string, "256Mi")
+    }), {})
+  })</code></pre>
+</div>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>{}</code></p>

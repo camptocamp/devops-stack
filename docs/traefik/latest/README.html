@@ -36,7 +36,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="traefik" data-version="v6.2.0">
+<div class="nav-container" data-component="traefik" data-version="v6.3.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -86,7 +86,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">Traefik Module</span>
-    <span class="version">v6.2.0</span>
+    <span class="version">v6.3.0</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -408,7 +408,10 @@
       <a class="title" href="../../efs-csi-driver/latest/README.html">EFS CSI Driver Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../efs-csi-driver/latest/README.html">v3.1.0</a>
+          <a href="../../efs-csi-driver/latest/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v3.1.0/README.html">v3.1.0</a>
         </li>
         <li class="version">
           <a href="../../efs-csi-driver/v3.0.0/README.html">v3.0.0</a>
@@ -533,7 +536,10 @@
       <a class="title" href="../../kube-prometheus-stack/latest/README.html">kube-prometheus-stack Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../kube-prometheus-stack/latest/README.html">v10.0.0</a>
+          <a href="../../kube-prometheus-stack/latest/README.html">v10.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v10.0.0/README.html">v10.0.0</a>
         </li>
         <li class="version">
           <a href="../../kube-prometheus-stack/v9.2.1/README.html">v9.2.1</a>
@@ -769,7 +775,10 @@
       <a class="title" href="../../metrics-server/latest/README.html">Metrics Server Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../metrics-server/latest/README.html">v2.0.0</a>
+          <a href="../../metrics-server/latest/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../metrics-server/v2.0.0/README.html">v2.0.0</a>
         </li>
         <li class="version">
           <a href="../../metrics-server/v1.0.0/README.html">v1.0.0</a>
@@ -891,7 +900,10 @@
       <a class="title" href="README.html">Traefik Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="README.html">v6.2.0</a>
+          <a href="README.html">v6.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../v6.2.0/README.html">v6.2.0</a>
         </li>
         <li class="version">
           <a href="../v6.1.1/README.html">v6.1.1</a>
@@ -958,9 +970,10 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v6.2.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v6.3.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="README.html">v6.2.0</a>
+    <a class="version is-current" href="README.html">v6.3.0</a>
+    <a class="version" href="../v6.2.0/README.html">v6.2.0</a>
     <a class="version" href="../v6.1.1/README.html">v6.1.1</a>
     <a class="version" href="../v6.1.0/README.html">v6.1.0</a>
     <a class="version" href="../v6.0.0/README.html">v6.0.0</a>
@@ -979,7 +992,7 @@
     <a class="version" href="../v1.0.0/README.html">v1.0.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-traefik/blob/v6.2.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-traefik/blob/v6.3.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -1099,7 +1112,7 @@
 <p>Type: <code>string</code></p>
 </div>
 <div class="paragraph">
-<p>Default: <code>"v6.1.1"</code></p>
+<p>Default: <code>"v6.2.0"</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -1178,6 +1191,44 @@
 </div>
 <div class="paragraph">
 <p>Default: <code>2</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_resources_2"><a class="anchor" href="#_resources_2"></a><a id="input_resources"></a> <a href="#input_resources">resources</a></h4>
+<div class="paragraph">
+<p>Description: Resource limits and requests for Traefik&#8217;s pods. Follow the style on <a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/">official documentation</a> to understand the format of the values.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+These are not production values. You should always adjust them to your needs.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">object({
+    requests = optional(object({
+      cpu    = optional(string, "150m")
+      memory = optional(string, "128Mi")
+    }), {})
+    limits = optional(object({
+      cpu    = optional(string)
+      memory = optional(string, "256Mi")
+    }), {})
+  })</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Default: <code>{}</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -1283,7 +1334,7 @@
 </tr>
 </tbody>
 </table>
-<h1 id="_resources_2" class="sect0"><a class="anchor" href="#_resources_2"></a>Resources</h1>
+<h1 id="_resources_3" class="sect0"><a class="anchor" href="#_resources_3"></a>Resources</h1>
 <table class="tableblock frame-all grid-all fit-content">
 <colgroup>
 <col>
@@ -1419,7 +1470,7 @@
 <p><code>string</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"v6.1.1"</code></p>
+<p><code>"v6.2.0"</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
@@ -1517,6 +1568,46 @@
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>2</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_resources"></a> <a href="#input_resources">resources</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Resource limits and requests for Traefik&#8217;s pods. Follow the style on <a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/">official documentation</a> to understand the format of the values.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+These are not production values. You should always adjust them to your needs.
+</td>
+</tr>
+</table>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">object({
+    requests = optional(object({
+      cpu    = optional(string, "150m")
+      memory = optional(string, "128Mi")
+    }), {})
+    limits = optional(object({
+      cpu    = optional(string)
+      memory = optional(string, "256Mi")
+    }), {})
+  })</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>{}</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
