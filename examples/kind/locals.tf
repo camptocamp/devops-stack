@@ -1,5 +1,5 @@
 locals {
-  kubernetes_version     = "v1.29.0"
+  kubernetes_version     = "v1.29.2"
   cluster_name           = "YOUR_CLUSTER_NAME"
   base_domain            = format("%s.nip.io", replace(module.traefik.external_ip, ".", "-"))
   subdomain              = "apps"
