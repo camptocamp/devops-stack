@@ -47,7 +47,7 @@ provider "aws" {
   access_key = var.exoscale_iam_key
   secret_key = var.exoscale_iam_secret
 
-  # Skip validations specific to AWS in order to use this provider for Exoscale services
+  # Skip validations specific to AWS in order to use this provider for Exoscale services.
   skip_credentials_validation = true
   skip_requesting_account_id  = true
   skip_metadata_api_check     = true
