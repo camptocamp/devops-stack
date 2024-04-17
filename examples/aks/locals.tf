@@ -22,8 +22,8 @@ locals {
   # The virtual network CIDR must be unique for each DevOps Stack deployment in a single Azure subscription.
   virtual_network_cidr = "10.1.0.0/16"
 
-  # Automatic subnets IP range calculation, splitting the virtual_network_cidr above into 6 subnets.
-  cluster_subnet = cidrsubnet(local.virtual_network_cidr, 8, 0)
+  # Automatic subnets IP range calculation, splitting the virtual_network_cidr above into multiple subnets.
+  cluster_subnet = cidrsubnet(local.virtual_network_cidr, 6, 0)
 
   # Local containing all the OIDC definitions required by the DevOps Stack modules.
   oidc = {
