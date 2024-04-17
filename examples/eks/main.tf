@@ -75,7 +75,7 @@ module "oidc" {
 }
 
 module "argocd_bootstrap" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v4.4.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v4.4.1"
 
   argocd_projects = {
     "${module.eks.cluster_name}" = {
@@ -87,7 +87,7 @@ module "argocd_bootstrap" {
 }
 
 module "metrics-server" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-metrics-server.git?ref=v2.0.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-metrics-server.git?ref=v2.1.0"
 
   argocd_project = module.eks.cluster_name
 
@@ -99,7 +99,7 @@ module "metrics-server" {
 }
 
 module "traefik" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//eks?ref=v6.2.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//eks?ref=v6.3.0"
 
   argocd_project = module.eks.cluster_name
 
@@ -112,7 +112,7 @@ module "traefik" {
 }
 
 module "cert-manager" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//eks?ref=v8.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//eks?ref=v8.2.0"
 
   cluster_name   = module.eks.cluster_name
   base_domain    = module.eks.base_domain
@@ -131,16 +131,16 @@ module "cert-manager" {
 }
 
 module "loki-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack.git//eks?ref=v7.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack.git//eks?ref=v7.2.0"
 
   argocd_project = module.eks.cluster_name
 
   app_autosync = local.app_autosync
 
   logs_storage = {
-    bucket_id    = aws_s3_bucket.loki_logs_storage.id
-    region       = aws_s3_bucket.loki_logs_storage.region
-    iam_role_arn = module.iam_assumable_role_loki.iam_role_arn
+    bucket_id               = aws_s3_bucket.loki_logs_storage.id
+    create_role             = true
+    cluster_oidc_issuer_url = module.eks.cluster_oidc_issuer_url
   }
 
   dependency_ids = {
@@ -150,7 +150,7 @@ module "loki-stack" {
 }
 
 module "thanos" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//eks?ref=v4.0.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//eks?ref=v4.1.0"
 
   cluster_name   = module.eks.cluster_name
   base_domain    = module.eks.base_domain
@@ -162,9 +162,9 @@ module "thanos" {
   enable_service_monitor = local.enable_service_monitor
 
   metrics_storage = {
-    bucket_id    = aws_s3_bucket.thanos_metrics_storage.id
-    region       = aws_s3_bucket.thanos_metrics_storage.region
-    iam_role_arn = module.iam_assumable_role_thanos.iam_role_arn
+    bucket_id               = aws_s3_bucket.thanos_metrics_storage.id
+    create_role             = true
+    cluster_oidc_issuer_url = module.eks.cluster_oidc_issuer_url
   }
 
   thanos = {
@@ -181,7 +181,7 @@ module "thanos" {
 }
 
 module "kube-prometheus-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//eks?ref=v9.2.1"
+  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//eks?ref=v10.1.0"
 
   cluster_name   = module.eks.cluster_name
   base_domain    = module.eks.base_domain
@@ -192,9 +192,9 @@ module "kube-prometheus-stack" {
   app_autosync = local.app_autosync
 
   metrics_storage = {
-    bucket_id    = aws_s3_bucket.thanos_metrics_storage.id
-    region       = aws_s3_bucket.thanos_metrics_storage.region
-    iam_role_arn = module.iam_assumable_role_thanos.iam_role_arn
+    bucket_id               = aws_s3_bucket.thanos_metrics_storage.id
+    create_role             = true
+    cluster_oidc_issuer_url = module.eks.cluster_oidc_issuer_url
   }
 
   prometheus = {
@@ -221,7 +221,7 @@ module "kube-prometheus-stack" {
 }
 
 module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v4.4.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v4.4.1"
 
   cluster_name   = module.eks.cluster_name
   base_domain    = module.eks.base_domain
