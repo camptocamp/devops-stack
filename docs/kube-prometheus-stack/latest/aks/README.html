@@ -36,7 +36,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="kube-prometheus-stack" data-version="v10.1.0">
+<div class="nav-container" data-component="kube-prometheus-stack" data-version="v10.1.1">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -80,7 +80,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">kube-prometheus-stack Module</span>
-    <span class="version">v10.1.0</span>
+    <span class="version">v10.1.1</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -530,7 +530,10 @@
       <a class="title" href="../README.html">kube-prometheus-stack Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../README.html">v10.1.0</a>
+          <a href="../README.html">v10.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../v10.1.0/README.html">v10.1.0</a>
         </li>
         <li class="version">
           <a href="../../v10.0.0/README.html">v10.0.0</a>
@@ -965,9 +968,10 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v10.1.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v10.1.1</button>
   <div class="version-menu">
-    <a class="version is-current" href="README.html">v10.1.0</a>
+    <a class="version is-current" href="README.html">v10.1.1</a>
+    <a class="version" href="../../v10.1.0/aks/README.html">v10.1.0</a>
     <a class="version" href="../../v10.0.0/aks/README.html">v10.0.0</a>
     <a class="version" href="../../v9.2.1/aks/README.html">v9.2.1</a>
     <a class="version" href="../../v9.2.0/aks/README.html">v9.2.0</a>
@@ -1003,7 +1007,7 @@
     <a class="version" href="../../v1.0.0/aks/README.html">v1.0.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack/blob/v10.1.0/docs/modules/ROOT/pages/aks/README.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack/blob/v10.1.1/docs/modules/ROOT/pages/aks/README.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -1043,6 +1047,9 @@
 <div class="ulist">
 <ul>
 <li>
+<p><a id="provider_null"></a> <a href="#provider_null">null</a> (&gt;= 3)</p>
+</li>
+<li>
 <p><a id="provider_azurerm"></a> <a href="#provider_azurerm">azurerm</a></p>
 </li>
 </ul>
@@ -1071,13 +1078,19 @@
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment">azurerm_role_assignment.contributor</a> (resource)</p>
+<p><a href="https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/federated_identity_credential">azurerm_federated_identity_credential.prometheus</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment">azurerm_role_assignment.storage_contributor</a> (resource)</p>
 </li>
 <li>
 <p><a href="https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/user_assigned_identity">azurerm_user_assigned_identity.prometheus</a> (resource)</p>
 </li>
 <li>
-<p><a href="https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/resource_group">azurerm_resource_group.node</a> (data source)</p>
+<p><a href="https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource">null_resource.dependencies</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/resource_group">azurerm_resource_group.node_resource_group</a> (data source)</p>
 </li>
 <li>
 <p><a href="https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/storage_container">azurerm_storage_container.container</a> (data source)</p>
@@ -1125,10 +1138,11 @@
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">object({
-    container                     = string
-    storage_account               = string
-    managed_identity_node_rg_name = optional(string, null)
-    storage_account_key           = optional(string, null)
+    container                        = string
+    storage_account                  = string
+    managed_identity_node_rg_name    = optional(string, null)
+    managed_identity_oidc_issuer_url = optional(string, null)
+    storage_account_key              = optional(string, null)
   })</code></pre>
 </div>
 </div>
@@ -1193,7 +1207,7 @@
 <p>Type: <code>string</code></p>
 </div>
 <div class="paragraph">
-<p>Default: <code>"v10.0.0"</code></p>
+<p>Default: <code>"v10.1.0"</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -1565,6 +1579,14 @@ These are not production values. You should always adjust them to your needs.
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 3</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="provider_azurerm"></a> <a href="#provider_azurerm">azurerm</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -1612,7 +1634,15 @@ These are not production values. You should always adjust them to your needs.
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment">azurerm_role_assignment.contributor</a></p>
+<p><a href="https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/federated_identity_credential">azurerm_federated_identity_credential.prometheus</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment">azurerm_role_assignment.storage_contributor</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>resource</p>
@@ -1628,7 +1658,15 @@ These are not production values. You should always adjust them to your needs.
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/resource_group">azurerm_resource_group.node</a></p>
+<p><a href="https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource">null_resource.dependencies</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/resource_group">azurerm_resource_group.node_resource_group</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>data source</p>
@@ -1673,10 +1711,11 @@ These are not production values. You should always adjust them to your needs.
 <td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-none hljs">object({
-    container                     = string
-    storage_account               = string
-    managed_identity_node_rg_name = optional(string, null)
-    storage_account_key           = optional(string, null)
+    container                        = string
+    storage_account                  = string
+    managed_identity_node_rg_name    = optional(string, null)
+    managed_identity_oidc_issuer_url = optional(string, null)
+    storage_account_key              = optional(string, null)
   })</code></pre>
 </div>
 </div></div></td>
@@ -1800,7 +1839,7 @@ These are not production values. You should always adjust them to your needs.
 <p><code>string</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"v10.0.0"</code></p>
+<p><code>"v10.1.0"</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
