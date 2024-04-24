@@ -36,7 +36,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="thanos" data-version="v4.1.0">
+<div class="nav-container" data-component="thanos" data-version="v5.0.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -80,7 +80,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">Thanos Module</span>
-    <span class="version">v4.1.0</span>
+    <span class="version">v5.0.0</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -530,7 +530,10 @@
       <a class="title" href="../../../kube-prometheus-stack/latest/README.html">kube-prometheus-stack Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../../kube-prometheus-stack/latest/README.html">v10.1.1</a>
+          <a href="../../../kube-prometheus-stack/latest/README.html">v11.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v10.1.1/README.html">v10.1.1</a>
         </li>
         <li class="version">
           <a href="../../../kube-prometheus-stack/v10.1.0/README.html">v10.1.0</a>
@@ -640,7 +643,10 @@
       <a class="title" href="../../../loki/latest/README.html">Loki Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../../loki/latest/README.html">v7.2.0</a>
+          <a href="../../../loki/latest/README.html">v8.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../loki/v7.2.0/README.html">v7.2.0</a>
         </li>
         <li class="version">
           <a href="../../../loki/v7.1.0/README.html">v7.1.0</a>
@@ -835,7 +841,10 @@
       <a class="title" href="../README.html">Thanos Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../README.html">v4.1.0</a>
+          <a href="../README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v4.1.0/README.html">v4.1.0</a>
         </li>
         <li class="version">
           <a href="../../v4.0.0/README.html">v4.0.0</a>
@@ -968,9 +977,10 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v4.1.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v5.0.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="README.html">v4.1.0</a>
+    <a class="version is-current" href="README.html">v5.0.0</a>
+    <a class="version" href="../../v4.1.0/eks/README.html">v4.1.0</a>
     <a class="version" href="../../v4.0.0/eks/README.html">v4.0.0</a>
     <a class="version" href="../../v3.3.0/eks/README.html">v3.3.0</a>
     <a class="version" href="../../v3.2.0/eks/README.html">v3.2.0</a>
@@ -991,7 +1001,7 @@
     <a class="version" href="../../v1.0.0/eks/README.html">v1.0.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-thanos/blob/v4.1.0/docs/modules/ROOT/pages/eks/README.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-thanos/blob/v5.0.0/docs/modules/ROOT/pages/eks/README.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -1023,9 +1033,9 @@
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
 
   metrics_storage = {
-    bucket_id    = aws_s3_bucket.thanos_metrics_storage.id
-    region       = aws_s3_bucket.thanos_metrics_storage.region
-    iam_role_arn = module.iam_assumable_role_thanos.iam_role_arn
+    bucket_id               = resource.aws_s3_bucket.thanos_metrics_storage.id
+    create_role             = true
+    cluster_oidc_issuer_url = module.eks.cluster_oidc_issuer_url
   }
   thanos = {
     oidc = module.oidc.oidc
@@ -1041,19 +1051,20 @@
 </div>
 </div>
 <div class="paragraph">
-<p>As you can see, a minimum requirement for this module is an S3 bucket with an IAM policy attached and an OIDC provider (more information below).</p>
+<p>As you can see, a minimum requirement for this module is an S3 bucket and an OIDC provider (more information below).</p>
 </div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-You are in charge of creating a S3 bucket for Thanos to store the archived metrics. We&#8217;ve decided to keep the creation of this bucket outside of this module, mainly because the persistence of the data should not be related to the instantiation of the module itself.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>IMPORTANT</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>You are in charge of creating a S3 bucket for Thanos to store the archived metrics. We&#8217;ve decided to keep the creation of this bucket outside of this module, mainly because the persistence of the data should not be related to the instantiation of the module itself.</p>
+</div>
+<div class="paragraph">
+<p>However, the IAM role used to give permissions to the Thanos components to access the bucket can be created by the module itself. If you want to create the role, you can set the attribute <code>create_role</code> to <code>true</code> and the module will create the role for you. If you already have a role created, you can pass the ARN of the role to the module using the attribute <code>iam_role_arn</code>.</p>
+</div>
+</div>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -1093,9 +1104,9 @@ Do not forget that the bucket configuration also needs to be passed to the modul
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
 
   metrics_storage = {
-    bucket_id    = aws_s3_bucket.thanos_metrics_storage.id
-    region       = aws_s3_bucket.thanos_metrics_storage.region
-    iam_role_arn = module.iam_assumable_role_thanos.iam_role_arn
+    bucket_id               = resource.aws_s3_bucket.thanos_metrics_storage.id
+    create_role             = true
+    cluster_oidc_issuer_url = module.eks.cluster_oidc_issuer_url
   }
 
   thanos = {
@@ -1168,9 +1179,9 @@ Do not forget that the bucket configuration also needs to be passed to the modul
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
 
   metrics_storage = {
-    bucket_id    = aws_s3_bucket.thanos_metrics_storage.id
-    region       = aws_s3_bucket.thanos_metrics_storage.region
-    iam_role_arn = module.iam_assumable_role_thanos.iam_role_arn
+    bucket_id               = resource.aws_s3_bucket.thanos_metrics_storage.id
+    create_role             = true
+    cluster_oidc_issuer_url = module.eks.cluster_oidc_issuer_url
   }
 
   thanos = {
@@ -1207,6 +1218,27 @@ Do not forget that the bucket configuration also needs to be passed to the modul
     oidc         = module.oidc.id
   }
 }</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_s3_bucket_and_iam_role"><a class="anchor" href="#_s3_bucket_and_iam_role"></a>S3 bucket and IAM role</h3>
+<div class="paragraph">
+<p>Thanos needs an S3 bucket to store the archived metrics. The bucket can be created and its ID should be passed to the module, along with the attribute <code>create_role</code> explicitly set. Set it to true if you want the module to create the required IAM role.</p>
+</div>
+<div class="paragraph">
+<p>However, if you want to create and manage this IAM role yourself, you can simply pass the ARN of the role to the module using the attribute <code>iam_role_arn</code> while setting the attribute <code>create_role</code> to <code>false</code>.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The code <a href="https://github.com/camptocamp/devops-stack/blob/main/examples/eks/s3_thanos.tf.disabled">in this example</a> should help you create the IAM policy and role with the required permissions.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -1315,9 +1347,31 @@ At the very least you should configure the size for the Persistent Volume used b
 </div>
 </div>
 <div class="sect2">
+<h3 id="_providers"><a class="anchor" href="#_providers"></a>Providers</h3>
+<div class="paragraph">
+<p>The following providers are used by this module:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="provider_aws"></a> <a href="#provider_aws">aws</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_modules"><a class="anchor" href="#_modules"></a>Modules</h3>
 <div class="paragraph">
 <p>The following Modules are called:</p>
+</div>
+<div class="sect3">
+<h4 id="_iam_assumable_role_thanos"><a class="anchor" href="#_iam_assumable_role_thanos"></a><a id="module_iam_assumable_role_thanos"></a> <a href="#module_iam_assumable_role_thanos">iam_assumable_role_thanos</a></h4>
+<div class="paragraph">
+<p>Source: terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc</p>
+</div>
+<div class="paragraph">
+<p>Version: ~&gt; 5.0</p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_thanos"><a class="anchor" href="#_thanos"></a><a id="module_thanos"></a> <a href="#module_thanos">thanos</a></h4>
@@ -1327,6 +1381,25 @@ At the very least you should configure the size for the Persistent Volume used b
 <div class="paragraph">
 <p>Version:</p>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_resources"><a class="anchor" href="#_resources"></a>Resources</h3>
+<div class="paragraph">
+<p>The following resources are used by this module:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy">aws_iam_policy.thanos</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document">aws_iam_policy_document.thanos</a> (data source)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/s3_bucket">aws_s3_bucket.thanos</a> (data source)</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
@@ -1340,14 +1413,18 @@ At the very least you should configure the size for the Persistent Volume used b
 <p>Description: AWS S3 bucket configuration values for the bucket where the archived metrics will be stored.</p>
 </div>
 <div class="paragraph">
+<p>An IAM role is required to give the Thanos components read and write access to the S3 bucket. You can create this role yourself or let the module create it for you. If you want the module to create the role, you need to provide the OIDC issuer&#8217;s URL for the EKS cluster. If you create the role yourself, you need to provide the ARN of the IAM role you created.</p>
+</div>
+<div class="paragraph">
 <p>Type:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">object({
-    bucket_id    = string
-    region       = string
-    iam_role_arn = string
+    bucket_id               = string
+    create_role             = bool
+    iam_role_arn            = optional(string, null)
+    cluster_oidc_issuer_url = optional(string, null)
   })</code></pre>
 </div>
 </div>
@@ -1433,7 +1510,7 @@ At the very least you should configure the size for the Persistent Volume used b
 <p>Type: <code>string</code></p>
 </div>
 <div class="paragraph">
-<p>Default: <code>"v4.0.0"</code></p>
+<p>Default: <code>"v5.0.0"</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -1527,7 +1604,7 @@ At the very least you should configure the size for the Persistent Volume used b
 </div>
 </div>
 <div class="sect3">
-<h4 id="_resources"><a class="anchor" href="#_resources"></a><a id="input_resources"></a> <a href="#input_resources">resources</a></h4>
+<h4 id="_resources_2"><a class="anchor" href="#_resources_2"></a><a id="input_resources"></a> <a href="#input_resources">resources</a></h4>
 <div class="paragraph">
 <p>Description: Resource limits and requests for Thanos' components. Follow the style on <a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/">official documentation</a> to understand the format of the values.</p>
 </div>
@@ -1703,6 +1780,31 @@ These are not production values. You should always adjust them to your needs.
 </tbody>
 </table>
 <div class="paragraph">
+<p>= Providers</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_aws"></a> <a href="#provider_aws">aws</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
 <p>= Modules</p>
 </div>
 <table class="tableblock frame-all grid-all fit-content">
@@ -1721,10 +1823,62 @@ These are not production values. You should always adjust them to your needs.
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="module_iam_assumable_role_thanos"></a> <a href="#module_iam_assumable_role_thanos">iam_assumable_role_thanos</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>~&gt; 5.0</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="module_thanos"></a> <a href="#module_thanos">thanos</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>= Resources</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy">aws_iam_policy.thanos</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document">aws_iam_policy_document.thanos</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>data source</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/s3_bucket">aws_s3_bucket.thanos</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>data source</p>
+</div></div></td>
 </tr>
 </tbody>
 </table>
@@ -1755,13 +1909,17 @@ These are not production values. You should always adjust them to your needs.
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>AWS S3 bucket configuration values for the bucket where the archived metrics will be stored.</p>
+</div>
+<div class="paragraph">
+<p>An IAM role is required to give the Thanos components read and write access to the S3 bucket. You can create this role yourself or let the module create it for you. If you want the module to create the role, you need to provide the OIDC issuer&#8217;s URL for the EKS cluster. If you create the role yourself, you need to provide the ARN of the IAM role you created.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-none hljs">object({
-    bucket_id    = string
-    region       = string
-    iam_role_arn = string
+    bucket_id               = string
+    create_role             = bool
+    iam_role_arn            = optional(string, null)
+    cluster_oidc_issuer_url = optional(string, null)
   })</code></pre>
 </div>
 </div></div></td>
@@ -1885,7 +2043,7 @@ These are not production values. You should always adjust them to your needs.
 <p><code>string</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"v4.0.0"</code></p>
+<p><code>"v5.0.0"</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
