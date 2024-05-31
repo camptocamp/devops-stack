@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.1](https://github.com/camptocamp/devops-stack/compare/v1.8.0...v1.8.1) (2024-05-31)
+
+
+### Bug Fixes
+
+* typo ([9dc4752](https://github.com/camptocamp/devops-stack/commit/9dc475259266edf8865151ec0a89f86043b95c2a))
+
 ## [1.8.0](https://github.com/camptocamp/devops-stack/compare/v1.7.0...v1.8.0) (2024-01-22)
 
 
