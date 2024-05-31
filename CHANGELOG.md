@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.0](https://github.com/camptocamp/devops-stack/compare/v1.8.1...v1.9.0) (2024-05-31)
+
+
+### Features
+
+* document the ami type for x86 VMs ([a2351bd](https://github.com/camptocamp/devops-stack/commit/a2351bd51a8b7f39f7c8dd72ae45bf92506b4d66))
+
 ## [1.8.1](https://github.com/camptocamp/devops-stack/compare/v1.8.0...v1.8.1) (2024-05-31)
 
 
