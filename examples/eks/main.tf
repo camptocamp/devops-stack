@@ -39,7 +39,7 @@ module "eks" {
 
   node_groups = {
     "${module.eks.cluster_name}-main" = {
-      ami_type        = "AL2_ARM_64"
+      ami_type        = "AL2_ARM_64" # Use 'AL2_x86_64' for x86 VMs like 'm5.large'
       instance_types  = ["m7g.xlarge"]
       min_size        = 3
       max_size        = 3
