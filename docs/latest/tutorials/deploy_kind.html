@@ -36,7 +36,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="ROOT" data-version="v1.8.0">
+<div class="nav-container" data-component="ROOT" data-version="v1.8.1">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -205,7 +205,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">DevOps Stack</span>
-    <span class="version">v1.8.0</span>
+    <span class="version">v1.8.1</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -440,7 +440,10 @@
       <a class="title" href="../index.html">DevOps Stack</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../index.html">v1.8.0</a>
+          <a href="../index.html">v1.8.1</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.8.0/index.html">v1.8.0</a>
         </li>
         <li class="version">
           <a href="../../v1.7.0/index.html">v1.7.0</a>
@@ -571,7 +574,10 @@
       <a class="title" href="../../eks/latest/README.html">EKS Cluster Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../eks/latest/README.html">v3.1.0</a>
+          <a href="../../eks/latest/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v3.1.0/README.html">v3.1.0</a>
         </li>
         <li class="version">
           <a href="../../eks/v3.0.1/README.html">v3.0.1</a>
@@ -1115,9 +1121,10 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v1.8.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v1.8.1</button>
   <div class="version-menu">
-    <a class="version is-current" href="deploy_kind.html">v1.8.0</a>
+    <a class="version is-current" href="deploy_kind.html">v1.8.1</a>
+    <a class="version" href="../../v1.8.0/tutorials/deploy_kind.html">v1.8.0</a>
     <a class="version" href="../../v1.7.0/tutorials/deploy_kind.html">v1.7.0</a>
     <a class="version" href="../../v1.6.0/tutorials/deploy_kind.html">v1.6.0</a>
     <a class="version" href="../../v1.5.2/tutorials/deploy_kind.html">v1.5.2</a>
@@ -1131,7 +1138,7 @@
     <a class="version" href="../../v1.0.0/tutorials/deploy_kind.html">v1.0.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/blob/v1.8.0/docs/modules/ROOT/pages/tutorials/deploy_kind.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/blob/v1.8.1/docs/modules/ROOT/pages/tutorials/deploy_kind.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -1303,9 +1310,10 @@ You can also add your own Terraform modules in this file or any other file on th
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-terraform hljs" data-lang="terraform">locals {
-  kubernetes_version     = "v1.29.0"
+  kubernetes_version     = "v1.29.2"
   cluster_name           = "YOUR_CLUSTER_NAME"
   base_domain            = format("%s.nip.io", replace(module.traefik.external_ip, ".", "-"))
+  subdomain              = "apps"
   cluster_issuer         = module.cert-manager.cluster_issuers.ca
   enable_service_monitor = false # Can be enabled after the first bootstrap.
   app_autosync           = true ? { allow_empty = false, prune = true, self_heal = true } : {}

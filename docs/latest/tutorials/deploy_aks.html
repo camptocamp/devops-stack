@@ -36,7 +36,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="ROOT" data-version="v1.8.0">
+<div class="nav-container" data-component="ROOT" data-version="v1.8.1">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -205,7 +205,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">DevOps Stack</span>
-    <span class="version">v1.8.0</span>
+    <span class="version">v1.8.1</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -440,7 +440,10 @@
       <a class="title" href="../index.html">DevOps Stack</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../index.html">v1.8.0</a>
+          <a href="../index.html">v1.8.1</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.8.0/index.html">v1.8.0</a>
         </li>
         <li class="version">
           <a href="../../v1.7.0/index.html">v1.7.0</a>
@@ -571,7 +574,10 @@
       <a class="title" href="../../eks/latest/README.html">EKS Cluster Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../eks/latest/README.html">v3.1.0</a>
+          <a href="../../eks/latest/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v3.1.0/README.html">v3.1.0</a>
         </li>
         <li class="version">
           <a href="../../eks/v3.0.1/README.html">v3.0.1</a>
@@ -1115,9 +1121,10 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v1.8.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v1.8.1</button>
   <div class="version-menu">
-    <a class="version is-current" href="deploy_aks.html">v1.8.0</a>
+    <a class="version is-current" href="deploy_aks.html">v1.8.1</a>
+    <a class="version" href="../../v1.8.0/tutorials/deploy_aks.html">v1.8.0</a>
     <a class="version" href="../../v1.7.0/tutorials/deploy_aks.html">v1.7.0</a>
     <a class="version" href="../../v1.6.0/tutorials/deploy_aks.html">v1.6.0</a>
     <a class="version" href="../../v1.5.2/tutorials/deploy_aks.html">v1.5.2</a>
@@ -1131,7 +1138,7 @@
     <a class="version" href="../../v1.0.0/tutorials/deploy_aks.html">v1.0.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/blob/v1.8.0/docs/modules/ROOT/pages/tutorials/deploy_aks.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/blob/v1.8.1/docs/modules/ROOT/pages/tutorials/deploy_aks.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -1380,6 +1387,7 @@ TIP: The <a href="../../eks/latest/README.html" class="xref page">cluster module
   sku_tier                 = "Standard"
   cluster_name             = "YOUR_CLUSTER_NAME" # Must be unique for each DevOps Stack deployment in a single Azure subscription.
   base_domain              = "your.domain.here"  # Must match a DNS zone in the Azure subscription where you are deploying the DevOps Stack.
+  subdomain                = "apps"
   activate_wildcard_record = true
   cluster_issuer           = module.cert-manager.cluster_issuers.staging
   letsencrypt_issuer_email = "YOUR_EMAIL_ADDRESS"
@@ -1389,8 +1397,8 @@ TIP: The <a href="../../eks/latest/README.html" class="xref page">cluster module
   # The virtual network CIDR must be unique for each DevOps Stack deployment in a single Azure subscription.
   virtual_network_cidr = "10.1.0.0/16"
 
-  # Automatic subnets IP range calculation, splitting the virtual_network_cidr above into 6 subnets.
-  cluster_subnet = cidrsubnet(local.virtual_network_cidr, 8, 0)
+  # Automatic subnets IP range calculation, splitting the virtual_network_cidr above into multiple subnets.
+  cluster_subnet = cidrsubnet(local.virtual_network_cidr, 6, 0)
 
   # Local containing all the OIDC definitions required by the DevOps Stack modules.
   oidc = {
