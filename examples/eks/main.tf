@@ -24,7 +24,7 @@ module "vpc" {
 }
 
 module "eks" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cluster-eks.git?ref=v3.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cluster-eks.git?ref=v3.2.0"
 
   cluster_name       = local.cluster_name
   kubernetes_version = local.kubernetes_version
