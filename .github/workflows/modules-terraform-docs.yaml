@@ -33,7 +33,7 @@ jobs:
         ref: ${{ github.event.pull_request.head.ref }}
 
     - name: "Generate Terraform docs"
-      uses: terraform-docs/gh-actions@v1.1.0
+      uses: terraform-docs/gh-actions@v1.2.0
       with:
         working-dir: .
         indention: 3
@@ -45,7 +45,7 @@ jobs:
         git-push: false
 
     - name: "Generate Terraform tables"
-      uses: terraform-docs/gh-actions@v1.1.0
+      uses: terraform-docs/gh-actions@v1.2.0
       with:
         working-dir: .
         indention: 1 # Since the headings are not read inside the collapsible block we can indent as 1
@@ -58,7 +58,7 @@ jobs:
 
     - name: "Generate Terraform docs for the variants"
       if: ${{ inputs.variants != '' }}
-      uses: terraform-docs/gh-actions@v1.1.0
+      uses: terraform-docs/gh-actions@v1.2.0
       with:
         working-dir: ${{ inputs.variants }}
         indention: 3
@@ -71,7 +71,7 @@ jobs:
 
     - name: "Generate Terraform tables for the variants"
       if: ${{ inputs.variants != '' }}
-      uses: terraform-docs/gh-actions@v1.1.0
+      uses: terraform-docs/gh-actions@v1.2.0
       with:
         working-dir: ${{ inputs.variants }}
         indention: 1 # Since the headings are not read inside the collapsible block we can indent as 1
