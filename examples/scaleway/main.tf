@@ -21,26 +21,15 @@ module "scaleway" {
 # ###########################
 
 module "argocd_bootstrap" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v4.4.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v5.2.0"
 }
 
 module "ingress_controller" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git?ref=v5.0.0"
-
-  cluster_name           = var.cluster_name
-  base_domain            = module.scaleway.base_domain
+  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//scaleway?ref=scaleway-annotatation-for-lb"
+  target_revision = "scaleway-annotatation-for-lb"
   enable_service_monitor = var.ingress_enable_service_monitor
+  lb_id = module.scaleway.lb_id
 
-  helm_values = [{
-    traefik = {
-      service = {
-        type = "LoadBalancer"
-        annotations = {
-          "service.beta.kubernetes.io/scw-loadbalancer-id" = module.scaleway.lb_id
-        }
-      }
-    }
-  }]
 
   dependency_ids = {
     argocd = module.argocd_bootstrap.id
@@ -48,7 +37,7 @@ module "ingress_controller" {
 }
 
 module "cert-manager" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//self-signed?ref=v8.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//self-signed?ref=v8.3.0"
 
   enable_service_monitor = var.cert_manager_enable_service_monitor
 
@@ -60,9 +49,9 @@ module "cert-manager" {
 module "authentication_with_keycloak" {
   source = "git::https://github.com/camptocamp/devops-stack-module-keycloak.git?ref=v3.1.1"
 
-  cluster_name     = var.cluster_name
-  base_domain      = var.base_domain
-  cluster_issuer   = var.cluster_issuer
+  cluster_name   = var.cluster_name
+  base_domain    = var.base_domain
+  cluster_issuer = var.cluster_issuer
 
   dependency_ids = {
     ingress_controller = module.ingress_controller.id
@@ -91,7 +80,7 @@ module "authorization_with_keycloak" {
 
 
 module "kube-prometheus-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack?ref=v9.2.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack?ref=v11.1.0"
 
   cluster_name   = var.cluster_name
   base_domain    = module.scaleway.base_domain
@@ -117,7 +106,7 @@ module "kube-prometheus-stack" {
 }
 
 module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v4.4.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v5.2.0"
 
   base_domain              = module.scaleway.base_domain
   cluster_name             = var.cluster_name
@@ -126,7 +115,6 @@ module "argocd" {
   accounts_pipeline_tokens = module.argocd_bootstrap.argocd_accounts_pipeline_tokens
 
   admin_enabled = true
-  #app_autosync = {}
 
   oidc = {
     name         = "OIDC"
