@@ -103,7 +103,7 @@ module "oidc" {
 }
 
 module "minio" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-minio.git?ref=v3.1.1"
+  source = "git::https://github.com/camptocamp/devops-stack-module-minio.git?ref=v3.2.0"
 
   cluster_name   = local.cluster_name
   base_domain    = local.base_domain
