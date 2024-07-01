@@ -6,7 +6,7 @@ module "kind" {
 }
 
 module "metallb" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-metallb.git?ref=v1.3.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-metallb.git?ref=v1.4.0"
 
   subnet = module.kind.kind_subnet
 }
