@@ -8,7 +8,7 @@ locals {
   # Parameters used for this deployment of the DevOps Stack.
   common_resource_group    = "YOUR_COMMON_RESOURCE_GROUP" # The resource group where the common resources will reside. Must be unique for each DevOps Stack deployment in a single Azure subscription. 
   location                 = "YOUR_LOCATION"
-  kubernetes_version       = "1.28"
+  kubernetes_version       = "1.29"
   sku_tier                 = "Standard"
   cluster_name             = "YOUR_CLUSTER_NAME" # Must be unique for each DevOps Stack deployment in a single Azure subscription.
   base_domain              = "your.domain.here"  # Must match a DNS zone in the Azure subscription where you are deploying the DevOps Stack.
