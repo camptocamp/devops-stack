@@ -12,7 +12,7 @@ terraform {
   required_providers {
     exoscale = {
       source  = "exoscale/exoscale"
-      version = "~> 0.51"
+      version = "~> 0.59"
     }
     aws = { # Needed to store the state file in S3 and to create S3 buckets (provider configuration bellow)
       source  = "hashicorp/aws"
@@ -37,7 +37,11 @@ terraform {
   }
 }
 
+provider "aws" {}
+
 provider "aws" {
+  alias = "exoscale-s3"
+
   endpoints {
     s3 = "https://sos-${local.zone}.exo.io"
   }
