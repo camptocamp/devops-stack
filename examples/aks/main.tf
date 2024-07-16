@@ -19,21 +19,21 @@ resource "azurerm_virtual_network" "this" {
 }
 
 module "aks" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cluster-aks?ref=v1.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cluster-aks?ref=v1.2.0"
 
-  cluster_name         = local.cluster_name
-  base_domain          = local.base_domain
-  subdomain            = local.subdomain
-  location             = resource.azurerm_resource_group.main.location
-  resource_group_name  = resource.azurerm_resource_group.main.name
-  virtual_network_name = resource.azurerm_virtual_network.this.name
-  cluster_subnet       = local.cluster_subnet
+  cluster_name                 = local.cluster_name
+  base_domain                  = local.base_domain
+  subdomain                    = local.subdomain
+  location                     = resource.azurerm_resource_group.main.location
+  resource_group_name          = resource.azurerm_resource_group.main.name
+  virtual_network_name         = resource.azurerm_virtual_network.this.name
+  cluster_subnet               = local.cluster_subnet
+  dns_zone_resource_group_name = local.default_resource_group
 
   kubernetes_version = local.kubernetes_version
   sku_tier           = local.sku_tier
 
-  agents_count    = 7
-  agents_max_pods = 70
+  agents_max_pods = 100
 
   rbac_aad_admin_group_object_ids = [
     data.azuread_group.cluster_admins.object_id
@@ -54,7 +54,7 @@ module "aks" {
 }
 
 module "argocd_bootstrap" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v4.4.1"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v5.3.0"
 
   argocd_projects = {
     "${module.aks.cluster_name}" = {
@@ -66,7 +66,7 @@ module "argocd_bootstrap" {
 }
 
 module "traefik" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//aks?ref=v6.3.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//aks?ref=v7.0.0"
 
   cluster_name   = module.aks.cluster_name
   base_domain    = module.aks.base_domain
@@ -81,7 +81,7 @@ module "traefik" {
 }
 
 module "cert-manager" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//aks?ref=v8.2.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//aks?ref=v8.4.0"
 
   cluster_name   = local.cluster_name
   base_domain    = local.base_domain
@@ -101,7 +101,7 @@ module "cert-manager" {
 }
 
 module "loki-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack.git//aks?ref=v7.2.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack.git//aks?ref=v8.1.0"
 
   argocd_project = module.aks.cluster_name
 
@@ -121,7 +121,7 @@ module "loki-stack" {
 }
 
 module "thanos" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//aks?ref=v4.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//aks?ref=v5.0.0"
 
   cluster_name   = module.aks.cluster_name
   base_domain    = module.aks.base_domain
@@ -152,7 +152,7 @@ module "thanos" {
 }
 
 module "kube-prometheus-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//aks?ref=v10.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//aks?ref=v11.1.1"
 
   cluster_name   = module.aks.cluster_name
   base_domain    = module.aks.base_domain
@@ -192,7 +192,7 @@ module "kube-prometheus-stack" {
 }
 
 module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v4.4.1"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v5.3.0"
 
   cluster_name   = module.aks.cluster_name
   base_domain    = module.aks.base_domain
