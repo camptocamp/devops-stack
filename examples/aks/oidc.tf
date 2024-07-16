@@ -1,18 +1,18 @@
-data "azurerm_key_vault" "default" {
-  name                = local.default_key_vault
+data "azurerm_key_vault" "shared_key_vault" {
+  name                = local.shared_key_vault_name
   resource_group_name = local.default_resource_group
 }
 
 data "azurerm_key_vault_secret" "aad_application_object_id" {
-  key_vault_id = data.azurerm_key_vault.default.id
+  key_vault_id = data.azurerm_key_vault.shared_key_vault.id
   name         = "${local.oidc_application_name}-application-object-id"
 }
 data "azurerm_key_vault_secret" "aad_application_client_id" {
-  key_vault_id = data.azurerm_key_vault.default.id
+  key_vault_id = data.azurerm_key_vault.shared_key_vault.id
   name         = "${local.oidc_application_name}-application-client-id"
 }
 data "azurerm_key_vault_secret" "aad_application_client_secret" {
-  key_vault_id = data.azurerm_key_vault.default.id
+  key_vault_id = data.azurerm_key_vault.shared_key_vault.id
   name         = "${local.oidc_application_name}-application-client-secret"
 }
 
