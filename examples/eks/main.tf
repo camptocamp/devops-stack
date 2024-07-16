@@ -75,7 +75,7 @@ module "oidc" {
 }
 
 module "argocd_bootstrap" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v5.2.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v5.3.0"
 
   argocd_projects = {
     "${module.eks.cluster_name}" = {
@@ -99,7 +99,7 @@ module "metrics-server" {
 }
 
 module "traefik" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//eks?ref=v6.3.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//eks?ref=v7.0.0"
 
   argocd_project = module.eks.cluster_name
 
@@ -112,7 +112,7 @@ module "traefik" {
 }
 
 module "cert-manager" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//eks?ref=v8.3.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//eks?ref=v8.4.0"
 
   cluster_name   = module.eks.cluster_name
   base_domain    = module.eks.base_domain
@@ -221,7 +221,7 @@ module "kube-prometheus-stack" {
 }
 
 module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v5.2.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v5.3.0"
 
   cluster_name   = module.eks.cluster_name
   base_domain    = module.eks.base_domain
