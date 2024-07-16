@@ -90,7 +90,7 @@ module "cert-manager" {
   letsencrypt_issuer_email     = local.letsencrypt_issuer_email
   cluster_oidc_issuer_url      = module.aks.cluster_oidc_issuer_url
   node_resource_group_name     = module.aks.node_resource_group_name
-  dns_zone_resource_group_name = "default"
+  dns_zone_resource_group_name = local.default_resource_group
 
   app_autosync           = local.app_autosync
   enable_service_monitor = local.enable_service_monitor
