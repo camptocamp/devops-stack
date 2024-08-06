@@ -1,5 +1,5 @@
 locals {
-  kubernetes_version       = "1.29.2"
+  kubernetes_version       = "1.30.2"
   cluster_name             = "YOUR_CLUSTER_NAME" # Must be unique for each DevOps Stack deployment in a single account.
   zone                     = "YOUR_CLUSTER_ZONE"
   service_level            = "starter"
