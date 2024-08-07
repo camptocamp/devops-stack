@@ -36,7 +36,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="argocd" data-version="v5.3.0">
+<div class="nav-container" data-component="argocd" data-version="v5.4.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -71,7 +71,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">Argo CD Module</span>
-    <span class="version">v5.3.0</span>
+    <span class="version">v5.4.0</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -159,7 +159,10 @@
       <a class="title" href="README.html">Argo CD Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="README.html">v5.3.0</a>
+          <a href="README.html">v5.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../v5.3.0/README.html">v5.3.0</a>
         </li>
         <li class="version">
           <a href="../v5.2.0/README.html">v5.2.0</a>
@@ -1033,9 +1036,10 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v5.3.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v5.4.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="README.html">v5.3.0</a>
+    <a class="version is-current" href="README.html">v5.4.0</a>
+    <a class="version" href="../v5.3.0/README.html">v5.3.0</a>
     <a class="version" href="../v5.2.0/README.html">v5.2.0</a>
     <a class="version" href="../v5.1.0/README.html">v5.1.0</a>
     <a class="version" href="../v5.0.0/README.html">v5.0.0</a>
@@ -1066,7 +1070,7 @@
     <a class="version" href="../v1.0.0/README.html">v1.0.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-argocd/blob/v5.3.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-argocd/blob/v5.4.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -1422,6 +1426,9 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 <div class="ulist">
 <ul>
 <li>
+<p><a id="provider_null"></a> <a href="#provider_null">null</a> (&gt;= 3)</p>
+</li>
+<li>
 <p><a id="provider_jwt"></a> <a href="#provider_jwt">jwt</a> (&gt;= 1.1)</p>
 </li>
 <li>
@@ -1435,9 +1442,6 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 </li>
 <li>
 <p><a id="provider_utils"></a> <a href="#provider_utils">utils</a> (&gt;= 1.6)</p>
-</li>
-<li>
-<p><a id="provider_null"></a> <a href="#provider_null">null</a> (&gt;= 3)</p>
 </li>
 </ul>
 </div>
@@ -1568,7 +1572,7 @@ Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
 <p>Type: <code>string</code></p>
 </div>
 <div class="paragraph">
-<p>Default: <code>"v5.0.0"</code></p>
+<p>Default: <code>"v5.3.0"</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -2176,14 +2180,6 @@ If you set this variable, the default known hosts will be overridden by this val
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>&gt;= 3</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="provider_jwt"></a> <a href="#provider_jwt">jwt</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -2208,6 +2204,14 @@ If you set this variable, the default known hosts will be overridden by this val
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_utils"></a> <a href="#provider_utils">utils</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 1.6</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="provider_argocd"></a> <a href="#provider_argocd">argocd</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -2216,10 +2220,10 @@ If you set this variable, the default known hosts will be overridden by this val
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="provider_utils"></a> <a href="#provider_utils">utils</a></p>
+<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>&gt;= 1.6</p>
+<p>&gt;= 3</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -2422,7 +2426,7 @@ If you set this variable, the default known hosts will be overridden by this val
 <p><code>string</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"v5.0.0"</code></p>
+<p><code>"v5.3.0"</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
