@@ -36,7 +36,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="efs-csi-driver" data-version="v3.2.0">
+<div class="nav-container" data-component="efs-csi-driver" data-version="v3.2.1">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -62,7 +62,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">EFS CSI Driver Module</span>
-    <span class="version">v3.2.0</span>
+    <span class="version">v3.2.1</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -423,7 +423,10 @@
       <a class="title" href="README.html">EFS CSI Driver Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="README.html">v3.2.0</a>
+          <a href="README.html">v3.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../v3.2.0/README.html">v3.2.0</a>
         </li>
         <li class="version">
           <a href="../v3.1.0/README.html">v3.1.0</a>
@@ -1027,9 +1030,10 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v3.2.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v3.2.1</button>
   <div class="version-menu">
-    <a class="version is-current" href="README.html">v3.2.0</a>
+    <a class="version is-current" href="README.html">v3.2.1</a>
+    <a class="version" href="../v3.2.0/README.html">v3.2.0</a>
     <a class="version" href="../v3.1.0/README.html">v3.1.0</a>
     <a class="version" href="../v3.0.0/README.html">v3.0.0</a>
     <a class="version" href="../v2.4.0/README.html">v2.4.0</a>
@@ -1042,7 +1046,7 @@
     <a class="version" href="../v1.0.1/README.html">v1.0.1</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-efs-csi-driver/blob/v3.2.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-efs-csi-driver/blob/v3.2.1/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -1222,13 +1226,13 @@ resource "aws_efs_mount_target" "eks" {
 <p><a id="provider_null"></a> <a href="#provider_null">null</a> (&gt;= 3)</p>
 </li>
 <li>
+<p><a id="provider_argocd"></a> <a href="#provider_argocd">argocd</a> (&gt;= 5)</p>
+</li>
+<li>
 <p><a id="provider_utils"></a> <a href="#provider_utils">utils</a> (&gt;= 1)</p>
 </li>
 <li>
 <p><a id="provider_aws"></a> <a href="#provider_aws">aws</a></p>
-</li>
-<li>
-<p><a id="provider_argocd"></a> <a href="#provider_argocd">argocd</a> (&gt;= 5)</p>
 </li>
 </ul>
 </div>
@@ -1262,13 +1266,13 @@ resource "aws_efs_mount_target" "eks" {
 <p><a href="https://registry.terraform.io/providers/oboukili/argocd/latest/docs/resources/project">argocd_project.this</a> (resource)</p>
 </li>
 <li>
-<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy">aws_iam_policy.efs</a> (resource)</p>
-</li>
-<li>
 <p><a href="https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource">null_resource.dependencies</a> (resource)</p>
 </li>
 <li>
 <p><a href="https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource">null_resource.this</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy">aws_iam_policy.AmazonEFSCSIDriverPolicy</a> (data source)</p>
 </li>
 <li>
 <p><a href="https://registry.terraform.io/providers/cloudposse/utils/latest/docs/data-sources/deep_merge_yaml">utils_deep_merge_yaml.values</a> (data source)</p>
@@ -1362,7 +1366,7 @@ resource "aws_efs_mount_target" "eks" {
 <p>Type: <code>string</code></p>
 </div>
 <div class="paragraph">
-<p>Default: <code>"v3.1.0"</code></p>
+<p>Default: <code>"v3.2.0"</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -1572,18 +1576,10 @@ These are the same values as the defaults on the Helm chart aws-efs-csi-driver.
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="provider_utils"></a> <a href="#provider_utils">utils</a></p>
+<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>&gt;= 1</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="provider_aws"></a> <a href="#provider_aws">aws</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
+<p>&gt;= 3</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1596,10 +1592,18 @@ These are the same values as the defaults on the Helm chart aws-efs-csi-driver.
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
+<p><a id="provider_utils"></a> <a href="#provider_utils">utils</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>&gt;= 3</p>
+<p>&gt;= 1</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_aws"></a> <a href="#provider_aws">aws</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1667,14 +1671,6 @@ These are the same values as the defaults on the Helm chart aws-efs-csi-driver.
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy">aws_iam_policy.efs</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>resource</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource">null_resource.dependencies</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -1687,6 +1683,14 @@ These are the same values as the defaults on the Helm chart aws-efs-csi-driver.
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy">aws_iam_policy.AmazonEFSCSIDriverPolicy</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>data source</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1799,7 +1803,7 @@ These are the same values as the defaults on the Helm chart aws-efs-csi-driver.
 <p><code>string</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"v3.1.0"</code></p>
+<p><code>"v3.2.0"</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
