@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.10.0](https://github.com/camptocamp/devops-stack/compare/v1.9.0...v1.10.0) (2024-08-14)
+
+
+### Features
+
+* **aks:** update K8s version ([01775e6](https://github.com/camptocamp/devops-stack/commit/01775e6687b46ad6c0b3a69d9c9c45059ac83ab3))
+* **aks:** upgrade DevOps Stack modules ([87f477b](https://github.com/camptocamp/devops-stack/commit/87f477b718a61a84f0f08cb3978744ba49f55d2c))
+* **eks:** update K8s version ([8d49e77](https://github.com/camptocamp/devops-stack/commit/8d49e77ac09ebeaca79f4634b6a9519791f6f6b4))
+* **sks:** add support to new Exoscale IAM keys ([9e29a2e](https://github.com/camptocamp/devops-stack/commit/9e29a2e83cc72be8edbc36515a402e84a37238a2))
+* **sks:** upgrade K8s version on the SKS example ([f8f1f68](https://github.com/camptocamp/devops-stack/commit/f8f1f6827f2518bf73fb7d4a53959808c179110f))
+
+
+### Bug Fixes
+
+* **aks:** use proper local instead of hardcoding value ([d3c8567](https://github.com/camptocamp/devops-stack/commit/d3c8567b0262f75de3fb55edbd9b1048d310e775))
+* **eks:** replace hardcoded values by placeholders ([2a136df](https://github.com/camptocamp/devops-stack/commit/2a136df9ceb1582cc1bfab4cc38fd8d7f8355658))
+
 ## [1.9.0](https://github.com/camptocamp/devops-stack/compare/v1.8.1...v1.9.0) (2024-05-31)
 
 
