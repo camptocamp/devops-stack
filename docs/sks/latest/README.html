@@ -36,7 +36,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="sks" data-version="v1.2.0">
+<div class="nav-container" data-component="sks" data-version="v1.2.1">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -62,7 +62,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">SKS Cluster Module</span>
-    <span class="version">v1.2.0</span>
+    <span class="version">v1.2.1</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -245,7 +245,10 @@
       <a class="title" href="../../oidc-aws-cognito/latest/README.html">AWS Cognito OIDC Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../oidc-aws-cognito/latest/README.html">v1.1.0</a>
+          <a href="../../oidc-aws-cognito/latest/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../oidc-aws-cognito/v1.1.0/README.html">v1.1.0</a>
         </li>
         <li class="version">
           <a href="../../oidc-aws-cognito/v1.0.1/README.html">v1.0.1</a>
@@ -318,7 +321,10 @@
       <a class="title" href="../../latest/index.html">DevOps Stack</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../latest/index.html">v1.9.0</a>
+          <a href="../../latest/index.html">v1.10.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.9.0/index.html">v1.9.0</a>
         </li>
         <li class="version">
           <a href="../../v1.8.1/index.html">v1.8.1</a>
@@ -875,7 +881,10 @@
       <a class="title" href="README.html">SKS Cluster Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="README.html">v1.2.0</a>
+          <a href="README.html">v1.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../v1.2.0/README.html">v1.2.0</a>
         </li>
         <li class="version">
           <a href="../v1.1.1/README.html">v1.1.1</a>
@@ -1030,15 +1039,16 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v1.2.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v1.2.1</button>
   <div class="version-menu">
-    <a class="version is-current" href="README.html">v1.2.0</a>
+    <a class="version is-current" href="README.html">v1.2.1</a>
+    <a class="version" href="../v1.2.0/README.html">v1.2.0</a>
     <a class="version" href="../v1.1.1/README.html">v1.1.1</a>
     <a class="version" href="../v1.1.0/README.html">v1.1.0</a>
     <a class="version" href="../v1.0.0/README.html">v1.0.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-cluster-sks/blob/v1.2.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-cluster-sks/blob/v1.2.1/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -1325,10 +1335,10 @@ SKS instance pools will automatically choose cordoned nodes to delete in priorit
 <div class="ulist">
 <ul>
 <li>
-<p><a id="provider_exoscale"></a> <a href="#provider_exoscale">exoscale</a> (&gt;= 0.49)</p>
+<p><a id="provider_local"></a> <a href="#provider_local">local</a></p>
 </li>
 <li>
-<p><a id="provider_local"></a> <a href="#provider_local">local</a></p>
+<p><a id="provider_exoscale"></a> <a href="#provider_exoscale">exoscale</a> (&gt;= 0.49)</p>
 </li>
 </ul>
 </div>
@@ -1426,7 +1436,7 @@ SKS instance pools will automatically choose cordoned nodes to delete in priorit
 <div class="sect3">
 <h4 id="_kubernetes_version"><a class="anchor" href="#_kubernetes_version"></a><a id="input_kubernetes_version"></a> <a href="#input_kubernetes_version">kubernetes_version</a></h4>
 <div class="paragraph">
-<p>Description: Kubernetes version to use for the SKS cluster. See <code>exo compute sks versions</code> for reference. May only be set at creation time.</p>
+<p>Description: Kubernetes version to use for the SKS cluster. Run <code>exo compute sks versions</code> for reference. May only be set at creation time.</p>
 </div>
 <div class="paragraph">
 <p>Type: <code>string</code></p>
@@ -1791,18 +1801,18 @@ The other keys are optional: <code>description</code>, <code>instance_prefix</co
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="provider_exoscale"></a> <a href="#provider_exoscale">exoscale</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>&gt;= 0.49</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="provider_local"></a> <a href="#provider_local">local</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>n/a</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_exoscale"></a> <a href="#provider_exoscale">exoscale</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 0.49</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -2087,7 +2097,7 @@ The other keys are optional: <code>description</code>, <code>instance_prefix</co
 <p><a id="input_kubernetes_version"></a> <a href="#input_kubernetes_version">kubernetes_version</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Kubernetes version to use for the SKS cluster. See <code>exo compute sks versions</code> for reference. May only be set at creation time.</p>
+<p>Kubernetes version to use for the SKS cluster. Run <code>exo compute sks versions</code> for reference. May only be set at creation time.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>string</code></p>

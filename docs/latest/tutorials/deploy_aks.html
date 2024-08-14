@@ -36,7 +36,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="ROOT" data-version="v1.9.0">
+<div class="nav-container" data-component="ROOT" data-version="v1.10.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -205,7 +205,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">DevOps Stack</span>
-    <span class="version">v1.9.0</span>
+    <span class="version">v1.10.0</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -388,7 +388,10 @@
       <a class="title" href="../../oidc-aws-cognito/latest/README.html">AWS Cognito OIDC Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../oidc-aws-cognito/latest/README.html">v1.1.0</a>
+          <a href="../../oidc-aws-cognito/latest/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../oidc-aws-cognito/v1.1.0/README.html">v1.1.0</a>
         </li>
         <li class="version">
           <a href="../../oidc-aws-cognito/v1.0.1/README.html">v1.0.1</a>
@@ -461,7 +464,10 @@
       <a class="title" href="../index.html">DevOps Stack</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../index.html">v1.9.0</a>
+          <a href="../index.html">v1.10.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.9.0/index.html">v1.9.0</a>
         </li>
         <li class="version">
           <a href="../../v1.8.1/index.html">v1.8.1</a>
@@ -1018,7 +1024,10 @@
       <a class="title" href="../../sks/latest/README.html">SKS Cluster Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../sks/latest/README.html">v1.2.0</a>
+          <a href="../../sks/latest/README.html">v1.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../sks/v1.2.0/README.html">v1.2.0</a>
         </li>
         <li class="version">
           <a href="../../sks/v1.1.1/README.html">v1.1.1</a>
@@ -1175,9 +1184,10 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v1.9.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v1.10.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="deploy_aks.html">v1.9.0</a>
+    <a class="version is-current" href="deploy_aks.html">v1.10.0</a>
+    <a class="version" href="../../v1.9.0/tutorials/deploy_aks.html">v1.9.0</a>
     <a class="version" href="../../v1.8.1/tutorials/deploy_aks.html">v1.8.1</a>
     <a class="version" href="../../v1.8.0/tutorials/deploy_aks.html">v1.8.0</a>
     <a class="version" href="../../v1.7.0/tutorials/deploy_aks.html">v1.7.0</a>
@@ -1193,7 +1203,7 @@
     <a class="version" href="../../v1.0.0/tutorials/deploy_aks.html">v1.0.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/blob/v1.9.0/docs/modules/ROOT/pages/tutorials/deploy_aks.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack/blob/v1.10.0/docs/modules/ROOT/pages/tutorials/deploy_aks.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -1431,14 +1441,14 @@ TIP: The <a href="../../eks/latest/README.html" class="xref page">cluster module
 <pre class="highlightjs highlight"><code class="language-terraform hljs" data-lang="terraform">locals {
   # Parameters for the resources that are created outside this code, but still on the Azure subscription where the DevOps Stack will be deployed.
   default_resource_group         = "YOUR_DEFAULT_RESOURCE_GROUP" # The default resource group where the Key Vault with the Azure AD application credentials is located.
-  default_key_vault              = "YOUR_KEY_VAULT_NAME"         # The name of the Key Vault with the Azure AD application credentials.
+  shared_key_vault_name          = "YOUR_KEY_VAULT_NAME"         # The name of the Key Vault with the Azure AD application credentials.
   oidc_application_name          = "YOUR_APPLICATION_NAME"       # The name of the Azure AD application that will be used for OIDC authentication.  cluster_admins_group_object_id = "38a1908d-0ccd-4acc-99d5-7f0228289752"
   cluster_admins_group_object_id = "YOUR_CLUSTER_ADMINS_GROUP_OBJECT_ID"
 
   # Parameters used for this deployment of the DevOps Stack.
   common_resource_group    = "YOUR_COMMON_RESOURCE_GROUP" # The resource group where the common resources will reside. Must be unique for each DevOps Stack deployment in a single Azure subscription. 
   location                 = "YOUR_LOCATION"
-  kubernetes_version       = "1.28"
+  kubernetes_version       = "1.29"
   sku_tier                 = "Standard"
   cluster_name             = "YOUR_CLUSTER_NAME" # Must be unique for each DevOps Stack deployment in a single Azure subscription.
   base_domain              = "your.domain.here"  # Must match a DNS zone in the Azure subscription where you are deploying the DevOps Stack.
