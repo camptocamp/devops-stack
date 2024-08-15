@@ -36,7 +36,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="ebs-csi-driver" data-version="v3.4.0">
+<div class="nav-container" data-component="ebs-csi-driver" data-version="v3.4.1">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -62,7 +62,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">EBS CSI Driver Module</span>
-    <span class="version">v3.4.0</span>
+    <span class="version">v3.4.1</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -385,7 +385,10 @@
       <a class="title" href="README.html">EBS CSI Driver Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="README.html">v3.4.0</a>
+          <a href="README.html">v3.4.1</a>
+        </li>
+        <li class="version">
+          <a href="../v3.4.0/README.html">v3.4.0</a>
         </li>
         <li class="version">
           <a href="../v3.3.0/README.html">v3.3.0</a>
@@ -682,7 +685,10 @@
       <a class="title" href="../../loki/latest/README.html">Loki Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../loki/latest/README.html">v8.2.0</a>
+          <a href="../../loki/latest/README.html">v9.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v8.2.0/README.html">v8.2.0</a>
         </li>
         <li class="version">
           <a href="../../loki/v8.1.0/README.html">v8.1.0</a>
@@ -901,7 +907,10 @@
       <a class="title" href="../../thanos/latest/README.html">Thanos Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../thanos/latest/README.html">v5.0.0</a>
+          <a href="../../thanos/latest/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v5.0.0/README.html">v5.0.0</a>
         </li>
         <li class="version">
           <a href="../../thanos/v4.1.0/README.html">v4.1.0</a>
@@ -1039,9 +1048,10 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v3.4.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v3.4.1</button>
   <div class="version-menu">
-    <a class="version is-current" href="README.html">v3.4.0</a>
+    <a class="version is-current" href="README.html">v3.4.1</a>
+    <a class="version" href="../v3.4.0/README.html">v3.4.0</a>
     <a class="version" href="../v3.3.0/README.html">v3.3.0</a>
     <a class="version" href="../v3.2.0/README.html">v3.2.0</a>
     <a class="version" href="../v3.1.0/README.html">v3.1.0</a>
@@ -1056,7 +1066,7 @@
     <a class="version" href="../v1.0.1/README.html">v1.0.1</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-ebs-csi-driver/blob/v3.4.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-ebs-csi-driver/blob/v3.4.1/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -1189,13 +1199,13 @@ The <code>create_role</code> variable is required. If passing <code>iam_role_arn
 <div class="ulist">
 <ul>
 <li>
-<p><a id="provider_null"></a> <a href="#provider_null">null</a> (&gt;= 3)</p>
-</li>
-<li>
 <p><a id="provider_utils"></a> <a href="#provider_utils">utils</a> (&gt;= 1)</p>
 </li>
 <li>
 <p><a id="provider_argocd"></a> <a href="#provider_argocd">argocd</a> (&gt;= 5)</p>
+</li>
+<li>
+<p><a id="provider_null"></a> <a href="#provider_null">null</a> (&gt;= 3)</p>
 </li>
 </ul>
 </div>
@@ -1317,7 +1327,7 @@ The <code>create_role</code> variable is required. If passing <code>iam_role_arn
 <p>Type: <code>string</code></p>
 </div>
 <div class="paragraph">
-<p>Default: <code>"v3.1.0"</code></p>
+<p>Default: <code>"v3.4.0"</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -1451,6 +1461,18 @@ These are the same values as the defaults on the Helm chart aws-ebs-csi-driver.
 <p>Default: <code>""</code></p>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_default_storage_class"><a class="anchor" href="#_default_storage_class"></a><a id="input_default_storage_class"></a> <a href="#input_default_storage_class">default_storage_class</a></h4>
+<div class="paragraph">
+<p>Description: Boolean to indicate if the EBS CSI driver should be the default storage class.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>bool</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>true</code></p>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_outputs"><a class="anchor" href="#_outputs"></a>Outputs</h3>
@@ -1527,10 +1549,10 @@ These are the same values as the defaults on the Helm chart aws-ebs-csi-driver.
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="provider_utils"></a> <a href="#provider_utils">utils</a></p>
+<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>&gt;= 1</p>
+<p>&gt;= 3</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1543,10 +1565,10 @@ These are the same values as the defaults on the Helm chart aws-ebs-csi-driver.
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
+<p><a id="provider_utils"></a> <a href="#provider_utils">utils</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>&gt;= 3</p>
+<p>&gt;= 1</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1738,7 +1760,7 @@ These are the same values as the defaults on the Helm chart aws-ebs-csi-driver.
 <p><code>string</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>"v3.1.0"</code></p>
+<p><code>"v3.4.0"</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
@@ -1908,6 +1930,23 @@ These are the same values as the defaults on the Helm chart aws-ebs-csi-driver.
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>""</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_default_storage_class"></a> <a href="#input_default_storage_class">default_storage_class</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Boolean to indicate if the EBS CSI driver should be the default storage class.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>bool</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>true</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
