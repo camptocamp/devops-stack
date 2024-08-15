@@ -1,5 +1,5 @@
 module "sks" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cluster-sks.git?ref=v1.2.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cluster-sks.git?ref=v1.2.1"
 
   cluster_name       = local.cluster_name
   kubernetes_version = local.kubernetes_version
