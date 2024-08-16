@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: DevOps Stack</title>
+    <meta name="generator" content="Antora 3.1.2">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GDBX9466LL"></script>
+    <script>function gtag(){dataLayer.push(arguments)};window.dataLayer=window.dataLayer||[];gtag('js',new Date());gtag('config','G-GDBX9466LL')</script>
+    <link rel="icon" href="../../../_/img/favicon.png" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://devops-stack.io"><img width="200px" src="../../../_/img/devops-stack-logo_light_by_c2c_black.png"/></a>
+      <div class="navbar-item search hide-for-print">
+        <div id="search-field" class="field">
+          <input id="search-input" type="text" placeholder="Search the docs">
+        </div>
+      </div>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/camptocamp/devops-stack"><i class="fa fa-github-alt"></i>&nbsp;GitHub</a>
+        <a class="navbar-item" href="https://www.camptocamp.com">Camptocamp</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="cert-manager" data-version="v8.4.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../README.html">cert-manager Module</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../README.html">Home</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Module Variants</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../aks/README.html">AKS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../eks/README.html">EKS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../scaleway/README.html">Scaleway</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../self-signed/README.html">Self-signed</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="README.html">SKS</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><a href="https://github.com/camptocamp/devops-stack-module-cert-manager" target="_blank" rel="noopener">Repository</a></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../../latest/index.html"><em>Return to DevOps Stack docs</em></a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">cert-manager Module</span>
+    <span class="version">v8.4.0</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../../aks/latest/README.html">AKS Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../aks/latest/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../aks/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../aks/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../application/latest/README.html">Application Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../application/latest/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../application/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../application/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../application/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../application/v1.2.3/README.html">v1.2.3</a>
+        </li>
+        <li class="version">
+          <a href="../../../application/v1.2.2/README.html">v1.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../../application/v1.2.1/README.html">v1.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../application/v1.2.0/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../application/v1.1.1/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../application/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../application/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../applicationset/latest/README.html">ApplicationSet Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../applicationset/latest/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../applicationset/v2.1.1/README.html">v2.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../applicationset/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../applicationset/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../applicationset/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../applicationset/v1.2.6/README.html">v1.2.6</a>
+        </li>
+        <li class="version">
+          <a href="../../../applicationset/v1.2.5/README.html">v1.2.5</a>
+        </li>
+        <li class="version">
+          <a href="../../../applicationset/v1.2.4/README.html">v1.2.4</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../argocd/latest/README.html">Argo CD Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../argocd/latest/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v5.5.0/README.html">v5.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v5.4.0/README.html">v5.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v5.3.0/README.html">v5.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v5.2.0/README.html">v5.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v5.1.0/README.html">v5.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v5.0.0/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v4.5.0/README.html">v4.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v4.4.1/README.html">v4.4.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v4.4.0/README.html">v4.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v4.3.0/README.html">v4.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v4.2.0/README.html">v4.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v4.1.0/README.html">v4.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v4.0.0/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v3.5.2/README.html">v3.5.2</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v3.5.1/README.html">v3.5.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v3.5.0/README.html">v3.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v3.4.1/README.html">v3.4.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v3.4.0/README.html">v3.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v3.3.0/README.html">v3.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v3.1.3/README.html">v3.1.3</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v3.1.2/README.html">v3.1.2</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v3.1.1/README.html">v3.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v1.1.2/README.html">v1.1.2</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v1.1.1/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../argocd/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../oidc-aws-cognito/latest/README.html">AWS Cognito OIDC Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../oidc-aws-cognito/latest/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../oidc-aws-cognito/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../oidc-aws-cognito/v1.0.1/README.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../oidc-aws-cognito/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../../latest/README.html">cert-manager Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../latest/README.html">v8.5.0</a>
+        </li>
+        <li class="version is-current">
+          <a href="../README.html">v8.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v8.3.0/README.html">v8.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v8.2.0/README.html">v8.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v8.1.0/README.html">v8.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v8.0.0/README.html">v8.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v7.0.1/README.html">v7.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../v7.0.0/README.html">v7.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v6.0.0/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v5.3.0/README.html">v5.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v5.2.1/README.html">v5.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../v5.2.0/README.html">v5.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v5.1.0/README.html">v5.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v5.0.1/README.html">v5.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../v5.0.0/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v4.0.3/README.html">v4.0.3</a>
+        </li>
+        <li class="version">
+          <a href="../../v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../latest/index.html">DevOps Stack</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../latest/index.html">v1.10.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../v1.9.0/index.html">v1.9.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../v1.8.1/index.html">v1.8.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../v1.8.0/index.html">v1.8.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../v1.7.0/index.html">v1.7.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../v1.6.0/index.html">v1.6.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../v1.5.2/index.html">v1.5.2</a>
+        </li>
+        <li class="version">
+          <a href="../../../v1.5.1/index.html">v1.5.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../v1.5.0/index.html">v1.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../v1.4.0/index.html">v1.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../v1.3.0/index.html">v1.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../v1.2.0/index.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../v1.0.2/index.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../../v1.0.1/index.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../v1.0.0/index.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../dex/latest/README.html">Dex Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../dex/latest/README.html">v1.0.1-alpha.4</a>
+        </li>
+        <li class="version">
+          <a href="../../../dex/v1.0.0-alpha.4/README.html">v1.0.0-alpha.4</a>
+        </li>
+        <li class="version">
+          <a href="../../../dex/v1.0.0-alpha.3/README.html">v1.0.0-alpha.3</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../ebs-csi-driver/latest/README.html">EBS CSI Driver Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../ebs-csi-driver/latest/README.html">v3.4.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../ebs-csi-driver/v3.4.0/README.html">v3.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../ebs-csi-driver/v3.3.0/README.html">v3.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../ebs-csi-driver/v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../ebs-csi-driver/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../ebs-csi-driver/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../ebs-csi-driver/v2.4.0/README.html">v2.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../ebs-csi-driver/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../ebs-csi-driver/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../ebs-csi-driver/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../ebs-csi-driver/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../ebs-csi-driver/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../ebs-csi-driver/v1.0.2/README.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../../ebs-csi-driver/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../efs-csi-driver/latest/README.html">EFS CSI Driver Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../efs-csi-driver/latest/README.html">v3.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../efs-csi-driver/v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../efs-csi-driver/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../efs-csi-driver/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../efs-csi-driver/v2.4.0/README.html">v2.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../efs-csi-driver/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../efs-csi-driver/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../efs-csi-driver/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../efs-csi-driver/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../efs-csi-driver/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../efs-csi-driver/v1.0.2/README.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../../efs-csi-driver/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../eks/latest/README.html">EKS Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../eks/latest/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../eks/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../eks/v3.0.1/README.html">v3.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../eks/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../eks/v2.0.2/README.html">v2.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../../eks/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../eks/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../eks/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../keycloak/latest/README.html">Keycloak Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../keycloak/latest/README.html">v3.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../keycloak/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../keycloak/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../keycloak/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../keycloak/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../keycloak/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../keycloak/v1.1.1/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../keycloak/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../keycloak/v1.0.2/README.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../../keycloak/v1.0.1/README.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../keycloak/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../kind/latest/README.html">KinD Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../kind/latest/README.html">v2.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kind/v2.4.0/README.html">v2.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kind/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kind/v2.2.2/README.html">v2.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../../kind/v2.2.1/README.html">v2.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../kind/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kind/v2.1.2/README.html">v2.1.2</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../kube-prometheus-stack/latest/README.html">kube-prometheus-stack Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../kube-prometheus-stack/latest/README.html">v11.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v11.1.0/README.html">v11.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v11.0.0/README.html">v11.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v10.1.1/README.html">v10.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v10.1.0/README.html">v10.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v10.0.0/README.html">v10.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v9.2.1/README.html">v9.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v9.2.0/README.html">v9.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v9.1.0/README.html">v9.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v9.0.0/README.html">v9.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v8.2.0/README.html">v8.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v8.1.0/README.html">v8.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v8.0.2/README.html">v8.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v8.0.1/README.html">v8.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v8.0.0/README.html">v8.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v7.1.0/README.html">v7.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v7.0.0/README.html">v7.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v6.3.0/README.html">v6.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v6.2.0/README.html">v6.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v6.1.1/README.html">v6.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v6.1.0/README.html">v6.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v6.0.1/README.html">v6.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v6.0.0/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v5.0.0/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v4.0.1/README.html">v4.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v4.0.0/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v3.3.0/README.html">v3.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v2.2.3/README.html">v2.2.3</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v2.2.2/README.html">v2.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v2.2.1/README.html">v2.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../kube-prometheus-stack/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../loki/latest/README.html">Loki Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../loki/latest/README.html">v9.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../loki/v8.2.0/README.html">v8.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../loki/v8.1.0/README.html">v8.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../loki/v8.0.0/README.html">v8.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../loki/v7.2.0/README.html">v7.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../loki/v7.1.0/README.html">v7.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../loki/v7.0.1/README.html">v7.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../loki/v7.0.0/README.html">v7.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../loki/v6.0.0/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../loki/v5.2.0/README.html">v5.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../loki/v5.1.0/README.html">v5.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../loki/v5.0.0/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../loki/v4.0.2/README.html">v4.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../../loki/v4.0.1/README.html">v4.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../loki/v4.0.0/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../loki/v3.0.1/README.html">v3.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../loki/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../loki/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../loki/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../loki/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../loki/v2.0.2/README.html">v2.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../../loki/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../loki/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../loki/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../loki/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../longhorn/latest/README.html">Longhorn Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../longhorn/latest/README.html">v3.6.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../longhorn/v3.5.0/README.html">v3.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../longhorn/v3.4.0/README.html">v3.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../longhorn/v3.3.1/README.html">v3.3.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../longhorn/v3.3.0/README.html">v3.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../longhorn/v3.2.1/README.html">v3.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../longhorn/v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../longhorn/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../longhorn/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../longhorn/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../longhorn/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../longhorn/v2.1.1/README.html">v2.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../longhorn/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../longhorn/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../longhorn/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../metallb/latest/README.html">MetalLB Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../metallb/latest/README.html">v1.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../metallb/v1.4.0/README.html">v1.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../metallb/v1.3.0/README.html">v1.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../metallb/v1.2.0/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../metallb/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../metallb/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../metrics-server/latest/README.html">Metrics Server Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../metrics-server/latest/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../metrics-server/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../metrics-server/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../minio/latest/README.html">MinIO Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../minio/latest/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../minio/v3.1.1/README.html">v3.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../minio/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../minio/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../minio/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../minio/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../minio/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../minio/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../minio/v1.1.2/README.html">v1.1.2</a>
+        </li>
+        <li class="version">
+          <a href="../../../minio/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../sks/latest/README.html">SKS Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../sks/latest/README.html">v1.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../sks/v1.2.0/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../sks/v1.1.1/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../sks/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../sks/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../thanos/latest/README.html">Thanos Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../thanos/latest/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../thanos/v5.0.0/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../thanos/v4.1.0/README.html">v4.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../thanos/v4.0.0/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../thanos/v3.3.0/README.html">v3.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../thanos/v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../thanos/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../thanos/v3.0.1/README.html">v3.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../thanos/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../thanos/v2.7.0/README.html">v2.7.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../thanos/v2.6.0/README.html">v2.6.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../thanos/v2.5.0/README.html">v2.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../thanos/v2.4.0/README.html">v2.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../thanos/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../thanos/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../thanos/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../thanos/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../thanos/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../thanos/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../thanos/v1.0.1/README.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../thanos/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../traefik/latest/README.html">Traefik Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../traefik/latest/README.html">v8.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../traefik/v7.0.0/README.html">v7.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../traefik/v6.3.0/README.html">v6.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../traefik/v6.2.0/README.html">v6.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../traefik/v6.1.1/README.html">v6.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../traefik/v6.1.0/README.html">v6.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../traefik/v6.0.0/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../traefik/v5.0.0/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../traefik/v4.1.0/README.html">v4.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../traefik/v4.0.0/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../traefik/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../traefik/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../traefik/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../traefik/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../traefik/v1.2.3/README.html">v1.2.3</a>
+        </li>
+        <li class="version">
+          <a href="../../../traefik/v1.2.2/README.html">v1.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../../traefik/v1.2.1/README.html">v1.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../traefik/v1.2.0/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../traefik/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../traefik/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../README.html">cert-manager Module</a></li>
+    <li>Module Variants</li>
+    <li><a href="README.html">SKS</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">v8.4.0</button>
+  <div class="version-menu">
+    <a class="version" href="../../latest/sks/README.html">v8.5.0</a>
+    <a class="version is-current" href="README.html">v8.4.0</a>
+    <a class="version" href="../../v8.3.0/sks/README.html">v8.3.0</a>
+    <a class="version" href="../../v8.2.0/sks/README.html">v8.2.0</a>
+    <a class="version" href="../../v8.1.0/sks/README.html">v8.1.0</a>
+    <a class="version" href="../../v8.0.0/sks/README.html">v8.0.0</a>
+    <a class="version" href="../../v7.0.1/sks/README.html">v7.0.1</a>
+    <a class="version" href="../../v7.0.0/sks/README.html">v7.0.0</a>
+    <a class="version" href="../../v6.0.0/sks/README.html">v6.0.0</a>
+    <a class="version" href="../../v5.3.0/sks/README.html">v5.3.0</a>
+    <a class="version" href="../../v5.2.1/sks/README.html">v5.2.1</a>
+    <a class="version" href="../../v5.2.0/sks/README.html">v5.2.0</a>
+    <a class="version" href="../../v5.1.0/sks/README.html">v5.1.0</a>
+    <a class="version" href="../../v5.0.1/sks/README.html">v5.0.1</a>
+    <a class="version" href="../../v5.0.0/sks/README.html">v5.0.0</a>
+    <a class="version" href="../../v4.0.3/sks/README.html">v4.0.3</a>
+    <a class="version" href="../../v2.0.1/sks/README.html">v2.0.1</a>
+    <a class="version" href="../../v2.0.0/sks/README.html">v2.0.0</a>
+    <a class="version" href="../../v1.0.1/sks/README.html">v1.0.1</a>
+  </div>
+</div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-cert-manager/blob/v8.4.0/docs/modules/ROOT/pages/sks/README.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<div class="sect2">
+<h3 id="_requirements"><a class="anchor" href="#_requirements"></a>Requirements</h3>
+<div class="paragraph">
+<p>The following requirements are needed by this module:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="requirement_argocd"></a> <a href="#requirement_argocd">argocd</a> (&gt;= 5)</p>
+</li>
+<li>
+<p><a id="requirement_null"></a> <a href="#requirement_null">null</a> (&gt;= 3)</p>
+</li>
+<li>
+<p><a id="requirement_utils"></a> <a href="#requirement_utils">utils</a> (&gt;= 1)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_modules"><a class="anchor" href="#_modules"></a>Modules</h3>
+<div class="paragraph">
+<p>The following Modules are called:</p>
+</div>
+<div class="sect3">
+<h4 id="_cert_manager"><a class="anchor" href="#_cert_manager"></a><a id="module_cert-manager"></a> <a href="#module_cert-manager">cert-manager</a></h4>
+<div class="paragraph">
+<p>Source: ../</p>
+</div>
+<div class="paragraph">
+<p>Version:</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_required_inputs"><a class="anchor" href="#_required_inputs"></a>Required Inputs</h3>
+<div class="paragraph">
+<p>The following input variables are required:</p>
+</div>
+<div class="sect3">
+<h4 id="_letsencrypt_issuer_email"><a class="anchor" href="#_letsencrypt_issuer_email"></a><a id="input_letsencrypt_issuer_email"></a> <a href="#input_letsencrypt_issuer_email">letsencrypt_issuer_email</a></h4>
+<div class="paragraph">
+<p>Description: E-mail address used to register with Let&#8217;s Encrypt.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_optional_inputs"><a class="anchor" href="#_optional_inputs"></a>Optional Inputs</h3>
+<div class="paragraph">
+<p>The following input variables are optional (have default values):</p>
+</div>
+<div class="sect3">
+<h4 id="_argocd_project"><a class="anchor" href="#_argocd_project"></a><a id="input_argocd_project"></a> <a href="#input_argocd_project">argocd_project</a></h4>
+<div class="paragraph">
+<p>Description: Name of the Argo CD AppProject where the Application should be created. If not set, the Application will be created in a new AppProject only for this Application.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>null</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_argocd_labels"><a class="anchor" href="#_argocd_labels"></a><a id="input_argocd_labels"></a> <a href="#input_argocd_labels">argocd_labels</a></h4>
+<div class="paragraph">
+<p>Description: Labels to attach to the Argo CD Application resource.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>map(string)</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>{}</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_destination_cluster"><a class="anchor" href="#_destination_cluster"></a><a id="input_destination_cluster"></a> <a href="#input_destination_cluster">destination_cluster</a></h4>
+<div class="paragraph">
+<p>Description: Destination cluster where the application should be deployed.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"in-cluster"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_target_revision"><a class="anchor" href="#_target_revision"></a><a id="input_target_revision"></a> <a href="#input_target_revision">target_revision</a></h4>
+<div class="paragraph">
+<p>Description: Override of target revision of the application chart.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"v8.1.0"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_enable_service_monitor"><a class="anchor" href="#_enable_service_monitor"></a><a id="input_enable_service_monitor"></a> <a href="#input_enable_service_monitor">enable_service_monitor</a></h4>
+<div class="paragraph">
+<p>Description: Enable Prometheus ServiceMonitor in the Helm chart.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>bool</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>true</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_helm_values"><a class="anchor" href="#_helm_values"></a><a id="input_helm_values"></a> <a href="#input_helm_values">helm_values</a></h4>
+<div class="paragraph">
+<p>Description: Helm values, passed as a list of HCL structures.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>any</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>[]</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_deep_merge_append_list"><a class="anchor" href="#_deep_merge_append_list"></a><a id="input_deep_merge_append_list"></a> <a href="#input_deep_merge_append_list">deep_merge_append_list</a></h4>
+<div class="paragraph">
+<p>Description: A boolean flag to enable/disable appending lists instead of overwriting them.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>bool</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>false</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_app_autosync"><a class="anchor" href="#_app_autosync"></a><a id="input_app_autosync"></a> <a href="#input_app_autosync">app_autosync</a></h4>
+<div class="paragraph">
+<p>Description: Automated sync options for the Argo CD Application resource.</p>
+</div>
+<div class="paragraph">
+<p>Type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">object({
+    allow_empty = optional(bool)
+    prune       = optional(bool)
+    self_heal   = optional(bool)
+  })</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Default:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "allow_empty": false,
+  "prune": true,
+  "self_heal": true
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_dependency_ids"><a class="anchor" href="#_dependency_ids"></a><a id="input_dependency_ids"></a> <a href="#input_dependency_ids">dependency_ids</a></h4>
+<div class="paragraph">
+<p>Description: IDs of the other modules on which this module depends on.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>map(string)</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>{}</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_resources"><a class="anchor" href="#_resources"></a><a id="input_resources"></a> <a href="#input_resources">resources</a></h4>
+<div class="paragraph">
+<p>Description: Resource limits and requests for cert-manager&#8217;s components. Follow the style on <a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/">official documentation</a> to understand the format of the values.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+These are not production values. You should always adjust them to your needs.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">object({
+
+    controller = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "50m")
+        memory = optional(string, "128Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string)
+        memory = optional(string, "128Mi")
+      }), {})
+    }), {})
+
+    webhook = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "50m")
+        memory = optional(string, "128Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string)
+        memory = optional(string, "128Mi")
+      }), {})
+    }), {})
+
+    cainjector = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "50m")
+        memory = optional(string, "128Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string)
+        memory = optional(string, "128Mi")
+      }), {})
+    }), {})
+
+    startupapicheck = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "50m")
+        memory = optional(string, "128Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string)
+        memory = optional(string, "128Mi")
+      }), {})
+    }), {})
+
+  })</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Default: <code>{}</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_letsencrypt_issuer_email_main"><a class="anchor" href="#_letsencrypt_issuer_email_main"></a><a id="input_letsencrypt_issuer_email_main"></a> <a href="#input_letsencrypt_issuer_email_main">letsencrypt_issuer_email_main</a></h4>
+<div class="paragraph">
+<p>Description: E-mail address used to register with Let&#8217;s Encrypt.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>null</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_use_default_dns01_solver"><a class="anchor" href="#_use_default_dns01_solver"></a><a id="input_use_default_dns01_solver"></a> <a href="#input_use_default_dns01_solver">use_default_dns01_solver</a></h4>
+<div class="paragraph">
+<p>Description: Whether to use the default dns01 solver configuration.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>bool</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>true</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_use_default_http01_solver"><a class="anchor" href="#_use_default_http01_solver"></a><a id="input_use_default_http01_solver"></a> <a href="#input_use_default_http01_solver">use_default_http01_solver</a></h4>
+<div class="paragraph">
+<p>Description: Whether to use the default http01 solver configuration.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>bool</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>true</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_custom_solver_configurations"><a class="anchor" href="#_custom_solver_configurations"></a><a id="input_custom_solver_configurations"></a> <a href="#input_custom_solver_configurations">custom_solver_configurations</a></h4>
+<div class="paragraph">
+<p>Description: List of additional solver configurations, appended to the default dns01 and http01 solvers (if enabled).</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>list(any)</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>[]</code></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_outputs"><a class="anchor" href="#_outputs"></a>Outputs</h3>
+<div class="paragraph">
+<p>The following outputs are exported:</p>
+</div>
+<div class="sect3">
+<h4 id="_id"><a class="anchor" href="#_id"></a><a id="output_id"></a> <a href="#output_id">id</a></h4>
+<div class="paragraph">
+<p>Description: ID to pass other modules in order to refer to this module as a dependency.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cluster_issuers"><a class="anchor" href="#_cluster_issuers"></a><a id="output_cluster_issuers"></a> <a href="#output_cluster_issuers">cluster_issuers</a></h4>
+<div class="paragraph">
+<p>Description: List of cluster issuers created by cert-manager.
+= Requirements</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_argocd"></a> <a href="#requirement_argocd">argocd</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 5</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_null"></a> <a href="#requirement_null">null</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 3</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_utils"></a> <a href="#requirement_utils">utils</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 1</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<h1 id="_modules_2" class="sect0"><a class="anchor" href="#_modules_2"></a>Modules</h1>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Source</th>
+<th class="tableblock halign-left valign-top">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="module_cert-manager"></a> <a href="#module_cert-manager">cert-manager</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+</tr>
+</tbody>
+</table>
+<h1 id="_inputs" class="sect0"><a class="anchor" href="#_inputs"></a>Inputs</h1>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_letsencrypt_issuer_email"></a> <a href="#input_letsencrypt_issuer_email">letsencrypt_issuer_email</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>E-mail address used to register with Let&#8217;s Encrypt.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_argocd_project"></a> <a href="#input_argocd_project">argocd_project</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Name of the Argo CD AppProject where the Application should be created. If not set, the Application will be created in a new AppProject only for this Application.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>null</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_argocd_labels"></a> <a href="#input_argocd_labels">argocd_labels</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Labels to attach to the Argo CD Application resource.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>map(string)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>{}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_destination_cluster"></a> <a href="#input_destination_cluster">destination_cluster</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Destination cluster where the application should be deployed.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>"in-cluster"</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_target_revision"></a> <a href="#input_target_revision">target_revision</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Override of target revision of the application chart.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>"v8.1.0"</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_enable_service_monitor"></a> <a href="#input_enable_service_monitor">enable_service_monitor</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Enable Prometheus ServiceMonitor in the Helm chart.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>bool</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>true</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_helm_values"></a> <a href="#input_helm_values">helm_values</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Helm values, passed as a list of HCL structures.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>any</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>[]</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_deep_merge_append_list"></a> <a href="#input_deep_merge_append_list">deep_merge_append_list</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A boolean flag to enable/disable appending lists instead of overwriting them.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>bool</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>false</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_app_autosync"></a> <a href="#input_app_autosync">app_autosync</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Automated sync options for the Argo CD Application resource.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">object({
+    allow_empty = optional(bool)
+    prune       = optional(bool)
+    self_heal   = optional(bool)
+  })</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">{
+  "allow_empty": false,
+  "prune": true,
+  "self_heal": true
+}</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_dependency_ids"></a> <a href="#input_dependency_ids">dependency_ids</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>IDs of the other modules on which this module depends on.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>map(string)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>{}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_resources"></a> <a href="#input_resources">resources</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Resource limits and requests for cert-manager&#8217;s components. Follow the style on <a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/">official documentation</a> to understand the format of the values.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+These are not production values. You should always adjust them to your needs.
+</td>
+</tr>
+</table>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">object({
+
+    controller = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "50m")
+        memory = optional(string, "128Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string)
+        memory = optional(string, "128Mi")
+      }), {})
+    }), {})
+
+    webhook = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "50m")
+        memory = optional(string, "128Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string)
+        memory = optional(string, "128Mi")
+      }), {})
+    }), {})
+
+    cainjector = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "50m")
+        memory = optional(string, "128Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string)
+        memory = optional(string, "128Mi")
+      }), {})
+    }), {})
+
+    startupapicheck = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "50m")
+        memory = optional(string, "128Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string)
+        memory = optional(string, "128Mi")
+      }), {})
+    }), {})
+
+  })</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>{}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_letsencrypt_issuer_email_main"></a> <a href="#input_letsencrypt_issuer_email_main">letsencrypt_issuer_email_main</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>E-mail address used to register with Let&#8217;s Encrypt.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>null</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_use_default_dns01_solver"></a> <a href="#input_use_default_dns01_solver">use_default_dns01_solver</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Whether to use the default dns01 solver configuration.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>bool</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>true</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_use_default_http01_solver"></a> <a href="#input_use_default_http01_solver">use_default_http01_solver</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Whether to use the default http01 solver configuration.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>bool</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>true</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_custom_solver_configurations"></a> <a href="#input_custom_solver_configurations">custom_solver_configurations</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>List of additional solver configurations, appended to the default dns01 and http01 solvers (if enabled).</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>list(any)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>[]</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<h1 id="_outputs_2" class="sect0"><a class="anchor" href="#_outputs_2"></a>Outputs</h1>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_id"></a> <a href="#output_id">id</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>ID to pass other modules in order to refer to this module as a dependency.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_cluster_issuers"></a> <a href="#output_cluster_issuers">cluster_issuers</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>List of cluster issuers created by cert-manager.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>Copyright © Camptocamp <script> document.write(new Date().getFullYear()) </script> — All Rights Reserved</p>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/terraform.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script src="../../../_/js/vendor/lunr.js"></script>
+<script src="../../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../../.." data-snippet-length="100" data-stylesheet="../../../_/css/search.css"></script>
+<script async src="../../../search-index.js"></script>
+  </body>
+</html>
