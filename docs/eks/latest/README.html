@@ -36,7 +36,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="eks" data-version="v3.2.0">
+<div class="nav-container" data-component="eks" data-version="v3.3.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -62,7 +62,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">EKS Cluster Module</span>
-    <span class="version">v3.2.0</span>
+    <span class="version">v3.3.0</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -336,7 +336,10 @@
       <a class="title" href="../../latest/index.html">DevOps Stack</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../latest/index.html">v1.10.0</a>
+          <a href="../../latest/index.html">v1.11.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.10.0/index.html">v1.10.0</a>
         </li>
         <li class="version">
           <a href="../../v1.9.0/index.html">v1.9.0</a>
@@ -494,7 +497,10 @@
       <a class="title" href="README.html">EKS Cluster Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="README.html">v3.2.0</a>
+          <a href="README.html">v3.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../v3.2.0/README.html">v3.2.0</a>
         </li>
         <li class="version">
           <a href="../v3.1.0/README.html">v3.1.0</a>
@@ -1081,9 +1087,10 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v3.2.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v3.3.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="README.html">v3.2.0</a>
+    <a class="version is-current" href="README.html">v3.3.0</a>
+    <a class="version" href="../v3.2.0/README.html">v3.2.0</a>
     <a class="version" href="../v3.1.0/README.html">v3.1.0</a>
     <a class="version" href="../v3.0.1/README.html">v3.0.1</a>
     <a class="version" href="../v3.0.0/README.html">v3.0.0</a>
@@ -1093,7 +1100,7 @@
     <a class="version" href="../v1.0.0/README.html">v1.0.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-cluster-eks/blob/v3.2.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-cluster-eks/blob/v3.3.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -1238,10 +1245,10 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 <div class="ulist">
 <ul>
 <li>
-<p><a id="provider_dns"></a> <a href="#provider_dns">dns</a></p>
+<p><a id="provider_aws"></a> <a href="#provider_aws">aws</a> (&gt;= 4)</p>
 </li>
 <li>
-<p><a id="provider_aws"></a> <a href="#provider_aws">aws</a> (&gt;= 4)</p>
+<p><a id="provider_dns"></a> <a href="#provider_dns">dns</a></p>
 </li>
 </ul>
 </div>
@@ -1261,21 +1268,21 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 </div>
 </div>
 <div class="sect3">
-<h4 id="_cluster"><a class="anchor" href="#_cluster"></a><a id="module_cluster"></a> <a href="#module_cluster">cluster</a></h4>
-<div class="paragraph">
-<p>Source: terraform-aws-modules/eks/aws</p>
-</div>
-<div class="paragraph">
-<p>Version: ~&gt; 19.0</p>
-</div>
-</div>
-<div class="sect3">
 <h4 id="_nlb_private"><a class="anchor" href="#_nlb_private"></a><a id="module_nlb_private"></a> <a href="#module_nlb_private">nlb_private</a></h4>
 <div class="paragraph">
 <p>Source: terraform-aws-modules/alb/aws</p>
 </div>
 <div class="paragraph">
 <p>Version: ~&gt; 8.0</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cluster"><a class="anchor" href="#_cluster"></a><a id="module_cluster"></a> <a href="#module_cluster">cluster</a></h4>
+<div class="paragraph">
+<p>Source: terraform-aws-modules/eks/aws</p>
+</div>
+<div class="paragraph">
+<p>Version: ~&gt; 19.0</p>
 </div>
 </div>
 </div>
@@ -1641,9 +1648,21 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 </div>
 </div>
 <div class="sect3">
+<h4 id="_nlb_dns_name"><a class="anchor" href="#_nlb_dns_name"></a><a id="output_nlb_dns_name"></a> <a href="#output_nlb_dns_name">nlb_dns_name</a></h4>
+<div class="paragraph">
+<p>Description: Map of the DNS names of the load balancers (public and/or private if enabled). Returns <code>null</code> if the respective load balancer is disabled.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_nlb_zone_id"><a class="anchor" href="#_nlb_zone_id"></a><a id="output_nlb_zone_id"></a> <a href="#output_nlb_zone_id">nlb_zone_id</a></h4>
+<div class="paragraph">
+<p>Description: Map of the zone_id of the load balancer to assist with creating DNS records (public and/or private if enabled). Returns <code>null</code> if the respective load balancer is disabled.</p>
+</div>
+</div>
+<div class="sect3">
 <h4 id="_nlb_target_groups"><a class="anchor" href="#_nlb_target_groups"></a><a id="output_nlb_target_groups"></a> <a href="#output_nlb_target_groups">nlb_target_groups</a></h4>
 <div class="paragraph">
-<p>Description: List of ARNs of Network LBs (public and/or private if enabled).</p>
+<p>Description: List of the target groups ARNs (public and/or private if enabled).</p>
 </div>
 </div>
 <div class="sect3">
@@ -1708,18 +1727,18 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="provider_dns"></a> <a href="#provider_dns">dns</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="provider_aws"></a> <a href="#provider_aws">aws</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>&gt;= 4</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_dns"></a> <a href="#provider_dns">dns</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -2310,10 +2329,26 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_nlb_dns_name"></a> <a href="#output_nlb_dns_name">nlb_dns_name</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Map of the DNS names of the load balancers (public and/or private if enabled). Returns <code>null</code> if the respective load balancer is disabled.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_nlb_zone_id"></a> <a href="#output_nlb_zone_id">nlb_zone_id</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Map of the zone_id of the load balancer to assist with creating DNS records (public and/or private if enabled). Returns <code>null</code> if the respective load balancer is disabled.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="output_nlb_target_groups"></a> <a href="#output_nlb_target_groups">nlb_target_groups</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>List of ARNs of Network LBs (public and/or private if enabled).</p>
+<p>List of the target groups ARNs (public and/or private if enabled).</p>
 </div></div></td>
 </tr>
 <tr>
