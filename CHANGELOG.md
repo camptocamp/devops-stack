@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.11.0](https://github.com/camptocamp/devops-stack/compare/v1.10.0...v1.11.0) (2024-08-28)
+
+
+### Features
+
+* **website:** Use the camptocamp.com contact page ([#1351](https://github.com/camptocamp/devops-stack/issues/1351)) ([60c8c26](https://github.com/camptocamp/devops-stack/commit/60c8c2656c86a22eaed69e217d16481b17fa3f4f))
+
 ## [1.10.0](https://github.com/camptocamp/devops-stack/compare/v1.9.0...v1.10.0) (2024-08-14)
 
 
