@@ -52,7 +52,7 @@ module "efs" {
 }
 
 module "ebs" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-ebs-csi-driver.git?ref=v3.5.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-ebs-csi-driver.git?ref=v3.6.0"
 
   cluster_name   = local.cluster_name
   argocd_project = module.eks.cluster_name
