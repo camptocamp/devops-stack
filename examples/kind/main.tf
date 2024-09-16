@@ -89,11 +89,11 @@ module "oidc" {
   cluster_issuer = local.cluster_issuer
 
   user_map = {
-    YOUR_USERNAME = {
-      username   = "YOUR_USERNAME"
-      email      = "YOUR_EMAIL"
-      first_name = "YOUR_FIRST_NAME"
-      last_name  = "YOUR_LAST_NAME"
+    admin = {
+      username   = "test"
+      email      = "test@admin.com"
+      first_name = "test"
+      last_name  = "test"
     },
   }
 
@@ -126,10 +126,10 @@ module "minio" {
 }
 
 module "loki-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack.git//kind?ref=v9.0.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack.git//kind?ref=alloy"
 
   argocd_project = local.cluster_name
-
+  target_revision = "alloy"
   app_autosync = local.app_autosync
 
   logs_storage = {
@@ -138,43 +138,68 @@ module "loki-stack" {
     access_key  = local.minio_config.users.0.accessKey
     secret_key  = local.minio_config.users.0.secretKey
   }
+  helm_values = [{
+    alloy = {
+      alloy = {
+        configMap = {
+          content = <<-EOF
+            discovery.kubernetes "pods" {
+              role = "pod"
+            }
+
+            loki.source.kubernetes_events "events" {
+              forward_to = [loki.write.local.receiver] 
+            }
+
+            loki.write "local" {
+              endpoint {
+                url = "http://loki-distributor.loki-stack:3100/loki/api/v1/push"
+              }
+              tenant_id = "tenant_test"
+            }
+          EOF
+        }
+        create = true
+      }
+    }
+  }]
 
   dependency_ids = {
     minio = module.minio.id
   }
 }
 
-module "thanos" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//kind?ref=v6.0.0"
-
-  cluster_name   = local.cluster_name
-  base_domain    = local.base_domain
-  subdomain      = local.subdomain
-  cluster_issuer = local.cluster_issuer
-  argocd_project = local.cluster_name
-
-  app_autosync = local.app_autosync
-
-  metrics_storage = {
-    bucket_name = local.minio_config.buckets.1.name
-    endpoint    = module.minio.endpoint
-    access_key  = local.minio_config.users.1.accessKey
-    secret_key  = local.minio_config.users.1.secretKey
-  }
-
-  thanos = {
-    oidc = module.oidc.oidc
-  }
-
-  dependency_ids = {
-    argocd       = module.argocd_bootstrap.id
-    traefik      = module.traefik.id
-    cert-manager = module.cert-manager.id
-    minio        = module.minio.id
-    keycloak     = module.keycloak.id
-    oidc         = module.oidc.id
-  }
-}
+//module "thanos" {
+//  source = "git::https://github.com/camptocamp/devops-stack-module-thanos.git//kind?ref=v5.0.0"
+//
+//  cluster_name   = local.cluster_name
+//  base_domain    = local.base_domain
+//  subdomain      = local.subdomain
+//  cluster_issuer = local.cluster_issuer
+//  argocd_project = local.cluster_name
+//
+//  app_autosync = local.app_autosync
+//
+//  metrics_storage = {
+//    bucket_name = local.minio_config.buckets.1.name
+//    endpoint    = module.minio.endpoint
+//    access_key  = local.minio_config.users.1.accessKey
+//    secret_key  = local.minio_config.users.1.secretKey
+//  }
+//
+//  thanos = {
+//    oidc = module.oidc.oidc
+//  }
+//
+//  dependency_ids = {
+//    argocd       = module.argocd_bootstrap.id
+//    traefik      = module.traefik.id
+//    cert-manager = module.cert-manager.id
+//    minio        = module.minio.id
+//    keycloak     = module.keycloak.id
+//    oidc         = module.oidc.id
+//  }
+//}
 
 module "kube-prometheus-stack" {
   source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git//kind?ref=v11.1.1"
