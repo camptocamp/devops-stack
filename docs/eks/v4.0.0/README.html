@@ -1,0 +1,2318 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>devops-stack-module-cluster-eks :: DevOps Stack</title>
+    <meta name="generator" content="Antora 3.1.2">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GDBX9466LL"></script>
+    <script>function gtag(){dataLayer.push(arguments)};window.dataLayer=window.dataLayer||[];gtag('js',new Date());gtag('config','G-GDBX9466LL')</script>
+    <link rel="icon" href="../../_/img/favicon.png" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://devops-stack.io"><img width="200px" src="../../_/img/devops-stack-logo_light_by_c2c_black.png"/></a>
+      <div class="navbar-item search hide-for-print">
+        <div id="search-field" class="field">
+          <input id="search-input" type="text" placeholder="Search the docs">
+        </div>
+      </div>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/camptocamp/devops-stack"><i class="fa fa-github-alt"></i>&nbsp;GitHub</a>
+        <a class="navbar-item" href="https://www.camptocamp.com">Camptocamp</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="eks" data-version="v4.0.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="README.html">EKS Cluster Module</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="README.html">Home</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><a href="https://github.com/camptocamp/devops-stack-module-cluster-eks" target="_blank" rel="noopener">Repository</a></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../latest/index.html"><em>Return to DevOps Stack docs</em></a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">EKS Cluster Module</span>
+    <span class="version">v4.0.0</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../aks/latest/README.html">AKS Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../aks/latest/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../aks/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../aks/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../application/latest/README.html">Application Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../application/latest/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.2.3/README.html">v1.2.3</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.2.2/README.html">v1.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.2.1/README.html">v1.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.2.0/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.1.1/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../applicationset/latest/README.html">ApplicationSet Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../applicationset/latest/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v2.1.1/README.html">v2.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.2.6/README.html">v1.2.6</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.2.5/README.html">v1.2.5</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.2.4/README.html">v1.2.4</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../argocd/latest/README.html">Argo CD Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../argocd/latest/README.html">v6.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v6.2.0/README.html">v6.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v6.1.0/README.html">v6.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v6.0.0/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v5.5.0/README.html">v5.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v5.4.0/README.html">v5.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v5.3.0/README.html">v5.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v5.2.0/README.html">v5.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v5.1.0/README.html">v5.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v5.0.0/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v4.5.0/README.html">v4.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v4.4.1/README.html">v4.4.1</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v4.4.0/README.html">v4.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v4.3.0/README.html">v4.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v4.2.0/README.html">v4.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v4.1.0/README.html">v4.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v4.0.0/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.5.2/README.html">v3.5.2</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.5.1/README.html">v3.5.1</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.5.0/README.html">v3.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.4.1/README.html">v3.4.1</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.4.0/README.html">v3.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.3.0/README.html">v3.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.1.3/README.html">v3.1.3</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.1.2/README.html">v3.1.2</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.1.1/README.html">v3.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v1.1.2/README.html">v1.1.2</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v1.1.1/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../oidc-aws-cognito/latest/README.html">AWS Cognito OIDC Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../oidc-aws-cognito/latest/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../oidc-aws-cognito/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../oidc-aws-cognito/v1.0.1/README.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../oidc-aws-cognito/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../cert-manager/latest/README.html">cert-manager Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../cert-manager/latest/README.html">v8.6.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v8.5.0/README.html">v8.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v8.4.0/README.html">v8.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v8.3.0/README.html">v8.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v8.2.0/README.html">v8.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v8.1.0/README.html">v8.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v8.0.0/README.html">v8.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v7.0.1/README.html">v7.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v7.0.0/README.html">v7.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v6.0.0/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v5.3.0/README.html">v5.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v5.2.1/README.html">v5.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v5.2.0/README.html">v5.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v5.1.0/README.html">v5.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v5.0.1/README.html">v5.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v5.0.0/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v4.0.3/README.html">v4.0.3</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../latest/index.html">DevOps Stack</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../latest/index.html">v1.11.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.10.0/index.html">v1.10.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.9.0/index.html">v1.9.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.8.1/index.html">v1.8.1</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.8.0/index.html">v1.8.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.7.0/index.html">v1.7.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.6.0/index.html">v1.6.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.5.2/index.html">v1.5.2</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.5.1/index.html">v1.5.1</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.5.0/index.html">v1.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.4.0/index.html">v1.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.3.0/index.html">v1.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.2.0/index.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.0.2/index.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.0.1/index.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.0.0/index.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../dex/latest/README.html">Dex Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../dex/latest/README.html">v1.0.1-alpha.4</a>
+        </li>
+        <li class="version">
+          <a href="../../dex/v1.0.0-alpha.4/README.html">v1.0.0-alpha.4</a>
+        </li>
+        <li class="version">
+          <a href="../../dex/v1.0.0-alpha.3/README.html">v1.0.0-alpha.3</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../ebs-csi-driver/latest/README.html">EBS CSI Driver Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../ebs-csi-driver/latest/README.html">v3.6.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v3.5.0/README.html">v3.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v3.4.1/README.html">v3.4.1</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v3.4.0/README.html">v3.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v3.3.0/README.html">v3.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v2.4.0/README.html">v2.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v1.0.2/README.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../efs-csi-driver/latest/README.html">EFS CSI Driver Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../efs-csi-driver/latest/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v3.2.1/README.html">v3.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v2.4.0/README.html">v2.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v1.0.2/README.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../latest/README.html">EKS Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../latest/README.html">v4.1.0</a>
+        </li>
+        <li class="version is-current">
+          <a href="README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../v3.3.0/README.html">v3.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../v3.0.1/README.html">v3.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../v2.0.2/README.html">v2.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../keycloak/latest/README.html">Keycloak Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../keycloak/latest/README.html">v3.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.1.1/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.0.2/README.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.0.1/README.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../kind/latest/README.html">KinD Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../kind/latest/README.html">v2.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kind/v2.4.0/README.html">v2.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kind/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kind/v2.2.2/README.html">v2.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../kind/v2.2.1/README.html">v2.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kind/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kind/v2.1.2/README.html">v2.1.2</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../kube-prometheus-stack/latest/README.html">kube-prometheus-stack Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../kube-prometheus-stack/latest/README.html">v12.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v11.1.1/README.html">v11.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v11.1.0/README.html">v11.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v11.0.0/README.html">v11.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v10.1.1/README.html">v10.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v10.1.0/README.html">v10.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v10.0.0/README.html">v10.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v9.2.1/README.html">v9.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v9.2.0/README.html">v9.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v9.1.0/README.html">v9.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v9.0.0/README.html">v9.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v8.2.0/README.html">v8.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v8.1.0/README.html">v8.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v8.0.2/README.html">v8.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v8.0.1/README.html">v8.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v8.0.0/README.html">v8.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v7.1.0/README.html">v7.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v7.0.0/README.html">v7.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v6.3.0/README.html">v6.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v6.2.0/README.html">v6.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v6.1.1/README.html">v6.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v6.1.0/README.html">v6.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v6.0.1/README.html">v6.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v6.0.0/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v5.0.0/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v4.0.1/README.html">v4.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v4.0.0/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v3.3.0/README.html">v3.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.2.3/README.html">v2.2.3</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.2.2/README.html">v2.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.2.1/README.html">v2.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../loki/latest/README.html">Loki Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../loki/latest/README.html">v9.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v8.2.0/README.html">v8.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v8.1.0/README.html">v8.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v8.0.0/README.html">v8.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v7.2.0/README.html">v7.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v7.1.0/README.html">v7.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v7.0.1/README.html">v7.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v7.0.0/README.html">v7.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v6.0.0/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v5.2.0/README.html">v5.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v5.1.0/README.html">v5.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v5.0.0/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v4.0.2/README.html">v4.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v4.0.1/README.html">v4.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v4.0.0/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v3.0.1/README.html">v3.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.0.2/README.html">v2.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../longhorn/latest/README.html">Longhorn Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../longhorn/latest/README.html">v3.8.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v3.7.0/README.html">v3.7.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v3.6.0/README.html">v3.6.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v3.5.0/README.html">v3.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v3.4.0/README.html">v3.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v3.3.1/README.html">v3.3.1</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v3.3.0/README.html">v3.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v3.2.1/README.html">v3.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v2.1.1/README.html">v2.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../metallb/latest/README.html">MetalLB Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../metallb/latest/README.html">v1.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../metallb/v1.4.0/README.html">v1.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../metallb/v1.3.0/README.html">v1.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../metallb/v1.2.0/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../metallb/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../metallb/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../metrics-server/latest/README.html">Metrics Server Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../metrics-server/latest/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../metrics-server/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../metrics-server/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../minio/latest/README.html">MinIO Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../minio/latest/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v3.1.1/README.html">v3.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v1.1.2/README.html">v1.1.2</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../sks/latest/README.html">SKS Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../sks/latest/README.html">v1.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../sks/v1.2.0/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../sks/v1.1.1/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../sks/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../sks/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../thanos/latest/README.html">Thanos Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../thanos/latest/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v5.0.0/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v4.1.0/README.html">v4.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v4.0.0/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v3.3.0/README.html">v3.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v3.0.1/README.html">v3.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.7.0/README.html">v2.7.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.6.0/README.html">v2.6.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.5.0/README.html">v2.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.4.0/README.html">v2.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v1.0.1/README.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../traefik/latest/README.html">Traefik Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../traefik/latest/README.html">v8.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v8.1.0/README.html">v8.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v8.0.0/README.html">v8.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v7.0.0/README.html">v7.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v6.3.0/README.html">v6.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v6.2.0/README.html">v6.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v6.1.1/README.html">v6.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v6.1.0/README.html">v6.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v6.0.0/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v5.0.0/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v4.1.0/README.html">v4.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v4.0.0/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.2.3/README.html">v1.2.3</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.2.2/README.html">v1.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.2.1/README.html">v1.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.2.0/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="README.html">EKS Cluster Module</a></li>
+    <li><a href="README.html">Home</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">v4.0.0</button>
+  <div class="version-menu">
+    <a class="version" href="../latest/README.html">v4.1.0</a>
+    <a class="version is-current" href="README.html">v4.0.0</a>
+    <a class="version" href="../v3.3.0/README.html">v3.3.0</a>
+    <a class="version" href="../v3.2.0/README.html">v3.2.0</a>
+    <a class="version" href="../v3.1.0/README.html">v3.1.0</a>
+    <a class="version" href="../v3.0.1/README.html">v3.0.1</a>
+    <a class="version" href="../v3.0.0/README.html">v3.0.0</a>
+    <a class="version" href="../v2.0.2/README.html">v2.0.2</a>
+    <a class="version" href="../v2.0.1/README.html">v2.0.1</a>
+    <a class="version" href="../v2.0.0/README.html">v2.0.0</a>
+    <a class="version" href="../v1.0.0/README.html">v1.0.0</a>
+  </div>
+</div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-cluster-eks/blob/v4.0.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">devops-stack-module-cluster-eks</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <a href="https://devops-stack.io/">DevOps Stack</a> module to deploy a Kubernetes cluster on Amazon Web Services EKS.</p>
+</div>
+<div class="paragraph">
+<p>This module creates <a href="https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html">EKS managed nodes</a> by default, bug also supports <a href="https://docs.aws.amazon.com/eks/latest/userguide/worker.html">self-managed node groups</a> by setting the variable <code>use_self_managed_node_groups</code> to <code>true</code>. It uses the Terraform <a href="https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest">module "eks" by AWS</a> to manage the cluster itself.</p>
+</div>
+<div class="paragraph">
+<p>The <code>node_groups</code> variable is a map of objects. Each value of the map creates a node group referenced by its label. The value object can take any input accepted by the <a href="https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest/submodules/eks-managed-node-group">eks-managed-node-group</a> or <a href="https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest/submodules/self-managed-node-group">self-managed-node-group</a> submodule.</p>
+</div>
+<div class="paragraph">
+<p>Here is an example that creates one EKS managed node group with 3 instances of type <code>r5a.large</code>, attaches them to the cluster Load Balancer(s), and customizes the base EBS volume size to 100 GB:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>  node_groups = {
+    "my-node-group" = {
+      instance_types  = ["r5a.xlarge"]
+      min_size        = 3
+      max_size        = 3
+      desired_size    = 3
+      nlbs_attachment = true
+
+      block_device_mappings = {
+        "default" = {
+          device_name = "/dev/xvda"
+          ebs = {
+            volume_size = 100
+          }
+        }
+      }
+    },
+  }</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>When using self-managed node groups, the instance type is instead given as a single string value instead of an array:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>      instance_type     = "r5a.xlarge"</pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can check out available instance types on the <a href="https://aws.amazon.com/ec2/instance-types">official AWS documentation pages</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Depending on the <code>create_public_nlb</code> and <code>create_private_nlb</code> variables, it creates a public and/or public Network Load Balancer(s). The node groups that have the <code>target_group_arns = module.my_cluster.nlb_target_groups</code> value set will be added as backends of the LBs. By default, the LBs only forward traffic on the ports <code>80</code> and <code>443</code>, but you can customize this using the <code>extra_lb_target_groups</code> and <code>extra_lb_http_tcp_listeners</code> variables to add other ports. Look at the <code>lb.tf</code> file in this module for the syntax.</p>
+</div>
+<div class="paragraph">
+<p>This module needs a Route 53 DNS zone in the same AWS account to create a wildcard CNAME record that points to the Network LB. The DNS zone must be passed in the <code>base_domain</code> variable. This record is used by other DevOps Stack modules as default URLs for their applications.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_upgrading_from_versions_earlier_than_3_x"><a class="anchor" href="#_upgrading_from_versions_earlier_than_3_x"></a>Upgrading from versions earlier than 3.x</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The versions 2.x and earlier of this module created <a href="https://docs.aws.amazon.com/eks/latest/userguide/worker.html">self-managed node groups</a> exclusively. Upgrading to versions 3.x or later requires setting the variable <code>use_self_managed_node_groups</code> to <code>true</code> to avoid breaking existing clusters.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>When going from self-managed node groups to EKS managed ones, note the following changes in node groups arguments:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>instance_type</code> argument is replaced with <code>instance_types</code> and accepts a list of strings,</p>
+</li>
+<li>
+<p>The <code>target_group_arns</code> argument isn&#8217;t supported anymore. Instead set <code>nlbs_attachment = true</code>.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Switching an existing cluster to EKS managed node groups is possible, but requires manually draining the existing nodes after the new node group is created and before the old one is destroyed (by doing a <code>terraform apply -target &lt;resource&gt;</code> in multiple steps).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_technical_reference"><a class="anchor" href="#_technical_reference"></a>Technical Reference</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_requirements"><a class="anchor" href="#_requirements"></a>Requirements</h3>
+<div class="paragraph">
+<p>The following requirements are needed by this module:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="requirement_terraform"></a> <a href="#requirement_terraform">terraform</a> (&gt;= 1.0)</p>
+</li>
+<li>
+<p><a id="requirement_aws"></a> <a href="#requirement_aws">aws</a> (&gt;= 4)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_providers"><a class="anchor" href="#_providers"></a>Providers</h3>
+<div class="paragraph">
+<p>The following providers are used by this module:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="provider_dns"></a> <a href="#provider_dns">dns</a></p>
+</li>
+<li>
+<p><a id="provider_aws"></a> <a href="#provider_aws">aws</a> (&gt;= 4)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_modules"><a class="anchor" href="#_modules"></a>Modules</h3>
+<div class="paragraph">
+<p>The following Modules are called:</p>
+</div>
+<div class="sect3">
+<h4 id="_cluster"><a class="anchor" href="#_cluster"></a><a id="module_cluster"></a> <a href="#module_cluster">cluster</a></h4>
+<div class="paragraph">
+<p>Source: terraform-aws-modules/eks/aws</p>
+</div>
+<div class="paragraph">
+<p>Version: ~&gt; 20.0</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_nlb"><a class="anchor" href="#_nlb"></a><a id="module_nlb"></a> <a href="#module_nlb">nlb</a></h4>
+<div class="paragraph">
+<p>Source: terraform-aws-modules/alb/aws</p>
+</div>
+<div class="paragraph">
+<p>Version: ~&gt; 8.0</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_nlb_private"><a class="anchor" href="#_nlb_private"></a><a id="module_nlb_private"></a> <a href="#module_nlb_private">nlb_private</a></h4>
+<div class="paragraph">
+<p>Source: terraform-aws-modules/alb/aws</p>
+</div>
+<div class="paragraph">
+<p>Version: ~&gt; 8.0</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_resources"><a class="anchor" href="#_resources"></a>Resources</h3>
+<div class="paragraph">
+<p>The following resources are used by this module:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_attachment">aws_autoscaling_attachment.node_groups_to_nlbs_target_groups</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record">aws_route53_record.wildcard</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/eks_cluster_auth">aws_eks_cluster_auth.cluster</a> (data source)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region">aws_region.current</a> (data source)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/route53_zone">aws_route53_zone.this</a> (data source)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/hashicorp/dns/latest/docs/data-sources/a_record_set">dns_a_record_set.nlb</a> (data source)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/hashicorp/dns/latest/docs/data-sources/a_record_set">dns_a_record_set.nlb_private</a> (data source)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_required_inputs"><a class="anchor" href="#_required_inputs"></a>Required Inputs</h3>
+<div class="paragraph">
+<p>The following input variables are required:</p>
+</div>
+<div class="sect3">
+<h4 id="_cluster_name"><a class="anchor" href="#_cluster_name"></a><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></h4>
+<div class="paragraph">
+<p>Description: Name of the EKS cluster. Must be unique in the AWS account.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_vpc_id"><a class="anchor" href="#_vpc_id"></a><a id="input_vpc_id"></a> <a href="#input_vpc_id">vpc_id</a></h4>
+<div class="paragraph">
+<p>Description: ID of the VPC where the cluster and nodes will be deployed.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_private_subnet_ids"><a class="anchor" href="#_private_subnet_ids"></a><a id="input_private_subnet_ids"></a> <a href="#input_private_subnet_ids">private_subnet_ids</a></h4>
+<div class="paragraph">
+<p>Description: List of IDs of private subnets that the EKS instances will be attached to.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>list(string)</code></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_optional_inputs"><a class="anchor" href="#_optional_inputs"></a>Optional Inputs</h3>
+<div class="paragraph">
+<p>The following input variables are optional (have default values):</p>
+</div>
+<div class="sect3">
+<h4 id="_base_domain"><a class="anchor" href="#_base_domain"></a><a id="input_base_domain"></a> <a href="#input_base_domain">base_domain</a></h4>
+<div class="paragraph">
+<p>Description: The base domain for the cluster.</p>
+</div>
+<div class="paragraph">
+<p>This module needs a Route 53 zone matching this variable with permission to create DNS records. It will create a wildcard CNAME record <code>*.&lt;subdomain&gt;.&lt;base_domain&gt;</code> that points to an Elastic Load Balancer routing ingress traffic to all cluster nodes. Such urls will be used by default by other DevOps Stack modules for the applications they deploy (e.g. Argo CD, Prometheus, etc).</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>null</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_subdomain"><a class="anchor" href="#_subdomain"></a><a id="input_subdomain"></a> <a href="#input_subdomain">subdomain</a></h4>
+<div class="paragraph">
+<p>Description: The subdomain used for ingresses.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"apps"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_kubernetes_version"><a class="anchor" href="#_kubernetes_version"></a><a id="input_kubernetes_version"></a> <a href="#input_kubernetes_version">kubernetes_version</a></h4>
+<div class="paragraph">
+<p>Description: Kubernetes <code>&lt;major&gt;.&lt;minor&gt;</code> version to use for the EKS cluster.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html">AWS EKS documentation</a> for a list of available versions.</p>
+</div>
+<div class="paragraph">
+<p>If you do not specify a value, the latest available version at creation is used and no upgrades will occur except those automatically triggered by EKS.</p>
+</div>
+<div class="paragraph">
+<p>The value can be set and increased on an existing cluster to upgrade it. <strong>Note that this triggers a rolling replacement of the compute nodes, so all pods will be recreated</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>null</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cluster_endpoint_public_access_cidrs"><a class="anchor" href="#_cluster_endpoint_public_access_cidrs"></a><a id="input_cluster_endpoint_public_access_cidrs"></a> <a href="#input_cluster_endpoint_public_access_cidrs">cluster_endpoint_public_access_cidrs</a></h4>
+<div class="paragraph">
+<p>Description: List of CIDR blocks which can access the Amazon EKS public API server endpoint.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>list(string)</code></p>
+</div>
+<div class="paragraph">
+<p>Default:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">[
+  "0.0.0.0/0"
+]</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_public_subnet_ids"><a class="anchor" href="#_public_subnet_ids"></a><a id="input_public_subnet_ids"></a> <a href="#input_public_subnet_ids">public_subnet_ids</a></h4>
+<div class="paragraph">
+<p>Description: List of IDs of public subnets the public NLB will be attached to if enabled with 'create_public_nlb'.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>list(string)</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>[]</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_node_groups"><a class="anchor" href="#_node_groups"></a><a id="input_node_groups"></a> <a href="#input_node_groups">node_groups</a></h4>
+<div class="paragraph">
+<p>Description: A map of node group configurations to be created.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>any</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>{}</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_use_self_managed_node_groups"><a class="anchor" href="#_use_self_managed_node_groups"></a><a id="input_use_self_managed_node_groups"></a> <a href="#input_use_self_managed_node_groups">use_self_managed_node_groups</a></h4>
+<div class="paragraph">
+<p>Description: Whether to use self-managed node groups instead of EKS managed node groups.</p>
+</div>
+<div class="paragraph">
+<p>EKS managed node groups have the advantage of automatically draining the nodes when instances are being replaced.</p>
+</div>
+<div class="paragraph">
+<p><strong>You should set this variable to <code>true</code> on clusters deployed with a module earlier than v3 because it created self-managed node groups exclusively.</strong></p>
+</div>
+<div class="paragraph">
+<p>Changing this on an existing cluster is not supported (although it is possible with some downtime and manual fixes to the load balancer target groups).</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>bool</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>false</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_create_public_nlb"><a class="anchor" href="#_create_public_nlb"></a><a id="input_create_public_nlb"></a> <a href="#input_create_public_nlb">create_public_nlb</a></h4>
+<div class="paragraph">
+<p>Description: Whether to create an internet-facing NLB attached to the public subnets</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>bool</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>true</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_create_private_nlb"><a class="anchor" href="#_create_private_nlb"></a><a id="input_create_private_nlb"></a> <a href="#input_create_private_nlb">create_private_nlb</a></h4>
+<div class="paragraph">
+<p>Description: Whether to create an internal NLB attached the private subnets</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>bool</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>false</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_nlb_attached_node_groups"><a class="anchor" href="#_nlb_attached_node_groups"></a><a id="input_nlb_attached_node_groups"></a> <a href="#input_nlb_attached_node_groups">nlb_attached_node_groups</a></h4>
+<div class="paragraph">
+<p>Description: List of node_groups indexes that the NLB(s) should be attached to</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>list(any)</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>[]</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_extra_lb_target_groups"><a class="anchor" href="#_extra_lb_target_groups"></a><a id="input_extra_lb_target_groups"></a> <a href="#input_extra_lb_target_groups">extra_lb_target_groups</a></h4>
+<div class="paragraph">
+<p>Description: Additional Target Groups to attach to Network LBs.</p>
+</div>
+<div class="paragraph">
+<p>A list of maps containing key/value pairs that define the target groups. Required key/values: <code>name</code>, <code>backend_protocol</code>, <code>backend_port</code>.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>list(any)</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>[]</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_extra_lb_http_tcp_listeners"><a class="anchor" href="#_extra_lb_http_tcp_listeners"></a><a id="input_extra_lb_http_tcp_listeners"></a> <a href="#input_extra_lb_http_tcp_listeners">extra_lb_http_tcp_listeners</a></h4>
+<div class="paragraph">
+<p>Description: Additional Listeners to attach to Network LBs.</p>
+</div>
+<div class="paragraph">
+<p>A list of maps describing the HTTP listeners. Required key/values: <code>port</code>, <code>protocol</code>. Optional key/values: <code>target_group_index</code> (defaults to <code>http_tcp_listeners[count.index]</code>).</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>list(any)</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>[]</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_tags"><a class="anchor" href="#_tags"></a><a id="input_tags"></a> <a href="#input_tags">tags</a></h4>
+<div class="paragraph">
+<p>Description: Tags to apply to all resources created by the EKS Terraform module.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>map(string)</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>{}</code></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_outputs"><a class="anchor" href="#_outputs"></a>Outputs</h3>
+<div class="paragraph">
+<p>The following outputs are exported:</p>
+</div>
+<div class="sect3">
+<h4 id="_cluster_name_2"><a class="anchor" href="#_cluster_name_2"></a><a id="output_cluster_name"></a> <a href="#output_cluster_name">cluster_name</a></h4>
+<div class="paragraph">
+<p>Description: Name of the EKS cluster.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cluster_arn"><a class="anchor" href="#_cluster_arn"></a><a id="output_cluster_arn"></a> <a href="#output_cluster_arn">cluster_arn</a></h4>
+<div class="paragraph">
+<p>Description: The Amazon Resource Name (ARN) of the cluster</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_base_domain_2"><a class="anchor" href="#_base_domain_2"></a><a id="output_base_domain"></a> <a href="#output_base_domain">base_domain</a></h4>
+<div class="paragraph">
+<p>Description: The base domain for the cluster.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cluster_oidc_issuer_url"><a class="anchor" href="#_cluster_oidc_issuer_url"></a><a id="output_cluster_oidc_issuer_url"></a> <a href="#output_cluster_oidc_issuer_url">cluster_oidc_issuer_url</a></h4>
+<div class="paragraph">
+<p>Description: The URL on the EKS cluster for the OpenID Connect identity provider</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_node_security_group_id"><a class="anchor" href="#_node_security_group_id"></a><a id="output_node_security_group_id"></a> <a href="#output_node_security_group_id">node_security_group_id</a></h4>
+<div class="paragraph">
+<p>Description: ID of the node shared security group</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_node_groups_2"><a class="anchor" href="#_node_groups_2"></a><a id="output_node_groups"></a> <a href="#output_node_groups">node_groups</a></h4>
+<div class="paragraph">
+<p>Description: Map of attribute maps for all node groups created.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_kubernetes_host"><a class="anchor" href="#_kubernetes_host"></a><a id="output_kubernetes_host"></a> <a href="#output_kubernetes_host">kubernetes_host</a></h4>
+<div class="paragraph">
+<p>Description: Endpoint for your Kubernetes API server.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_kubernetes_cluster_ca_certificate"><a class="anchor" href="#_kubernetes_cluster_ca_certificate"></a><a id="output_kubernetes_cluster_ca_certificate"></a> <a href="#output_kubernetes_cluster_ca_certificate">kubernetes_cluster_ca_certificate</a></h4>
+<div class="paragraph">
+<p>Description: Certificate data required to communicate with the cluster.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_kubernetes_token"><a class="anchor" href="#_kubernetes_token"></a><a id="output_kubernetes_token"></a> <a href="#output_kubernetes_token">kubernetes_token</a></h4>
+<div class="paragraph">
+<p>Description: Token to use to authenticate with the cluster.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_nlb_dns_name"><a class="anchor" href="#_nlb_dns_name"></a><a id="output_nlb_dns_name"></a> <a href="#output_nlb_dns_name">nlb_dns_name</a></h4>
+<div class="paragraph">
+<p>Description: Map of the DNS names of the load balancers (public and/or private if enabled). Returns <code>null</code> if the respective load balancer is disabled.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_nlb_zone_id"><a class="anchor" href="#_nlb_zone_id"></a><a id="output_nlb_zone_id"></a> <a href="#output_nlb_zone_id">nlb_zone_id</a></h4>
+<div class="paragraph">
+<p>Description: Map of the zone_id of the load balancer to assist with creating DNS records (public and/or private if enabled). Returns <code>null</code> if the respective load balancer is disabled.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_nlb_target_groups"><a class="anchor" href="#_nlb_target_groups"></a><a id="output_nlb_target_groups"></a> <a href="#output_nlb_target_groups">nlb_target_groups</a></h4>
+<div class="paragraph">
+<p>Description: List of the target groups ARNs (public and/or private if enabled).</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_kubernetes"><a class="anchor" href="#_kubernetes"></a><a id="output_kubernetes"></a> <a href="#output_kubernetes">kubernetes</a></h4>
+<div class="paragraph">
+<p>Description: Kubernetes API endpoint and CA certificate as a structured value.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_reference_in_table_format"><a class="anchor" href="#_reference_in_table_format"></a>Reference in table format</h3>
+<details>
+<summary class="title">Show tables</summary>
+<div class="content">
+<div class="paragraph">
+<p>= Requirements</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_terraform"></a> <a href="#requirement_terraform">terraform</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 1.0</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_aws"></a> <a href="#requirement_aws">aws</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 4</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>= Providers</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_aws"></a> <a href="#provider_aws">aws</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 4</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_dns"></a> <a href="#provider_dns">dns</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>= Modules</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Source</th>
+<th class="tableblock halign-left valign-top">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="module_nlb"></a> <a href="#module_nlb">nlb</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>terraform-aws-modules/alb/aws</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>~&gt; 8.0</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="module_nlb_private"></a> <a href="#module_nlb_private">nlb_private</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>terraform-aws-modules/alb/aws</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>~&gt; 8.0</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="module_cluster"></a> <a href="#module_cluster">cluster</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>terraform-aws-modules/eks/aws</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>~&gt; 20.0</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>= Resources</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_attachment">aws_autoscaling_attachment.node_groups_to_nlbs_target_groups</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record">aws_route53_record.wildcard</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/eks_cluster_auth">aws_eks_cluster_auth.cluster</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>data source</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region">aws_region.current</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>data source</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/route53_zone">aws_route53_zone.this</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>data source</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/dns/latest/docs/data-sources/a_record_set">dns_a_record_set.nlb</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>data source</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/dns/latest/docs/data-sources/a_record_set">dns_a_record_set.nlb_private</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>data source</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>= Inputs</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Name of the EKS cluster. Must be unique in the AWS account.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_base_domain"></a> <a href="#input_base_domain">base_domain</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The base domain for the cluster.</p>
+</div>
+<div class="paragraph">
+<p>This module needs a Route 53 zone matching this variable with permission to create DNS records. It will create a wildcard CNAME record <code>*.&lt;subdomain&gt;.&lt;base_domain&gt;</code> that points to an Elastic Load Balancer routing ingress traffic to all cluster nodes. Such urls will be used by default by other DevOps Stack modules for the applications they deploy (e.g. Argo CD, Prometheus, etc).</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>null</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_subdomain"></a> <a href="#input_subdomain">subdomain</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The subdomain used for ingresses.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>"apps"</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_kubernetes_version"></a> <a href="#input_kubernetes_version">kubernetes_version</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Kubernetes <code>&lt;major&gt;.&lt;minor&gt;</code> version to use for the EKS cluster.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html">AWS EKS documentation</a> for a list of available versions.</p>
+</div>
+<div class="paragraph">
+<p>If you do not specify a value, the latest available version at creation is used and no upgrades will occur except those automatically triggered by EKS.</p>
+</div>
+<div class="paragraph">
+<p>The value can be set and increased on an existing cluster to upgrade it. <strong>Note that this triggers a rolling replacement of the compute nodes, so all pods will be recreated</strong>.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>null</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_cluster_endpoint_public_access_cidrs"></a> <a href="#input_cluster_endpoint_public_access_cidrs">cluster_endpoint_public_access_cidrs</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>List of CIDR blocks which can access the Amazon EKS public API server endpoint.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>list(string)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">[
+  "0.0.0.0/0"
+]</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_vpc_id"></a> <a href="#input_vpc_id">vpc_id</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>ID of the VPC where the cluster and nodes will be deployed.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_private_subnet_ids"></a> <a href="#input_private_subnet_ids">private_subnet_ids</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>List of IDs of private subnets that the EKS instances will be attached to.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>list(string)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_public_subnet_ids"></a> <a href="#input_public_subnet_ids">public_subnet_ids</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>List of IDs of public subnets the public NLB will be attached to if enabled with 'create_public_nlb'.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>list(string)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>[]</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_node_groups"></a> <a href="#input_node_groups">node_groups</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A map of node group configurations to be created.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>any</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>{}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_use_self_managed_node_groups"></a> <a href="#input_use_self_managed_node_groups">use_self_managed_node_groups</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Whether to use self-managed node groups instead of EKS managed node groups.</p>
+</div>
+<div class="paragraph">
+<p>EKS managed node groups have the advantage of automatically draining the nodes when instances are being replaced.</p>
+</div>
+<div class="paragraph">
+<p><strong>You should set this variable to <code>true</code> on clusters deployed with a module earlier than v3 because it created self-managed node groups exclusively.</strong></p>
+</div>
+<div class="paragraph">
+<p>Changing this on an existing cluster is not supported (although it is possible with some downtime and manual fixes to the load balancer target groups).</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>bool</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>false</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_create_public_nlb"></a> <a href="#input_create_public_nlb">create_public_nlb</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Whether to create an internet-facing NLB attached to the public subnets</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>bool</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>true</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_create_private_nlb"></a> <a href="#input_create_private_nlb">create_private_nlb</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Whether to create an internal NLB attached the private subnets</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>bool</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>false</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_nlb_attached_node_groups"></a> <a href="#input_nlb_attached_node_groups">nlb_attached_node_groups</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>List of node_groups indexes that the NLB(s) should be attached to</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>list(any)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>[]</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_extra_lb_target_groups"></a> <a href="#input_extra_lb_target_groups">extra_lb_target_groups</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Additional Target Groups to attach to Network LBs.</p>
+</div>
+<div class="paragraph">
+<p>A list of maps containing key/value pairs that define the target groups. Required key/values: <code>name</code>, <code>backend_protocol</code>, <code>backend_port</code>.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>list(any)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>[]</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_extra_lb_http_tcp_listeners"></a> <a href="#input_extra_lb_http_tcp_listeners">extra_lb_http_tcp_listeners</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Additional Listeners to attach to Network LBs.</p>
+</div>
+<div class="paragraph">
+<p>A list of maps describing the HTTP listeners. Required key/values: <code>port</code>, <code>protocol</code>. Optional key/values: <code>target_group_index</code> (defaults to <code>http_tcp_listeners[count.index]</code>).</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>list(any)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>[]</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_tags"></a> <a href="#input_tags">tags</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Tags to apply to all resources created by the EKS Terraform module.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>map(string)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>{}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>= Outputs</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_cluster_name"></a> <a href="#output_cluster_name">cluster_name</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Name of the EKS cluster.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_cluster_arn"></a> <a href="#output_cluster_arn">cluster_arn</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The Amazon Resource Name (ARN) of the cluster</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_base_domain"></a> <a href="#output_base_domain">base_domain</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The base domain for the cluster.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_cluster_oidc_issuer_url"></a> <a href="#output_cluster_oidc_issuer_url">cluster_oidc_issuer_url</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The URL on the EKS cluster for the OpenID Connect identity provider</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_node_security_group_id"></a> <a href="#output_node_security_group_id">node_security_group_id</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>ID of the node shared security group</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_node_groups"></a> <a href="#output_node_groups">node_groups</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Map of attribute maps for all node groups created.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_kubernetes_host"></a> <a href="#output_kubernetes_host">kubernetes_host</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Endpoint for your Kubernetes API server.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_kubernetes_cluster_ca_certificate"></a> <a href="#output_kubernetes_cluster_ca_certificate">kubernetes_cluster_ca_certificate</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Certificate data required to communicate with the cluster.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_kubernetes_token"></a> <a href="#output_kubernetes_token">kubernetes_token</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Token to use to authenticate with the cluster.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_nlb_dns_name"></a> <a href="#output_nlb_dns_name">nlb_dns_name</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Map of the DNS names of the load balancers (public and/or private if enabled). Returns <code>null</code> if the respective load balancer is disabled.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_nlb_zone_id"></a> <a href="#output_nlb_zone_id">nlb_zone_id</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Map of the zone_id of the load balancer to assist with creating DNS records (public and/or private if enabled). Returns <code>null</code> if the respective load balancer is disabled.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_nlb_target_groups"></a> <a href="#output_nlb_target_groups">nlb_target_groups</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>List of the target groups ARNs (public and/or private if enabled).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_kubernetes"></a> <a href="#output_kubernetes">kubernetes</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Kubernetes API endpoint and CA certificate as a structured value.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>Copyright © Camptocamp <script> document.write(new Date().getFullYear()) </script> — All Rights Reserved</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/terraform.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/vendor/lunr.js"></script>
+<script src="../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../.." data-snippet-length="100" data-stylesheet="../../_/css/search.css"></script>
+<script async src="../../search-index.js"></script>
+  </body>
+</html>
