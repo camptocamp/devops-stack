@@ -140,22 +140,51 @@ module "loki-stack" {
   }
   helm_values = [{
     alloy = {
+      serviceMonitor= {
+        enabled = true
+      }
+      config = {  
+        livedebugging = {
+              enabled = true
+            }
+      }
       alloy = {
+        stabilityLevel= "experimental"
         configMap = {
           content = <<-EOF
+            livedebugging {
+              enabled = true
+            }
+
             discovery.kubernetes "pods" {
               role = "pod"
             }
 
+            prometheus.remote_write "metrics_service" {
+              endpoint {
+                url = "http://localhost:9090/api/v1/write"
+              }
+            } 
+
             loki.source.kubernetes_events "events" {
-              forward_to = [loki.write.local.receiver] 
+              forward_to = [
+                loki.process.change.receiver,
+                loki.write.local.receiver,
+                loki.echo.debug.receiver,
+              ] 
             }
+
+            loki.process "change" {
+              forward_to = [loki.write.local.receiver]
+            }
+
+            loki.echo "debug"{}
 
             loki.write "local" {
               endpoint {
                 url = "http://loki-distributor.loki-stack:3100/loki/api/v1/push"
+                tenant_id = "test"
               }
-              tenant_id = "tenant_test"
             }
           EOF
         }
