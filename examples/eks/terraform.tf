@@ -21,7 +21,7 @@ terraform {
       version = "~> 2"
     }
     argocd = {
-      source  = "oboukili/argocd"
+      source  = "argoproj-labs/argocd"
       version = "~> 7"
     }
   }
