@@ -1,0 +1,3210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>devops-stack-module-argocd :: DevOps Stack</title>
+    <meta name="generator" content="Antora 3.1.2">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GDBX9466LL"></script>
+    <script>function gtag(){dataLayer.push(arguments)};window.dataLayer=window.dataLayer||[];gtag('js',new Date());gtag('config','G-GDBX9466LL')</script>
+    <link rel="icon" href="../../_/img/favicon.png" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://devops-stack.io"><img width="200px" src="../../_/img/devops-stack-logo_light_by_c2c_black.png"/></a>
+      <div class="navbar-item search hide-for-print">
+        <div id="search-field" class="field">
+          <input id="search-input" type="text" placeholder="Search the docs">
+        </div>
+      </div>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/camptocamp/devops-stack"><i class="fa fa-github-alt"></i>&nbsp;GitHub</a>
+        <a class="navbar-item" href="https://www.camptocamp.com">Camptocamp</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="argocd" data-version="v6.3.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="README.html">Argo CD Module</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="README.html">Home</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Module Variants</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="bootstrap/README.html">Bootstrap</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><a href="https://github.com/camptocamp/devops-stack-module-argocd" target="_blank" rel="noopener">Repository</a></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../latest/index.html"><em>Return to DevOps Stack docs</em></a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Argo CD Module</span>
+    <span class="version">v6.3.0</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../aks/latest/README.html">AKS Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../aks/latest/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../aks/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../aks/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../application/latest/README.html">Application Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../application/latest/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.2.3/README.html">v1.2.3</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.2.2/README.html">v1.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.2.1/README.html">v1.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.2.0/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.1.1/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../application/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../applicationset/latest/README.html">ApplicationSet Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../applicationset/latest/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v2.1.1/README.html">v2.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.2.6/README.html">v1.2.6</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.2.5/README.html">v1.2.5</a>
+        </li>
+        <li class="version">
+          <a href="../../applicationset/v1.2.4/README.html">v1.2.4</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../latest/README.html">Argo CD Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../latest/README.html">v7.0.0</a>
+        </li>
+        <li class="version is-current">
+          <a href="README.html">v6.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../v6.2.0/README.html">v6.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../v6.1.0/README.html">v6.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../v6.0.0/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../v5.5.0/README.html">v5.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../v5.4.0/README.html">v5.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../v5.3.0/README.html">v5.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../v5.2.0/README.html">v5.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../v5.1.0/README.html">v5.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../v5.0.0/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../v4.5.0/README.html">v4.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../v4.4.1/README.html">v4.4.1</a>
+        </li>
+        <li class="version">
+          <a href="../v4.4.0/README.html">v4.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../v4.3.0/README.html">v4.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../v4.2.0/README.html">v4.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../v4.1.0/README.html">v4.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../v4.0.0/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../v3.5.2/README.html">v3.5.2</a>
+        </li>
+        <li class="version">
+          <a href="../v3.5.1/README.html">v3.5.1</a>
+        </li>
+        <li class="version">
+          <a href="../v3.5.0/README.html">v3.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../v3.4.1/README.html">v3.4.1</a>
+        </li>
+        <li class="version">
+          <a href="../v3.4.0/README.html">v3.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../v3.3.0/README.html">v3.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../v3.1.3/README.html">v3.1.3</a>
+        </li>
+        <li class="version">
+          <a href="../v3.1.2/README.html">v3.1.2</a>
+        </li>
+        <li class="version">
+          <a href="../v3.1.1/README.html">v3.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../v1.1.2/README.html">v1.1.2</a>
+        </li>
+        <li class="version">
+          <a href="../v1.1.1/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../oidc-aws-cognito/latest/README.html">AWS Cognito OIDC Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../oidc-aws-cognito/latest/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../oidc-aws-cognito/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../oidc-aws-cognito/v1.0.1/README.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../oidc-aws-cognito/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../cert-manager/latest/README.html">cert-manager Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../cert-manager/latest/README.html">v9.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v8.6.0/README.html">v8.6.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v8.5.0/README.html">v8.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v8.4.0/README.html">v8.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v8.3.0/README.html">v8.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v8.2.0/README.html">v8.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v8.1.0/README.html">v8.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v8.0.0/README.html">v8.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v7.0.1/README.html">v7.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v7.0.0/README.html">v7.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v6.0.0/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v5.3.0/README.html">v5.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v5.2.1/README.html">v5.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v5.2.0/README.html">v5.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v5.1.0/README.html">v5.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v5.0.1/README.html">v5.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v5.0.0/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v4.0.3/README.html">v4.0.3</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../cert-manager/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../latest/index.html">DevOps Stack</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../latest/index.html">v1.11.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.10.0/index.html">v1.10.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.9.0/index.html">v1.9.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.8.1/index.html">v1.8.1</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.8.0/index.html">v1.8.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.7.0/index.html">v1.7.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.6.0/index.html">v1.6.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.5.2/index.html">v1.5.2</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.5.1/index.html">v1.5.1</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.5.0/index.html">v1.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.4.0/index.html">v1.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.3.0/index.html">v1.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.2.0/index.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.0.2/index.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.0.1/index.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../v1.0.0/index.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../dex/latest/README.html">Dex Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../dex/latest/README.html">v1.0.1-alpha.5</a>
+        </li>
+        <li class="version">
+          <a href="../../dex/v1.0.1-alpha.4/README.html">v1.0.1-alpha.4</a>
+        </li>
+        <li class="version">
+          <a href="../../dex/v1.0.0-alpha.4/README.html">v1.0.0-alpha.4</a>
+        </li>
+        <li class="version">
+          <a href="../../dex/v1.0.0-alpha.3/README.html">v1.0.0-alpha.3</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../ebs-csi-driver/latest/README.html">EBS CSI Driver Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../ebs-csi-driver/latest/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v3.6.0/README.html">v3.6.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v3.5.0/README.html">v3.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v3.4.1/README.html">v3.4.1</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v3.4.0/README.html">v3.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v3.3.0/README.html">v3.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v2.4.0/README.html">v2.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v1.0.2/README.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../ebs-csi-driver/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../efs-csi-driver/latest/README.html">EFS CSI Driver Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../efs-csi-driver/latest/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v4.0.0/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v3.2.1/README.html">v3.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v2.4.0/README.html">v2.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v1.0.2/README.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../efs-csi-driver/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../eks/latest/README.html">EKS Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../eks/latest/README.html">v4.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v4.0.0/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v3.3.0/README.html">v3.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v3.0.1/README.html">v3.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v2.0.2/README.html">v2.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../eks/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../keycloak/latest/README.html">Keycloak Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../keycloak/latest/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v3.1.1/README.html">v3.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.1.1/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.0.2/README.html">v1.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.0.1/README.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../keycloak/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../kind/latest/README.html">KinD Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../kind/latest/README.html">v2.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kind/v2.4.0/README.html">v2.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kind/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kind/v2.2.2/README.html">v2.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../kind/v2.2.1/README.html">v2.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kind/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kind/v2.1.2/README.html">v2.1.2</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../kube-prometheus-stack/latest/README.html">kube-prometheus-stack Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../kube-prometheus-stack/latest/README.html">v13.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v12.0.0/README.html">v12.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v11.1.1/README.html">v11.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v11.1.0/README.html">v11.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v11.0.0/README.html">v11.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v10.1.1/README.html">v10.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v10.1.0/README.html">v10.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v10.0.0/README.html">v10.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v9.2.1/README.html">v9.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v9.2.0/README.html">v9.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v9.1.0/README.html">v9.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v9.0.0/README.html">v9.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v8.2.0/README.html">v8.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v8.1.0/README.html">v8.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v8.0.2/README.html">v8.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v8.0.1/README.html">v8.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v8.0.0/README.html">v8.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v7.1.0/README.html">v7.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v7.0.0/README.html">v7.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v6.3.0/README.html">v6.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v6.2.0/README.html">v6.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v6.1.1/README.html">v6.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v6.1.0/README.html">v6.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v6.0.1/README.html">v6.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v6.0.0/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v5.0.0/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v4.0.1/README.html">v4.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v4.0.0/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v3.3.0/README.html">v3.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.2.3/README.html">v2.2.3</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.2.2/README.html">v2.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.2.1/README.html">v2.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../kube-prometheus-stack/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../loki/latest/README.html">Loki Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../loki/latest/README.html">v10.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v9.0.0/README.html">v9.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v8.2.0/README.html">v8.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v8.1.0/README.html">v8.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v8.0.0/README.html">v8.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v7.2.0/README.html">v7.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v7.1.0/README.html">v7.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v7.0.1/README.html">v7.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v7.0.0/README.html">v7.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v6.0.0/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v5.2.0/README.html">v5.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v5.1.0/README.html">v5.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v5.0.0/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v4.0.2/README.html">v4.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v4.0.1/README.html">v4.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v4.0.0/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v3.0.1/README.html">v3.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.0.2/README.html">v2.0.2</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../loki/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../longhorn/latest/README.html">Longhorn Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../longhorn/latest/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v3.9.0/README.html">v3.9.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v3.8.0/README.html">v3.8.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v3.7.0/README.html">v3.7.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v3.6.0/README.html">v3.6.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v3.5.0/README.html">v3.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v3.4.0/README.html">v3.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v3.3.1/README.html">v3.3.1</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v3.3.0/README.html">v3.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v3.2.1/README.html">v3.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v2.1.1/README.html">v2.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../longhorn/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../metallb/latest/README.html">MetalLB Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../metallb/latest/README.html">v1.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../metallb/v1.4.0/README.html">v1.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../metallb/v1.3.0/README.html">v1.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../metallb/v1.2.0/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../metallb/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../metallb/v1.0.1/README.html">v1.0.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../metrics-server/latest/README.html">Metrics Server Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../metrics-server/latest/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../metrics-server/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../metrics-server/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../metrics-server/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../minio/latest/README.html">MinIO Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../minio/latest/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v3.1.1/README.html">v3.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v1.1.2/README.html">v1.1.2</a>
+        </li>
+        <li class="version">
+          <a href="../../minio/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../sks/latest/README.html">SKS Cluster Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../sks/latest/README.html">v1.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../sks/v1.2.0/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../sks/v1.1.1/README.html">v1.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../sks/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../sks/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../thanos/latest/README.html">Thanos Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../thanos/latest/README.html">v7.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v6.0.0/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v5.0.0/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v4.1.0/README.html">v4.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v4.0.0/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v3.3.0/README.html">v3.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v3.2.0/README.html">v3.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v3.0.1/README.html">v3.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.7.0/README.html">v2.7.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.6.0/README.html">v2.6.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.5.0/README.html">v2.5.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.4.0/README.html">v2.4.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.3.0/README.html">v2.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.2.0/README.html">v2.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.1.0/README.html">v2.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v1.0.1/README.html">v1.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../thanos/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../traefik/latest/README.html">Traefik Module</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../traefik/latest/README.html">v9.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v8.2.0/README.html">v8.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v8.1.0/README.html">v8.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v8.0.0/README.html">v8.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v7.0.0/README.html">v7.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v6.3.0/README.html">v6.3.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v6.2.0/README.html">v6.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v6.1.1/README.html">v6.1.1</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v6.1.0/README.html">v6.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v6.0.0/README.html">v6.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v5.0.0/README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v4.1.0/README.html">v4.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v4.0.0/README.html">v4.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v3.1.0/README.html">v3.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v3.0.0/README.html">v3.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v2.0.1/README.html">v2.0.1</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v2.0.0/README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.2.3/README.html">v1.2.3</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.2.2/README.html">v1.2.2</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.2.1/README.html">v1.2.1</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.2.0/README.html">v1.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.1.0/README.html">v1.1.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v1.0.0/README.html">v1.0.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="README.html">Argo CD Module</a></li>
+    <li><a href="README.html">Home</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">v6.3.0</button>
+  <div class="version-menu">
+    <a class="version" href="../latest/README.html">v7.0.0</a>
+    <a class="version is-current" href="README.html">v6.3.0</a>
+    <a class="version" href="../v6.2.0/README.html">v6.2.0</a>
+    <a class="version" href="../v6.1.0/README.html">v6.1.0</a>
+    <a class="version" href="../v6.0.0/README.html">v6.0.0</a>
+    <a class="version" href="../v5.5.0/README.html">v5.5.0</a>
+    <a class="version" href="../v5.4.0/README.html">v5.4.0</a>
+    <a class="version" href="../v5.3.0/README.html">v5.3.0</a>
+    <a class="version" href="../v5.2.0/README.html">v5.2.0</a>
+    <a class="version" href="../v5.1.0/README.html">v5.1.0</a>
+    <a class="version" href="../v5.0.0/README.html">v5.0.0</a>
+    <a class="version" href="../v4.5.0/README.html">v4.5.0</a>
+    <a class="version" href="../v4.4.1/README.html">v4.4.1</a>
+    <a class="version" href="../v4.4.0/README.html">v4.4.0</a>
+    <a class="version" href="../v4.3.0/README.html">v4.3.0</a>
+    <a class="version" href="../v4.2.0/README.html">v4.2.0</a>
+    <a class="version" href="../v4.1.0/README.html">v4.1.0</a>
+    <a class="version" href="../v4.0.0/README.html">v4.0.0</a>
+    <a class="version" href="../v3.5.2/README.html">v3.5.2</a>
+    <a class="version" href="../v3.5.1/README.html">v3.5.1</a>
+    <a class="version" href="../v3.5.0/README.html">v3.5.0</a>
+    <a class="version" href="../v3.4.1/README.html">v3.4.1</a>
+    <a class="version" href="../v3.4.0/README.html">v3.4.0</a>
+    <a class="version" href="../v3.3.0/README.html">v3.3.0</a>
+    <a class="version" href="../v3.2.0/README.html">v3.2.0</a>
+    <a class="version" href="../v3.1.3/README.html">v3.1.3</a>
+    <a class="version" href="../v3.1.2/README.html">v3.1.2</a>
+    <a class="version" href="../v3.1.1/README.html">v3.1.1</a>
+    <a class="version" href="../v3.1.0/README.html">v3.1.0</a>
+    <a class="version" href="../v3.0.0/README.html">v3.0.0</a>
+    <a class="version" href="../v2.1.0/README.html">v2.1.0</a>
+    <a class="version" href="../v2.0.0/README.html">v2.0.0</a>
+    <a class="version" href="../v1.1.2/README.html">v1.1.2</a>
+    <a class="version" href="../v1.1.1/README.html">v1.1.1</a>
+    <a class="version" href="../v1.1.0/README.html">v1.1.0</a>
+    <a class="version" href="../v1.0.0/README.html">v1.0.0</a>
+  </div>
+</div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-argocd/blob/v6.3.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">devops-stack-module-argocd</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <a href="https://devops-stack.io">DevOps Stack</a> module to deploy and configure <a href="https://argo-cd.readthedocs.io/">Argo CD</a>.</p>
+</div>
+<div class="paragraph">
+<p>The Argo CD chart used by this module is shipped in this repository as well, in order to avoid any unwanted behaviors caused by unsupported versions.</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Current Chart Version</th>
+<th class="tableblock halign-left valign-top">Original Repository</th>
+<th class="tableblock halign-left valign-top">Default Values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>5.27.1</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/argoproj/argo-helm/tree/main/charts/argo-cd">Chart</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://artifacthub.io/packages/helm/argo/argo-cd/5.27.1?modal=values"><code>values.yaml</code></a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_usage"><a class="anchor" href="#_usage"></a>Usage</h2>
+<div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The root of this repository contains the final Argo CD module to be deployed, which uses a <a href="https://registry.terraform.io/providers/oboukili/argocd/latest/docs">Terraform provider for Argo CD</a> to deploy the Argo CD chart. On the first deployment of a cluster, you&#8217;ll want to use the bootstrap module instead. Check the <a href="bootstrap/README.html" class="xref page">bootstrap module&#8217;s documentation</a> for more information.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To deploy the final Argo CD module, you&#8217;ll need to add the following declaration on your Terraform configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-terraform hljs" data-lang="terraform">module "argocd" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=&lt;RELEASE&gt;"
+
+  cluster_name   = local.cluster_name
+  base_domain    = local.base_domain
+  cluster_issuer = local.cluster_issuer
+
+  admin_enabled            = "true"
+  namespace                = module.argocd_bootstrap.argocd_namespace
+  accounts_pipeline_tokens = module.argocd_bootstrap.argocd_accounts_pipeline_tokens
+  server_secretkey         = module.argocd_bootstrap.argocd_server_secretkey
+
+  dependency_ids = {
+    argocd                = module.argocd_bootstrap.id
+    traefik               = module.traefik.id
+    cert-manager          = module.cert-manager.id
+    oidc                  = module.oidc.id
+    kube-prometheus-stack = module.kube-prometheus-stack.id
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A more complex declaration, that includes a OIDC configuration for the login (this way you avoid having to login using the admin password found on a Kubernetes secret) and the configuration of some other source repositories, would be:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-terraform hljs" data-lang="terraform">module "argocd" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=&lt;RELEASE&gt;"
+
+  ...
+
+  oidc = {
+    name         = "OIDC"
+    issuer       = module.oidc.oidc.issuer_url
+    clientID     = module.oidc.oidc.client_id
+    clientSecret = module.oidc.oidc.client_secret
+    requestedIDTokenClaims = {
+      groups = {
+        essential = true
+      }
+    }
+    requestedScopes = [
+      "openid", "profile", "email"
+    ]
+  }
+
+  repositories = {
+    cluster-apps = {
+      ...
+    }
+    user-apps = {
+      ...
+    }
+  }
+
+  ...
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The sources can also be configured using the <a href="../../application/latest/README.html" class="xref page">Application</a> and <a href="../../applicationset/latest/README.html" class="xref page">ApplicationSet</a> modules.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can also overload the <code>policy.csv</code> as shown in the following example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-terraform hljs" data-lang="terraform">module "argocd" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=&lt;RELEASE&gt;"
+
+  ...
+
+  rbac = {
+    policy_csv = &lt;&lt;-EOT
+      g, pipeline, role:admin
+      g, argocd-admin, role:admin
+      p, role:read-sync, applications, get, */*, allow
+      p, role:read-sync, applications, sync, */*, allow
+      p, role:read-sync, repositories, get, *, allow
+      p, role:read-sync, projects, get, *, allow
+    EOT
+  }
+
+  ...
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+By default, this module has a <code>policy.csv</code> that is configured to give administrator access to any user belonging to the groups <code>argocd-admin</code> or <code>devops-stack-admins</code>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_custom_plugins"><a class="anchor" href="#_custom_plugins"></a>Custom Plugins</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This module installs two custom plugins:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>"kustomized-helm" is just a combination of Kustomize and Helm that allows using Helm charts and then applying Kustomize overrides to the result.</p>
+</li>
+<li>
+<p>"helmfile-sops" adds support for Helmfile managed applications, and integrates the support for <a href="https://github.com/mozilla/sops">SOPS</a>. This is a custom plugin developed by Camptocamp (source code available <a href="https://github.com/camptocamp/docker-argocd-cmp-helmfile">here</a>).</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+When using SOPS, you will want to give it access to an external secrets management or encryption service. For this, you will want to pass an AWS IAM role, and Azure Workload Identity Client-ID, or an Azure AAD Pod Identity using the variables <code>repo_server_iam_role_arn</code>, repo_server_azure_workload_identity_clientid`, or <code>repo_server_aadpodidbinding</code>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_troubleshooting"><a class="anchor" href="#_troubleshooting"></a>Troubleshooting</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_connection_error_during_terraform_apply"><a class="anchor" href="#_connection_error_during_terraform_apply"></a><code>connection_error</code> during <code>terraform apply</code></h3>
+<div class="paragraph">
+<p>When deploying this module of Argo CD you may experience connection errors (which is normal given that <code>argocd-server</code> pod could have been redeployed).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">│ Error: Error while waiting for application argocd to be created
+│
+│   with module.argocd.argocd_application.this,
+│   on .terraform/modules/argocd/main.tf line 55, in resource "argocd_application" "this":
+│   55: resource "argocd_application" "this" {
+│
+│ error while waiting for application argocd to be synced and healthy: rpc error: code = Unavailable desc = connection error: desc = "transport: error while dialing: dial tcp 127.0.0.1:44461: connect:
+│ connection refused"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When bootstrapping a cluster for the first time, you can simply run <code>terraform apply</code> again and the deployment should finish correctly.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>There are some settings that force the automatic redeployment of the <code>argocd-server</code> pod during the first bootstrap of the cluster.</p>
+</div>
+<div class="paragraph">
+<p>A good example is the <code>admin_enabled</code> variable which is set as <code>true</code> for the bootstrap but not for the final Argo CD module. If you pass the <code>admin_enabled = true</code> to the final Argo CD module you will most likely not encounter this error on the first deployment of you cluster, however you could run into the error of the interface looping whenever you click login (see the other troubleshoot sections).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>However, on some cases (notably when upgrading the Argo CD module), this error could leave the Terraform resource tainted.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">terraform plan
+  # module.devops_stack_blue.module.argocd.argocd_application.this is tainted, so must be replaced
+-/+ resource "argocd_application" "this" {
+      ~ id      = "argocd:argocd" -&gt; (known after apply)
+        # (2 unchanged attributes hidden)
+
+      ~ metadata {
+        ...
+        }
+
+      ~ spec {
+        ...
+        }
+    }
+
+Plan: 1 to add, 1 to change, 1 to destroy.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Untainting the resource with the command <code>terraform untaint module.argocd.argocd_application.this</code> should solve the issue</strong>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_argo_cd_interface_reload_loop_when_clicking_on_login"><a class="anchor" href="#_argo_cd_interface_reload_loop_when_clicking_on_login"></a>Argo CD interface reload loop when clicking on login</h3>
+<div class="paragraph">
+<p>If you encounter a loop when clicking on the login button on the Argo CD interface, you can try to delete the Argo CD server pod and let it be recreated.</p>
+</div>
+<div class="paragraph">
+<p>This error usually happens because there are some unapplied settings between the bootstrap Argo CD and the final Argo CD module. If you already encountered the error from the previous step, then this error should not happen, as it means the pod was already recreated.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_technical_documentation"><a class="anchor" href="#_technical_documentation"></a>Technical Documentation</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_dependencies"><a class="anchor" href="#_dependencies"></a>Dependencies</h3>
+<div class="sect3">
+<h4 id="_module_argocd_bootstrap_id"><a class="anchor" href="#_module_argocd_bootstrap_id"></a><code>module.argocd_bootstrap.id</code></h4>
+<div class="paragraph">
+<p>Obviously, this module needs an already working Argo CD (the bootstrap), so it depends on <code>module.argocd_bootstrap</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_module_traefik_id"><a class="anchor" href="#_module_traefik_id"></a><code>module.traefik.id</code></h4>
+<div class="paragraph">
+<p>Since there is an ingress deployed with this module, it needs to be deployed after Traefik so it depends on <code>module.ingress</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_module_traefik_id_2"><a class="anchor" href="#_module_traefik_id_2"></a><code>module.traefik.id</code></h4>
+<div class="paragraph">
+<p>For the same reason as the previous dependency, it needs to be deployed after cert-manager so it depends on <code>module.cert-manager</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_module_oidc_id"><a class="anchor" href="#_module_oidc_id"></a><code>module.oidc.id</code></h4>
+<div class="paragraph">
+<p>Only for the platforms that deploy a OIDC module, such as EKS, KinD or SKS, there is also a the dependency on <code>module.oidc.id</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_module_kube_prometheus_stack_id"><a class="anchor" href="#_module_kube_prometheus_stack_id"></a><code>module.kube-prometheus-stack.id</code></h4>
+<div class="paragraph">
+<p>Finally, the kube-prometheus-stack is a requirement because this Argo CD module requires the ServiceMonitor CRD so it depends on <code>module.kube-prometheus-stack</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_requirements"><a class="anchor" href="#_requirements"></a>Requirements</h3>
+<div class="paragraph">
+<p>The following requirements are needed by this module:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="requirement_terraform"></a> <a href="#requirement_terraform">terraform</a> (&gt;= 1.2)</p>
+</li>
+<li>
+<p><a id="requirement_argocd"></a> <a href="#requirement_argocd">argocd</a> (&gt;= 5)</p>
+</li>
+<li>
+<p><a id="requirement_htpasswd"></a> <a href="#requirement_htpasswd">htpasswd</a> (&gt;= 1)</p>
+</li>
+<li>
+<p><a id="requirement_jwt"></a> <a href="#requirement_jwt">jwt</a> (&gt;= 1.1)</p>
+</li>
+<li>
+<p><a id="requirement_null"></a> <a href="#requirement_null">null</a> (&gt;= 3)</p>
+</li>
+<li>
+<p><a id="requirement_random"></a> <a href="#requirement_random">random</a> (&gt;= 3)</p>
+</li>
+<li>
+<p><a id="requirement_time"></a> <a href="#requirement_time">time</a> (&gt;= 0.9)</p>
+</li>
+<li>
+<p><a id="requirement_utils"></a> <a href="#requirement_utils">utils</a> (&gt;= 1.6)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_providers"><a class="anchor" href="#_providers"></a>Providers</h3>
+<div class="paragraph">
+<p>The following providers are used by this module:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="provider_jwt"></a> <a href="#provider_jwt">jwt</a> (&gt;= 1.1)</p>
+</li>
+<li>
+<p><a id="provider_time"></a> <a href="#provider_time">time</a> (&gt;= 0.9)</p>
+</li>
+<li>
+<p><a id="provider_random"></a> <a href="#provider_random">random</a> (&gt;= 3)</p>
+</li>
+<li>
+<p><a id="provider_argocd"></a> <a href="#provider_argocd">argocd</a> (&gt;= 5)</p>
+</li>
+<li>
+<p><a id="provider_utils"></a> <a href="#provider_utils">utils</a> (&gt;= 1.6)</p>
+</li>
+<li>
+<p><a id="provider_null"></a> <a href="#provider_null">null</a> (&gt;= 3)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_resources"><a class="anchor" href="#_resources"></a>Resources</h3>
+<div class="paragraph">
+<p>The following resources are used by this module:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://registry.terraform.io/providers/oboukili/argocd/latest/docs/resources/application">argocd_application.this</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/oboukili/argocd/latest/docs/resources/project">argocd_project.this</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/camptocamp/jwt/latest/docs/resources/hashed_token">jwt_hashed_token.tokens</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource">null_resource.dependencies</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource">null_resource.this</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/uuid">random_uuid.jti</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/static">time_static.iat</a> (resource)</p>
+</li>
+<li>
+<p><a href="https://registry.terraform.io/providers/cloudposse/utils/latest/docs/data-sources/deep_merge_yaml">utils_deep_merge_yaml.values</a> (data source)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_required_inputs"><a class="anchor" href="#_required_inputs"></a>Required Inputs</h3>
+<div class="paragraph">
+<p>The following input variables are required:</p>
+</div>
+<div class="sect3">
+<h4 id="_cluster_name"><a class="anchor" href="#_cluster_name"></a><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></h4>
+<div class="paragraph">
+<p>Description: Name given to the cluster. Value used for the ingress' URL of the application.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_base_domain"><a class="anchor" href="#_base_domain"></a><a id="input_base_domain"></a> <a href="#input_base_domain">base_domain</a></h4>
+<div class="paragraph">
+<p>Description: Base domain of the cluster. Value used for the ingress' URL of the application.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_accounts_pipeline_tokens"><a class="anchor" href="#_accounts_pipeline_tokens"></a><a id="input_accounts_pipeline_tokens"></a> <a href="#input_accounts_pipeline_tokens">accounts_pipeline_tokens</a></h4>
+<div class="paragraph">
+<p>Description: API token for pipeline account.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_server_secretkey"><a class="anchor" href="#_server_secretkey"></a><a id="input_server_secretkey"></a> <a href="#input_server_secretkey">server_secretkey</a></h4>
+<div class="paragraph">
+<p>Description: Signature key for session validation. <strong>Must reuse the bootstrap output containing the secretkey.</strong></p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_optional_inputs"><a class="anchor" href="#_optional_inputs"></a>Optional Inputs</h3>
+<div class="paragraph">
+<p>The following input variables are optional (have default values):</p>
+</div>
+<div class="sect3">
+<h4 id="_subdomain"><a class="anchor" href="#_subdomain"></a><a id="input_subdomain"></a> <a href="#input_subdomain">subdomain</a></h4>
+<div class="paragraph">
+<p>Description: Subdomain of the cluster. Value used for the ingress' URL of the application.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"apps"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_argocd_project"><a class="anchor" href="#_argocd_project"></a><a id="input_argocd_project"></a> <a href="#input_argocd_project">argocd_project</a></h4>
+<div class="paragraph">
+<p>Description: Name of the Argo CD AppProject where the Application should be created. If not set, the Application will be created in a new AppProject only for this Application.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>null</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_argocd_labels"><a class="anchor" href="#_argocd_labels"></a><a id="input_argocd_labels"></a> <a href="#input_argocd_labels">argocd_labels</a></h4>
+<div class="paragraph">
+<p>Description: Labels to attach to the Argo CD Application resource.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>map(string)</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>{}</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_target_revision"><a class="anchor" href="#_target_revision"></a><a id="input_target_revision"></a> <a href="#input_target_revision">target_revision</a></h4>
+<div class="paragraph">
+<p>Description: Override of target revision of the application chart.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"v6.0.0"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cluster_issuer"><a class="anchor" href="#_cluster_issuer"></a><a id="input_cluster_issuer"></a> <a href="#input_cluster_issuer">cluster_issuer</a></h4>
+<div class="paragraph">
+<p>Description: SSL certificate issuer to use. Usually you would configure this value as <code>letsencrypt-staging</code> or <code>letsencrypt-prod</code> on your root <code>*.tf</code> files. You can use <code>ca-issuer</code> when using the self-signed variant of cert-manager.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"selfsigned-issuer"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_helm_values"><a class="anchor" href="#_helm_values"></a><a id="input_helm_values"></a> <a href="#input_helm_values">helm_values</a></h4>
+<div class="paragraph">
+<p>Description: Helm chart value overrides. They should be passed as a list of HCL structures.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>any</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>[]</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_app_autosync"><a class="anchor" href="#_app_autosync"></a><a id="input_app_autosync"></a> <a href="#input_app_autosync">app_autosync</a></h4>
+<div class="paragraph">
+<p>Description: Automated sync options for the Argo CD Application resource.</p>
+</div>
+<div class="paragraph">
+<p>Type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">object({
+    allow_empty = optional(bool)
+    prune       = optional(bool)
+    self_heal   = optional(bool)
+  })</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Default:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "allow_empty": false,
+  "prune": true,
+  "self_heal": true
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_dependency_ids"><a class="anchor" href="#_dependency_ids"></a><a id="input_dependency_ids"></a> <a href="#input_dependency_ids">dependency_ids</a></h4>
+<div class="paragraph">
+<p>Description: n/a</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>map(string)</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>{}</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_resources_2"><a class="anchor" href="#_resources_2"></a><a id="input_resources"></a> <a href="#input_resources">resources</a></h4>
+<div class="paragraph">
+<p>Description: Resource limits and requests for Argo CD&#8217;s components. Follow the style on <a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/">official documentation</a> to understand the format of the values.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <code>repo_server</code> requests and limits will be applied to all the extra containers that are deployed with the <code>argocd-repo-server</code> component (each container has the same requests and limits as the main container, <strong>so it is cumulative</strong>).
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you enable the HA mode using the <code>high_availability</code> variable, the values for Redis will be applied to the Redis HA chart instead of the default one.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+These are not production values. You should always adjust them to your needs.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">object({
+
+    application_set = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "100m")
+        memory = optional(string, "128Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string)
+        memory = optional(string)
+      }), {})
+    }), {})
+
+    controller = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "500m")
+        memory = optional(string, "512Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string)
+        memory = optional(string)
+      }), {})
+    }), {})
+
+    notifications = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "100m")
+        memory = optional(string, "128Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string)
+        memory = optional(string)
+      }), {})
+    }), {})
+
+    repo_server = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "200m")
+        memory = optional(string, "128Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string)
+        memory = optional(string)
+      }), {})
+    }), {})
+
+    kustomized_helm_cmp = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "100m")
+        memory = optional(string, "128Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string)
+        memory = optional(string)
+      }), {})
+    }), {})
+
+    helmfile_cmp = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "100m")
+        memory = optional(string, "128Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string)
+        memory = optional(string)
+      }), {})
+    }), {})
+
+    server = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "50m")
+        memory = optional(string, "128Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string)
+        memory = optional(string)
+      }), {})
+    }), {})
+
+    redis = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "200m")
+        memory = optional(string, "256Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string)
+        memory = optional(string)
+      }), {})
+    }), {})
+
+  })</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Default: <code>{}</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_high_availability"><a class="anchor" href="#_high_availability"></a><a id="input_high_availability"></a> <a href="#input_high_availability">high_availability</a></h4>
+<div class="paragraph">
+<p>Description: Argo CD High Availability settings. By default, the HA is disabled.</p>
+</div>
+<div class="paragraph">
+<p>To enable HA using the default replicas, simply set the value <code>high_availability.enabled</code> to <code>true</code>. <strong>This will deploy Argo CD in HA without autoscaling.</strong></p>
+</div>
+<div class="paragraph">
+<p>You can enable autoscaling of the <code>argocd-server</code> and <code>argocd-repo-server</code> components by setting the <code>high_availability.server.autoscaling.enabled</code> and <code>high_availability.repo_server.autoscaling.enabled</code> values to <code>true</code>. You can also configure the minimum and maximum replicas desired or leave the default values.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Activating the HA mode automatically enables the Redis HA chart which requires at least 3 worker nodes, as this chart enforces Pods to run on separate nodes.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Since this variable uses the <code>optional</code> argument to forcing the user to define all the values, there is a side effect you can pass any other bogus value and Terraform will accept it, <strong>but they won&#8217;t be used in the chart behind the module</strong>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">object({
+    enabled = bool
+
+    controller = optional(object({
+      replicas = optional(number, 1)
+    }), {})
+
+    application_set = optional(object({
+      replicas = optional(number, 2)
+    }), {})
+
+    server = optional(object({
+      replicas = optional(number, 2)
+      autoscaling = optional(object({
+        enabled      = bool
+        min_replicas = optional(number, 2)
+        max_replicas = optional(number, 5)
+        }), {
+        enabled = false
+      })
+    }), {})
+
+    repo_server = optional(object({
+      replicas = optional(number, 2)
+      autoscaling = optional(object({
+        enabled      = bool
+        min_replicas = optional(number, 2)
+        max_replicas = optional(number, 5)
+        }), {
+        enabled = false
+      })
+    }), {})
+
+  })</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Default:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "enabled": false
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_oidc"><a class="anchor" href="#_oidc"></a><a id="input_oidc"></a> <a href="#input_oidc">oidc</a></h4>
+<div class="paragraph">
+<p>Description: OIDC settings for the log in to the Argo CD web interface.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>any</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>null</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_rbac"><a class="anchor" href="#_rbac"></a><a id="input_rbac"></a> <a href="#input_rbac">rbac</a></h4>
+<div class="paragraph">
+<p>Description: RBAC settings for the Argo CD users.</p>
+</div>
+<div class="paragraph">
+<p>Type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">object({
+    scopes         = optional(string, "[groups, cognito:groups, roles]")
+    policy_default = optional(string, "")
+    policy_csv = optional(string, &lt;&lt;-EOT
+                                    g, pipeline, role:admin
+                                    g, argocd-admin, role:admin
+                                    g, devops-stack-admins, role:admin
+                                  EOT
+    )
+  })</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Default: <code>{}</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_repositories"><a class="anchor" href="#_repositories"></a><a id="input_repositories"></a> <a href="#input_repositories">repositories</a></h4>
+<div class="paragraph">
+<p>Description: List of repositories to add to Argo CD.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>map(map(string))</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>{}</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ssh_known_hosts"><a class="anchor" href="#_ssh_known_hosts"></a><a id="input_ssh_known_hosts"></a> <a href="#input_ssh_known_hosts">ssh_known_hosts</a></h4>
+<div class="paragraph">
+<p>Description: List of SSH known hosts to add to Argo CD.</p>
+</div>
+<div class="paragraph">
+<p>Check the official <code>values.yaml</code> to get the format to pass this value.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+If you set this variable, the default known hosts will be overridden by this value, so you might want to consider adding the ones you need here."
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>null</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_exec_enabled"><a class="anchor" href="#_exec_enabled"></a><a id="input_exec_enabled"></a> <a href="#input_exec_enabled">exec_enabled</a></h4>
+<div class="paragraph">
+<p>Description: Flag to enable the web-based terminal on Argo CD. Do not forget to set the appropriate RBAC configuration to your users/groups.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>bool</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>false</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_admin_enabled"><a class="anchor" href="#_admin_enabled"></a><a id="input_admin_enabled"></a> <a href="#input_admin_enabled">admin_enabled</a></h4>
+<div class="paragraph">
+<p>Description: Flag to indicate whether to enable the administrator user.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>bool</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>false</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_extra_accounts"><a class="anchor" href="#_extra_accounts"></a><a id="input_extra_accounts"></a> <a href="#input_extra_accounts">extra_accounts</a></h4>
+<div class="paragraph">
+<p>Description: List of accounts for which tokens will be generated.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>list(string)</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>[]</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_repo_server_iam_role_arn"><a class="anchor" href="#_repo_server_iam_role_arn"></a><a id="input_repo_server_iam_role_arn"></a> <a href="#input_repo_server_iam_role_arn">repo_server_iam_role_arn</a></h4>
+<div class="paragraph">
+<p>Description: IAM role ARN to associate with the argocd-repo-server ServiceAccount. This role can be used to give SOPS access to AWS KMS.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>null</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_repo_server_azure_workload_identity_clientid"><a class="anchor" href="#_repo_server_azure_workload_identity_clientid"></a><a id="input_repo_server_azure_workload_identity_clientid"></a> <a href="#input_repo_server_azure_workload_identity_clientid">repo_server_azure_workload_identity_clientid</a></h4>
+<div class="paragraph">
+<p>Description: Azure AD Workload Identity Client-ID to associate with argocd-repo-server. This role can be used to give SOPS access to a Key Vault.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>null</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_repo_server_aadpodidbinding"><a class="anchor" href="#_repo_server_aadpodidbinding"></a><a id="input_repo_server_aadpodidbinding"></a> <a href="#input_repo_server_aadpodidbinding">repo_server_aadpodidbinding</a></h4>
+<div class="paragraph">
+<p>Description: Azure AAD Pod Identity to associate with the argocd-repo-server Pod. This role can be used to give SOPS access to a Key Vault.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>null</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_helmfile_cmp_version"><a class="anchor" href="#_helmfile_cmp_version"></a><a id="input_helmfile_cmp_version"></a> <a href="#input_helmfile_cmp_version">helmfile_cmp_version</a></h4>
+<div class="paragraph">
+<p>Description: Version of the helmfile-cmp plugin.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>string</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>"0.1.1"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_helmfile_cmp_env_variables"><a class="anchor" href="#_helmfile_cmp_env_variables"></a><a id="input_helmfile_cmp_env_variables"></a> <a href="#input_helmfile_cmp_env_variables">helmfile_cmp_env_variables</a></h4>
+<div class="paragraph">
+<p>Description: List of environment variables to attach to the helmfile-cmp plugin, usually used to pass authentication credentials. Use an <a href="https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/">explicit format</a> or take the values from a <a href="https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#define-container-environment-variables-using-secret-data">Kubernetes secret</a>.</p>
+</div>
+<div class="paragraph">
+<p>Type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">list(object({
+    name  = optional(string)
+    value = optional(string)
+    valueFrom = optional(object({
+      secretKeyRef = optional(object({
+        name = optional(string)
+        key  = optional(string)
+      }))
+    }))
+  }))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Default: <code>[]</code></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_outputs"><a class="anchor" href="#_outputs"></a>Outputs</h3>
+<div class="paragraph">
+<p>The following outputs are exported:</p>
+</div>
+<div class="sect3">
+<h4 id="_id"><a class="anchor" href="#_id"></a><a id="output_id"></a> <a href="#output_id">id</a></h4>
+<div class="paragraph">
+<p>Description: ID to pass other modules in order to refer to this module as a dependency.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_extra_tokens"><a class="anchor" href="#_extra_tokens"></a><a id="output_extra_tokens"></a> <a href="#output_extra_tokens">extra_tokens</a></h4>
+<div class="paragraph">
+<p>Description: Map of extra accounts that were created and their tokens.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_reference_in_table_format"><a class="anchor" href="#_reference_in_table_format"></a>Reference in table format</h3>
+<details>
+<summary class="title">Show tables</summary>
+<div class="content">
+<div class="paragraph">
+<p>= Requirements</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_terraform"></a> <a href="#requirement_terraform">terraform</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 1.2</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_argocd"></a> <a href="#requirement_argocd">argocd</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 5</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_htpasswd"></a> <a href="#requirement_htpasswd">htpasswd</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 1</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_jwt"></a> <a href="#requirement_jwt">jwt</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 1.1</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_null"></a> <a href="#requirement_null">null</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 3</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_random"></a> <a href="#requirement_random">random</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 3</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_time"></a> <a href="#requirement_time">time</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 0.9</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="requirement_utils"></a> <a href="#requirement_utils">utils</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 1.6</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>= Providers</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_jwt"></a> <a href="#provider_jwt">jwt</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 1.1</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_time"></a> <a href="#provider_time">time</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 0.9</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_random"></a> <a href="#provider_random">random</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 3</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_argocd"></a> <a href="#provider_argocd">argocd</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 5</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_utils"></a> <a href="#provider_utils">utils</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 1.6</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 3</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>= Resources</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/oboukili/argocd/latest/docs/resources/application">argocd_application.this</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/oboukili/argocd/latest/docs/resources/project">argocd_project.this</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/camptocamp/jwt/latest/docs/resources/hashed_token">jwt_hashed_token.tokens</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource">null_resource.dependencies</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource">null_resource.this</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/uuid">random_uuid.jti</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/static">time_static.iat</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>resource</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="https://registry.terraform.io/providers/cloudposse/utils/latest/docs/data-sources/deep_merge_yaml">utils_deep_merge_yaml.values</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>data source</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>= Inputs</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_cluster_name"></a> <a href="#input_cluster_name">cluster_name</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Name given to the cluster. Value used for the ingress' URL of the application.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_base_domain"></a> <a href="#input_base_domain">base_domain</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Base domain of the cluster. Value used for the ingress' URL of the application.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_subdomain"></a> <a href="#input_subdomain">subdomain</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Subdomain of the cluster. Value used for the ingress' URL of the application.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>"apps"</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_argocd_project"></a> <a href="#input_argocd_project">argocd_project</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Name of the Argo CD AppProject where the Application should be created. If not set, the Application will be created in a new AppProject only for this Application.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>null</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_argocd_labels"></a> <a href="#input_argocd_labels">argocd_labels</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Labels to attach to the Argo CD Application resource.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>map(string)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>{}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_target_revision"></a> <a href="#input_target_revision">target_revision</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Override of target revision of the application chart.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>"v6.0.0"</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_cluster_issuer"></a> <a href="#input_cluster_issuer">cluster_issuer</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>SSL certificate issuer to use. Usually you would configure this value as <code>letsencrypt-staging</code> or <code>letsencrypt-prod</code> on your root <code>*.tf</code> files. You can use <code>ca-issuer</code> when using the self-signed variant of cert-manager.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>"selfsigned-issuer"</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_helm_values"></a> <a href="#input_helm_values">helm_values</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Helm chart value overrides. They should be passed as a list of HCL structures.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>any</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>[]</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_app_autosync"></a> <a href="#input_app_autosync">app_autosync</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Automated sync options for the Argo CD Application resource.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">object({
+    allow_empty = optional(bool)
+    prune       = optional(bool)
+    self_heal   = optional(bool)
+  })</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">{
+  "allow_empty": false,
+  "prune": true,
+  "self_heal": true
+}</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_dependency_ids"></a> <a href="#input_dependency_ids">dependency_ids</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>map(string)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>{}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_resources"></a> <a href="#input_resources">resources</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Resource limits and requests for Argo CD&#8217;s components. Follow the style on <a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/">official documentation</a> to understand the format of the values.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <code>repo_server</code> requests and limits will be applied to all the extra containers that are deployed with the <code>argocd-repo-server</code> component (each container has the same requests and limits as the main container, <strong>so it is cumulative</strong>).
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you enable the HA mode using the <code>high_availability</code> variable, the values for Redis will be applied to the Redis HA chart instead of the default one.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+These are not production values. You should always adjust them to your needs.
+</td>
+</tr>
+</table>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">object({
+
+    application_set = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "100m")
+        memory = optional(string, "128Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string)
+        memory = optional(string)
+      }), {})
+    }), {})
+
+    controller = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "500m")
+        memory = optional(string, "512Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string)
+        memory = optional(string)
+      }), {})
+    }), {})
+
+    notifications = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "100m")
+        memory = optional(string, "128Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string)
+        memory = optional(string)
+      }), {})
+    }), {})
+
+    repo_server = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "200m")
+        memory = optional(string, "128Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string)
+        memory = optional(string)
+      }), {})
+    }), {})
+
+    kustomized_helm_cmp = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "100m")
+        memory = optional(string, "128Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string)
+        memory = optional(string)
+      }), {})
+    }), {})
+
+    helmfile_cmp = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "100m")
+        memory = optional(string, "128Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string)
+        memory = optional(string)
+      }), {})
+    }), {})
+
+    server = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "50m")
+        memory = optional(string, "128Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string)
+        memory = optional(string)
+      }), {})
+    }), {})
+
+    redis = optional(object({
+      requests = optional(object({
+        cpu    = optional(string, "200m")
+        memory = optional(string, "256Mi")
+      }), {})
+      limits = optional(object({
+        cpu    = optional(string)
+        memory = optional(string)
+      }), {})
+    }), {})
+
+  })</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>{}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_high_availability"></a> <a href="#input_high_availability">high_availability</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Argo CD High Availability settings. By default, the HA is disabled.</p>
+</div>
+<div class="paragraph">
+<p>To enable HA using the default replicas, simply set the value <code>high_availability.enabled</code> to <code>true</code>. <strong>This will deploy Argo CD in HA without autoscaling.</strong></p>
+</div>
+<div class="paragraph">
+<p>You can enable autoscaling of the <code>argocd-server</code> and <code>argocd-repo-server</code> components by setting the <code>high_availability.server.autoscaling.enabled</code> and <code>high_availability.repo_server.autoscaling.enabled</code> values to <code>true</code>. You can also configure the minimum and maximum replicas desired or leave the default values.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Activating the HA mode automatically enables the Redis HA chart which requires at least 3 worker nodes, as this chart enforces Pods to run on separate nodes.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Since this variable uses the <code>optional</code> argument to forcing the user to define all the values, there is a side effect you can pass any other bogus value and Terraform will accept it, <strong>but they won&#8217;t be used in the chart behind the module</strong>.
+</td>
+</tr>
+</table>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">object({
+    enabled = bool
+
+    controller = optional(object({
+      replicas = optional(number, 1)
+    }), {})
+
+    application_set = optional(object({
+      replicas = optional(number, 2)
+    }), {})
+
+    server = optional(object({
+      replicas = optional(number, 2)
+      autoscaling = optional(object({
+        enabled      = bool
+        min_replicas = optional(number, 2)
+        max_replicas = optional(number, 5)
+        }), {
+        enabled = false
+      })
+    }), {})
+
+    repo_server = optional(object({
+      replicas = optional(number, 2)
+      autoscaling = optional(object({
+        enabled      = bool
+        min_replicas = optional(number, 2)
+        max_replicas = optional(number, 5)
+        }), {
+        enabled = false
+      })
+    }), {})
+
+  })</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">{
+  "enabled": false
+}</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_oidc"></a> <a href="#input_oidc">oidc</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>OIDC settings for the log in to the Argo CD web interface.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>any</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>null</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_rbac"></a> <a href="#input_rbac">rbac</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>RBAC settings for the Argo CD users.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">object({
+    scopes         = optional(string, "[groups, cognito:groups, roles]")
+    policy_default = optional(string, "")
+    policy_csv = optional(string, &lt;&lt;-EOT
+                                    g, pipeline, role:admin
+                                    g, argocd-admin, role:admin
+                                    g, devops-stack-admins, role:admin
+                                  EOT
+    )
+  })</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>{}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_repositories"></a> <a href="#input_repositories">repositories</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>List of repositories to add to Argo CD.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>map(map(string))</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>{}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_ssh_known_hosts"></a> <a href="#input_ssh_known_hosts">ssh_known_hosts</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>List of SSH known hosts to add to Argo CD.</p>
+</div>
+<div class="paragraph">
+<p>Check the official <code>values.yaml</code> to get the format to pass this value.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+If you set this variable, the default known hosts will be overridden by this value, so you might want to consider adding the ones you need here."
+</td>
+</tr>
+</table>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>null</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_exec_enabled"></a> <a href="#input_exec_enabled">exec_enabled</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Flag to enable the web-based terminal on Argo CD. Do not forget to set the appropriate RBAC configuration to your users/groups.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>bool</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>false</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_admin_enabled"></a> <a href="#input_admin_enabled">admin_enabled</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Flag to indicate whether to enable the administrator user.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>bool</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>false</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_accounts_pipeline_tokens"></a> <a href="#input_accounts_pipeline_tokens">accounts_pipeline_tokens</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>API token for pipeline account.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_server_secretkey"></a> <a href="#input_server_secretkey">server_secretkey</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Signature key for session validation. <strong>Must reuse the bootstrap output containing the secretkey.</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>yes</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_extra_accounts"></a> <a href="#input_extra_accounts">extra_accounts</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>List of accounts for which tokens will be generated.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>list(string)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>[]</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_repo_server_iam_role_arn"></a> <a href="#input_repo_server_iam_role_arn">repo_server_iam_role_arn</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>IAM role ARN to associate with the argocd-repo-server ServiceAccount. This role can be used to give SOPS access to AWS KMS.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>null</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_repo_server_azure_workload_identity_clientid"></a> <a href="#input_repo_server_azure_workload_identity_clientid">repo_server_azure_workload_identity_clientid</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Azure AD Workload Identity Client-ID to associate with argocd-repo-server. This role can be used to give SOPS access to a Key Vault.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>null</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_repo_server_aadpodidbinding"></a> <a href="#input_repo_server_aadpodidbinding">repo_server_aadpodidbinding</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Azure AAD Pod Identity to associate with the argocd-repo-server Pod. This role can be used to give SOPS access to a Key Vault.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>null</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_helmfile_cmp_version"></a> <a href="#input_helmfile_cmp_version">helmfile_cmp_version</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Version of the helmfile-cmp plugin.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>"0.1.1"</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_helmfile_cmp_env_variables"></a> <a href="#input_helmfile_cmp_env_variables">helmfile_cmp_env_variables</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>List of environment variables to attach to the helmfile-cmp plugin, usually used to pass authentication credentials. Use an <a href="https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/">explicit format</a> or take the values from a <a href="https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#define-container-environment-variables-using-secret-data">Kubernetes secret</a>.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">list(object({
+    name  = optional(string)
+    value = optional(string)
+    valueFrom = optional(object({
+      secretKeyRef = optional(object({
+        name = optional(string)
+        key  = optional(string)
+      }))
+    }))
+  }))</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>[]</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>= Outputs</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_id"></a> <a href="#output_id">id</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>ID to pass other modules in order to refer to this module as a dependency.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="output_extra_tokens"></a> <a href="#output_extra_tokens">extra_tokens</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Map of extra accounts that were created and their tokens.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>Copyright © Camptocamp <script> document.write(new Date().getFullYear()) </script> — All Rights Reserved</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/terraform.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/vendor/lunr.js"></script>
+<script src="../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../.." data-snippet-length="100" data-stylesheet="../../_/css/search.css"></script>
+<script async src="../../search-index.js"></script>
+  </body>
+</html>
