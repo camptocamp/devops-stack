@@ -1,6 +1,5 @@
 module "helloworld_apps" {
   source = "git::https://github.com/camptocamp/devops-stack-module-applicationset.git?ref=v4.0.0"
-  # source = "../../devops-stack-module-applicationset"
 
   dependency_ids = {
     argocd = module.argocd.id
