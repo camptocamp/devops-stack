@@ -112,7 +112,7 @@ module "traefik" {
 }
 
 module "cert-manager" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//eks?ref=v9.0.2"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//eks?ref=v10.0.0"
 
   cluster_name   = module.eks.cluster_name
   base_domain    = module.eks.base_domain
