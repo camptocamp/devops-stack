@@ -44,5 +44,6 @@
 * xref:metrics-server:ROOT:README.adoc[Metrics Server]
 * xref:minio:ROOT:README.adoc[MinIO]
 * xref:rclone:ROOT:README.adoc[Rclone]
+* xref:secrets:ROOT:README.adoc[Secrets]
 * xref:thanos:ROOT:README.adoc[Thanos]
 * xref:traefik:ROOT:README.adoc[Traefik]
