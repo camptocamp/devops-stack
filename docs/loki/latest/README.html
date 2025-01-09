@@ -36,7 +36,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="loki" data-version="v10.0.0">
+<div class="nav-container" data-component="loki" data-version="v11.0.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -80,7 +80,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">Loki Module</span>
-    <span class="version">v10.0.0</span>
+    <span class="version">v11.0.0</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -174,7 +174,10 @@
       <a class="title" href="../../argocd/latest/README.html">Argo CD Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../argocd/latest/README.html">v7.1.1</a>
+          <a href="../../argocd/latest/README.html">v7.2.0</a>
+        </li>
+        <li class="version">
+          <a href="../../argocd/v7.1.1/README.html">v7.1.1</a>
         </li>
         <li class="version">
           <a href="../../argocd/v7.1.0/README.html">v7.1.0</a>
@@ -796,7 +799,10 @@
       <a class="title" href="README.html">Loki Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="README.html">v10.0.0</a>
+          <a href="README.html">v11.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../v10.0.0/README.html">v10.0.0</a>
         </li>
         <li class="version">
           <a href="../v9.0.0/README.html">v9.0.0</a>
@@ -1204,9 +1210,10 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v10.0.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v11.0.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="README.html">v10.0.0</a>
+    <a class="version is-current" href="README.html">v11.0.0</a>
+    <a class="version" href="../v10.0.0/README.html">v10.0.0</a>
     <a class="version" href="../v9.0.0/README.html">v9.0.0</a>
     <a class="version" href="../v8.2.0/README.html">v8.2.0</a>
     <a class="version" href="../v8.1.0/README.html">v8.1.0</a>
@@ -1234,7 +1241,7 @@
     <a class="version" href="../v1.0.0/README.html">v1.0.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-loki-stack/blob/v10.0.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-loki-stack/blob/v11.0.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -1373,6 +1380,18 @@
 </div>
 <div class="paragraph">
 <p>Default: <code>"v10.0.0"</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_enable_service_monitor"><a class="anchor" href="#_enable_service_monitor"></a><a id="input_enable_service_monitor"></a> <a href="#input_enable_service_monitor">enable_service_monitor</a></h4>
+<div class="paragraph">
+<p>Description: Enable Prometheus ServiceMonitor in the Helm chart.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>bool</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>true</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -1584,18 +1603,6 @@ These are not production values. You should always adjust them to your needs.
         memory = optional(string, "512Mi")
       }), {})
     }), {})
-
-    grafana_eventhandler = optional(object({
-      requests = optional(object({
-        cpu    = optional(string, "100m")
-        memory = optional(string, "128Mi")
-      }), {})
-      limits = optional(object({
-        cpu    = optional(string)
-        memory = optional(string, "256Mi")
-      }), {})
-    }), {})
-
   })</code></pre>
 </div>
 </div>
@@ -1725,6 +1732,14 @@ These are not production values. You should always adjust them to your needs.
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 3</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="provider_random"></a> <a href="#provider_random">random</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -1753,14 +1768,6 @@ These are not production values. You should always adjust them to your needs.
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>&gt;= 1</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="provider_null"></a> <a href="#provider_null">null</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>&gt;= 3</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1918,6 +1925,23 @@ These are not production values. You should always adjust them to your needs.
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>"v10.0.0"</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_enable_service_monitor"></a> <a href="#input_enable_service_monitor">enable_service_monitor</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Enable Prometheus ServiceMonitor in the Helm chart.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>bool</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>true</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
@@ -2140,18 +2164,6 @@ These are not production values. You should always adjust them to your needs.
         memory = optional(string, "512Mi")
       }), {})
     }), {})
-
-    grafana_eventhandler = optional(object({
-      requests = optional(object({
-        cpu    = optional(string, "100m")
-        memory = optional(string, "128Mi")
-      }), {})
-      limits = optional(object({
-        cpu    = optional(string)
-        memory = optional(string, "256Mi")
-      }), {})
-    }), {})
-
   })</code></pre>
 </div>
 </div></div></td>
