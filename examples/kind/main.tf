@@ -12,7 +12,7 @@ module "metallb" {
 }
 
 module "argocd_bootstrap" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v7.1.1"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v7.2.0"
 
   argocd_projects = {
     "${local.cluster_name}" = {
