@@ -1,12 +1,19 @@
 ### Unwanted Terraform files when using the examples ###
-
 examples/*/.terraform
 examples/*/terraform.tfstate
 examples/*/terraform.tfstate.*
 examples/*/.terraform.tfstate.lock.info
 examples/*/*-config
 examples/*/.terraform.lock.hcl
-
+examples/*/secrets.yml
+examples/*/terraform.tfstate*
+examples/*/.terraform.lock.hcl
+examples/*/kubeconfig.yml
+examples/*/issue.txt
+examples/*/log.txt
+examples/*/*.png
+examples/*/*.html
+examples/*/issuers.yml
 
 ### Files and folders when building the website and documentation locally ###
 
@@ -55,3 +62,5 @@ ehthumbs_vista.db
 
 # Folder config file
 [Dd]esktop.ini
+.DS_STORE
+**/*.swp

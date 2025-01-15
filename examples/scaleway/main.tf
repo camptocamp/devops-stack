@@ -1,58 +1,35 @@
-locals {
-  cluster_name   = "scaleway-test"
-  cluster_region = "fr-par"
-  cluster_zone   = "fr-par-1"
-  tags           = ["test", "${local.cluster_name}"]
+# ###########################
+# INFRA + K8s PHASE
+# ###########################
+module "scaleway" {
+  source = "git@github.com:camptocamp/devops-stack-module-cluster-scaleway.git"
+
+  base_domain         = var.base_domain
+  cluster_name        = var.cluster_name
+  cluster_description = var.cluster_description
+  cluster_tags        = var.cluster_tags
+  cluster_type        = var.cluster_type
+  kubernetes_version  = var.kubernetes_version
+  lb_name             = var.lb_name
+  lb_type             = var.lb_type
+  zone                = var.zone
+  node_pools          = var.node_pools
 }
 
-module "cluster" {
-  source = "git::https://github.com/camptocamp/devops-stack.git//modules/scaleway?ref=v1-alpha"
-
-  kubernetes_version = "1.24.3"
-
-  cluster_type = "kapsule"
-  cluster_name = local.cluster_name
-  cluster_tags = local.tags
-  region       = local.cluster_region
-  zone         = local.cluster_zone
-  lb_type      = "LB-S"
-
-}
-
+# ###########################
+# BOOTSPRAP APPLICATION PHASE
+# ###########################
 
 module "argocd_bootstrap" {
-  source         = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v1-alpha"
-  cluster_name   = local.cluster_name
-  base_domain    = module.cluster.base_domain
-  cluster_issuer = "letsencrypt-prod"
-
-  argocd = {
-    admin_enabled = "true"
-  }
-
-  depends_on = [
-    module.cluster,
-  ]
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v5.2.0"
 }
 
+module "ingress_controller" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//scaleway?ref=scaleway-annotatation-for-lb"
+  target_revision = "scaleway-annotatation-for-lb"
+  enable_service_monitor = var.ingress_enable_service_monitor
+  lb_id = module.scaleway.lb_id
 
-module "ingress" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//scaleway?ref=v1-alpha"
-
-  cluster_name     = local.cluster_name
-  argocd_namespace = module.argocd_bootstrap.argocd_namespace
-  base_domain      = module.cluster.base_domain
-
-  helm_values = [{
-    traefik = {
-      service = {
-        type = "LoadBalancer"
-        annotations = {
-          "service.beta.kubernetes.io/scw-loadbalancer-id" = module.cluster.lb_id
-        }
-      }
-    }
-  }]
 
   dependency_ids = {
     argocd = module.argocd_bootstrap.id
@@ -60,131 +37,102 @@ module "ingress" {
 }
 
 module "cert-manager" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//scaleway?ref=remove-read-only-attribut"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//self-signed?ref=v8.3.0"
 
-  cluster_name     = local.cluster_name
-  argocd_namespace = module.argocd_bootstrap.argocd_namespace
-  base_domain      = module.cluster.base_domain
-
-  helm_values = [{
-    cert-manager = {
-      clusterIssuers = {
-        letsencrypt = {
-          enabled = true
-        }
-        acme = {
-          solvers = [
-            {
-              http01 = {
-                ingress = {}
-              }
-            }
-          ]
-        }
-      }
-    }
-  }]
+  enable_service_monitor = var.cert_manager_enable_service_monitor
 
   dependency_ids = {
     argocd = module.argocd_bootstrap.id
   }
 }
 
-module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v1-alpha"
+module "authentication_with_keycloak" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak.git?ref=v3.1.1"
 
-  bootstrap_values = module.argocd_bootstrap.bootstrap_values
-  argocd_namespace = module.argocd_bootstrap.argocd_namespace
-
-  oidc = {}
-
-  helm_values = [{
-    argo-cd = {
-      global = {
-        image = {
-          repository = "camptocamp/argocd"
-          tag        = "v2.3.4_c2c.3"
-        }
-      }
-      server = {
-        config = {
-          configManagementPlugins = <<-EOT
-                - name: kustomized-helm
-                  init:
-                    command: ["/bin/sh", "-c"]
-                    args: ["helm dependency build || true"]
-                  generate:
-                    command: ["/bin/sh", "-c"]
-                    args: ["echo \"$HELM_VALUES\" | helm template . --name-template $ARGOCD_APP_NAME --namespace $ARGOCD_APP_NAMESPACE $HELM_ARGS -f - --include-crds > all.yaml && kustomize build"]
-                - name: helmfile
-                  init:
-                    command: ["argocd-helmfile"]
-                    args: ["init"]
-                  generate:
-                    command: ["argocd-helmfile"]
-                    args: ["generate"]
-                  lockRepo: true
-          EOT
-        }
-      }
-    }
-  }]
+  cluster_name   = var.cluster_name
+  base_domain    = var.base_domain
+  cluster_issuer = var.cluster_issuer
 
   dependency_ids = {
-    argocd       = module.argocd_bootstrap.id
-    cert_manager = module.cert-manager.id
+    ingress_controller = module.ingress_controller.id
+    cert-manager       = module.cert-manager.id
   }
 }
 
-#module "monitoring" {
-#  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack.git?ref=v1-alpha"
-#
-#  cluster_name = local.cluster_name
-#
-#  prometheus = {
-#    oidc = {
-#      issuer_url    = module.oidc.issuer_url
-#      api_url       = "${module.oidc.issuer_url}/healthz"
-#      client_id     = module.oidc.clients.prometheus.id
-#      client_secret = module.oidc.clients.prometheus.secret
-#
-#      oauth2_proxy_extra_args = [
-#      ]
-#    }
-#  }
-#
-#  alertmanager = {
-#    oidc = {
-#      issuer_url    = module.oidc.issuer_url
-#      api_url       = "${module.oidc.issuer_url}/healthz"
-#      client_id     = module.oidc.clients.alertmanager.id
-#      client_secret = module.oidc.clients.alertmanager.secret
-#
-#      oauth2_proxy_extra_args = [
-#      ]
-#    }
-#  }
-#
-#  grafana = {
-#    oidc = {
-#      oauth_url     = "${module.oidc.issuer_url}/auth"
-#      token_url     = "${module.oidc.issuer_url}/token"
-#      api_url       = "${module.oidc.issuer_url}/userinfo"
-#      client_id     = module.oidc.clients.grafana.id
-#      client_secret = module.oidc.clients.grafana.secret
-#
-#      oauth2_proxy_extra_args = [
-#      ]
-#    }
-#  }
-#
-#  argocd_namespace = module.argocd_bootstrap.argocd_namespace
-#  base_domain      = module.cluster.base_domain
-#  cluster_issuer   = "letsencrypt-prod"
-#  metrics_archives = {}
-#
-#  dependency_ids = {
-#    argocd = module.argocd_bootstrap.id
-#    oidc   = module.oidc.id
-#  }
-#}
+module "authorization_with_keycloak" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak.git//oidc_bootstrap?ref=v3.1.1"
+
+  cluster_name   = var.cluster_name
+  base_domain    = var.base_domain
+  cluster_issuer = var.cluster_issuer
+  user_map = {
+    jdoe = {
+      username   = "jdoe"
+      email      = "john.doe@camptocamp.com"
+      first_name = "John"
+      last_name  = "Doe"
+    }
+  }
+  dependency_ids = {
+    keycloak = module.authentication_with_keycloak.id
+  }
+}
+
+
+module "kube-prometheus-stack" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-kube-prometheus-stack?ref=v11.1.0"
+
+  cluster_name   = var.cluster_name
+  base_domain    = module.scaleway.base_domain
+  cluster_issuer = var.cluster_issuer
+
+  metrics_storage_main = null
+
+  prometheus = {
+    oidc = module.authorization_with_keycloak.oidc
+  }
+  alertmanager = {
+    oidc = module.authorization_with_keycloak.oidc
+  }
+  grafana = {
+    oidc = module.authorization_with_keycloak.oidc
+  }
+
+  dependency_ids = {
+    ingress_controller = module.ingress_controller.id
+    cert-manager       = module.cert-manager.id
+    oidc               = module.authentication_with_keycloak.id
+  }
+}
+
+module "argocd" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v5.2.0"
+
+  base_domain              = module.scaleway.base_domain
+  cluster_name             = var.cluster_name
+  cluster_issuer           = var.cluster_issuer
+  server_secretkey         = module.argocd_bootstrap.argocd_server_secretkey
+  accounts_pipeline_tokens = module.argocd_bootstrap.argocd_accounts_pipeline_tokens
+
+  admin_enabled = true
+
+  oidc = {
+    name         = "OIDC"
+    issuer       = module.authorization_with_keycloak.oidc.issuer_url
+    clientID     = module.authorization_with_keycloak.oidc.client_id
+    clientSecret = module.authorization_with_keycloak.oidc.client_secret
+    requestedIDTokenClaims = {
+      groups = {
+        essential = true
+      }
+    }
+  }
+
+  dependency_ids = {
+    ingress_controller = module.ingress_controller.id
+    cert-manager       = module.cert-manager.id
+    oidc               = module.authorization_with_keycloak.id
+    #  kube-prometheus-stack = module.kube-prometheus-stack.id
+  }
+}
+
