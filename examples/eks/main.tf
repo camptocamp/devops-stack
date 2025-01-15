@@ -75,7 +75,7 @@ module "oidc" {
 }
 
 module "argocd_bootstrap" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v7.1.1"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v7.2.0"
 
   argocd_projects = {
     "${module.eks.cluster_name}" = {
