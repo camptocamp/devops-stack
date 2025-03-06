@@ -36,7 +36,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="eks" data-version="v4.2.0">
+<div class="nav-container" data-component="eks" data-version="v5.0.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -62,7 +62,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">EKS Cluster Module</span>
-    <span class="version">v4.2.0</span>
+    <span class="version">v5.0.0</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -545,7 +545,10 @@
       <a class="title" href="README.html">EKS Cluster Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="README.html">v4.2.0</a>
+          <a href="README.html">v5.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../v4.2.0/README.html">v4.2.0</a>
         </li>
         <li class="version">
           <a href="../v4.1.0/README.html">v4.1.0</a>
@@ -1198,9 +1201,10 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v4.2.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v5.0.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="README.html">v4.2.0</a>
+    <a class="version is-current" href="README.html">v5.0.0</a>
+    <a class="version" href="../v4.2.0/README.html">v4.2.0</a>
     <a class="version" href="../v4.1.0/README.html">v4.1.0</a>
     <a class="version" href="../v4.0.0/README.html">v4.0.0</a>
     <a class="version" href="../v3.3.0/README.html">v3.3.0</a>
@@ -1214,7 +1218,7 @@
     <a class="version" href="../v1.0.0/README.html">v1.0.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-cluster-eks/blob/v4.2.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-cluster-eks/blob/v5.0.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -1329,6 +1333,64 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 </div>
 <div class="paragraph">
 <p>Switching an existing cluster to EKS managed node groups is possible, but requires manually draining the existing nodes after the new node group is created and before the old one is destroyed (by doing a <code>terraform apply -target &lt;resource&gt;</code> in multiple steps).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_managing_add_ons"><a class="anchor" href="#_managing_add_ons"></a>Managing add-ons</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can use the <code>cluster_addons</code> variable to manage EKS add-ons on the cluster. The key of the map can be the add-on name or set with the <code>name</code> attribute. The value is a map of the add-on configuration. Here is a minimum example:</p>
+</div>
+<div class="listingblock hcl">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">data "aws_iam_policy" "cni" {
+  name = "AmazonEKS_CNI_Policy"
+}
+
+resource "aws_iam_role" "vpc_cni" {
+  name               = "vpc-cni-role"
+  assume_role_policy = data.aws_iam_policy_document.pod_identity_association.json
+}
+
+resource "aws_iam_role_policy_attachment" "vpc_cni" {
+  role       = aws_iam_role.vpc_cni.name
+  policy_arn = data.aws_iam_policy.cni.arn
+}
+
+module "cluster_green" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-cluster-eks.git?ref=v4.x.x"
+
+  [...]
+
+  cluster_addons = {
+    coredns                = {}
+    eks-pod-identity-agent = {}
+    kube-proxy             = {}
+    vpc-cni = {
+      pod_identity_association = [{
+        role_arn        = aws_iam_role.vpc_cni.arn
+        service_account = "aws-node"
+      }]
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Be careful when using the pod identity agent, it binds the port 80 on the hosts so it is not available anymore.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Check the  <a href="https://github.com/terraform-aws-modules/terraform-aws-eks?tab=readme-ov-file#input_cluster_addons">upstream module documentation</a> for more information. And the <a href="https://docs.aws.amazon.com/eks/latest/userguide/workloads-add-ons-available-eks.html">AWS EKS documentation</a> for the list of available add-ons.</p>
 </div>
 </div>
 </div>
@@ -1618,18 +1680,28 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 </div>
 </div>
 <div class="sect3">
-<h4 id="_extra_lb_target_groups"><a class="anchor" href="#_extra_lb_target_groups"></a><a id="input_extra_lb_target_groups"></a> <a href="#input_extra_lb_target_groups">extra_lb_target_groups</a></h4>
+<h4 id="_lb_target_groups"><a class="anchor" href="#_lb_target_groups"></a><a id="input_lb_target_groups"></a> <a href="#input_lb_target_groups">lb_target_groups</a></h4>
 <div class="paragraph">
-<p>Description: Additional Target Groups to attach to Network LBs.</p>
+<p>Description: Target Groups to attach to Network LBs (overrides the default target groups).</p>
 </div>
 <div class="paragraph">
-<p>A list of maps containing key/value pairs that define the target groups. Required key/values: <code>name</code>, <code>backend_protocol</code>, <code>backend_port</code>.</p>
+<p>A list of maps containing key/value pairs that define the target groups.</p>
 </div>
 <div class="paragraph">
-<p>Type: <code>list(any)</code></p>
+<p>Type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">list(object({
+    name_prefix      = string
+    backend_protocol = string
+    backend_port     = number
+    target_type      = optional(string)
+  }))</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>Default: <code>[]</code></p>
+<p>Default: <code>null</code></p>
 </div>
 </div>
 <div class="sect3">
@@ -1684,6 +1756,18 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 <h4 id="_access_entries"><a class="anchor" href="#_access_entries"></a><a id="input_access_entries"></a> <a href="#input_access_entries">access_entries</a></h4>
 <div class="paragraph">
 <p>Description: Map of access entries to add to the cluster. The type of the variable is <code>any</code> similarly to the upstream EKS module. Please check the <a href="https://github.com/terraform-aws-modules/terraform-aws-eks">their README</a> for more information and examples.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>any</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>{}</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cluster_addons"><a class="anchor" href="#_cluster_addons"></a><a id="input_cluster_addons"></a> <a href="#input_cluster_addons">cluster_addons</a></h4>
+<div class="paragraph">
+<p>Description: Map of cluster add-on configurations to enable for the cluster. Add-on name can be the map keys or set with <code>name</code>.</p>
 </div>
 <div class="paragraph">
 <p>Type: <code>any</code></p>
@@ -1832,18 +1916,18 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="provider_aws"></a> <a href="#provider_aws">aws</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>&gt;= 4</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="provider_dns"></a> <a href="#provider_dns">dns</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>n/a</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_aws"></a> <a href="#provider_aws">aws</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&gt;= 4</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -2242,19 +2326,26 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_extra_lb_target_groups"></a> <a href="#input_extra_lb_target_groups">extra_lb_target_groups</a></p>
+<p><a id="input_lb_target_groups"></a> <a href="#input_lb_target_groups">lb_target_groups</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Additional Target Groups to attach to Network LBs.</p>
+<p>Target Groups to attach to Network LBs (overrides the default target groups).</p>
 </div>
 <div class="paragraph">
-<p>A list of maps containing key/value pairs that define the target groups. Required key/values: <code>name</code>, <code>backend_protocol</code>, <code>backend_port</code>.</p>
+<p>A list of maps containing key/value pairs that define the target groups.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">list(object({
+    name_prefix      = string
+    backend_protocol = string
+    backend_port     = number
+    target_type      = optional(string)
+  }))</code></pre>
+</div>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>list(any)</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>[]</code></p>
+<p><code>null</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>no</p>
@@ -2326,6 +2417,23 @@ You can check out available instance types on the <a href="https://aws.amazon.co
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Map of access entries to add to the cluster. The type of the variable is <code>any</code> similarly to the upstream EKS module. Please check the <a href="https://github.com/terraform-aws-modules/terraform-aws-eks">their README</a> for more information and examples.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>any</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>{}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_cluster_addons"></a> <a href="#input_cluster_addons">cluster_addons</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Map of cluster add-on configurations to enable for the cluster. Add-on name can be the map keys or set with <code>name</code>.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>any</code></p>
