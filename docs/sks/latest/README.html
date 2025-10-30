@@ -36,7 +36,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="sks" data-version="v1.2.1">
+<div class="nav-container" data-component="sks" data-version="v2.0.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -62,7 +62,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">SKS Cluster Module</span>
-    <span class="version">v1.2.1</span>
+    <span class="version">v2.0.0</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -1031,7 +1031,10 @@
       <a class="title" href="README.html">SKS Cluster Module</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="README.html">v1.2.1</a>
+          <a href="README.html">v2.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../v1.2.1/README.html">v1.2.1</a>
         </li>
         <li class="version">
           <a href="../v1.2.0/README.html">v1.2.0</a>
@@ -1125,7 +1128,10 @@
       <a class="title" href="../../traefik/latest/README.html">Traefik Module</a>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../traefik/latest/README.html">v9.0.2</a>
+          <a href="../../traefik/latest/README.html">v10.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../traefik/v9.0.2/README.html">v9.0.2</a>
         </li>
         <li class="version">
           <a href="../../traefik/v9.0.1/README.html">v9.0.1</a>
@@ -1216,16 +1222,17 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">v1.2.1</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v2.0.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="README.html">v1.2.1</a>
+    <a class="version is-current" href="README.html">v2.0.0</a>
+    <a class="version" href="../v1.2.1/README.html">v1.2.1</a>
     <a class="version" href="../v1.2.0/README.html">v1.2.0</a>
     <a class="version" href="../v1.1.1/README.html">v1.1.1</a>
     <a class="version" href="../v1.1.0/README.html">v1.1.0</a>
     <a class="version" href="../v1.0.0/README.html">v1.0.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-cluster-sks/blob/v1.2.1/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/camptocamp/devops-stack-module-cluster-sks/blob/v2.0.0/docs/modules/ROOT/pages/README.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -1512,10 +1519,10 @@ SKS instance pools will automatically choose cordoned nodes to delete in priorit
 <div class="ulist">
 <ul>
 <li>
-<p><a id="provider_local"></a> <a href="#provider_local">local</a></p>
+<p><a id="provider_exoscale"></a> <a href="#provider_exoscale">exoscale</a> (&gt;= 0.49)</p>
 </li>
 <li>
-<p><a id="provider_exoscale"></a> <a href="#provider_exoscale">exoscale</a> (&gt;= 0.49)</p>
+<p><a id="provider_local"></a> <a href="#provider_local">local</a></p>
 </li>
 </ul>
 </div>
@@ -1716,9 +1723,9 @@ The other keys are optional: <code>description</code>, <code>instance_prefix</co
 </div>
 </div>
 <div class="sect3">
-<h4 id="_router_nodepool"><a class="anchor" href="#_router_nodepool"></a><a id="input_router_nodepool"></a> <a href="#input_router_nodepool">router_nodepool</a></h4>
+<h4 id="_default_nodepool"><a class="anchor" href="#_default_nodepool"></a><a id="input_default_nodepool"></a> <a href="#input_default_nodepool">default_nodepool</a></h4>
 <div class="paragraph">
-<p>Description: Configuration of the router node pool. The defaults of this variable are sensible and rarely need to be changed. <strong>The variable is mainly used to change the size of the node pool when doing cluster upgrades.</strong></p>
+<p>Description: Configuration of the default node pool. The defaults of this variable are sensible and rarely need to be changed. <strong>The variable is mainly used to change the size of the node pool when doing cluster upgrades.</strong></p>
 </div>
 <div class="paragraph">
 <p>Type:</p>
@@ -1726,15 +1733,13 @@ The other keys are optional: <code>description</code>, <code>instance_prefix</co
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">object({
-    size            = number
-    instance_type   = string
-    instance_prefix = optional(string, "router")
-    disk_size       = optional(number, 20)
-    labels          = optional(map(string), {})
-    taints = optional(map(string), {
-      nodepool = "router:NoSchedule"
-    })
-    private_network_ids = optional(list(string), [])
+    size                = number
+    instance_type       = string
+    instance_prefix     = optional(string, "default")
+    disk_size           = optional(number, 20)
+    labels              = optional(map(string), {})
+    taints              = optional(map(string), {})
+    private_network_ids = optional(list(string), null)
   })</code></pre>
 </div>
 </div>
@@ -1822,6 +1827,18 @@ The other keys are optional: <code>description</code>, <code>instance_prefix</co
 <p>Default: <code>false</code></p>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_enable_csi_driver"><a class="anchor" href="#_enable_csi_driver"></a><a id="input_enable_csi_driver"></a> <a href="#input_enable_csi_driver">enable_csi_driver</a></h4>
+<div class="paragraph">
+<p>Description: Enable the creation of the Exoscale CSI driver.</p>
+</div>
+<div class="paragraph">
+<p>Type: <code>bool</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>false</code></p>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_outputs"><a class="anchor" href="#_outputs"></a>Outputs</h3>
@@ -1859,15 +1876,15 @@ The other keys are optional: <code>description</code>, <code>instance_prefix</co
 </div>
 </div>
 <div class="sect3">
-<h4 id="_router_nodepool_id"><a class="anchor" href="#_router_nodepool_id"></a><a id="output_router_nodepool_id"></a> <a href="#output_router_nodepool_id">router_nodepool_id</a></h4>
+<h4 id="_default_nodepool_id"><a class="anchor" href="#_default_nodepool_id"></a><a id="output_default_nodepool_id"></a> <a href="#output_default_nodepool_id">default_nodepool_id</a></h4>
 <div class="paragraph">
-<p>Description: ID of the node pool specifically created for Traefik.</p>
+<p>Description: ID of the default node pool.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_router_instance_pool_id"><a class="anchor" href="#_router_instance_pool_id"></a><a id="output_router_instance_pool_id"></a> <a href="#output_router_instance_pool_id">router_instance_pool_id</a></h4>
+<h4 id="_default_instance_pool_id"><a class="anchor" href="#_default_instance_pool_id"></a><a id="output_default_instance_pool_id"></a> <a href="#output_default_instance_pool_id">default_instance_pool_id</a></h4>
 <div class="paragraph">
-<p>Description: Instance pool ID of the node pool specifically created for Traefik.</p>
+<p>Description: Instance pool ID of the default node pool.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1978,18 +1995,18 @@ The other keys are optional: <code>description</code>, <code>instance_prefix</co
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="provider_local"></a> <a href="#provider_local">local</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>n/a</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="provider_exoscale"></a> <a href="#provider_exoscale">exoscale</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>&gt;= 0.49</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="provider_local"></a> <a href="#provider_local">local</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>n/a</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -2354,23 +2371,21 @@ The other keys are optional: <code>description</code>, <code>instance_prefix</co
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="input_router_nodepool"></a> <a href="#input_router_nodepool">router_nodepool</a></p>
+<p><a id="input_default_nodepool"></a> <a href="#input_default_nodepool">default_nodepool</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Configuration of the router node pool. The defaults of this variable are sensible and rarely need to be changed. <strong>The variable is mainly used to change the size of the node pool when doing cluster upgrades.</strong></p>
+<p>Configuration of the default node pool. The defaults of this variable are sensible and rarely need to be changed. <strong>The variable is mainly used to change the size of the node pool when doing cluster upgrades.</strong></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-none hljs">object({
-    size            = number
-    instance_type   = string
-    instance_prefix = optional(string, "router")
-    disk_size       = optional(number, 20)
-    labels          = optional(map(string), {})
-    taints = optional(map(string), {
-      nodepool = "router:NoSchedule"
-    })
-    private_network_ids = optional(list(string), [])
+    size                = number
+    instance_type       = string
+    instance_prefix     = optional(string, "default")
+    disk_size           = optional(number, 20)
+    labels              = optional(map(string), {})
+    taints              = optional(map(string), {})
+    private_network_ids = optional(list(string), null)
   })</code></pre>
 </div>
 </div></div></td>
@@ -2488,6 +2503,23 @@ The other keys are optional: <code>description</code>, <code>instance_prefix</co
 <p>no</p>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="input_enable_csi_driver"></a> <a href="#input_enable_csi_driver">enable_csi_driver</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Enable the creation of the Exoscale CSI driver.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>bool</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>false</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>no</p>
+</div></div></td>
+</tr>
 </tbody>
 </table>
 <div class="paragraph">
@@ -2547,18 +2579,18 @@ The other keys are optional: <code>description</code>, <code>instance_prefix</co
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="output_router_nodepool_id"></a> <a href="#output_router_nodepool_id">router_nodepool_id</a></p>
+<p><a id="output_default_nodepool_id"></a> <a href="#output_default_nodepool_id">default_nodepool_id</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>ID of the node pool specifically created for Traefik.</p>
+<p>ID of the default node pool.</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="output_router_instance_pool_id"></a> <a href="#output_router_instance_pool_id">router_instance_pool_id</a></p>
+<p><a id="output_default_instance_pool_id"></a> <a href="#output_default_instance_pool_id">default_instance_pool_id</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Instance pool ID of the node pool specifically created for Traefik.</p>
+<p>Instance pool ID of the default node pool.</p>
 </div></div></td>
 </tr>
 <tr>
